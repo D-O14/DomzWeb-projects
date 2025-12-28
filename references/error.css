@@ -1,0 +1,154 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    
+}
+
+body{
+    background-color: #0f2027;
+}
+
+#form{
+    width: 300px;
+    margin: 20vh auto 0 auto;
+    padding: 20px;
+    background-color: whitesmoke;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #0f2027;
+}
+
+#form h1{
+    color: #0f2027;
+    text-align: center;
+}
+
+ 
+
+#form button{
+    padding: 10px;
+    margin-top: 10px;
+    width: 100%;
+    color: white;
+    background-color: rgb(41, 57, 194);
+    border: none;
+    border-radius: 4px;
+}
+
+.input-control{
+    display: flex;
+    flex-direction: column;
+}
+
+.input-control input{
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    display: block;
+    font-size: 12px;
+    padding: 10px;
+    width: 90%;
+}
+
+.input-control input:focus{
+    outline: 0;
+}
+
+.input-control.success input{
+    border-color: #ff3860;
+}
+
+.input-control .error{
+    color: #ff3860;
+    font-size: 9px;
+    height: 13px;
+} 
+
+input:invalid:not(:placeholder-shown){
+    border-color: red;
+    background-image: url(images/redcheck.png);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px);
+}
+
+input:valid:not(:placeholder-shown){
+    border-color: rgb(19, 227, 19);
+    background-image: url(images/greencheck.jpeg);
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px);
+}
+
+input:invalid:not(:placeholder-shown),
+input:valid:not(:placeholder-shown){
+    background-size: 20px;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px);
+}
+
+input:invalid:not(:placeholder-shown) + p{
+    color: #a20e0e;
+}
+
+input:invalid ~ button[type="submit"]{
+    opacity: .6;
+    pointer-events:none;
+}
+
+#toastBox{
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.toast{
+    width: 400px;
+    height: 75px;
+    background: #fff;
+    font-weight: 500;
+    margin: 15px 0;
+    box-shadow: 0 0 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transform: translateX(100%);
+    animation: moveleft 0.5s linear forwards;
+    border-radius: 12px;
+}
+
+@keyframes moveleft{
+    100%{
+        transform: translateX(0);
+    }
+}
+
+.toast img{
+    width: 30px;
+    margin: 0 20px;
+    border-radius: 20px;
+    height: 30px;
+}
+
+.toast::after{
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background: green;
+    animation: anim 5.8s linear forwards;
+    border-radius: 2px;
+}
+
+@keyframes anim{
+    100%{
+        width: 0;
+    }
+}

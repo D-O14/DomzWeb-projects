@@ -1,0 +1,17 @@
+{% extends "structure.html" %}
+
+{% block title %}500 Internal Server Error{% endblock %}
+
+{% block content %}
+
+<body style="background: #111;">
+    
+<br />
+<center>
+    <h1 style="color: aliceblue;">500 Internal Server Error</h1>
+    <a class="btn btn-danger" href="{{ url_for('lp') }}">Try Again...</a>
+</center>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "aos": "^2.3.4",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "gsap": "^3.13.0",
+    "jsap": "^2.0.0",
+    "tailwindcss": "^4.1.16"
+  }
+}

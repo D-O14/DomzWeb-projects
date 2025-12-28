@@ -1,0 +1,20 @@
+{% extends 'structure.html' %}
+
+{% block content %}
+    <div class="admin">
+    <h2>Welcome to your Admin Dashboard</h2>
+    <p>Do some Admin-y type things here</p>
+    </div>
+    <br/>
+    <h2>User List:</h2><br/>
+    <table class="table table-striped table-responsive table-hover table-bordered">
+        {% for user in our_users %}
+        <tr>
+            <td>{{ user.id }}. {{ user.name }} - <a href="" class="link-primary text-decoration-none">{{ user.user_name }}</a>
+                - <a href="" class="email-link">{{ user.email }}</a> - <a href="{{ url_for('delete', id=user.id) }}"><button class="btn btn-danger btn-sm" id="banBtn">Ban User</button></a> 
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

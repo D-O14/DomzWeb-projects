@@ -1,0 +1,16 @@
+node_modules/
+
+__pycache__/
+*.pyc
+
+.venv/
+venv/
+
+.vscode/
+.pem
+.key
+.log
+dist/
+build/
+
+.env

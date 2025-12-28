@@ -1,0 +1,179 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body{
+background-image:url(images/bakery.jpg);
+background-color: whitesmoke;
+background-size: 1550px;
+background-repeat: no-repeat;
+color:white;
+overflow-x: hidden;
+}
+
+#h1{
+    font-size: 70px;
+    text-align: right;
+    padding-right: 200px;    
+    color: orange;
+    text-decoration:solid;
+    font-style: italic;
+}
+
+
+h2 p{
+    text-decoration: underline;
+    margin-top: 10px;
+}
+
+h2{
+    text-align: center;
+    font-family:'Courier New', Courier, monospace;
+    margin-bottom: 20px;
+}
+
+h4{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    margin-left: 140px;
+    margin-bottom: 10px;
+}
+
+h6{
+    text-align: center;
+}
+
+h6 button{
+    border: 2px solid;
+    border-radius: 20px;
+    border-color: white;
+    background-color: transparent;
+    color: orange;
+    font-size: 20px;
+    font-style:italic ;
+    padding: 5.5px;
+    width: 240px;
+    margin-bottom: 200px;
+}
+
+  h6 button:hover{
+    border-color: white;
+    background-color: orange;
+    color: white;
+    transition: 0.7s;
+}
+
+#text h2{
+    color: black;
+    font-family:'Franklin Gothic Medium' ;
+    font-style: solid;
+    font-style: italic;
+    font-weight: 200;
+    display: flex;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    align-items: bottom;
+}
+
+.container{
+    background-image: url(images/work2.jpg);
+    background-repeat: no-repeat;
+    width: 1550px;
+    height: 768px;
+}
+#text button{
+    color: white;
+    background-color: black;
+    border: 2px solid;
+    border-radius: 5px;
+    font-size: 20px;
+    font-style:italic ;
+    padding: 5.5px;
+    width: 240px;
+}
+
+#text h3 {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+}
+
+#text button:hover{
+   background-color: turquoise;
+}
+
+#p30{
+    color: black;
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 200;
+    text-decoration: underline;
+    background-color: yellow;
+    border: 2px solid;
+    border-radius: 10px;
+    text-align: center;
+    width: 1500px;
+}
+
+.p3{
+    float: left;
+}
+
+.p5{
+    float: left;
+}
+
+
+#p31{
+    color: black;
+    font-size: 50px;
+    font-style: italic;
+    font-weight: 200;
+    text-decoration: underline;
+    background-color: darkblue;
+    border: 2px solid;
+    border-radius: 10px;
+    text-align: center;
+    width: 1500px;
+}
+
+.p7{
+    float: left;
+}
+
+.p9{
+    float: left;
+}
+
+.menu{
+    background-color: orange;
+    height: 1200px;
+    margin: 0px;
+    padding: 0px;
+    border: 2px solid;
+    border-radius:5px;
+    border-color: black;
+    color: black;
+}
+
+.menu h1{
+    text-align: center;
+    font-weight:bold;
+    font-style: italic;
+    font-size: 50px;
+    text-decoration: underline;
+}
+
+
+marquee{
+    background-color: black;
+}
+
+.head{
+    color: white;
+}
+

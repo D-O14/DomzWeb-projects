@@ -1,0 +1,67 @@
+{% extends 'structure.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+
+<h1>Dashboard</h1>
+<br />
+
+<div class="card">
+    {% if current_user.id == 1 %}
+        <div class="card-header">
+            Hello {{ current_user.name }} - ( Admin )
+        </div>
+    {% else %}
+        <div class="card-header">
+            Hello {{ current_user.name }}
+        </div>
+    {% endif %}
+    <div class="card-body">
+        <h5 class="card-t">Welcome To Your User Dashboard</h5>
+        <p>Below is your user information</p>
+        <p class="card-text">
+            <div class="container">
+                <div class="row">
+                    <div class="col-8">
+
+            <strong>Username:</strong> {{ current_user.user_name }}<br />
+            <strong>User Id:</strong> {{ current_user.id }}<br />
+            <strong>E-mail: </strong> <a href="" class="text-decoration-none">{{ current_user.email }}</a><br />
+            <strong>Date of birth:</strong> {{ current_user.birthday }} <br/>
+            <!--<strong>Favourite color:</strong> {{ current_user.fav_color }}<br>
+            <strong>About author:</strong> {{ current_user.about_author }}<br>
+            <strong>Profile pic:</strong> {{ current_user.profile_pic }}<br>-->
+            <strong>Date Joined:</strong> {{ current_user.date_added }}<br>
+            </p>
+            <br />
+            <a href="{{ url_for('logout') }}" class=" btn btn-danger text-decoration-none" id="logout">Logout</a>
+            <a href="{{url_for('update', id=current_user.id)}}" class="btn btn-primary text-decoration-none">Update profile</a>
+            <a href="{{url_for('delete', id=current_user.id)}}" class="btn btn-danger">Delete</a>
+            <br/><br/>
+
+                    </div>
+                    <div class="col-4">
+                        {% if current_user.profile_pic %}
+
+                        <img src="{{ url_for('static', filename='images/' +  current_user.profile_pic) }}" class="img">
+
+                        {% else %}
+
+                        <img src="{{ url_for('static', filename='images/default_pic.jpg')}}"  class="img">
+
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+    </div>
+</div>
+
+{% endblock %}

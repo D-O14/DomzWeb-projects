@@ -1,0 +1,155 @@
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style:none;
+    box-sizing: border-box;
+}
+
+body{
+    background-image: url(beach.jpg);
+    background-repeat:no-repeat;
+    font-family:'Times New Roman', Times, serif;
+    background-size:2250px;
+}
+
+nav{
+    position: sticky; top: 0;
+    background-color:  #2c3e50;
+    height: 80px;
+    width: 100%;
+}
+
+label.logo{
+    float: right;
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+    font-weight: 2500;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px
+}
+
+nav ul li{
+    display: block;
+    line-height: 30px;
+    margin: 50px 0px;
+
+}
+
+nav ul li a{
+    color:black;
+    font-size: 20px;
+    text-transform:uppercase;
+    padding: 7px 13px;
+    border-radius: 3px;
+}
+
+a.active,a:hover{
+    background-color: yellow;
+    color: #0082e6;
+    transition: 0.5s;
+}
+
+#check:checked ~ ul{
+    left: 0;
+}
+
+.checkbtn{
+    font-size: 30px;
+    color: white;
+    float: left;
+    line-height: 80px;
+    margin-left: 40px;
+    cursor: pointer;
+}
+
+#check{
+    display: none;
+}
+
+@media (max-width: 952px){
+    label.logo{
+        font-size: 30px;
+        padding-left: 50px;
+    }
+}
+
+ul{
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: darkred;
+    top: 80px;
+    left: -100%;
+    text-align: center;
+    transition: 0.5s;
+}
+
+section{
+    background: url(beach.jpg) no-repeat;
+    background-size:cover;
+    height: calc(100vh - 80px); 
+}
+
+.search{
+    --padding: 18px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    margin-left: 400px;
+    margin-top: 200px;
+    padding: var(--padding);
+    border-radius: 28px;
+    background: #f6f6f6;
+    color: rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.25s;
+}
+
+.search:focus-within{
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
+}
+
+.search-input{
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    border: none;
+    background-color: transparent;
+    color: #333333;
+    margin-left: var(--padding);
+    outline: none;
+    width: 600px;
+    flex: 1;
+}
+
+.search-input::placeholder{
+    color: rgba(0, 0, 0, 0.25);
+}
+
+h1{
+    font-family: "Poppins", sans-serif;
+    font-size: 50px;
+    font-style:italic;
+    text-transform: uppercase;
+    text-align: center;
+    background: linear-gradient(to right, #fc72ff, #8f68ff, #487bff, #8f68ff, #fc72ff);
+    background-size: 200%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: animate-gradient 2.5s linear infinite;
+    position: absolute;
+    transform: translate(370%, -175%);
+}
+
+@keyframes animate-gradient { to{
+    background-position: 200%
+}
+
+
+}

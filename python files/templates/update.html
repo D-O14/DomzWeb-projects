@@ -1,0 +1,54 @@
+{% extends 'structure.html' %}
+
+{% block content %}
+
+<!--{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}-->
+
+{% if id == current_user.id %}
+
+<h1>Update User</h1>
+<br /><br/>
+ID to Update: {{ id }}<br/>
+Current Id: {{ current_user.id }}
+<br/><br/> 
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form action="/dashboard" method="POST" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+
+        {{ form.Name.label ( class="form-label" ) }}
+        {{ form.Name(class="form-control", value=name_to_update.name) }}
+
+        {{ form.Username.label ( class="form-label" ) }}
+        {{ form.Username(class="form-control", value=name_to_update.user_name) }}
+
+        {{ form.Email.label ( class="form-label" ) }}
+        {{ form.Email(class="form-control", value=name_to_update.email) }}
+
+        {{ form.Birthday.label ( class="form-label" ) }}
+        {{ form.Birthday(class="form-control", value=name_to_update.birthday) }}
+
+        <br />
+
+        {{ form.Submit( class="btn btn-dark" ) }}
+
+        <a href="{{url_for('delete', id=id)}}" class="btn btn-danger">Delete</a>
+    </form>
+</div>
+<br /><br /><br />
+
+{% else %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Cannot update page. Not your user!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+    <h2>Access denied!</h2>
+    <p>Sorry you cannot access this user profile</p>
+{% endif %}
+
+{% endblock %}

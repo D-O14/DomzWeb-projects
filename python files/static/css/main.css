@@ -1,0 +1,241 @@
+/*{
+    overflow: hidden ;
+    overflow-clip-margin: none ;
+    overflow: scroll;
+    overflow: visible;
+    overflow-y: none (vertical);
+    overflow-x: none (horizontal);
+    
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin: auto;
+
+    padding-top: auto;
+    padding-bottom: auto;
+    padding-left: auto;
+    padding-right: auto;
+    padding: auto;
+
+    border:none;
+    border-radius: none;
+    border-bottom: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-width: 0px, 0em, 0rem, 0vw, 0vh;
+    border-style: none;
+
+    font-family: none;
+    font-size: 0px,0em,0rem,0vw,0vh;
+    font-style: none;
+    font-weight: 0px,0em,0rem,0vw,0vh;
+    font: optional;
+
+    display: block;
+    display: inline;
+    display: inline-block;
+    display: none;
+
+    visibility: hidden;
+    visibility: visible;
+
+    width: 50px, 50em, 50rem, 50vh, 50vw, 50%;
+    height: 50px, 50em, 50rem, 50vh, 50vw, 50%;
+    max-width: 50px, 50em, 50rem, 50vh, 50vw, 50%;
+    min-width: 50px, 50em, 50rem, 50vh, 50vw, 50%;
+    max-height: 50px, 50em, 50rem, 50vh, 50vw, 50%;
+    min-height: 50px, 50em, 50rem, 50vh, 50vw, 50%;
+
+    box-sizing: border-box;
+    box-shadow: 0px;
+
+    position: relative (relative to normal position);
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+    position: absolute (relative to its nearest ancestor);
+        top: 0px;
+        left: 0px;
+    position: fixed (fixed to a state);
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+    position: static (default);
+    position: sticky (position based on scroll);
+
+    
+    text-align: center;
+    text-emphasis: none ;
+    text-decoration: none;
+    text-transform: none;
+    text-overflow: 0px;
+    text-decoration-line: none ;
+    text-decoration-color: none ;
+    text-wrap: none ;
+    
+    background-color: none;
+    background-image: none;
+    background-position: none;
+    background-size: none;
+    backdrop-filter: none;
+
+    flex: auto;
+    flex-direction: row column;
+    flex-wrap: nowrap wrap;
+
+    justify-content: flex-end;
+    justify-content: space-between;
+    justify-content: space-evenly;
+    justify-content: space-around;
+
+    align-items: flex-start;
+    align-items: flex-end;
+    align-items: baseline;
+    align-items: center;
+
+    align-content: flex-start;
+    align-content: flex-end;
+    align-content: center;
+    align-content: space-evenly;
+    align-content: space-between;
+
+    align-self: center;
+    align-self: flex-end;
+    align-self: flex-start;
+
+    column-gap: 0px;
+    row-gap: 0px;
+
+    : :after::before::first-letter::first-line:focus:hover:active:last-child:last-of-type:not::selection
+}*/
+
+
+h1{
+    color: rgb(22, 22, 55);
+    font-size: 60px;
+}
+
+body{
+    background: #f4f4f4;
+}
+
+#edit_link{
+    float: right;
+    margin: 5px;
+}
+
+#delete_link{
+    float: right;
+    margin: 5px;
+}
+
+#ed_link{
+    float: right;
+    margin: 5px;
+}
+
+#del_link{
+    float: right;
+    margin: 5px;
+}
+
+.img{
+    border: 10px solid whitesmoke;
+    border-radius: 120px;
+    width: 100px;
+    height: 100px;
+    margin: 0;
+}
+
+.form-body{
+    width: 1000px;
+    height: 650px;
+    margin-top: 80px;
+}
+
+.reg-h2 {
+    font-weight: 600;
+    color: #222;
+    font-size: 40px;
+    margin-bottom: 5px;
+    margin-left: 120px;
+}
+
+.content{
+    margin-bottom: 3rem;
+    border-radius: 10px;
+}
+
+.table {
+    border: none;
+}
+
+.admin{
+    padding: 10px 30px;
+    width: 1000px;
+    height: 100px;
+}
+
+.user-link {
+    color: #606060;
+    text-decoration: none;
+}
+
+.user-link:hover{
+    color: rgb(24, 160, 213);
+}
+
+.card-title{
+    margin-left: -120px;
+}
+
+.form{
+    margin: 10px;
+    width: 400px;
+    border-radius: 5px;
+    border: 1px solid #aaa5a5;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    transition: 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin-bottom: 1rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+}
+
+.submit_btn{
+    width: 600px;
+    padding: 8px;
+    background: #11b769;
+    border: none;
+}
+
+.submit_btn:hover{
+    background: #99e5c2;
+    transition: ease-in-out .3s;
+}
+
+.link-text{
+    margin-left: 20px;
+}
+
+.btn-post{
+    width: 100px;
+}
+
+.email-link{
+    text-decoration: none;
+    color: #111;
+}
+
+.email-link:hover{
+    color: blue;
+    text-decoration: underline;
+}

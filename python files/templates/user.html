@@ -1,0 +1,73 @@
+{% extends 'structure.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+{% if name %}
+    <h1>User Added</h1>
+    <br/><br/><br/>
+
+    <table class="table table-striped table-responsive table-hover table-bordered">
+        {% for user in our_users %}
+        <tr>
+            <td>{{ user.id }}. <a href="{{url_for('update', id=user.id)}}" class="link text-decoration-none">{{ user.name}}</a>
+                - <a href="" class="email-link">{{ user.email }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% else %}
+
+<div class="shadow p-3 mb-5 bg-body rounded">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+
+        <h2 class="reg-h2">Registration page</h2>
+        <br />
+
+        {{ form.Name.label ( class="form-label" ) }}
+        {{ form.Name(class="form-control") }}<br/>
+
+        {{ form.Username.label ( class="form-label" ) }}<br/>
+        {{ form.Username(class="form-control") }}<br/>
+        
+        {{ form.Email.label ( class="form-label" ) }}
+        {{ form.Email(class="form-control") }}<br/>
+        
+        {{ form.Birthday.label ( class="form-label" ) }}<br/>
+        {{ form.Birthday(class="form-control") }}<br/>
+
+        {{ form.Password.label ( class="form-label" ) }}
+        {{ form.Password(class="form-control") }}
+
+        {{ form.Password2.label ( class="form-label" ) }}
+        {{ form.Password2(class="form-control") }}
+        <br />
+        <button class="btn btn-dark">Register</button>
+    </form>
+</div>
+
+<br/>
+
+{% if current_user.id == 1 %}
+<table class="table table-striped table-responsive table-hover table-bordered">
+    {% for user in our_users %}
+        <tr>
+        <td>{{ user.id }}. {{ user.name }} 
+        - <a href="" class="email-link link-dark text-decoration-none">{{ user.email }}</a> - <a href="" class="link-primary text-decoration-none">{{ user.user_name }}</a> - <a href="{{ url_for('delete', id=user.id) }}" class="link-primary text-decoration-none">Delete</a>
+        </td>
+        </tr>
+        {% endfor %}
+</table>     
+    {% endif %}
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'structure.html' %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+
+{% if name %}
+    <h1>Hello {{ name }}</h1>
+    <button type="button" class="btn btn-primary btn-sm" onclick="document.getElementById('demo').innerHTML = 'Text changed'">CLICK HERE</button>
+    <p id="demo">Some text</p>
+{% else %}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+    <div class="shadow p-3 mb-5 bg-body rounded">
+    
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+
+        {{ form.Name.label ( class="form-label" ) }}
+        {{ form.Name(class="form-control") }}
+        
+        {{ form.Email.label ( class="form-label" ) }}
+        {{ form.Email(class="form-control") }}
+        
+        {{ form.Password.label ( class="form-label" ) }}
+        {{ form.Password(class="form-control") }}
+        
+        <br />
+        {{ form.Submit( class="btn btn-dark" ) }}
+    </form>
+
+    </div>
+
+{% endif %}
+
+{% endblock %}

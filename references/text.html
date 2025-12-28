@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>letter</title>
+    <link rel="stylesheet" href="text.css">
+</head>
+
+<body>
+    <p>This is normal text</p>
+    <p>This is <b>bold</b> text</p>
+    <p>This is <i>italic</i> text</p>
+    <p>This is <u>underlined</u> text</p>
+    <p>This is <del>deleted</del> text</p>
+    <p>This is <big>big</big> text</p>
+    <p>This is <small>small</small>text</p>
+    <p>This is <sub>subscript</sub> text</p>
+    <p>This is <sup>superscript</sup> text</p>
+    <p>This is <tt>monospaced</tt> text</p>
+    <p>This is <mark style="background-color: aquamarine;">marked</mark> text</p>
+
+
+    <h1><span style="background-color: red;">This is a span title</span></h1>
+    <h1>
+        <div style="background-color: cyan;">This is a div title</div>
+    </h1>
+
+    <p><span style="background-color: red;">this is a span sentence.</span></p>
+    <p>
+    <div style="background-color: cyan;">this is a div sentence.</div>
+    </p>
+
+
+    <pre>Lorem ipsum dolor sit amet consectetur adipisicing 
+        elit.<span style="background-color: yellow;">Dolorum accusantium nam, deleniti rem ipsa debitis dicta
+        necessitatibus illum animi, laudantium reiciendis perspiciatis 
+        distinctio nobis, mollitia odio asperiores sequi
+        fuga nulla.</span></pre>
+
+        <pre>Lorem ipsum dolor sit amet consectetur adipisicing 
+elit?.<div style="background-color: aqua;">            
+    Dolorum accusantium nam, deleniti rem ipsa debitis dicta
+    necessitatibus illum animi, laudantium reiciendis perspiciatis 
+    distinctio nobis, mollitia odio asperiores sequi
+    fuga nulla.</div></pre>
+
+
+    <h4>Groceries</h4>
+    <ul>
+        <li>milk</li>
+        <li>sugar</li>
+        <li>wheat</li>
+        <li>corn</li>
+        <li>bread</li>
+        <li>flour</li>
+        <li>eggs</li>
+        <li>coffee supplies</li>
+        <ul>
+            <li>coffee beans</li>
+            <li>creamer</li>
+            <li>milk</li>
+            <li>sugar</li>
+        </ul>
+    </ul>
+
+    <h4>To do list</h4>
+    <ol>
+        <li>brush my teeth</li>
+        <li>Eat breakfast</li>
+        <li>exercise</li>
+        <li>go for classes</li>
+        <li>walk tasha(the dog)</li>
+        <li>sleep</li>
+        <li>bomb small</li>
+    </ol>
+
+    <h4>Some unreal shit</h4>
+    <dl style="background-color: red; border: 2px solid">
+        <dt>dragon</dt>
+        <dd>Flying firebreathing <mark>reptile</mark></dd>
+        <dt>knight</dt>
+        <dd><mark>armoured</mark> warrior</dd>
+        <dt>gremlin</dt>
+        <dd><mark>evil creature</mark></dd>
+        <dt>skinwalker</dt>
+        <dd>walks in other <mark>peoples's skin</mark></dd>
+    </dl>
+
+
+    <h3>Store Hours</h3>
+
+    <table border="1" style="background-color: black;">
+        <tr align="center" style="background-color: lightblue;">
+            <th width="100">Sunday</th>
+            <th width="100">Monday</th>
+            <th width="100">Tuesday</th>
+            <th width="100">Wednesday</th>
+            <th width="100">Thursday</th>
+            <th width="100">Friday</th>
+            <th width="100">Saturday</th>
+        </tr>
+        <tr align="center" style="background-color: aliceblue;">
+            <td>Closed</td>
+            <td>9am-5pm</td>
+            <td>9am-5pm</td>
+            <td>9am-5pm</td>
+            <td>9am-5pm</td>
+            <td>9am-5pm</td>
+            <td>10am-2pm</td>
+        </tr>
+    </table>
+
+    <button onclick="dosomething()" style="font-size: 25px; 
+    background-color: grey; color: lightblue; 
+    border-radius:25px;">click me
+    </button>
+
+    <p id="greeting">Hello</p>
+
+    <script>
+        function dosomething(){
+            document.getElementById("greeting").innerHTML = "sayonara"
+        }
+    </script>
+
+
+    <form action="" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="mickey mouse" minlength="6" maxlength="12" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="some shit idc"><br>
+
+        <label for="Email">Email:</label>
+        <input type="Email" id="Email" placeholder="dom\234\@gmail.com"><br>
+
+        <label for="phone">phone no:</label>
+        <input type="tel" id="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required><br>
+
+        <label for="bday">birthdate:</label>
+        <input type="date" id="bday"><br>
+
+        <label for="quantity">quantity:</label>
+        <input type="number" id="quantity" minlength="0" maxlength="99"><br>
+
+        <label for="Title">Title:</label>
+        <label for="Mr">Mr</label>
+        <input type="radio" id="Mr" value="Mr" name="Title">
+        <label for="Mr">Ms/Mrs</label>
+        <input type="radio" id="Ms/Mrs" value="Ms/Mrs" name="Title"><br>
+
+        <label for="payment">payment</label>
+        <select id="payment">
+            <option value="visa">visa</option>
+            <option value="mastercard">mastercard</option>
+            <option value="giftcard">giftcard</option>
+        </select><br>
+
+        <label for="subscribe">subscribe</label>
+        <input type="checkbox" id="checkbox"><br>
+
+        <label for="comment">comment:</label>
+        <textarea name="" id="comment" rows="3" cols="25"></textarea><br>
+
+        <label for="file">file:</label>
+        <input type="file" id="file"><br>
+
+        <input type="reset"><br>
+        <input type="submit">
+
+    </form>
+
+
+    <header style="background-color:burlywood ;">
+        <h1>Welcome to HTML class</h1>
+        <a href="">Home</a>
+        <a href="">About Us</a>
+        <a href="">Products</a>
+        <a href="">Contact Us</a>
+        <hr>
+    </header>
+
+    <main>
+        <h4>Practice these</h4>
+        <img src="k.png" alt="knight" width="200px">
+        <pre>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Ducimus earum ea animi nesciunt minus, impedit vel sunt,
+            reiciendis autem expedita, architecto adipisci fugit.
+            Asperiores vel quaerat eius omnis iste inventore.
+        </pre>
+    </main>
+
+    <footer style="background-color: burlywood;">
+    <hr>
+    Author: Sir Lancelot<br>
+    &copy; 2025 copyright all rights reserved<br>
+    <small><a href="dominionogwai613@gmail.com">dominionogwai613@gmail.com</a></small><br>
+    </footer>
+
+
+<style>
+    body{
+        background-color: white;
+    }
+</style>
+
+    <h1 style="color: white;">This is my website</h1>
+
+    <pre style="color: yellow;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eaque, pariatur sed voluptas voluptate reiciendis,
+        repellat ipsam eveniet distinctio, at beatae sint similique minima consequatur rem? Deserunt tempore veniam
+        sequi?</pre>
+    <pre style="color: red;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eaque, pariatur sed voluptas voluptate reiciendis,
+        repellat ipsam eveniet distinctio, at beatae sint similique minima consequatur rem? Deserunt tempore veniam
+        sequi?</pre>
+    <pre style="color: green;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eaque, pariatur sed voluptas voluptate reiciendis,
+        repellat ipsam eveniet distinctio, at beatae sint similique minima consequatur rem? Deserunt tempore veniam
+        sequi?</pre>
+    <pre style="color: blue;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia eaque, pariatur sed voluptas voluptate reiciendis,
+        repellat ipsam eveniet distinctio, at beatae sint similique minima consequatur rem? Deserunt tempore veniam
+        sequi?</pre>
+
+    <h1>BROSKI</h1>
+    <div id="box1"></div>
+
+    <div class="box" id="box1">box 1</div>
+    <div class="box" id="box2">box 2</div>
+
+    <div>                        
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima magni dignissimos nisi, fugiat repudiandae
+            quos. Earum omnis excepturi odio et nostrum sed? Recusandae a perspiciatis accusantium excepturi eum labore
+            repellat?</p>
+    </div>
+
+<div>div</div>
+<span>span</span>
+
+
+    <div class="container">
+        <div class="body">
+        <h2>This is box #1</h2>
+        <pre>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Sit, suscipit vero recusandae ipsa repellendus
+            explicabo labore dolorem quidem.
+            A aliquid voluptas vitae ea quas beatae eaque,
+            consequuntur ducimus rerum quos?
+            </pre>
+    </div>
+    <div class="body">
+        <h2>This is box #2</h2>
+        <pre>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Sit, suscipit vero recusandae ipsa repellendus
+            explicabo labore dolorem quidem. 
+            A aliquid voluptas vitae ea quas
+            beatae eaque, consequuntur ducimus rerum quos?
+            </pre>
+    </div>
+    </div>
+
+    <div id="block1">
+        <div id="block2">
+            <div id="block3"></div>
+        </div>
+    </div>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+    <pre>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nam corrupti molestiae eos totam! Explicabo, ipsum ut
+        quisquam aperiam natus quaerat totam sequi repellendus provident quo sit excepturi repellat molestias inventore.
+    </pre>
+
+
+    <h1>HELLO!</h1>
+    <pre>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+    Harum aperiam debitis voluptatem provident quas? 
+    Voluptatum maiores cumque adipisci modi voluptatem 
+    labore dolor laudantium obcaecati ratione! Expedita cupiditate cum molestias a!</pre>
+<style>
+    
+body{
+    background-image: url(grav2.jpg);
+    background-attachment: fixed;
+    background-size: 1000px;
+    background-repeat: no-repeat;
+}
+</style>
+
+    <div id="select">
+        <p>This is #1</p>
+        <p>This is #2</p>
+        <div>
+            <p>This is #3</p>
+        </div>
+    </div>
+
+    <p>This is #4</p>
+    <p>This is #5</p>
+     
+
+    <button>click me</button><br>
+    <a href="https://google.com">Google</a>
+
+    <ul>
+        <li>This is #1</li>
+        <li>This is #2</li>
+        <li>This is #3</li>
+        <li>This is #4</li>
+        <li>This is #5</li>
+        <li>This is #6</li>
+        <li>This is #7</li>
+        <li>This is #8</li>
+        <li>This is #9</li>
+        <li>This is #10</li>
+    </ul>
+
+    <div id="greeting">
+        Hover here
+        <p>Hello</p>
+    </div>
+
+    <h1>Hello</h1>
+
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt, in consectetur. Aspernatur eligendi deserunt voluptatum voluptate perspiciatis magni molestias, tempora maiores quos fugiat rem voluptatem, debitis, dolore est eaque sint?
+
+        <ul id="fruit">
+            <li id="apple">apple</li>
+            <li id="orange">orange</li>
+            <li id="banana">banana</li>
+        </ul>
+    </p>
+     <style>
+        h1::first-letter{
+    font-size: 2em;
+    font-style:italic;
+}
+
+p::first-line{
+    background-color: yellow;
+}
+     </style>
+
+    <h1>This is page #1</h1>
+    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br> Cupiditate illo illum commodi nemo minus, quas
+        omnis.<br>
+        Hic dignissimos incidunt voluptatem ex deserunt exercitationem,<br>
+        saepe dolore nisi tenetur blanditiis repellat eius.</p>
+
+    <div class="pagination">
+                <a href=""><</a>
+                <a href="lyrics.html" class="active">1</a>
+                <a href="gamedev.html">2</a>
+                <a href="gamedev2.html">3</a>
+                <a href="blessed.html">4</a>
+                <a href="p.html">5</a>
+                <a href="">></a>
+    </div>
+
+    <style>
+        #block1{
+    width: 200px;
+    height: 200px;
+    background-color: purple;
+    position: sticky;
+    top: 0px;
+    left: 0px;
+}
+
+#block2{
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    position: static;
+}
+
+#block3{
+    width: 100px;
+    height: 100px;
+    background-color: yellowgreen;
+    position: absolute;
+    top: 100px;
+}
+
+#select{
+    border: 2px solid;
+    width:350px ;
+}
+
+#select + p{
+    background-color: yellow;
+}
+button{
+border: 2px solid;
+border-radius: 15px;
+font-size: 30px;
+}
+
+button:hover{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background-color: black;
+    color: white;
+    font-size: 35px;
+}
+
+button:active{
+    font-size: 35px;
+    background-color: white;
+    color: orange;
+}
+
+a:link{
+    color: purple
+}
+
+a:hover{
+    color: blueviolet;
+}
+
+li:hover{
+    background-color: yellow;
+}
+
+#greeting p{
+    background-color: blue;
+    width: 100px;
+    border: 2px solid;
+    padding: 10px;
+    display: none;
+}
+
+#greeting:hover p{
+    display: block;
+}
+
+
+p::selection{
+    color: green;
+    background-color: black;
+}
+
+
+#apple::after{
+    content: "🍎";
+}
+
+#orange::after{
+    content: "🍊";
+}
+
+#banana::after{
+    content: "🍌";
+}
+
+#fruit li::marker{
+    content: "🔹";
+    color: black;
+}
+
+#fruit li::before{
+    content: "✔️";
+    color: black;
+}
+
+.pagination{
+    text-align: center;
+}
+
+.pagination a{
+    color: black;
+    text-decoration: none;
+    padding: 8px 15px;
+    display: inline-block;
+}
+
+.pagination a.active{
+    background-color: rgb(0, 255, 94);
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active){
+background-color: grey;
+border-radius: 5px;
+}
+    </style>
+
+    <style>
+        .dropdown{
+    display: inline-block;
+}
+
+.dropdown button{
+background-color: hsl(0, 0%, 80%);
+color: white;
+padding: 10px 15px;
+border: none;
+cursor: pointer;
+}
+
+.dropdown a{
+    display: block;
+    color: black;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.dropdown .content{
+    display: none;
+    position: absolute;
+    background-color: hsl(0, 0%, 95%);
+    min-width: 100px;
+    box-shadow: 2px 2px 5px;
+}
+
+.dropdown:hover .content{
+    display: block;
+}
+
+.dropdown:hover button{
+    background-color: hsl(0, 0%, 70%);
+}
+
+.dropdown a:hover{
+    background-color: hsl(0, 0%, 90%);
+}
+    </style>
+
+    <div class="dropdown">
+        <button>Food</button>
+        <div class="content">
+            <a href="">onion soup</a>
+            <a href="">Butter chicken</a>
+            <a href="">Croissant</a>
+        </div>
+    </div>
+
+<p>
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit.<br> 
+    Laudantium cupiditate quos veniam ipsa qui.<br>
+    Quo odit, delectus eos officia ipsum numquam sunt<br>
+    saepe ab ducimus voluptatum culpa placeat enim perspiciatis.</p>
+
+    <style>
+        body{
+margin: 0px;
+}
+
+main{
+    margin: 20px;
+}
+
+h1{
+    text-align: center;
+}
+.navbar ul{
+    list-style-type: none;
+    background-color: hsl(0, 0%, 25%);
+    margin: 0px;
+    padding: 0px;
+    overflow: hidden;
+}
+
+.navbar a{
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+
+.navbar a:hover{
+    background-color:  hsl(0, 0%, 10%);;
+}
+
+.navbar li{
+    float: left;
+}
+    </style>
+
+    <h1>Dominion</h1>
+    <nav class="navbar">
+        <ul>
+            <li><a href="">Home</a></li>
+            <li><a href="">About</a></li>
+            <li><a href="">Products</a></li>
+            <li><a href="contacts.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h3>This is the Home page</h3>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Repellat nisi libero soluta quas sunt corporis<br>
+            nesciunt autem, quisquam rerum tempore at,<br> molestias deserunt aut nihil pariatur explicabo<br> reiciendis beatae
+            nulla.</p>
+    </main>x
+<style>
+    *{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0px;
+}
+
+header{
+    background-color: hsl(0, 0%, 86%);
+    text-align: center;
+    padding: 25px;
+}
+
+.navbar{
+    background-color: hsl(0, 0%, 15%);
+    height: 50px;
+}
+
+aside{
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+
+section{
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+
+article{
+    width: 20%;
+    float: left;
+    padding: 10px;
+}
+
+footer{
+    display: block;
+    clear: both;
+    background-color: hsl(0, 0%, 86%);
+    text-align: center;
+    padding: 25px;
+}
+</style>
+    <header>
+        <h1>Header</h1>
+    </header>
+
+    <nav class="navbar">
+
+    </nav>
+
+    <main>
+        <aside>
+            <h2>This is Aside</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Provident, dicta officiis aspernatur tempora<br>
+                corrupti consectetur eveniet voluptatum voluptate<br> laborum ducimus deleniti fuga quisquam pariatur?<br>
+                Mollitia reiciendis recusandae voluptatum animi obcaecati?</p>
+        </aside>
+
+        <section>
+            <h2>This is a Section</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Provident, dicta officiis aspernatur tempora<br>
+                corrupti consectetur eveniet voluptatum voluptate<br> laborum ducimus deleniti fuga quisquam pariatur?<br>
+                Mollitia reiciendis recusandae voluptatum animi obcaecati?</p>
+        </section>
+
+        <article>
+            <h2>This is an Article</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br> Provident, dicta officiis aspernatur tempora<br>
+                corrupti consectetur eveniet voluptatum voluptate<br> laborum ducimus deleniti fuga quisquam pariatur?<br>
+                Mollitia reiciendis recusandae voluptatum animi obcaecati?</p>
+        </article>
+    </main>
+
+    <footer>
+        <h1>footer</h1>
+    </footer>
+
+<style>
+    .gallery{
+    display: inline-block;
+    border: 1px solid grey;
+    margin: 5px;
+    width: 200px;
+}
+
+.gallery .description{
+    padding: 10px;
+    text-align: center;
+}
+
+.gallery:hover{
+    border: 2px solid hsl(0, 0%, 20%);
+}
+
+.gallery img{
+    width: 100%;
+    height: auto;
+}
+</style>
+
+    <div class="gallery">
+        <a target="_blank" href="grav.jpg">
+        <img src="grav.jpg" alt="">
+        </a>
+        <div class="description">Forest pic</div>
+    </div>
+
+        <div class="gallery">
+            <a target="_blank" href="mkk.jpg">
+        <img src="mkk.jpg" alt="">
+        </a>
+        <div class="description">Monkey king pic</div>
+    </div>
+
+    <div class="gallery">
+        <a target="_blank" href="grav2.jpg">
+        <img src="grav2.jpg" alt="" >
+        </a>
+        <div class="description">Gravity falls pic</div>
+    </div>
+
+    <style>
+        .container {
+    display: flex;
+    border: 10px solid black;
+    height: 90vh;
+}
+
+.box {
+    width: 150px;
+    height: 150px;
+    font-size: 8em;
+    text-align: center;
+    border-radius: 15px;
+}
+
+#box1 {
+    background-color: hsl(0, 100%, 70%);
+}
+
+#box2 {
+    background-color: hsl(52, 100%, 70%);
+}
+
+#box3 {
+    background-color: hsl(111, 100%, 70%);
+}
+
+#box4 {
+    background-color: hsl(201, 100%, 70%);
+}
+    </style>
+
+<div class="container">
+    <div class="box" id="box1">1</div>
+    <div class="box" id="box2">2</div>
+    <div class="box" id="box3">3</div>
+    <div class="box" id="box4">4</div>
+</div>
+
+<style>
+    body{
+    margin: 0;
+}
+
+.boxes{
+    transform: translateX(100px) rotateZ(45deg) scale(0.5);
+}
+
+#box0{
+    width: 250px;
+    height: 250px;
+    border: 5px solid black;
+    font-size: 13em;
+    text-align: center;
+    background-color: hsl(221, 50%, 40%);
+}
+
+#box-0{
+    width: 250px;
+    height: 250px;
+    border: 5px solid black;
+    font-size: 13em;
+    text-align: center;
+    background-color: hsl(220, 80%, 80%);
+}
+
+#box-1{
+    width: 250px;
+    height: 250px;
+    border: 5px solid black;
+    font-size: 13em;
+    text-align: center;
+    background-color: hsl(360, 70%, 40%);
+}
+</style>
+
+
+<div class="boxes">
+<div id="box0">Hi</div>
+<div id="box-0" >Hi</div>
+<div id="box-1" >Hi</div>
+</div>
+
+
+<div id="Animation">Hi</div>
+
+</body>
+
+
+</html>
