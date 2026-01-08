@@ -30,3 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 console.log("Hello, i'm working")
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({ 
+  cloud_name: 'YOUR_CLOUD_NAME', 
+  api_key: 'YOUR_API_KEY', 
+  api_secret: 'YOUR_API_SECRET' 
+});
+
+// Upload a file
+cloudinary.uploader.upload("local_image.jpg", function(error, result) {
+  console.log(result.url);
+});
