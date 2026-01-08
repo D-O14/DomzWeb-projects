@@ -16,9 +16,15 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "scripts": {
+    "minify-js": "terser codes/code.js -o codes/code.min.js -c -m",
+    "minify-css": "npx postcss codes/project.css -o codes/project.min.css -c -m",
+    "build": "npm run minify-js && npm run minify-css"
+  },
   "devDependencies": {
     "cssnano": "^7.1.2",
     "postcss": "^8.5.6",
-    "postcss-cli": "^11.0.1"
+    "postcss-cli": "^11.0.1",
+    "terser": "^5.44.1"
   }
 }
