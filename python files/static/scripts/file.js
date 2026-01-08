@@ -29,14 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-console.log("Hello, i'm working")
+
 
 const cloudinary = require('cloudinary').v2;
 
 cloudinary.config({ 
-  cloud_name: 'YOUR_CLOUD_NAME', 
-  api_key: 'YOUR_API_KEY', 
-  api_secret: 'YOUR_API_SECRET' 
+  cloud_name: 'dyyvwfgqr', 
+  api_key: '359132321779776', 
+  api_secret: 'h4soM2tnY_AcrTiIStMa-FDlLTI' 
 });
 
 // Upload a file
