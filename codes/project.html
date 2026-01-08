@@ -59,26 +59,29 @@
                 <div class="col-left">
                     <div class="box">
                         <div class="inner-box">
-                            <img src="images/1.png" alt="">
+                            <picture>
+                                <img srcset="images/1.png?width=200 200w" alt="" loading="lazy" role="presentation"
+                                    sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
+                            </picture>
                         </div>
                         <div class="inner-box">
-                            <img src="images/2.png" alt="" id="myImage">
-                        </div>
-                    </div>
-                    <div class="box">
-                        <div class="inner-box">
-                            <img src="images/3.png" alt="" id="myImage">
-                        </div>
-                        <div class="inner-box">
-                            <img src="images/4.png" alt="" id="myImage">
+                            <img src="images/2.png" alt="" id="myImage" loading="lazy" role="presentation">
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner-box">
-                            <img src="images/5.png" alt="" id="myImage">
+                            <img src="images/3.png" alt="" id="myImage" loading="lazy" role="presentation">
                         </div>
                         <div class="inner-box">
-                            <img src="images/6.png" alt="" id="myImage"> 
+                            <img src="images/4.png" alt="" id="myImage" loading="lazy" role="presentation">
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="inner-box">
+                            <img src="images/5.png" alt="" id="myImage" loading="lazy" role="presentation">
+                        </div>
+                        <div class="inner-box">
+                            <img src="images/6.png" alt="" id="myImage" loading="lazy" role="presentation">
                         </div>
                     </div>
                 </div>
@@ -356,38 +359,38 @@
 </body>
 
 <script>
-    
-        const slider = document.querySelector('.slider');
-        document.querySelector('.right').onclick = () => {
-            slider.scrollBy({ left: slider.clientWidth, behavior: "smooth" });
-        };
 
-        document.querySelector('.left').onclick = () => {
-            slider.scrollBy({ left: -slider.clientWidth, behavior: "smooth" });
-        };
+    const slider = document.querySelector('.slider');
+    document.querySelector('.right').onclick = () => {
+        slider.scrollBy({ left: slider.clientWidth, behavior: "smooth" });
+    };
 
-        document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('.left').onclick = () => {
+        slider.scrollBy({ left: -slider.clientWidth, behavior: "smooth" });
+    };
 
-            const sliderTile = document.querySelector('.tile-slider');
+    document.addEventListener('DOMContentLoaded', () => {
 
-            if (!sliderTile) return;
+        const sliderTile = document.querySelector('.tile-slider');
 
-            let hideTimer;
+        if (!sliderTile) return;
 
-            function showNav() {
-                sliderTile.classList.add('show-nav');
+        let hideTimer;
 
-                clearTimeout(hideTimer);
-                hideTimer = setTimeout(() => {
-                    sliderTile.classList.remove('show-nav');
-                }, 2500)
-            }
+        function showNav() {
+            sliderTile.classList.add('show-nav');
 
-            ['mousemove', 'click', 'touchstart', 'focusin'].forEach(event => {
-                sliderTile.addEventListener(event, showNav);
-            });
+            clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+                sliderTile.classList.remove('show-nav');
+            }, 2500)
+        }
+
+        ['mousemove', 'click', 'touchstart', 'focusin'].forEach(event => {
+            sliderTile.addEventListener(event, showNav);
         });
-            
+    });
+
 </script>
 
 <script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js"></script>
