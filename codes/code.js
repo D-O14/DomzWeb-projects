@@ -206,8 +206,7 @@ console.log(`your E-mail is ${Email}`)
 console.log("You are now a member of the Java workspace")
 */
 
-var cl = cloudinary.Cloudinary.new({ cloud_name: 'YOUR_CLOUD_NAME', secure: true });
+var cl = cloudinary.Cloudinary.new({ cloud_name: 'dyyvwfgqr', secure: true });
 
-// Generate a URL dynamically
 var url = cl.url('sample.jpg', { width: 300, height: 200, crop: 'fill' });
 document.getElementById('myImage').src = url;
