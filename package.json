@@ -1,10 +1,18 @@
 {
   "dependencies": {
     "aos": "^2.3.4",
+    "cloudinary": "^2.8.0",
     "cors": "^2.8.5",
-    "express": "^5.1.0",
     "gsap": "^3.13.0",
     "jsap": "^2.0.0",
     "tailwindcss": "^4.1.16"
-  }
+  },
+  "name": "website-development",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
 }

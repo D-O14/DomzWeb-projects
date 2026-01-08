@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/project.css') }}">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="#" class="nav-brand">WebNav</a>
+
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('home') }}" class="nav-link">Home</a></li>
+                <li><a href="#flex-cards" class="nav-link">Cards</a></li>
+                <li><a href="#grid-area" class="nav-link">GridBox</a></li>
+                <li><a href="#slides" class="nav-link">Grid-Slides</a></li>
+                <li><a href="#News" class="nav-link">Information</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="" class="btn btn-login">Login</a>
+                <a href="{{ url_for( 'signUp' ) }}" class="btn btn-signup">Sign Up</a>
+            </div>
+
+        </div>
+    </nav>
+
+    <main>
+        <section class="home" id="home">
+            <div class="content">
+                <code><h1 class="main-txt">&lt;Insert Company Name&gt;</h1></code>
+                <p>Stand together. Work together. Grow together. Be <span>Empowered</span> by your own hand. ✊
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum explicabo incidunt et ab dicta quam
+                    suscipit laboriosam nobis fugiat enim?</p>
+                <div class="btnBox">
+                    <button>Button</button>
+                    <button>Button</button>
+                </div>
+            </div>
+
+            <div class="bento">
+                <div class="col-left">
+                    <div class="box">
+                        <div class="inner-box">
+                            <img src="{{url_for('static', filename='images/1.png')}}" alt="">
+                        </div>
+                        <div class="inner-box">
+                            <img src="{{url_for('static', filename='images/2.png')}}" alt="">
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="inner-box">
+                            <img src="{{url_for('static', filename='images/3.png')}}" alt="">
+                        </div>
+                        <div class="inner-box">
+                            <img src="{{url_for('static', filename='images/4.png')}}" alt="">
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="inner-box">
+                            <img src="{{url_for('static', filename='images/5.png')}}" alt="">
+                        </div>
+                        <div class="inner-box">
+                            <img src="{{url_for('static', filename='images/6.png')}}" alt="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-right">
+                    <div class="box">
+                        <video src="{{url_for('static', filename='videos/sea.mp4')}}" autoplay muted loop></video>
+                    </div>
+                    <div class="box">
+                        <video src="{{url_for('static', filename='videos/sm.mp4')}}" autoplay muted loop></video>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="flex-cards" id="flex-cards">
+            <div class="container">
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='images/cafe (11).jpg')}}" alt="">
+                    </div>
+                    <div class="text-box">
+                        <h3>Product Name</h3>
+                        <div class="subtext">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
+                            </p>
+                        </div>
+                        <a href="#" class="link_btn">Add to cart</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='images/cafe (6).jpg')}}" alt="">
+                    </div>
+                    <div class="text-box">
+                        <div class="text">
+                            <h3>Product Name</h3>
+                        </div>
+                        <div class="subtext">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
+                            </p>
+                        </div>
+                        <a href="#" class="link_btn">Add to cart</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='images/cafe (4).jpg')}}" alt="" class="card-image">
+                    </div>
+                    <div class="text-box">
+                        <div class="text">
+                            <h3>Product Name</h3>
+                        </div>
+                        <div class="subtext">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
+                            </p>
+                        </div>
+                        <a href="#" class="link_btn">Add to cart</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='images/cafe (9).jpg')}}" alt="">
+                    </div>
+                    <div class="text-box">
+                        <div class="text">
+                            <h3>Product Name</h3>
+                        </div>
+                        <div class="subtext">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
+                            </p>
+                        </div>
+                        <a href="#" class="link_btn">Add to cart</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='images/cafe (2).jpg')}}" alt="">
+                    </div>
+                    <div class="text-box">
+                        <div class="text">
+                            <h3>Product Name</h3>
+                        </div>
+                        <div class="subtext">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
+                            </p>
+                        </div>
+                        <a href="#" class="link_btn">Add to cart</a>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <img src="{{url_for('static', filename='images/cafe (10).jpg')}}" alt="">
+                    </div>
+                    <div class="text-box">
+                        <div class="text">
+                            <h3>Product Name</h3>
+                        </div>
+                        <div class="subtext">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
+                            </p>
+                        </div>
+                        <a href="#" class="link_btn">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid-area" id="grid-area">
+            <h1>Section header</h1>
+            <div class="grid-container">
+                <div class="grid-rows" style="grid-area: grid-1;">
+                    <img src="{{url_for('static', filename='images/cafe (1).jpg')}}" alt="">
+                    <div class="grid-overlay">Image definition</div>
+                </div>
+                <div class="grid-rows" style="grid-area: grid-2;">
+                    <img src="{{url_for('static', filename='images/AM.jpg')}}" alt="" class="grid-img">
+                    <div class="grid-overlay">Image definition</div>
+                </div>
+                <div class="grid-rows" style="grid-area: grid-3;">
+                    <img src="{{url_for('static', filename='images/banner.jpg')}}" alt="" class="grid-img">
+                    <div class="grid-overlay">Image definition</div>
+                </div>
+                <div class="grid-rows" style="grid-area: grid-4;">
+                    <img src="{{url_for('static', filename='images/bakery.jpg')}}" alt="" class="grid-img">
+                    <div class="grid-overlay">Image definition</div>
+                </div>
+                <div class="grid-rows" style="grid-area: grid-5;">
+                    <img src="{{url_for('static', filename='images/grav.jpg')}}" alt="" class="grid-img">
+                    <div class="grid-overlay">Image definition</div>
+                </div>
+        </section>
+
+        <section class="store-grid" id="slides">
+            <div class="tile tile-lg tile-slider" tabindex="0">
+
+                <div class="slider">
+
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (12).jpg')}}" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (10).jpg')}}" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (14).jpg')}}" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (13).jpg')}}" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (11).jpg')}}" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (7).jpg')}}" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (9).jpg')}}" alt="">
+                    </div>
+                    <div class="slide">
+                        <img src="{{url_for('static', filename='images/food (8).jpg')}}" alt="">
+                    </div>
+                </div>
+
+                <button class="nav-btn left">&lt;</button>
+                <button class="nav-btn right">&gt;</button>
+
+            </div>
+
+
+            <div class="tile">
+                <img src="{{url_for('static', filename='images/food (13).jpg')}}" alt="">
+            </div>
+
+            <div class="tile">
+                <img src="{{url_for('static', filename='images/food (10).jpg')}}" alt="">
+            </div>
+
+            <div class="tile">
+                <img src="{{url_for('static', filename='images/cafe (16).jpg')}}" alt="">
+            </div>
+
+            <div class="tile">
+                <img src="{{url_for('static', filename='images/cafe (10).jpg')}}" alt="">
+            </div>
+
+        </section>
+
+        <section class="info-pg" id="News">
+            <div class="info-container">
+                <div class="News">
+                    <div class="News-image">
+                        <img src="{{url_for('static', filename='images/main-image.jpg')}}" alt="Featured News" />
+                    </div>
+                    <div class="News-content">
+                        <h2>Some random text that's supposed to mean something.</h2>
+                        <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, amet. Neque, enim deserunt
+                            minus
+                            similique, sunt facilis natus cumque sint, illo officia nobis expedita animi? Ducimus velit
+                            nostrum,
+                            quo cupiditate impedit sint placeat distinctio asperiores dolor ullam tempora earum ex
+                            numquam
+                            eius
+                            mollitia debitis, enim esse architecto illo. Adipisci dolorum, debitis quisquam nobis
+                            officiis
+                            animi. Maxime voluptate sit eveniet soluta accusamus iure!
+                        </p>
+                        <div class="News-footer">
+                            <button href="#" class="News-more">Read More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="News">
+                    <div class="News-image">
+                        <img src="{{url_for('static', filename='images/main-image.jpg')}}" alt="Featured News" />
+                    </div>
+                    <div class="News-content">
+                        <h2>Some random text that's supposed to mean something.</h2>
+                        <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, amet. Neque, enim deserunt
+                            minus
+                            similique, sunt facilis natus cumque sint, illo officia nobis expedita animi? Ducimus velit
+                            nostrum,
+                            quo cupiditate impedit sint placeat distinctio asperiores dolor ullam tempora earum ex
+                            numquam
+                            eius
+                            mollitia debitis, enim esse architecto illo. Adipisci dolorum, debitis quisquam nobis
+                            officiis
+                            animi. Maxime voluptate sit eveniet soluta accusamus iure!
+                        </p>
+                        <div class="News-footer">
+                            <button href="#" class="News-more">Read More</button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="News">
+                    <div class="News-image">
+                        <img src="{{url_for('static', filename='images/main-image.jpg')}}" alt="Featured News" />
+                    </div>
+                    <div class="News-content">
+                        <h2>Some random text that's supposed to mean something.</h2>
+                        <p>
+                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id, amet. Neque, enim deserunt
+                            minus
+                            similique, sunt facilis natus cumque sint, illo officia nobis expedita animi? Ducimus velit
+                            nostrum,
+                            quo cupiditate impedit sint placeat distinctio asperiores dolor ullam tempora earum ex
+                            numquam
+                            eius
+                            mollitia debitis, enim esse architecto illo. Adipisci dolorum, debitis quisquam nobis
+                            officiis
+                            animi. Maxime voluptate sit eveniet soluta accusamus iure!
+                        </p>
+                        <div class="News-footer">
+                            <button href="#" class="News-more">Read More</button>
+                        </div>
+                    </div>
+                </div>
+        </section>
+
+    </main>
+
+</body>
+<script src="{{url_for('static', filename='scripts/file.js')}}"></script>
+
+</html>

@@ -13,7 +13,7 @@ body{
     font-family: sans-serif;
     color: #fff;
     background: url(images/cafe\ \(14\).jpg);
-    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter-: blur(4px);
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -233,7 +233,6 @@ img{
     background-color: lightyellow;
     color: #333;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;

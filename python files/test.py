@@ -1,14 +1,12 @@
 from flask import Flask, render_template, flash, request, redirect, url_for
 from flask_migrate import Migrate
-from datetime import datetime, date
+from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-from werkzeug.utils import secure_filename
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user, UserMixin
 from admin.webforms import PostForm, LoginForm, UserForm, Form
 from flask_sqlalchemy import SQLAlchemy
 from flask_ckeditor import CKEditor
 import uuid as uuid
-import os
 
 #flask variable settings: $env:FLASK_ENV = "appname"
 #flask variable settings: $env:FLASK_APP = "development"
@@ -18,11 +16,11 @@ app = Flask(__name__)
 ckeditor = CKEditor(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
 app.config['SECRET_KEY'] = 'your_secret_key'
-upload_folder = 'static/images/'
-app.config['upload_folder'] = upload_folder
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 app.app_context().push()
+#upload_folder = 'static/images/'
+#app.config['upload_folder'] = upload_folder
 
 
 login_manager = LoginManager()
@@ -54,7 +52,7 @@ def add_post():
       form = PostForm()
       if form.validate_on_submit():
             poster = current_user
-            post = Posts(title=form.title.data, content=form.content.data, poster=poster)
+            post = Posts(title=form.title.data or "", content=form.content.data, poster=poster)
             form.title.data = ''
             form.content.data = ''
             #form.slug.data = '' 
@@ -147,11 +145,11 @@ def edit_post(id):
 
 
 @app.errorhandler(404)
-def error(e):
+def error_404(e):
         return render_template("404.html"), 404
         
 @app.errorhandler(500)
-def error(e):
+def error_500(e):
         return render_template("500.html"), 500
 
 
@@ -191,7 +189,7 @@ def login():
       if form.validate_on_submit():
             user = Users.query.filter_by(user_name=form.Username.data, email=form.Email.data).first()
             if user:
-                  if check_password_hash(user.password_hash, form.Password.data):
+                  if check_password_hash(user.password_hash, form.Password.data or ""):
                         login_user(user) #remember=form.Remember_Me.data)
                         flash("Login Successful!")
                         return redirect(url_for('dashboard'))
@@ -266,8 +264,8 @@ def user():
        if form.validate_on_submit():
              user = Users.query.filter_by(email=form.Email.data).first()
              if user is None:
-                   hashed_pw = generate_password_hash(form.Password.data, method='pbkdf2:sha256')
-                   user = Users(user_name=form.Username.data, name=form.Name.data, password_hash=hashed_pw, email=form.Email.data, birthday=form.Birthday.data)
+                   hashed_pw = generate_password_hash(form.Password.data or "", method='pbkdf2:sha256')
+                   user = Users(user_name=form.Username.data or "", name=form.Name.data or "", password_hash=hashed_pw, email=form.Email.data, birthday=form.Birthday.data)
                    db.session.add(user)
                    db.session.commit()
              name = form.Name.data
@@ -275,7 +273,7 @@ def user():
              form.Name.data = ''
              form.Email.data = ''
              #form.Fav_color.data = ''
-             form.Birthday.data = ''
+             form.Birthday.data = None
              form.Password.data = ''
              flash("User Added Successfully")
        our_users = Users.query.order_by(Users.date_added)
@@ -297,6 +295,11 @@ class Posts(db.Model):
       #slug = db.Column(db.String(255))
       poster_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
+      def __init__(self, title: str, content: str, **kwargs):
+             super().__init__(**kwargs)
+             self.title = title
+             self.content = content
+
 
 class Users(db.Model, UserMixin):
        __tablename__ = "users"
@@ -311,6 +314,11 @@ class Users(db.Model, UserMixin):
        #profile_pic = db.Column(db.String(), nullable=True)
        password_hash = db.Column(db.String(128))
        posts = db.relationship('Posts', backref = 'poster')
+
+       def __init__(self, user_name: str, name: str, **kwargs):
+             super().__init__(**kwargs)
+             self.user_name = user_name
+             self.name = name
 
        @property
        def password(self):

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/project.css')}}">
+</head>
+
+<body style="background: #333;">
+    <form action="" method="POST" class="form">
+        {{ form.hidden_tag() }}
+
+        <div class="input">
+            <h1>Sign-Up Form</h1>
+            <hr/>
+
+            {{ form.Username.label ( class="input-label" ) }}
+            {{ form.Username (class="input-field") }}
+
+            {{ form.Name.label ( class="input-label" ) }}
+            {{ form.Name (class="input-field") }}
+
+            {{ form.Email.label ( class="input-label" ) }}
+            {{ form.Email (class="input-field") }}
+
+            {{ form.Password.label ( class="input-label" ) }}
+            {{ form.Password (class="input-field") }}
+
+            {{ form.Submit ( class="SubmitBtn" )}}
+        </div>
+    </form>
+
+</body>
+
+</html>
