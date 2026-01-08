@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="UI testing Website">
     <title>HTML & CSS</title>
 
     <link rel="stylesheet" href="project.css">
@@ -24,14 +26,14 @@
     <nav class="navbar">
         <div class="nav-container">
 
-            <a href="#" class="nav-brand">WebNav</a>
+            <a href="#" class="nav-brand" role="link">WebNav</a>
 
             <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#flex-cards" class="nav-link">Cards</a></li>
-                <li><a href="#grid-area" class="nav-link">GridBox</a></li>
-                <li><a href="#slides" class="nav-link">Grid-Slides</a></li>
-                <li><a href="#News" class="nav-link">Information</a></li>
+                <li role="listitem"><a href="#home" class="nav-link" role="navigation">Home</a></li>
+                <li role="listitem"><a href="#flex-cards" class="nav-link" role="navigation">Cards</a></li>
+                <li role="listitem"><a href="#grid-area" class="nav-link" role="navigation">GridBox</a></li>
+                <li role="listitem"><a href="#slides" class="nav-link" role="navigation">Grid-Slides</a></li>
+                <li role="listitem"><a href="#News" class="nav-link" role="navigation">Information</a></li>
             </ul>
 
             <div class="nav-actions">
@@ -50,8 +52,8 @@
                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rerum explicabo incidunt et ab dicta quam
                     suscipit laboriosam nobis fugiat enim?</p>
                 <div class="btnBox">
-                    <button>Button</button>
-                    <button>Button</button>
+                    <button role="button">Button</button>
+                    <button role="button">Button</button>
                 </div>
             </div>
 
@@ -65,23 +67,28 @@
                             </picture>
                         </div>
                         <div class="inner-box">
-                            <img src="images/2.png" alt="" id="myImage" loading="lazy" role="presentation">
+                            <img src="images/2.png" alt="" id="myImage" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner-box">
-                            <img src="images/3.png" alt="" id="myImage" loading="lazy" role="presentation">
+                            <img src="images/3.png" alt="" id="myImage" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                         </div>
                         <div class="inner-box">
-                            <img src="images/4.png" alt="" id="myImage" loading="lazy" role="presentation">
+                            <img src="images/4.png" alt="" id="myImage" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                         </div>
                     </div>
                     <div class="box">
                         <div class="inner-box">
-                            <img src="images/5.png" alt="" id="myImage" loading="lazy" role="presentation">
+                            <img src="images/5.png" alt="" id="myImage" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                         </div>
                         <div class="inner-box">
-                            <img src="images/6.png" alt="" id="myImage" loading="lazy" role="presentation">
+                            <img src="images/6.png" alt="" id="myImage" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                         </div>
                     </div>
                 </div>
@@ -101,7 +108,8 @@
             <div class="container">
                 <div class="card">
                     <div class="card-img">
-                        <img src="images/cafe (11).jpg" alt="">
+                        <img src="images/cafe (11).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="text-box">
                         <h3>Product Name</h3>
@@ -109,13 +117,14 @@
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
                             </p>
                         </div>
-                        <a href="#" class="link_btn">Add to cart</a>
+                        <a href="#" class="link_btn" role="link">Add to cart</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-img">
-                        <img src="images/cafe (6).jpg" alt="">
+                        <img src="images/cafe (6).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="text-box">
                         <div class="text">
@@ -125,13 +134,14 @@
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
                             </p>
                         </div>
-                        <a href="#" class="link_btn">Add to cart</a>
+                        <a href="#" class="link_btn" role="link">Add to cart</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-img">
-                        <img src="images/cafe (4).jpg" alt="" class="card-image">
+                        <img src="images/cafe (4).jpg" alt="" class="card-image" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="text-box">
                         <div class="text">
@@ -141,13 +151,14 @@
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
                             </p>
                         </div>
-                        <a href="#" class="link_btn">Add to cart</a>
+                        <a href="#" class="link_btn" role="link">Add to cart</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-img">
-                        <img src="images/cafe (9).jpg" alt="">
+                        <img src="images/cafe (9).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="text-box">
                         <div class="text">
@@ -157,13 +168,14 @@
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
                             </p>
                         </div>
-                        <a href="#" class="link_btn">Add to cart</a>
+                        <a href="#" class="link_btn" role="link">Add to cart</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-img">
-                        <img src="images/cafe (2).jpg" alt="">
+                        <img src="images/cafe (2).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="text-box">
                         <div class="text">
@@ -173,13 +185,14 @@
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
                             </p>
                         </div>
-                        <a href="#" class="link_btn">Add to cart</a>
+                        <a href="#" class="link_btn" role="link">Add to cart</a>
                     </div>
                 </div>
 
                 <div class="card">
                     <div class="card-img">
-                        <img src="images/cafe (10).jpg" alt="" width="300px" height="640px">
+                        <img src="images/cafe (10).jpg" alt="" width="300px" height="640px" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="text-box">
                         <div class="text">
@@ -189,7 +202,7 @@
                             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Vitae, consectetur?
                             </p>
                         </div>
-                        <a href="#" class="link_btn">Add to cart</a>
+                        <a href="#" class="link_btn" role="link">Add to cart</a>
                     </div>
                 </div>
             </div>
@@ -199,23 +212,28 @@
             <h1>Section header</h1>
             <div class="grid-container">
                 <div class="grid-rows" style="grid-area: grid-1;">
-                    <img src="images/cafe (1).jpg" alt="">
+                    <img src="images/cafe (1).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     <div class="grid-overlay">Image definition</div>
                 </div>
                 <div class="grid-rows" style="grid-area: grid-2;">
-                    <img src="images/AM.jpg" alt="" class="grid-img">
+                    <img src="images/AM.jpg" alt="" class="grid-img" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     <div class="grid-overlay">Image definition</div>
                 </div>
                 <div class="grid-rows" style="grid-area: grid-3;">
-                    <img src="images/banner.jpg" alt="" class="grid-img">
+                    <img src="images/banner.jpg" alt="" class="grid-img" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     <div class="grid-overlay">Image definition</div>
                 </div>
                 <div class="grid-rows" style="grid-area: grid-4;">
-                    <img src="images/bakery.jpg" alt="" class="grid-img">
+                    <img src="images/bakery.jpg" alt="" class="grid-img" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     <div class="grid-overlay">Image definition</div>
                 </div>
                 <div class="grid-rows" style="grid-area: grid-5;">
-                    <img src="images/grav.jpg" alt="" class="grid-img">
+                    <img src="images/grav.jpg" alt="" class="grid-img" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     <div class="grid-overlay">Image definition</div>
                 </div>
         </section>
@@ -226,51 +244,63 @@
                 <div class="slider">
 
                     <div class="slide">
-                        <img src="images/food (12).jpg" alt="">
+                        <img src="images/food (12).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="slide">
-                        <img src="images/food (10).jpg" alt="">
+                        <img src="images/food (10).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="slide">
-                        <img src="images/food (14).jpg" alt="">
+                        <img src="images/food (14).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="slide">
-                        <img src="images/food (13).jpg" alt="">
+                        <img src="images/food (13).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="slide">
-                        <img src="images/food (11).jpg" alt="">
+                        <img src="images/food (11).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="slide">
-                        <img src="images/food (7).jpg" alt="">
+                        <img src="images/food (7).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="slide">
-                        <img src="images/food (9).jpg" alt="">
+                        <img src="images/food (9).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="slide">
-                        <img src="images/food (8).jpg" alt="">
+                        <img src="images/food (8).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                 </div>
 
-                <button class="nav-btn left">&lt;</button>
-                <button class="nav-btn right">&gt;</button>
+                <button class="nav-btn left" role="navigation">&lt;</button>
+                <button class="nav-btn right" role="navigation">&gt;</button>
 
             </div>
 
 
             <div class="tile">
-                <img src="images/food (13).jpg" alt="">
+                <img src="images/food (13).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
             </div>
 
             <div class="tile">
-                <img src="images/food (10).jpg" alt="">
+                <img src="images/food (10).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
             </div>
 
             <div class="tile">
-                <img src="images/cafe (16).jpg" alt="">
+                <img src="images/cafe (16).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
             </div>
 
             <div class="tile">
-                <img src="images/cafe (10).jpg" alt="">
+                <img src="images/cafe (10).jpg" alt="" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
             </div>
 
         </section>
@@ -279,7 +309,8 @@
             <div class="info-container">
                 <div class="News">
                     <div class="News-image">
-                        <img src="images/main-image.jpg" alt="Featured News" />
+                        <img src="images/main-image.jpg" alt="Featured News" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="News-content">
                         <h2>Some random text that's supposed to mean something.</h2>
@@ -296,7 +327,7 @@
                             animi. Maxime voluptate sit eveniet soluta accusamus iure!
                         </p>
                         <div class="News-footer">
-                            <button href="#" class="News-more">Read More</button>
+                            <button class="News-more" role="button">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -305,7 +336,8 @@
 
                 <div class="News">
                     <div class="News-image">
-                        <img src="images/main-image.jpg" alt="Featured News" />
+                        <img src="images/main-image.jpg" alt="Featured News" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="News-content">
                         <h2>Some random text that's supposed to mean something.</h2>
@@ -322,7 +354,7 @@
                             animi. Maxime voluptate sit eveniet soluta accusamus iure!
                         </p>
                         <div class="News-footer">
-                            <button href="#" class="News-more">Read More</button>
+                            <button class="News-more" role="button">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -331,7 +363,8 @@
 
                 <div class="News">
                     <div class="News-image">
-                        <img src="images/main-image.jpg" alt="Featured News" />
+                        <img src="images/main-image.jpg" alt="Featured News" loading="lazy" role="presentation"
+                            sizes="{max-width: 800px} 100vw, 50vw" decoding="async" fetchpriority="high">
                     </div>
                     <div class="News-content">
                         <h2>Some random text that's supposed to mean something.</h2>
@@ -348,7 +381,7 @@
                             animi. Maxime voluptate sit eveniet soluta accusamus iure!
                         </p>
                         <div class="News-footer">
-                            <button href="#" class="News-more">Read More</button>
+                            <button class="News-more" role="button">Read More</button>
                         </div>
                     </div>
                 </div>
@@ -393,7 +426,7 @@
 
 </script>
 
-<script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js"></script>
+<!--<script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js"></script>-->
 <script src="code.js" defer></script>
 
 </html>
