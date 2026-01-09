@@ -322,7 +322,8 @@ img{
 }
 
 .container .card .card-img img {
-  width: 100%;
+  width: 110%;
+  height: 110%;
   object-fit: cover;
   border-radius: 8px;
 }
