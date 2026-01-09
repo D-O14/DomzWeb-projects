@@ -129,7 +129,7 @@ img{
 
 .home {
   position: relative;
-  text-wrap: balance;
+  /*text-wrap: balance;*/
   display: flex;
   padding: 10% 12%;
   gap: 5em;
@@ -612,8 +612,8 @@ img{
   top: 50%;
   transform: translateY(-50%);
   background: rgba(0, 0, 0, 0.12);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.25);
   color: #fff;
   font-size: 28px;
