@@ -17,10 +17,11 @@ body {
   /*font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;*/
 }
 
-img{
+img, video{
   width: 100%;
   height: auto;
-  aspect-ratio: attr(width) / attr(height)
+  /*aspect-ratio: attr(width) / attr(height)*/
+  aspect-ratio: 16/9;
 }
 
 /* Navbar */
