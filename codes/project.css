@@ -15,11 +15,11 @@ body {
   font-family: system-ui, Arial, sans-serif;
 }
 
-/*img{
+img{
   width: 100%;
   height: auto;
-  aspect-ratio: 400 / 300;
-}*/
+/*  aspect-ratio: 400 / 300;*/
+}
 
 /* Navbar */
 
@@ -351,8 +351,7 @@ body {
 }
 
 .container .card .card-img img {
-  width: 110%;
-  height: 110%;
+  width: 100%;
   object-fit: cover;
   border-radius: 8px;
 }
