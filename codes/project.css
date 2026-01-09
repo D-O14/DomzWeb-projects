@@ -17,7 +17,7 @@ body {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-img, video{
+img{
   width: 100%;
   height: auto;
   /*aspect-ratio: attr(width) / attr(height)
