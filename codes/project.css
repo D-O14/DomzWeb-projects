@@ -18,7 +18,7 @@ body {
 img{
   width: 100%;
   height: auto;
-/*  aspect-ratio: 400 / 300;*/
+  aspect-ratio: attr(width) / attr(height)
 }
 
 /* Navbar */
@@ -68,7 +68,7 @@ img{
   color: #ffffff;
 }
 
-/*@media (max-width: 768px) {
+@media (max-width: 768px) {
   .nav-toggle {
     display: block;
 } 
@@ -87,7 +87,7 @@ img{
   .nav-menu.active {
     display: flex;
   }
-}*/
+}
 
 .nav-actions {
   display: flex;
