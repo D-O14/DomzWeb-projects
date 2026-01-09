@@ -13,15 +13,15 @@ html {
 }
 
 body {
-  font-family: system-ui, Arial, sans-serif;
-  /*font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;*/
+  /*font-family: system-ui, Arial, sans-serif;*/
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 img, video{
   width: 100%;
   height: auto;
-  /*aspect-ratio: attr(width) / attr(height)*/
-  aspect-ratio: 16/9;
+  /*aspect-ratio: attr(width) / attr(height)
+  aspect-ratio: 16/9;*/
 }
 
 /* Navbar */
