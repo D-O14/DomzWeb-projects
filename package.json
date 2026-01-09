@@ -17,8 +17,8 @@
   "license": "ISC",
   "type": "commonjs",
   "scripts": {
-    "minify-js": "terser codes/code.js -o codes/code.min.js -c -m",
-    "minify-css": "npx postcss codes/project.css -o codes/project.min.css -c -m",
+    "minify-js": "terser codes/code.js -o codes/code.min.6f3a8.js -c -m",
+    "minify-css": "npx postcss codes/project.css -o codes/project.min.a2b7c.css -c -m",
     "build": "npm run minify-js && npm run minify-css"
   },
   "devDependencies": {
