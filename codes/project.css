@@ -188,6 +188,7 @@ img{
   background: linear-gradient(270deg, #2fffdc 10%, #87ff38 100%);
   background-clip: text;
   color: transparent;
+  font-size: 2rem;
 }
 
 .home .bento {
