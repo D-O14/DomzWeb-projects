@@ -302,6 +302,7 @@ img{
 
 .container .card {
   cursor: pointer;
+  will-change: transform;
   position: relative;
   overflow: hidden;
   height: 480px;
@@ -315,15 +316,16 @@ img{
 .container .card .card-img {
   transition: transform 0.5s ease, scale 0.5s;
   border-radius: 8px;
-  width: 110%;
-  height: 110%;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  height: 100%;
   display: flex;
   justify-content: center;
 }
 
 .container .card .card-img img {
-  width: 110%;
-  height: 110%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 8px;
 }
@@ -534,6 +536,8 @@ img{
 
 .store-grid {
   display: grid;
+  content-visibility: auto;
+  contain-intrinsic-size: 800px;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 180px;
   gap: 1rem;

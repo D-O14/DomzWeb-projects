@@ -204,12 +204,12 @@ console.log(`You are ${Age} years old`)
 console.log("You have a Job")
 console.log(`your E-mail is ${Email}`)
 console.log("You are now a member of the Java workspace")
-
+*/
 
 var cl = cloudinary.Cloudinary.new({ cloud_name: 'dyyvwfgqr', secure: true });
 
 var url = cl.url('sample.jpg', { width: 300, height: 200, crop: 'fill' });
-document.getElementById('myImage').src = url;*/
+document.getElementById('myImage').src = url;
 
 
     const slider = document.querySelector('.slider');
