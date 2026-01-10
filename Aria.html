@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="" data-form>
+            <input type="text" required placeholder="Name" name="input_form">
+            <button type="submit" title="A submit button">Save</button>
+    </form>    
+
+    <div data-container aria-live="polite"></div>
+
+</body>
+
+<script>
+    const form = document.querySelector("[data-form]")
+    form.addEventListener("submit", e => {
+        e.preventDefault()
+        const container = document.querySelector("[data-container]")
+        const div = document.createElement("div")
+        div.innerText = "Saved data"
+        container.append(div)
+    } )
+</script>
+
+</html>
+
+<!--aria-expanded = "false" or "true" ( Can be used for hamburger menus with JS )
+    Ex: if(this.getAttribute('aria-expanded') == 'false' ){
+    this.getAttribute('aria-expanded', 'true');
+    }
+    aria-label = "Text" ( For icons and others )
+    aria-labelledby = { ID of image caption }
+    role = changes semantics of an element-->
