@@ -1,10 +1,10 @@
-/** {
+* {
   font-display: swap;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-style: normal;
-  /*font-family: system-ui, Arial, sans-serif;
+  /*font-family: system-ui, Arial, sans-serif;*/
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -12,7 +12,7 @@ html {
   scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark){
+/*@media (prefers-color-scheme: dark){
   body{
       background: #0f0f0f;
       color: #f5f5f5;
@@ -90,16 +90,14 @@ html {
       background: white;
       color: black;
   }
-}
+}*/
 
 img{
   width: 100%;
   height: auto;
   /*aspect-ratio: attr(width) / attr(height)
-  aspect-ratio: 16/9;
-}*/
-
-/* Navbar 
+  aspect-ratio: 16/9;*/
+}
 
 .navbar {
   position: relative;
@@ -198,13 +196,12 @@ img{
 
 .btn-signup:hover {
   background-color: #0b5ed7;
-}*/
+}
 
-/* Homepage 
 
 .home {
   position: relative;
-  /*text-wrap: balance;
+  /*text-wrap: balance;*/
   display: flex;
   padding: 10% 12%;
   gap: 5em;
@@ -219,13 +216,13 @@ img{
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background-color: rgba(0, 0, 0, 0.55);
+  /*background-color: rgba(0, 0, 0, 0.55);
   background-position: center;
   background-repeat: no-repeat;
   background-image: url("https://res.cloudinary.com/dyyvwfgqr/image/upload/v1767952959/features_2_jdepre.jpg");
   background-size: 1550px 1000px;
   background-color: rgba(0, 0, 0, .55);
-  background-blend-mode: overlay;
+  background-blend-mode: overlay;*/
 }
 
 .home button {
@@ -354,9 +351,8 @@ img{
 .home .content p span {
   text-transform: uppercase;
   color: #dbfbe0;
-}*/
+}
 
-/* Flex card designs 
 
 .flex-cards {
   padding: 6rem 0;
@@ -502,9 +498,8 @@ img{
   background: #df460e;
   color: #d9d8d8;
   cursor: pointer;
-}*/
+}
 
-/* Grids 
 
 .grid-area {
   padding: 6rem;
@@ -605,9 +600,9 @@ img{
 .grid-rows:hover::after {
   border-radius: 8px;
   opacity: 1;
-}*/
+}
 
-/*grid-slides
+
 
 .store-grid {
   display: grid;
@@ -720,7 +715,7 @@ img{
 .tile-slider:focus {
   outline: 2px solid rgba(255, 255, 255, 0.4);
   outline-offset: 4px;
-}*/
+}
 
 /* info-sect 
 
@@ -795,208 +790,3 @@ img{
 .News-content p {
   color: #4d4d4d;
 }*/
-
-
-/* end of old line */
-
-/* Global Reset */
-* {
-    font-display: swap;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-style: normal;
-    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-img, video {
-    width: 100%;
-    height: auto;
-}
-
-/* Navbar */
-.navbar {
-    position: relative;
-    background-color: hsl(0, 0%, 0%);
-    padding: 1rem 1.5rem;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-brand {
-    color: hsla(0, 0%, 100%, 0.75);
-    font-size: 1.25rem;
-    font-weight: 500;
-    text-decoration: none;
-}
-
-.nav-menu {
-    list-style: none;
-    display: flex;
-    gap: 1.25rem;
-    border: 1px solid hsla(0, 0%, 100%, 0.4);
-    border-radius: 13px;
-    padding: 12px;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    font-size: 1rem;
-    color: hsla(0, 0%, 100%, 0.75);
-    transition: color 0.2s ease;
-}
-
-.nav-menu a:hover {
-    color: hsl(0, 0%, 100%);
-}
-
-.btn {
-    padding: 0.4rem 0.9rem;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.btn-login {
-    color: hsla(0, 0%, 100%, 0.75);
-    border: 1px solid hsla(0, 0%, 100%, 0.4);
-}
-
-.btn-login:hover {
-    background-color: hsla(0, 0%, 100%, 0.1);
-}
-
-.btn-signup {
-    background-color: hsl(214, 90%, 39%);
-    color: hsl(0, 0%, 100%);
-}
-
-.btn-signup:hover {
-    background-color: hsl(214, 90%, 35%);
-}
-
-/* Home Section */
-.home {
-    display: flex;
-    flex-direction: column;
-    padding: 5% 5%;
-    gap: 2rem;
-    min-height: 100vh;
-}
-
-.home-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-color: hsla(0, 0%, 0%, 0.55);
-}
-
-.main-txt {
-    background: linear-gradient(270deg, hsl(174, 100%, 60%) 10%, hsl(101, 100%, 56%) 100%);
-    background-clip: text;
-    color: transparent;
-    font-size: 2rem;
-}
-
-.home .content p span {
-    text-transform: uppercase;
-    color: hsl(138, 100%, 93%);
-}
-
-/* Flex Cards */
-.flex-cards {
-    padding: 6rem 0;
-    background: hsl(0, 0%, 96%);
-}
-
-.container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2.5rem;
-    justify-items: space-between;
-    padding: 10px 20px;
-}
-
-.card {
-    position: relative;
-    overflow: hidden;
-    width: 325px;
-    height: 480px;
-    border-radius: 8px;
-    background: hsl(134, 10%, 74%);
-    box-shadow: -2px 7px 12px 2px hsla(60, 7%, 11%, 0.13);
-}
-
-.card .card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.card .text-box {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    text-align: center;
-    padding: 1.5rem;
-    background: hsl(0, 0%, 100%);
-    opacity: 0;
-    transform: translateY(100%);
-    transition: transform 0.5s ease, opacity 0.5s ease;
-}
-
-.card:hover .text-box {
-    transform: translateY(0);
-    opacity: 1;
-}
-
-/* Buttons inside cards */
-.link_btn {
-    color: hsl(0, 0%, 7%);
-    background: hsl(0, 0%, 100%);
-    border-radius: 15px;
-    border: none;
-    padding: 12px 20px;
-    text-decoration: none;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.link_btn:hover {
-    background: hsl(16, 86%, 41%);
-    color: hsl(0, 0%, 85%);
-    cursor: pointer;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-    .home {
-        flex-direction: column;
-        padding: 5% 5%;
-    }
-
-    .flex-cards .container {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-    .home {
-        padding: 8% 8%;
-    }
-}
