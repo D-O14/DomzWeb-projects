@@ -1,10 +1,10 @@
-* {
+/** {
   font-display: swap;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-style: normal;
-  /*font-family: system-ui, Arial, sans-serif;*/
+  /*font-family: system-ui, Arial, sans-serif;
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -12,7 +12,7 @@ html {
   scroll-behavior: smooth;
 }
 
-/*@media (prefers-color-scheme: dark){
+@media (prefers-color-scheme: dark){
   body{
       background: #0f0f0f;
       color: #f5f5f5;
@@ -90,16 +90,16 @@ html {
       background: white;
       color: black;
   }
-}*/
+}
 
 img{
   width: 100%;
   height: auto;
   /*aspect-ratio: attr(width) / attr(height)
-  aspect-ratio: 16/9;*/
-}
+  aspect-ratio: 16/9;
+}*/
 
-/* Navbar */
+/* Navbar 
 
 .navbar {
   position: relative;
@@ -198,13 +198,13 @@ img{
 
 .btn-signup:hover {
   background-color: #0b5ed7;
-}
+}*/
 
-/* Homepage */
+/* Homepage 
 
 .home {
   position: relative;
-  /*text-wrap: balance;*/
+  /*text-wrap: balance;
   display: flex;
   padding: 10% 12%;
   gap: 5em;
@@ -222,10 +222,10 @@ img{
   background-color: rgba(0, 0, 0, 0.55);
   background-position: center;
   background-repeat: no-repeat;
-  /*background-image: url("https://res.cloudinary.com/dyyvwfgqr/image/upload/v1767952959/features_2_jdepre.jpg");
+  background-image: url("https://res.cloudinary.com/dyyvwfgqr/image/upload/v1767952959/features_2_jdepre.jpg");
   background-size: 1550px 1000px;
   background-color: rgba(0, 0, 0, .55);
-  background-blend-mode: overlay;*/
+  background-blend-mode: overlay;
 }
 
 .home button {
@@ -354,9 +354,9 @@ img{
 .home .content p span {
   text-transform: uppercase;
   color: #dbfbe0;
-}
+}*/
 
-/* Flex card designs */
+/* Flex card designs 
 
 .flex-cards {
   padding: 6rem 0;
@@ -502,9 +502,9 @@ img{
   background: #df460e;
   color: #d9d8d8;
   cursor: pointer;
-}
+}*/
 
-/* Grids */
+/* Grids 
 
 .grid-area {
   padding: 6rem;
@@ -551,7 +551,7 @@ img{
 .grid-rows {
   cursor: pointer;
   position: relative;
-  /*padding: 1em;*/
+  padding: 1em;
   border-radius: 8px;
   transition: 0.3 ease opacity 0.3s ease;
 }
@@ -605,9 +605,9 @@ img{
 .grid-rows:hover::after {
   border-radius: 8px;
   opacity: 1;
-}
+}*/
 
-/*grid-slides*/
+/*grid-slides
 
 .store-grid {
   display: grid;
@@ -720,9 +720,9 @@ img{
 .tile-slider:focus {
   outline: 2px solid rgba(255, 255, 255, 0.4);
   outline-offset: 4px;
-}
+}*/
 
-/* info-sect */
+/* info-sect 
 
 .info-pg {
   padding: 2rem 0;
@@ -794,8 +794,10 @@ img{
 
 .News-content p {
   color: #4d4d4d;
-}
+}*/
 
+
+/* end of old line */
 
 /* Global Reset */
 * {
