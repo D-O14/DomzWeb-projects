@@ -11,6 +11,15 @@
         animation: move 2s ease-in-out infinite;
     }
 
+    button[type="button"]:hover{
+        color: #fff;
+        border: none;
+        padding: .5rem 1rem;
+        border-radius: 3px;
+        background: hsl(50, 100%, 50%);
+        transition: .3s ease;
+    }
+
     @keyframes move{
         0%,100%{
             translate: 0;
@@ -41,7 +50,7 @@
         <form action="" data-form method="post">
             <label id="Name">Name</label>
             <input type="text" aria-labelledby="Name" id="name_input" required autofocus title="Input Name Field" aria-placeholder="Name">
-            <button type="submit" title="A submit button">Save</button>
+            <button type="button" title="A submit button">Save</button>
         </form>
 
         <div data-container aria-live="polite"></div>
