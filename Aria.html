@@ -12,22 +12,18 @@
         font-family: sans-serif;
     }
 
-    button[type="button"]{
+    button{
         animation: move 2s ease-in-out infinite;
         color: #fff;
         border: none;
         padding: .5rem 1rem;
         border-radius: 3px;
         background: hsl(50, 100%, 50%);
+        transition: .5s ease-in-out;
     }
 
-    button[type="submit"]{
-        animation: move 2s ease-in-out infinite;
-        color: #fff;
-        border: none;
-        padding: .5rem 1rem;
-        border-radius: 3px;
-        background: hsl(50, 100%, 50%);
+    button:hover{
+        background: hsl(30, 100%, 50%);
     }
 
     a{
@@ -47,9 +43,10 @@
             translate: 0;
         }
         50%{
-            translate: 2rem;
+            translate: .5rem 2rem;
         }
     }
+
 </style>
 
 <body>
