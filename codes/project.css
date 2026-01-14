@@ -10,6 +10,11 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+body{
+  scroll-snap-align: start;
 }
 
 @media (prefers-color-scheme: dark){
