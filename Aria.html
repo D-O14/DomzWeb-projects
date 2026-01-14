@@ -6,13 +6,48 @@
     <title>Document</title>
 </head>
 
+<style>
+
+button[popovertarget]{
+    background: dodgerblue;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+}
+
+#popover_form{
+    border: 1px inset #333;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    background: none;
+    font-family: sans-serif;
+
+    & button{
+        background: dodgerblue;
+        padding: .5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+    }
+
+    & input{
+        border: 1px solid;
+        border-radius: 3px;
+        padding: .5rem 1rem;
+    }
+
+}
+</style>
+
 <body>
 
     <main>
         <div class="modal">
-            <h1>Login here</h1>
             <form action="" popover="manual" id="popover_form">
-                <input type="text" placeholder="name" id="">
+                <h1>Login here</h1>
+                <input type="text" placeholder="Name" id="">
+                <button type="submit">submit</button>
             </form>
         </div>
         <button popovertarget="popover_form">open modal</button>
