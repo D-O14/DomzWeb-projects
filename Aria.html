@@ -8,10 +8,6 @@
 
 <style>
 
-/*body{
-    background: oklch(from blue l c h); /*255 0 0
-}
-
 button[popovertarget]{
     background: dodgerblue;
     padding: .5rem 1rem;
@@ -33,29 +29,38 @@ button[popovertarget]{
         border: none;
         border-radius: 4px;
         color: #fff;
+        margin-left: 20px;
     }
 
     & input{
+        display: flex;
+        flex-direction: column;
         border: 1px solid;
         border-radius: 3px;
         padding: .5rem 1rem;
+        margin: .75rem;
     }
 
-}*/
+}
+
 </style>
 
 <body>
 
     <main>
-        <!--<div class="modal">
+        <div class="modal">
             <form action="" popover="manual" id="popover_form">
                 <h1>Login here</h1>
                 <input type="text" placeholder="Name" id="">
-                <button type="submit">submit</button>
+                <input type="password" placeholder="Password" id="">
+                <input type="email" placeholder="E-mail" id="">
+                <input type="date" placeholder="Birthday" id="">
+                <button type="submit">Submit</button>
             </form>
         </div>
-        <button popovertarget="popover_form">open modal</button>-->
-    </main>
+        <button title="Open Modal button" popovertarget="popover_form">open modal</button>
+
+        </main>
 
 </body>
 
