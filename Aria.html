@@ -7,42 +7,58 @@
 </head>
 
 <style>
+    * {
+        font-family: sans-serif;
+    }
 
-button[popovertarget]{
-    background: dodgerblue;
-    padding: .5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-}
-
-#popover_form{
-    border: 1px inset #333;
-    border-radius: 8px;
-    padding: 1rem 2rem;
-    background: none;
-    font-family: sans-serif;
-
-    & button{
+    button[popovertarget] {
         background: dodgerblue;
         padding: .5rem 1rem;
         border: none;
         border-radius: 4px;
         color: #fff;
-        margin-left: 20px;
     }
 
-    & input{
-        display: flex;
-        flex-direction: column;
-        border: 1px solid;
-        border-radius: 3px;
-        padding: .5rem 1rem;
-        margin: .75rem;
+    #popover_form {
+        border: 1px inset #333;
+        border-radius: 8px;
+        padding: 1rem 2rem;
+        background: none;
+
+        & button {
+            background: dodgerblue;
+            padding: .5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            margin-left: 20px;
+        }
+
+        & input {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid;
+            border-radius: 3px;
+            padding: .5rem 1rem;
+            margin: .75rem;
+        }
+
     }
 
-}
+    summary {
+        background: #f3f3f3;
+        color: #000;
+        padding: 1rem 2rem;
+        margin: 20px;
+        max-width: 300px;
+        border: none;
 
+        & details {
+            border: 2px solid #000;
+            margin: 20px;
+            padding: .5rem;
+        }
+    }
 </style>
 
 <body>
@@ -60,7 +76,37 @@ button[popovertarget]{
         </div>
         <button title="Open Modal button" popovertarget="popover_form">open modal</button>
 
-        </main>
+        <summary>
+            <h1>FAQs</h1>
+
+            <details name="details">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias minus ut, hic tempore impedit
+                    magni deleniti voluptatibus architecto aut quasi. Tempora recusandae consectetur nisi consequuntur
+                    rerum et sunt sed fugiat!</p>
+            </details>
+
+            <details name="details">
+                <p>Provident maiores, similique exercitationem nulla corrupti blanditiis necessitatibus cupiditate,
+                    optio pariatur perspiciatis impedit deserunt laboriosam, et officia recusandae! Facilis voluptas
+                    possimus ad quis ipsum, recusandae nobis accusantium soluta ex ipsam.</p>
+            </details>
+
+            <details name="details">
+                <p>Sed dolores debitis rem veritatis impedit numquam placeat ex quae vero. Ab, rem quidem itaque eum
+                    consectetur repellat molestias quae non iusto delectus, eos reprehenderit ut autem dolorum commodi
+                    laudantium!</p>
+            </details>
+
+            <details name="details">
+                <p>Tenetur obcaecati accusantium error nihil cumque, aliquid corporis totam, officiis reiciendis minus
+                    doloribus aspernatur sunt enim et ratione voluptatibus! Nihil laboriosam harum at excepturi vitae
+                    aspernatur veritatis cupiditate aperiam alias.</p>
+            </details>
+
+        </summary>
+
+
+    </main>
 
 </body>
 
