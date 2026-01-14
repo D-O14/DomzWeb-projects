@@ -21,7 +21,7 @@ section{
   content-visibility: auto;
 }
 
-@media (prefers-color-scheme: dark){
+/*@media (prefers-color-scheme: dark){
   body{
       background: #0f0f0f;
       color: #f5f5f5;
@@ -99,7 +99,7 @@ section{
       background: white;
       color: black;
   }
-}
+}*/
 
 img{
   width: 100%;
