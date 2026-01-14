@@ -17,6 +17,10 @@ body{
   scroll-snap-align: start;
 }
 
+section{
+  content-visibility: auto;
+}
+
 @media (prefers-color-scheme: dark){
   body{
       background: #0f0f0f;
