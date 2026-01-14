@@ -6,109 +6,18 @@
     <title>Document</title>
 </head>
 
-<style>
-
-    *{
-        font-family: sans-serif;
-    }
-
-    button{
-        animation: move 2s ease-in-out infinite;
-        color: #fff;
-        border: none;
-        padding: .5rem 1rem;
-        border-radius: 3px;
-        background: hsl(50, 100%, 50%);
-        transition: .5s ease-in-out;
-    }
-
-    button:hover{
-        background: hsl(30, 100%, 50%);
-    }
-
-    a{
-        color: dodgerblue;
-        font-size: 17px;
-    }
-
-    #name_input{
-        padding: .2rem .5rem;
-        background: none;
-        outline: none;
-        border: 2px outset #f0f0f0;
-    }
-
-    @keyframes move{
-        0%,100%{
-            translate: 0;
-        }
-        50%{
-            translate: .5rem 2rem;
-        }
-    }
-
-
-</style>
-
 <body>
 
-
-    <header>
-        
-    </header>
-
-    <nav>
-
-    </nav>
-
-    <aside>
-
-    </aside>
-
     <main>
-
-        <form action="" data-form method="post">
-            <label id="Name">Name</label>
-            <input type="text" aria-labelledby="Name" id="name_input" required autofocus title="Input Name Field" aria-placeholder="Name">
-            <button type="submit" title="A submit button">Save</button>
-        </form>
-
-        <div data-container aria-live="polite"></div>
-        <a href="#">Click me</a>
-        <button type="button" draggable="true">Drag me</button>
-
+        <div class="modal">
+            <h1>Login here</h1>
+            <form action="" popover="manual" id="popover_form">
+                <input type="text" placeholder="name" id="">
+            </form>
+        </div>
+        <button popovertarget="popover_form">open modal</button>
     </main>
 
 </body>
 
-<script>
-    const form = document.querySelector("[data-form]")
-    form.addEventListener("submit", e => {
-        e.preventDefault()
-        const container = document.querySelector("[data-container]")
-        const div = document.createElement("div")
-        div.innerText = "Saved data"
-        container.append(div)
-    })
-</script>
-
 </html>
-
-<!--aria-expanded = "false" or "true" ( Can be used for hamburger menus with JS )
-    Ex: if(this.getAttribute('aria-expanded') == 'false' ){
-    this.getAttribute('aria-expanded', 'true');
-    }
-    aria-label = "Text" ( For icons and others )
-    aria-labelledby = { ID of image caption }
-    role = changes semantics of an element
-    focus-visible
-    label for content id
-    scrollable-content = tabindex=0
-    divs = focusable
-    
-
-    body[data-theme="dark"]{
-        background: #111;
-    }
-
-    -->
