@@ -41,6 +41,8 @@
             border-radius: 3px;
             padding: .5rem 1rem;
             margin: .75rem;
+            width: 200px;
+            field-sizing: content;
         }
 
     }
@@ -59,6 +61,42 @@
             padding: .5rem;
         }
     }
+
+    select{
+        width: 200px;   
+        padding: .5rem 1rem;
+        border: 1px solid;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    selectedcontent,
+    option{
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+        /*border-bottom: 1px solid;*/
+        padding: .2rem .5rem;
+        outline: none;
+    }
+
+    option{
+        padding-block: .25rem;
+    }
+
+    option::checkmark{
+        display: none;
+    }
+
+    option:checked{
+        background: hsl(200,80%,80%);
+    }
+    
+    select,
+    ::picker(select){
+        appearance: base-select;
+    }
+
 </style>
 
 <body>
@@ -104,6 +142,21 @@
             </details>
 
         </summary>
+
+        <select name="" title="Drop-down box" id="">
+            <button>
+                <selectedcontent></selectedcontent>
+            </button>
+            <option value="">
+                Option1
+            </option>
+            <option value="">
+                Option2
+            </option>
+            <option value="">
+                Option3
+            </option>
+        </select>
 
 
     </main>
