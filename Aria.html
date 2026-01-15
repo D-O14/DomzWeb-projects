@@ -1,32 +1,31 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
 </head>
 
 <style>
-
     * {
         font-family: sans-serif;
     }
 
-    body{
+    body {
         --color: #2bc3e2;
         --base: hsl(241, 47%, 26%);
         --background: #f3f3f3;
-        --primary:#003049;
-        --secondary:#669bbc;
-        --accent1:#fdf0d5;
-        --accent2:#780000;
+        --primary: #003049;
+        --secondary: #669bbc;
+        --accent1: #fdf0d5;
+        --accent2: #780000;
     }
 
     button {
         /*background: hsl(from var(--color) h s l);
         background: hsl(200, 100%, 50%);*/
         background: var(--primary);
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         border: none;
         border-radius: 4px;
         color: var(--accent1);
@@ -34,14 +33,13 @@
 
     dialog {
         width: 400px;
-        border-radius: 8px;
         background: #fff;
         border: none;
         padding: 4rem 1rem;
         border-radius: 5px;
 
-        & h1{      
-        font-size: 34px;
+        & h1 {
+            font-size: 34px;
         }
 
         & input {
@@ -49,20 +47,19 @@
             flex-direction: column;
             border: 1px solid;
             border-radius: 3px;
-            padding: .5rem 1rem;
-            margin: .75rem;
+            padding: 0.5rem 1rem;
+            margin: 0.75rem;
             width: 200px;
             field-sizing: content;
         }
-
     }
 
-    #popover_form::backdrop{
-        background: rgba(0 0 0 / .5);
+    #popover_form::backdrop {
+        background: rgba(0 0 0 / 0.5);
     }
 
     summary {
-        background: hsl(from var(--background) h s l );
+        background: hsl(from var(--background) h s l);
         border-radius: 6px;
         color: #000;
         padding: 1rem 2rem;
@@ -73,50 +70,49 @@
         & details {
             border: 2px solid #000;
             margin: 20px;
-            padding: .5rem;
+            padding: 0.5rem;
         }
     }
 
-    select{
-        width: 200px;   
-        padding: .5rem 1rem;
+    select {
+        width: 200px;
+        padding: 0.5rem 1rem;
         border: 1px solid;
         outline: none;
         border-radius: 5px;
     }
 
     selectedcontent,
-    option{
+    option {
         color: #333;
         display: flex;
-        gap: .5rem;
+        gap: 0.5rem;
         align-items: center;
         /*border-bottom: 1px solid;*/
-        padding: .2rem .5rem;
+        padding: 0.2rem 0.5rem;
         outline: none;
     }
 
-    option{
-        padding-block: .25rem;
+    option {
+        padding-block: 0.25rem;
     }
 
-    option::checkmark{
+    option::checkmark {
         display: none;
     }
 
-    option:checked{
-        background: hsl(200,80%,80%);
+    option:checked {
+        background: hsl(200, 80%, 80%);
     }
-    
+
     select,
-    ::picker(select){
+    ::picker(select) {
         appearance: base-select;
     }
 
-    dialog::backdrop{
-        background: rgba(0 0 0 / .5);
+    dialog::backdrop {
+        background: rgba(0 0 0 / 0.5);
     }
-
 
     /*button[data-open] {
         background: dodgerblue;
@@ -128,17 +124,17 @@
 
     button[data-close] {
         background: red;
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
         border: none;
         border-radius: 4px;
         color: #fff;
     }
 
-    .btnBox{
+    .btnBox {
         margin-left: 20px;
     }
 
-    .skip-link{
+    .skip-link {
         position: fixed;
         top: 0;
         left: 0;
@@ -146,67 +142,70 @@
         text-align: center;
         background: #333;
         color: #fff;
-        padding: .5rem;
+        padding: 0.5rem;
         translate: 0 -100%;
         transition: translate 150ms ease-in-out;
     }
 
-    .skip-link:focus{
+    .skip-link:focus {
         translate: 0;
     }
-
 </style>
 
 <body>
-
     <header>
         <a href="#main" class="skip-link">Skip to main</a>
     </header>
 
     <main id="main">
-
         <summary>
             <h1>FAQs</h1>
 
             <details name="details">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias minus ut, hic tempore impedit
-                    magni deleniti voluptatibus architecto aut quasi. Tempora recusandae consectetur nisi consequuntur
-                    rerum et sunt sed fugiat!</p>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
+                    minus ut, hic tempore impedit magni deleniti voluptatibus architecto
+                    aut quasi. Tempora recusandae consectetur nisi consequuntur rerum et
+                    sunt sed fugiat!
+                </p>
             </details>
 
             <details name="details">
-                <p>Provident maiores, similique exercitationem nulla corrupti blanditiis necessitatibus cupiditate,
-                    optio pariatur perspiciatis impedit deserunt laboriosam, et officia recusandae! Facilis voluptas
-                    possimus ad quis ipsum, recusandae nobis accusantium soluta ex ipsam.</p>
+                <p>
+                    Provident maiores, similique exercitationem nulla corrupti
+                    blanditiis necessitatibus cupiditate, optio pariatur perspiciatis
+                    impedit deserunt laboriosam, et officia recusandae! Facilis voluptas
+                    possimus ad quis ipsum, recusandae nobis accusantium soluta ex
+                    ipsam.
+                </p>
             </details>
 
             <details name="details">
-                <p>Sed dolores debitis rem veritatis impedit numquam placeat ex quae vero. Ab, rem quidem itaque eum
-                    consectetur repellat molestias quae non iusto delectus, eos reprehenderit ut autem dolorum commodi
-                    laudantium!</p>
+                <p>
+                    Sed dolores debitis rem veritatis impedit numquam placeat ex quae
+                    vero. Ab, rem quidem itaque eum consectetur repellat molestias quae
+                    non iusto delectus, eos reprehenderit ut autem dolorum commodi
+                    laudantium!
+                </p>
             </details>
 
             <details name="details">
-                <p>Tenetur obcaecati accusantium error nihil cumque, aliquid corporis totam, officiis reiciendis minus
-                    doloribus aspernatur sunt enim et ratione voluptatibus! Nihil laboriosam harum at excepturi vitae
-                    aspernatur veritatis cupiditate aperiam alias.</p>
+                <p>
+                    Tenetur obcaecati accusantium error nihil cumque, aliquid corporis
+                    totam, officiis reiciendis minus doloribus aspernatur sunt enim et
+                    ratione voluptatibus! Nihil laboriosam harum at excepturi vitae
+                    aspernatur veritatis cupiditate aperiam alias.
+                </p>
             </details>
-
         </summary>
 
         <select name="Drop-down" title="Drop-down box" id="">
             <button>
                 <selectedcontent></selectedcontent>
             </button>
-            <option value="">
-                Option1
-            </option>
-            <option value="">
-                Option2
-            </option>
-            <option value="">
-                Option3
-            </option>
+            <option value="">Option1</option>
+            <option value="">Option2</option>
+            <option value="">Option3</option>
         </select>
 
         <button data-open onclick="modal.showModal()">Open modal</button>
@@ -214,34 +213,31 @@
         <dialog data-modal>
             <form action="" method="post">
                 <h1>Login here</h1>
-                <input type="text" placeholder="Name">
-                <input type="password" placeholder="Password">
-                <input type="email" placeholder="E-mail">
-                <input type="date" placeholder="Birthday">
+                <input type="text" placeholder="Name" />
+                <input type="password" placeholder="Password" />
+                <input type="email" placeholder="E-mail" />
+                <input type="date" placeholder="Birthday" />
                 <div class="btnBox">
                     <button type="submit" formmethod="dialog">Submit</button>
                     <button type="button" data-close>Cancel</button>
                 </div>
             </form>
         </dialog>
-
     </main>
-
 </body>
 
 <script>
-    const openBtn = document.querySelector("[data-open]")
-    const closeBtn = document.querySelector("[data-close]")
-    const modal = document.querySelector("[data-modal]")
+    const openBtn = document.querySelector("[data-open]");
+    const closeBtn = document.querySelector("[data-close]");
+    const modal = document.querySelector("[data-modal]");
 
     openBtn.addEventListener("click", () => {
-        modal.show()
-    })
+        modal.show();
+    });
 
     closeBtn.addEventListener("click", () => {
-        modal.close()
-    })
+        modal.close();
+    });
 </script>
-
 
 </html>
