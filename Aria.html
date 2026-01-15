@@ -24,7 +24,7 @@
         border: 1px inset #333;
         border-radius: 8px;
         padding: 1rem 2rem;
-        background: none;
+        background: #fff;
 
         & button {
             background: dodgerblue;
@@ -46,6 +46,10 @@
             field-sizing: content;
         }
 
+    }
+
+    #popover_form::backdrop{
+        background: rgba(0 0 0 / .5);
     }
 
     summary {
@@ -96,6 +100,35 @@
     select,
     ::picker(select){
         appearance: base-select;
+    }
+
+    .box{
+        margin: 0 auto;
+        padding: 2rem 2rem;
+        width: 200px;
+        height: 200px;
+        background:var(--box-color);
+    }
+
+    .box-1{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 29px;
+        --box-color: darkred;
+    }
+
+    .box-2{
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        background: var(--box-color);
+    }
+
+    @property --box-color{
+        syntax: "<color>";
+        inherits: false;
+        initial-value: coral;
     }
 
 </style>
@@ -159,6 +192,8 @@
             </option>
         </select>
 
+        <div class="box box-1">box-1</div>
+        <div class="box box-2">box-2</div>
 
     </main>
 
