@@ -113,129 +113,130 @@
     : :after::before::first-letter::first-line:focus:hover:active:last-child:last-of-type:not::selection
 }*/
 
-
-h1{
-    color: rgb(22, 22, 55);
-    font-size: 60px;
+h1 {
+	color: rgb(22, 22, 55);
+	font-size: 60px;
 }
 
-body{
-    background: #f4f4f4;
+body {
+	background: #f4f4f4;
 }
 
-#edit_link{
-    float: right;
-    margin: 5px;
+#edit_link {
+	float: right;
+	margin: 5px;
 }
 
-#delete_link{
-    float: right;
-    margin: 5px;
+#delete_link {
+	float: right;
+	margin: 5px;
 }
 
-#ed_link{
-    float: right;
-    margin: 5px;
+#ed_link {
+	float: right;
+	margin: 5px;
 }
 
-#del_link{
-    float: right;
-    margin: 5px;
+#del_link {
+	float: right;
+	margin: 5px;
 }
 
-.img{
-    border: 10px solid whitesmoke;
-    border-radius: 120px;
-    width: 100px;
-    height: 100px;
-    margin: 0;
+.img {
+	border: 10px solid whitesmoke;
+	border-radius: 120px;
+	width: 100px;
+	height: 100px;
+	margin: 0;
 }
 
-.form-body{
-    width: 1000px;
-    height: 650px;
-    margin-top: 80px;
+.form-body {
+	width: 1000px;
+	height: 650px;
+	margin-top: 80px;
 }
 
 .reg-h2 {
-    font-weight: 600;
-    color: #222;
-    font-size: 40px;
-    margin-bottom: 5px;
-    margin-left: 120px;
+	font-weight: 600;
+	color: #222;
+	font-size: 40px;
+	margin-bottom: 5px;
+	margin-left: 120px;
 }
 
-.content{
-    margin-bottom: 3rem;
-    border-radius: 10px;
+.content {
+	margin-bottom: 3rem;
+	border-radius: 10px;
 }
 
 .table {
-    border: none;
+	border: none;
 }
 
-.admin{
-    padding: 10px 30px;
-    width: 1000px;
-    height: 100px;
+.admin {
+	padding: 10px 30px;
+	width: 1000px;
+	height: 100px;
 }
 
 .user-link {
-    color: #606060;
-    text-decoration: none;
+	color: #606060;
+	text-decoration: none;
 }
 
-.user-link:hover{
-    color: rgb(24, 160, 213);
+.user-link:hover {
+	color: rgb(24, 160, 213);
 }
 
-.card-title{
-    margin-left: -120px;
+.card-title {
+	margin-left: -120px;
 }
 
-.form{
-    margin: 10px;
-    width: 400px;
-    border-radius: 5px;
-    border: 1px solid #aaa5a5;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    transition: 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    margin-bottom: 1rem;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
+.form {
+	margin: 10px;
+	width: 400px;
+	border-radius: 5px;
+	border: 1px solid #aaa5a5;
+	padding: 0.375rem 0.75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	transition:
+		0.15s ease-in-out,
+		box-shadow 0.15s ease-in-out;
+	margin-bottom: 1rem;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
 }
 
-.submit_btn{
-    width: 600px;
-    padding: 8px;
-    background: #11b769;
-    border: none;
+.submit_btn {
+	width: 600px;
+	padding: 8px;
+	background: #11b769;
+	border: none;
 }
 
-.submit_btn:hover{
-    background: #99e5c2;
-    transition: ease-in-out .3s;
+.submit_btn:hover {
+	background: #99e5c2;
+	transition: ease-in-out 0.3s;
 }
 
-.link-text{
-    margin-left: 20px;
+.link-text {
+	margin-left: 20px;
 }
 
-.btn-post{
-    width: 100px;
+.btn-post {
+	width: 100px;
 }
 
-.email-link{
-    text-decoration: none;
-    color: #111;
+.email-link {
+	text-decoration: none;
+	color: #111;
 }
 
-.email-link:hover{
-    color: blue;
-    text-decoration: underline;
+.email-link:hover {
+	color: blue;
+	text-decoration: underline;
 }

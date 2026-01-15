@@ -31,9 +31,9 @@ var gsap,
     _angleMin = _PI * 0.3,
     _angleMax = _PI * 0.7,
     _bigNum = 1e20,
-    _numExp = /[-+=\.]*\d+[\.e\-\+]*\d*[e\-\+]*\d*/gi,
+    _numExp = /[-+=.]*\d+[.e\-+]*\d*[e\-+]*\d*/gi,
     //finds any numbers, including ones that start with += or -=, negative numbers, and ones in scientific notation like 1e-8.
-_selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
+_selectorExp = /(^[#.][a-z]|[a-y][a-z])/i,
     _commands = /[achlmqstvz]/i,
     _log = function _log(message) {
   return console && console.warn(message);
@@ -583,11 +583,11 @@ _equalizePointQuantity = function _equalizePointQuantity(a, quantity) {
   }
 },
     _buildPointsFilter = function _buildPointsFilter(shapeIndex) {
-  return !isNaN(shapeIndex) ? function (a) {
+  return !isNaN(shapeIndex) ? ((a) => {
     _pointsFilter(a);
 
     a[1] = _offsetPoints(a[1], parseInt(shapeIndex, 10));
-  } : _pointsFilter;
+  }) : _pointsFilter;
 },
     _parseShape = function _parseShape(shape, forcePath, target) {
   var isString = typeof shape === "string",
@@ -818,7 +818,7 @@ export var MorphSVGPlugin = {
     this._prop = value.prop;
     this._render = value.render || MorphSVGPlugin.defaultRender;
     this._apply = "updateTarget" in value ? value.updateTarget : MorphSVGPlugin.defaultUpdateTarget;
-    this._rnd = Math.pow(10, isNaN(value.precision) ? 2 : +value.precision);
+    this._rnd = 10 ** (isNaN(value.precision) ? 2 : +value.precision);
     this._tween = tween;
 
     if (shape) {
@@ -1060,9 +1060,7 @@ export var MorphSVGPlugin = {
   getTotalSize: _getTotalSize,
   equalizeSegmentQuantity: _equalizeSegmentQuantity,
   convertToPath: function convertToPath(targets, swap) {
-    return _toArray(targets).map(function (target) {
-      return _convertToPath(target, swap !== false);
-    });
+    return _toArray(targets).map((target) => _convertToPath(target, swap !== false));
   },
   defaultType: "linear",
   defaultUpdateTarget: true,

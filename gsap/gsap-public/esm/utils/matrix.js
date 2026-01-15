@@ -282,7 +282,7 @@ _divTemps = [],
   return m;
 };
 
-export var Matrix2D = /*#__PURE__*/function () {
+export var Matrix2D = /*#__PURE__*/(() => {
   function Matrix2D(a, b, c, d, e, f) {
     if (a === void 0) {
       a = 1;
@@ -373,7 +373,7 @@ export var Matrix2D = /*#__PURE__*/function () {
   };
 
   return Matrix2D;
-}(); // Feed in an element and it'll return a 2D matrix (optionally inverted) so that you can translate between coordinate spaces.
+})(); // Feed in an element and it'll return a 2D matrix (optionally inverted) so that you can translate between coordinate spaces.
 // Inverting lets you translate a global point into a local coordinate space. No inverting lets you go the other way.
 // We needed this to work around various browser bugs, like Firefox doesn't accurately report getScreenCTM() when there
 // are transforms applied to ancestor elements.

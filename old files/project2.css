@@ -1,288 +1,275 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: cursive;
+	margin: 0;
+	padding: 0;
+	font-family: cursive;
 }
 
 header {
-    background-color: black;
-    color: aliceblue;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 30px;
+	background-color: black;
+	color: aliceblue;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	padding: 30px;
 }
 
 ul li {
-    display: inline;
-    margin: 0 20px;
-    
+	display: inline;
+	margin: 0 20px;
 }
 
 header button {
-    padding: 10px 30px;
-    background-color: red;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
+	padding: 10px 30px;
+	background-color: red;
+	border: none;
+	border-radius: 30px;
+	cursor: pointer;
 }
 
 header button:hover {
-    background-color: greenyellow;
+	background-color: greenyellow;
 }
 
 #banner {
-    background-image: url('banner.jpg');
-    background-blend-mode: soft-light;
-    background-color: #0000008e;
-    background-position: center;
-    background-size: cover;
-    height: 100vh;
-    width: 100%;
+	background-image: url("banner.jpg");
+	background-blend-mode: soft-light;
+	background-color: #0000008e;
+	background-position: center;
+	background-size: cover;
+	height: 100vh;
+	width: 100%;
 }
 
 .banner-caption {
-    position: relative;
-    top: 220px;
-    left: 30px;
+	position: relative;
+	top: 220px;
+	left: 30px;
 }
 
 .banner-caption h1 {
-    color: white;
-    font-size: 90px;
+	color: white;
+	font-size: 90px;
 }
 
 .banner-caption p {
-    color: white;
-    font-size: 30px;
+	color: white;
+	font-size: 30px;
 }
 
 .banner-caption button {
-    background: transparent;
-    color: white;
-    border: 2px solid white;
-    border-radius: 20px;
-    padding: 10px 30px;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 16px;
+	background: transparent;
+	color: white;
+	border: 2px solid white;
+	border-radius: 20px;
+	padding: 10px 30px;
+	margin-top: 10px;
+	cursor: pointer;
+	font-size: 16px;
 }
 
 .banner-caption button:hover {
-    background: white;
-    color: orange;
+	background: white;
+	color: orange;
 }
 
 #about {
-    padding: 50px;
+	padding: 50px;
 }
 
 #about h1 {
-    text-align: center;
-    font-size: 50px;
+	text-align: center;
+	font-size: 50px;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 7rem;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 7rem;
 }
 
 .about-image img {
-    width: 50%
+	width: 50%;
 }
 
 .about-content {
-    position: relative;
-    top: 120px
+	position: relative;
+	top: 120px;
 }
 
 #team {
-    padding: 70px;
-    margin-top: 50px;
-    background-color: black;
-    color: white;
+	padding: 70px;
+	margin-top: 50px;
+	background-color: black;
+	color: white;
 }
 
 #team h1 {
-    font-size: 60px;
-    text-align: center;
-    margin-bottom: 70px;
+	font-size: 60px;
+	text-align: center;
+	margin-bottom: 70px;
 }
 
 .team-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    width: 80%;
-    margin: 0 auto;
-    gap: 7rem;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	width: 80%;
+	margin: 0 auto;
+	gap: 7rem;
 }
 
 .team-member img {
-    width: 100%;
+	width: 100%;
 }
 
-.team-member{
-    background: orange;
-    padding: 2rem;
-    border: 1px solid transparent;
-    border-radius: 1rem;
-    position: relative;
-    overflow: hidden;
-    transition: var(--transition);
+.team-member {
+	background: orange;
+	padding: 2rem;
+	border: 1px solid transparent;
+	border-radius: 1rem;
+	position: relative;
+	overflow: hidden;
+	transition: var(--transition);
 }
 
-.team-member:hover{
-    background: transparent;
- border-color: var(--color-primary);
+.team-member:hover {
+	background: transparent;
+	border-color: var(--color-primary);
 }
 
-.team-member img{
-    filter: saturate(0);
-    transition: .5s;
+.team-member img {
+	filter: saturate(0);
+	transition: 0.5s;
 }
 
-
-.team-member:hover img{
-    filter: saturate(1);
+.team-member:hover img {
+	filter: saturate(1);
 }
-
-
 
 #offer {
-    background-image: url('banner.jpg');
-    background-blend-mode: soft-light;
-    background-color: #0000008e;
-    background-size: cover;
-    padding: 150px;
-    color: white;
-    text-align: center;
+	background-image: url("banner.jpg");
+	background-blend-mode: soft-light;
+	background-color: #0000008e;
+	background-size: cover;
+	padding: 150px;
+	color: white;
+	text-align: center;
 }
 
 #offer h1 {
-    font-size: 50px;
-    margin-bottom: 30px;
+	font-size: 50px;
+	margin-bottom: 30px;
 }
 
 #offer h1 {
-    font-size: 50px;
-    margin-bottom: 30px;
+	font-size: 50px;
+	margin-bottom: 30px;
 }
 
 #offer p {
-    font-size: 25px;
-    margin-bottom: 30px;
-
+	font-size: 25px;
+	margin-bottom: 30px;
 }
 
 #offer button {
-    color: white;
-    background-color: transparent;
-    padding: 10px 30px;
-    margin-top: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    border: 2px solid white;
-    border-radius: 20px;
-    transition: 0.5s;
+	color: white;
+	background-color: transparent;
+	padding: 10px 30px;
+	margin-top: 10px;
+	cursor: pointer;
+	font-size: 18px;
+	border: 2px solid white;
+	border-radius: 20px;
+	transition: 0.5s;
 }
 
 #offer button:hover {
-    background-color: orange;
-    border: 2pxsolid orange;
+	background-color: orange;
+	border: 2pxsolid orange;
 }
 
 #contact {
-    margin-top: 50px;
+	margin-top: 50px;
 }
 
 .contact-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    width: 80%;
-    margin: 0 auto;
-    gap: 2rem;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	width: 80%;
+	margin: 0 auto;
+	gap: 2rem;
 }
 
 .contact-image img {
-    position: relative;
-    top: 40px;
+	position: relative;
+	top: 40px;
 }
 
 .contact-content h1 {
-    text-align: left;
-    font-size: 50px;
-    margin-bottom: 30px;
+	text-align: left;
+	font-size: 50px;
+	margin-bottom: 30px;
 }
 
 .contact-content input,
 .contact-content textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: none;
-    outline: none;
-    border-bottom: 3px solid black;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: none;
+	outline: none;
+	border-bottom: 3px solid black;
 }
-
-
 
 .footer {
-    background-color: white;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
+	background-color: white;
+	color: white;
+	padding: 20px 0;
+	text-align: center;
 }
-
 
 .footer-container {
-    display: flex;
-    justify-content: space-around;
-    max-width: 120px;
-    margin: 0 auto;
-    padding: 0 auto;
-    margin-top: 30px;
-    background-color: white;
-    color: blue;
+	display: flex;
+	justify-content: space-around;
+	max-width: 120px;
+	margin: 0 auto;
+	padding: 0 auto;
+	margin-top: 30px;
+	background-color: white;
+	color: blue;
 }
-
 
 .footer-section {
-    flex: 1;
-    margin: 0 20px;
+	flex: 1;
+	margin: 0 20px;
 }
-
 
 .footer-section h4 {
-    margin-bottom: 10px;
-    font-size: 15px;
-    text-transform: uppercase;
-    color: white;
+	margin-bottom: 10px;
+	font-size: 15px;
+	text-transform: uppercase;
+	color: white;
 }
-
 
 .footer-section p .footing-section a {
-    font-size: 14px;
-    color: white;
-    background-color: white;
-    text-decoration: none;
-    margin: 5px 0;
+	font-size: 14px;
+	color: white;
+	background-color: white;
+	text-decoration: none;
+	margin: 5px 0;
 }
 
-
 .footer-section a:hover {
-    color: orange;
+	color: orange;
 }
 
 .info {
-    margin-left: 400px;
+	margin-left: 400px;
 }
 
-
 .footer {
-    color: black;
-    font-size: 20px;
-    padding: 10px 30px;
-    border-radius: 30px;
-    background-color: orange;
+	color: black;
+	font-size: 20px;
+	padding: 10px 30px;
+	border-radius: 30px;
+	background-color: orange;
 }

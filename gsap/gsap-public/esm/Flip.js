@@ -19,9 +19,7 @@ var _id = 1,
     _closestTenth,
     _getStyleSaver,
     _forEachBatch = function _forEachBatch(batch, name) {
-  return batch.actions.forEach(function (a) {
-    return a.vars[name] && a.vars[name](a);
-  });
+  return batch.actions.forEach((a) => a.vars[name] && a.vars[name](a));
 },
     _batchLookup = {},
     _RAD2DEG = 180 / Math.PI,
@@ -42,9 +40,7 @@ _callbacks = _listToArray("onStart,onUpdate,onComplete,onReverseComplete,onInter
   return Math.round(value * 10000) / 10000 || 0;
 },
     _toggleClass = function _toggleClass(targets, className, action) {
-  return targets.forEach(function (el) {
-    return el.classList[action](className);
-  });
+  return targets.forEach((el) => el.classList[action](className));
 },
     _reserved = {
   zIndex: 1,
@@ -122,7 +118,7 @@ _callbacks = _listToArray("onStart,onUpdate,onComplete,onReverseComplete,onInter
 
   // In invert is true, the sibling depth is increments of 1, and parent/nesting depth is increments of 1000. This lets us order elements in an Array to reflect document flow.
   var parent = el.parentNode,
-      inc = 1000 * Math.pow(10, level) * (invert ? -1 : 1),
+      inc = 1000 * 10 ** level * (invert ? -1 : 1),
       l = invert ? -inc * 900 : 0;
 
   while (el) {
@@ -133,12 +129,8 @@ _callbacks = _listToArray("onStart,onUpdate,onComplete,onReverseComplete,onInter
   return parent ? l + _getDOMDepth(parent, invert, level + 1) : l;
 },
     _orderByDOMDepth = function _orderByDOMDepth(comps, invert, isElStates) {
-  comps.forEach(function (comp) {
-    return comp.d = _getDOMDepth(isElStates ? comp.element : comp.t, invert);
-  });
-  comps.sort(function (c1, c2) {
-    return c1.d - c2.d;
-  });
+  comps.forEach((comp) => comp.d = _getDOMDepth(isElStates ? comp.element : comp.t, invert));
+  comps.sort((c1, c2) => c1.d - c2.d);
   return comps;
 },
     _recordInlineStyles = function _recordInlineStyles(elState, props) {
@@ -175,9 +167,7 @@ _callbacks = _listToArray("onStart,onUpdate,onComplete,onReverseComplete,onInter
   }
 },
     _setFinalStates = function _setFinalStates(comps, onlyTransforms) {
-  comps.forEach(function (c) {
-    return c.a.cache.uncache = 1;
-  });
+  comps.forEach((c) => c.a.cache.uncache = 1);
   onlyTransforms || comps.finalStates.forEach(_applyInlineStyles);
 },
     _absoluteProps = "paddingTop,paddingRight,paddingBottom,paddingLeft,gridArea,transition".split(","),
@@ -203,9 +193,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
       sd: 0
     });
 
-    _batch._final.push(function () {
-      return (elState.cache.uncache = 1) && _applyInlineStyles(elState);
-    });
+    _batch._final.push(() => (elState.cache.uncache = 1) && _applyInlineStyles(elState));
 
     return element;
   }
@@ -258,7 +246,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
     _filterComps = function _filterComps(comps, targets) {
   if (targets !== true) {
     targets = _toArray(targets);
-    comps = comps.filter(function (c) {
+    comps = comps.filter((c) => {
       if (targets.indexOf((c.sd < 0 ? c.b : c.a).element) !== -1) {
         return true;
       } else {
@@ -277,9 +265,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
   return comps;
 },
     _makeCompsAbsolute = function _makeCompsAbsolute(comps) {
-  return _orderByDOMDepth(comps, true).forEach(function (c) {
-    return (c.a.isVisible || c.b.isVisible) && _makeAbsolute(c.sd < 0 ? c.b : c.a, c.b, 1);
-  });
+  return _orderByDOMDepth(comps, true).forEach((c) => (c.a.isVisible || c.b.isVisible) && _makeAbsolute(c.sd < 0 ? c.b : c.a, c.b, 1));
 },
     _findElStateInState = function _findElStateInState(state, other) {
   return other && state.idLookup[_parseElementState(other).id] || state.elementStates[0];
@@ -314,9 +300,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
   return id;
 },
     _elementsFromElementStates = function _elementsFromElementStates(elStates) {
-  return elStates.map(function (elState) {
-    return elState.element;
-  });
+  return elStates.map((elState) => elState.element);
 },
     _handleCallback = function _handleCallback(callback, elStates, tl) {
   return callback && elStates.length && tl.add(callback(_elementsFromElementStates(elStates), tl, new FlipState(elStates, 0, true)), 0);
@@ -358,8 +342,8 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
     rotation = _round(Math.atan2(matrix.b, matrix.a) * _RAD2DEG);
     skewX = _round(Math.atan2(matrix.c, matrix.d) * _RAD2DEG + rotation) % 360; // in very rare cases, minor rounding might end up with 360 which should be 0.
 
-    scaleX = Math.sqrt(Math.pow(matrix.a, 2) + Math.pow(matrix.b, 2));
-    scaleY = Math.sqrt(Math.pow(matrix.c, 2) + Math.pow(matrix.d, 2)) * Math.cos(skewX * _DEG2RAD);
+    scaleX = Math.sqrt(matrix.a ** 2 + matrix.b ** 2);
+    scaleY = Math.sqrt(matrix.c ** 2 + matrix.d ** 2) * Math.cos(skewX * _DEG2RAD);
 
     if (fitChild) {
       fitChild = _toArray(fitChild)[0];
@@ -538,9 +522,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
       comps = [],
       swapOutTargets = [],
       spinNum = spin === true ? 1 : spin || 0,
-      spinFunc = typeof spin === "function" ? spin : function () {
-    return spinNum;
-  },
+      spinFunc = typeof spin === "function" ? spin : (() => spinNum),
       interrupted = fromState.interrupted || toState.interrupted,
       addFunc = animation[relative !== 1 ? "to" : "from"],
       v,
@@ -607,11 +589,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
     }
   }
 
-  props && (_memoizedProps[props] || _memoizeProps(props)).forEach(function (p) {
-    return tweenVars[p] = function (i) {
-      return comps[i].a.props[p];
-    };
-  });
+  props && (_memoizedProps[props] || _memoizeProps(props)).forEach((p) => tweenVars[p] = (i) => comps[i].a.props[p]);
   comps.finalStates = finalStates = [];
 
   run = function run() {
@@ -682,55 +660,33 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
     var classTargets;
 
     if (toggleClass) {
-      classTargets = finalStates.map(function (s) {
-        return s.element;
-      });
-      nested && classTargets.forEach(function (e) {
-        return e.classList.remove(toggleClass);
-      }); // there could be a delay, so don't leave the classes applied (we'll do it in a timeline callback)
+      classTargets = finalStates.map((s) => s.element);
+      nested && classTargets.forEach((e) => e.classList.remove(toggleClass)); // there could be a delay, so don't leave the classes applied (we'll do it in a timeline callback)
     }
 
     _lockBodyScroll(false);
 
     if (scale) {
-      tweenVars.scaleX = function (i) {
-        return comps[i].a.scaleX;
-      };
+      tweenVars.scaleX = (i) => comps[i].a.scaleX;
 
-      tweenVars.scaleY = function (i) {
-        return comps[i].a.scaleY;
-      };
+      tweenVars.scaleY = (i) => comps[i].a.scaleY;
     } else {
-      tweenVars.width = function (i) {
-        return comps[i].a.width + "px";
-      };
+      tweenVars.width = (i) => comps[i].a.width + "px";
 
-      tweenVars.height = function (i) {
-        return comps[i].a.height + "px";
-      };
+      tweenVars.height = (i) => comps[i].a.height + "px";
 
       tweenVars.autoRound = vars.autoRound || false;
     }
 
-    tweenVars.x = function (i) {
-      return comps[i].a.x + "px";
-    };
+    tweenVars.x = (i) => comps[i].a.x + "px";
 
-    tweenVars.y = function (i) {
-      return comps[i].a.y + "px";
-    };
+    tweenVars.y = (i) => comps[i].a.y + "px";
 
-    tweenVars.rotation = function (i) {
-      return comps[i].a.rotation + (spin ? spinFunc(i, targets[i], targets) * 360 : 0);
-    };
+    tweenVars.rotation = (i) => comps[i].a.rotation + (spin ? spinFunc(i, targets[i], targets) * 360 : 0);
 
-    tweenVars.skewX = function (i) {
-      return comps[i].a.skewX;
-    };
+    tweenVars.skewX = (i) => comps[i].a.skewX;
 
-    targets = comps.map(function (c) {
-      return c.t;
-    });
+    targets = comps.map((c) => c.t);
 
     if (_zIndex || _zIndex === 0) {
       tweenVars.modifiers = {
@@ -742,17 +698,13 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
       tweenVars.immediateRender = vars.immediateRender !== false;
     }
 
-    fade && (tweenVars.opacity = function (i) {
-      return comps[i].sd < 0 ? 0 : comps[i].sd > 0 ? comps[i].a.opacity : "+=0";
-    });
+    fade && (tweenVars.opacity = (i) => comps[i].sd < 0 ? 0 : comps[i].sd > 0 ? comps[i].a.opacity : "+=0");
 
     if (swapOutTargets.length) {
       stagger = gsap.utils.distribute(stagger);
       var dummyArray = targets.slice(swapOutTargets.length);
 
-      tweenVars.stagger = function (i, el) {
-        return stagger(~swapOutTargets.indexOf(el) ? targets.indexOf(comps[i].swap.t) : i, el, dummyArray);
-      };
+      tweenVars.stagger = (i, el) => stagger(~swapOutTargets.indexOf(el) ? targets.indexOf(comps[i].swap.t) : i, el, dummyArray);
     } // // for testing...
     // gsap.delayedCall(vars.data ? 50 : 1, function() {
     // 	animation.eventCallback("onComplete", () => _setFinalStates(comps, !clearProps));
@@ -761,9 +713,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
     // return;
 
 
-    _callbacks.forEach(function (name) {
-      return vars[name] && animation.eventCallback(name, vars[name], vars[name + "Params"]);
-    }); // apply callbacks to the timeline, not tweens (because "custom" timing can make multiple tweens)
+    _callbacks.forEach((name) => vars[name] && animation.eventCallback(name, vars[name], vars[name + "Params"])); // apply callbacks to the timeline, not tweens (because "custom" timing can make multiple tweens)
 
 
     if (custom && targets.length) {
@@ -786,9 +736,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
     }
 
     if (targets.length || leaving.length || entering.length) {
-      toggleClass && animation.add(function () {
-        return _toggleClass(classTargets, toggleClass, animation._zTime < 0 ? "remove" : "add");
-      }, 0) && !paused && _toggleClass(classTargets, toggleClass, "add");
+      toggleClass && animation.add(() => _toggleClass(classTargets, toggleClass, animation._zTime < 0 ? "remove" : "add"), 0) && !paused && _toggleClass(classTargets, toggleClass, "add");
       targets.length && addFunc.call(animation, targets, remainingProps, 0);
     }
 
@@ -801,24 +749,18 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
     if (batchTl) {
       batchTl.add(animation, 0);
 
-      _batch._final.push(function () {
-        return _setFinalStates(comps, !clearProps);
-      });
+      _batch._final.push(() => _setFinalStates(comps, !clearProps));
     }
 
     endTime = animation.duration();
-    animation.call(function () {
+    animation.call(() => {
       var forward = animation.time() >= endTime;
       forward && !batchTl && _setFinalStates(comps, !clearProps);
       toggleClass && _toggleClass(classTargets, toggleClass, forward ? "remove" : "add");
     });
   };
 
-  absoluteOnLeave && (absolute = comps.filter(function (comp) {
-    return !comp.sd && !comp.a.isVisible && comp.b.isVisible;
-  }).map(function (comp) {
-    return comp.a.element;
-  }));
+  absoluteOnLeave && (absolute = comps.filter((comp) => !comp.sd && !comp.a.isVisible && comp.b.isVisible).map((comp) => comp.a.element));
 
   if (_batch) {
     var _batch$_abs;
@@ -834,9 +776,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
 
   var anim = _batch ? _batch.timeline : animation;
 
-  anim.revert = function () {
-    return _killFlip(anim, 1, 1);
-  }; // a Flip timeline should behave very different when reverting - it should actually jump to the end so that styles get cleared out.
+  anim.revert = () => _killFlip(anim, 1, 1); // a Flip timeline should behave very different when reverting - it should actually jump to the end so that styles get cleared out.
 
 
   return anim;
@@ -872,7 +812,7 @@ _makeAbsolute = function _makeAbsolute(elState, fallbackNode, ignoreBatch) {
   }
 };
 
-var FlipState = /*#__PURE__*/function () {
+var FlipState = /*#__PURE__*/(() => {
   function FlipState(targets, vars, targetsAreElementStates) {
     this.props = vars && vars.props;
     this.simple = !!(vars && vars.simple);
@@ -893,11 +833,8 @@ var FlipState = /*#__PURE__*/function () {
   var _proto = FlipState.prototype;
 
   _proto.update = function update(soft) {
-    var _this = this;
 
-    this.elementStates = this.targets.map(function (el) {
-      return new ElementState(el, _this.props, _this.simple);
-    });
+    this.elementStates = this.targets.map((el) => new ElementState(el, this.props, this.simple));
 
     _createLookup(this);
 
@@ -1049,17 +986,14 @@ var FlipState = /*#__PURE__*/function () {
   };
 
   _proto.interrupt = function interrupt(soft) {
-    var _this2 = this;
 
     // soft = DON'T force in-progress flip animations to completion (like when running a batch, we can't immediately kill flips when getting states because it could contaminate positioning and other .getState() calls that will run in the batch (we kill AFTER all the .getState() calls complete).
     var timelines = [];
-    this.targets.forEach(function (t) {
+    this.targets.forEach((t) => {
       var tl = t._flip,
           foundInProgress = _killFlip(tl, soft ? 0 : 1);
 
-      soft && foundInProgress && timelines.indexOf(tl) < 0 && tl.add(function () {
-        return _this2.updateVisibility();
-      });
+      soft && foundInProgress && timelines.indexOf(tl) < 0 && tl.add(() => this.updateVisibility());
       foundInProgress && timelines.push(tl);
     });
     !soft && timelines.length && this.updateVisibility(); // if we found an in-progress Flip animation, we must record all the values in their current state at that point BUT we should update the isVisible value AFTER pushing that flip to completion so that elements that are entering or leaving will populate those Arrays properly.
@@ -1068,7 +1002,7 @@ var FlipState = /*#__PURE__*/function () {
   };
 
   _proto.updateVisibility = function updateVisibility() {
-    this.elementStates.forEach(function (es) {
+    this.elementStates.forEach((es) => {
       var b = es.element.getBoundingClientRect();
       es.isVisible = !!(b.width || b.height || b.top || b.left);
       es.uncache = 1;
@@ -1084,9 +1018,9 @@ var FlipState = /*#__PURE__*/function () {
   };
 
   return FlipState;
-}();
+})();
 
-var ElementState = /*#__PURE__*/function () {
+var ElementState = /*#__PURE__*/(() => {
   function ElementState(element, props, simple) {
     this.element = element;
     this.update(props, simple);
@@ -1101,8 +1035,8 @@ var ElementState = /*#__PURE__*/function () {
   };
 
   _proto2.update = function update(props, simple) {
-    var self = this,
-        element = self.element,
+    var 
+        element = this.element,
         getProp = gsap.getProperty(element),
         cache = gsap.core.getCache(element),
         bounds = element.getBoundingClientRect(),
@@ -1110,37 +1044,37 @@ var ElementState = /*#__PURE__*/function () {
         m = simple ? new Matrix2D(1, 0, 0, 1, bounds.left + _getDocScrollLeft(), bounds.top + _getDocScrollTop()) : getGlobalMatrix(element, false, false, true);
     cache.uncache = 1; // in case there are CSS rules that affect the element. Example: https://gsap.com/community/forums/topic/44321-bug-on-fixed-position-using-flip/
 
-    self.getProp = getProp;
-    self.element = element;
-    self.id = _getID(element);
-    self.matrix = m;
-    self.cache = cache;
-    self.bounds = bounds;
-    self.isVisible = !!(bounds.width || bounds.height || bounds.left || bounds.top);
-    self.display = getProp("display");
-    self.position = getProp("position");
-    self.parent = element.parentNode;
-    self.x = getProp("x");
-    self.y = getProp("y");
-    self.scaleX = cache.scaleX;
-    self.scaleY = cache.scaleY;
-    self.rotation = getProp("rotation");
-    self.skewX = getProp("skewX");
-    self.opacity = getProp("opacity");
-    self.width = bbox ? bbox.width : _closestTenth(getProp("width", "px"), 0.04); // round up to the closest 0.1 so that text doesn't wrap.
+    this.getProp = getProp;
+    this.element = element;
+    this.id = _getID(element);
+    this.matrix = m;
+    this.cache = cache;
+    this.bounds = bounds;
+    this.isVisible = !!(bounds.width || bounds.height || bounds.left || bounds.top);
+    this.display = getProp("display");
+    this.position = getProp("position");
+    this.parent = element.parentNode;
+    this.x = getProp("x");
+    this.y = getProp("y");
+    this.scaleX = cache.scaleX;
+    this.scaleY = cache.scaleY;
+    this.rotation = getProp("rotation");
+    this.skewX = getProp("skewX");
+    this.opacity = getProp("opacity");
+    this.width = bbox ? bbox.width : _closestTenth(getProp("width", "px"), 0.04); // round up to the closest 0.1 so that text doesn't wrap.
 
-    self.height = bbox ? bbox.height : _closestTenth(getProp("height", "px"), 0.04);
-    props && _recordProps(self, _memoizedProps[props] || _memoizeProps(props));
-    self.ctm = element.getCTM && element.nodeName.toLowerCase() === "svg" && _getCTM(element).inverse();
-    self.simple = simple || _round(m.a) === 1 && !_round(m.b) && !_round(m.c) && _round(m.d) === 1; // allows us to speed through some other tasks if it's not scale/rotated
+    this.height = bbox ? bbox.height : _closestTenth(getProp("height", "px"), 0.04);
+    props && _recordProps(this, _memoizedProps[props] || _memoizeProps(props));
+    this.ctm = element.getCTM && element.nodeName.toLowerCase() === "svg" && _getCTM(element).inverse();
+    this.simple = simple || _round(m.a) === 1 && !_round(m.b) && !_round(m.c) && _round(m.d) === 1; // allows us to speed through some other tasks if it's not scale/rotated
 
-    self.uncache = 0;
+    this.uncache = 0;
   };
 
   return ElementState;
-}();
+})();
 
-var FlipAction = /*#__PURE__*/function () {
+var FlipAction = /*#__PURE__*/(() => {
   function FlipAction(vars, batch) {
     this.vars = vars;
     this.batch = batch;
@@ -1165,9 +1099,9 @@ var FlipAction = /*#__PURE__*/function () {
   };
 
   return FlipAction;
-}();
+})();
 
-var FlipBatch = /*#__PURE__*/function () {
+var FlipBatch = /*#__PURE__*/(() => {
   function FlipBatch(id) {
     this.id = id;
     this.actions = [];
@@ -1183,9 +1117,7 @@ var FlipBatch = /*#__PURE__*/function () {
   var _proto4 = FlipBatch.prototype;
 
   _proto4.add = function add(config) {
-    var result = this.actions.filter(function (action) {
-      return action.vars === config;
-    });
+    var result = this.actions.filter((action) => action.vars === config);
 
     if (result.length) {
       return result[0];
@@ -1205,23 +1137,20 @@ var FlipBatch = /*#__PURE__*/function () {
   };
 
   _proto4.getState = function getState(merge) {
-    var _this3 = this;
 
     var prevBatch = _batch,
         prevAction = _batchAction;
     _batch = this;
     this.state.clear();
     this._kill.length = 0;
-    this.actions.forEach(function (action) {
+    this.actions.forEach((action) => {
       if (action.vars.getState) {
         action.states.length = 0;
         _batchAction = action;
         action.state = action.vars.getState(action);
       }
 
-      merge && action.states.forEach(function (s) {
-        return _this3.state.add(s);
-      });
+      merge && action.states.forEach((s) => this.state.add(s));
     });
     _batchAction = prevAction;
     _batch = prevBatch;
@@ -1230,7 +1159,6 @@ var FlipBatch = /*#__PURE__*/function () {
   };
 
   _proto4.animate = function animate() {
-    var _this4 = this;
 
     var prevBatch = _batch,
         tl = this.timeline,
@@ -1240,7 +1168,7 @@ var FlipBatch = /*#__PURE__*/function () {
     _batch = this;
     tl.clear();
     this._abs.length = this._final.length = this._run.length = 0;
-    this.actions.forEach(function (a) {
+    this.actions.forEach((a) => {
       a.vars.animate && a.vars.animate(a);
       var onEnter = a.vars.onEnter,
           onLeave = a.vars.onLeave,
@@ -1250,9 +1178,7 @@ var FlipBatch = /*#__PURE__*/function () {
 
       if (targets && targets.length && (onEnter || onLeave)) {
         s = new FlipState();
-        a.states.forEach(function (state) {
-          return s.add(state);
-        });
+        a.states.forEach((state) => s.add(state));
         result = s.compare(Flip.getState(targets));
         result.enter.length && onEnter && onEnter(result.enter);
         result.leave.length && onLeave && onLeave(result.leave);
@@ -1261,20 +1187,16 @@ var FlipBatch = /*#__PURE__*/function () {
 
     _makeCompsAbsolute(this._abs);
 
-    this._run.forEach(function (f) {
-      return f();
-    });
+    this._run.forEach((f) => f());
 
     endTime = tl.duration();
     finalStates = this._final.slice(0);
-    tl.add(function () {
+    tl.add(() => {
       if (endTime <= tl.time()) {
         // only call if moving forward in the timeline (in case it's nested in a timeline that gets reversed)
-        finalStates.forEach(function (f) {
-          return f();
-        });
+        finalStates.forEach((f) => f());
 
-        _forEachBatch(_this4, "onComplete");
+        _forEachBatch(this, "onComplete");
       }
     });
     _batch = prevBatch;
@@ -1294,7 +1216,7 @@ var FlipBatch = /*#__PURE__*/function () {
       return 0;
     });
     var queue = [];
-    this.actions.forEach(function (c) {
+    this.actions.forEach((c) => {
       if (c.vars.loadState) {
         var i,
             f = function f(targets) {
@@ -1316,32 +1238,27 @@ var FlipBatch = /*#__PURE__*/function () {
   };
 
   _proto4.setState = function setState() {
-    this.actions.forEach(function (c) {
-      return c.targets = c.vars.setState && c.vars.setState(c);
-    });
+    this.actions.forEach((c) => c.targets = c.vars.setState && c.vars.setState(c));
     return this;
   };
 
   _proto4.killConflicts = function killConflicts(soft) {
     this.state.interrupt(soft);
 
-    this._kill.forEach(function (state) {
-      return state.interrupt(soft);
-    });
+    this._kill.forEach((state) => state.interrupt(soft));
 
     return this;
   };
 
   _proto4.run = function run(skipGetState, merge) {
-    var _this5 = this;
 
     if (this !== _batch) {
       skipGetState || this.getState(merge);
-      this.loadState(function () {
-        if (!_this5._killed) {
-          _this5.setState();
+      this.loadState(() => {
+        if (!this._killed) {
+          this.setState();
 
-          _this5.animate();
+          this.animate();
         }
       });
     }
@@ -1376,9 +1293,9 @@ var FlipBatch = /*#__PURE__*/function () {
   };
 
   return FlipBatch;
-}();
+})();
 
-export var Flip = /*#__PURE__*/function () {
+export var Flip = /*#__PURE__*/(() => {
   function Flip() {}
 
   Flip.getState = function getState(targets, vars) {
@@ -1444,11 +1361,7 @@ export var Flip = /*#__PURE__*/function () {
     absolute && _makeAbsolute(after, before);
     v = _fit(after, before, scale || fitChild, !v.duration && props, fitChild, v.duration || getVars ? v : 0);
     typeof vars === "object" && "zIndex" in vars && (v.zIndex = vars.zIndex);
-    ctx && !getVars && ctx.add(function () {
-      return function () {
-        return _applyInlineStyles(after);
-      };
-    });
+    ctx && !getVars && ctx.add(() => () => _applyInlineStyles(after));
     return getVars ? v : v.duration ? gsap.to(after.element, v) : null;
   };
 
@@ -1462,9 +1375,7 @@ export var Flip = /*#__PURE__*/function () {
   };
 
   Flip.killFlipsOf = function killFlipsOf(targets, complete) {
-    (targets instanceof FlipState ? targets.targets : _toArray(targets)).forEach(function (t) {
-      return t && _killFlip(t._flip, complete !== false ? 1 : 2);
-    });
+    (targets instanceof FlipState ? targets.targets : _toArray(targets)).forEach((t) => t && _killFlip(t._flip, complete !== false ? 1 : 2));
   };
 
   Flip.isFlipping = function isFlipping(target) {
@@ -1504,7 +1415,7 @@ export var Flip = /*#__PURE__*/function () {
   };
 
   return Flip;
-}();
+})();
 Flip.version = "3.13.0"; // function whenImagesLoad(el, func) {
 // 	let pending = [],
 // 		onLoad = e => {

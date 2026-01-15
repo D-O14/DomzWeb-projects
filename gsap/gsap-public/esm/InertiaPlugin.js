@@ -330,7 +330,7 @@ _isArray = Array.isArray,
     _clamp = gsap.utils.clamp;
     _getStyleSaver = gsap.core.getStyleSaver;
 
-    _reverting = gsap.core.reverting || function () {};
+    _reverting = gsap.core.reverting || (() => {});
 
     _power3 = _parseEase("power3");
     _checkPointRatio = _power3(0.05);
@@ -471,8 +471,6 @@ export var InertiaPlugin = {
     }
   }
 };
-"track,untrack,isTracking,getVelocity,getByTarget".split(",").forEach(function (name) {
-  return InertiaPlugin[name] = VelocityTracker[name];
-});
+"track,untrack,isTracking,getVelocity,getByTarget".split(",").forEach((name) => InertiaPlugin[name] = VelocityTracker[name]);
 _getGSAP() && gsap.registerPlugin(InertiaPlugin);
 export { InertiaPlugin as default, VelocityTracker };

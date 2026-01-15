@@ -87,28 +87,20 @@ _pointerDownHandler = function _pointerDownHandler() {
   return (dimensionProperty === "Height" ? _100vh : _win["inner" + dimensionProperty]) || _docEl["client" + dimensionProperty] || _body["client" + dimensionProperty];
 },
     _getBoundsFunc = function _getBoundsFunc(element) {
-  return _getProxyProp(element, "getBoundingClientRect") || (_isViewport(element) ? function () {
+  return _getProxyProp(element, "getBoundingClientRect") || (_isViewport(element) ? (() => {
     _winOffsets.width = _win.innerWidth;
     _winOffsets.height = _100vh;
     return _winOffsets;
-  } : function () {
-    return _getBounds(element);
-  });
+  }) : (() => _getBounds(element)));
 },
     _getSizeFunc = function _getSizeFunc(scroller, isViewport, _ref) {
   var d = _ref.d,
       d2 = _ref.d2,
       a = _ref.a;
-  return (a = _getProxyProp(scroller, "getBoundingClientRect")) ? function () {
-    return a()[d];
-  } : function () {
-    return (isViewport ? _getViewportDimension(d2) : scroller["client" + d2]) || 0;
-  };
+  return (a = _getProxyProp(scroller, "getBoundingClientRect")) ? (() => a()[d]) : (() => (isViewport ? _getViewportDimension(d2) : scroller["client" + d2]) || 0);
 },
     _getOffsetsFunc = function _getOffsetsFunc(element, isViewport) {
-  return !isViewport || ~_proxies.indexOf(element) ? _getBoundsFunc(element) : function () {
-    return _winOffsets;
-  };
+  return !isViewport || ~_proxies.indexOf(element) ? _getBoundsFunc(element) : (() => _winOffsets);
 },
     _maxScroll = function _maxScroll(element, _ref2) {
   var s = _ref2.s,
@@ -139,9 +131,7 @@ _pointerDownHandler = function _pointerDownHandler() {
 },
     _callback = function _callback(self, func) {
   if (self.enabled) {
-    var result = self._ctx ? self._ctx.add(function () {
-      return func(self);
-    }) : func(self);
+    var result = self._ctx ? self._ctx.add(() => func(self)) : func(self);
     result && result.totalTime && (self.callbackAnimation = result);
   }
 },
@@ -211,16 +201,12 @@ _pointerDownHandler = function _pointerDownHandler() {
   return a;
 },
     _getClosestLabel = function _getClosestLabel(animation) {
-  return function (value) {
-    return gsap.utils.snap(_getLabelRatioArray(animation), value);
-  };
+  return (value) => gsap.utils.snap(_getLabelRatioArray(animation), value);
 },
     _snapDirectional = function _snapDirectional(snapIncrementOrArray) {
   var snap = gsap.utils.snap(snapIncrementOrArray),
-      a = Array.isArray(snapIncrementOrArray) && snapIncrementOrArray.slice(0).sort(function (a, b) {
-    return a - b;
-  });
-  return a ? function (value, direction, threshold) {
+      a = Array.isArray(snapIncrementOrArray) && snapIncrementOrArray.slice(0).sort((a, b) => a - b);
+  return a ? ((value, direction, threshold) => {
     if (threshold === void 0) {
       threshold = 1e-3;
     }
@@ -253,24 +239,20 @@ _pointerDownHandler = function _pointerDownHandler() {
     }
 
     return a[0];
-  } : function (value, direction, threshold) {
+  }) : ((value, direction, threshold) => {
     if (threshold === void 0) {
       threshold = 1e-3;
     }
 
     var snapped = snap(value);
     return !direction || Math.abs(snapped - value) < threshold || snapped - value < 0 === direction < 0 ? snapped : snap(direction < 0 ? value - snapIncrementOrArray : value + snapIncrementOrArray);
-  };
+  });
 },
     _getLabelAtDirection = function _getLabelAtDirection(timeline) {
-  return function (value, st) {
-    return _snapDirectional(_getLabelRatioArray(timeline))(value, st.direction);
-  };
+  return (value, st) => _snapDirectional(_getLabelRatioArray(timeline))(value, st.direction);
 },
     _multiListener = function _multiListener(func, element, types, callback) {
-  return types.split(",").forEach(function (type) {
-    return func(element, type, callback);
-  });
+  return types.split(",").forEach((type) => func(element, type, callback));
 },
     _addListener = function _addListener(element, type, func, nonPassive, capture) {
   return element.addEventListener(type, func, {
@@ -403,9 +385,7 @@ _listeners = {},
   return _removeListener(ScrollTrigger, "scrollEnd", _softRefresh) || _refreshAll(true);
 },
     _dispatch = function _dispatch(type) {
-  return _listeners[type] && _listeners[type].map(function (f) {
-    return f();
-  }) || _emptyArray;
+  return _listeners[type] && _listeners[type].map((f) => f()) || _emptyArray;
 },
     _savedStyles = [],
     // when ScrollTrigger.saveStyles() is called, the inline styles are recorded in this Array in a sequential format like [element, cssText, gsCache, media]. This keeps it very memory-efficient and fast to iterate through.
@@ -440,9 +420,7 @@ _revertRecorded = function _revertRecorded(media) {
     _clearScrollMemory = function _clearScrollMemory(scrollRestoration, force) {
   // zero-out all the recorded scroll positions. Don't use _triggers because if, for example, .matchMedia() is used to create some ScrollTriggers and then the user resizes and it removes ALL ScrollTriggers, and then go back to a size where there are ScrollTriggers, it would have kept the position(s) saved from the initial state.
   _scrollers.cache++;
-  (force || !_refreshingAll) && _scrollers.forEach(function (obj) {
-    return _isFunction(obj) && obj.cacheID++ && (obj.rec = 0);
-  });
+  (force || !_refreshingAll) && _scrollers.forEach((obj) => _isFunction(obj) && obj.cacheID++ && (obj.rec = 0));
   _isString(scrollRestoration) && (_win.history.scrollRestoration = _scrollRestoration = scrollRestoration);
 },
     _refreshingAll,
@@ -452,9 +430,7 @@ _revertRecorded = function _revertRecorded(media) {
   // we don't want to call _refreshAll() every time we create a new ScrollTrigger (for performance reasons) - it's better to batch them. Some frameworks dynamically load content and we can't rely on the window's "load" or "DOMContentLoaded" events to trigger it.
   if (_queueRefreshID !== _refreshID) {
     var id = _queueRefreshID = _refreshID;
-    requestAnimationFrame(function () {
-      return id === _refreshID && _refreshAll(true);
-    });
+    requestAnimationFrame(() => id === _refreshID && _refreshAll(true));
   }
 },
     _refresh100vh = function _refresh100vh() {
@@ -465,9 +441,7 @@ _revertRecorded = function _revertRecorded(media) {
   _body.removeChild(_div100vh);
 },
     _hideAllMarkers = function _hideAllMarkers(hide) {
-  return _toArray(".gsap-marker-start, .gsap-marker-end, .gsap-marker-scroller-start, .gsap-marker-scroller-end").forEach(function (el) {
-    return el.style.display = hide ? "none" : "block";
-  });
+  return _toArray(".gsap-marker-start, .gsap-marker-end, .gsap-marker-scroller-start, .gsap-marker-scroller-end").forEach((el) => el.style.display = hide ? "none" : "block");
 },
     _refreshAll = function _refreshAll(force, skipRevert) {
   _docEl = _doc.documentElement; // some frameworks like Astro may cache the <body> and replace it during routing, so we'll just re-record the _docEl and _body for safety (otherwise, the markers may not get added properly).
@@ -485,9 +459,7 @@ _revertRecorded = function _revertRecorded(media) {
 
   _refreshingAll = ScrollTrigger.isRefreshing = true;
 
-  _scrollers.forEach(function (obj) {
-    return _isFunction(obj) && ++obj.cacheID && (obj.rec = obj());
-  }); // force the clearing of the cache because some browsers take a little while to dispatch the "scroll" event and the user may have changed the scroll position and then called ScrollTrigger.refresh() right away
+  _scrollers.forEach((obj) => _isFunction(obj) && ++obj.cacheID && (obj.rec = obj())); // force the clearing of the cache because some browsers take a little while to dispatch the "scroll" event and the user may have changed the scroll position and then called ScrollTrigger.refresh() right away
 
 
   var refreshInits = _dispatch("refreshInit");
@@ -495,7 +467,7 @@ _revertRecorded = function _revertRecorded(media) {
   _sort && ScrollTrigger.sort();
   skipRevert || _revertAll();
 
-  _scrollers.forEach(function (obj) {
+  _scrollers.forEach((obj) => {
     if (_isFunction(obj)) {
       obj.smooth && (obj.target.style.scrollBehavior = "auto"); // smooth scrolling interferes
 
@@ -503,14 +475,12 @@ _revertRecorded = function _revertRecorded(media) {
     }
   });
 
-  _triggers.slice(0).forEach(function (t) {
-    return t.refresh();
-  }); // don't loop with _i because during a refresh() someone could call ScrollTrigger.update() which would iterate through _i resulting in a skip.
+  _triggers.slice(0).forEach((t) => t.refresh()); // don't loop with _i because during a refresh() someone could call ScrollTrigger.update() which would iterate through _i resulting in a skip.
 
 
   _isReverted = false;
 
-  _triggers.forEach(function (t) {
+  _triggers.forEach((t) => {
     // nested pins (pinnedContainer) with pinSpacing may expand the container, so we must accommodate that here.
     if (t._subPinOffset && t.pin) {
       var prop = t.vars.horizontal ? "offsetWidth" : "offsetHeight",
@@ -525,7 +495,7 @@ _revertRecorded = function _revertRecorded(media) {
 
   _hideAllMarkers(true);
 
-  _triggers.forEach(function (t) {
+  _triggers.forEach((t) => {
     // the scroller's max scroll position may change after all the ScrollTriggers refreshed (like pinning could push it down), so we need to loop back and correct any with end: "max". Same for anything with a clamped end
     var max = _maxScroll(t.scroller, t._dir),
         endClamp = t.vars.end === "max" || t._endClamp && t.end > max,
@@ -537,15 +507,11 @@ _revertRecorded = function _revertRecorded(media) {
   _hideAllMarkers(false);
 
   _clampingMax = 0;
-  refreshInits.forEach(function (result) {
-    return result && result.render && result.render(-1);
-  }); // if the onRefreshInit() returns an animation (typically a gsap.set()), revert it. This makes it easy to put things in a certain spot before refreshing for measurement purposes, and then put things back.
+  refreshInits.forEach((result) => result && result.render && result.render(-1)); // if the onRefreshInit() returns an animation (typically a gsap.set()), revert it. This makes it easy to put things in a certain spot before refreshing for measurement purposes, and then put things back.
 
-  _scrollers.forEach(function (obj) {
+  _scrollers.forEach((obj) => {
     if (_isFunction(obj)) {
-      obj.smooth && requestAnimationFrame(function () {
-        return obj.target.style.scrollBehavior = "smooth";
-      });
+      obj.smooth && requestAnimationFrame(() => obj.target.style.scrollBehavior = "smooth");
       obj.rec && obj(obj.rec);
     }
   });
@@ -559,9 +525,7 @@ _revertRecorded = function _revertRecorded(media) {
 
   _updateAll(2);
 
-  _triggers.forEach(function (t) {
-    return _isFunction(t.vars.onRefresh) && t.vars.onRefresh(t);
-  });
+  _triggers.forEach((t) => _isFunction(t.vars.onRefresh) && t.vars.onRefresh(t));
 
   _refreshingAll = ScrollTrigger.isRefreshing = false;
 
@@ -836,7 +800,7 @@ _parsePosition = function _parsePosition(value, trigger, scrollerSize, direction
     _interruptionTracker = function _interruptionTracker(getValueFunc, initialValue, onInterrupt) {
   var last1 = initialValue,
       last2 = last1;
-  return function (value) {
+  return (value) => {
     var current = Math.round(getValueFunc()); // round because in some [very uncommon] Windows environments, scroll can get reported with decimals even though it was set without.
 
     if (current !== last1 && current !== last2 && Math.abs(current - last1) > 3 && Math.abs(current - last2) > 3) {
@@ -872,7 +836,7 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
         modifiers = {};
     initialValue = initialValue || getScroll();
 
-    var checkForInterruption = _interruptionTracker(getScroll, initialValue, function () {
+    var checkForInterruption = _interruptionTracker(getScroll, initialValue, () => {
       tween.kill();
       getTween.tween = 0;
     });
@@ -885,16 +849,14 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
     vars.inherit = false;
     vars.modifiers = modifiers;
 
-    modifiers[prop] = function () {
-      return checkForInterruption(initialValue + change1 * tween.ratio + change2 * tween.ratio * tween.ratio);
-    };
+    modifiers[prop] = () => checkForInterruption(initialValue + change1 * tween.ratio + change2 * tween.ratio * tween.ratio);
 
-    vars.onUpdate = function () {
+    vars.onUpdate = () => {
       _scrollers.cache++;
       getTween.tween && _updateAll(); // if it was interrupted/killed, like in a context.revert(), don't force an updateAll()
     };
 
-    vars.onComplete = function () {
+    vars.onComplete = () => {
       getTween.tween = 0;
       onComplete && onComplete.call(tween);
     };
@@ -905,9 +867,7 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
 
   scroller[prop] = getScroll;
 
-  getScroll.wheelHandler = function () {
-    return getTween.tween && getTween.tween.kill() && (getTween.tween = 0);
-  };
+  getScroll.wheelHandler = () => getTween.tween && getTween.tween.kill() && (getTween.tween = 0);
 
   _addListener(scroller, "wheel", getScroll.wheelHandler); // Windows machines handle mousewheel scrolling in chunks (like "3 lines per scroll") meaning the typical strategy for cancelling the scroll isn't as sensitive. It's much more likely to match one of the previous 2 scroll event positions. So we kill any snapping as soon as there's a wheel event.
 
@@ -916,7 +876,7 @@ _getTweenCreator = function _getTweenCreator(scroller, direction) {
   return getTween;
 };
 
-export var ScrollTrigger = /*#__PURE__*/function () {
+export var ScrollTrigger = /*#__PURE__*/(() => {
   function ScrollTrigger(vars, animation) {
     _coreInitted || ScrollTrigger.register(gsap) || console.warn("Please gsap.registerPlugin(ScrollTrigger)");
 
@@ -972,9 +932,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
         markers = "markers" in vars ? vars.markers : _defaults.markers,
         borderWidth = isViewport ? 0 : parseFloat(_getComputedStyle(scroller)["border" + direction.p2 + _Width]) || 0,
         self = this,
-        onRefreshInit = vars.onRefreshInit && function () {
-      return vars.onRefreshInit(self);
-    },
+        onRefreshInit = vars.onRefreshInit && (() => vars.onRefreshInit(self)),
         getScrollerSize = _getSizeFunc(scroller, isViewport, direction),
         getScrollerOffsets = _getOffsetsFunc(scroller, isViewport),
         lastSnap = 0,
@@ -1042,7 +1000,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
     };
     self.tweenTo = tweenTo = scrollerCache.tweenScroll[direction.p];
 
-    self.scrubDuration = function (value) {
+    self.scrubDuration = (value) => {
       scrubSmooth = _isNumber(value) && value;
 
       if (!scrubSmooth) {
@@ -1085,20 +1043,16 @@ export var ScrollTrigger = /*#__PURE__*/function () {
         scrollBehavior: "auto"
       }); // smooth scrolling doesn't work with snap.
 
-      _scrollers.forEach(function (o) {
-        return _isFunction(o) && o.target === (isViewport ? _doc.scrollingElement || _docEl : scroller) && (o.smooth = false);
-      }); // note: set smooth to false on both the vertical and horizontal scroll getters/setters
+      _scrollers.forEach((o) => _isFunction(o) && o.target === (isViewport ? _doc.scrollingElement || _docEl : scroller) && (o.smooth = false)); // note: set smooth to false on both the vertical and horizontal scroll getters/setters
 
 
-      snapFunc = _isFunction(snap.snapTo) ? snap.snapTo : snap.snapTo === "labels" ? _getClosestLabel(animation) : snap.snapTo === "labelsDirectional" ? _getLabelAtDirection(animation) : snap.directional !== false ? function (value, st) {
-        return _snapDirectional(snap.snapTo)(value, _getTime() - lastRefresh < 500 ? 0 : st.direction);
-      } : gsap.utils.snap(snap.snapTo);
+      snapFunc = _isFunction(snap.snapTo) ? snap.snapTo : snap.snapTo === "labels" ? _getClosestLabel(animation) : snap.snapTo === "labelsDirectional" ? _getLabelAtDirection(animation) : snap.directional !== false ? ((value, st) => _snapDirectional(snap.snapTo)(value, _getTime() - lastRefresh < 500 ? 0 : st.direction)) : gsap.utils.snap(snap.snapTo);
       snapDurClamp = snap.duration || {
         min: 0.1,
         max: 2
       };
       snapDurClamp = _isObject(snapDurClamp) ? _clamp(snapDurClamp.min, snapDurClamp.max) : _clamp(snapDurClamp, snapDurClamp);
-      snapDelayedCall = gsap.delayedCall(snap.delay || scrubSmooth / 2 || 0.1, function () {
+      snapDelayedCall = gsap.delayedCall(snap.delay || scrubSmooth / 2 || 0.1, () => {
         var scroll = scrollFunc(),
             refreshedRecently = _getTime() - lastRefresh < 500,
             tween = tweenTo.tween;
@@ -1235,21 +1189,17 @@ export var ScrollTrigger = /*#__PURE__*/function () {
     if (containerAnimation) {
       var oldOnUpdate = containerAnimation.vars.onUpdate,
           oldParams = containerAnimation.vars.onUpdateParams;
-      containerAnimation.eventCallback("onUpdate", function () {
+      containerAnimation.eventCallback("onUpdate", () => {
         self.update(0, 0, 1);
         oldOnUpdate && oldOnUpdate.apply(containerAnimation, oldParams || []);
       });
     }
 
-    self.previous = function () {
-      return _triggers[_triggers.indexOf(self) - 1];
-    };
+    self.previous = () => _triggers[_triggers.indexOf(self) - 1];
 
-    self.next = function () {
-      return _triggers[_triggers.indexOf(self) + 1];
-    };
+    self.next = () => _triggers[_triggers.indexOf(self) + 1];
 
-    self.revert = function (revert, temp) {
+    self.revert = (revert, temp) => {
       if (!temp) {
         return self.kill(true);
       } // for compatibility with gsap.context() and gsap.matchMedia() which call revert()
@@ -1266,9 +1216,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
           prevAnimProgress = animation && animation.progress();
         }
 
-        markerStart && [markerStart, markerEnd, markerStartTrigger, markerEndTrigger].forEach(function (m) {
-          return m.style.display = r ? "none" : "block";
-        });
+        markerStart && [markerStart, markerEnd, markerStartTrigger, markerEndTrigger].forEach((m) => m.style.display = r ? "none" : "block");
 
         if (r) {
           _refreshing = self;
@@ -1291,7 +1239,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       }
     };
 
-    self.refresh = function (soft, force, position, pinOffset) {
+    self.refresh = (soft, force, position, pinOffset) => {
       // position is typically only defined if it's coming from setPositions() - it's a way to skip the normal parsing. pinOffset is also only from setPositions() and is mostly related to fancy stuff we need to do in ScrollSmoother with effects
       if ((_refreshing || !self.enabled) && !force) {
         return;
@@ -1318,9 +1266,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
         animation.revert({
           kill: false
         }).invalidate();
-        animation.getChildren && animation.getChildren(true, true, false).forEach(function (t) {
-          return t.vars.immediateRender && t.render(0, true, true);
-        }); // any from() or fromTo() tweens inside a timeline should render immediately (well, unless they have immediateRender: false)
+        animation.getChildren && animation.getChildren(true, true, false).forEach((t) => t.vars.immediateRender && t.render(0, true, true)); // any from() or fromTo() tweens inside a timeline should render immediately (well, unless they have immediateRender: false)
       }
 
       self.isReverted || self.revert(true, true);
@@ -1485,7 +1431,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
 
           if (pinnedContainer) {
             // in ScrollTrigger.refresh(), we need to re-evaluate the pinContainer's size because this pinSpacing may stretch it out, but we can't just add the exact distance because depending on layout, it may not push things down or it may only do so partially.
-            _triggers.forEach(function (t) {
+            _triggers.forEach((t) => {
               if (t.pin === pinnedContainer && t.vars.pinSpacing !== false) {
                 t._subPinOffset = true;
               }
@@ -1552,9 +1498,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
         }
       }
 
-      revertedPins && revertedPins.forEach(function (t) {
-        return t.revert(false, true);
-      });
+      revertedPins && revertedPins.forEach((t) => t.revert(false, true));
       self.start = start;
       self.end = end;
       scroll1 = scroll2 = _refreshingAll ? prevScroll : scrollFunc(); // reset velocity
@@ -1611,11 +1555,9 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       }
     };
 
-    self.getVelocity = function () {
-      return (scrollFunc() - scroll2) / (_getTime() - _time2) * 1000 || 0;
-    };
+    self.getVelocity = () => (scrollFunc() - scroll2) / (_getTime() - _time2) * 1000 || 0;
 
-    self.endAnimation = function () {
+    self.endAnimation = () => {
       _endAnimation(self.callbackAnimation);
 
       if (animation) {
@@ -1623,22 +1565,16 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       }
     };
 
-    self.labelToScroll = function (label) {
-      return animation && animation.labels && (start || self.refresh() || start) + animation.labels[label] / animation.duration() * change || 0;
-    };
+    self.labelToScroll = (label) => animation && animation.labels && (start || self.refresh() || start) + animation.labels[label] / animation.duration() * change || 0;
 
-    self.getTrailing = function (name) {
+    self.getTrailing = (name) => {
       var i = _triggers.indexOf(self),
           a = self.direction > 0 ? _triggers.slice(0, i).reverse() : _triggers.slice(i + 1);
 
-      return (_isString(name) ? a.filter(function (t) {
-        return t.vars.preventOverlaps === name;
-      }) : a).filter(function (t) {
-        return self.direction > 0 ? t.end <= start : t.start >= end;
-      });
+      return (_isString(name) ? a.filter((t) => t.vars.preventOverlaps === name) : a).filter((t) => self.direction > 0 ? t.end <= start : t.start >= end);
     };
 
-    self.update = function (reset, recordVelocity, forceFake) {
+    self.update = (reset, recordVelocity, forceFake) => {
       if (containerAnimation && !forceFake && !reset) {
         return;
       }
@@ -1694,9 +1630,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
           }
         }
 
-        preventOverlaps && (toggled || isTakingAction) && (isTakingAction || scrub || !animation) && (_isFunction(preventOverlaps) ? preventOverlaps(self) : self.getTrailing(preventOverlaps).forEach(function (t) {
-          return t.endAnimation();
-        }));
+        preventOverlaps && (toggled || isTakingAction) && (isTakingAction || scrub || !animation) && (_isFunction(preventOverlaps) ? preventOverlaps(self) : self.getTrailing(preventOverlaps).forEach((t) => t.endAnimation()));
 
         if (!isToggle) {
           if (scrubTween && !_refreshing && !_startup) {
@@ -1740,9 +1674,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
         }
 
         snap && !tweenTo.tween && !_refreshing && !_startup && snapDelayedCall.restart(true);
-        toggleClass && (toggled || once && clipped && (clipped < 1 || !_limitCallbacks)) && _toArray(toggleClass.targets).forEach(function (el) {
-          return el.classList[isActive || once ? "add" : "remove"](toggleClass.className);
-        }); // classes could affect positioning, so do it even if reset or refreshing is true.
+        toggleClass && (toggled || once && clipped && (clipped < 1 || !_limitCallbacks)) && _toArray(toggleClass.targets).forEach((el) => el.classList[isActive || once ? "add" : "remove"](toggleClass.className)); // classes could affect positioning, so do it even if reset or refreshing is true.
 
         onUpdate && !isToggle && !reset && onUpdate(self);
 
@@ -1796,7 +1728,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       caMarkerSetter && caMarkerSetter(-scroll / containerAnimation.duration() * (containerAnimation._caScrollDist || 0));
     };
 
-    self.enable = function (reset, refresh) {
+    self.enable = (reset, refresh) => {
       if (!self.enabled) {
         self.enabled = true;
 
@@ -1814,11 +1746,9 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       }
     };
 
-    self.getTween = function (snap) {
-      return snap && tweenTo ? tweenTo.tween : scrubTween;
-    };
+    self.getTween = (snap) => snap && tweenTo ? tweenTo.tween : scrubTween;
 
-    self.setPositions = function (newStart, newEnd, keepClamp, pinOffset) {
+    self.setPositions = (newStart, newEnd, keepClamp, pinOffset) => {
       // doesn't persist after refresh()! Intended to be a way to override values that were set during refresh(), like you could set it in onRefresh()
       if (containerAnimation) {
         // convert ratios into scroll positions. Remember, start/end values on ScrollTriggers that have a containerAnimation refer to the time (in seconds), NOT scroll positions.
@@ -1837,7 +1767,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       self.update();
     };
 
-    self.adjustPinSpacing = function (amount) {
+    self.adjustPinSpacing = (amount) => {
       if (spacerState && amount) {
         var i = spacerState.indexOf(direction.d) + 1;
         spacerState[i] = parseFloat(spacerState[i]) + amount + _px;
@@ -1847,7 +1777,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       }
     };
 
-    self.disable = function (reset, allowAnimation) {
+    self.disable = (reset, allowAnimation) => {
       if (self.enabled) {
         reset !== false && self.revert(true, true);
         self.enabled = self.isActive = false;
@@ -1877,7 +1807,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       }
     };
 
-    self.kill = function (revert, allowAnimation) {
+    self.kill = (revert, allowAnimation) => {
       self.disable(revert, allowAnimation);
       scrubTween && !allowAnimation && scrubTween.kill();
       id && delete _ids[id];
@@ -1890,9 +1820,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
 
       i = 0;
 
-      _triggers.forEach(function (t) {
-        return t.scroller === self.scroller && (i = 1);
-      });
+      _triggers.forEach((t) => t.scroller === self.scroller && (i = 1));
 
       i || _refreshingAll || (self.scroll.rec = 0);
 
@@ -1904,18 +1832,14 @@ export var ScrollTrigger = /*#__PURE__*/function () {
         allowAnimation || animation.kill();
       }
 
-      markerStart && [markerStart, markerEnd, markerStartTrigger, markerEndTrigger].forEach(function (m) {
-        return m.parentNode && m.parentNode.removeChild(m);
-      });
+      markerStart && [markerStart, markerEnd, markerStartTrigger, markerEndTrigger].forEach((m) => m.parentNode && m.parentNode.removeChild(m));
       _primary === self && (_primary = 0);
 
       if (pin) {
         pinCache && (pinCache.uncache = 1);
         i = 0;
 
-        _triggers.forEach(function (t) {
-          return t.pin === pin && i++;
-        });
+        _triggers.forEach((t) => t.pin === pin && i++);
 
         i || (pinCache.spacer = 0); // if there aren't any more ScrollTriggers with the same pin, remove the spacer, otherwise it could be contaminated with old/stale values if the user re-creates a ScrollTrigger for the same element.
       }
@@ -1932,7 +1856,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
       // if the animation is a timeline, it may not have been populated yet, so it wouldn't render at the proper place on the first refresh(), thus we should schedule one for the next tick. If "change" is defined, we know it must be re-enabling, thus we can refresh() right away.
       var updateFunc = self.update; // some browsers may fire a scroll event BEFORE a tick elapses and/or the DOMContentLoaded fires. So there's a chance update() will be called BEFORE a refresh() has happened on a Timeline-attached ScrollTrigger which means the start/end won't be calculated yet. We don't want to add conditional logic inside the update() method (like check to see if end is defined and if not, force a refresh()) because that's a function that gets hit a LOT (performance). So we swap out the real update() method for this one that'll re-attach it the first time it gets called and of course forces a refresh().
 
-      self.update = function () {
+      self.update = () => {
         self.update = updateFunc;
         _scrollers.cache++; // otherwise a cached scroll position may get used in the refresh() in a very rare scenario, like if ScrollTriggers are created inside a DOMContentLoaded event and the queued requestAnimationFrame() fires beforehand. See https://gsap.com/community/forums/topic/41267-scrolltrigger-breaks-on-refresh-when-using-domcontentloaded/
 
@@ -1972,9 +1896,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
   ScrollTrigger.disable = function disable(reset, kill) {
     _enabled = 0;
 
-    _triggers.forEach(function (trigger) {
-      return trigger[kill ? "kill" : "disable"](reset);
-    });
+    _triggers.forEach((trigger) => trigger[kill ? "kill" : "disable"](reset));
 
     _removeListener(_win, "wheel", _onScroll);
 
@@ -2040,7 +1962,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
         _root = [_win, _doc, _docEl, _body];
 
         if (gsap.matchMedia) {
-          ScrollTrigger.matchMedia = function (vars) {
+          ScrollTrigger.matchMedia = (vars) => {
             var mm = gsap.matchMedia(),
                 p;
 
@@ -2051,18 +1973,14 @@ export var ScrollTrigger = /*#__PURE__*/function () {
             return mm;
           };
 
-          gsap.addEventListener("matchMediaInit", function () {
-            return _revertAll();
-          });
-          gsap.addEventListener("matchMediaRevert", function () {
-            return _revertRecorded();
-          });
-          gsap.addEventListener("matchMedia", function () {
+          gsap.addEventListener("matchMediaInit", () => _revertAll());
+          gsap.addEventListener("matchMediaRevert", () => _revertRecorded());
+          gsap.addEventListener("matchMedia", () => {
             _refreshAll(0, 1);
 
             _dispatch("matchMedia");
           });
-          gsap.matchMedia().add("(orientation: portrait)", function () {
+          gsap.matchMedia().add("(orientation: portrait)", () => {
             // when orientation changes, we should take new base measurements for the ignoreMobileResize feature.
             _setBaseDimensions();
 
@@ -2108,9 +2026,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
 
 
         _syncInterval = setInterval(_sync, 250);
-        gsap.delayedCall(0.5, function () {
-          return _startup = 0;
-        });
+        gsap.delayedCall(0.5, () => _startup = 0);
 
         _addListener(_doc, "touchcancel", _passThrough); // some older Android devices intermittently stop dispatching "touchmove" events if we don't listen for "touchcancel" on the document.
 
@@ -2128,7 +2044,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
 
         _coreInitted = _getTime();
         _resizeDelay = gsap.delayedCall(0.2, _refreshAll).pause();
-        _autoRefresh = [_doc, "visibilitychange", function () {
+        _autoRefresh = [_doc, "visibilitychange", () => {
           var w = _win.innerWidth,
               h = _win.innerHeight;
 
@@ -2142,9 +2058,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
 
         _iterateAutoRefresh(_addListener);
 
-        _triggers.forEach(function (trigger) {
-          return trigger.enable(0, 1);
-        });
+        _triggers.forEach((trigger) => trigger.enable(0, 1));
 
         for (i = 0; i < _scrollers.length; i += 3) {
           _wheelListener(_removeListener, _scrollers[i], _scrollers[i + 1]);
@@ -2182,9 +2096,7 @@ export var ScrollTrigger = /*#__PURE__*/function () {
   };
 
   ScrollTrigger.clearMatchMedia = function clearMatchMedia(query) {
-    _triggers.forEach(function (t) {
-      return t._ctx && t._ctx.query === query && t._ctx.kill(true, true);
-    });
+    _triggers.forEach((t) => t._ctx && t._ctx.query === query && t._ctx.kill(true, true));
   };
 
   ScrollTrigger.isInViewport = function isInViewport(element, ratio, horizontal) {
@@ -2202,25 +2114,20 @@ export var ScrollTrigger = /*#__PURE__*/function () {
   };
 
   ScrollTrigger.killAll = function killAll(allowListeners) {
-    _triggers.slice(0).forEach(function (t) {
-      return t.vars.id !== "ScrollSmoother" && t.kill();
-    });
+    _triggers.slice(0).forEach((t) => t.vars.id !== "ScrollSmoother" && t.kill());
 
     if (allowListeners !== true) {
       var listeners = _listeners.killAll || [];
       _listeners = {};
-      listeners.forEach(function (f) {
-        return f();
-      });
+      listeners.forEach((f) => f());
     }
   };
 
   return ScrollTrigger;
-}();
+})();
 ScrollTrigger.version = "3.13.0";
 
-ScrollTrigger.saveStyles = function (targets) {
-  return targets ? _toArray(targets).forEach(function (target) {
+ScrollTrigger.saveStyles = (targets) => targets ? _toArray(targets).forEach((target) => {
     // saved styles are recorded in a consecutive alternating Array, like [element, cssText, transform attribute, cache, matchMedia, ...]
     if (target && target.style) {
       var i = _savedStyles.indexOf(target);
@@ -2230,63 +2137,42 @@ ScrollTrigger.saveStyles = function (targets) {
       _savedStyles.push(target, target.style.cssText, target.getBBox && target.getAttribute("transform"), gsap.core.getCache(target), _context());
     }
   }) : _savedStyles;
-};
 
-ScrollTrigger.revert = function (soft, media) {
-  return _revertAll(!soft, media);
-};
+ScrollTrigger.revert = (soft, media) => _revertAll(!soft, media);
 
-ScrollTrigger.create = function (vars, animation) {
-  return new ScrollTrigger(vars, animation);
-};
+ScrollTrigger.create = (vars, animation) => new ScrollTrigger(vars, animation);
 
-ScrollTrigger.refresh = function (safe) {
-  return safe ? _onResize(true) : (_coreInitted || ScrollTrigger.register()) && _refreshAll(true);
-};
+ScrollTrigger.refresh = (safe) => safe ? _onResize(true) : (_coreInitted || ScrollTrigger.register()) && _refreshAll(true);
 
-ScrollTrigger.update = function (force) {
-  return ++_scrollers.cache && _updateAll(force === true ? 2 : 0);
-};
+ScrollTrigger.update = (force) => ++_scrollers.cache && _updateAll(force === true ? 2 : 0);
 
 ScrollTrigger.clearScrollMemory = _clearScrollMemory;
 
-ScrollTrigger.maxScroll = function (element, horizontal) {
-  return _maxScroll(element, horizontal ? _horizontal : _vertical);
-};
+ScrollTrigger.maxScroll = (element, horizontal) => _maxScroll(element, horizontal ? _horizontal : _vertical);
 
-ScrollTrigger.getScrollFunc = function (element, horizontal) {
-  return _getScrollFunc(_getTarget(element), horizontal ? _horizontal : _vertical);
-};
+ScrollTrigger.getScrollFunc = (element, horizontal) => _getScrollFunc(_getTarget(element), horizontal ? _horizontal : _vertical);
 
-ScrollTrigger.getById = function (id) {
-  return _ids[id];
-};
+ScrollTrigger.getById = (id) => _ids[id];
 
-ScrollTrigger.getAll = function () {
-  return _triggers.filter(function (t) {
-    return t.vars.id !== "ScrollSmoother";
-  });
-}; // it's common for people to ScrollTrigger.getAll(t => t.kill()) on page routes, for example, and we don't want it to ruin smooth scrolling by killing the main ScrollSmoother one.
+ScrollTrigger.getAll = () => _triggers.filter((t) => t.vars.id !== "ScrollSmoother"); // it's common for people to ScrollTrigger.getAll(t => t.kill()) on page routes, for example, and we don't want it to ruin smooth scrolling by killing the main ScrollSmoother one.
 
 
-ScrollTrigger.isScrolling = function () {
-  return !!_lastScrollTime;
-};
+ScrollTrigger.isScrolling = () => !!_lastScrollTime;
 
 ScrollTrigger.snapDirectional = _snapDirectional;
 
-ScrollTrigger.addEventListener = function (type, callback) {
+ScrollTrigger.addEventListener = (type, callback) => {
   var a = _listeners[type] || (_listeners[type] = []);
   ~a.indexOf(callback) || a.push(callback);
 };
 
-ScrollTrigger.removeEventListener = function (type, callback) {
+ScrollTrigger.removeEventListener = (type, callback) => {
   var a = _listeners[type],
       i = a && a.indexOf(callback);
   i >= 0 && a.splice(i, 1);
 };
 
-ScrollTrigger.batch = function (targets, vars) {
+ScrollTrigger.batch = (targets, vars) => {
   var result = [],
       varsCopy = {},
       interval = vars.interval || 0.016,
@@ -2294,12 +2180,12 @@ ScrollTrigger.batch = function (targets, vars) {
       proxyCallback = function proxyCallback(type, callback) {
     var elements = [],
         triggers = [],
-        delay = gsap.delayedCall(interval, function () {
+        delay = gsap.delayedCall(interval, () => {
       callback(elements, triggers);
       elements = [];
       triggers = [];
     }).pause();
-    return function (self) {
+    return (self) => {
       elements.length || delay.restart(true);
       elements.push(self.trigger);
       triggers.push(self);
@@ -2315,12 +2201,10 @@ ScrollTrigger.batch = function (targets, vars) {
   if (_isFunction(batchMax)) {
     batchMax = batchMax();
 
-    _addListener(ScrollTrigger, "refresh", function () {
-      return batchMax = vars.batchMax();
-    });
+    _addListener(ScrollTrigger, "refresh", () => batchMax = vars.batchMax());
   }
 
-  _toArray(targets).forEach(function (target) {
+  _toArray(targets).forEach((target) => {
     var config = {};
 
     for (p in varsCopy) {
@@ -2430,11 +2314,7 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
       scale = 1,
       initialScale = (Observer.isTouch && _win.visualViewport ? _win.visualViewport.scale * _win.visualViewport.width : _win.outerWidth) / _win.innerWidth,
       wheelRefresh = 0,
-      resolveMomentumDuration = _isFunction(momentum) ? function () {
-    return momentum(self);
-  } : function () {
-    return momentum || 2.8;
-  },
+      resolveMomentumDuration = _isFunction(momentum) ? (() => momentum(self)) : (() => momentum || 2.8),
       lastRefreshID,
       skipTouchMove,
       inputObserver = _inputObserver(target, vars.type, true, allowNestedScroll),
@@ -2496,11 +2376,9 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     y: "+=0"
   }); // to ensure there's a cache (element._gsap)
 
-  vars.ignoreCheck = function (e) {
-    return _fixIOSBug && e.type === "touchmove" && ignoreDrag(e) || scale > 1.05 && e.type !== "touchstart" || self.isGesturing || e.touches && e.touches.length > 1;
-  };
+  vars.ignoreCheck = (e) => _fixIOSBug && e.type === "touchmove" && ignoreDrag(e) || scale > 1.05 && e.type !== "touchstart" || self.isGesturing || e.touches && e.touches.length > 1;
 
-  vars.onPress = function () {
+  vars.onPress = () => {
     skipTouchMove = false;
     var prevScale = scale;
     scale = _round((_win.visualViewport && _win.visualViewport.scale || 1) / initialScale);
@@ -2512,7 +2390,7 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     lastRefreshID = _refreshID;
   };
 
-  vars.onRelease = vars.onGestureStart = function (self, wasDragging) {
+  vars.onRelease = vars.onGestureStart = (self, wasDragging) => {
     scrollFuncY.offset && removeContentOffset();
 
     if (!wasDragging) {
@@ -2552,7 +2430,7 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     onRelease && onRelease(self);
   };
 
-  vars.onWheel = function () {
+  vars.onWheel = () => {
     tween._ts && tween.pause();
 
     if (_getTime() - wheelRefresh > 1000) {
@@ -2562,7 +2440,7 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     }
   };
 
-  vars.onChange = function (self, dx, dy, xArray, yArray) {
+  vars.onChange = (self, dx, dy, xArray, yArray) => {
     _refreshID !== lastRefreshID && updateClamps();
     dx && normalizeScrollX && scrollFuncX(scrollClampX(xArray[2] === dx ? startScrollX + (self.startX - self.x) : scrollFuncX() + dx - xArray[1])); // for more precision, we track pointer/touch movement from the start, otherwise it'll drift.
 
@@ -2578,7 +2456,7 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     (dy || dx) && _updateAll();
   };
 
-  vars.onEnable = function () {
+  vars.onEnable = () => {
     _allowNativePanning(target, normalizeScrollX ? false : "x");
 
     ScrollTrigger.addEventListener("refresh", onResize);
@@ -2593,7 +2471,7 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     inputObserver.enable();
   };
 
-  vars.onDisable = function () {
+  vars.onDisable = () => {
     _allowNativePanning(target, true);
 
     _removeListener(_win, "resize", onResize);
@@ -2618,9 +2496,7 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
     scrollX: normalizeScrollX ? "+=0.1" : "+=0",
     scrollY: "+=0.1",
     modifiers: {
-      scrollY: _interruptionTracker(scrollFuncY, scrollFuncY(), function () {
-        return tween.pause();
-      })
+      scrollY: _interruptionTracker(scrollFuncY, scrollFuncY(), () => tween.pause())
     },
     onUpdate: _updateAll,
     onComplete: onStopDelayedCall.vars.onComplete
@@ -2629,25 +2505,19 @@ _inputObserver = function _inputObserver(target, type, inputs, nested) {
   return self;
 };
 
-ScrollTrigger.sort = function (func) {
+ScrollTrigger.sort = (func) => {
   if (_isFunction(func)) {
     return _triggers.sort(func);
   }
 
   var scroll = _win.pageYOffset || 0;
-  ScrollTrigger.getAll().forEach(function (t) {
-    return t._sortY = t.trigger ? scroll + t.trigger.getBoundingClientRect().top : t.start + _win.innerHeight;
-  });
-  return _triggers.sort(func || function (a, b) {
-    return (a.vars.refreshPriority || 0) * -1e6 + (a.vars.containerAnimation ? 1e6 : a._sortY) - ((b.vars.containerAnimation ? 1e6 : b._sortY) + (b.vars.refreshPriority || 0) * -1e6);
-  }); // anything with a containerAnimation should refresh last.
+  ScrollTrigger.getAll().forEach((t) => t._sortY = t.trigger ? scroll + t.trigger.getBoundingClientRect().top : t.start + _win.innerHeight);
+  return _triggers.sort(func || ((a, b) => (a.vars.refreshPriority || 0) * -1e6 + (a.vars.containerAnimation ? 1e6 : a._sortY) - ((b.vars.containerAnimation ? 1e6 : b._sortY) + (b.vars.refreshPriority || 0) * -1e6))); // anything with a containerAnimation should refresh last.
 };
 
-ScrollTrigger.observe = function (vars) {
-  return new Observer(vars);
-};
+ScrollTrigger.observe = (vars) => new Observer(vars);
 
-ScrollTrigger.normalizeScroll = function (vars) {
+ScrollTrigger.normalizeScroll = (vars) => {
   if (typeof vars === "undefined") {
     return _normalizer;
   }

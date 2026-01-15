@@ -29,7 +29,7 @@ var _win,
     _bigNum = 1e8,
     _capsExp = /([A-Z])/g,
     _horizontalExp = /(left|right|width|margin|padding|x)/i,
-    _complexExp = /[\s,\(]\S/,
+    _complexExp = /[\s,(]\S/,
     _propertyAliases = {
   autoAlpha: "opacity,visibility",
   scale: "scaleX,scaleY",
@@ -80,7 +80,6 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
     _transformProp = "transform",
     _transformOriginProp = _transformProp + "Origin",
     _saveStyle = function _saveStyle(property, isNotCSS) {
-  var _this = this;
 
   var target = this.target,
       style = target.style,
@@ -91,15 +90,11 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
 
     if (property !== "transform") {
       property = _propertyAliases[property] || property;
-      ~property.indexOf(",") ? property.split(",").forEach(function (a) {
-        return _this.tfm[a] = _get(target, a);
-      }) : this.tfm[property] = cache.x ? cache[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
+      ~property.indexOf(",") ? property.split(",").forEach((a) => this.tfm[a] = _get(target, a)) : this.tfm[property] = cache.x ? cache[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
 
       property === _transformOriginProp && (this.tfm.zOrigin = cache.zOrigin);
     } else {
-      return _propertyAliases.transform.split(",").forEach(function (p) {
-        return _saveStyle.call(_this, p, isNotCSS);
-      });
+      return _propertyAliases.transform.split(",").forEach((p) => _saveStyle.call(this, p, isNotCSS));
     }
 
     if (this.props.indexOf(_transformProp) >= 0) {
@@ -179,9 +174,7 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
   };
   target._gsap || gsap.core.getCache(target); // just make sure there's a _gsap cache defined because we read from it in _saveStyle() and it's more efficient to just check it here once.
 
-  properties && target.style && target.nodeType && properties.split(",").forEach(function (p) {
-    return saver.save(p);
-  }); // make sure it's a DOM node too.
+  properties && target.style && target.nodeType && properties.split(",").forEach((p) => saver.save(p)); // make sure it's a DOM node too.
 
   return saver;
 },
@@ -1289,32 +1282,26 @@ _addPxTranslate = function _addPxTranslate(target, start, value) {
 }; // handle splitting apart padding, margin, borderWidth, and borderRadius into their 4 components. Firefox, for example, won't report borderRadius correctly - it will only do borderTopLeftRadius and the other corners. We also want to handle paddingTop, marginLeft, borderRightWidth, etc.
 
 
-_forEachName("padding,margin,Width,Radius", function (name, index) {
+_forEachName("padding,margin,Width,Radius", (name, index) => {
   var t = "Top",
       r = "Right",
       b = "Bottom",
       l = "Left",
-      props = (index < 3 ? [t, r, b, l] : [t + l, t + r, b + r, b + l]).map(function (side) {
-    return index < 2 ? name + side : "border" + side + name;
-  });
+      props = (index < 3 ? [t, r, b, l] : [t + l, t + r, b + r, b + l]).map((side) => index < 2 ? name + side : "border" + side + name);
 
   _specialProps[index > 1 ? "border" + name : name] = function (plugin, target, property, endValue, tween) {
     var a, vars;
 
     if (arguments.length < 4) {
       // getter, passed target, property, and unit (from _get())
-      a = props.map(function (prop) {
-        return _get(plugin, prop, property);
-      });
+      a = props.map((prop) => _get(plugin, prop, property));
       vars = a.join(" ");
       return vars.split(a[0]).length === 5 ? a[0] : vars;
     }
 
     a = (endValue + "").split(" ");
     vars = {};
-    props.forEach(function (prop, i) {
-      return vars[prop] = a[i] = a[i] || a[(i - 1) / 2 | 0];
-    });
+    props.forEach((prop, i) => vars[prop] = a[i] = a[i] || a[(i - 1) / 2 | 0]);
     plugin.init(target, vars, tween);
   };
 });
@@ -1555,25 +1542,25 @@ export var CSSPlugin = {
 gsap.utils.checkPrefix = _checkPropPrefix;
 gsap.core.getStyleSaver = _getStyleSaver;
 
-(function (positionAndScale, rotation, others, aliases) {
-  var all = _forEachName(positionAndScale + "," + rotation + "," + others, function (name) {
+((positionAndScale, rotation, others, aliases) => {
+  var all = _forEachName(positionAndScale + "," + rotation + "," + others, (name) => {
     _transformProps[name] = 1;
   });
 
-  _forEachName(rotation, function (name) {
+  _forEachName(rotation, (name) => {
     _config.units[name] = "deg";
     _rotationalProperties[name] = 1;
   });
 
   _propertyAliases[all[13]] = positionAndScale + "," + rotation;
 
-  _forEachName(aliases, function (name) {
+  _forEachName(aliases, (name) => {
     var split = name.split(":");
     _propertyAliases[split[1]] = all[split[0]];
   });
 })("x,y,z,scale,scaleX,scaleY,xPercent,yPercent", "rotation,rotationX,rotationY,skewX,skewY", "transform,transformOrigin,svgOrigin,force3D,smoothOrigin,transformPerspective", "0:translateX,1:translateY,2:translateZ,8:rotate,8:rotationZ,8:rotateZ,9:rotateX,10:rotateY");
 
-_forEachName("x,y,z,top,right,bottom,left,width,height,fontSize,padding,margin,perspective", function (name) {
+_forEachName("x,y,z,top,right,bottom,left,width,height,fontSize,padding,margin,perspective", (name) => {
   _config.units[name] = "px";
 });
 

@@ -332,7 +332,7 @@ export var EaselPlugin = {
   register: _initCore
 };
 
-EaselPlugin.registerCreateJS = function (createjs) {
+EaselPlugin.registerCreateJS = (createjs) => {
   _createJS = createjs;
 };
 

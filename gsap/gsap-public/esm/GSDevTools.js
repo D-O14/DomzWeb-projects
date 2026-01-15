@@ -54,7 +54,7 @@ _svgNS = "http://www.w3.org/2000/svg",
     _idSeed = 0,
     //we assign an ID to each GSDevTools instance so that we can segregate the sessionStorage data accordingly.
 _lookup = {},
-    _supportsStorage = function () {
+    _supportsStorage = (() => {
   try {
     sessionStorage.setItem("gsTest", "1");
     sessionStorage.removeItem("gsTest");
@@ -62,7 +62,7 @@ _lookup = {},
   } catch (e) {
     return false;
   }
-}(),
+})(),
     _parseAnimation = function _parseAnimation(animationOrId) {
   return animationOrId instanceof Animation ? animationOrId : animationOrId ? gsap.getById(animationOrId) : null;
 },
@@ -413,7 +413,7 @@ _merge = function _merge() {
       _docEl = _doc.documentElement;
       _win = window;
 
-      _context = gsap.core.context || function () {};
+      _context = gsap.core.context || (() => {});
 
       gsap.registerPlugin(Draggable);
       _globalTimeline = gsap.globalTimeline;
@@ -452,16 +452,14 @@ _merge = function _merge() {
         parent: _independentRoot
       }, 0); // so that auto-overwriting works. Initially we transferred the tweens to the _recordedRoot.
 
-      _globalTimeline.killTweensOf = function (targets, props, onlyActive) {
+      _globalTimeline.killTweensOf = (targets, props, onlyActive) => {
         _recordedRoot.killTweensOf(targets, props, onlyActive);
 
         _recordedRoot.killTweensOf.call(_globalTimeline, targets, props, onlyActive);
       };
 
       _independentRoot._start = gsap.ticker.time;
-      gsap.ticker.add(function (time) {
-        return _independentRoot.render(time - _independentRoot._start);
-      }); // before 3.7.0, the listener below was necessary (in place of the line above)
+      gsap.ticker.add((time) => _independentRoot.render(time - _independentRoot._start)); // before 3.7.0, the listener below was necessary (in place of the line above)
       // gsap.ticker.add(time => {
       // 	_independentRoot._initted || _independentRoot.render(0.001, true); // to prevent callbacks from being fired on the first tick, like onComplete would fire immediately and then again at the correct time.
       // 	_independentRoot.render(time - _independentRoot._start);
@@ -485,12 +483,10 @@ _merge = function _merge() {
       }; //in case GSDevTools.create() is called before anything is actually on the global timeline, we've gotta update it or else the duration will be 0 and it'll be stuck.
 
 
-      _delayedCall(0.01, function () {
-        return _rootInstance ? _rootInstance.update() : _merge();
-      }); //initially we record everything into the _recordedRoot Timeline because developers might call GSDevTools.create() AFTER some of their code executes, but after 2 seconds if there aren't any GSDevTool instances that have globalSync enabled, we should dump all the stuff from _recordedRoot into the global timeline to improve performance and avoid issues where _recordedRoot is paused and reaches its end and wants to stop the playhead.
+      _delayedCall(0.01, () => _rootInstance ? _rootInstance.update() : _merge()); //initially we record everything into the _recordedRoot Timeline because developers might call GSDevTools.create() AFTER some of their code executes, but after 2 seconds if there aren't any GSDevTool instances that have globalSync enabled, we should dump all the stuff from _recordedRoot into the global timeline to improve performance and avoid issues where _recordedRoot is paused and reaches its end and wants to stop the playhead.
 
 
-      _delayedCall(2, function () {
+      _delayedCall(2, () => {
         var t, next, offset;
 
         if (!_rootInstance) {
@@ -513,7 +509,7 @@ _merge = function _merge() {
         }
 
         if (GSDevTools.globalRecordingTime > 2) {
-          _delayedCall(GSDevTools.globalRecordingTime - 2, function () {
+          _delayedCall(GSDevTools.globalRecordingTime - 2, () => {
             _rootInstance && _rootInstance.update();
             _recording = false;
             _globalTimeline.autoRemoveChildren = true;
@@ -1094,7 +1090,7 @@ _merge = function _merge() {
         //jump forward and then back in order to make sure the start/end values are recorded internally right away and don't drift outside this tween.
         _rootTween.progress(1, true).pause(0, true);
       } else {
-        _delayedCall(0.01, function () {
+        _delayedCall(0.01, () => {
           _rootTween.resume().progress(inProgress / 100);
 
           paused && play();
@@ -1230,9 +1226,7 @@ _merge = function _merge() {
         linkedAnimation.pause();
       }
 
-      _delayedCall(0.01, function () {
-        return linkedAnimation.resume();
-      });
+      _delayedCall(0.01, () => linkedAnimation.resume());
     }
 
     timeScaleLabel.innerHTML = ts + "x";
@@ -1455,7 +1449,7 @@ _merge = function _merge() {
 
   gsap.ticker.add(updateProgress);
 
-  this.update = function (forceMerge) {
+  this.update = (forceMerge) => {
     if (_rootInstance === _self) {
       if (!_rootTween.paused() || forceMerge) {
         _merge();
@@ -1465,7 +1459,7 @@ _merge = function _merge() {
     }
   };
 
-  this.kill = this.revert = function () {
+  this.kill = this.revert = () => {
     _removeListener(list, "change", onChangeAnimation);
 
     _removeListener(list, "mousedown", updateList);
@@ -1548,11 +1542,9 @@ _merge = function _merge() {
 GSDevTools.version = "3.13.0";
 GSDevTools.globalRecordingTime = 2;
 
-GSDevTools.getById = function (id) {
-  return id ? _lookup[id] : _rootInstance;
-};
+GSDevTools.getById = (id) => id ? _lookup[id] : _rootInstance;
 
-GSDevTools.getByAnimation = function (animation) {
+GSDevTools.getByAnimation = (animation) => {
   if (_isString(animation)) {
     animation = gsap.getById(animation);
   }
@@ -1564,9 +1556,7 @@ GSDevTools.getByAnimation = function (animation) {
   }
 };
 
-GSDevTools.create = function (vars) {
-  return new GSDevTools(vars);
-};
+GSDevTools.create = (vars) => new GSDevTools(vars);
 
 GSDevTools.register = _initCore;
 _getGSAP() && gsap.registerPlugin(GSDevTools);

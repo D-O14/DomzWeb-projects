@@ -86,7 +86,7 @@ _segmentToRawPath = function _segmentToRawPath(plugin, segment, target, x, y, sl
     _emptyFunc = function _emptyFunc(v) {
   return v;
 },
-    _numExp = /[-+\.]*\d+\.?(?:e-|e\+)?\d*/g,
+    _numExp = /[-+.]*\d+\.?(?:e-|e\+)?\d*/g,
     _originToPoint = function _originToPoint(element, origin, parentMatrix) {
   // origin is an array of normalized values (0-1) in relation to the width/height, so [0.5, 0.5] would be the center. It can also be "auto" in which case it will be the top left unless it's a <path>, when it will start at the beginning of the path itself.
   var m = getGlobalMatrix(element),
@@ -210,9 +210,7 @@ _segmentToRawPath = function _segmentToRawPath(plugin, segment, target, x, y, sl
   plugin._props.push(prop);
 },
     _sliceModifier = function _sliceModifier(start, end) {
-  return function (rawPath) {
-    return start || end !== 1 ? sliceRawPath(rawPath, start, end) : rawPath;
-  };
+  return (rawPath) => start || end !== 1 ? sliceRawPath(rawPath, start, end) : rawPath;
 };
 
 export var MotionPathPlugin = {
@@ -224,7 +222,7 @@ export var MotionPathPlugin = {
     _toArray = gsap.utils.toArray;
     _getStyleSaver = gsap.core.getStyleSaver;
 
-    _reverting = gsap.core.reverting || function () {};
+    _reverting = gsap.core.reverting || (() => {});
 
     PropTween = propTween;
   },
@@ -339,9 +337,7 @@ export var MotionPathPlugin = {
   getPositionOnPath: getPositionOnPath,
   cacheRawPathMeasurements: cacheRawPathMeasurements,
   convertToPath: function convertToPath(targets, swap) {
-    return _toArray(targets).map(function (target) {
-      return _convertToPath(target, swap !== false);
-    });
+    return _toArray(targets).map((target) => _convertToPath(target, swap !== false));
   },
   convertCoordinates: function convertCoordinates(fromElement, toElement, point) {
     var m = getGlobalMatrix(toElement, true, true).multiply(getGlobalMatrix(fromElement));

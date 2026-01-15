@@ -1,31 +1,29 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-body{
-    background-color: black;
+body {
+	background-color: black;
 }
 
-
-.block{
-    animation: scrolling linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 50%;
+.block {
+	animation: scrolling linear;
+	animation-timeline: view();
+	animation-range: entry 0% cover 50%;
 }
 
 @keyframes scrolling {
-    from{
-        opacity: 0;
-        transform: translateX(-150px);
-    }
-    to{
-        opacity: 1;
-        scale: 1;
-    }
+	from {
+		opacity: 0;
+		transform: translateX(-150px);
+	}
+	to {
+		opacity: 1;
+		scale: 1;
+	}
 }
-
 
 /*.box{
     height: 200px;

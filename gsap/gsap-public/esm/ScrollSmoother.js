@@ -82,7 +82,7 @@ _round = function _round(value) {
   return wrapper;
 };
 
-export var ScrollSmoother = /*#__PURE__*/function () {
+export var ScrollSmoother = /*#__PURE__*/(() => {
   function ScrollSmoother(vars) {
     var _this = this;
 
@@ -179,7 +179,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
 
       return -currentY;
     },
-        resizeObserver = typeof ResizeObserver !== "undefined" && vars.autoResize !== false && new ResizeObserver(function () {
+        resizeObserver = typeof ResizeObserver !== "undefined" && vars.autoResize !== false && new ResizeObserver(() => {
       if (!ScrollTrigger.isRefreshing) {
         var max = _maxScroll(wrapper) * speed;
         max < -currentY && scrollTop(max); // if the user scrolled down to the bottom, for example, and then the page resizes smaller, we should adjust things accordingly right away so that the scroll position isn't past the very end.
@@ -212,7 +212,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
           pins = st.pins || [],
           pinOffset = pins.offset || 0,
           progressOffset = st._startClamp && st.start <= 0 || st.pins && st.pins.offset ? 0 : st._endClamp && st.end === _maxScroll() ? 1 : 0.5;
-      pins.forEach(function (p) {
+      pins.forEach((p) => {
         // remove any pinning space/distance
         change -= p.distance;
 
@@ -285,9 +285,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       }
     },
         adjustParallaxPosition = function adjustParallaxPosition(triggers, createdAfterEffectWasApplied) {
-      effects.forEach(function (st) {
-        return adjustEffectRelatedTriggers(st, triggers, createdAfterEffectWasApplied);
-      });
+      effects.forEach((st) => adjustEffectRelatedTriggers(st, triggers, createdAfterEffectWasApplied));
     },
         onRefresh = function onRefresh() {
       _docEl = _doc.documentElement; // some frameworks like Astro may cache the <body> and replace it during routing, so we'll just re-record the _docEl and _body for safety (otherwise, the markers may not get added properly).
@@ -298,12 +296,12 @@ export var ScrollSmoother = /*#__PURE__*/function () {
 
       if (effects) {
         // adjust all the effect start/end positions including any pins!
-        ScrollTrigger.getAll().forEach(function (st) {
+        ScrollTrigger.getAll().forEach((st) => {
           // record the native start/end positions because we'll be messing with them and need a way to have a "source of truth"
           st._startNative = st.start;
           st._endNative = st.end;
         });
-        effects.forEach(function (st) {
+        effects.forEach((st) => {
           var start = st._startClamp || st.start,
               // if it was already clamped, we should base things on the unclamped value and then do the clamping here.
           end = st.autoSpeed ? Math.min(_maxScroll(), st.end) : start + Math.abs((st.end - start) / st.ratio),
@@ -342,18 +340,14 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       return ScrollTrigger.addEventListener("refresh", onRefresh);
     },
         restoreEffects = function restoreEffects() {
-      return effects && effects.forEach(function (st) {
-        return st.vars.onRefresh(st);
-      });
+      return effects && effects.forEach((st) => st.vars.onRefresh(st));
     },
         revertEffects = function revertEffects() {
-      effects && effects.forEach(function (st) {
-        return st.vars.onRefreshInit(st);
-      });
+      effects && effects.forEach((st) => st.vars.onRefreshInit(st));
       return restoreEffects;
     },
         effectValueGetter = function effectValueGetter(name, value, index, el) {
-      return function () {
+      return () => {
         var v = typeof value === "function" ? value(index, el) : value;
         v || v === 0 || (v = el.getAttribute("data-" + effectsPrefix + name) || (name === "speed" ? 1 : 0));
         el.setAttribute("data-" + effectsPrefix + name, v);
@@ -417,9 +411,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
           change = (self.end - self.start - yOffset) * (1 - ratio);
         }
 
-        pins.forEach(function (p) {
-          return change -= p.distance * (1 - ratio);
-        });
+        pins.forEach((p) => change -= p.distance * (1 - ratio));
         self.offset = change || 0.001;
         self.vars.onUpdate(self);
         scrub && scrub.progress(1);
@@ -486,9 +478,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
                 y = startY + extraY + change * ((gsap.utils.clamp(self.start, self.end, scrollY) - self.start - extraY) / (end - self.start) - progressOffset);
               }
 
-              markers.length && !autoSpeed && markers.forEach(function (setter) {
-                return setter(y - extraY);
-              });
+              markers.length && !autoSpeed && markers.forEach((setter) => setter(y - extraY));
               y = _round(y + yOffset);
 
               if (scrub) {
@@ -517,12 +507,10 @@ export var ScrollSmoother = /*#__PURE__*/function () {
 
     addOnRefresh();
     ScrollTrigger.addEventListener("killAll", addOnRefresh);
-    gsap.delayedCall(0.5, function () {
-      return startupPhase = 0;
-    });
+    gsap.delayedCall(0.5, () => startupPhase = 0);
     this.scrollTop = scrollTop;
 
-    this.scrollTo = function (target, smooth, position) {
+    this.scrollTo = (target, smooth, position) => {
       var p = gsap.utils.clamp(0, _maxScroll(), isNaN(target) ? _this.offset(target, position, !!smooth && !paused) : +target);
       !smooth ? scrollTop(p) : paused ? gsap.to(_this, {
         duration: smoothDuration,
@@ -532,7 +520,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       }) : scrollFunc(p);
     };
 
-    this.offset = function (target, position, ignoreSpeed) {
+    this.offset = (target, position, ignoreSpeed) => {
       target = _toArray(target)[0];
       var cssText = target.style.cssText,
           // because if there's an effect applied, we revert(). We need to restore.
@@ -615,7 +603,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       return wrapper;
     };
 
-    this.effects = function (targets, config) {
+    this.effects = (targets, config) => {
       var _effects;
 
       effects || (effects = []);
@@ -625,7 +613,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       }
 
       targets = _toArray(targets);
-      targets.forEach(function (target) {
+      targets.forEach((target) => {
         var i = effects.length;
 
         while (i--) {
@@ -653,7 +641,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       return effectsToAdd;
     };
 
-    this.sections = function (targets, config) {
+    this.sections = (targets, config) => {
       var _sections;
 
       sections || (sections = []);
@@ -662,8 +650,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
         return sections.slice(0);
       }
 
-      var newSections = _toArray(targets).map(function (el) {
-        return ScrollTrigger.create({
+      var newSections = _toArray(targets).map((el) => ScrollTrigger.create({
           trigger: el,
           start: "top 120%",
           end: "bottom -20%",
@@ -671,8 +658,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
             el.style.opacity = self.isActive ? "1" : "0";
             el.style.pointerEvents = self.isActive ? "all" : "none";
           }
-        });
-      });
+        }));
 
       config && config.add ? (_sections = sections).push.apply(_sections, newSections) : sections = newSections.slice(0);
       return newSections;
@@ -681,13 +667,9 @@ export var ScrollSmoother = /*#__PURE__*/function () {
     this.content(vars.content);
     this.wrapper(vars.wrapper);
 
-    this.render = function (y) {
-      return render(y || y === 0 ? y : currentY);
-    };
+    this.render = (y) => render(y || y === 0 ? y : currentY);
 
-    this.getVelocity = function () {
-      return tracker.getVelocity(-currentY);
-    };
+    this.getVelocity = () => tracker.getVelocity(-currentY);
 
     ScrollTrigger.scrollerProxy(wrapper, {
       scrollTop: scrollTop,
@@ -708,12 +690,8 @@ export var ScrollSmoother = /*#__PURE__*/function () {
     ScrollTrigger.defaults({
       scroller: wrapper
     });
-    var existingScrollTriggers = ScrollTrigger.getAll().filter(function (st) {
-      return st.scroller === _win || st.scroller === wrapper;
-    });
-    existingScrollTriggers.forEach(function (st) {
-      return st.revert(true, true);
-    }); // in case it's in an environment like React where child components that have ScrollTriggers instantiate BEFORE the parent that does ScrollSmoother.create(...);
+    var existingScrollTriggers = ScrollTrigger.getAll().filter((st) => st.scroller === _win || st.scroller === wrapper);
+    existingScrollTriggers.forEach((st) => st.revert(true, true)); // in case it's in an environment like React where child components that have ScrollTriggers instantiate BEFORE the parent that does ScrollSmoother.create(...);
 
     mainST = ScrollTrigger.create({
       animation: gsap.fromTo(scroll, {
@@ -756,13 +734,11 @@ export var ScrollSmoother = /*#__PURE__*/function () {
         ScrollSmoother.isRefreshing = true;
 
         if (effects) {
-          var _pins = ScrollTrigger.getAll().filter(function (st) {
-            return !!st.pin;
-          });
+          var _pins = ScrollTrigger.getAll().filter((st) => !!st.pin);
 
-          effects.forEach(function (st) {
+          effects.forEach((st) => {
             if (!st.vars.pinnedContainer) {
-              _pins.forEach(function (pinST) {
+              _pins.forEach((pinST) => {
                 if (pinST.pin.contains(st.trigger)) {
                   var v = st.vars;
                   v.pinnedContainer = pinST.pin;
@@ -845,7 +821,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       refresh: false
     });
     vars.sections && this.sections(vars.sections === true ? "[data-section]" : vars.sections);
-    existingScrollTriggers.forEach(function (st) {
+    existingScrollTriggers.forEach((st) => {
       st.vars.scroller = wrapper;
       st.revert(false, true);
       st.init(st.vars, st.animation);
@@ -890,7 +866,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       return !!paused;
     };
 
-    this.kill = this.revert = function () {
+    this.kill = this.revert = () => {
       _this.paused(false);
 
       killScrub(mainST);
@@ -922,9 +898,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
       _win.removeEventListener("focusin", _onFocusIn);
     };
 
-    this.refresh = function (soft, force) {
-      return mainST.refresh(soft, force);
-    };
+    this.refresh = (soft, force) => mainST.refresh(soft, force);
 
     if (normalizeScroll) {
       this.normalizer = ScrollTrigger.normalizeScroll(normalizeScroll === true ? {
@@ -943,9 +917,7 @@ export var ScrollSmoother = /*#__PURE__*/function () {
     _win.addEventListener("focusin", _onFocusIn);
 
     intervalID = setInterval(updateVelocity, 250);
-    _doc.readyState === "loading" || requestAnimationFrame(function () {
-      return ScrollTrigger.refresh();
-    });
+    _doc.readyState === "loading" || requestAnimationFrame(() => ScrollTrigger.refresh());
   }
 
   ScrollSmoother.register = function register(core) {
@@ -964,15 +936,13 @@ export var ScrollSmoother = /*#__PURE__*/function () {
         _clamp = gsap.utils.clamp;
         _expo = gsap.parseEase("expo");
 
-        _context = gsap.core.context || function () {};
+        _context = gsap.core.context || (() => {});
 
         ScrollTrigger = gsap.core.globals().ScrollTrigger;
         gsap.core.globals("ScrollSmoother", ScrollSmoother); // must register the global manually because in Internet Explorer, functions (classes) don't have a "name" property.
 
         if (_body && ScrollTrigger) {
-          _onResizeDelayedCall = gsap.delayedCall(0.2, function () {
-            return ScrollTrigger.isRefreshing || _mainInstance && _mainInstance.refresh();
-          }).pause();
+          _onResizeDelayedCall = gsap.delayedCall(0.2, () => ScrollTrigger.isRefreshing || _mainInstance && _mainInstance.refresh()).pause();
           _root = [_win, _doc, _docEl, _body];
           _getVelocityProp = ScrollTrigger.core._getVelocityProp;
           _inputObserver = ScrollTrigger.core._inputObserver;
@@ -993,16 +963,12 @@ export var ScrollSmoother = /*#__PURE__*/function () {
   }]);
 
   return ScrollSmoother;
-}();
+})();
 ScrollSmoother.version = "3.13.0";
 
-ScrollSmoother.create = function (vars) {
-  return _mainInstance && vars && _mainInstance.content() === _toArray(vars.content)[0] ? _mainInstance : new ScrollSmoother(vars);
-};
+ScrollSmoother.create = (vars) => _mainInstance && vars && _mainInstance.content() === _toArray(vars.content)[0] ? _mainInstance : new ScrollSmoother(vars);
 
-ScrollSmoother.get = function () {
-  return _mainInstance;
-};
+ScrollSmoother.get = () => _mainInstance;
 
 _getGSAP() && gsap.registerPlugin(ScrollSmoother);
 export { ScrollSmoother as default };

@@ -4,7 +4,6 @@
 
 //title.style.color = 'red'
 
-
 /*const listitem = document.querySelectorAll('li');
 
 
@@ -381,8 +380,6 @@ function revealContent(){
 4. addition & subtraction
 */
 
-
-
 //document.getElementById('myH2').textContent = `Enrolled: ${ student}`
 //document.getElementById('myH3').textContent = `you are ${age} years old`
 
@@ -568,7 +565,7 @@ console.log(`Your total is $${amount - amount * (discount/100)}`)
 
 // switch //
 
-let day = 1;
+const day = 1;
 
 /*switch (day) {
      case 1:
@@ -652,7 +649,6 @@ switch (true) {
 //console.log(username.length)
 //console.log(username)
 
-
 /*if (outcome) {
     console.log('your username cannot have any symbols')
 }
@@ -717,7 +713,7 @@ else{
     console.log("That is Pi");    
 }*/
 
-// while loop 
+// while loop
 
 /*let nameOfUser = "";
 let logged = false
@@ -746,13 +742,10 @@ console.log(`hello ${nameOfUser}`)*/
 // for loops //
 
 for (let i = 1; i <= 20; i++) {
-
-    if (i == 13) {
-        continue
-    }
-    else {
-        //console.log(i)
-    }
+	if (i == 13) {
+	} else {
+		//console.log(i)
+	}
 }
 
 // number guessing game //
@@ -819,15 +812,15 @@ function convert() {
 
 // arrays //
 
-let fruits = ["apple", "orange", "banana"]
-let numOfFruits = fruits.length;
+const fruits = ["apple", "orange", "banana"];
+const numOfFruits = fruits.length;
 
 ///fruits.push("")
 //fruits.pop()
 //fruits.unshift()
 //fruits.shift
 //fruits.join
-fruits[3] = "coconut"
+fruits[3] = "coconut";
 
 //console.log(numOfFruits)
 //console.log(fruits)
@@ -838,9 +831,9 @@ fruits[3] = "coconut"
 
 // spread operator //
 
-let numbers = [1, 2, 3, 4, 5]
-let maxnum = Math.max(...numbers)
-let minnum = Math.min(...numbers)
+const numbers = [1, 2, 3, 4, 5];
+const maxnum = Math.max(...numbers);
+const minnum = Math.min(...numbers);
 
 //console.log(numbers)
 
@@ -884,7 +877,6 @@ const food5 = "ramen"
 
 openFridge(food1, food2, food3, food4, food5) */
 
-
 /* Dice roller  3:44:59 
 
 
@@ -893,33 +885,38 @@ openFridge(food1, food2, food3, food4, food5) */
 
 // Random Password Generator //
 
-function generatePassword(length, includeLowercase, includeUppercase, includeNumbers, includeSymbols) {
+function generatePassword(
+	length,
+	includeLowercase,
+	includeUppercase,
+	includeNumbers,
+	includeSymbols,
+) {
+	const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+	const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	const numberChars = "0123456789";
+	const symbolChars = "!@#$%^&*()_-+";
 
-    const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
-    const upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const numberChars = "0123456789";
-    const symbolChars = "!@#$%^&*()_-+"
+	let allowedChars = "";
+	let password = "";
 
-    let allowedChars = ""
-    let password = ""
+	allowedChars += includeLowercase ? lowercaseChars : "";
+	allowedChars += includeUppercase ? upperCaseChars : "";
+	allowedChars += includeNumbers ? numberChars : "";
+	allowedChars += includeSymbols ? symbolChars : "";
 
-    allowedChars += includeLowercase ? lowercaseChars : "";
-    allowedChars += includeUppercase ? upperCaseChars : "";
-    allowedChars += includeNumbers ? numberChars : "";
-    allowedChars += includeSymbols ? symbolChars : "";
+	//console.log(allowedChars)
 
-    //console.log(allowedChars)
+	if (length <= 0) {
+		return `(password lenght must be at least 1)`;
+	}
 
-    if (length <= 0) {
-        return `(password lenght must be at least 1)`
-    }
+	for (let i = 0; i < length; i++) {
+		const randomIndex = Math.floor(Math.random() * allowedChars.length);
+		password += allowedChars[randomIndex];
+	}
 
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * allowedChars.length);
-        password += allowedChars[randomIndex]
-    }
-
-    return password;
+	return password;
 }
 
 const passwordLength = 12;
@@ -928,11 +925,13 @@ const includeUppercase = true;
 const includeNumbers = true;
 const includeSymbols = true;
 
-const password = generatePassword(passwordLength,
-    includeLowercase,
-    includeUppercase,
-    includeNumbers,
-    includeSymbols)
+const password = generatePassword(
+	passwordLength,
+	includeLowercase,
+	includeUppercase,
+	includeNumbers,
+	includeSymbols,
+);
 
 // console.log(`Generated Password: ${password}`)
 
@@ -944,69 +943,69 @@ const password = generatePassword(passwordLength,
 }*/
 
 function leave() {
-    // console.log("Cynthia ofori go home")
+	// console.log("Cynthia ofori go home")
 }
 
 function goodbye() {
-    // console.log("goodbye")
+	// console.log("goodbye")
 }
 
 //hello(leave)
 
 // foreach() //
 
-let num = [1, 2, 3, 4, 5]
+const num = [1, 2, 3, 4, 5];
 
-num.forEach(display)
+num.forEach(display);
 
 function display(element) {
-    //console.log(element)
+	//console.log(element)
 }
 
 // .filter() //
 
-let figure = [1, 2, 3, 4, 5, 6, 7];
-let evenNums = figure.filter(isEven)
-let oddNums = figure.filter(isOdd)
+const figure = [1, 2, 3, 4, 5, 6, 7];
+const evenNums = figure.filter(isEven);
+const oddNums = figure.filter(isOdd);
 
 //console.log(evenNums)
 //console.log(oddNums)
 
 function isEven(element) {
-    return element % 2 === 0;
+	return element % 2 === 0;
 }
 
 function isOdd(element) {
-    return element % 2 !== 0;
+	return element % 2 !== 0;
 }
 
 // function expression //
 
 //function hello(){}
 
-setTimeout(function () {
-    //  console.log("ello gov'nor")
+setTimeout(() => {
+	//  console.log("ello gov'nor")
 }, 3000);
 
 // arrow functions //
 
 const hello = (name, age) => {
-    //console.log(`Hello ${name}`);
-    //console.log("Happy birthday")
-    //console.log(`you are ${age} years old today!! 🥳`)
-}
+	//console.log(`Hello ${name}`);
+	//console.log("Happy birthday")
+	//console.log(`you are ${age} years old today!! 🥳`)
+};
 
-hello("Bro", 16)
+hello("Bro", 16);
 
 // objects, this, constructor //
 
 const person = {
-    firstName: "Spongebob",
-    lastName: "Squarepants",
-    age: 30,
-    isEmployed: true,
-    //sayHello: function () { console.log(`Hi I'm ${this.firstName}`) }
-}
+	firstName: "Spongebob",
+	lastName: "Squarepants",
+	age: 30,
+	isEmployed: true,
+	//sayHello: function () { console.log(`Hi I'm ${this.firstName}`) }
+};
 
 //console.log(person.firstName)
 //console.log(person.lastName)
@@ -1016,10 +1015,10 @@ const person = {
 //console.log(this)
 
 function Car(make, model, year, color) {
-    this.make = make,
-        this.model = model,
-        this.year = year,
-        this.color = color
+	(this.make = make),
+		(this.model = model),
+		(this.year = year),
+		(this.color = color);
 }
 
 const car = new Car("Ford", "Mustang", 2024, "red");
@@ -1032,15 +1031,15 @@ const car = new Car("Ford", "Mustang", 2024, "red");
 // class //
 
 class Product {
-    constructor(name, price) {
-        this.name = name;
-        this.price = price;
-    }
+	constructor(name, price) {
+		this.name = name;
+		this.price = price;
+	}
 
-    displayProduct() {
-        console.log(`Product: ${this.name}`)
-        console.log(`Price: $${this.price.toFixed(2)}`)
-    }
+	displayProduct() {
+		console.log(`Product: ${this.name}`);
+		console.log(`Price: $${this.price.toFixed(2)}`);
+	}
 }
 
 const product1 = new Product("Shirt", 19.99);
@@ -1059,12 +1058,12 @@ const product2 = new Product("trousers", 12.37);
 //console.log(Mathutil.pi)
 
 class User {
-    static userCount = 0;
+	static userCount = 0;
 
-    constructor(username) {
-        this.username = username;
-        User.userCount++
-    }
+	constructor(username) {
+		this.username = username;
+		User.userCount++;
+	}
 }
 
 const user1 = new User("Spongebob");
@@ -1081,31 +1080,31 @@ const user4 = new User("Squidward");
 // inheritance //
 
 class Animal {
-    alive = true;
+	alive = true;
 
-    eat() {
-        console.log(`This ${this.name} is eating`)
-    }
-    sleep() {
-        console.log(`This ${this.name} is sleeping`)
-    }
+	eat() {
+		console.log(`This ${this.name} is eating`);
+	}
+	sleep() {
+		console.log(`This ${this.name} is sleeping`);
+	}
 }
 
 class Rabbit extends Animal {
-    name = "Rabbit";
+	name = "Rabbit";
 }
 
 class Fish extends Animal {
-    name = "Fish";
+	name = "Fish";
 }
 
 class Hawk extends Animal {
-    name = "Hawk";
+	name = "Hawk";
 }
 
-const rabbit = new Rabbit()
-const fish = new Fish()
-const hawk = new Hawk()
+const rabbit = new Rabbit();
+const fish = new Fish();
+const hawk = new Hawk();
 
 //rabbit.eat()
 
@@ -1114,39 +1113,37 @@ const hawk = new Hawk()
 // getter - makes items readable &  setter - makes items writeable //
 
 class rect {
-    constructor(width, height) {
-        this.width = width;
-        this.height = height;
-    }
+	constructor(width, height) {
+		this.width = width;
+		this.height = height;
+	}
 
-    set width(newWidth) {
-        if (newWidth > 0) {
-            this._width = newWidth;
-        }
-        else {
-            console.error("Width must be a positive number")
-        }
-    }
+	set width(newWidth) {
+		if (newWidth > 0) {
+			this._width = newWidth;
+		} else {
+			console.error("Width must be a positive number");
+		}
+	}
 
-    set height(newHeight) {
-        if (newHeight > 0) {
-            this._height = newHeight;
-        }
-        else {
-            console.error("Height must be a positive number")
-        }
-    }
+	set height(newHeight) {
+		if (newHeight > 0) {
+			this._height = newHeight;
+		} else {
+			console.error("Height must be a positive number");
+		}
+	}
 
-    get width() {
-        return this._width
-    }
+	get width() {
+		return this._width;
+	}
 
-    get height() {
-        return this._height
-    }
+	get height() {
+		return this._height;
+	}
 }
 
-const rectangle = new rect(34, 17)
+const rectangle = new rect(34, 17);
 
 rectangle.width = 6;
 rectangle.height = 7;
@@ -1181,24 +1178,24 @@ const [firstColor, secondColor, thirdColor, ...extraColors] = colors;
 // objects //
 
 function displayPerson({ name, surName, age, occupation }) {
-    console.log(`name:${name} ${surName}`);
-    console.log(`age:${age}`);
-    console.log(`occupation:${occupation}`);
+	console.log(`name:${name} ${surName}`);
+	console.log(`age:${age}`);
+	console.log(`occupation:${occupation}`);
 }
 
 const person1 = {
-    name: "spongebob",
-    surName: "squarepants",
-    age: 27,
-    occupation: "fry cook",
-}
+	name: "spongebob",
+	surName: "squarepants",
+	age: 27,
+	occupation: "fry cook",
+};
 
 const person2 = {
-    name: " Patrick",
-    surName: "star",
-    age: 36,
-    occupation: "unemployed",
-}
+	name: " Patrick",
+	surName: "star",
+	age: 36,
+	occupation: "unemployed",
+};
 
 //displayPerson(person1)
 //displayPerson(person2)
@@ -1221,16 +1218,16 @@ console.log(occupation)*/
 // nested objects //
 
 const body = {
-    fullName: "Spongebob Squarepants",
-    age: 30,
-    isStudent: true,
-    hobbies: ["Karate", "Jellyfishing", "Cooking"],
-    address: {
-        street: "124 Conch St",
-        city: "Bikini Bottom",
-        country: "Int. Waters"
-    }
-}
+	fullName: "Spongebob Squarepants",
+	age: 30,
+	isStudent: true,
+	hobbies: ["Karate", "Jellyfishing", "Cooking"],
+	address: {
+		street: "124 Conch St",
+		city: "Bikini Bottom",
+		country: "Int. Waters",
+	},
+};
 
 //console.log(body.fullName)
 //console.log(body.age)
@@ -1251,12 +1248,12 @@ const date = new Date();
 
 const year = date.getFullYear();
 const month = date.getMonth();
-const weekDate = date.getDate()
-const weekDay = date.getDay()
-const hr = date.getHours()
-const min = date.getMinutes()
-const sec = date.getSeconds()
-const ms = date.getMilliseconds()
+const weekDate = date.getDate();
+const weekDay = date.getDay();
+const hr = date.getHours();
+const min = date.getMinutes();
+const sec = date.getSeconds();
+const ms = date.getMilliseconds();
 
 //console.log(date);
 //console.log(year);
@@ -1268,36 +1265,34 @@ const ms = date.getMilliseconds()
 //console.log(sec);
 //console.log(ms);
 
-const date1 = new Date("2025-12-31")
-const date2 = new Date("2026-01-01")
+const date1 = new Date("2025-12-31");
+const date2 = new Date("2026-01-01");
 
 if (date2 > date1) {
-    //console.log("Happy new year")
+	//console.log("Happy new year")
 }
 
 function outer() {
-    
-    let message = "Hello"
-    
-    function inner() {
-        console.log(message)
-    }
-    
-    //inner()
+	const message = "Hello";
+
+	function inner() {
+		console.log(message);
+	}
+
+	//inner()
 }
 
-outer()
+outer();
 
 function createCounter() {
+	let count = 0;
 
-    let count = 0;
+	function increase() {
+		count++;
+		console.log(`Count increased to ${count}`);
+	}
 
-    function increase() { 
-        count++
-        console.log(`Count increased to ${count}`)
-    }
-
-    return { increase }
+	return { increase };
 }
 
 const counter = createCounter();
@@ -1307,28 +1302,26 @@ const counter = createCounter();
 //counter.increase();
 
 function Creategame() {
+	let score = 0;
 
-    let score = 0;
+	function increaseScore(points) {
+		score += points;
+		console.log(`+${points}pts`);
+	}
 
-    function increaseScore(points) {
-        score += points;
-        console.log(`+${points}pts`);
-    }
+	function decreaseScore(points) {
+		score -= points;
+		console.log(`-${points}pts`);
+	}
 
+	function getScore() {
+		return score;
+	}
 
-    function decreaseScore(points) {
-        score -= points;
-        console.log(`-${points}pts`);
-    }
-
-    function getScore() {
-        return score;
-    }
-
-    return { increaseScore, decreaseScore, getScore }
+	return { increaseScore, decreaseScore, getScore };
 }
 
-const game = Creategame()
+const game = Creategame();
 
 //game.increaseScore(65)
 //game.increaseScore(42)
@@ -1340,13 +1333,13 @@ const game = Creategame()
 let timeoutId;
 
 function start() {
-    timeoutId = setTimeout(() => window.alert("hello"), 3000);
-    //console.log("started");
+	timeoutId = setTimeout(() => window.alert("hello"), 3000);
+	//console.log("started");
 }
 
 function clear() {
-    clearTimer(timeoutId);
-    // console.log("cleared");
+	clearTimer(timeoutId);
+	// console.log("cleared");
 }
 
 // Digital clock //
@@ -1382,17 +1375,19 @@ export function getVolume(radius) {
     return 4 * pi * radius * radius;
 }*/
 
-
 // synchronous & asynchronous //
 
 function func1(callback) {
-    setTimeout(() => { console.log("Task 1"); callback() }, 3000)
+	setTimeout(() => {
+		console.log("Task 1");
+		callback();
+	}, 3000);
 }
 
 function func2() {
-    //    console.log("Task 2");
-    //    console.log("Task 3");
-    //    console.log("Task 4");
+	//    console.log("Task 2");
+	//    console.log("Task 3");
+	//    console.log("Task 4");
 }
 
 //func1(func2);
@@ -1400,13 +1395,11 @@ function func2() {
 // Errors //
 
 try {
-    //console.log("hello")
-}
-catch (error) {
-    //console.error(error);
-}
-finally {
-    //  console.log("this always executes")
+	//console.log("hello")
+} catch (error) {
+	//console.error(error);
+} finally {
+	//  console.log("this always executes")
 }
 
 //const dividend = window.prompt("enter a dividend:");
@@ -1430,31 +1423,29 @@ const moveAmount = 10;
 let x = 0;
 let y = 0;
 
-document.addEventListener("keydown", event => {
+document.addEventListener("keydown", (event) => {
+	if (event.key.startsWith("Arrow")) {
+		event.preventDefault();
 
-    if (event.key.startsWith("Arrow")) {
+		switch (event.key) {
+			case "ArrowUp":
+				y -= moveAmount;
+				break;
+			case "ArrowDown":
+				y += moveAmount;
+				break;
+			case "ArrowLeft":
+				x -= moveAmount;
+				break;
+			case "ArrowRight":
+				x += moveAmount;
+				break;
+		}
 
-        event.preventDefault();
-
-        switch (event.key) {
-            case "ArrowUp":
-                y -= moveAmount;
-                break;
-            case "ArrowDown":
-                y += moveAmount;
-                break
-            case "ArrowLeft":
-                x -= moveAmount
-                break
-            case "ArrowRight":
-                x += moveAmount
-                break;
-        }
-
-        myBox.style.top = `${y}px`;
-        myBox.style.left = `${x}px`;
-    }
-})
+		myBox.style.top = `${y}px`;
+		myBox.style.left = `${x}px`;
+	}
+});
 
 /*document.addEventListener("keydown", event => {
     myBox.textContent = "😞"
@@ -1490,7 +1481,6 @@ mybutton.addEventListener("click", event => {
 //.remove()
 //.toggle()
 //.contains()
-
 
 // image slider //
 

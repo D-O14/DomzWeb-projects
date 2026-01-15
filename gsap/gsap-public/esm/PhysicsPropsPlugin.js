@@ -28,7 +28,7 @@ _initCore = function _initCore(core) {
     _getUnit = gsap.utils.getUnit;
     _getStyleSaver = gsap.core.getStyleSaver;
 
-    _reverting = gsap.core.reverting || function () {};
+    _reverting = gsap.core.reverting || (() => {});
 
     _coreInitted = 1;
   }
@@ -61,15 +61,15 @@ export var PhysicsPropsPlugin = {
   register: _initCore,
   init: function init(target, value, tween) {
     _coreInitted || _initCore();
-    var data = this,
+    var 
         p;
-    data.styles = _getStyleSaver && _getStyleSaver(target);
-    data.target = target;
-    data.tween = tween;
-    data.step = 0;
-    data.sps = 30; //steps per second
+    this.styles = _getStyleSaver && _getStyleSaver(target);
+    this.target = target;
+    this.tween = tween;
+    this.step = 0;
+    this.sps = 30; //steps per second
 
-    data.vProps = [];
+    this.vProps = [];
 
     for (p in value) {
       var _value$p = value[p],
@@ -78,12 +78,12 @@ export var PhysicsPropsPlugin = {
           friction = _value$p.friction;
 
       if (velocity || acceleration) {
-        data.vProps.push(new PhysicsProp(target, p, velocity, acceleration, friction, data.sps));
+        this.vProps.push(new PhysicsProp(target, p, velocity, acceleration, friction, this.sps));
 
-        data._props.push(p);
+        this._props.push(p);
 
-        _getStyleSaver && data.styles.save(p);
-        friction && (data.hasFr = 1);
+        _getStyleSaver && this.styles.save(p);
+        friction && (this.hasFr = 1);
       }
     }
   },

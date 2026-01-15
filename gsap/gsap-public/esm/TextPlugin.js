@@ -25,14 +25,13 @@ export var TextPlugin = {
     });
 
     var i = target.nodeName.toUpperCase(),
-        data = this,
         _value = value,
         newClass = _value.newClass,
         oldClass = _value.oldClass,
         preserveSpaces = _value.preserveSpaces,
         rtl = _value.rtl,
-        delimiter = data.delimiter = value.delimiter || "",
-        fillChar = data.fillChar = value.fillChar || (value.padSpace ? "&nbsp;" : ""),
+        delimiter = this.delimiter = value.delimiter || "",
+        fillChar = this.fillChar = value.fillChar || (value.padSpace ? "&nbsp;" : ""),
         _short,
         text,
         original,
@@ -42,35 +41,35 @@ export var TextPlugin = {
         aggregate,
         s;
 
-    data.svg = target.getBBox && (i === "TEXT" || i === "TSPAN");
+    this.svg = target.getBBox && (i === "TEXT" || i === "TSPAN");
 
-    if (!("innerHTML" in target) && !data.svg) {
+    if (!("innerHTML" in target) && !this.svg) {
       return false;
     }
 
-    data.target = target;
+    this.target = target;
 
     if (!("value" in value)) {
-      data.text = data.original = [""];
+      this.text = this.original = [""];
       return;
     }
 
-    original = splitInnerHTML(target, delimiter, false, preserveSpaces, data.svg);
+    original = splitInnerHTML(target, delimiter, false, preserveSpaces, this.svg);
     _tempDiv || (_tempDiv = document.createElement("div"));
     _tempDiv.innerHTML = value.value;
-    text = splitInnerHTML(_tempDiv, delimiter, false, preserveSpaces, data.svg);
-    data.from = tween._from;
+    text = splitInnerHTML(_tempDiv, delimiter, false, preserveSpaces, this.svg);
+    this.from = tween._from;
 
-    if ((data.from || rtl) && !(rtl && data.from)) {
+    if ((this.from || rtl) && !(rtl && this.from)) {
       // right-to-left or "from()" tweens should invert things (but if it's BOTH .from() and rtl, inverting twice equals not inverting at all :)
       i = original;
       original = text;
       text = i;
     }
 
-    data.hasClass = !!(newClass || oldClass);
-    data.newClass = rtl ? oldClass : newClass;
-    data.oldClass = rtl ? newClass : oldClass;
+    this.hasClass = !!(newClass || oldClass);
+    this.newClass = rtl ? oldClass : newClass;
+    this.oldClass = rtl ? newClass : oldClass;
     i = original.length - text.length;
     _short = i < 0 ? original : text;
 
@@ -110,11 +109,11 @@ export var TextPlugin = {
     }
 
     value.speed && tween.duration(Math.min(0.05 / value.speed * _short.length, value.maxDuration || 9999));
-    data.rtl = rtl;
-    data.original = original;
-    data.text = text;
+    this.rtl = rtl;
+    this.original = original;
+    this.text = text;
 
-    data._props.push("text");
+    this._props.push("text");
   },
   render: function render(ratio, data) {
     if (ratio > 1) {

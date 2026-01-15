@@ -11,7 +11,7 @@
 import { stringToRawPath, rawPathToString, bezierToPoints, simplifyPoints, pointsToSegment, subdivideSegment, getClosestData, copyRawPath, transformRawPath } from "./paths.js";
 import { getGlobalMatrix, Matrix2D } from "./matrix.js";
 
-var _numbersExp = /(?:(-)?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/ig,
+var _numbersExp = /(?:(-)?\d*\.?\d*(?:e[-+]?\d+)?)[0-9]/ig,
     _doc,
     _supportsPointer,
     _win,
@@ -21,9 +21,7 @@ var _numbersExp = /(?:(-)?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/ig,
     _selectionColor = "#4e7fff",
     _minimumMovement = 1,
     _DEG2RAD = Math.PI / 180,
-    _getTime = Date.now || function () {
-  return new Date().getTime();
-},
+    _getTime = Date.now || (() => new Date().getTime()),
     _lastInteraction = 0,
     _isPressed = 0,
     _emptyFunc = function _emptyFunc() {
@@ -191,9 +189,7 @@ _comma = ",",
   _addListener(e.target, "touchend", _onMultiTouchDocumentEnd);
 },
     _bind = function _bind(func, scope) {
-  return function (e) {
-    return func.call(scope, e);
-  };
+  return (e) => func.call(scope, e);
 },
     _callback = function _callback(type, self, param) {
   var callback = self.vars[type];
@@ -219,14 +215,14 @@ _comma = ",",
   _body = _doc.body;
   gsap = gsap || core || _win.gsap || console.warn("Please gsap.registerPlugin(PathEditor)");
 
-  _context = gsap && gsap.core.context || function () {};
+  _context = gsap && gsap.core.context || (() => {});
 
   _tempDiv = _createElement("div");
   _copyElement = _createElement("textarea");
   _copyElement.style.display = "none";
   _body && _body.appendChild(_copyElement);
 
-  _touchEventLookup = function (types) {
+  _touchEventLookup = ((types) => {
     //we create an object that makes it easy to translate touch event types into their "pointer" counterparts if we're in a browser that uses those instead. Like IE10 uses "MSPointerDown" instead of "touchstart", for example.
     var standard = types.split(","),
         converted = (_tempDiv.onpointerdown !== undefined ? "pointerdown,pointermove,pointerup,pointercancel" : _tempDiv.onmspointerdown !== undefined ? "MSPointerDown,MSPointerMove,MSPointerUp,MSPointerCancel" : types).split(","),
@@ -239,14 +235,14 @@ _comma = ",",
     }
 
     return obj;
-  }("touchstart,touchmove,touchend,touchcancel");
+  })("touchstart,touchmove,touchend,touchcancel");
 
   SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformToElement || function (e) {
     //adds Chrome support
     return e.getScreenCTM().inverse().multiply(this.getScreenCTM());
   };
 
-  _doc.addEventListener("keydown", function (e) {
+  _doc.addEventListener("keydown", (e) => {
     var key = e.keyCode || e.which,
         keyString = e.key || key,
         i,
@@ -311,7 +307,7 @@ _comma = ",",
     }
   }, true);
 
-  _doc.addEventListener("keyup", function (e) {
+  _doc.addEventListener("keyup", (e) => {
     var key = e.key || e.keyCode || e.which;
 
     if (key === "Shift" || key === 16) {
@@ -347,8 +343,8 @@ _comma = ",",
   _coreInitted = 1;
 },
     _onPress = function _onPress(e) {
-  var self = this,
-      ctm = getGlobalMatrix(self.target.parentNode, true),
+  var 
+      ctm = getGlobalMatrix(this.target.parentNode, true),
       //previously used self.target.parentNode.getScreenCTM().inverse() but there's a major bug in Firefox that prevents it from working properly when there's an ancestor with a transform applied, so we bootstrapped our own solution that seems to work great across all browsers.
   touchEventTarget,
       temp;
@@ -359,11 +355,11 @@ _comma = ",",
     //note: on iOS, BOTH touchmove and mousemove are dispatched, but the mousemove has pageY and pageX of 0 which would mess up the calculations and needlessly hurt performance.
     touchEventTarget = e.type.indexOf("touch") !== -1 ? e.currentTarget || e.target : _doc; //pointer-based touches (for Microsoft browsers) don't remain locked to the original target like other browsers, so we must use the document instead. The event type would be "MSPointerDown" or "pointerdown".
 
-    _addListener(touchEventTarget, "touchend", self._onRelease);
+    _addListener(touchEventTarget, "touchend", this._onRelease);
 
-    _addListener(touchEventTarget, "touchmove", self._onMove);
+    _addListener(touchEventTarget, "touchmove", this._onMove);
 
-    _addListener(touchEventTarget, "touchcancel", self._onRelease);
+    _addListener(touchEventTarget, "touchcancel", this._onRelease);
 
     _addListener(_doc, "touchstart", _onMultiTouchDocument);
 
@@ -372,12 +368,12 @@ _comma = ",",
   } else {
     touchEventTarget = null;
 
-    _addListener(_doc, "mousemove", self._onMove); //attach these to the document instead of the box itself so that if the user's mouse moves too quickly (and off of the box), things still work.
+    _addListener(_doc, "mousemove", this._onMove); //attach these to the document instead of the box itself so that if the user's mouse moves too quickly (and off of the box), things still work.
 
   }
 
   if (!_supportsPointer) {
-    _addListener(_doc, "mouseup", self._onRelease);
+    _addListener(_doc, "mouseup", this._onRelease);
   }
 
   _preventDefault(e);
@@ -387,117 +383,116 @@ _comma = ",",
 
   if (e.changedTouches) {
     //touch events store the data slightly differently
-    e = self.touch = e.changedTouches[0];
-    self.touchID = e.identifier;
+    e = this.touch = e.changedTouches[0];
+    this.touchID = e.identifier;
   } else if (e.pointerId) {
-    self.touchID = e.pointerId; //for some Microsoft browsers
+    this.touchID = e.pointerId; //for some Microsoft browsers
   } else {
-    self.touch = self.touchID = null;
+    this.touch = this.touchID = null;
   }
 
-  self._startPointerY = self.pointerY = e.pageY; //record the starting x and y so that we can calculate the movement from the original in _onMouseMove
+  this._startPointerY = this.pointerY = e.pageY; //record the starting x and y so that we can calculate the movement from the original in _onMouseMove
 
-  self._startPointerX = self.pointerX = e.pageX;
-  self._startElementX = self._matrix.e;
-  self._startElementY = self._matrix.f;
+  this._startPointerX = this.pointerX = e.pageX;
+  this._startElementX = this._matrix.e;
+  this._startElementY = this._matrix.f;
 
   if (this._ctm.a === 1 && this._ctm.b === 0 && this._ctm.c === 0 && this._ctm.d === 1) {
     this._ctm = null;
   } else {
-    temp = self._startPointerX * this._ctm.a + self._startPointerY * this._ctm.c + this._ctm.e;
-    self._startPointerY = self._startPointerX * this._ctm.b + self._startPointerY * this._ctm.d + this._ctm.f;
-    self._startPointerX = temp;
+    temp = this._startPointerX * this._ctm.a + this._startPointerY * this._ctm.c + this._ctm.e;
+    this._startPointerY = this._startPointerX * this._ctm.b + this._startPointerY * this._ctm.d + this._ctm.f;
+    this._startPointerX = temp;
   }
 
-  self.isPressed = _isPressed = true;
-  self.touchEventTarget = touchEventTarget;
+  this.isPressed = _isPressed = true;
+  this.touchEventTarget = touchEventTarget;
 
-  if (self.vars.onPress) {
-    self.vars.onPress.call(self.vars.callbackScope || self, self.pointerEvent);
+  if (this.vars.onPress) {
+    this.vars.onPress.call(this.vars.callbackScope || this, this.pointerEvent);
   }
 },
     _onMove = function _onMove(e) {
-  var self = this,
+  var 
       originalEvent = e,
       touches,
       i;
 
-  if (!self._enabled || _isMultiTouching || !self.isPressed || !e) {
+  if (!this._enabled || _isMultiTouching || !this.isPressed || !e) {
     return;
   }
 
-  self.pointerEvent = e;
+  this.pointerEvent = e;
   touches = e.changedTouches;
 
   if (touches) {
     //touch events store the data slightly differently
     e = touches[0];
 
-    if (e !== self.touch && e.identifier !== self.touchID) {
+    if (e !== this.touch && e.identifier !== this.touchID) {
       //Usually changedTouches[0] will be what we're looking for, but in case it's not, look through the rest of the array...(and Android browsers don't reuse the event like iOS)
       i = touches.length;
 
-      while (--i > -1 && (e = touches[i]).identifier !== self.touchID) {}
+      while (--i > -1 && (e = touches[i]).identifier !== this.touchID) {}
 
       if (i < 0) {
         return;
       }
     }
-  } else if (e.pointerId && self.touchID && e.pointerId !== self.touchID) {
+  } else if (e.pointerId && this.touchID && e.pointerId !== this.touchID) {
     //for some Microsoft browsers, we must attach the listener to the doc rather than the trigger so that when the finger moves outside the bounds of the trigger, things still work. So if the event we're receiving has a pointerId that doesn't match the touchID, ignore it (for multi-touch)
     return;
   }
 
   _preventDefault(originalEvent);
 
-  self.setPointerPosition(e.pageX, e.pageY);
+  this.setPointerPosition(e.pageX, e.pageY);
 
-  if (self.vars.onDrag) {
-    self.vars.onDrag.call(self.vars.callbackScope || self, self.pointerEvent);
+  if (this.vars.onDrag) {
+    this.vars.onDrag.call(this.vars.callbackScope || this, this.pointerEvent);
   }
 },
     _onRelease = function _onRelease(e, force) {
-  var self = this;
 
-  if (!self._enabled || !self.isPressed || e && self.touchID != null && !force && (e.pointerId && e.pointerId !== self.touchID || e.changedTouches && !_hasTouchID(e.changedTouches, self.touchID))) {
+  if (!this._enabled || !this.isPressed || e && this.touchID != null && !force && (e.pointerId && e.pointerId !== this.touchID || e.changedTouches && !_hasTouchID(e.changedTouches, this.touchID))) {
     //for some Microsoft browsers, we must attach the listener to the doc rather than the trigger so that when the finger moves outside the bounds of the trigger, things still work. So if the event we're receiving has a pointerId that doesn't match the touchID, ignore it (for multi-touch)
     return;
   }
 
   _interacted();
 
-  self.isPressed = _isPressed = false; //TODO: if we want to accommodate multi-touch, we'd need to introduce a counter to track how many touches there are and only toggle this when they're all off.
+  this.isPressed = _isPressed = false; //TODO: if we want to accommodate multi-touch, we'd need to introduce a counter to track how many touches there are and only toggle this when they're all off.
 
   var originalEvent = e,
-      wasDragging = self.isDragging,
-      touchEventTarget = self.touchEventTarget,
+      wasDragging = this.isDragging,
+      touchEventTarget = this.touchEventTarget,
       touches,
       i;
 
   if (touchEventTarget) {
-    _removeListener(touchEventTarget, "touchend", self._onRelease);
+    _removeListener(touchEventTarget, "touchend", this._onRelease);
 
-    _removeListener(touchEventTarget, "touchmove", self._onMove);
+    _removeListener(touchEventTarget, "touchmove", this._onMove);
 
-    _removeListener(touchEventTarget, "touchcancel", self._onRelease);
+    _removeListener(touchEventTarget, "touchcancel", this._onRelease);
 
     _removeListener(_doc, "touchstart", _onMultiTouchDocument);
   } else {
-    _removeListener(_doc, "mousemove", self._onMove);
+    _removeListener(_doc, "mousemove", this._onMove);
   }
 
   if (!_supportsPointer) {
-    _removeListener(_doc, "mouseup", self._onRelease);
+    _removeListener(_doc, "mouseup", this._onRelease);
 
     if (e && e.target) {
-      _removeListener(e.target, "mouseup", self._onRelease);
+      _removeListener(e.target, "mouseup", this._onRelease);
     }
   }
 
   if (wasDragging) {
-    self.isDragging = false;
-  } else if (self.vars.onClick) {
-    self.vars.onClick.call(self.vars.callbackScope || self, originalEvent);
+    this.isDragging = false;
+  } else if (this.vars.onClick) {
+    this.vars.onClick.call(this.vars.callbackScope || this, originalEvent);
   }
 
   if (e) {
@@ -507,11 +502,11 @@ _comma = ",",
       //touch events store the data slightly differently
       e = touches[0];
 
-      if (e !== self.touch && e.identifier !== self.touchID) {
+      if (e !== this.touch && e.identifier !== this.touchID) {
         //Usually changedTouches[0] will be what we're looking for, but in case it's not, look through the rest of the array...(and Android browsers don't reuse the event like iOS)
         i = touches.length;
 
-        while (--i > -1 && (e = touches[i]).identifier !== self.touchID) {}
+        while (--i > -1 && (e = touches[i]).identifier !== this.touchID) {}
 
         if (i < 0) {
           return;
@@ -519,25 +514,25 @@ _comma = ",",
       }
     }
 
-    self.pointerEvent = originalEvent;
-    self.pointerX = e.pageX;
-    self.pointerY = e.pageY;
+    this.pointerEvent = originalEvent;
+    this.pointerX = e.pageX;
+    this.pointerY = e.pageY;
   }
 
-  if (originalEvent && !wasDragging && self.vars.onDragRelease) {
-    self.vars.onDragRelease.call(self, self.pointerEvent);
+  if (originalEvent && !wasDragging && this.vars.onDragRelease) {
+    this.vars.onDragRelease.call(this, this.pointerEvent);
   } else {
     if (originalEvent) {
       _preventDefault(originalEvent);
     }
 
-    if (self.vars.onRelease) {
-      self.vars.onRelease.call(self.vars.callbackScope || self, self.pointerEvent);
+    if (this.vars.onRelease) {
+      this.vars.onRelease.call(this.vars.callbackScope || this, this.pointerEvent);
     }
   }
 
-  if (wasDragging && self.vars.onDragEnd) {
-    self.vars.onDragEnd.call(self.vars.callbackScope || self, self.pointerEvent);
+  if (wasDragging && this.vars.onDragEnd) {
+    this.vars.onDragEnd.call(this.vars.callbackScope || this, this.pointerEvent);
   }
 
   return true;
@@ -562,7 +557,7 @@ _comma = ",",
   return Math.sqrt(x * x + y * y);
 };
 
-var DraggableSVG = /*#__PURE__*/function () {
+var DraggableSVG = /*#__PURE__*/(() => {
   function DraggableSVG(target, vars) {
     this.target = typeof target === "string" ? _doc.querySelectorAll(target)[0] : target;
     this.vars = vars || {};
@@ -693,9 +688,9 @@ var DraggableSVG = /*#__PURE__*/function () {
   };
 
   return DraggableSVG;
-}();
+})();
 
-var Anchor = /*#__PURE__*/function () {
+var Anchor = /*#__PURE__*/(() => {
   function Anchor(editor, rawPath, j, i, vars) {
     this.editor = editor;
     this.element = _createSVG("path", editor._selection, {
@@ -768,9 +763,9 @@ var Anchor = /*#__PURE__*/function () {
   };
 
   return Anchor;
-}();
+})();
 
-export var PathEditor = /*#__PURE__*/function () {
+export var PathEditor = /*#__PURE__*/(() => {
   function PathEditor(target, vars) {
     vars = vars || {};
     _coreInitted || _initCore();
@@ -1686,11 +1681,11 @@ export var PathEditor = /*#__PURE__*/function () {
   };
 
   return PathEditor;
-}();
+})();
 PathEditor.simplifyPoints = simplifyPoints;
 PathEditor.pointsToSegment = pointsToSegment;
 
-PathEditor.simplifySVG = function (data, vars) {
+PathEditor.simplifySVG = (data, vars) => {
   //takes a <path> element or data string and simplifies it according to whatever tolerance you set (default:1, the bigger the number the more variance there can be). vars: {tolerance:1, cornerThreshold:degrees, curved:true}
   var element, points, i, x1, x2, y1, y2, bezier, precision, tolerance, l, cornerThreshold;
   vars = vars || {};
@@ -1744,13 +1739,11 @@ PathEditor.simplifySVG = function (data, vars) {
   return data;
 };
 
-PathEditor.create = function (target, vars) {
-  return new PathEditor(target, vars);
-};
+PathEditor.create = (target, vars) => new PathEditor(target, vars);
 
 PathEditor.editingAxis = _editingAxis;
 
-PathEditor.getSnapFunction = function (vars) {
+PathEditor.getSnapFunction = (vars) => {
   //{gridSize, radius, x, y, width, height}
   var r = vars.radius || 2,
       big = 1e20,
@@ -1763,7 +1756,7 @@ PathEditor.getSnapFunction = function (vars) {
       axis = vars.axis,
       grid = vars.gridSize;
   r *= r;
-  return function (p) {
+  return (p) => {
     var x = p.x,
         y = p.y,
         gridX,

@@ -25,12 +25,10 @@ var gsap,
 
     var eases = gsap.parseEase(),
         createConfig = function createConfig(ease) {
-      return function (ratio) {
+      return (ratio) => {
         var y = 0.5 + ratio / 2;
 
-        ease.config = function (p) {
-          return ease(2 * (1 - p) * p * y + p * p);
-        };
+        ease.config = (p) => ease(2 * (1 - p) * p * y + p * p);
       };
     },
         p;
@@ -62,7 +60,7 @@ var gsap,
       p3 = p1 + linearRatio,
       calcEnd = _boolean(yoyoMode);
 
-  return function (p) {
+  return (p) => {
     var r = p + (0.5 - p) * pow;
     return p < p1 ? calcEnd ? 1 - (p = 1 - p / p1) * p : r - (p = 1 - p / p1) * p * p * p * r : p > p3 ? calcEnd ? p === 1 ? 0 : 1 - (p = (p - p3) / p1) * p : r + (p - r) * (p = (p - p3) / p1) * p * p * p : calcEnd ? 1 : r;
   };
@@ -71,9 +69,7 @@ var gsap,
   var p1 = Math.log(end / start),
       p2 = end - start;
   ease && (ease = gsap.parseEase(ease));
-  return function (p) {
-    return (start * Math.exp(p1 * (ease ? ease(p) : p)) - start) / p2;
-  };
+  return (p) => (start * Math.exp(p1 * (ease ? ease(p) : p)) - start) / p2;
 },
     EasePoint = function EasePoint(time, value, next) {
   this.t = time;
@@ -154,9 +150,7 @@ var gsap,
     };
   }
 
-  a.sort(function (a, b) {
-    return a.x - b.x;
-  });
+  a.sort((a, b) => a.x - b.x);
   pnt = new EasePoint(1, 1, null);
   i = points;
 
@@ -166,7 +160,7 @@ var gsap,
   }
 
   recent = new EasePoint(0, 0, pnt.t ? pnt : pnt.next);
-  return function (p) {
+  return (p) => {
     var pnt = recent;
 
     if (p > pnt.t) {

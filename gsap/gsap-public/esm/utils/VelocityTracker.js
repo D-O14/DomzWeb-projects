@@ -84,7 +84,7 @@ var PropTracker = function PropTracker(target, property, type, next) {
   }
 };
 
-export var VelocityTracker = /*#__PURE__*/function () {
+export var VelocityTracker = /*#__PURE__*/(() => {
   function VelocityTracker(target, property) {
     if (!_coreInitted) {
       _initCore();
@@ -218,16 +218,14 @@ export var VelocityTracker = /*#__PURE__*/function () {
   VelocityTracker.untrack = function untrack(targets, properties) {
     var props = (properties || "").split(",");
 
-    _toArray(targets).forEach(function (target) {
+    _toArray(targets).forEach((target) => {
       var tracker = _getByTarget(target);
 
       if (tracker) {
         if (!props.length) {
           tracker.kill(1);
         } else {
-          props.forEach(function (p) {
-            return tracker.remove(p);
-          });
+          props.forEach((p) => tracker.remove(p));
         }
       }
     });
@@ -246,7 +244,7 @@ export var VelocityTracker = /*#__PURE__*/function () {
   };
 
   return VelocityTracker;
-}();
+})();
 VelocityTracker.getByTarget = _getByTarget;
 _getGSAP() && gsap.registerPlugin(VelocityTracker);
 export { VelocityTracker as default };

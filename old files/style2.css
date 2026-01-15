@@ -1,57 +1,64 @@
-body{
-    background: #1c1f2b;
+body {
+	background: #1c1f2b;
 }
 
-
-.wrapper{
-    max-height: 120px;
-    display: flex;
+.wrapper {
+	max-height: 120px;
+	display: flex;
 }
 
-.wrapper .item{
-    min-width: 510px;
-    height: 510px;
-    text-align: center;
-    background-color: #1c1f2b;
-    position: relative;
-    color: #fff;
+.wrapper .item {
+	min-width: 510px;
+	height: 510px;
+	text-align: center;
+	background-color: #1c1f2b;
+	position: relative;
+	color: #fff;
 }
 
-.item{
-    position: relative;
+.item {
+	position: relative;
 }
 
-@property --angle{
-    syntax: "<angle>";
-    initial-value: 0deg;
-    inherits: false;
-} 
-
-.item::after, .item::before{
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-image: conic-gradient(from var(--angle), red, lightgreen, coral, pink, blue);
-    left: 50%;
-    top: 50%;
-    translate: -50% -50%;
-    z-index: -1;
-    padding: 3px;
-    border-radius: 10px;
-    animation: 3s spin linear infinite;
+@property --angle {
+	syntax: "<angle>";
+	initial-value: 0deg;
+	inherits: false;
 }
 
-.item::before{
-    filter: blur(1.5rem);
-    opacity: 0.5;
+.item::after,
+.item::before {
+	content: "";
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-image: conic-gradient(
+		from var(--angle),
+		red,
+		lightgreen,
+		coral,
+		pink,
+		blue
+	);
+	left: 50%;
+	top: 50%;
+	translate: -50% -50%;
+	z-index: -1;
+	padding: 3px;
+	border-radius: 10px;
+	animation: 3s spin linear infinite;
 }
 
-@keyframes spin{
-    from{
-        --angle: 0deg;
-    }
-    to{
-        --angle: 360deg;
-    }
+.item::before {
+	filter: blur(1.5rem);
+	opacity: 0.5;
+}
+
+@keyframes spin {
+	from {
+		--angle: 0deg;
+	}
+	to {
+		--angle: 360deg;
+	}
 }

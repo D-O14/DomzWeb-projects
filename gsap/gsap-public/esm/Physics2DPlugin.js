@@ -29,7 +29,7 @@ _initCore = function _initCore(core) {
     _getUnit = gsap.utils.getUnit;
     _getStyleSaver = gsap.core.getStyleSaver;
 
-    _reverting = gsap.core.reverting || function () {};
+    _reverting = gsap.core.reverting || (() => {});
 
     _coreInitted = 1;
   }
@@ -60,18 +60,18 @@ export var Physics2DPlugin = {
   register: _initCore,
   init: function init(target, value, tween) {
     _coreInitted || _initCore();
-    var data = this,
+    var 
         angle = +value.angle || 0,
         velocity = +value.velocity || 0,
         acceleration = +value.acceleration || 0,
         xProp = value.xProp || "x",
         yProp = value.yProp || "y",
         aAngle = value.accelerationAngle || value.accelerationAngle === 0 ? +value.accelerationAngle : angle;
-    data.styles = _getStyleSaver && _getStyleSaver(target, value.xProp && value.xProp !== "x" ? value.xProp + "," + value.yProp : "transform");
-    data.target = target;
-    data.tween = tween;
-    data.step = 0;
-    data.sps = 30; //steps per second
+    this.styles = _getStyleSaver && _getStyleSaver(target, value.xProp && value.xProp !== "x" ? value.xProp + "," + value.yProp : "transform");
+    this.target = target;
+    this.tween = tween;
+    this.step = 0;
+    this.sps = 30; //steps per second
 
     if (value.gravity) {
       acceleration = +value.gravity;
@@ -80,13 +80,13 @@ export var Physics2DPlugin = {
 
     angle *= _DEG2RAD;
     aAngle *= _DEG2RAD;
-    data.fr = 1 - (+value.friction || 0);
+    this.fr = 1 - (+value.friction || 0);
 
-    data._props.push(xProp, yProp);
+    this._props.push(xProp, yProp);
 
-    data.xp = new PhysicsProp(target, xProp, Math.cos(angle) * velocity, Math.cos(aAngle) * acceleration, data.sps);
-    data.yp = new PhysicsProp(target, yProp, Math.sin(angle) * velocity, Math.sin(aAngle) * acceleration, data.sps);
-    data.skipX = data.skipY = 0;
+    this.xp = new PhysicsProp(target, xProp, Math.cos(angle) * velocity, Math.cos(aAngle) * acceleration, this.sps);
+    this.yp = new PhysicsProp(target, yProp, Math.sin(angle) * velocity, Math.sin(aAngle) * acceleration, this.sps);
+    this.skipX = this.skipY = 0;
   },
   render: function render(ratio, data) {
     var xp = data.xp,

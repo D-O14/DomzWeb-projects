@@ -35,11 +35,9 @@ var gsap,
 
       _coreInitted = 1;
 
-      _create("wiggle").config = function (vars) {
-        return typeof vars === "object" ? _create("", vars) : _create("wiggle(" + vars + ")", {
+      _create("wiggle").config = (vars) => typeof vars === "object" ? _create("", vars) : _create("wiggle(" + vars + ")", {
           wiggles: +vars
         });
-      };
     } else {
       required && console.warn("Please gsap.registerPlugin(CustomEase, CustomWiggle)");
     }
@@ -50,9 +48,7 @@ var gsap,
     ease = gsap.parseEase(ease) || createCustomEase("", ease);
   }
 
-  return ease.custom || !invertNonCustomEases ? ease : function (p) {
-    return 1 - ease(p);
-  };
+  return ease.custom || !invertNonCustomEases ? ease : ((p) => 1 - ease(p));
 },
     _bonusValidated = 1,
     //<name>CustomWiggle</name>
@@ -139,7 +135,7 @@ _create = function _create(id, vars) {
   }
 };
 
-export var CustomWiggle = /*#__PURE__*/function () {
+export var CustomWiggle = /*#__PURE__*/(() => {
   function CustomWiggle(id, vars) {
     this.ease = _create(id, vars);
   }
@@ -155,7 +151,7 @@ export var CustomWiggle = /*#__PURE__*/function () {
   };
 
   return CustomWiggle;
-}();
+})();
 _getGSAP() && gsap.registerPlugin(CustomWiggle);
 CustomWiggle.version = "3.13.0";
 export { CustomWiggle as default };

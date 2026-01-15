@@ -10,7 +10,7 @@
 /* eslint-disable */
 import { emojiSafeSplit, getText } from "./utils/strings.js";
 
-var CharSet = /*#__PURE__*/function () {
+var CharSet = /*#__PURE__*/(() => {
   function CharSet(chars) {
     this.chars = emojiSafeSplit(chars);
     this.sets = [];
@@ -33,7 +33,7 @@ var CharSet = /*#__PURE__*/function () {
   };
 
   return CharSet;
-}();
+})();
 
 var gsap,
     _coreInitted,
@@ -90,45 +90,44 @@ export var ScrambleTextPlugin = {
 
     var text = value.text || value.value || "",
         trim = value.trim !== false,
-        data = this,
         delim,
         maxLength,
         charset,
         splitByChars;
-    data.delimiter = delim = value.delimiter || "";
-    data.original = emojiSafeSplit(getText(target).replace(_spacesExp, " ").split("&nbsp;").join(""), delim, trim);
+    this.delimiter = delim = value.delimiter || "";
+    this.original = emojiSafeSplit(getText(target).replace(_spacesExp, " ").split("&nbsp;").join(""), delim, trim);
 
     if (text === "{original}" || text === true || text == null) {
-      text = data.original.join(delim);
+      text = this.original.join(delim);
     }
 
-    data.text = emojiSafeSplit((text || "").replace(_spacesExp, " "), delim, trim);
-    data.hasClass = !!(value.newClass || value.oldClass);
-    data.newClass = value.newClass;
-    data.oldClass = value.oldClass;
+    this.text = emojiSafeSplit((text || "").replace(_spacesExp, " "), delim, trim);
+    this.hasClass = !!(value.newClass || value.oldClass);
+    this.newClass = value.newClass;
+    this.oldClass = value.oldClass;
     splitByChars = delim === "";
-    data.textHasEmoji = splitByChars && !!data.text.emoji;
-    data.charsHaveEmoji = !!value.chars && !!emojiSafeSplit(value.chars).emoji;
-    data.length = splitByChars ? data.original.length : data.original.join(delim).length;
-    data.lengthDif = (splitByChars ? data.text.length : data.text.join(delim).length) - data.length;
-    data.fillChar = value.fillChar || value.chars && ~value.chars.indexOf(" ") ? "&nbsp;" : "";
-    data.charSet = charset = _charsLookup[value.chars || "upperCase"] || new CharSet(value.chars);
-    data.speed = 0.05 / (value.speed || 1);
-    data.prevScrambleTime = 0;
-    data.setIndex = Math.random() * 20 | 0;
-    maxLength = data.length + Math.max(data.lengthDif, 0);
+    this.textHasEmoji = splitByChars && !!this.text.emoji;
+    this.charsHaveEmoji = !!value.chars && !!emojiSafeSplit(value.chars).emoji;
+    this.length = splitByChars ? this.original.length : this.original.join(delim).length;
+    this.lengthDif = (splitByChars ? this.text.length : this.text.join(delim).length) - this.length;
+    this.fillChar = value.fillChar || value.chars && ~value.chars.indexOf(" ") ? "&nbsp;" : "";
+    this.charSet = charset = _charsLookup[value.chars || "upperCase"] || new CharSet(value.chars);
+    this.speed = 0.05 / (value.speed || 1);
+    this.prevScrambleTime = 0;
+    this.setIndex = Math.random() * 20 | 0;
+    maxLength = this.length + Math.max(this.lengthDif, 0);
 
     if (maxLength > charset.length) {
       charset.grow(maxLength);
     }
 
-    data.chars = charset.sets[data.setIndex];
-    data.revealDelay = value.revealDelay || 0;
-    data.tweenLength = value.tweenLength !== false;
-    data.tween = tween;
-    data.rightToLeft = !!value.rightToLeft;
+    this.chars = charset.sets[this.setIndex];
+    this.revealDelay = value.revealDelay || 0;
+    this.tweenLength = value.tweenLength !== false;
+    this.tween = tween;
+    this.rightToLeft = !!value.rightToLeft;
 
-    data._props.push("scrambleText", "text");
+    this._props.push("scrambleText", "text");
 
     return _bonusValidated;
   },

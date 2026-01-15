@@ -8,10 +8,10 @@
 */
 
 /* eslint-disable */
-var _svgPathExp = /[achlmqstvz]|(-?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/ig,
-    _numbersExp = /(?:(-)?\d*\.?\d*(?:e[\-+]?\d+)?)[0-9]/ig,
-    _scientific = /[\+\-]?\d*\.?\d+e[\+\-]?\d+/ig,
-    _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
+var _svgPathExp = /[achlmqstvz]|(-?\d*\.?\d*(?:e[-+]?\d+)?)[0-9]/ig,
+    _numbersExp = /(?:(-)?\d*\.?\d*(?:e[-+]?\d+)?)[0-9]/ig,
+    _scientific = /[+-]?\d*\.?\d+e[+-]?\d+/ig,
+    _selectorExp = /(^[#.][a-z]|[a-y][a-z])/i,
     _DEG2RAD = Math.PI / 180,
     _RAD2DEG = 180 / Math.PI,
     _sin = Math.sin,
@@ -826,7 +826,7 @@ function arcToSegment(lastX, lastY, rx, ry, angle, largeArcFlag, sweepFlag, x, y
 
 
 export function stringToRawPath(d) {
-  var a = (d + "").replace(_scientific, function (m) {
+  var a = (d + "").replace(_scientific, (m) => {
     var n = +m;
     return n < 0.0001 && n > -0.0001 ? 0 : n;
   }).match(_svgPathExp) || [],
@@ -1155,7 +1155,7 @@ export function pointsToSegment(points, curviness) {
     r1 = _sqrt(dx1 * dx1 + dy1 * dy1); // r1, r2, and r3 correlate x and y (and z in the future). Basically 2D or 3D hypotenuse
 
     r2 = _sqrt(dx2 * dx2 + dy2 * dy2);
-    r3 = _sqrt(Math.pow(dx2 / r2 + dx1 / r1, 2) + Math.pow(dy2 / r2 + dy1 / r1, 2));
+    r3 = _sqrt((dx2 / r2 + dx1 / r1) ** 2 + (dy2 / r2 + dy1 / r1) ** 2);
     tl = (r1 + r2) * curviness * 0.25 / r3;
     mx1 = x - (x - prevX) * (r1 ? tl / r1 : 0);
     mx2 = x + (nextX - x) * (r2 ? tl / r2 : 0);
@@ -1202,7 +1202,7 @@ function pointToSegDist(x, y, x1, y1, x2, y2) {
     }
   }
 
-  return Math.pow(x - x1, 2) + Math.pow(y - y1, 2);
+  return (x - x1) ** 2 + (y - y1) ** 2;
 }
 
 function simplifyStep(points, first, last, tolerance, simplified) {
@@ -1244,7 +1244,7 @@ export function simplifyPoints(points, tolerance) {
       dy,
       result,
       last;
-  tolerance = Math.pow(tolerance || 1, 2);
+  tolerance = (tolerance || 1) ** 2;
 
   for (i = 2; i < l; i += 2) {
     x = parseFloat(points[i]);

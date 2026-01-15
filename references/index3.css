@@ -1,46 +1,44 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
-body{
-    background-color:  #3c536c;
+body {
+	background-color: #3c536c;
 }
 
-#main-heading{
-    color: #fff;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 35px;
-    font-weight: 100px;
-    font-style: italic;
-    margin-bottom: 30px;
-    margin-top: 20px;
+#main-heading {
+	color: #fff;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 35px;
+	font-weight: 100px;
+	font-style: italic;
+	margin-bottom: 30px;
+	margin-top: 20px;
 }
 
-.container{
-    margin-top: 50px;
-    height: 350px;
-    width: 550px;
-    border: 3px solid white;
-    border-radius: 17px;
-    text-align: center;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 20px;
-    margin-left: 440px;
-    box-sizing: content-box;
-
+.container {
+	margin-top: 50px;
+	height: 350px;
+	width: 550px;
+	border: 3px solid white;
+	border-radius: 17px;
+	text-align: center;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 20px;
+	margin-left: 440px;
+	box-sizing: content-box;
 }
 
-.list-item{
-    background-color: white;
-    height: 30px;
-    width: 435px;
-    padding: 5px;
-    margin-bottom: 2px;
-    display:flex;
-    margin-left: 70px;
-    align-items: center;
-    justify-content: center;
-    
+.list-item {
+	background-color: white;
+	height: 30px;
+	width: 435px;
+	padding: 5px;
+	margin-bottom: 2px;
+	display: flex;
+	margin-left: 70px;
+	align-items: center;
+	justify-content: center;
 }

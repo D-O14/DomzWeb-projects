@@ -60,7 +60,7 @@ var _config = {
     _isFuncOrString = function _isFuncOrString(value) {
   return _isFunction(value) || _isString(value);
 },
-    _isTypedArray = typeof ArrayBuffer === "function" && ArrayBuffer.isView || function () {},
+    _isTypedArray = typeof ArrayBuffer === "function" && ArrayBuffer.isView || (() => {}),
     // note: IE10 has ArrayBuffer, but NOT ArrayBuffer.isView().
 _isArray = Array.isArray,
     _strictNumExp = /(?:-?\.?\d|\.)+/gi,
@@ -71,7 +71,7 @@ _numWithUnitExp = /[-+=.]*\d+[.e-]*\d*[a-z%]*/g,
     _complexStringNumExp = /[-+=.]*\d+\.?\d*(?:e-|e\+)?\d*/gi,
     //duplicate so that while we're looping through matches from exec(), it doesn't contaminate the lastIndex of _numExp which we use to search for colors too.
 _relExp = /[+-]=-?[.\d]+/,
-    _delimitedValueExp = /[^,'"\[\]\s]+/gi,
+    _delimitedValueExp = /[^,'"[\]\s]+/gi,
     // previously /[#\-+.]*\b[a-z\d\-=+%.]+/gi but didn't catch special characters.
 _unitExp = /^[+\-=e\s\d]*\d+[.\d]*([a-z]*|%)\s*$/i,
     _globalTimeline,
@@ -209,7 +209,7 @@ _parseRelative = function _parseRelative(start, value) {
   return obj;
 },
     _setKeyframeDefaults = function _setKeyframeDefaults(excludeDuration) {
-  return function (obj, defaults) {
+  return (obj, defaults) => {
     for (var p in defaults) {
       p in obj || p === "duration" && excludeDuration || p === "ease" || (obj[p] = defaults[p]);
     }
@@ -645,9 +645,7 @@ _isFromOrFromStart = function _isFromOrFromStart(_ref2) {
 },
     // note: protect against padded numbers as strings, like "100.100". That shouldn't return "00" as the unit. If it's numeric, return no unit.
 clamp = function clamp(min, max, value) {
-  return _conditionalReturn(value, function (v) {
-    return _clamp(min, max, v);
-  });
+  return _conditionalReturn(value, (v) => _clamp(min, max, v));
 },
     _slice = [].slice,
     _isArrayLike = function _isArrayLike(value, nonEmpty) {
@@ -658,7 +656,7 @@ clamp = function clamp(min, max, value) {
     accumulator = [];
   }
 
-  return ar.forEach(function (value) {
+  return ar.forEach((value) => {
     var _accumulator;
 
     return _isString(value) && !leaveStrings || _isArrayLike(value, 1) ? (_accumulator = accumulator).push.apply(_accumulator, toArray(value)) : accumulator.push(value);
@@ -670,15 +668,13 @@ toArray = function toArray(value, scope, leaveStrings) {
 },
     selector = function selector(value) {
   value = toArray(value)[0] || _warn("Invalid scope") || {};
-  return function (v) {
+  return (v) => {
     var el = value.current || value.nativeElement || value;
     return toArray(v, el.querySelectorAll ? el : el === value ? _warn("Invalid scope") || _doc.createElement("div") : value);
   };
 },
     shuffle = function shuffle(a) {
-  return a.sort(function () {
-    return .5 - Math.random();
-  });
+  return a.sort(() => .5 - Math.random());
 },
     // alternative that's a bit faster and more reliably diverse but bigger:   for (let j, v, i = a.length; i; j = (Math.random() * i) | 0, v = a[--i], a[i] = a[j], a[j] = v); return a;
 //for distributing values across an array. Can accept a number, a function or (most commonly) a function which can contain the following properties: {base, amount, from, ease, grid, axis, length, each}. Returns a function that expects the following parameters: index, target, array. Recognizes the following
@@ -712,7 +708,7 @@ distribute = function distribute(v) {
     ratioY = from[1];
   }
 
-  return function (i, target, a) {
+  return (i, target, a) => {
     var l = (a || vars).length,
         distances = cache[l],
         originX,
@@ -766,9 +762,9 @@ distribute = function distribute(v) {
 },
     _roundModifier = function _roundModifier(v) {
   //pass in 0.1 get a function that'll round to the nearest tenth, or 5 to round to the closest 5, or 0.001 to the closest 1000th, etc.
-  var p = Math.pow(10, ((v + "").split(".")[1] || "").length); //to avoid floating point math errors (like 24 * 0.1 == 2.4000000000000004), we chop off at a specific number of decimal places (much faster than toFixed())
+  var p = 10 ** ((v + "").split(".")[1] || "").length; //to avoid floating point math errors (like 24 * 0.1 == 2.4000000000000004), we chop off at a specific number of decimal places (much faster than toFixed())
 
-  return function (raw) {
+  return (raw) => {
     var n = _roundPrecise(Math.round(parseFloat(raw) / v) * v * p);
 
     return (n - n % 1) / p + (_isNumber(raw) ? 0 : getUnit(raw)); // n - n % 1 replaces Math.floor() in order to handle negative values properly. For example, Math.floor(-150.00000000000003) is 151!
@@ -793,10 +789,10 @@ distribute = function distribute(v) {
     }
   }
 
-  return _conditionalReturn(value, !isArray ? _roundModifier(snapTo) : _isFunction(snapTo) ? function (raw) {
+  return _conditionalReturn(value, !isArray ? _roundModifier(snapTo) : _isFunction(snapTo) ? ((raw) => {
     is2D = snapTo(raw);
     return Math.abs(is2D - raw) <= radius ? is2D : raw;
-  } : function (raw) {
+  }) : ((raw) => {
     var x = parseFloat(is2D ? raw.x : raw),
         y = parseFloat(is2D ? raw.y : 0),
         min = _bigNum,
@@ -822,48 +818,36 @@ distribute = function distribute(v) {
 
     closest = !radius || min <= radius ? snapTo[closest] : raw;
     return is2D || closest === raw || _isNumber(raw) ? closest : closest + getUnit(raw);
-  });
+  }));
 },
     random = function random(min, max, roundingIncrement, returnFunction) {
-  return _conditionalReturn(_isArray(min) ? !max : roundingIncrement === true ? !!(roundingIncrement = 0) : !returnFunction, function () {
-    return _isArray(min) ? min[~~(Math.random() * min.length)] : (roundingIncrement = roundingIncrement || 1e-5) && (returnFunction = roundingIncrement < 1 ? Math.pow(10, (roundingIncrement + "").length - 2) : 1) && Math.floor(Math.round((min - roundingIncrement / 2 + Math.random() * (max - min + roundingIncrement * .99)) / roundingIncrement) * roundingIncrement * returnFunction) / returnFunction;
-  });
+  return _conditionalReturn(_isArray(min) ? !max : roundingIncrement === true ? !!(roundingIncrement = 0) : !returnFunction, () => _isArray(min) ? min[~~(Math.random() * min.length)] : (roundingIncrement = roundingIncrement || 1e-5) && (returnFunction = roundingIncrement < 1 ? 10 ** ((roundingIncrement + "").length - 2) : 1) && Math.floor(Math.round((min - roundingIncrement / 2 + Math.random() * (max - min + roundingIncrement * .99)) / roundingIncrement) * roundingIncrement * returnFunction) / returnFunction);
 },
     pipe = function pipe() {
   for (var _len = arguments.length, functions = new Array(_len), _key = 0; _key < _len; _key++) {
     functions[_key] = arguments[_key];
   }
 
-  return function (value) {
-    return functions.reduce(function (v, f) {
-      return f(v);
-    }, value);
-  };
+  return (value) => functions.reduce((v, f) => f(v), value);
 },
     unitize = function unitize(func, unit) {
-  return function (value) {
-    return func(parseFloat(value)) + (unit || getUnit(value));
-  };
+  return (value) => func(parseFloat(value)) + (unit || getUnit(value));
 },
     normalize = function normalize(min, max, value) {
   return mapRange(min, max, 0, 1, value);
 },
     _wrapArray = function _wrapArray(a, wrapper, value) {
-  return _conditionalReturn(value, function (index) {
-    return a[~~wrapper(index)];
-  });
+  return _conditionalReturn(value, (index) => a[~~wrapper(index)]);
 },
     wrap = function wrap(min, max, value) {
   // NOTE: wrap() CANNOT be an arrow function! A very odd compiling bug causes problems (unrelated to GSAP).
   var range = max - min;
-  return _isArray(min) ? _wrapArray(min, wrap(0, min.length), max) : _conditionalReturn(value, function (value) {
-    return (range + (value - min) % range) % range + min;
-  });
+  return _isArray(min) ? _wrapArray(min, wrap(0, min.length), max) : _conditionalReturn(value, (value) => (range + (value - min) % range) % range + min);
 },
     wrapYoyo = function wrapYoyo(min, max, value) {
   var range = max - min,
       total = range * 2;
-  return _isArray(min) ? _wrapArray(min, wrapYoyo(0, min.length - 1), max) : _conditionalReturn(value, function (value) {
+  return _isArray(min) ? _wrapArray(min, wrapYoyo(0, min.length - 1), max) : _conditionalReturn(value, (value) => {
     value = (total + (value - min) % total) % total || 0;
     return min + (value > range ? total - value : value);
   });
@@ -890,14 +874,10 @@ distribute = function distribute(v) {
     mapRange = function mapRange(inMin, inMax, outMin, outMax, value) {
   var inRange = inMax - inMin,
       outRange = outMax - outMin;
-  return _conditionalReturn(value, function (value) {
-    return outMin + ((value - inMin) / inRange * outRange || 0);
-  });
+  return _conditionalReturn(value, (value) => outMin + ((value - inMin) / inRange * outRange || 0));
 },
     interpolate = function interpolate(start, end, progress, mutate) {
-  var func = isNaN(start + end) ? 0 : function (p) {
-    return (1 - p) * start + p * end;
-  };
+  var func = isNaN(start + end) ? 0 : ((p) => (1 - p) * start + p * end);
 
   if (!func) {
     var isString = _isString(start),
@@ -1191,7 +1171,7 @@ _hue = function _hue(h, m1, m2) {
   var values = [],
       c = [],
       i = -1;
-  v.split(_colorExp).forEach(function (v) {
+  v.split(_colorExp).forEach((v) => {
     var a = v.match(_numWithUnitExp) || [];
     values.push.apply(values, a);
     c.push(i += a.length + 1);
@@ -1213,9 +1193,7 @@ _hue = function _hue(h, m1, m2) {
     return s;
   }
 
-  colors = colors.map(function (color) {
-    return (color = splitColor(color, toHSL, 1)) && type + (toHSL ? color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : color.join(",")) + ")";
-  });
+  colors = colors.map((color) => (color = splitColor(color, toHSL, 1)) && type + (toHSL ? color[0] + "," + color[1] + "%," + color[2] + "%," + color[3] : color.join(",")) + ")");
 
   if (orderMatchData) {
     d = _colorOrderData(s);
@@ -1242,7 +1220,7 @@ _hue = function _hue(h, m1, m2) {
 
   return result + shell[l];
 },
-    _colorExp = function () {
+    _colorExp = (() => {
   var s = "(?:\\b(?:(?:rgb|rgba|hsl|hsla)\\(.+?\\))|\\B#(?:[0-9a-f]{3,4}){1,2}\\b",
       //we'll dynamically build this Regular Expression to conserve file size. After building it, it will be able to find rgb(), rgba(), # (hexadecimal), and named color values like red, blue, purple, etc.,
   p;
@@ -1252,7 +1230,7 @@ _hue = function _hue(h, m1, m2) {
   }
 
   return new RegExp(s + ")", "gi");
-}(),
+})(),
     _hslExp = /hsl[a]?\(/,
     _colorStringFilter = function _colorStringFilter(a) {
   var combined = a.join(" "),
@@ -1274,7 +1252,7 @@ _hue = function _hue(h, m1, m2) {
  * --------------------------------------------------------------------------------------
  */
 _tickerActive,
-    _ticker = function () {
+    _ticker = (() => {
   var _getTime = Date.now,
       _lagThreshold = 500,
       _adjustedLag = 33,
@@ -1345,9 +1323,7 @@ _tickerActive,
         _raf = typeof requestAnimationFrame !== "undefined" && requestAnimationFrame;
         _id && _self.sleep();
 
-        _req = _raf || function (f) {
-          return setTimeout(f, _nextTime - _self.time * 1000 + 1 | 0);
-        };
+        _req = _raf || ((f) => setTimeout(f, _nextTime - _self.time * 1000 + 1 | 0));
 
         _tickerActive = 1;
 
@@ -1369,11 +1345,11 @@ _tickerActive,
       _nextTime = _self.time * 1000 + _gap;
     },
     add: function add(callback, once, prioritize) {
-      var func = once ? function (t, d, f, v) {
+      var func = once ? ((t, d, f, v) => {
         callback(t, d, f, v);
 
         _self.remove(func);
-      } : callback;
+      }) : callback;
 
       _self.remove(callback);
 
@@ -1389,7 +1365,7 @@ _tickerActive,
     _listeners: _listeners
   };
   return _self;
-}(),
+})(),
     _wake = function _wake() {
   return !_tickerActive && _ticker.wake();
 },
@@ -1437,9 +1413,7 @@ _easeMap = {},
   return ease && split.length > 1 && ease.config ? ease.config.apply(null, ~name.indexOf("{") ? [_parseObjectInString(split[1])] : _valueInParentheses(name).split(",").map(_numericIfPossible)) : _easeMap._CE && _customEaseExp.test(name) ? _easeMap._CE("", name) : ease;
 },
     _invertEase = function _invertEase(ease) {
-  return function (p) {
-    return 1 - ease(1 - p);
-  };
+  return (p) => 1 - ease(1 - p);
 },
     // allow yoyoEase to be set in children and have those affected when the parent/ancestor timeline yoyos.
 _propagateYoyoEase = function _propagateYoyoEase(timeline, isYoyo) {
@@ -1486,7 +1460,7 @@ _propagateYoyoEase = function _propagateYoyoEase(timeline, isYoyo) {
   },
       lowercaseName;
 
-  _forEachName(names, function (name) {
+  _forEachName(names, (name) => {
     _easeMap[name] = _globals[name] = ease;
     _easeMap[lowercaseName = name.toLowerCase()] = easeOut;
 
@@ -1498,9 +1472,7 @@ _propagateYoyoEase = function _propagateYoyoEase(timeline, isYoyo) {
   return ease;
 },
     _easeInOutFromOut = function _easeInOutFromOut(easeOut) {
-  return function (p) {
-    return p < .5 ? (1 - easeOut(1 - p * 2)) / 2 : .5 + easeOut((p - .5) * 2) / 2;
-  };
+  return (p) => p < .5 ? (1 - easeOut(1 - p * 2)) / 2 : .5 + easeOut((p - .5) * 2) / 2;
 },
     _configElastic = function _configElastic(type, amplitude, period) {
   var p1 = amplitude >= 1 ? amplitude : 1,
@@ -1508,17 +1480,13 @@ _propagateYoyoEase = function _propagateYoyoEase(timeline, isYoyo) {
   p2 = (period || (type ? .3 : .45)) / (amplitude < 1 ? amplitude : 1),
       p3 = p2 / _2PI * (Math.asin(1 / p1) || 0),
       easeOut = function easeOut(p) {
-    return p === 1 ? 1 : p1 * Math.pow(2, -10 * p) * _sin((p - p3) * p2) + 1;
+    return p === 1 ? 1 : p1 * 2 ** (-10 * p) * _sin((p - p3) * p2) + 1;
   },
-      ease = type === "out" ? easeOut : type === "in" ? function (p) {
-    return 1 - easeOut(1 - p);
-  } : _easeInOutFromOut(easeOut);
+      ease = type === "out" ? easeOut : type === "in" ? ((p) => 1 - easeOut(1 - p)) : _easeInOutFromOut(easeOut);
 
   p2 = _2PI / p2; //precalculate to optimize
 
-  ease.config = function (amplitude, period) {
-    return _configElastic(type, amplitude, period);
-  };
+  ease.config = (amplitude, period) => _configElastic(type, amplitude, period);
 
   return ease;
 },
@@ -1530,13 +1498,9 @@ _propagateYoyoEase = function _propagateYoyoEase(timeline, isYoyo) {
   var easeOut = function easeOut(p) {
     return p ? --p * p * ((overshoot + 1) * p + overshoot) + 1 : 0;
   },
-      ease = type === "out" ? easeOut : type === "in" ? function (p) {
-    return 1 - easeOut(1 - p);
-  } : _easeInOutFromOut(easeOut);
+      ease = type === "out" ? easeOut : type === "in" ? ((p) => 1 - easeOut(1 - p)) : _easeInOutFromOut(easeOut);
 
-  ease.config = function (overshoot) {
-    return _configBack(type, overshoot);
-  };
+  ease.config = (overshoot) => _configBack(type, overshoot);
 
   return ease;
 }; // a cheaper (kb and cpu) but more mild way to get a parameterized weighted ease by feeding in a value between -1 (easeIn) and 1 (easeOut) where 0 is linear.
@@ -1554,49 +1518,33 @@ _propagateYoyoEase = function _propagateYoyoEase(timeline, isYoyo) {
 // };
 
 
-_forEachName("Linear,Quad,Cubic,Quart,Quint,Strong", function (name, i) {
+_forEachName("Linear,Quad,Cubic,Quart,Quint,Strong", (name, i) => {
   var power = i < 5 ? i + 1 : i;
 
-  _insertEase(name + ",Power" + (power - 1), i ? function (p) {
-    return Math.pow(p, power);
-  } : function (p) {
-    return p;
-  }, function (p) {
-    return 1 - Math.pow(1 - p, power);
-  }, function (p) {
-    return p < .5 ? Math.pow(p * 2, power) / 2 : 1 - Math.pow((1 - p) * 2, power) / 2;
-  });
+  _insertEase(name + ",Power" + (power - 1), i ? ((p) => p ** power) : ((p) => p), (p) => 1 - (1 - p) ** power, (p) => p < .5 ? (p * 2) ** power / 2 : 1 - ((1 - p) * 2) ** power / 2);
 });
 
 _easeMap.Linear.easeNone = _easeMap.none = _easeMap.Linear.easeIn;
 
 _insertEase("Elastic", _configElastic("in"), _configElastic("out"), _configElastic());
 
-(function (n, c) {
+((n, c) => {
   var n1 = 1 / c,
       n2 = 2 * n1,
       n3 = 2.5 * n1,
       easeOut = function easeOut(p) {
-    return p < n1 ? n * p * p : p < n2 ? n * Math.pow(p - 1.5 / c, 2) + .75 : p < n3 ? n * (p -= 2.25 / c) * p + .9375 : n * Math.pow(p - 2.625 / c, 2) + .984375;
+    return p < n1 ? n * p * p : p < n2 ? n * (p - 1.5 / c) ** 2 + .75 : p < n3 ? n * (p -= 2.25 / c) * p + .9375 : n * (p - 2.625 / c) ** 2 + .984375;
   };
 
-  _insertEase("Bounce", function (p) {
-    return 1 - easeOut(1 - p);
-  }, easeOut);
+  _insertEase("Bounce", (p) => 1 - easeOut(1 - p), easeOut);
 })(7.5625, 2.75);
 
-_insertEase("Expo", function (p) {
-  return Math.pow(2, 10 * (p - 1)) * p + p * p * p * p * p * p * (1 - p);
-}); // previously 2 ** (10 * (p - 1)) but that doesn't end up with the value quite at the right spot so we do a blended ease to ensure it lands where it should perfectly.
+_insertEase("Expo", (p) => 2 ** (10 * (p - 1)) * p + p * p * p * p * p * p * (1 - p)); // previously 2 ** (10 * (p - 1)) but that doesn't end up with the value quite at the right spot so we do a blended ease to ensure it lands where it should perfectly.
 
 
-_insertEase("Circ", function (p) {
-  return -(_sqrt(1 - p * p) - 1);
-});
+_insertEase("Circ", (p) => -(_sqrt(1 - p * p) - 1));
 
-_insertEase("Sine", function (p) {
-  return p === 1 ? 1 : -_cos(p * _HALF_PI) + 1;
-});
+_insertEase("Sine", (p) => p === 1 ? 1 : -_cos(p * _HALF_PI) + 1);
 
 _insertEase("Back", _configBack("in"), _configBack("out"), _configBack());
 
@@ -1610,16 +1558,12 @@ _easeMap.SteppedEase = _easeMap.steps = _globals.SteppedEase = {
         p2 = steps + (immediateStart ? 0 : 1),
         p3 = immediateStart ? 1 : 0,
         max = 1 - _tinyNum;
-    return function (p) {
-      return ((p2 * _clamp(0, max, p) | 0) + p3) * p1;
-    };
+    return (p) => ((p2 * _clamp(0, max, p) | 0) + p3) * p1;
   }
 };
 _defaults.ease = _easeMap["quad.out"];
 
-_forEachName("onComplete,onUpdate,onStart,onRepeat,onReverseComplete,onInterrupt", function (name) {
-  return _callbackNames += name + "," + name + "Params,";
-});
+_forEachName("onComplete,onUpdate,onStart,onRepeat,onReverseComplete,onInterrupt", (name) => _callbackNames += name + "," + name + "Params,");
 /*
  * --------------------------------------------------------------------------------------
  * CACHE
@@ -1641,7 +1585,7 @@ export var GSCache = function GSCache(target, harness) {
  * --------------------------------------------------------------------------------------
  */
 
-export var Animation = /*#__PURE__*/function () {
+export var Animation = /*#__PURE__*/(() => {
   function Animation(vars) {
     this.vars = vars;
     this._delay = +vars.delay || 0;
@@ -1969,7 +1913,7 @@ export var Animation = /*#__PURE__*/function () {
 
   _proto.then = function then(onFulfilled) {
     var self = this;
-    return new Promise(function (resolve) {
+    return new Promise((resolve) => {
       var f = _isFunction(onFulfilled) ? onFulfilled : _passThrough,
           _resolve = function _resolve() {
         var _then = self.then;
@@ -1993,7 +1937,7 @@ export var Animation = /*#__PURE__*/function () {
   };
 
   return Animation;
-}();
+})();
 
 _setDefaults(Animation.prototype, {
   _time: 0,
@@ -2022,7 +1966,7 @@ _setDefaults(Animation.prototype, {
  */
 
 
-export var Timeline = /*#__PURE__*/function (_Animation) {
+export var Timeline = /*#__PURE__*/((_Animation) => {
   _inheritsLoose(Timeline, _Animation);
 
   function Timeline(vars, position) {
@@ -2336,15 +2280,12 @@ export var Timeline = /*#__PURE__*/function (_Animation) {
   };
 
   _proto2.add = function add(child, position) {
-    var _this2 = this;
 
     _isNumber(position) || (position = _parsePosition(this, position, child));
 
     if (!(child instanceof Animation)) {
       if (_isArray(child)) {
-        child.forEach(function (obj) {
-          return _this2.add(obj, position);
-        });
+        child.forEach((obj) => this.add(obj, position));
         return this;
       }
 
@@ -2644,19 +2585,18 @@ export var Timeline = /*#__PURE__*/function (_Animation) {
 
   _proto2.totalDuration = function totalDuration(value) {
     var max = 0,
-        self = this,
-        child = self._last,
+        child = this._last,
         prevStart = _bigNum,
         prev,
         start,
         parent;
 
     if (arguments.length) {
-      return self.timeScale((self._repeat < 0 ? self.duration() : self.totalDuration()) / (self.reversed() ? -value : value));
+      return this.timeScale((this._repeat < 0 ? this.duration() : this.totalDuration()) / (this.reversed() ? -value : value));
     }
 
-    if (self._dirty) {
-      parent = self.parent;
+    if (this._dirty) {
+      parent = this.parent;
 
       while (child) {
         prev = child._prev; //record it here in case the tween changes position in the sequence...
@@ -2665,11 +2605,11 @@ export var Timeline = /*#__PURE__*/function (_Animation) {
 
         start = child._start;
 
-        if (start > prevStart && self._sort && child._ts && !self._lock) {
+        if (start > prevStart && this._sort && child._ts && !this._lock) {
           //in case one of the tweens shifted out of order, it needs to be re-inserted into the correct position in the sequence
-          self._lock = 1; //prevent endless recursive calls - there are methods that get triggered that check duration/totalDuration when we add().
+          this._lock = 1; //prevent endless recursive calls - there are methods that get triggered that check duration/totalDuration when we add().
 
-          _addToTimeline(self, child, start - child._delay, 1)._lock = 0;
+          _addToTimeline(this, child, start - child._delay, 1)._lock = 0;
         } else {
           prevStart = start;
         }
@@ -2678,13 +2618,13 @@ export var Timeline = /*#__PURE__*/function (_Animation) {
           //children aren't allowed to have negative startTimes unless smoothChildTiming is true, so adjust here if one is found.
           max -= start;
 
-          if (!parent && !self._dp || parent && parent.smoothChildTiming) {
-            self._start += start / self._ts;
-            self._time -= start;
-            self._tTime -= start;
+          if (!parent && !this._dp || parent && parent.smoothChildTiming) {
+            this._start += start / this._ts;
+            this._time -= start;
+            this._tTime -= start;
           }
 
-          self.shiftChildren(-start, false, -1e999);
+          this.shiftChildren(-start, false, -1e999);
           prevStart = 0;
         }
 
@@ -2692,12 +2632,12 @@ export var Timeline = /*#__PURE__*/function (_Animation) {
         child = prev;
       }
 
-      _setDuration(self, self === _globalTimeline && self._time > max ? self._time : max, 1, 1);
+      _setDuration(this, this === _globalTimeline && this._time > max ? this._time : max, 1, 1);
 
-      self._dirty = 0;
+      this._dirty = 0;
     }
 
-    return self._tDur;
+    return this._tDur;
   };
 
   Timeline.updateRoot = function updateRoot(time) {
@@ -2721,7 +2661,7 @@ export var Timeline = /*#__PURE__*/function (_Animation) {
   };
 
   return Timeline;
-}(Animation);
+})(Animation);
 
 _setDefaults(Timeline.prototype, {
   _lock: 0,
@@ -2942,9 +2882,7 @@ _forceAllPropTweens,
         lazy: !prevStartAt && _isNotFalse(lazy),
         startAt: null,
         delay: 0,
-        onUpdate: onUpdate && function () {
-          return _callback(tween, "onUpdate");
-        },
+        onUpdate: onUpdate && (() => _callback(tween, "onUpdate")),
         stagger: 0
       }, startAt))); //copy the properties/values into a new object to avoid collisions, like var to = {x:0}, from = {x:500}; timeline.fromTo(e, from, to).fromTo(e, to, from);
 
@@ -3012,7 +2950,7 @@ _forceAllPropTweens,
       if (harness && (plugin = new harness()).init(target, harnessVars || cleanVars, tween, index, fullTargets) !== false) {
         tween._pt = pt = new PropTween(tween._pt, target, plugin.name, 0, 1, plugin.render, plugin, 0, plugin.priority);
 
-        plugin._props.forEach(function (name) {
+        plugin._props.forEach((name) => {
           ptLookup[name] = pt;
         });
 
@@ -3144,13 +3082,11 @@ _parseKeyframe = function _parseKeyframe(prop, obj, allProps, easeEach) {
   if (_isArray(obj)) {
     a = allProps[prop] || (allProps[prop] = []); // t = time (out of 100), v = value, e = ease
 
-    obj.forEach(function (value, i) {
-      return a.push({
+    obj.forEach((value, i) => a.push({
         t: i / (obj.length - 1) * 100,
         v: value,
         e: ease
-      });
-    });
+      }));
   } else {
     for (p in obj) {
       a = allProps[p] || (allProps[p] = []);
@@ -3168,9 +3104,7 @@ _parseKeyframe = function _parseKeyframe(prop, obj, allProps, easeEach) {
     _staggerTweenProps = _callbackNames + "repeat,repeatDelay,yoyo,repeatRefresh,yoyoEase,autoRevert",
     _staggerPropsToSkip = {};
 
-_forEachName(_staggerTweenProps + ",id,stagger,delay,duration,paused,scrollTrigger", function (name) {
-  return _staggerPropsToSkip[name] = 1;
-});
+_forEachName(_staggerTweenProps + ",id,stagger,delay,duration,paused,scrollTrigger", (name) => _staggerPropsToSkip[name] = 1);
 /*
  * --------------------------------------------------------------------------------------
  * TWEEN
@@ -3178,7 +3112,7 @@ _forEachName(_staggerTweenProps + ",id,stagger,delay,duration,paused,scrollTrigg
  */
 
 
-export var Tween = /*#__PURE__*/function (_Animation2) {
+export var Tween = /*#__PURE__*/((_Animation2) => {
   _inheritsLoose(Tween, _Animation2);
 
   function Tween(targets, vars, position, skipInherit) {
@@ -3276,9 +3210,7 @@ export var Tween = /*#__PURE__*/function (_Animation2) {
             v;
 
         if (_isArray(keyframes)) {
-          keyframes.forEach(function (frame) {
-            return tl.to(parsedTargets, frame, ">");
-          });
+          keyframes.forEach((frame) => tl.to(parsedTargets, frame, ">"));
           tl.duration(); // to ensure tl._dur is cached because we tap into it for performance purposes in the render() method.
         } else {
           copy = {};
@@ -3288,9 +3220,7 @@ export var Tween = /*#__PURE__*/function (_Animation2) {
           }
 
           for (p in copy) {
-            a = copy[p].sort(function (a, b) {
-              return a.t - b.t;
-            });
+            a = copy[p].sort((a, b) => a.t - b.t);
             time = 0;
 
             for (i = 0; i < a.length; i++) {
@@ -3578,9 +3508,7 @@ export var Tween = /*#__PURE__*/function (_Animation2) {
       if (_isString(vars)) {
         p = {};
 
-        _forEachName(vars, function (name) {
-          return p[name] = 1;
-        });
+        _forEachName(vars, (name) => p[name] = 1);
 
         vars = p;
       }
@@ -3663,7 +3591,7 @@ export var Tween = /*#__PURE__*/function (_Animation2) {
   };
 
   return Tween;
-}(Animation);
+})(Animation);
 
 _setDefaults(Tween.prototype, {
   _targets: [],
@@ -3681,7 +3609,7 @@ _setDefaults(Tween.prototype, {
 //for backward compatibility. Leverage the timeline calls.
 
 
-_forEachName("staggerTo,staggerFrom,staggerFromTo", function (name) {
+_forEachName("staggerTo,staggerFrom,staggerFromTo", (name) => {
   Tween[name] = function () {
     var tl = new Timeline(),
         params = _slice.call(arguments, 0);
@@ -3814,7 +3742,7 @@ var _setterPlain = function _setterPlain(target, property, value) {
 }; //PropTween key: t = target, p = prop, r = renderer, d = data, s = start, c = change, op = overwriteProperty (ONLY populated when it's different than p), pr = priority, _next/_prev for the linked list siblings, set = setter, m = modifier, mSet = modifierSetter (the original setter, before a modifier was added)
 
 
-export var PropTween = /*#__PURE__*/function () {
+export var PropTween = /*#__PURE__*/(() => {
   function PropTween(next, target, prop, start, change, renderer, data, setter, priority) {
     this.t = target;
     this.s = start;
@@ -3844,11 +3772,9 @@ export var PropTween = /*#__PURE__*/function () {
   };
 
   return PropTween;
-}(); //Initialization tasks
+})(); //Initialization tasks
 
-_forEachName(_callbackNames + "parent,duration,ease,delay,overwrite,runBackwards,startAt,yoyo,immediateRender,repeat,repeatDelay,data,paused,reversed,lazy,callbackScope,stringFilter,id,yoyoEase,stagger,inherit,repeatRefresh,keyframes,autoRevert,scrollTrigger", function (name) {
-  return _reservedProps[name] = 1;
-});
+_forEachName(_callbackNames + "parent,duration,ease,delay,overwrite,runBackwards,startAt,yoyo,immediateRender,repeat,repeatDelay,data,paused,reversed,lazy,callbackScope,stringFilter,id,yoyoEase,stagger,inherit,repeatRefresh,keyframes,autoRevert,scrollTrigger", (name) => _reservedProps[name] = 1);
 
 _globals.TweenMax = _globals.TweenLite = Tween;
 _globals.TimelineLite = _globals.TimelineMax = Timeline;
@@ -3867,9 +3793,7 @@ var _media = [],
     _lastMediaTime = 0,
     _contextID = 0,
     _dispatch = function _dispatch(type) {
-  return (_listeners[type] || _emptyArray).map(function (f) {
-    return f();
-  });
+  return (_listeners[type] || _emptyArray).map((f) => f());
 },
     _onMediaChange = function _onMediaChange() {
   var time = Date.now(),
@@ -3878,7 +3802,7 @@ var _media = [],
   if (time - _lastMediaTime > 2) {
     _dispatch("matchMediaInit");
 
-    _media.forEach(function (c) {
+    _media.forEach((c) => {
       var queries = c.queries,
           conditions = c.conditions,
           match,
@@ -3905,18 +3829,14 @@ var _media = [],
 
     _dispatch("matchMediaRevert");
 
-    matches.forEach(function (c) {
-      return c.onMatch(c, function (func) {
-        return c.add(null, func);
-      });
-    });
+    matches.forEach((c) => c.onMatch(c, (func) => c.add(null, func)));
     _lastMediaTime = time;
 
     _dispatch("matchMedia");
   }
 };
 
-var Context = /*#__PURE__*/function () {
+var Context = /*#__PURE__*/(() => {
   function Context(func, scope) {
     this.selector = scope && selector(scope);
     this.data = [];
@@ -3959,9 +3879,7 @@ var Context = /*#__PURE__*/function () {
     };
 
     self.last = f;
-    return name === _isFunction ? f(self, function (func) {
-      return self.add(null, func);
-    }) : name ? self[name] = f : f;
+    return name === _isFunction ? f(self, (func) => self.add(null, func)) : name ? self[name] = f : f;
   };
 
   _proto5.ignore = function ignore(func) {
@@ -3973,9 +3891,7 @@ var Context = /*#__PURE__*/function () {
 
   _proto5.getTweens = function getTweens() {
     var a = [];
-    this.data.forEach(function (e) {
-      return e instanceof Context ? a.push.apply(a, e.getTweens()) : e instanceof Tween && !(e.parent && e.parent.data === "nested") && a.push(e);
-    });
+    this.data.forEach((e) => e instanceof Context ? a.push.apply(a, e.getTweens()) : e instanceof Tween && !(e.parent && e.parent.data === "nested") && a.push(e));
     return a;
   };
 
@@ -3984,43 +3900,34 @@ var Context = /*#__PURE__*/function () {
   };
 
   _proto5.kill = function kill(revert, matchMedia) {
-    var _this4 = this;
 
     if (revert) {
-      (function () {
-        var tweens = _this4.getTweens(),
-            i = _this4.data.length,
+      (() => {
+        var tweens = this.getTweens(),
+            i = this.data.length,
             t;
 
         while (i--) {
           // Flip plugin tweens are very different in that they should actually be pushed to their end. The plugin replaces the timeline's .revert() method to do exactly that. But we also need to remove any of those nested tweens inside the flip timeline so that they don't get individually reverted.
-          t = _this4.data[i];
+          t = this.data[i];
 
           if (t.data === "isFlip") {
             t.revert();
-            t.getChildren(true, true, false).forEach(function (tween) {
-              return tweens.splice(tweens.indexOf(tween), 1);
-            });
+            t.getChildren(true, true, false).forEach((tween) => tweens.splice(tweens.indexOf(tween), 1));
           }
         } // save as an object so that we can cache the globalTime for each tween to optimize performance during the sort
 
 
-        tweens.map(function (t) {
-          return {
+        tweens.map((t) => ({
             g: t._dur || t._delay || t._sat && !t._sat.vars.immediateRender ? t.globalTime(0) : -Infinity,
             t: t
-          };
-        }).sort(function (a, b) {
-          return b.g - a.g || -Infinity;
-        }).forEach(function (o) {
-          return o.t.revert(revert);
-        }); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
+          })).sort((a, b) => b.g - a.g || -Infinity).forEach((o) => o.t.revert(revert)); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
 
-        i = _this4.data.length;
+        i = this.data.length;
 
         while (i--) {
           // make sure we loop backwards so that, for example, SplitTexts that were created later on the same element get reverted first
-          t = _this4.data[i];
+          t = this.data[i];
 
           if (t instanceof Timeline) {
             if (t.data !== "nested") {
@@ -4032,16 +3939,12 @@ var Context = /*#__PURE__*/function () {
           }
         }
 
-        _this4._r.forEach(function (f) {
-          return f(revert, _this4);
-        });
+        this._r.forEach((f) => f(revert, this));
 
-        _this4.isReverted = true;
+        this.isReverted = true;
       })();
     } else {
-      this.data.forEach(function (e) {
-        return e.kill && e.kill();
-      });
+      this.data.forEach((e) => e.kill && e.kill());
     }
 
     this.clear();
@@ -4065,9 +3968,9 @@ var Context = /*#__PURE__*/function () {
   };
 
   return Context;
-}();
+})();
 
-var MatchMedia = /*#__PURE__*/function () {
+var MatchMedia = /*#__PURE__*/(() => {
   function MatchMedia(scope) {
     this.contexts = [];
     this.scope = scope;
@@ -4105,9 +4008,7 @@ var MatchMedia = /*#__PURE__*/function () {
       }
     }
 
-    active && func(context, function (f) {
-      return context.add(null, f);
-    });
+    active && func(context, (f) => context.add(null, f));
     return this;
   } // refresh() {
   // 	let time = _lastMediaTime,
@@ -4125,13 +4026,11 @@ var MatchMedia = /*#__PURE__*/function () {
   };
 
   _proto6.kill = function kill(revert) {
-    this.contexts.forEach(function (c) {
-      return c.kill(revert, true);
-    });
+    this.contexts.forEach((c) => c.kill(revert, true));
   };
 
   return MatchMedia;
-}();
+})();
 /*
  * --------------------------------------------------------------------------------------
  * GSAP
@@ -4145,9 +4044,7 @@ var _gsap = {
       args[_key2] = arguments[_key2];
     }
 
-    args.forEach(function (config) {
-      return _createPlugin(config);
-    });
+    args.forEach((config) => _createPlugin(config));
   },
   timeline: function timeline(vars) {
     return new Timeline(vars);
@@ -4162,19 +4059,15 @@ var _gsap = {
         format = unit ? _passThrough : _numericIfPossible;
 
     unit === "native" && (unit = "");
-    return !target ? target : !property ? function (property, unit, uncache) {
-      return format((_plugins[property] && _plugins[property].get || getter)(target, property, unit, uncache));
-    } : format((_plugins[property] && _plugins[property].get || getter)(target, property, unit, uncache));
+    return !target ? target : !property ? ((property, unit, uncache) => format((_plugins[property] && _plugins[property].get || getter)(target, property, unit, uncache))) : format((_plugins[property] && _plugins[property].get || getter)(target, property, unit, uncache));
   },
   quickSetter: function quickSetter(target, property, unit) {
     target = toArray(target);
 
     if (target.length > 1) {
-      var setters = target.map(function (t) {
-        return gsap.quickSetter(t, property, unit);
-      }),
+      var setters = target.map((t) => gsap.quickSetter(t, property, unit)),
           l = setters.length;
-      return function (value) {
+      return (value) => {
         var i = l;
 
         while (i--) {
@@ -4189,17 +4082,15 @@ var _gsap = {
         cache = _getCache(target),
         p = cache.harness && (cache.harness.aliases || {})[property] || property,
         // in case it's an alias, like "rotate" for "rotation".
-    setter = Plugin ? function (value) {
+    setter = Plugin ? ((value) => {
       var p = new Plugin();
       _quickTween._pt = 0;
       p.init(target, unit ? value + unit : value, _quickTween, 0, [target]);
       p.render(1, p);
       _quickTween._pt && _renderPropTweens(1, _quickTween);
-    } : cache.set(target, p);
+    }) : cache.set(target, p);
 
-    return Plugin ? setter : function (value) {
-      return setter(target, p, unit ? value + unit : value, cache, 1);
-    };
+    return Plugin ? setter : ((value) => setter(target, p, unit ? value + unit : value, cache, 1));
   },
   quickTo: function quickTo(target, property, vars) {
     var _setDefaults2;
@@ -4228,13 +4119,9 @@ var _gsap = {
         plugins = _ref3.plugins,
         defaults = _ref3.defaults,
         extendTimeline = _ref3.extendTimeline;
-    (plugins || "").split(",").forEach(function (pluginName) {
-      return pluginName && !_plugins[pluginName] && !_globals[pluginName] && _warn(name + " effect requires " + pluginName + " plugin.");
-    });
+    (plugins || "").split(",").forEach((pluginName) => pluginName && !_plugins[pluginName] && !_globals[pluginName] && _warn(name + " effect requires " + pluginName + " plugin."));
 
-    _effects[name] = function (targets, vars, tl) {
-      return effect(toArray(targets), _setDefaults(vars || {}, defaults), tl);
-    };
+    _effects[name] = (targets, vars, tl) => effect(toArray(targets), _setDefaults(vars || {}, defaults), tl);
 
     if (extendTimeline) {
       Timeline.prototype[name] = function (targets, vars, position) {
@@ -4289,7 +4176,7 @@ var _gsap = {
     return new MatchMedia(scope);
   },
   matchMediaRefresh: function matchMediaRefresh() {
-    return _media.forEach(function (c) {
+    return _media.forEach((c) => {
       var cond = c.conditions,
           found,
           p;
@@ -4363,9 +4250,7 @@ var _gsap = {
   }
 };
 
-_forEachName("to,from,fromTo,delayedCall,set,killTweensOf", function (name) {
-  return _gsap[name] = Tween[name];
-});
+_forEachName("to,from,fromTo,delayedCall,set,killTweensOf", (name) => _gsap[name] = Tween[name]);
 
 _ticker.add(Timeline.updateRoot);
 
@@ -4412,15 +4297,13 @@ var _getPluginPropTween = function _getPluginPropTween(plugin, prop) {
     rawVars: 1,
     //don't pre-process function-based values or "random()" strings.
     init: function init(target, vars, tween) {
-      tween._onInit = function (tween) {
+      tween._onInit = (tween) => {
         var temp, p;
 
         if (_isString(vars)) {
           temp = {};
 
-          _forEachName(vars, function (name) {
-            return temp[name] = 1;
-          }); //if the user passes in a comma-delimited list of property names to roundProps, like "x,y", we round to whole numbers.
+          _forEachName(vars, (name) => temp[name] = 1); //if the user passes in a comma-delimited list of property names to roundProps, like "x,y", we round to whole numbers.
 
 
           vars = temp;

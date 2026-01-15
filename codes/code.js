@@ -206,39 +206,37 @@ console.log(`your E-mail is ${Email}`)
 console.log("You are now a member of the Java workspace")
 */
 
-var cl = cloudinary.Cloudinary.new({ cloud_name: 'dyyvwfgqr', secure: true });
+var cl = cloudinary.Cloudinary.new({ cloud_name: "dyyvwfgqr", secure: true });
 
-var url = cl.url('sample.jpg', { width: 300, height: 200, crop: 'fill' });
-document.getElementById('myImage').src = url;
+var url = cl.url("sample.jpg", { width: 300, height: 200, crop: "fill" });
+document.getElementById("myImage").src = url;
 
+const slider = document.querySelector(".slider");
+document.querySelector(".right").onclick = () => {
+	slider.scrollBy({ left: slider.clientWidth, behavior: "smooth" });
+};
 
-    const slider = document.querySelector('.slider');
-    document.querySelector('.right').onclick = () => {
-        slider.scrollBy({ left: slider.clientWidth, behavior: "smooth" });
-    };
+document.querySelector(".left").onclick = () => {
+	slider.scrollBy({ left: -slider.clientWidth, behavior: "smooth" });
+};
 
-    document.querySelector('.left').onclick = () => {
-        slider.scrollBy({ left: -slider.clientWidth, behavior: "smooth" });
-    };
+document.addEventListener("DOMContentLoaded", () => {
+	const sliderTile = document.querySelector(".tile-slider");
 
-    document.addEventListener('DOMContentLoaded', () => {
+	if (!sliderTile) return;
 
-        const sliderTile = document.querySelector('.tile-slider');
+	let hideTimer;
 
-        if (!sliderTile) return;
+	function showNav() {
+		sliderTile.classList.add("show-nav");
 
-        let hideTimer;
+		clearTimeout(hideTimer);
+		hideTimer = setTimeout(() => {
+			sliderTile.classList.remove("show-nav");
+		}, 2500);
+	}
 
-        function showNav() {
-            sliderTile.classList.add('show-nav');
-
-            clearTimeout(hideTimer);
-            hideTimer = setTimeout(() => {
-                sliderTile.classList.remove('show-nav');
-            }, 2500)
-        }
-
-        ['mousemove', 'click', 'touchstart', 'focusin'].forEach(event => {
-            sliderTile.addEventListener(event, showNav);
-        });
-    });
+	["mousemove", "click", "touchstart", "focusin"].forEach((event) => {
+		sliderTile.addEventListener(event, showNav);
+	});
+});

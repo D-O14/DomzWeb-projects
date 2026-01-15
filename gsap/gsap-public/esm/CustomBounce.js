@@ -21,11 +21,9 @@ var gsap,
   if (createCustomEase) {
     _coreInitted = 1;
 
-    gsap.parseEase("bounce").config = function (vars) {
-      return typeof vars === "object" ? _create("", vars) : _create("bounce(" + vars + ")", {
+    gsap.parseEase("bounce").config = (vars) => typeof vars === "object" ? _create("", vars) : _create("bounce(" + vars + ")", {
         strength: +vars
       });
-    };
   } else {
     required && console.warn("Please gsap.registerPlugin(CustomEase, CustomBounce)");
   }
@@ -143,7 +141,7 @@ _create = function _create(id, vars) {
   }
 };
 
-export var CustomBounce = /*#__PURE__*/function () {
+export var CustomBounce = /*#__PURE__*/(() => {
   function CustomBounce(id, vars) {
     this.ease = _create(id, vars);
   }
@@ -159,7 +157,7 @@ export var CustomBounce = /*#__PURE__*/function () {
   };
 
   return CustomBounce;
-}();
+})();
 _getGSAP() && gsap.registerPlugin(CustomBounce);
 CustomBounce.version = "3.13.0";
 export { CustomBounce as default };

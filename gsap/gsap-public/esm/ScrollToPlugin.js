@@ -46,9 +46,7 @@ var gsap,
     }
   }
 
-  return function () {
-    return e[p];
-  };
+  return () => e[p];
 },
     _clean = function _clean(value, index, target, targets) {
   _isFunction(value) && (value = value(index, target, targets));
@@ -135,18 +133,18 @@ export var ScrollToPlugin = {
   },
   init: function init(target, value, tween, index, targets) {
     _coreInitted || _initCore();
-    var data = this,
+    var 
         snapType = gsap.getProperty(target, "scrollSnapType");
-    data.isWin = target === _window;
-    data.target = target;
-    data.tween = tween;
+    this.isWin = target === _window;
+    this.target = target;
+    this.tween = tween;
     value = _clean(value, index, target, targets);
-    data.vars = value;
-    data.autoKill = !!("autoKill" in value ? value : _config).autoKill;
-    data.getX = _buildGetter(target, "x");
-    data.getY = _buildGetter(target, "y");
-    data.x = data.xPrev = data.getX();
-    data.y = data.yPrev = data.getY();
+    this.vars = value;
+    this.autoKill = !!("autoKill" in value ? value : _config).autoKill;
+    this.getX = _buildGetter(target, "x");
+    this.getY = _buildGetter(target, "y");
+    this.x = this.xPrev = this.getX();
+    this.y = this.yPrev = this.getY();
     ScrollTrigger || (ScrollTrigger = gsap.core.globals().ScrollTrigger);
     gsap.getProperty(target, "scrollBehavior") === "smooth" && gsap.set(target, {
       scrollBehavior: "auto"
@@ -154,25 +152,25 @@ export var ScrollToPlugin = {
 
     if (snapType && snapType !== "none") {
       // disable scroll snapping to avoid strange behavior
-      data.snap = 1;
-      data.snapInline = target.style.scrollSnapType;
+      this.snap = 1;
+      this.snapInline = target.style.scrollSnapType;
       target.style.scrollSnapType = "none";
     }
 
     if (value.x != null) {
-      data.add(data, "x", data.x, _parseVal(value.x, target, "x", data.x, value.offsetX || 0), index, targets);
+      this.add(this, "x", this.x, _parseVal(value.x, target, "x", this.x, value.offsetX || 0), index, targets);
 
-      data._props.push("scrollTo_x");
+      this._props.push("scrollTo_x");
     } else {
-      data.skipX = 1;
+      this.skipX = 1;
     }
 
     if (value.y != null) {
-      data.add(data, "y", data.y, _parseVal(value.y, target, "y", data.y, value.offsetY || 0), index, targets);
+      this.add(this, "y", this.y, _parseVal(value.y, target, "y", this.y, value.offsetY || 0), index, targets);
 
-      data._props.push("scrollTo_y");
+      this._props.push("scrollTo_y");
     } else {
-      data.skipY = 1;
+      this.skipY = 1;
     }
   },
   render: function render(ratio, data) {
@@ -269,7 +267,7 @@ ScrollToPlugin.max = _max;
 ScrollToPlugin.getOffset = _getOffset;
 ScrollToPlugin.buildGetter = _buildGetter;
 
-ScrollToPlugin.config = function (vars) {
+ScrollToPlugin.config = (vars) => {
   _config || _initCore() || (_config = gsap.config()); // in case the window hasn't been defined yet.
 
   for (var p in vars) {

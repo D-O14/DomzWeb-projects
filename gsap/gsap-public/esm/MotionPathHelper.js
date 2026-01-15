@@ -21,7 +21,7 @@ var gsap,
     _context,
     _bonusValidated = 1,
     //<name>MotionPathHelper</name>
-_selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
+_selectorExp = /(^[#.][a-z]|[a-y][a-z])/i,
     _isString = function _isString(value) {
   return typeof value === "string";
 },
@@ -76,7 +76,7 @@ _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
   }].concat(path), vars)) : _isString(path) || path && (path.tagName + "").toLowerCase() === "path" ? path : 0;
 },
     _addCopyToClipboard = function _addCopyToClipboard(target, getter, onComplete) {
-  target.addEventListener('click', function (e) {
+  target.addEventListener('click', (e) => {
     if (e.target._gsHelper) {
       var c = getter(e.target);
       _copyElement.value = c;
@@ -140,7 +140,7 @@ _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
     MotionPathPlugin = gsap.plugins.motionPath;
     MotionPathHelper.PathEditor = PathEditor;
 
-    _context = gsap.core.context || function () {};
+    _context = gsap.core.context || (() => {});
   }
 
   if (!MotionPathPlugin) {
@@ -153,9 +153,8 @@ _selectorExp = /(^[#\.][a-z]|[a-y][a-z])/i,
   }
 };
 
-export var MotionPathHelper = /*#__PURE__*/function () {
+export var MotionPathHelper = /*#__PURE__*/(() => {
   function MotionPathHelper(targetOrTween, vars) {
-    var _this = this;
 
     if (vars === void 0) {
       vars = {};
@@ -166,7 +165,6 @@ export var MotionPathHelper = /*#__PURE__*/function () {
     }
 
     var copyButton = _createElement("div"),
-        self = this,
         offset = {
       x: 0,
       y: 0
@@ -208,20 +206,16 @@ export var MotionPathHelper = /*#__PURE__*/function () {
     copyButton.setAttribute("class", "copy-motion-path");
     copyButton.style.cssText = "border-radius:8px; background-color:rgba(85, 85, 85, 0.7); color:#fff; cursor:pointer; padding:6px 12px; font-family:Signika Negative, Arial, sans-serif; position:fixed; left:50%; transform:translate(-50%, 0); font-size:19px; bottom:10px";
     copyButton.innerText = "COPY MOTION PATH";
-    copyButton._gsHelper = self;
+    copyButton._gsHelper = this;
 
     (gsap.utils.toArray(vars.container)[0] || _body).appendChild(copyButton);
 
-    _addCopyToClipboard(copyButton, function () {
-      return self.getString();
-    }, function () {
-      return gsap.fromTo(copyButton, {
+    _addCopyToClipboard(copyButton, () => this.getString(), () => gsap.fromTo(copyButton, {
         backgroundColor: "white"
       }, {
         duration: 0.5,
         backgroundColor: "rgba(85, 85, 85, 0.6)"
-      });
-    });
+      }));
 
     svg = path && path.ownerSVGElement;
 
@@ -277,7 +271,7 @@ export var MotionPathHelper = /*#__PURE__*/function () {
     }
 
     if (!("anchorSnap" in vars)) {
-      vars.anchorSnap = function (p) {
+      vars.anchorSnap = (p) => {
         if (p.x * p.x + p.y * p.y < 16) {
           p.x = p.y = 0;
         }
@@ -286,7 +280,7 @@ export var MotionPathHelper = /*#__PURE__*/function () {
 
     animationToScrub = animation && animation.parent && animation.parent.data === "nested" ? animation.parent.parent : animation;
 
-    vars.onPress = function () {
+    vars.onPress = () => {
       animationToScrub.pause(0);
     };
 
@@ -345,8 +339,8 @@ export var MotionPathHelper = /*#__PURE__*/function () {
 
     _context(this);
 
-    this.kill = this.revert = function () {
-      _this.editor.kill();
+    this.kill = this.revert = () => {
+      this.editor.kill();
 
       copyButton.parentNode && copyButton.parentNode.removeChild(copyButton);
       createdSVG && svg.parentNode && svg.parentNode.removeChild(svg);
@@ -361,16 +355,12 @@ export var MotionPathHelper = /*#__PURE__*/function () {
   };
 
   return MotionPathHelper;
-}();
+})();
 MotionPathHelper.register = _initCore;
 
-MotionPathHelper.create = function (target, vars) {
-  return new MotionPathHelper(target, vars);
-};
+MotionPathHelper.create = (target, vars) => new MotionPathHelper(target, vars);
 
-MotionPathHelper.editPath = function (path, vars) {
-  return PathEditor.create(path, vars);
-};
+MotionPathHelper.editPath = (path, vars) => PathEditor.create(path, vars);
 
 MotionPathHelper.version = "3.13.0";
 export { MotionPathHelper as default };

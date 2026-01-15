@@ -6,8 +6,8 @@
  * @author: Jack Doyle
  */
 
-let gsap, _fonts, _coreInitted, _initIfNecessary = () => _coreInitted || SplitText.register(window.gsap), _charSegmenter = typeof Intl !== "undefined" ? new Intl.Segmenter() : 0, _toArray = (r) => typeof r === "string" ? _toArray(document.querySelectorAll(r)) : "length" in r ? Array.from(r) : [r], _elements = (targets) => _toArray(targets).filter((e) => e instanceof HTMLElement), _emptyArray = [], _context = function() {
-}, _spacesRegEx = /\s+/g, _emojiSafeRegEx = new RegExp("\\p{RI}\\p{RI}|\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?(\\u{200D}\\p{Emoji}(\\p{EMod}|\\u{FE0F}\\u{20E3}?|[\\u{E0020}-\\u{E007E}]+\\u{E007F})?)*|.", "gu"), _emptyBounds = { left: 0, top: 0, width: 0, height: 0 }, _stretchToFitSpecialChars = (collection, specialCharsRegEx) => {
+let gsap, _fonts, _coreInitted, _initIfNecessary = () => _coreInitted || SplitText.register(window.gsap), _charSegmenter = typeof Intl !== "undefined" ? new Intl.Segmenter() : 0, _toArray = (r) => typeof r === "string" ? _toArray(document.querySelectorAll(r)) : "length" in r ? Array.from(r) : [r], _elements = (targets) => _toArray(targets).filter((e) => e instanceof HTMLElement), _emptyArray = [], _context = () => {
+}, _spacesRegEx = /\s+/g, _emojiSafeRegEx = /\p{RI}\p{RI}|\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?(\u{200D}\p{Emoji}(\p{EMod}|\u{FE0F}\u{20E3}?|[\u{E0020}-\u{E007E}]+\u{E007F})?)*|./gu, _emptyBounds = { left: 0, top: 0, width: 0, height: 0 }, _stretchToFitSpecialChars = (collection, specialCharsRegEx) => {
   if (specialCharsRegEx) {
     let charsFound = new Set(collection.join("").match(specialCharsRegEx) || _emptyArray), i = collection.length, slots, word, char, combined;
     if (charsFound.size) {
@@ -32,7 +32,7 @@ let gsap, _fonts, _coreInitted, _initIfNecessary = () => _coreInitted || SplitTe
   return collection;
 }, _disallowInline = (element) => window.getComputedStyle(element).display === "inline" && (element.style.display = "inline-block"), _insertNodeBefore = (newChild, parent, existingChild) => parent.insertBefore(typeof newChild === "string" ? document.createTextNode(newChild) : newChild, existingChild), _getWrapper = (type, config, collection) => {
   let className = config[type + "sClass"] || "", { tag = "div", aria = "auto", propIndex = false } = config, display = type === "line" ? "block" : "inline-block", incrementClass = className.indexOf("++") > -1, wrapper = (text) => {
-    let el = document.createElement(tag), i = collection.length + 1;
+    const el = document.createElement(tag), i = collection.length + 1;
     className && (el.className = className + (incrementClass ? " " + className + i : ""));
     propIndex && el.style.setProperty("--" + type, i + "");
     aria !== "none" && el.setAttribute("aria-hidden", "true");
@@ -48,9 +48,9 @@ let gsap, _fonts, _coreInitted, _initIfNecessary = () => _coreInitted || SplitTe
   wrapper.collection = collection;
   return wrapper;
 }, _getLineWrapper = (element, nodes, config, collection) => {
-  let lineWrapper = _getWrapper("line", config, collection), textAlign = window.getComputedStyle(element).textAlign || "left";
+  const lineWrapper = _getWrapper("line", config, collection), textAlign = window.getComputedStyle(element).textAlign || "left";
   return (startIndex, endIndex) => {
-    let newLine = lineWrapper("");
+    const newLine = lineWrapper("");
     newLine.style.textAlign = textAlign;
     element.insertBefore(newLine, nodes[startIndex]);
     for (; startIndex < endIndex; startIndex++) {
@@ -166,7 +166,7 @@ const _SplitText = class _SplitText {
       let i = orig.length, o;
       while (i--) {
         o = orig[i];
-        let w = o.element.offsetWidth;
+        const w = o.element.offsetWidth;
         if (w !== o.width) {
           o.width = w;
           this._split();
@@ -251,7 +251,7 @@ const _SplitText = class _SplitText {
         this.chars.push(...chars);
       });
       mask && this[mask] && this.masks.push(...this[mask].map((el) => {
-        let maskEl = el.cloneNode();
+        const maskEl = el.cloneNode();
         el.replaceWith(maskEl);
         maskEl.appendChild(el);
         el.className && (maskEl.className = el.className.replace(/(\b\w+\b)/g, "$1-mask"));
@@ -272,7 +272,7 @@ const _SplitText = class _SplitText {
   }
   revert() {
     var _a, _b;
-    let { orig, anim, obs } = this._data;
+    const { orig, anim, obs } = this._data;
     obs && obs.disconnect();
     orig.forEach(({ element, html, ariaL, ariaH }) => {
       element.innerHTML = html;
@@ -305,6 +305,6 @@ const _SplitText = class _SplitText {
   }
 };
 _SplitText.version = "3.13.0";
-let SplitText = _SplitText;
+const SplitText = _SplitText;
 
 export { SplitText, SplitText as default };

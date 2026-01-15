@@ -222,15 +222,13 @@ var gsap,
     _root = [_win, _doc, _docEl, _body];
     _clamp = gsap.utils.clamp;
 
-    _context = gsap.core.context || function () {};
+    _context = gsap.core.context || (() => {});
 
     _pointerType = "onpointerenter" in _body ? "pointer" : "mouse"; // isTouch is 0 if no touch, 1 if ONLY touch, and 2 if it can accommodate touch but also other types like mouse/pointer.
 
     _isTouch = Observer.isTouch = _win.matchMedia && _win.matchMedia("(hover: none), (pointer: coarse)").matches ? 1 : "ontouchstart" in _win || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0 ? 2 : 0;
     _eventTypes = Observer.eventTypes = ("ontouchstart" in _docEl ? "touchstart,touchmove,touchcancel,touchend" : !("onpointerdown" in _docEl) ? "mousedown,mousemove,mouseup,mouseup" : "pointerdown,pointermove,pointercancel,pointerup").split(",");
-    setTimeout(function () {
-      return _startup = 0;
-    }, 500);
+    setTimeout(() => _startup = 0, 500);
 
     _setScrollTrigger();
 
@@ -242,7 +240,7 @@ var gsap,
 
 _horizontal.op = _vertical;
 _scrollers.cache = 0;
-export var Observer = /*#__PURE__*/function () {
+export var Observer = /*#__PURE__*/(() => {
   function Observer(vars) {
     this.init(vars);
   }
@@ -441,7 +439,7 @@ export var Observer = /*#__PURE__*/function () {
         onTouchOrPointerDelta(dx, dy);
       }
     },
-        _onPress = self.onPress = function (e) {
+        _onPress = self.onPress = (e) => {
       if (_ignoreCheck(e, 1) || e && e.button) {
         return;
       }
@@ -465,7 +463,7 @@ export var Observer = /*#__PURE__*/function () {
       self.deltaX = self.deltaY = 0;
       onPress && onPress(self);
     },
-        _onRelease = self.onRelease = function (e) {
+        _onRelease = self.onRelease = (e) => {
       if (_ignoreCheck(e, 1)) {
         return;
       }
@@ -485,7 +483,7 @@ export var Observer = /*#__PURE__*/function () {
 
 
         if (preventDefault && allowClicks) {
-          gsap.delayedCall(0.08, function () {
+          gsap.delayedCall(0.08, () => {
             // some browsers (like Firefox) won't trust script-generated clicks, so if the user tries to click on a video to play it, for example, it simply won't work. Since a regular "click" event will most likely be generated anyway (one that has its isTrusted flag set to true), we must slightly delay our script-generated click so that the "real"/trusted one is prioritized. Remember, when there are duplicate events in quick succession, we suppress all but the first one. Some browsers don't even trigger the "real" one at all, so our synthetic one is a safety valve that ensures that no matter what, a click event does get dispatched.
             if (_getTime() - onClickTime > 300 && !e.defaultPrevented) {
               if (e.target.click) {
@@ -574,7 +572,7 @@ export var Observer = /*#__PURE__*/function () {
 
     _context(this);
 
-    self.enable = function (e) {
+    self.enable = (e) => {
       if (!self.isEnabled) {
         _addListener(isViewport ? ownerDoc : target, "scroll", _onScroll);
 
@@ -613,12 +611,10 @@ export var Observer = /*#__PURE__*/function () {
       return self;
     };
 
-    self.disable = function () {
+    self.disable = () => {
       if (self.isEnabled) {
         // only remove the _onScroll listener if there aren't any others that rely on the functionality.
-        _observers.filter(function (o) {
-          return o !== self && _isViewport(o.target);
-        }).length || _removeListener(isViewport ? ownerDoc : target, "scroll", _onScroll);
+        _observers.filter((o) => o !== self && _isViewport(o.target)).length || _removeListener(isViewport ? ownerDoc : target, "scroll", _onScroll);
 
         if (self.isPressed) {
           self._vx.reset();
@@ -657,7 +653,7 @@ export var Observer = /*#__PURE__*/function () {
       }
     };
 
-    self.kill = self.revert = function () {
+    self.kill = self.revert = () => {
       self.disable();
 
       var i = _observers.indexOf(self);
@@ -685,24 +681,16 @@ export var Observer = /*#__PURE__*/function () {
   }]);
 
   return Observer;
-}();
+})();
 Observer.version = "3.13.0";
 
-Observer.create = function (vars) {
-  return new Observer(vars);
-};
+Observer.create = (vars) => new Observer(vars);
 
 Observer.register = _initCore;
 
-Observer.getAll = function () {
-  return _observers.slice();
-};
+Observer.getAll = () => _observers.slice();
 
-Observer.getById = function (id) {
-  return _observers.filter(function (o) {
-    return o.vars.id === id;
-  })[0];
-};
+Observer.getById = (id) => _observers.filter((o) => o.vars.id === id)[0];
 
 _getGSAP() && gsap.registerPlugin(Observer);
 export { Observer as default, _isViewport, _scrollers, _getScrollFunc, _getProxyProp, _proxies, _getVelocityProp, _vertical, _horizontal, _getTarget };

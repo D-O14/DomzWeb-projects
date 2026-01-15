@@ -118,7 +118,7 @@ _bezierToPoints = function _bezierToPoints(x1, y1, x2, y2, x3, y3, x4, y4, thres
   return points;
 };
 
-export var CustomEase = /*#__PURE__*/function () {
+export var CustomEase = /*#__PURE__*/(() => {
   function CustomEase(id, data, config) {
     _coreInitted || _initCore();
     this.id = id;
@@ -268,7 +268,7 @@ export var CustomEase = /*#__PURE__*/function () {
     } //this._calcEnd = (points[points.length-1].y !== 1 || points[0].y !== 0); //ensures that we don't run into floating point errors. As long as we're starting at 0 and ending at 1, tell GSAP to skip the final calculation and use 0/1 as the factor.
 
 
-    this.ease = function (p) {
+    this.ease = (p) => {
       var point = lookup[p * l | 0] || lookup[l - 1];
 
       if (point.nx < p) {
@@ -366,7 +366,7 @@ export var CustomEase = /*#__PURE__*/function () {
   };
 
   return CustomEase;
-}();
+})();
 CustomEase.version = "3.13.0";
 CustomEase.headless = true;
 _getGSAP() && gsap.registerPlugin(CustomEase);

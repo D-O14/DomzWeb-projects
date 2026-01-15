@@ -67,9 +67,7 @@ var gsap,
     _RAD2DEG = 180 / Math.PI,
     _bigNum = 1e20,
     _identityMatrix = new Matrix2D(),
-    _getTime = Date.now || function () {
-  return new Date().getTime();
-},
+    _getTime = Date.now || (() => new Date().getTime()),
     _renderQueue = [],
     _lookup = {},
     //when a Draggable is created, the target gets a unique _gsDragID property that allows gets associated with the Draggable instance for quick lookups in Draggable.get(). This avoids circular references that could cause gc problems.
@@ -110,9 +108,7 @@ _copy = function _copy(obj, factor) {
   }
 },
     _renderQueueTick = function _renderQueueTick() {
-  return _renderQueue.forEach(function (func) {
-    return func();
-  });
+  return _renderQueue.forEach((func) => func());
 },
     _addToRenderQueue = function _addToRenderQueue(func) {
   _renderQueue.push(func);
@@ -461,7 +457,7 @@ _getElementBounds = function _getElementBounds(element, context) {
 
       min -= 1.1;
     } else if (_isFunction(snap)) {
-      vars.end = function (value) {
+      vars.end = (value) => {
         var result = snap.call(draggable, value),
             copy,
             p;
@@ -676,15 +672,11 @@ ScrollProxy = function ScrollProxy(element, vars) {
     prevTop = element.scrollTop;
   };
 
-  this.maxScrollTop = function () {
-    return maxTop;
-  };
+  this.maxScrollTop = () => maxTop;
 
-  this.maxScrollLeft = function () {
-    return maxLeft;
-  };
+  this.maxScrollLeft = () => maxLeft;
 
-  this.disable = function () {
+  this.disable = () => {
     node = content.firstChild;
 
     while (node) {
@@ -796,7 +788,7 @@ ScrollProxy = function ScrollProxy(element, vars) {
 
     _isTouchDevice = "ontouchstart" in _docElement && "orientation" in _win || nav && (nav.MaxTouchPoints > 0 || nav.msMaxTouchPoints > 0);
 
-    _addPaddingBR = function () {
+    _addPaddingBR = (() => {
       //this function is in charge of analyzing browser behavior related to padding. It sets the _addPaddingBR to true if the browser doesn't normally factor in the bottom or right padding on the element inside the scrolling area, and it sets _addPaddingLeft to true if it's a browser that requires the extra offset (offsetLeft) to be added to the paddingRight (like Opera).
       var div = _createElement("div"),
           child = _createElement("div"),
@@ -813,9 +805,9 @@ ScrollProxy = function ScrollProxy(element, vars) {
 
       parent.removeChild(div);
       return val;
-    }();
+    })();
 
-    _touchEventLookup = function (types) {
+    _touchEventLookup = ((types) => {
       //we create an object that makes it easy to translate touch event types into their "pointer" counterparts if we're in a browser that uses those instead. Like IE10 uses "MSPointerDown" instead of "touchstart", for example.
       var standard = types.split(","),
           converted = ("onpointerdown" in _tempDiv ? "pointerdown,pointermove,pointerup,pointercancel" : "onmspointerdown" in _tempDiv ? "MSPointerDown,MSPointerMove,MSPointerUp,MSPointerCancel" : types).split(","),
@@ -837,7 +829,7 @@ ScrollProxy = function ScrollProxy(element, vars) {
       } catch (e) {}
 
       return obj;
-    }("touchstart,touchmove,touchend,touchcancel");
+    })("touchstart,touchmove,touchend,touchcancel");
 
     _addListener(_doc, "touchcancel", _emptyFunc); //some older Android devices intermittently stop dispatching "touchmove" events if we don't listen for "touchcancel" on the document. Very strange indeed.
 
@@ -847,7 +839,7 @@ ScrollProxy = function ScrollProxy(element, vars) {
 
     _body && _body.addEventListener("touchstart", _emptyFunc); //works around Safari bug: https://gsap.com/forums/topic/21450-draggable-in-iframe-on-mobile-is-buggy/
 
-    _addListener(_doc, "contextmenu", function () {
+    _addListener(_doc, "contextmenu", () => {
       for (var p in _lookup) {
         if (_lookup[p].isPressed) {
           _lookup[p].endDrag();
@@ -861,7 +853,7 @@ ScrollProxy = function ScrollProxy(element, vars) {
   if (gsap) {
     InertiaPlugin = gsap.plugins.inertia;
 
-    _context = gsap.core.context || function () {};
+    _context = gsap.core.context || (() => {});
 
     _checkPrefix = gsap.utils.checkPrefix;
     _transformProp = _checkPrefix(_transformProp);
@@ -874,7 +866,7 @@ ScrollProxy = function ScrollProxy(element, vars) {
   }
 };
 
-var EventDispatcher = /*#__PURE__*/function () {
+var EventDispatcher = /*#__PURE__*/(() => {
   function EventDispatcher(target) {
     this._listeners = {};
     this.target = target || this;
@@ -897,22 +889,19 @@ var EventDispatcher = /*#__PURE__*/function () {
   };
 
   _proto.dispatchEvent = function dispatchEvent(type) {
-    var _this = this;
 
     var result;
-    (this._listeners[type] || []).forEach(function (callback) {
-      return callback.call(_this, {
+    (this._listeners[type] || []).forEach((callback) => callback.call(this, {
         type: type,
-        target: _this.target
-      }) === false && (result = false);
-    });
+        target: this.target
+      }) === false && (result = false));
     return result; //if any of the callbacks return false, pass that along.
   };
 
   return EventDispatcher;
-}();
+})();
 
-export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
+export var Draggable = /*#__PURE__*/((_EventDispatcher) => {
   _inheritsLoose(Draggable, _EventDispatcher);
 
   function Draggable(target, vars) {
@@ -1237,7 +1226,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       }
 
       if (_isFunction(snap)) {
-        return function (n) {
+        return (n) => {
           var edgeTolerance = !self.isPressed ? 1 : 1 - self.edgeResistance; //if we're tweening, disable the edgeTolerance because it's already factored into the tweening values (we don't want to apply it multiple times)
 
           return snap.call(self, (n > max ? max + (n - max) * edgeTolerance : n < min ? min + (n - min) * edgeTolerance : n) * factor) * factor;
@@ -1245,7 +1234,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       }
 
       if (_isArray(snap)) {
-        return function (n) {
+        return (n) => {
           var i = snap.length,
               closest = 0,
               absDif = _bigNum,
@@ -1270,17 +1259,13 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
         };
       }
 
-      return isNaN(snap) ? function (n) {
-        return n;
-      } : function () {
-        return snap * factor;
-      };
+      return isNaN(snap) ? ((n) => n) : (() => snap * factor);
     },
         buildPointSnapFunc = function buildPointSnapFunc(snap, minX, maxX, minY, maxY, radius, factor) {
       radius = radius && radius < _bigNum ? radius * radius : _bigNum; //so we don't have to Math.sqrt() in the functions. Performance optimization.
 
       if (_isFunction(snap)) {
-        return function (point) {
+        return (point) => {
           var edgeTolerance = !self.isPressed ? 1 : 1 - self.edgeResistance,
               x = point.x,
               y = point.y,
@@ -1317,7 +1302,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       }
 
       if (_isArray(snap)) {
-        return function (p) {
+        return (p) => {
           var i = snap.length,
               closest = 0,
               minDist = _bigNum,
@@ -1342,9 +1327,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
         };
       }
 
-      return function (n) {
-        return n;
-      };
+      return (n) => n;
     },
         calculateBounds = function calculateBounds() {
       var bounds, targetBounds, snap, snapIsRaw;
@@ -1356,7 +1339,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
         self.minY = minY = -scrollProxy.maxScrollTop();
         self.maxX = maxX = self.maxY = maxY = 0;
         hasBounds = true;
-      } else if (!!vars.bounds) {
+      } else if (vars.bounds) {
         bounds = _getBounds(vars.bounds, target.parentNode); //could be a selector/jQuery object or a DOM element or a generic object like {top:0, left:100, width:1000, height:800} or {minX:100, maxX:1100, minY:0, maxY:800}
 
         if (rotationMode) {
@@ -2224,7 +2207,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
     old && old.kill(); // avoids duplicates (an element can only be controlled by one Draggable)
     //give the user access to start/stop dragging...
 
-    _this2.startDrag = function (event, align) {
+    _this2.startDrag = (event, align) => {
       var r1, r2, p1, p2;
       onPress(event || self.pointerEvent, true); //if the pointer isn't on top of the element, adjust things accordingly
 
@@ -2252,23 +2235,15 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
 
     _this2.drag = onMove;
 
-    _this2.endDrag = function (e) {
-      return onRelease(e || self.pointerEvent, true);
-    };
+    _this2.endDrag = (e) => onRelease(e || self.pointerEvent, true);
 
-    _this2.timeSinceDrag = function () {
-      return self.isDragging ? 0 : (_getTime() - dragEndTime) / 1000;
-    };
+    _this2.timeSinceDrag = () => self.isDragging ? 0 : (_getTime() - dragEndTime) / 1000;
 
-    _this2.timeSinceClick = function () {
-      return (_getTime() - clickTime) / 1000;
-    };
+    _this2.timeSinceClick = () => (_getTime() - clickTime) / 1000;
 
-    _this2.hitTest = function (target, threshold) {
-      return Draggable.hitTest(self.target, target, threshold);
-    };
+    _this2.hitTest = (target, threshold) => Draggable.hitTest(self.target, target, threshold);
 
-    _this2.getDirection = function (from, diagonalThreshold) {
+    _this2.getDirection = (from, diagonalThreshold) => {
       //from can be "start" (default), "velocity", or an element
       var mode = from === "velocity" && InertiaPlugin ? from : _isObject(from) && !rotationMode ? "element" : "start",
           xChange,
@@ -2305,7 +2280,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       return direction;
     };
 
-    _this2.applyBounds = function (newBounds, sticky) {
+    _this2.applyBounds = (newBounds, sticky) => {
       var x, y, forceZeroVelocity, e, parent, isRoot;
 
       if (newBounds && vars.bounds !== newBounds) {
@@ -2378,7 +2353,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       return self;
     };
 
-    _this2.update = function (applyBounds, sticky, ignoreExternalChanges) {
+    _this2.update = (applyBounds, sticky, ignoreExternalChanges) => {
       if (sticky && self.isPressed) {
         // in case the element was repositioned in the document flow, thus its x/y may be identical but its position is actually quite different.
         var m = getGlobalMatrix(target),
@@ -2431,7 +2406,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       return self;
     };
 
-    _this2.enable = function (type) {
+    _this2.enable = (type) => {
       var setVars = {
         lazy: true
       },
@@ -2498,7 +2473,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       return self;
     };
 
-    _this2.disable = function (type) {
+    _this2.disable = (type) => {
       var dragging = self.isDragging,
           i = triggers.length,
           trigger;
@@ -2563,7 +2538,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
       return arguments.length ? value ? self.enable(type) : self.disable(type) : enabled;
     };
 
-    _this2.kill = function () {
+    _this2.kill = () => {
       self.isThrowing = false;
       self.tween && self.tween.kill();
       self.disable();
@@ -2621,9 +2596,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
 
   Draggable.create = function create(targets, vars) {
     _coreInitted || _initCore(true);
-    return _toArray(targets).map(function (target) {
-      return new Draggable(target, vars);
-    });
+    return _toArray(targets).map((target) => new Draggable(target, vars));
   };
 
   Draggable.get = function get(target) {
@@ -2679,7 +2652,7 @@ export var Draggable = /*#__PURE__*/function (_EventDispatcher) {
   };
 
   return Draggable;
-}(EventDispatcher);
+})(EventDispatcher);
 
 _setDefaults(Draggable.prototype, {
   pointerX: 0,

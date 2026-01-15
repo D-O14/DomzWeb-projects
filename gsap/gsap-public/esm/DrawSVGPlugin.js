@@ -23,7 +23,7 @@ var gsap,
     _getGSAP = function _getGSAP() {
   return gsap || _windowExists() && (gsap = window.gsap) && gsap.registerPlugin && gsap;
 },
-    _numExp = /[-+=\.]*\d+[\.e\-\+]*\d*[e\-\+]*\d*/gi,
+    _numExp = /[-+=.]*\d+[.e\-+]*\d*[e\-+]*\d*/gi,
     //finds any numbers, including ones that start with += or -=, negative numbers, and ones in scientific notation like 1e-8.
 _types = {
   rect: ["width", "height"],
@@ -47,7 +47,7 @@ _types = {
 },
     _sqrt = Math.sqrt,
     _getDistance = function _getDistance(x1, y1, x2, y2, scaleX, scaleY) {
-  return _sqrt(Math.pow((_parseNum(x2) - _parseNum(x1)) * scaleX, 2) + Math.pow((_parseNum(y2) - _parseNum(y1)) * scaleY, 2));
+  return _sqrt(((_parseNum(x2) - _parseNum(x1)) * scaleX) ** 2 + ((_parseNum(y2) - _parseNum(y1)) * scaleY) ** 2);
 },
     _warn = function _warn(message) {
   return console.warn(message);
@@ -193,7 +193,7 @@ _parse = function _parse(value, length, defaultStart) {
     _toArray = gsap.utils.toArray;
     _getStyleSaver = gsap.core.getStyleSaver;
 
-    _reverting = gsap.core.reverting || function () {};
+    _reverting = gsap.core.reverting || (() => {});
 
     _isEdge = ((_win.navigator || {}).userAgent || "").indexOf("Edge") !== -1; //Microsoft Edge has a bug that causes it not to redraw the path correctly if the stroke-linecap is anything other than "butt" (like "round") and it doesn't match the stroke-linejoin. A way to trigger it is to change the stroke-miterlimit, so we'll only do that if/when we have to (to maximize performance)
   }
