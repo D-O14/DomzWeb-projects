@@ -17,7 +17,7 @@
   "license": "ISC",
   "type": "commonjs",
   "scripts": {
-    "lint-format": "npx @biomejs/biome check --write",
+    "lint-format": "biome check --write",
     "minify-js": "terser codes/code.js -o codes/code.min.6f3a8.js -c -m",
     "minify-css": "npx postcss codes/project.css -o codes/project.min.a2b7c.css -c -m",
     "build": "npm run minify-js && npm run minify-css"
