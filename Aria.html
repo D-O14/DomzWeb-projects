@@ -126,7 +126,20 @@
     }
 
     .skip-link{
-        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        text-align: center;
+        background: #333;
+        color: #fff;
+        padding: .5rem;
+        translate: 0 -100%;
+        transition: translate 150ms ease-in-out;
+    }
+
+    .skip-link:focus{
+        translate: 0;
     }
 
 </style>
