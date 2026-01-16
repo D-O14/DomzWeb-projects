@@ -12,14 +12,22 @@
     }
 
     body{
-        background:hsl(250, 90%, 30%);
+        background:hsl(0, 0%, 90%);
+        --bg-dark:hsl(0,0%,0%);
+        --bg:hsl(0,0%,5%);
+        --bg-light:hsl(0,0%,10%);
+        --border:hsl(0,0%,30%);
+        --txt:hsl(0,0%,95%);
+        --txt-muted:hsl(0,0%,70%);
+        --gradient:linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+        --gradient-hover:linear-gradient(0deg, var(--bg), var(--bg-light));
     }
 
     button {
-        background: dodgerblue; 
-        color:hsl(240, 100%, 98%);
+        background: var(--bg-light); 
+        border: 2px solid var(--border);
+        color:var(--txt);
         padding: 0.5rem 1rem;
-        border: none;
         border-radius: 4px;
     }
 
@@ -66,94 +74,15 @@
         }
     }
 
-    select {
-        width: 200px;
-        padding: 0.5rem 1rem;
-        border: 1px solid;
-        outline: none;
-        border-radius: 5px;
-    }
-
-    /*selectedcontent,
-    option {
-        color: #333;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-        border-bottom: 1px solid;
-        padding: 0.2rem 0.5rem;
-        outline: none;
-    }
-
-    option {
-        padding-block: 0.25rem;
-    }
-
-    option::checkmark {
-        display: none;
-    }
-
-    option:checked {
-        background: hsl(200, 80%, 80%);
-    }
-
-    select,
-    ::picker(select) {
-        appearance: base-select;
-    }*/
-
-    dialog::backdrop {
-        background: rgba(0 0 0 / 0.5);
-    }
-
-    /*button[data-open] {
-        background: dodgerblue;
-        padding: .5rem 1rem;
-        border: none;
-        border-radius: 4px;
-        color: #fff;
-    }*/
-
-    button[data-close] {
-        background: red;
-        padding: 0.5rem 1rem;
-        border: none;
-        border-radius: 4px;
-        color: #fff;
-    }
-
-    .btnBox {
-        margin-left: 20px;
-    }
-
-    .skip-link {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-        background: #333;
-        color: #fff;
-        padding: 0.5rem;
-        translate: 0 -100%;
-        transition: translate 150ms ease-in-out;
-    }
-
-    .skip-link:focus {
-        translate: 0;
-    }
 </style>
 
 <body>
-    <header>
-        <a href="#main" class="skip-link">Skip to main</a>
-    </header>
 
-    <main id="main">
-        <!--<summary>
+    <main>
+        <summary>
             <h1>FAQs</h1>
 
-            <details name="details">
+            <details>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
                     minus ut, hic tempore impedit magni deleniti voluptatibus architecto
@@ -162,7 +91,7 @@
                 </p>
             </details>
 
-            <details name="details">
+            <details>
                 <p>
                     Provident maiores, similique exercitationem nulla corrupti
                     blanditiis necessitatibus cupiditate, optio pariatur perspiciatis
@@ -172,7 +101,7 @@
                 </p>
             </details>
 
-            <details name="details">
+            <details>
                 <p>
                     Sed dolores debitis rem veritatis impedit numquam placeat ex quae
                     vero. Ab, rem quidem itaque eum consectetur repellat molestias quae
@@ -181,7 +110,7 @@
                 </p>
             </details>
 
-            <details name="details">
+            <details>
                 <p>
                     Tenetur obcaecati accusantium error nihil cumque, aliquid corporis
                     totam, officiis reiciendis minus doloribus aspernatur sunt enim et
@@ -191,7 +120,7 @@
             </details>
         </summary>
 
-        <select name="Drop-down" title="Drop-down box" id="">
+        <!--<select name="Drop-down" title="Drop-down box" id="">
             <button>
                 <selectedcontent></selectedcontent>
             </button>
@@ -200,36 +129,7 @@
             <option value="">Option3</option>
         </select>-->
 
-        <button data-open onclick="modal.showModal()">Open modal</button>
-
-        <dialog data-modal>
-            <form action="">
-                <h1>Login here</h1>
-                <input type="text" placeholder="Name"/>
-                <input type="password" placeholder="Password" />
-                <input type="email" placeholder="E-mail" />
-                <input type="date" placeholder="Birthday" />
-                <div class="btnBox">
-                    <button type="submit">Submit</button>
-                    <button type="button" data-close>Cancel</button>
-                </div>
-            </form>
-        </dialog>
     </main>
 </body>
-
-<script>
-    const openBtn = document.querySelector("[data-open]");
-    const closeBtn = document.querySelector("[data-close]");
-    const modal = document.querySelector("[data-modal]");
-
-    openBtn.addEventListener("click", () => {
-        modal.show();
-    });
-
-    closeBtn.addEventListener("click", () => {
-        modal.close();
-    });
-</script>
 
 </html>
