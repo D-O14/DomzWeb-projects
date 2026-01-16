@@ -11,12 +11,16 @@
         font-family: sans-serif;
     }
 
+    body{
+        background:hsl(250, 90%, 30%);
+    }
+
     button {
-        background: dodgerblue;
+        background: dodgerblue; 
+        color:hsl(240, 100%, 98%);
         padding: 0.5rem 1rem;
         border: none;
         border-radius: 4px;
-        color: var(--accent1);
     }
 
     dialog {
@@ -146,7 +150,7 @@
     </header>
 
     <main id="main">
-        <summary>
+        <!--<summary>
             <h1>FAQs</h1>
 
             <details name="details">
@@ -194,19 +198,19 @@
             <option value="">Option1</option>
             <option value="">Option2</option>
             <option value="">Option3</option>
-        </select>
+        </select>-->
 
         <button data-open onclick="modal.showModal()">Open modal</button>
 
         <dialog data-modal>
-            <form action="" method="post">
+            <form action="">
                 <h1>Login here</h1>
-                <input type="text" placeholder="Name" />
+                <input type="text" placeholder="Name"/>
                 <input type="password" placeholder="Password" />
                 <input type="email" placeholder="E-mail" />
                 <input type="date" placeholder="Birthday" />
                 <div class="btnBox">
-                    <button type="submit" formmethod="dialog">Submit</button>
+                    <button type="submit">Submit</button>
                     <button type="button" data-close>Cancel</button>
                 </div>
             </form>
