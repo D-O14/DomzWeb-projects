@@ -11,67 +11,65 @@
         font-family: sans-serif;
     }
 
+    :root{
+        /*--bg-light: hsl(0, 0%, 95%);
+        --bg-light: lch(95 0 0);*/
+        --bg-light: oklch(.95 0 0);
+        --background: hsl(0, 0%, 90%);
+        --txt:hsl(0, 0%, 5%);
+        --txt-muted:hsl(0 0% 30%);
+    }
+
+    body.light{
+        --bg:hsl(0, 0%, 0%);
+        --bg-dark: hsl(0, 0%, 5%);
+        --background: hsl(0, 0%, 10%);
+        --txt:hsl(0, 0%, 95%);
+        --txt-muted:hsl(0, 0%, 70%);
+        --border: hsl(0, 0%, 30%);
+        --bg-gradient: linear-gradient(0deg, hsl(0, 0%, 0%), hsl(0, 0%, 95%));
+        /*--gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+        --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));*/
+        background: var(--bg);
+
+        & .box{
+            background: var(--bg-dark);
+        }
+    }
+
     body{
-        background:hsl(0, 0%, 90%);
-        --bg-dark:hsl(0,0%,0%);
-        --bg:hsl(0,0%,5%);
-        --bg-light:hsl(0,0%,10%);
-        --border:hsl(0,0%,30%);
-        --txt:hsl(0,0%,95%);
-        --txt-muted:hsl(0,0%,70%);
-        --gradient:linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
-        --gradient-hover:linear-gradient(0deg, var(--bg), var(--bg-light));
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: hsl(0, 0%, 100%);
     }
 
-    button {
-        background: var(--bg-light); 
-        border: 2px solid var(--border);
-        color:var(--txt);
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-    }
-
-    dialog {
-        width: 400px;
-        background: #fff;
+    button{
+        background: var(--background);
+        color: var(--txt);
+        padding: .5rem 1rem;
         border: none;
-        padding: 4rem 1rem;
-        border-radius: 5px;
-
-        & h1 {
-            font-size: 34px;
-        }
-
-        & input {
-            display: flex;
-            flex-direction: column;
-            border: 1px solid;
-            border-radius: 3px;
-            padding: 0.5rem 1rem;
-            margin: 0.75rem;
-            width: 200px;
-            /*field-sizing: content;*/
-        }
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 16px;
     }
 
-    #popover_form::backdrop {
-        background: rgba(0 0 0 / 0.5);
-    }
-
-    summary {
-        background: hsl(from var(--background) h s l);
-        border-radius: 6px;
-        color: #000;
-        padding: 1rem 2rem;
-        margin: 20px;
+    .box{
+        background: var(--bg-light);
+        border: 1px outset var(--border);
         max-width: 300px;
-        border: none;
+        border-radius: 8px;
+        padding: 2rem 4rem;
 
-        & details {
-            border: 2px solid #000;
-            margin: 20px;
-            padding: 0.5rem;
+        & h1{
+            color: var(--txt);
+            font-weight: 600;
         }
+
+        & p{
+            color: var(--txt-muted);
+        }
+
     }
 
 </style>
@@ -79,57 +77,19 @@
 <body>
 
     <main>
-        <summary>
-            <h1>FAQs</h1>
-
-            <details>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias
-                    minus ut, hic tempore impedit magni deleniti voluptatibus architecto
-                    aut quasi. Tempora recusandae consectetur nisi consequuntur rerum et
-                    sunt sed fugiat!
-                </p>
-            </details>
-
-            <details>
-                <p>
-                    Provident maiores, similique exercitationem nulla corrupti
-                    blanditiis necessitatibus cupiditate, optio pariatur perspiciatis
-                    impedit deserunt laboriosam, et officia recusandae! Facilis voluptas
-                    possimus ad quis ipsum, recusandae nobis accusantium soluta ex
-                    ipsam.
-                </p>
-            </details>
-
-            <details>
-                <p>
-                    Sed dolores debitis rem veritatis impedit numquam placeat ex quae
-                    vero. Ab, rem quidem itaque eum consectetur repellat molestias quae
-                    non iusto delectus, eos reprehenderit ut autem dolorum commodi
-                    laudantium!
-                </p>
-            </details>
-
-            <details>
-                <p>
-                    Tenetur obcaecati accusantium error nihil cumque, aliquid corporis
-                    totam, officiis reiciendis minus doloribus aspernatur sunt enim et
-                    ratione voluptatibus! Nihil laboriosam harum at excepturi vitae
-                    aspernatur veritatis cupiditate aperiam alias.
-                </p>
-            </details>
-        </summary>
-
-        <!--<select name="Drop-down" title="Drop-down box" id="">
-            <button>
-                <selectedcontent></selectedcontent>
-            </button>
-            <option value="">Option1</option>
-            <option value="">Option2</option>
-            <option value="">Option3</option>
-        </select>-->
-
+        <div class="box">
+            <h1>Sharp heading</h1>
+            <p>A muted shade for the rest of the text.</p>
+            <button onclick="toggle()">Call To Action</button>
+        </div>
     </main>
+
+    <script>
+        function toggle(){
+            document.body.classList.toggle("light");
+        }
+    </script>
+
 </body>
 
 </html>
