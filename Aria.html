@@ -7,90 +7,15 @@
 </head>
 
 <style>
-    * {
-        font-family: sans-serif;
-    }
-
-    :root{
-        /*--bg-light: hsl(0, 0%, 95%);
-        --bg-light: lch(95 0 0);*/
-        --bg-light: oklch(.95 0 0);
-        --background: hsl(0, 0%, 90%);
-        --txt:hsl(0, 0%, 5%);
-        --txt-muted:hsl(0 0% 30%);
-    }
-
-    body.light{
-        --bg:hsl(0, 0%, 0%);
-        --bg-dark: hsl(0, 0%, 5%);
-        --background: hsl(0, 0%, 10%);
-        --txt:hsl(0, 0%, 95%);
-        --txt-muted:hsl(0, 0%, 70%);
-        --border: hsl(0, 0%, 30%);
-        --bg-gradient: linear-gradient(0deg, hsl(0, 0%, 0%), hsl(0, 0%, 95%));
-        /*--gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
-        --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));*/
-        background: var(--bg);
-
-        & .box{
-            background: var(--bg-dark);
-        }
-    }
-
-    body{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: hsl(0, 0%, 100%);
-    }
-
-    button{
-        background: var(--background);
-        color: var(--txt);
-        padding: .5rem 1rem;
-        border: none;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 16px;
-    }
-
-    .box{
-        background: var(--bg-light);
-        border: 1px outset var(--border);
-        max-width: 300px;
-        border-radius: 8px;
-        padding: 2rem 4rem;
-
-        & h1{
-            color: var(--txt);
-            font-weight: 600;
-        }
-
-        & p{
-            color: var(--txt-muted);
-        }
-
-    }
-
+    
 </style>
 
 <body>
 
     <main>
-        <div class="box">
-            <h1>Sharp heading</h1>
-            <p>A muted shade for the rest of the text.</p>
-            <button onclick="toggle()" title="A toggle button">Call To Action</button>
-        </div>
 
     </main>
 
-    <script>
-
-        function toggle(){
-            document.body.classList.toggle("light");
-        }
-    </script>
 
 </body>
 
