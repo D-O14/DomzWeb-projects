@@ -7,13 +7,67 @@
 </head>
 
 <style>
-    
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
+
+    body{
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        word-spacing: 1.4px;
+        /*display: flex;
+        justify-content: center;
+        align-items: center;*/
+        height: 100vh;
+    }
+
+    .container{
+        display: flex;
+        width: 80%;
+        height: 700px;
+        margin: 0 auto;
+        border: 10px solid #000;
+        /*flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: flex-start;
+        align-content: flex-start;
+        gap: 1em;*/
+    }
+
+    .item{
+        width: 150px;
+        height: 150px;
+        background: #fb7185;
+        padding: 1em;
+        font-weight: 700;
+        color: #fff;
+        text-align: center;
+        border: 10px solid #fe2545;
+        border-radius: 10px;
+    }
+
+    .item-3{
+        flex: 1;
+        /*align-self: center;*/
+    }
+
+
+
+
 </style>
 
 <body>
 
     <main>
-
+        <div class="container">
+            <div class="item item-1">Item 1</div>
+            <div class="item item-2">Item 2</div>
+            <div class="item item-3">Item 3</div>
+        </div>
     </main>
 
 
