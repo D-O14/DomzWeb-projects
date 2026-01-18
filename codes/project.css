@@ -189,8 +189,8 @@ img {
 	text-decoration: none;
 	font-weight: 500;
 	transition:
-		background-color 0.2s ease,
-		color 0.2s ease;
+	background-color 0.2s ease,
+	color 0.2s ease;
 }
 
 .btn-login {
@@ -388,7 +388,6 @@ img {
 	cursor: pointer;
 	will-change: transform;
 	position: relative;
-	overflow: hidden;
 	height: 480px;
 	width: 325px;
 	border-radius: 8px;
@@ -457,8 +456,6 @@ img {
 	padding-top: 0;
 	margin-right: -10px;
 	position: relative;
-	margin: 15px;
-	margin: 0 auto;
 	margin-bottom: 20px;
 }
 
@@ -489,8 +486,6 @@ img {
 }
 
 .container .card .text-box h3 {
-	font-weight: 600;
-	letter-spacing: 1px;
 	margin: 0 auto;
 	color: #121212;
 	font-size: 14px;
