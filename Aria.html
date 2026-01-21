@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,77 +20,244 @@
     }
 
     body {
+        margin: 0;
+        padding: 0;
         font-family: "Roboto", system-ui;
-        width: 90%;
-        margin-inline: auto;
+        margin-top: 5rem;
+        margin-left: 5rem;
+        /*width: 90%;
+        margin-inline: auto;*/
     }
 
-    img{
-        max-width: 100%;
-        width: 400px;
-        height: 200px;
-        border-radius: 6px;
+   /*img {
+        width: 100%;
+        height: auto;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
     }
 
-    .wrapper{
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    .container {
+        padding: 5rem 5rem;
+        display: flex;
+        flex-wrap: wrap;
         gap: 1rem;
         margin-top: 5rem;
+        justify-content: center;
+        align-items: center;
     }
 
-    .box{
-        border: 1px solid #ccc;
+    .card {
+        background: hsl(0, 0%, 99%);
+        border-radius: 8px;
+        border: 1px solid hsl(0, 0%, 85%);
+        gap: .75rem;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        color: #000;
+        flex: 1 0 300px;
+    }
+
+    button {
+        display: inline-flex;
+        align-items: center;
+        background: hsl(210, 100%, 56%);
+        color: #fff;
         border-radius: 6px;
-        padding: 2rem;
-        text-align: center;
-        display: grid;
-        grid-template-rows: subgrid;
-        grid-row: span 3;
+        border: none;
+        padding: .5em 1em;
+        transition: .3s ease;
     }
 
+    button:hover{
+        background: hsl(210, 100%, 36%);
+    }
+
+    .cards {
+        padding: 5rem 5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
+    }
+
+    .grid-card {
+        display: grid;
+        grid-template-columns: subgrid;
+        grid-row: span 2;
+        overflow: hidden;
+        background: hsl(0, 0%, 99%);
+        border-radius: 8px;
+        border: 1px solid hsl(0, 0%, 85%);
+        gap: .75rem;
+        color: #000;
+        flex: 1 0 300px;
+    }
+
+    .card .content{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .content{
+        padding: 1em;
+    }*/
+
+    /*h1{
+        animation: slide 2s ease-in-out .5s infinite alternate-reverse both;
+        transform: translateX(-150px);
+    }*/
+
+    .animate{
+        animation: 1s both;
+    }
+
+    .animate-infinite{
+        animation: infinite;
+    }
+    .animate-delay{
+        animation-delay: 1s;
+    }
+
+    .animate-fast{
+        animation: .6s;
+    }
+
+    .animate-slow{
+        animation: 3s;
+    }
+
+    @keyframes slide{
+        from {
+            transform: translateX(-300px);
+        }
+
+        to{
+            transform: translateX(0);
+        }
+    }
+
+    .slide{
+        /*animation: slide 2s ease .5s infinite alternate-reverse;*/
+        animation-name: slide;
+        animation-timing-function: ease-in;
+    }
+
+    
 </style>
 
 <body>
 
     <main>
-        <div class="wrapper">
-            <div class="box">
-                <h2>Hello world</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, velit harum dignissimos eum omnis
-                    temporibus voluptate vel rerum aut veniam earum illum nemo minus. Accusamus architecto facilis, in
-                </p>
-                <img src="codes\images\green.jpg" alt="Green mountains">
+        <!--<div class="container">
+            <div class="card card-1">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quod doloremque ex itaque
+                        autem
+                        unde modi nam provident praesentium corporis eveniet at accusamus alias fugiat porro numquam
+                        nihil,
+                        assumenda optio!</p>
+                    <button  >Button</button>
+                </div>
             </div>
 
-            <div class="box">
-                <h2>Hello world</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, velit harum dignissimos eum omnis
-                    temporibus voluptate vel rerum aut veniam earum illum nemo minus. Accusamus architecto facilis, in
-                    provident non perferendis necessitatibus neque nemo, sed odio velit dignissimos explicabo officia?
-                </p>
-                <img src="codes\images\green.jpg" alt="Green mountains">
+            <div class="card card-2">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quod doloremque ex itaque
+                        autem
+                        unde modi nam provident praesentium corporis eveniet at accusamus alias fugiat porro numquam
+                        nihil,
+                        assumenda optio!</p>
+                    <button>Button</button>
+                </div>
             </div>
 
-            <div class="box">
-                <h2>Hello world</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, velit harum dignissimos eum omnis
-                    temporibus voluptate vel rerum aut veniam earum illum nemo minus. Accusamus architecto facilis, in
-                    provident non perferendis necessitatibus neque nemo, sed odio velit dignissimos explicabo officia?
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, facere?
-                </p>
-                <img src="codes\images\green.jpg" alt="Green mountains">
+            <div class="card card-3">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quod doloremque ex itaque
+                        autem
+                        unde modi nam provident praesentium corporis eveniet at accusamus alias fugiat porro numquam
+                        nihil,
+                        assumenda optio!</p>
+                    <button>Button</button>
+                </div>
             </div>
 
-            <div class="box">
-                <h2>Hello world</h2>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam, velit harum dignissimos eum omnis
-                </p>
-                <img src="codes\images\green.jpg" alt="Green mountains">
+            <div class="card card-4">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quod doloremque ex itaque
+                        autem
+                        unde modi nam provident praesentium corporis eveniet at accusamus alias fugiat porro numquam
+                        nihil,
+                        assumenda optio!</p>
+                    <button>Button</button>
+                </div>
             </div>
-
         </div>
-        
+
+        <div class="cards">
+            <div class="grid-card">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading Name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla fugit similique ipsam blanditiis,
+                        quisquam aperiam nesciunt mini</p>
+                    <button>Button</button>
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quod doloremque ex itaque
+                        autem
+                        unde modi nam provident praesentium corporis eveniet at accusamus alias fugiat porro numquam
+                        nihil,
+                        assumenda optio!</p>
+                    <button>Button</button>
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quod doloremque ex itaque
+                        autem
+                        unde modi nam provident praesentium corporis eveniet at accusamus alias fugiat porro numquam
+                        nihil,
+                        assumenda optio!</p>
+                    <button>Button</button>
+                </div>
+            </div>
+
+            <div class="grid-card">
+                <img src="codes/images/space (9).jpg" alt="">
+                <div class="content">
+                    <h1>Heading name</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum quod doloremque ex itaque
+                        autem
+                        unde modi nam provident praesentium corporis eveniet at accusamus alias fugiat porro numquam
+                        nihil,
+                        assumenda optio!</p>
+                    <button>Button</button>
+                </div>
+            </div>
+        </div>-->
+        <h1 class="animate slide animate-fast">Hello World</h1>
+        <h1 class="animate slide animation-delay">Hello World</h1>
+        <h1 class="animate slide animate-slow">Hello World</h1>
     </main>
 
 </body>
