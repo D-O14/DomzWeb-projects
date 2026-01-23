@@ -24,133 +24,146 @@
 
     body {
         font-family: "Roboto", sans-serif;
-        /*display: grid;
-        grid-template-columns: 300px 1fr;
-        grid-template-rows: auto 1fr auto;
-        grid-template-areas:
-            "navbar navbar"
-            "sidebar main"
-            "sidebar footer";
-        width: 90%;
-        margin-inline: auto;*/
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 1rem;
     }
 
-    
 
-    /*nav {
-        position: sticky;
-        top: 0;
-        grid-area: navbar;
-        padding: 1em;
-        background: hsl(210, 100%, 56%);
-        color: hsl(0, 0%, 95%);
-    }
 
-    aside {
-        position: sticky;
-        height: calc(100vh - 50.5px);
-        top: 50.5px;
-        align-self: start;
-        grid-area: sidebar;
-        background: hsl(0, 0%, 80%);
-        color: hsl(0, 0%, 95%);
-    }
-
-    main {
-        grid-area: main;
-    }
-
-    footer {
-        grid-area: footer;
-    }
-
-    @media(max-width: 800px){
-        body{
-            grid-template-columns: 1fr;
-        }
-        aside{
-            position: fixed;
-            width: 300px;
-            display: none;
-        }
-
-        .show{
-            display: block;
-        }
-    }
-
-    img {
-        width: 100%;
-        height: auto;
-        border-top-right-radius: 8px;
-        border-top-left-radius: 8px;
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
+    /*.btnBox {
+        display: flex;
+        flex-direction: column;
+        gap: .7rem;
+        align-items: center;
     }
 
     button {
-        display: inline-flex;
-        align-items: center;
-        background: hsl(210, 100%, 56%);
-        color: #fff;
-        border-radius: 6px;
+        outline: none;
+        cursor: pointer;
+        position: relative;
+        font-weight: 600;
+        background: hsl(0, 0%, 90%);
+        color: hsl(0, 0%, 5%);
         border: none;
-        padding: .5em 1em;
+        padding: .5rem 1rem;
+        width: 200px;
+    }
+
+    button:focus {
+        border: 1px solid;
+    }
+
+    button:nth-child(1)::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        border: 2px solid hsl(5, 0%, 80%);
         transition: .3s ease;
     }
 
-    button:hover{
-        background: hsl(210, 100%, 36%);
+    button:nth-child(1):hover::before,
+    button:nth-child(1):focus::before {
+        top: calc(2px * -2);
+        left: calc(2px * -2);
+        right: calc(2px * -2);
+        bottom: calc(2px * -2);
     }
 
-    .cards {
-        padding: 5rem 5rem;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 1rem;
+    button:nth-child(2)::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        background: var(--accent);
+        transition: 1s ease;
+        transform: scaleX(0);
+        transform-origin: left;
     }
 
-    .grid-card {
-        display: grid;
-        grid-template-columns: subgrid;
-        grid-row: span 2;
+    button:nth-child(2):hover::before,
+    button:nth-child(2):focus::before {
+        transform: scaleX(1);
+    }
+
+    button:nth-child(2) {
+        z-index: 1;
+        transition: color 1s ease;
+    }
+
+    button:nth-child(2):hover,
+    button:nth-child(2):focus {
+        color: hsl(0, 0%, 90%);
+    }
+
+
+    button:nth-child(3)::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+        border-radius: 50%;
+        transform: scale(1.5);
+        transition: 300ms ease-in-out;
+        background: hsl(0, 0%, 90%);
+    }
+
+    button:nth-child(3):hover::before,
+    button:nth-child(3):focus::before {
+        transform: scale(0);
+    }
+
+    button:nth-child(3):hover,
+    button:nth-child(3):focus {
+        color: hsl(0, 0%, 90%);
+    }
+
+    button:nth-child(3) {
+        transition: color 500ms ease-in-out;
+        z-index: 1;
         overflow: hidden;
-        background: hsl(0, 0%, 99%);
-        border-radius: 8px;
-        border: 1px solid hsl(0, 0%, 85%);
-        gap: .75rem;
-        color: #000;
-        flex: 1 0 300px;
+        background: var(--accent);
     }
 
-    .content{
-        padding: 1em;
-    }*/
+    button:last-of-type::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 4px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transition: transform 300ms ease-in-out;
+    }
 
+    button:last-of-type:hover::before,
+    button:last-of-type:focus::before {
+        transform: scaleX(1);
+    }*/
 </style>
 
 <body>
 
     <main>
-        <!--<h1>Hello world</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores necessitatibus provident eos quas
-            corrupti ullam fugit dicta expedita, pariatur officia soluta quod quibusdam sequi dolor explicabo
-            dignissimos sint sed! Voluptatem, exercitationem minima pariatur nisi facere explicabo veniam esse ipsam
-            itaque, autem repellendus enim! Accusamus ad unde quia deserunt ducimus explicabo, iusto et. Quisquam,
-            fugiat tenetur. Quo, maiores ducimus assumenda distinctio nam perferendis saepe hic tempora iste amet,
-            doloribus officiis velit illo consectetur aliquid aspernatur, dicta autem perspiciatis officia modi
-            consequuntur? Quas doloribus ipsam eum voluptatum ab nihil quibusdam earum eius laudantium minima pariatur
-            iure dolor delectus nulla cum blanditiis ex veritatis quam ratione ullam dolore, suscipit</p>
-        <div class="cards">
-            <div class="grid-card">
-                <img src="codes/images/space (9).jpg" alt="">
-                <div class="content">
-                    <h1>Heading Name</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla fugit similique ipsam blanditiis,
-                        quisquam aperiam nesciunt mini</p>
-                    <button>Button</button>
-                </div>
-            </div>-->
+        <!--<div class="btnBox">
+            <button>Button</button>
+            <button>Button</button>
+            <button>Button</button>
+            <button>Button</button>
+        </div>-->
     </main>
 
 </body>
