@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 
     <title>Document</title>
 </head>
@@ -19,25 +19,105 @@
     *::before,
     *::after {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
+        margin: 100px;
+        padding: 10px;
         line-height: 1.5;
     }
 
-    
-    :root{
-        --shadow-sm: inset 0 1px 2px;
-    }
 
     body {
+        /*scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        scroll-snap-align: start;*/
+        min-height: 100dvh;
         font-family: "Roboto", sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        margin: 1rem;
+        /*display: grid;
+        grid-template-columns: 300px 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            "navbar navbar"
+            "sidebar main"
+            "sidebar footer";*/
+        --box-shadow: 1px 1px 2px hsl(0,0%, 8%);    
+        --box-shadow-md: 2px 2px 4px hsl(0, 0%, 10%);    
+        --bg-lg: linear-gradient(175deg, hsl(0,0%,20%) 0%, hsl(0,0%,5%) 100%);
     }
-    
+
+    /*nav {
+        position: sticky;
+        top: 0;
+        grid-area: navbar;
+        padding: .5rem 1rem;
+        background: hsl(200, 80%, 60%);
+        color: hsl(0, 0%, 90%);
+    }
+
+    aside {
+        height: calc(100vh - 40px);
+        position: sticky;
+        top: 40px;
+        align-self: start;
+        grid-area: sidebar;
+        background: hsl(0, 0%, 80%);
+        color: hsl(0, 0%, 90%);
+    }
+
+    main {
+        grid-area: main;
+        background: hsl(0, 0%, 90%);
+        color: hsl(0, 0%, 9%);
+    }
+
+    footer {
+        grid-area: footer;
+        padding: 1rem 1rem;
+        color: hsl(0, 0%, 90%);
+        background: hsl(0, 0%, 8%);
+    }
+
+    @media(max-width:768px){
+        body{
+            grid-template-columns: 1fr;
+        }
+        aside{
+            position: fixed;
+            width: 300px;
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+    }*/
+
+    .box{
+        background: var(--bg-lg);
+        color: hsl(0, 0%, 95%);
+        font-weight: 600;
+        border-radius: .5em;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: .5rem;
+        align-items: center;
+        width: 300px;
+        height: 200px;
+        box-shadow: var(--box-shadow);
+    }
+
+    button{
+        padding: .5em 1em;
+        border-radius: 4px;
+        color: hsl(0, 0%, 92%);
+        border: none;
+        background: hsl(0,0%,25%);
+        transition: .3s ease;
+    }
+
+    button:hover{
+        background: hsl(0,0%,30%);
+        box-shadow: var(--box-shadow-md);
+    }
+
     /*.btnBox {
         display: flex;
         flex-direction: column;
@@ -162,6 +242,8 @@
 
 <body>
 
+    <!--<nav>Navigation menu</nav>
+    <aside id="sidebar">Sidebar</aside>-->
     <main>
         <!--<div class="btnBox">
             <button>Button</button>
@@ -169,7 +251,12 @@
             <button>Button</button>
             <button>Button</button>
         </div>-->
+        <div class="box">
+            This is a box
+            <button>button</button>
+        </div>
     </main>
+    <!--<footer>footer</footer>-->
 
 </body>
 
