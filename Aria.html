@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet">-->
 
     <title>Document</title>
 </head>
@@ -21,308 +21,39 @@
         box-sizing: border-box;
         margin: 0px;
         padding: 0px;
+        font-size: clamp(1em, 1.1em, 1.125em);
     }
 
     body {
-        font-size: clamp(1rem, 1.2vw, 1.125rem);
         min-height: 100dvh;
         font-family: "Roboto", sans-serif;
-        display: grid;
+        /*display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
         grid-template-rows: auto 1fr auto;
         grid-template-areas:
             "header header"
             "navbar navbar"
             "main main"
-            "footer footer";  
-        background: hsl(0,0%,100%);
+            "footer footer";             
+        box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);*/
+        background: hsl(0, 0%, 100%);
         line-height: 1.5;
-        margin-bottom: 1lh;
     }
-
-    nav {
-        display: flex;
-        position: relative;
-        top: -750px;
-        grid-area: navbar;
-        justify-content: center;
-        /*background: hsl(0,0%,90%);*/
-        width: 1200px;
-        margin: auto;
-        border-radius: .75em;
-        /*border: 1px solid hsl(0,0%,80%);
-        box-shadow: 1px 1px 1px  hsl(0,0%,8%)*/
-
-        & h1{
-            color: hsl(0,0%,95%);
-            font-size: clamp(1rem, 3rem, 2rem);
-            font-style: italic;
-        }
-    }
-
-    span{
-        color: hsl(210, 80%, 50%);
-        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    }
-
-    a{
-        text-decoration: none;
-        color: hsl(0,0%,90%);
-        transition: .3s ease;
-        font-style: italic;
-
-        &:hover{
-            color: hsl(0,0%,95%);
-            font-weight: 600;
-        }
-    }
-
-    .active{
-        color: hsl(0,0%,95%);
-        font-weight: 600;
-        font-style: italic;
-    }
-
-    li{
-        list-style: none;
-    }
-    button{
-        border: none;
-        padding: .5em 1em;
-        border-radius: 6px;
-        cursor: pointer;
-        font-weight: 600;
-    }
-   
-    .btn{
-        background: hsl(210, 80%, 50%);
-        color: hsl(0,0%,90%);
-        transition: .3s ease;
-    }
-
-    .btn:hover{
-        background: hsl(210, 100%, 40%);
-    }
-
-    .btn-disabled:disabled{
-        color: hsl(0,0%,30%);
-        background: hsl(0,0%,20%);
-        cursor: not-allowed;
-    }
-
-    .nav-container{
-        /*position: relative;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;*/
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-        gap: 5rem;
-
-        & form input[type="search"]{
-            outline: none;
-            border: none;
-            padding: .5rem 1rem;
-            border-radius: 5px;
-        }
-
-        & form input[type="search"]::placeholder{
-            color: hsl(0,0%,75%);
-            font-style: italic;
-            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-        }    
-
-        & form input[type="search"]:focus{
-            border: 2px solid hsl(0,0%,90%);
-
-        }
-
-        & form input[type="search"]::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: -1;
-            border: 2px solid hsl(5, 0%, 80%);
-            transition: .3s ease;
-        }
-
-        & form input[type="search"]:hover::before,
-        & form input[type="search"]:focus::before {
-            top: calc(2px * -2);
-            left: calc(2px * -2);
-            right: calc(2px * -2);
-            bottom: calc(2px * -2);
-        }
-        
-    }
-
-    .menu{
-        display: flex;  
-        gap: 1rem;
-    }
-
-    .btnBox{
-        display: flex;
-        gap: .5em;
-    }
-
-    main {
-        grid-area: main;
-    }
-
-    .img-container{
-        height: 100vh;
-    }
-
-    img{
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-    }
-
-    footer {
-        grid-area: footer;
-    }
-
-    /*
-    aside {
-        height: calc(100vh - 40px);
-        position: sticky;
-        top: 40px;
-        align-self: start;
-        grid-area: sidebar;
-        background: hsl(0, 0%, 80%);
-        color: hsl(0, 0%, 90%);
-    }
-
-    @media(max-width:768px){
-        body{
-            grid-template-columns: 1fr;
-        }
-        aside{
-            position: fixed;
-            width: 300px;
-            display: none;
-        }
-        .show{
-            display: block;
-        }
-    }*/
-
-
-    /*button:nth-child(2)::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: -1;
-        background: var(--accent);
-        transition: 1s ease;
-        transform: scaleX(0);
-        transform-origin: left;
-    }
-
-    button:nth-child(2):hover::before,
-    button:nth-child(2):focus::before {
-        transform: scaleX(1);
-    }
-
-    button:nth-child(2) {
-        z-index: 1;
-        transition: color 1s ease;
-    }
-
-    button:nth-child(2):hover,
-    button:nth-child(2):focus {
-        color: hsl(0, 0%, 90%);
-    }
-
-
-    button:nth-child(3)::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: -1;
-        border-radius: 50%;
-        transform: scale(1.5);
-        transition: 300ms ease-in-out;
-        background: hsl(0, 0%, 90%);
-    }
-
-    button:nth-child(3):hover::before,
-    button:nth-child(3):focus::before {
-        transform: scale(0);
-    }
-
-    button:nth-child(3):hover,
-    button:nth-child(3):focus {
-        color: hsl(0, 0%, 90%);
-    }
-
-    button:nth-child(3) {
-        transition: color 500ms ease-in-out;
-        z-index: 1;
-        overflow: hidden;
-        background: var(--accent);
-    }
-
-    button:last-of-type::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 4px;
-        background: var(--accent);
-        transform: scaleX(0);
-        transition: transform 300ms ease-in-out;
-    }
-
-    button:last-of-type:hover::before,
-    button:last-of-type:focus::before {
-        transform: scaleX(1);
-    }*/
-
-
+    
 </style>
 
 <body>
     <main>
-        <div class="img-container">
-            <img src="codes/images/space (9).jpg" alt="" srcset="">
-        </div>
-        <nav>
-            <h1>Domz<span>Web</span></h1>
-            <div class="nav-container">
-                <form action="">
-                    <input type="search" name="" id="" aria-label="Search" placeholder="Find anything....">
-                </form>
-                <ul class="menu">
-                    <li><a href="" class="active">Home</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Services</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">Newsletter</a></li>
-                </ul>
-                <div class="btnBox">
-                    <button class="btn">Sign Up</button>
-                    <button class="btn-disabled" disabled>Login</button>
-                </div>
-            </div>
-            </nav>
+        <img
+        style="width: 50vw;" 
+        src="https://placehold.co/1600x400/png"
+        sizes="(max-width: 800px) 100vw, 800px"
+        srcset=
+        "https://placehold.co/400x100/png 400w,
+        https://placehold.co/800x200/png  800w,
+        https://placehold.co/1600x400/png 1600w"
+        />  
     </main>
-    <footer>footer</footer>
 
 </body>
 
