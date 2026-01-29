@@ -39,11 +39,44 @@
         background: hsl(0, 0%, 100%);
         line-height: 1.5;
     }
+
+    .hero{
+        position: relative;
+        /*aspect-ratio: 21/9;*/
+        overflow: hidden;
+    }
+
+    .hero picture,
+    .hero img{
+        width: 100%;
+        height: auto;
+    }
+
+    .hero img{
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
     
 </style>
 
 <body>
     <main>
+        <section class="hero">
+            <picture>
+                <source 
+                    media="
+                    (min-width: 1024px)"
+                    srcset=
+                    "https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_1200/cafe_14_pii7sq.webp 1200w, 
+                    https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_1800/cafe_14_pii7sq.webp 1800w,
+                    https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_2400/cafe_14_pii7sq.webp 2400w,"
+                    sizes="70vw">
+                <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_900/cafe_14_pii7sq.webp"
+                    alt="hero image" loading="eager" decoding="async" width="900px" height="1125px">
+                </picture>
+        </section>
 
     </main>
 
