@@ -18,14 +18,12 @@
     *,
     *::before,
     *::after {
+        margin: 0;
+        padding: 0;
         box-sizing: border-box;
-        margin: 0px;
-        padding: 0px;
-        font-size: clamp(1em, 1.1em, 1.125em);
     }
 
     body {
-        min-height: 100dvh;
         font-family: "Roboto", sans-serif;
         /*display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
@@ -34,50 +32,73 @@
             "header header"
             "navbar navbar"
             "main main"
-            "footer footer";             
+            "footer footer";  
+            overflow-x: hidden;           
         box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);*/
-        background: hsl(0, 0%, 100%);
-        line-height: 1.5;
     }
 
-    .hero{
-        position: relative;
-        /*aspect-ratio: 21/9;*/
-        overflow: hidden;
+    section {
+        /*aspect-ratio: 21 / 9;*/
+        height: 60vh;
     }
 
-    .hero picture,
-    .hero img{
-        width: 100%;
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
         height: auto;
+        display: block;
     }
 
-    .hero img{
-        width: 100%;
-        height: auto;
-        object-fit: cover;
+    .box, .container{
+        box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);
+        width: max(500px, 50vw);
+        height: 30vmin;
+        margin: 20px auto;
+        font-size: clamp(.5rem, 7vw + 1rem, 1.25rem);
+        padding: min(3%, 6em);
     }
 
-    
+    .box-1 {
+        padding: min(3%, 2em);
+        width: 80%;
+        background: hsl(0, 0%, 98%);
+        border-radius: 5px;
+        color: hsl(0, 0%, 26%);
+        border: 1px solid hsl(0, 0%, 86%);
+    }
+
+    .container{
+        width: min(50em, 95%);
+        height: 50vmin;
+    }
+
 </style>
 
 <body>
     <main>
-        <section class="hero">
-            <picture>
+        <section>
+            <!--<picture>
                 <source 
-                    media="
-                    (min-width: 1024px)"
-                    srcset=
-                    "https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_1200/cafe_14_pii7sq.webp 1200w, 
-                    https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_1800/cafe_14_pii7sq.webp 1800w,
-                    https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_2400/cafe_14_pii7sq.webp 2400w,"
-                    sizes="70vw">
-                <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,ar_4:5,c_fill,g_auto,w_900/cafe_14_pii7sq.webp"
-                    alt="hero image" loading="eager" decoding="async" width="900px" height="1125px">
-                </picture>
-        </section>
+                media="(min-width: 1024px)"
+                srcset=
+                "https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_1200/cafe_14_pii7sq.webp 1200w,
+                https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_1800/cafe_14_pii7sq.webp 1800w"
+                sizes="100vw">
+                <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
+                alt="Bakery image" loading="eager" decoding="async">
+            </picture>-->
+            <div class="box">
+                <div class="box-1">50%</div>
+            </div>
 
+            <div class="container">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates adipisci eius placeat, eaque
+                    laboriosam perferendis dolores dolorem ut reiciendis dolor eligendi blanditiis. Obcaecati nisi
+                    deleniti, numquam rerum corporis provident, eos eius suscipit porro, ea adipisci. Accusamus velit
+                    facilis exercitationem!</p>
+            </div>
+        </section>
     </main>
 
 </body>
