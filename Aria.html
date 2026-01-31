@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">-->
+        rel="stylesheet">
 
     <title>Document</title>
 </head>
@@ -18,12 +18,23 @@
     *,
     *::before,
     *::after {
+        padding: 0;
+        margin: 0;
         box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
     }
 
     body {
         scrollbar-width: none;
-        font-family: "Roboto", sans-serif;
+        font-family: "Fira sans" sans-serif;
+        container-type: inline-size;
+        padding-top: 4em;
+        text-align: center;
+        width: 80%;
+        margin: 0 auto;
         /*display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
         grid-template-rows: auto 1fr auto;
@@ -36,66 +47,100 @@
         box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);*/
     }
 
-    /*
-         
-    h1 {
-        background: hsla(0, 0%, 66%);
-        font-size: clamp(20px, 3vw, 30px);
-        padding: clamp(8px, 3vw, 16px);
-    }
-
-    p {
-        background: hsla(300, 80%, 56%, .8);
-        font-size: clamp(16px, 2vw, 20px);
-        padding: clamp(8px, 3vw, 16px);
-    }*/
-
     .box {
-        /*width: max(500px, 50vw);
-        width: min(500px, 50vw);
-        animation: grow 1s forwards;       
-        padding: clamp(8px, 3vw, 16px);*/
+        /*animation: grow 1s forwards;       
+        padding: clamp(8px, 3vw, 16px);
         max-width: fit-content;
         transition: scale 1s ease;
-        border-radius: .5rem;
-        background: hsl(10, 100%, 50%);
-        margin: 20px auto;
-        /*font-size: clamp(.5rem, 7vw + 1rem, 1.25rem);*/
-        padding: min(6rem, 3%);
+        font-size: clamp(.5rem, 7vw + 1rem, 1.25rem);  */
+        width: 50%;
         box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);
-
-        @starting-style {
-            scale: 0;
-        }
-
-        & p{
-            font-size: clamp(16px, calc(2vw + 1rem), 20px);
-            line-height: 1.25;
-        }
+        border-radius: .5rem;
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    section {
-        height: 60vh;
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
-    img {
-        max-width: 100%;
-        max-height: 100%;
-        width: auto;
-        height: auto;     
+    .card {
+        display: flex;
+        flex-flow: column;
+    }
+
+    .pic {
+        overflow: hidden;
+    }
+
+    .pic img {
+        inline-size: 100%;
+        /*max-width: 100%;
+        aspect-ratio: 16/9;*/
+        aspect-ratio: 1;
         object-fit: cover;
-        aspect-ratio: 16 / 9;   
-        border-radius: .25rem;
+        display: block;
+        transition: scale .5s ease-in-out;
     }
 
-    /*@keyframes grow{
-        from{
-            scale: 1;
+    .card:hover .pic img,
+    .card:focus-within .pic img {
+        scale: 1.15;
+    }
+
+    .content {
+        flex: 1;
+        padding: 1rem;
+        border: 1px solid #efefef;
+        border-block-start: none;
+        background: #fff;
+    }
+
+    .title {
+        font-size: clamp(1rem, 1rem + .5cqi, 1.25rem);
+        line-height: 1.4;
+        font-weight: 700;
+        color: #282c3f;
+        margin-block-end: .15rem;
+    }
+
+    .author {
+        font-size: .875rem;
+        font-weight: 400;
+        color: #737686;
+        margin-block-end: .5rem;
+    }
+
+    .desc {
+        display: none;
+    }
+
+    .btn-play {
+        border: none;
+        border-radius: .25rem;
+        padding: .5em 1.25em;
+        color: #fa3361;
+        cursor: pointer;
+        outline: 1px solid transparent;
+        outline-offset: 2px;
+        transition: outline .5s ease-in-out;
+    }
+
+    .btn-play:hover,
+    .btn-play:focus-visible {
+        outline-color: currentColor;
+
+    }
+
+    @container (inline-size > 300px) {
+        .cards {
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
         }
-        to{
-            scale: .5;
-        }
-    }*/
+    }
 </style>
 
 <body>
@@ -110,15 +155,63 @@
                 sizes="100vw">
                 <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
                 alt="Bakery image" loading="eager" decoding="async">
-            </picture>-->
+            </picture>
 
-            <div class="box">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo blanditiis quia facere tempora
-                    esse, rerum quam rem dolorem aliquam voluptate et sed ipsam non, nulla iusto quidem deserunt autem
-                    neque!</p>
-            </div>
+            <div class="cards">
+                <div class="card">
+                    <div class="pic">
+                        <img src="codes/images/cafe (10).webp" alt="" width="250" height="250">
+                    </div>
+                    <div class="content">
+                        <h3 class="title">Stuff You Should Know</h3>
+                        <h4 class="author">Waveland</h4>
+                        <p class="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, placeat!</p>
+                        <button type="button" class="btn-play">&#9654; 36min</button>
+                    </div>
+                </div>
 
-            <img src="codes/images/bakery.webp" alt="" width="750" height="750">
+                <div class="card">
+                    <div class="pic">
+                        <img src="codes/images/cafe (10).webp" alt="" width="250" height="250">
+                    </div>
+                    <div class="content">
+                        <h3 class="title">Stuff You Should Know</h3>
+                        <h4 class="author">Waveland</h4>
+                        <p class="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, placeat!</p>
+                        <button type="button" class="btn-play">&#9654; 36min</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="pic">
+                        <img src="codes/images/cafe (10).webp" alt="" width="250" height="250">
+                    </div>
+                    <div class="content">
+                        <h3 class="title">Stuff You Should Know</h3>
+                        <h4 class="author">Waveland</h4>
+                        <p class="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, placeat!</p>
+                        <button type="button" class="btn-play">&#9654; 36min</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="pic">
+                        <img src="codes/images/cafe (10).webp" alt="" width="250" height="250">
+                    </div>
+                    <div class="content">
+                        <h3 class="title">Stuff You Should Know</h3>
+                        <h4 class="author">Waveland</h4>
+                        <p class="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo, placeat!</p>
+                        <button type="button" class="btn-play">&#9654; 36min</button>
+                    </div>
+                </div>
+            </div>-->
+
+            <h1>Heading</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nam error, quae soluta
+                    repudiandae quibusdam vero voluptates culpa, at nesciunt fugit impedit provident ut aspernatur quo
+                    aliquam exercitationem. Quasi, similique.</p>
+
         </section>
     </main>
 
