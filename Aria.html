@@ -18,12 +18,11 @@
     *,
     *::before,
     *::after {
-        margin: 0;
-        padding: 0;
         box-sizing: border-box;
     }
 
     body {
+        scrollbar-width: none;
         font-family: "Roboto", sans-serif;
         /*display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
@@ -37,8 +36,45 @@
         box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);*/
     }
 
+    /*
+         
+    h1 {
+        background: hsla(0, 0%, 66%);
+        font-size: clamp(20px, 3vw, 30px);
+        padding: clamp(8px, 3vw, 16px);
+    }
+
+    p {
+        background: hsla(300, 80%, 56%, .8);
+        font-size: clamp(16px, 2vw, 20px);
+        padding: clamp(8px, 3vw, 16px);
+    }*/
+
+    .box {
+        /*width: max(500px, 50vw);
+        width: min(500px, 50vw);
+        animation: grow 1s forwards;       
+        padding: clamp(8px, 3vw, 16px);*/
+        max-width: fit-content;
+        transition: scale 1s ease;
+        border-radius: .5rem;
+        background: hsl(10, 100%, 50%);
+        margin: 20px auto;
+        /*font-size: clamp(.5rem, 7vw + 1rem, 1.25rem);*/
+        padding: min(6rem, 3%);
+        box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);
+
+        @starting-style {
+            scale: 0;
+        }
+
+        & p{
+            font-size: clamp(16px, calc(2vw + 1rem), 20px);
+            line-height: 1.25;
+        }
+    }
+
     section {
-        /*aspect-ratio: 21 / 9;*/
         height: 60vh;
     }
 
@@ -46,33 +82,20 @@
         max-width: 100%;
         max-height: 100%;
         width: auto;
-        height: auto;
-        display: block;
+        height: auto;     
+        object-fit: cover;
+        aspect-ratio: 16 / 9;   
+        border-radius: .25rem;
     }
 
-    .box, .container{
-        box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);
-        width: max(500px, 50vw);
-        height: 30vmin;
-        margin: 20px auto;
-        font-size: clamp(.5rem, 7vw + 1rem, 1.25rem);
-        padding: min(3%, 6em);
-    }
-
-    .box-1 {
-        padding: min(3%, 2em);
-        width: 80%;
-        background: hsl(0, 0%, 98%);
-        border-radius: 5px;
-        color: hsl(0, 0%, 26%);
-        border: 1px solid hsl(0, 0%, 86%);
-    }
-
-    .container{
-        width: min(50em, 95%);
-        height: 50vmin;
-    }
-
+    /*@keyframes grow{
+        from{
+            scale: 1;
+        }
+        to{
+            scale: .5;
+        }
+    }*/
 </style>
 
 <body>
@@ -88,16 +111,14 @@
                 <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
                 alt="Bakery image" loading="eager" decoding="async">
             </picture>-->
+
             <div class="box">
-                <div class="box-1">50%</div>
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo blanditiis quia facere tempora
+                    esse, rerum quam rem dolorem aliquam voluptate et sed ipsam non, nulla iusto quidem deserunt autem
+                    neque!</p>
             </div>
 
-            <div class="container">
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptates adipisci eius placeat, eaque
-                    laboriosam perferendis dolores dolorem ut reiciendis dolor eligendi blanditiis. Obcaecati nisi
-                    deleniti, numquam rerum corporis provident, eos eius suscipit porro, ea adipisci. Accusamus velit
-                    facilis exercitationem!</p>
-            </div>
+            <img src="codes/images/bakery.webp" alt="" width="750" height="750">
         </section>
     </main>
 
