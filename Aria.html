@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
-    
+
 
     <title>Document</title>
 </head>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Asimovian&family=DM+Serif+Text:ital@0;1&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
+    @import url('https://fonts.googleapis.com/css2?family=Asimovian&family=DM+Serif+Text:ital@0;1&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
     *,
     *::before,
@@ -22,19 +21,10 @@
         box-sizing: border-box;
     }
 
-    html {
-        scroll-behavior: smooth;
-    }
-
     body {
-        scrollbar-width: none;
-        container-type: inline-size;
         font-family: "Asimovian", sans-serif;
-        padding-top: 4em;
-        text-align: center;
-        width: 80%;
-        margin: 0 auto;
         /*display: grid;
+        container-type:inline-size;
         grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
         grid-template-rows: auto 1fr auto;
         grid-template-areas:
@@ -46,16 +36,14 @@
         box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);*/
     }
 
-    .box {
+    /*.box {
         /*animation: grow 1s forwards;       
         padding: clamp(8px, 3vw, 16px);
         max-width: fit-content;
         transition: scale 1s ease;
-        font-size: clamp(.5rem, 7vw + 1rem, 1.25rem);  */
-        width: 50%;
+        font-size: clamp(.5rem, 7vw + 1rem, 1.25rem);  
         box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);
         border-radius: .5rem;
-        margin: 20px auto;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -79,7 +67,7 @@
     .pic img {
         inline-size: 100%;
         /*max-width: 100%;
-        aspect-ratio: 16/9;*/
+        aspect-ratio: 16/9;
         aspect-ratio: 1;
         object-fit: cover;
         display: block;
@@ -139,6 +127,76 @@
         .cards {
             grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
         }
+    }*/
+
+
+    /*@container style(--theme: attr(data-theme type( custom-ident ))){
+        .box{
+            background: blue;
+        }
+    }*/
+
+    /*form div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px auto;
+    }
+
+    .label-container{
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+    }
+
+    .info{
+        border: none;
+        background: dodgerblue;
+        padding: .5em 1em;
+        width: 30px;
+        height: 30px;
+        border-radius: 20px;
+        color: aliceblue;   
+    }
+
+    [popover]{
+        inset: unset;
+        bottom: anchor(bottom);
+        left: anchor(center);
+        translate: 50%;
+        margin: .25rem 0;
+    }*/
+
+    div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        position: absolute;
+        inset: 0px;
+        margin: auto;
+        /*display: grid;
+        place-items: center;
+        place-content: center;
+        padding-block: 3rem;
+        margin-inline: 4rem;*/
+        width: 50%;
+        height: 50vmin;
+        box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        margin: 20px auto;
+        gap: 1rem;
+    }
+
+    button{
+        padding: .5em 1em;
+        border: 1px inset hsla(0, 0%, 0%, 0.16);
+        border-radius: 4px;
     }
 </style>
 
@@ -204,12 +262,55 @@
                         <button type="button" class="btn-play">&#9654; 36min</button>
                     </div>
                 </div>
-            </div>-->
+            </div>
 
-            <h1>Heading</h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate nam error, quae soluta
-                    repudiandae quibusdam vero voluptates culpa, at nesciunt fugit impedit provident ut aspernatur quo
-                    aliquam exercitationem. Quasi, similique.</p>
+            <form>
+                <div>
+                    <div class="label-container">
+                        <label class="confusing">Confusing Field</label>
+                        <button class="info" popovertarget="info" popovertargetaction="toggle" id="btn" type="button">i</button>
+                        <div id="info" popover="manual" anchor="btn">Extra</div>
+                    </div>
+                    <input type="text" id="confusing">
+                </div>
+            </form>-->
+
+            <div>
+                <form action="" name="sampleform" method="post" autocomplete="on" autocapitalize="on">
+                    <legend>Register</legend>
+
+                    <label for="name">Full Name
+                        <input type="text" name="fullname" inputmode="text" enterkeyhint="next" autocomplete="name"
+                            required spellcheck="true">
+                    </label>
+                    <label for="email"> E-mail
+                        <input type="email" name="email" inputmode="email" enterkeyhint="next" autocomplete="email"
+                            required>
+                    </label>
+                    <label for="pass">Password
+                    <input type="password" name="pass" inputmode="text" enterkeyhint="done" autocomplete="new-password" required>
+                    </label>
+                    <textarea name="" id="" cols="30" rows="5" spellcheck="true"></textarea>
+                    <button>Submit</button>
+                    <!--&amp;
+                    &quot;
+                    &apos;
+                    &cent;
+                    &pound;
+                    &copy;
+                    &reg;
+                    &yen;
+                    &dollar;
+                    &euro;
+                    &ImaginaryI;
+                    &nbsp;
+                    &GreaterEqual;
+                    &lAarr;
+                    &delta;
+                    &alpha;-->
+                </form>
+            </div>
+
 
         </section>
     </main>
