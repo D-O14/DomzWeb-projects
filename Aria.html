@@ -190,16 +190,70 @@
     }*/
 
     form {
+        width: 50%;
+        padding: 12px 20px;
+        background: hsl(0, 0%, 98%);
+        box-shadow: 0 2px 6px -1px hsla(0, 0%, 0%, 0.16), 0 1px 4px -1px hsla(0, 0%, 0%, 0.04);
         display: flex;
         flex-direction: column;
+        justify-content: center;
         margin: 20px auto;
         gap: 1rem;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    input,
+    textarea {
+        width: 40vmax;
+        border: 1px solid hsl(0, 0%, 60%);
+        border-radius: .25rem;
+        padding: .5rem .75rem;
+    }
+
+    input:invalid{
+        border: 2px solid hsl(360, 80%, 50%);
+    }
+
+    input:valid{
+        border: 2px solid hsl(100, 80%, 50%);
+    }
+
+    input:focus{
+        outline: none;
+    }
+
+    textarea:focus{ 
+        outline: 1px solid hsl(0, 0%, 40%)
+    }
+
+    textarea::placeholder{
+        font-weight: 100;
+        color: hsl(0, 0%, 60%);
+    }
+
+    legend {
+        font-size: 40px;
+        align-self: center;
+        text-decoration: underline;
+        text-underline-offset: 10px;
     }
 
     button {
         padding: .5em 1em;
         border: 1px inset hsla(0, 0%, 0%, 0.16);
+        color: hsl(0, 0%, 95%);
+        background: hsl(210, 70%, 50%);
         border-radius: 4px;
+        transition: .5s ease;
+    }
+
+    button:hover{
+        background: hsl(210, 70%, 30%);
     }
 
 
@@ -312,6 +366,15 @@
         background: lightgray;
         border: 1px solid gray;
     }
+
+    a{
+        text-decoration: none;
+        color: hsl(230,50%,40%);
+        align-self: center;
+    }
+
+
+    /*section{ display: flex;}*/
 </style>
 
 <body>
@@ -391,10 +454,16 @@
                             required>
                     </label>
                     <label for="pass">Password
-                    <input type="password" name="pass" inputmode="text" enterkeyhint="done" autocomplete="new-password" required>
+                        <input type="password" name="pass" inputmode="text" enterkeyhint="done"
+                            autocomplete="new-password" required>
                     </label>
-                    <textarea name="" id="" cols="30" rows="5" spellcheck="true"></textarea>
-                    <button>Submit</button>
+                    <label for="Telephone">Phone No:
+                        <input type="tel" inputmode="tel" name="Telephone" required maxlength="11" minlength="11">
+                    </label>
+                    <textarea name="" id="" cols="25" rows="10" spellcheck="true" placeholder="A Message."></textarea>
+                    <div class="btnBox">
+                        <button type="reset">Submit</button>
+                    </div>
                     <!--&amp;
                     &quot;
                     &apos;
@@ -411,19 +480,21 @@
                     &lAarr;
                     &delta;
                     &alpha;-->
+                    <a href="">All rights reserved &copy; Domz&trade;</a>
                 </form>
             </div>
 
-            <!--<div class="progress-bar"></div>-->
-            <h1>Anchor Positioning</h1>
-
-            <p>Please enter your personal API key
+            <!--<h1>Form Registration</h1>
+            
+            <p>Please Fill in the form
                 <button class="help-trigger" popovertarget="help">?</button>
             </p>
-
+            
             <div id="help" popover>
-                You can find your API key in the dashboard under Settings.
-            </div>
+                Enter the necessary information required for registration
+            </div>-->
+
+            <!--<div class="progress-bar"></div>
 
             <div class="carousel">
                 <div class="slide">1</div>
@@ -431,7 +502,7 @@
                 <div class="slide">3</div>
                 <div class="slide">4</div>
                 <div class="slide">5</div>
-            </div>
+            </div>-->
 
         </section>
     </main>
