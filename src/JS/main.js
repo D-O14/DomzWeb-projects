@@ -1,1 +1,2 @@
-console.log("Vite is running!")
+import "../css/main.css";
+console.log("Vite is running!");
