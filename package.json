@@ -23,17 +23,17 @@
 		"lint-format": "biome check --write",
 		"minify-js": "terser codes/code.js -o codes/code.min.6f3a8.js -c -m",
 		"minify-css": "npx postcss codes/project.css -o codes/project.min.a2b7c.css -c -m",
-		"build:old": "npm run minify-js && npm run minify-css",
 		"build": "vite build",
 		"preview": "vite preview"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.3.11",
+		"autoprefixer": "^10.4.24",
 		"cssnano": "^7.1.2",
+		"firebase": "^10.7.1",
 		"postcss": "^8.5.6",
 		"postcss-cli": "^11.0.1",
 		"terser": "^5.44.1",
-		"vite": "^4.4.0",
-		"firebase": "^10.7.1"
+		"vite": "^4.4.0"
 	}
 }
