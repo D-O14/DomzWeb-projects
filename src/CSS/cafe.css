@@ -29,8 +29,11 @@
 	}
 
 	:root {
+		--base-bg: hsl(0, 0%, 98%);
+
 		--fs-lg: clamp(1.96rem, calc(1.58rem + 1.91vw), 3.01rem);
 		--fs-md: clamp(1.8rem, calc(1.5rem + 1.49vw), 2.62rem);
+		--fs-sm: clamp(.9rem, .85rem + .2vw, 1rem);
 		--h1-font-size: clamp(1.66rem, calc(1.43rem + 1.14vw), 1.28rem);
 		--h2-font-size: clamp(1.4rem, calc(1.28rem + 0.61vw), 1.73rem);
 		--h3-font-size: clamp(1.29rem, calc(1.2rem + 0.41vw), 1.51rem);
@@ -57,19 +60,27 @@
 
 		--container-width-1: 1200px;
 		--container-width-2: 100%;
-		--container-width-3: 50%;
-		--container-width-4: 25%;
-		--container-width-5: 100vmax;
-		--container-width-6: 50vmax;
+		--container-width-3: 75%;
+		--container-width-4: 95%;
+		--container-width-5: 50%;
+		--container-width-6: 25%;
+		--container-width-7: 100vmax;
+		--container-width-8: 50vmax;
 
 		--txt-color: hsl(0,0%,25%);
 		--txt-muted: hsl(0,0%,65%);
 		--txt-white: hsl(0,0%,95%);
 
 		--padding-1: clamp(.5rem, calc(2vw + 1rem), 1rem);		
-		--padding-block: clamp(.5em, .4em, .6vw);		
-		--padding-inline: clamp(1em, .8em, 1vw);		
+		--padding-2: clamp(1rem, calc(3vw + 2rem), 1.25rem);		
+		--btn-padding-block: clamp(.5em, .4em, .6vw);		
+		--btn-padding-inline: clamp(1em, .8em, 1vw);	
+		--link-padding-block: clamp(.4em, .35em, .6vw);		
+		--link-padding-inline: clamp(.6em, .5rem, .9em);	
 
+
+		--gap-xxl: 5rem;
+		--gap-xl: 2rem;
 		--gap-lg: 1.5rem;
 		--gap-md: 1.25rem;
 		--gap-base: 1rem;
@@ -89,10 +100,12 @@
 
 		nav {
 			display: flex;
-			max-width: var(--container-width-1);
-			justify-content: space-evenly;
+			background: var(--base-bg);
+			width: var(--container-width-4);
+			justify-content: space-around;
+			align-items: center;
 			grid-area: navbar;
-			padding: var(--padding-1);
+			padding: var(--padding-2);
 		}
 
 		main{
@@ -106,7 +119,6 @@
 		ul{
 			display: flex;
 			gap: var(--gap-base);
-			justify-content: center;
 		}
 
 		li {
@@ -115,12 +127,15 @@
 
 		a {
 			text-decoration: none;
+			font-size: var(--fs-sm);
+			padding-block: var(--link-padding-block);
+			padding-inline: var(--link-padding-inline);
 			color: var(--txt-color);
 		}
 
 		button{
-			padding-block: var(--padding-block);
-			padding-inline: var(--padding-inline);
+			padding-block: var(--btn-padding-block);
+			padding-inline: var(--btn-padding-inline);
 			border: var(--border-1);
 			border-radius: var(--radius-layer-5);
 		}
