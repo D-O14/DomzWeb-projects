@@ -14,48 +14,63 @@
     <meta property="og:url" content="https://127.0.0.1:5500/src/cafe.html">
     <title>Domz Cafe</title>
     <link rel="preload" as="style" href="./css/cafe.css" onload="this.rel='stylesheet'">
-    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Asimovian&family=DM+Serif+Text:ital@0;1&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Playwrite+NZ+Basic:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">-->
+        href="https://fonts.googleapis.com/css2?family=Asimovian&family=DM+Serif+Text:ital@0;1&family=Electrolize&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&family=Monsieur+La+Doulaise&family=Playwrite+NZ+Basic:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+
 </head>
 
-<body>
+<body class="electrolize-regular">
 
     <main>
         <section id="home">
             <nav>
-                <h1>Domz Cafe & Bakery</h1>
-                <ul>
-                    <li class="link"><a href="">Home</a></li>
-                    <li class="link"><a href="">Categories</a></li>
-                    <li class="link"><a href="">Products</a></li>
+                <!--<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-coffee-icon lucide-coffee"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-heading1-icon lucide-heading-1">
+                    <path d="M4 12h8" />
+                    <path d="M4 18V6" />
+                    <path d="M12 18V6" />
+                    <path d="m17 12 3-2v8" />
+                </svg>-->
+                <a href="#" class="brand">Domz Cafe & Bakery</a>
+                <ul class="nav-links">
+                    <li class="link active"><a href="">Home</a></li>
                     <li class="link"><a href="">Menu</a></li>
                     <li class="link"><a href="">About</a></li>
                     <li class="link"><a href="">Reviews</a></li>
+                    <li class="link"><a href="">Reservations</a></li>
+                    <li class="link"><a href="">Contact Us</a></li>
                 </ul>
-                <button data-btn >Book a Reservation</button>
+                <button class="sign-up-btn">Sign Up</button>
             </nav>
 
             <div class="content">
                 <h1>Bakery & Cafe, right here for your comfort.</h1>
-                
-                <p>
-                    Boost your day with food and drink like no other. Come sit, order, eat and love.
-                </p>
+
+                <div class="subtext">
+                    <p>
+                        Boost your day with food and drink like no other. Come sit, order, eat and love.
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis tempore delectus deleniti
+                        maiores earum ex cum eum optio officia nihil sint accusamus dolores, vero veritatis necessitatibus?
+                        Laudantium incidunt totam voluptatem.
+                    </p>
+                </div>
                 
                 <div class="hero-actions">
-                    <button>Explore</button>
-                    <button data-btn>Order</button>
+                    <button>View Menu</button>
+                    <button class="reserve-btn">Reserve Table</button>
                 </div>
 
-                <ul class="hero-features">
+
+                <!--<ul class="hero-features">
                     <li>Freshly baked daily</li>
                     <li>Premium ingredients</li>
                     <li>Cozy atmosphere</li>
-                </ul>
+                </ul>-->
 
             </div>
 
