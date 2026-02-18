@@ -16,11 +16,14 @@
 
 	body {
 		display: grid;
-		font-family: var(--font-fam-2);
+		font-family: var(--font-fam-1);
+		font-kerning: normal;
+		text-rendering: optimizeLegibility;
 		font-optical-sizing: auto;
 		text-wrap: balance;
 		font-weight: var(--fw-sm);
 		line-height: 1.5;
+		letter-spacing: .05em;
 		grid-template-columns: repeat(auto-fit, minmax(300, 1fr));
 		grid-template-rows: auto 1fr auto;
 		grid-template-areas:
@@ -267,9 +270,9 @@
 		.brand {
 			position: relative;
 			text-wrap: balance;
-			text-align: center;
+			/*text-align: center;
 			padding: 20px;
-			top: 10px;
+			top: 10px;*/
 			font-size: var(--h4-font-size);
 			color: hsl(60, 56%, 95%);
 			z-index: 1;
@@ -355,6 +358,7 @@
 			background: var(--sub-bg-4);
 			position: relative;
 			overflow: visible;
+			height: 80vh;
 		}
 
 		#home::before {
@@ -407,7 +411,15 @@
 				color: var(--txt-muted);
 				font-size: clamp(1rem, 0.95rem + 0.4vw, 1.125rem);
 				line-height: 1.6;
-				max-width: 45ch
+				max-width:  45ch;
+			}
+
+			& .hero-features{
+				display: flex;
+				flex-direction: column;
+				margin-top: var(--spacing-md);
+				margin-left: var(--spacing-sm);
+				gap: var(--spacing-xsm);
 			}
 		}
 	}
