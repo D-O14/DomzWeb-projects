@@ -12,6 +12,7 @@
 
 	html {
 		scroll-behavior: smooth;
+		scrollbar-width: none;
 	}
 
 	body {
@@ -21,7 +22,7 @@
 		font-optical-sizing: auto;
 		text-wrap: balance;
 		font-weight: var(--fw-sm);
-		font-family: var(--font-body);
+		font-family: var(--font-fam-1);
 		font-size: var(--step-0);
 		line-height: var(--lh-body);
 		letter-spacing: .05em;
@@ -62,19 +63,13 @@
 
 		--font-fam-1: "Electrolize", sans-serif;
 		--font-fam-2: "Playwrite NZ Basic", cursive;
-		--font-fam-3: "Monsieur La Doulaise", cursive;
-		--font-fam-4: "Asimovian", sans-serif;
-		--font-fam-5: "Roboto", sans-serif;
-		--font-fam-6: "Poppins", sans-serif;
-		--font-fam-7: "Fira Sans", sans-serif;
-		--font-fam-8: "Google Sans", sans-serif;
-		--font-fam-9: "DM Serif Text", serif;
-		--font-fam-10: "Paprika", system-ui
-		--font-body: "Inter", system-ui, sans-serif;
+		--font-fam-3: "Asimovian", sans-serif;
+		--font-fam-4: "Poppins", sans-serif;
+		--font-fam-5: "DM Serif Text", sans-serif;
+		--font-fam-6: "Paprika", sans-serif;
+		--font-neutral: sans-serif;
 
-		--lh-body: 1.6;
 		--lh-heading: 1.2;
-
 		--fs-lg: clamp(1.96rem, calc(1.58rem + 1.91vw), 3.01rem);
 		--fs-md: clamp(1.8rem, calc(1.5rem + 1.49vw), 2.62rem);
 		--fs-xmd: clamp(1em, .95em + .3vw, 1.1em);
@@ -122,7 +117,6 @@
 		--container-width-8: 50vmax;
 
 		--txt-color: hsl(30, 50%, 25%);
-		--txt-muted: hsl(0, 0%, 35%);
 		--txt-white: hsl(0, 0%, 95%);
 
 		--btn-padding-block: clamp(12px, 1.5vw, 16px);
@@ -277,10 +271,11 @@
 
 			& .main-btn {
 				background: none;
+				padding: .5em 1em;
 				border: 1px solid;
 				margin-left: auto;
 				color: var(--txt-color);
-				border-radius: 15px;
+				border-radius: 12px;
 				transition: .3s ease;
 
 				&:hover {
@@ -329,7 +324,7 @@
 			color: var(--txt-color);
 			display: inline-flex;
 			align-items: center;
-			gap: .25em;
+			gap: .5em;
 		}
 
 		button {
@@ -337,8 +332,7 @@
 			cursor: pointer;
 			background: var(--bg-dark);
 			color: var(--txt-white);
-			font-size: var(--fs-xmd);
-			padding: .5em 1em;
+			font-size: var(--fs-md);
 			border-radius: var(--radius-layer-5);
 			font-weight: var(--fw-md);
 			display: flex;
@@ -354,7 +348,7 @@
 
 		@keyframes shimmer {
 			0% {
-				left: -50%;
+				left: -5%;
 			}
 
 			100% {
@@ -365,6 +359,7 @@
 		[disabled] {
 			cursor: not-allowed;
 		}
+
 	}
 }
 
@@ -376,6 +371,7 @@
 		}
 
 		.primary-btn {
+			padding: .65em 1em;
 			border: none;
 			transition: .3s ease;
 		}
@@ -383,14 +379,14 @@
 		.primary-btn::after {
 			content: " ";
 			position: absolute;
-			top: 0;
+			bottom: 2.5px;
 			left: -100%;
 			width: 50%;
 			height: 100%;
 			background: linear-gradient(120deg,
-					rgba(255, 255, 255, 0) 0%,
-					rgba(255, 255, 255, 0.2) 50%,
-					rgba(255, 255, 255, 0) 100%);
+					hsla(0, 96%, 91%, 0) 0%,
+					hsla(0, 0%, 100%, 0.2) 50%,
+					hsla(0, 0%, 100%, 0) 100%);
 			transform: skewX(-20deg);
 			animation: shimmer 1.5s infinite;
 		}
@@ -400,6 +396,7 @@
 		}
 
 		.secondary-btn {
+			padding: .75em 1em;
 			background: none;
 			border: 1px solid;
 			color: var(--txt-color);
@@ -436,7 +433,7 @@
 		.content {
 			display: flex;
 			flex-direction: column;
-			gap: .75rem;
+			gap: .5rem;
 			justify-content: center;
 			align-items: flex-start;
 			max-width: 520px;
@@ -456,12 +453,12 @@
 			& .hero-actions {
 				display: flex;
 				width: 100%;
-				margin-top: var(--spacing-sm);
+				margin-top: var(--spacing-xsm);
 				gap: .75rem;
 			}
 
-			& p {
-				color: var(--txt-muted);
+			& .subtext {
+				color: hsl(19, 27%, 18%);
 				font-size: clamp(1rem, 0.95rem + 0.4vw, 1.125rem);
 				line-height: 1.6;
 				max-width: 45ch;
@@ -475,43 +472,51 @@
 				gap: var(--spacing-xsm);
 
 				& li {
+					position: relative;
 					background: hsl(0, 0%, 95%);
-					border-radius: 20px;
+					border-radius: 10px;
 					padding: .5rem 1rem;
+					margin-bottom: .25em;
 					color: var(--txt-color);
 					box-shadow: var(--shadow);
 					transition: .3s ease;
 
 					&:hover {
-						transform: scale(1.05);
+						transform: scale(1.05) translateX(8px);
 					}
 				}
+			}
 
-				.hero-features li::after {
-					content: " ";
-					position: absolute;
-					top: 0;
-					left: -100%;
-					width: 25%;
-					height: 50%;
-					background: linear-gradient(120deg,
-							rgba(255, 255, 255, 0) 0%,
-							rgba(255, 255, 255, 0.2) 50%,
-							rgba(255, 255, 255, 0) 100%);
-					transform: skewX(-20deg);
-					animation: shimmer 1.5s infinite;
-				}
+			.hero-features li::marker {
+				background: var(--color-primary-1);
+				font-size: 1.25em;
 			}
 		}
 	}
 
 	.hero-img {
-		display: flex;
-		width: min(500px, 100vw);
+		width: min(550px, 100vw);
 		aspect-ratio: 1 / 1;
+		transform-origin: center;
+		animation: float 6s ease-in-out infinite;
+		filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.15));
 
 		& img {
-			filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.15));
+			object-fit: cover;
+			display: block;
+			transform: rotate(25deg);
+		}
+	}
+
+	@keyframes float {
+
+		0%,
+		100% {
+			transform: translateY(0px) rotate(-1deg) scale(1);
+		}
+
+		50% {
+			transform: translateY(-25px) rotate(1deg) scale(1.02);
 		}
 	}
 }
@@ -546,5 +551,95 @@
 		.nav-content {
 			display: none;
 		}
+
+		.brand::before {
+			top: -105px;
+			left: -110px;
+			width: 300px;
+			height: 180px;
+		}
+
+		.main-btn:hover {
+			transform: translateX(-12px);
+		}
+
+	}
+
+	@scope(main) {
+		#home {
+			height: 100vh;
+		}
 	}
 }
+
+/*@media(min-width: 768px) {
+	@scope(body){
+		nav{
+			height: 4rem;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	@scope(nav) {
+		.nav-content {
+			display: none;
+		}
+
+		.brand {
+			background: var(--bg-dark);
+			border: none;
+			border-radius: 25px;
+
+			& span{
+				color: var(--txt-white);
+			}
+		}
+
+		.brand::before {
+			display: none;
+		}
+
+		.main-btn{
+			display: none;
+		}
+
+		.main-btn:hover {
+			transform: translateX(-12px);
+		}
+
+	}
+
+	@scope(main) {
+		#home {
+			height: 100vh;
+
+			& .hero {
+				display: flex;
+				align-items: center;
+				padding-top: clamp(80px, 10vw, 120px);
+				padding-inline: clamp(4rem, 4vw, 4rem);
+
+				& .hero-features {
+					display: none;
+				}
+
+				& .content{
+					margin-bottom: var(--spacing-md);
+
+					& .subtext{
+						max-width: 65ch;
+					}
+				}
+			}
+		}
+
+		.hero-img {
+			width: min(550px, 100vw);
+			aspect-ratio: 1 / 1;
+			transform-origin: center;
+			animation: none;
+			filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.15));
+		}
+	}
+}*/
