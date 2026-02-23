@@ -9,9 +9,6 @@
 </head>
 
 <style>
-
-/* Utility */
-
     /*.card:hover .pic img,
     .card:focus-within .pic img {
         scale: 1.15;
@@ -44,7 +41,74 @@
     .list:hover img:not(:hover) {
         filter: brightness(.5);
     }*/
-    
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui;
+    }
+
+    dialog {
+        margin: auto;
+        padding: 2rem;
+        border: none;
+        border-radius: 8px;
+        opacity: 0;
+        transition: all .3s ease allow-discrete;
+        box-shadow: 0 0 3px hsla(0, 0%, 0%, .5);
+    }
+
+
+    dialog[open] {
+        opacity: 1;
+    }
+
+    @starting-style {
+        dialog[open] {
+            opacity: 0;
+        }
+    }
+
+    dialog::backdrop {
+        transition: all .3s allow-discrete;
+        background: hsla(0, 0%, 0%, 0);
+    }
+
+    dialog[open]::backdrop {
+        background: hsla(0, 0%, 0%, .8);
+    }
+
+    @starting-style {
+        dialog[open]::backdrop {
+            background: hsla(0, 0%, 0%, 0);
+        }
+    }
+
+    button {
+        padding: .5em 1em;
+        border: none;
+        border-radius: 4px;
+        color: hsl(0, 0%, 95%);
+        background: hsl(210, 87%, 50%);
+        font-family: inherit;
+        cursor: pointer;
+    }
+
+    button[id="close-modal"] {
+        background: hsl(10, 87%, 50%);
+        font-weight: 600;
+    }
+
+    h1 {
+        font-weight: 700;
+    }
+
+    p {
+        max-width: 40ch;
+        margin: 1rem 0;
+        color: hsl(0, 0%, 30%);
+    }
 </style>
 
 <body>
@@ -61,6 +125,27 @@
                 alt="Bakery image" loading="eager" decoding="async">
             </picture>
             -->
+
+            <button id="open-modal" onclick="dialog.showModal()">Open Modal</button>
+            <dialog id="dialog">
+                <h1>Some modal information</h1>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate minima ad provident sunt illum
+                    modi nihil aperiam dolorem maiores dignissimos iste ea, deleniti pariatur qui optio voluptatem,
+                    consectetur praesentium debitis atque reprehenderit, aliquid ipsam doloribus? Necessitatibus
+                    veritatis neque repudiandae eveniet.</p>
+                <button id="close-modal" onclick="dialog.close()" autofocus>Exit</button>
+                <!--<form action="cafe.html" method="get">
+                    <label for="name" class="name">Name</label>
+                    <input type="text" aria-labelledby="name">
+                    <label for="password" class="pass">Password</label>
+                    <input type="password" aria-labelledby="pass">
+                    <label for="email" class="email">Email</label>
+                    <input type="email" aria-labelledby="email">
+                    <input type="checkbox" name="checkbox" id="" checked aria-labelledby="check">
+                    <label for="checkbox" class="check">Opt in for Newsletter</label>
+                    <button>Go to next Page</button>
+                </form>-->
+            </dialog>
         </section>
     </main>
 
