@@ -50,51 +50,40 @@
     }
 
     dialog {
+        position: fixed;
         margin: auto;
         padding: 2rem;
         border: none;
         border-radius: 8px;
-        /*opacity: 0;*/
-        transition: all .3s ease allow-discrete;
+        opacity: 0;
         box-shadow: 0 0 3px hsla(0, 0%, 0%, .5);
-        animation: drop .3s ease allow-discrete;
     }
 
-    @starting-style {
-        dialog{
-            top: -100;
-        }
+    dialog[open] {
+        animation: slideIn .5s ease-out forwards;
     }
 
-    @keyframes drop{
-        0%{top: 0;}
-        100%{}
+    dialog.closing {
+        animation: slideOut .5s ease-out forwards;
     }
 
-    /*dialog[open] {
-        opacity: 1;
-    }
-
-    @starting-style {
-        dialog[open] {
+    @keyframes slideIn {
+        from {
+            transform: translateY(-100vh);
             opacity: 0;
         }
-    }
 
-    dialog::backdrop {
-        transition: all .3s allow-discrete;
-        background: hsla(0, 0%, 0%, 0);
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
 
     dialog[open]::backdrop {
         background: hsla(0, 0%, 0%, .8);
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
     }
-
-    @starting-style {
-        dialog[open]::backdrop {
-            background: hsla(0, 0%, 0%, 0);
-        }
-    }*/
 
     button {
         padding: .5em 1em;
@@ -106,20 +95,44 @@
         cursor: pointer;
     }
 
-    button[id="close-modal"] {
+    button[onclick="drawer.close()"] {
         background: hsl(10, 87%, 50%);
         font-weight: 600;
     }
 
-    h1 {
+    h2 {
         font-weight: 700;
+        margin-bottom: 1rem;
+        text-decoration: underline;
+        text-underline-offset: 6px;
     }
 
-    p {
-        max-width: 40ch;
-        margin: 1rem 0;
-        color: hsl(0, 0%, 30%);
+    input {
+        outline: none;
+        border: 1px solid;
+        border-radius: 4px;
+        padding: .5rem 1rem;
     }
+
+    input:focus {
+        outline: 2px solid;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    /*input:is(:-webkit-autofill, :autofill) {
+        border: 2px solid hsl(120, 61%, 50%);
+    }*/
 </style>
 
 <body>
@@ -137,25 +150,43 @@
             </picture>
             -->
 
-            <button id="open-modal" onclick="dialog.showModal()">Open Modal</button>
-            <dialog id="dialog">
-                <h1>Some modal information</h1>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate minima ad provident sunt illum
-                    modi nihil aperiam dolorem maiores dignissimos iste ea, deleniti pariatur qui optio voluptatem,
-                    consectetur praesentium debitis atque reprehenderit, aliquid ipsam doloribus? Necessitatibus
-                    veritatis neque repudiandae eveniet.</p>
-                <button id="close-modal" onclick="dialog.close()" autofocus>Exit</button>
-                <!--<form action="cafe.html" method="get">
-                    <label for="name" class="name">Name</label>
-                    <input type="text" aria-labelledby="name">
-                    <label for="password" class="pass">Password</label>
-                    <input type="password" aria-labelledby="pass">
-                    <label for="email" class="email">Email</label>
-                    <input type="email" aria-labelledby="email">
-                    <input type="checkbox" name="checkbox" id="" checked aria-labelledby="check">
-                    <label for="checkbox" class="check">Opt in for Newsletter</label>
-                    <button>Go to next Page</button>
-                </form>-->
+            <button id="open-drawer" onclick="drawer.showModal()">Sign Up</button>
+            <dialog id="drawer" aria-labelledby="drawer-title">
+                <h2 id="drawer-title">Sign Up</h2>
+                <form action="" method="get" id="form" name="SignUpForm">
+
+                    <label for="name" class="name-label">
+                        Name
+                        <input type="text" aria-labelledby="name-label" name="name" placeholder="Enter Your Full Name"
+                            inputmode="text" autocapitalize="true" enterkeyhint="next" autocomplete="name" required>
+                    </label>
+
+                    <label id="tel-label" for="tel">
+                        Phone no:
+                        <input aria-labelledby="tel-label" placeholder="091-6456-9891" type="text" name="number"
+                            autocomplete="off" enterkeyhint="next" inputmode="numeric" required 
+                            pattern="[\d]{7,11}">
+                    </label>
+
+                    <label id="email-label" for="email">
+                        Email
+                        <input aria-labelledby="email-label" placeholder="Example@gmail.com" type="email" name="email"
+                            autocomplete="email" enterkeyhint="next" inputmode="email" required>
+                    </label>
+
+                    <label id="pass-label" for="password">
+                        Password
+                        <input aria-labelledby="pass-label" placeholder="Password" type="password" name="pass"
+                            autocomplete="off" enterkeyhint="send" inputmode="numeric" required minlength="8" maxlength="12">
+                    </label>
+
+                    <menu>
+                        <button value="cancel" onclick="drawer.close()" aria-label="Close" id="close">&times;</button>
+                        <button value="Submit" aria-label="Submit" type="submit">&check;</button>
+                    </menu>
+
+
+                </form>
             </dialog>
         </section>
     </main>
