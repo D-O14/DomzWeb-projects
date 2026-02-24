@@ -158,14 +158,15 @@
                     <label for="name" class="name-label">
                         Name
                         <input type="text" aria-labelledby="name-label" name="name" placeholder="Enter Your Full Name"
-                            inputmode="text" autocapitalize="true" enterkeyhint="next" autocomplete="name" required>
+                            inputmode="text" autocapitalize="words" enterkeyhint="next" autocomplete="name" required 
+                            autocorrect="on">
                     </label>
 
                     <label id="tel-label" for="tel">
                         Phone no:
-                        <input aria-labelledby="tel-label" placeholder="091-6456-9891" type="text" name="number"
-                            autocomplete="off" enterkeyhint="next" inputmode="numeric" required 
-                            pattern="[\d]{7,11}">
+                        <input aria-labelledby="tel-label" placeholder="091-6456-9891" type="tel" name="number"
+                            autocomplete="tel" enterkeyhint="next" inputmode="numeric" required 
+                            pattern="0[789][01][0-9]{8}">
                     </label>
 
                     <label id="email-label" for="email">
@@ -177,14 +178,13 @@
                     <label id="pass-label" for="password">
                         Password
                         <input aria-labelledby="pass-label" placeholder="Password" type="password" name="pass"
-                            autocomplete="off" enterkeyhint="send" inputmode="numeric" required minlength="8" maxlength="12">
+                         autocomplete="current-password" enterkeyhint="send" inputmode="numeric" required minlength="8" maxlength="12">
                     </label>
 
                     <menu>
-                        <button value="cancel" onclick="drawer.close()" aria-label="Close" id="close">&times;</button>
-                        <button value="Submit" aria-label="Submit" type="submit">&check;</button>
+                        <button value="Submit" aria-label="Submit" type="submit" onclick="form.requestSubmit()">&check;</button>
+                        <button value="cancel" onclick="drawer.close()" type="button" aria-label="Close" id="close">&times;</button>
                     </menu>
-
 
                 </form>
             </dialog>
