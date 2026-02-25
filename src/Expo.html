@@ -49,14 +49,41 @@
         font-family: system-ui;
     }
 
+    :root {
+        --sub-bg-4:
+            radial-gradient(circle at 70% 50%,
+                hsla(0, 0%, 0%, 0.05),
+                transparent 40%),
+            hsl(33, 48%, 88%);
+        --bg-dark: hsl(17, 30%, 9%);
+        --txt-white: hsl(0, 0%, 95%);
+        --txt-color: hsl(30, 50%, 25%);
+    }
+
     dialog {
-        position: fixed;
+        width: 45%;
+        position: relative;
         margin: auto;
-        padding: 2rem;
+        padding: 3rem;
         border: none;
         border-radius: 8px;
         opacity: 0;
+        background: var(--sub-bg-4);
         box-shadow: 0 0 3px hsla(0, 0%, 0%, .5);
+
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -155px;
+            left: -150px;
+            width: 300px;
+            height: 250px;
+            border-radius: 50%;
+            background: var(--bg-dark);
+            z-index: -1;
+            pointer-events: none;
+        }
     }
 
     dialog[open] {
@@ -85,37 +112,86 @@
         backdrop-filter: blur(2px);
     }
 
-    button {
-        padding: .5em 1em;
+    button:not(.close, menu > button) {
+        padding: .75em 1em;
         border: none;
         border-radius: 4px;
         color: hsl(0, 0%, 95%);
         background: hsl(210, 87%, 50%);
         font-family: inherit;
         cursor: pointer;
+        transition: .3s ease;
+
+        &:hover {
+            background: hsl(210, 87%, 30%);
+        }
     }
 
-    button[onclick="drawer.close()"] {
-        background: hsl(10, 87%, 50%);
-        font-weight: 600;
+    menu>button {
+        background: var(--bg-dark);
+        border: none;
+        color: beige;
+        border-radius: 6px;
+        width: 100px;
+        padding: .75em 1em;
+        font-family: inherit;
+        cursor: pointer;
+        transition: .3s ease;
+
+
+        &:hover {
+            background: var(--bg-dark);
+            transform: translateX(10px);
+        }
     }
 
-    h2 {
-        font-weight: 700;
-        margin-bottom: 1rem;
-        text-decoration: underline;
-        text-underline-offset: 6px;
+    .form-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        & h2 {
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--bg-dark);
+            margin-bottom: 1rem;
+        }
+    }
+
+    .close {
+        background: none;
+        border: none;
+        font-size: 2rem;
+        position: absolute;
+        top: 10px;
+        left: 650px;
     }
 
     input {
         outline: none;
-        border: 1px solid;
-        border-radius: 4px;
-        padding: .5rem 1rem;
+        background: transparent;
+        border: 1px solid var(--bg-dark);
+        border-radius: 6px;
+        padding: .75rem 1rem;
+        transition: .3s ease;
+        caret-color: hsl(60, 56%, 91%);
     }
 
     input:focus {
-        outline: 2px solid;
+        outline: 2px solid hsl(43, 87%, 67%);
+        outline-offset: 4px;
+        box-shadow: 0 0 0 3px hsla(43, 57%, 77%, 0.4);
+        border: none;
+        background: var(--bg-dark);
+        color: hsl(60, 56%, 91%);
+    }
+
+    input::placeholder{
+        transition: color .2s ease;
+    }
+
+    input:focus::placeholder{
+        color: hsl(60, 56%, 91%);
     }
 
     form {
@@ -124,10 +200,79 @@
         gap: 1rem;
     }
 
-    label {
+    .checks {
         display: flex;
         flex-direction: column;
         gap: .5rem;
+        margin: 10px 0;
+    }
+
+    label:not(#news-label, #terms-label) {
+        font-size: 1.05rem;
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        color: var(--bg-dark);
+    }
+
+    .copyright {
+        margin-top: 2rem;
+        text-align: center;
+        font-size: .9rem;
+        color: var(--bg-dark);
+    }
+
+    a {
+        text-decoration: none;
+        color: hsl(210, 87%, 50%);
+    }
+
+    /*#terms-label{
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+
+        & input{
+            display: none;
+        }
+    }
+
+    #terms-label input:checked + .checkmark{
+        background-size: 60%;
+    }
+
+    .checkmark{
+        width: 100%;
+        height: 100%;
+        border: 2px solid hsl(17, 30%, 9%);
+        display: inline-block;
+        border-radius: 3px;
+        background: hsl(17, 30%, 9%);
+        transition: background-size .3s ease;
+    }*/
+
+    @media (max-width: 900px) {
+        dialog {
+            width: 60%;
+            padding: 4rem;
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: -175px;
+                left: -125px;
+                width: 250px;
+                height: 250px;
+                border-radius: 50%;
+                background: var(--bg-dark);
+                z-index: -1;
+                pointer-events: none;
+            }
+        }
+
+        .close {
+            left: 400px;
+        }
     }
 
     /*input:is(:-webkit-autofill, :autofill) {
@@ -147,46 +292,67 @@
                 sizes="100vw">
                 <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
                 alt="Bakery image" loading="eager" decoding="async">
-            </picture>
-            -->
+            </picture>-->
+
 
             <button id="open-drawer" onclick="drawer.showModal()">Sign Up</button>
             <dialog id="drawer" aria-labelledby="drawer-title">
-                <h2 id="drawer-title">Sign Up</h2>
+                <div class="form-title">
+                    <h2 id="drawer-title">Become A Member Now!</h2>
+                </div>
+                <button value="cancel" aria-label="close" onclick="drawer.close()" type="button"
+                    class="close">&times;</button>
                 <form action="" method="get" id="form" name="SignUpForm">
-
-                    <label for="name" class="name-label">
-                        Name
+                    <label for="name_input" class="name-label">
+                        Name:
                         <input type="text" aria-labelledby="name-label" name="name" placeholder="Enter Your Full Name"
-                            inputmode="text" autocapitalize="words" enterkeyhint="next" autocomplete="name" required 
-                            autocorrect="on">
+                            inputmode="text" autocapitalize="words" enterkeyhint="next" autocomplete="name" required
+                            autocorrect="on" id="name_input" pattern="[A-Za-z\s]+"
+                            title="Name should only contain letters and spaces." autofocus>
                     </label>
 
-                    <label id="tel-label" for="tel">
+                    <label id="tel-label" for="tel_input">
                         Phone no:
                         <input aria-labelledby="tel-label" placeholder="091-6456-9891" type="tel" name="number"
-                            autocomplete="tel" enterkeyhint="next" inputmode="numeric" required 
-                            pattern="0[789][01][0-9]{8}">
+                            autocomplete="tel" enterkeyhint="next" inputmode="numeric" pattern="0[789][01][0-9]{8}"
+                            id="tel_input" required title="Must use valid phone number format, e.g. 091-6456-9891.">
                     </label>
 
-                    <label id="email-label" for="email">
-                        Email
-                        <input aria-labelledby="email-label" placeholder="Example@gmail.com" type="email" name="email"
-                            autocomplete="email" enterkeyhint="next" inputmode="email" required>
+                    <label id="email-label" for="email_inp">
+                        Email:
+                        <input aria-labelledby="email-label" placeholder="Cafe_lover@gmail.com" type="email"
+                            name="email" autocomplete="email" enterkeyhint="next" inputmode="email" required
+                            id="email_inp" title="Use proper E-mail, quit being a grandma">
                     </label>
 
-                    <label id="pass-label" for="password">
-                        Password
-                        <input aria-labelledby="pass-label" placeholder="Password" type="password" name="pass"
-                         autocomplete="current-password" enterkeyhint="send" inputmode="numeric" required minlength="8" maxlength="12">
+                    <label id="pass-label" for="pass_input">
+                        Password:
+                        <input aria-labelledby="pass-label" placeholder="This is a password" type="password" name="pass"
+                            id="pass_input" autocomplete="current-password" enterkeyhint="done" inputmode="numeric"
+                            required minlength="8" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                            title="Password must be 8-12 characters long and include at least one uppercase letter, one lowercase letter, special character and one number.">
                     </label>
+
+                    <div class="checks">
+                        <label id="news-label">
+                            <input type="checkbox" name="newsletter" aria-labelledby="news-label">
+                            Subscribe to our <a href="">Newsletter</a>
+                        </label>
+                        <label id="terms-label">
+                            <input type="checkbox" name="terms" aria-labelledby="terms-label" checked required>
+                            I agree to the <a href="">Terms and Conditions</a>
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
 
                     <menu>
-                        <button value="Submit" aria-label="Submit" type="submit" onclick="form.requestSubmit()">&check;</button>
-                        <button value="cancel" onclick="drawer.close()" type="button" aria-label="Close" id="close">&times;</button>
+                        <button value="Submit" type="submit" onclick="form.requestSubmit()">Submit</button>
                     </menu>
 
                 </form>
+                <p class="copyright">
+                    &copy; 2024 <a href="#">Domz Cafe.</a> All rights reserved.
+                </p>
             </dialog>
         </section>
     </main>
