@@ -58,6 +58,7 @@
         --bg-dark: hsl(17, 30%, 9%);
         --txt-white: hsl(0, 0%, 95%);
         --txt-color: hsl(30, 50%, 25%);
+        --accent: hsl(60, 56%, 91%);
     }
 
     dialog {
@@ -70,6 +71,9 @@
         opacity: 0;
         background: var(--sub-bg-4);
         box-shadow: 0 0 3px hsla(0, 0%, 0%, .5);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
 
 
         &::before {
@@ -130,7 +134,7 @@
     menu>button {
         background: var(--bg-dark);
         border: none;
-        color: beige;
+        color: hsl(60, 56%, 91%);
         border-radius: 6px;
         width: 100px;
         padding: .75em 1em;
@@ -143,6 +147,13 @@
             background: var(--bg-dark);
             transform: translateX(10px);
         }
+    }
+
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
     }
 
     .form-title {
@@ -167,44 +178,163 @@
         left: 650px;
     }
 
-    input {
-        outline: none;
-        background: transparent;
-        border: 1px solid var(--bg-dark);
-        border-radius: 6px;
-        padding: .75rem 1rem;
-        transition: .3s ease;
-        caret-color: hsl(60, 56%, 91%);
+
+    .label {
+        position: relative;
+        font-size: 16px;
+        padding-top: 1.25rem;
+        margin-bottom: 5px;
+
+        & .placeholder {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            top: calc(50% + 10px);
+            transform: translateY(-50%);
+            color: hsl(0, 0%, 67%);
+            transition: all .3s ease;
+            pointer-events: none;
+        }
+
+        & input {
+            position: relative;
+            outline: none;
+            padding-left: 40px;
+            background: hsla(0, 0%, 0%, 0.03);
+            border: 1px solid var(--bg-dark);
+            border-radius: 6px;
+            padding: .75rem 1rem;
+            caret-color: var(--bg-dark);
+            transition: transform .3s ease;
+
+            &:focus{
+                background: var(--bg-dark);
+            }
+
+            &:focus-within{
+                box-shadow: 0 0 0 3px var(--accent);
+            }
+
+        }
+
+    }
+
+    .icon{
+        position: absolute;
+        left: 14px;
+        opacity: .6;
+    }
+
+    .label input:valid+.placeholder,
+    .label input:focus+.placeholder {
+        top: 20px;
+        border-color: var(--accent);
+        background: var(--accent);
+        border-radius: 8px;
+        padding: .25em;
+        box-shadow: 0 0 3px hsl(0, 0%, 5%);
+        color: var(--bg-dark);
+    }
+
+    .label input+.placeholder {
+        padding: .25px;
+    }
+
+    .label input:valid,
+    .label input:focus {
+        border-color: hsl(0, 0%, 13%);
+        transition-delay: .3s;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+        /*-webkit-box-shadow: 0 0 0 1000px hsl(0, 0%, 7%) inset;
+        box-shadow: 0 0 0 1000px hsl(0, 0%, 7%) inset;
+        -webkit-text-fill-color: hsl(0, 0%, 100%);*/
+        caret-color: var(--bg-dark);
+        transition: background-color 9999s ease-in-out 0s;
     }
 
     input:focus {
-        outline: 2px solid hsl(43, 87%, 67%);
+        outline: 3px solid hsl(43, 97%, 87%);
         outline-offset: 4px;
         box-shadow: 0 0 0 3px hsla(43, 57%, 77%, 0.4);
-        border: none;
+        /*border: none;
         background: var(--bg-dark);
-        color: hsl(60, 56%, 91%);
-    }
-
-    input::placeholder{
-        transition: color .2s ease;
-    }
-
-    input:focus::placeholder{
-        color: hsl(60, 56%, 91%);
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        color: var(--accent);*/
     }
 
     .checks {
         display: flex;
         flex-direction: column;
+        cursor: pointer;
         gap: .5rem;
         margin: 10px 0;
+
+        & input {
+            position: absolute;
+            opacity: 0;
+        }
+    }
+
+    #news-label,
+    #terms-label {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .check {
+        width: 15px;
+        height: 15px;
+        border: 2px solid hsl(0, 0%, 27%);
+        border-radius: 4px;
+        display: grid;
+        background: hsl(0, 0%, 95%);
+        place-items: center;
+        position: relative;
+        transition: .2s;
+        cursor: pointer;
+        vertical-align: middle;
+        margin-right: .25rem;
+
+        & svg {
+            width: 10px;
+            height: 10px;
+            stroke: hsl(0, 0%, 100%);
+            stroke-width: 3;
+            fill: none;
+            opacity: 0;
+            transform: scale(.5);
+            transition: .2s;
+
+            & path {
+                stroke-dasharray: 24;
+                stroke-dashoffset: 24;
+            }
+        }
+    }
+
+    .checks input:checked+.check svg {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .checks input:checked+.check svg path {
+        stroke-dashoffset: 0;
+        transition: stroke-dashoffset .3s ease;
+    }
+
+    .checks input:checked+.check {
+        border-color: hsl(0, 0%, 5%);
+        background: var(--bg-dark);
+    }
+
+    .checks input:focus-visible+.check {
+        outline: 2px solid blue;
+        outline-offset: 2px;
     }
 
     label:not(#news-label, #terms-label) {
@@ -227,34 +357,10 @@
         color: hsl(210, 87%, 50%);
     }
 
-    /*#terms-label{
-        width: 15px;
-        height: 15px;
-        cursor: pointer;
-
-        & input{
-            display: none;
-        }
-    }
-
-    #terms-label input:checked + .checkmark{
-        background-size: 60%;
-    }
-
-    .checkmark{
-        width: 100%;
-        height: 100%;
-        border: 2px solid hsl(17, 30%, 9%);
-        display: inline-block;
-        border-radius: 3px;
-        background: hsl(17, 30%, 9%);
-        transition: background-size .3s ease;
-    }*/
-
     @media (max-width: 900px) {
         dialog {
             width: 60%;
-            padding: 4rem;
+            padding: 3.25rem;
 
             &::before {
                 content: "";
@@ -271,7 +377,7 @@
         }
 
         .close {
-            left: 400px;
+            left: 380px;
         }
     }
 
@@ -296,52 +402,79 @@
 
 
             <button id="open-drawer" onclick="drawer.showModal()">Sign Up</button>
+
             <dialog id="drawer" aria-labelledby="drawer-title">
+
                 <div class="form-title">
                     <h2 id="drawer-title">Become A Member Now!</h2>
                 </div>
-                <button value="cancel" aria-label="close" onclick="drawer.close()" type="button"
-                    class="close">&times;</button>
+
+                <button value="cancel" aria-label="close" onclick="drawer.close()" type="button" class="close">
+                    &times;
+                </button>
+
                 <form action="" method="get" id="form" name="SignUpForm">
-                    <label for="name_input" class="name-label">
-                        Name:
-                        <input type="text" aria-labelledby="name-label" name="name" placeholder="Enter Your Full Name"
-                            inputmode="text" autocapitalize="words" enterkeyhint="next" autocomplete="name" required
-                            autocorrect="on" id="name_input" pattern="[A-Za-z\s]+"
-                            title="Name should only contain letters and spaces." autofocus>
+
+                    <label for="name_input" class="name-label label">
+                        <!--<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide icon">
+                            <circle cx="12" cy="8" r="5" />
+                            <path d="M20 21a8 8 0 0 0-16 0" />
+                        </svg>
+                        &vert;-->
+                        <input type="text" aria-labelledby="name-label" name="name" placeholder=" " inputmode="text"
+                            autocapitalize="words" enterkeyhint="next" autocomplete="name" required autocorrect="on"
+                            id="name_input" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces."
+                            autofocus>
+                        <span class="placeholder">Name:</span>
                     </label>
 
-                    <label id="tel-label" for="tel_input">
-                        Phone no:
-                        <input aria-labelledby="tel-label" placeholder="091-6456-9891" type="tel" name="number"
+                    <label class="tel-label label" for="tel_input">
+                        <input aria-labelledby="tel-label" placeholder=" " type="tel" name="number"
                             autocomplete="tel" enterkeyhint="next" inputmode="numeric" pattern="0[789][01][0-9]{8}"
                             id="tel_input" required title="Must use valid phone number format, e.g. 091-6456-9891.">
+                            <span class="placeholder">Phone No:</span>
                     </label>
 
-                    <label id="email-label" for="email_inp">
-                        Email:
-                        <input aria-labelledby="email-label" placeholder="Cafe_lover@gmail.com" type="email"
+                    <label class="email-label label" for="email_inp">
+                        <input aria-labelledby="email-label" placeholder=" " type="email"
                             name="email" autocomplete="email" enterkeyhint="next" inputmode="email" required
                             id="email_inp" title="Use proper E-mail, quit being a grandma">
+                            <span class="placeholder">Email:</span>
                     </label>
 
-                    <label id="pass-label" for="pass_input">
-                        Password:
-                        <input aria-labelledby="pass-label" placeholder="This is a password" type="password" name="pass"
+                    <label class="pass-label label" for="pass_input">
+                        <input aria-labelledby="pass-label" placeholder=" " type="password" name="pass"
                             id="pass_input" autocomplete="current-password" enterkeyhint="done" inputmode="numeric"
                             required minlength="8" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             title="Password must be 8-12 characters long and include at least one uppercase letter, one lowercase letter, special character and one number.">
+                            <span class="placeholder">Password:</span>
                     </label>
 
                     <div class="checks">
-                        <label id="news-label">
-                            <input type="checkbox" name="newsletter" aria-labelledby="news-label">
+                        <label id="news-label" for="news-check">
+                            <input type="checkbox" name="newsletter" aria-labelledby="news-label" id="news-check">
+                            <span class="check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-check-icon lucide-check">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                            </span>
                             Subscribe to our <a href="">Newsletter</a>
                         </label>
-                        <label id="terms-label">
-                            <input type="checkbox" name="terms" aria-labelledby="terms-label" checked required>
+                        <label id="terms-label" for="terms-check">
+                            <input type="checkbox" name="terms" aria-labelledby="terms-label" checked required
+                                id="terms-check">
+                            <span class="check">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-check-icon lucide-check">
+                                    <path d="M20 6 9 17l-5-5" />
+                                </svg>
+                            </span>
                             I agree to the <a href="">Terms and Conditions</a>
-                            <span class="checkmark"></span>
                         </label>
                     </div>
 
