@@ -94,9 +94,9 @@
         animation: slideIn .5s ease-out forwards;
     }
 
-    dialog.closing {
+    /*dialog.closing {
         animation: slideOut .5s ease-out forwards;
-    }
+    }*/
 
     @keyframes slideIn {
         from {
@@ -149,7 +149,7 @@
         }
     }
 
-    
+
     form {
         display: flex;
         flex-direction: column;
@@ -178,6 +178,11 @@
         left: 650px;
     }
 
+    .icon {
+        position: absolute;
+        left: 14px;
+        opacity: .6;
+    }
 
     .label {
         position: relative;
@@ -192,76 +197,73 @@
             top: calc(50% + 10px);
             transform: translateY(-50%);
             color: hsl(0, 0%, 67%);
-            transition: all .3s ease;
+            transition: all .3s ease-in-out;
             pointer-events: none;
         }
+    }
 
-        & input {
-            position: relative;
-            outline: none;
-            padding-left: 40px;
-            background: hsla(0, 0%, 0%, 0.03);
-            border: 1px solid var(--bg-dark);
-            border-radius: 6px;
-            padding: .75rem 1rem;
-            caret-color: var(--accent);
-            transition: transform .3s ease;
+    .label input {
+        position: relative;
+        outline: none;
+        padding-left: 40px;
+        background: hsla(0, 0%, 0%, 0.03);
+        border: 1px solid var(--bg-dark);
+        border-radius: 6px;
+        padding: .75rem 1rem;
+        caret-color: var(--accent);
+        transition: transform .3s ease;
 
-            &:focus{
-                background: var(--bg-dark);
-            }
+        &:focus {
+            background: var(--bg-dark);
+            color: var(--accent);
+            outline: 3px solid hsl(43, 97%, 87%);
+            outline-offset: 4px;
+            box-shadow: 0 0 0 3px hsla(43, 57%, 77%, 0.4);
+        }
 
-            &:focus-within{
-                box-shadow: 0 0 0 3px var(--accent);
-            }
+        &:not(:focus) {
+            background: var(--sub-bg-4);
+        }
 
+        &:focus-within {
+            box-shadow: 0 0 0 3px var(--accent);
         }
 
     }
-
-    .icon{
-        position: absolute;
-        left: 14px;
-        opacity: .6;
-    }
-
+    
     .label input:valid+.placeholder,
-    .label input:focus+.placeholder {
+    .label input:not(:placeholder-shown)+.placeholder,
+    .label input:focus+.placeholder,
+    .label input:-webkit-autofill+.placeholder {
         top: 20px;
         border-color: var(--accent);
         background: var(--accent);
-        border-radius: 8px;
+        border-radius: 6px;
         padding: .25em;
         box-shadow: 0 0 3px hsl(0, 0%, 5%);
         color: var(--bg-dark);
     }
-
-    .label input+.placeholder {
-        padding: .25px;
+    
+    .label input:-webkit-autofill,
+    .label input:-webkit-autofill:hover,
+    .label input:-webkit-autofill:focus,
+    .label input:-webkit-autofill:active {
+        -webkit-text-fill-color: var(--accent);
+        -webkit-box-shadow: 0 0 0 1000px var(--sub-bg-4) inset !important;
+        box-shadow: 0 0 0 1000px var(--sub-bg-4) inset !important;
+        caret-color: var(--accent);
+        transition: background-color 5000s ease-in-out 0s;
     }
 
     .label input:valid,
     .label input:focus {
-        border-color: hsl(0, 0%, 13%);
         transition-delay: .3s;
     }
 
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover,
-    input:-webkit-autofill:focus,
-    input:-webkit-autofill:active {
-        /*-webkit-box-shadow: 0 0 0 1000px hsl(0, 0%, 7%) inset;
-        box-shadow: 0 0 0 1000px hsl(0, 0%, 7%) inset;
-        -webkit-text-fill-color: hsl(0, 0%, 100%);*/
-        caret-color: var(--bg-dark);
-        transition: background-color 9999s ease-in-out 0s;
-    }
-
-    input:focus {
-        outline: 3px solid hsl(43, 97%, 87%);
-        outline-offset: 4px;
-        box-shadow: 0 0 0 3px hsla(43, 57%, 77%, 0.4);
-        color: var(--accent);
+    .label input:not(:focus)+.placeholder,
+    .label input:-webkit-autofill+.placeholder {
+        background: var(--sub-bg-4);
+        box-shadow: none;
     }
 
     .checks {
@@ -411,43 +413,37 @@
                     &times;
                 </button>
 
-                <form action="" method="get" id="form" name="SignUpForm">
+                <form action="" method="get" id="form" name="SignUpForm" spellcheck="true">
 
                     <label for="name_input" class="name-label label">
-                        <!--<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide icon">
-                            <circle cx="12" cy="8" r="5" />
-                            <path d="M20 21a8 8 0 0 0-16 0" />
-                        </svg>
-                        &vert;-->
                         <input type="text" aria-labelledby="name-label" name="name" placeholder=" " inputmode="text"
                             autocapitalize="words" enterkeyhint="next" autocomplete="name" required autocorrect="on"
                             id="name_input" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces."
                             autofocus>
+                            
                         <span class="placeholder">Name:</span>
                     </label>
 
                     <label class="tel-label label" for="tel_input">
-                        <input aria-labelledby="tel-label" placeholder=" " type="tel" name="number"
-                            autocomplete="tel" enterkeyhint="next" inputmode="numeric" pattern="0[789][01][0-9]{8}"
-                            id="tel_input" required title="Must use valid phone number format, e.g. 091-6456-9891.">
-                            <span class="placeholder">Phone No:</span>
+                        <input aria-labelledby="tel-label" placeholder=" " type="tel" name="number" autocomplete="tel"
+                            enterkeyhint="next" inputmode="numeric" pattern="0[789][01][0-9]{8}" id="tel_input" required
+                            title="Must use valid phone number format, e.g. 091-6456-9891.">
+                        <span class="placeholder">Phone No:</span>
                     </label>
 
                     <label class="email-label label" for="email_inp">
-                        <input aria-labelledby="email-label" placeholder=" " type="email"
-                            name="email" autocomplete="email" enterkeyhint="next" inputmode="email" required
-                            id="email_inp" title="Use proper E-mail, quit being a grandma">
-                            <span class="placeholder">Email:</span>
+                        <input aria-labelledby="email-label" placeholder=" " type="email" name="email"
+                            autocomplete="email" enterkeyhint="next" inputmode="email" required id="email_inp"
+                            title="Use proper E-mail, quit being a grandma">
+                        <span class="placeholder">Email:</span>
                     </label>
 
                     <label class="pass-label label" for="pass_input">
-                        <input aria-labelledby="pass-label" placeholder=" " type="password" name="pass"
-                            id="pass_input" autocomplete="current-password" enterkeyhint="done" inputmode="numeric"
-                            required minlength="8" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                        <input aria-labelledby="pass-label" placeholder=" " type="password" name="pass" id="pass_input"
+                            autocomplete="current-password" enterkeyhint="done" inputmode="numeric" required
+                            minlength="8" maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                             title="Password must be 8-12 characters long and include at least one uppercase letter, one lowercase letter, special character and one number.">
-                            <span class="placeholder">Password:</span>
+                        <span class="placeholder">Password:</span>
                     </label>
 
                     <div class="checks">
@@ -460,7 +456,7 @@
                                     <path d="M20 6 9 17l-5-5" />
                                 </svg>
                             </span>
-                            Subscribe to our <a href="">Newsletter</a>
+                            Subscribe to our <a href="#">Newsletter</a>
                         </label>
                         <label id="terms-label" for="terms-check">
                             <input type="checkbox" name="terms" aria-labelledby="terms-label" checked required
@@ -472,7 +468,7 @@
                                     <path d="M20 6 9 17l-5-5" />
                                 </svg>
                             </span>
-                            I agree to the <a href="">Terms and Conditions</a>
+                            I agree to the <a href="cafe.html">Terms and Conditions</a>
                         </label>
                     </div>
 
