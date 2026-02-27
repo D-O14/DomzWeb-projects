@@ -1,4 +1,3 @@
-
 console.log("Vite is running!");
 
 import "../css/main.css";
