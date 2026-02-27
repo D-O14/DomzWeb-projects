@@ -122,6 +122,84 @@
         </nav>
     </header>
 
+    <dialog id="drawer" aria-labelledby="drawer-title">
+
+        <div class="form-title">
+            <h2 id="drawer-title">Become A Member Now!</h2>
+        </div>
+
+        <button value="cancel" aria-label="close" onclick="drawer.close()" type="button" class="close">
+            &times;
+        </button>
+
+        <form action="" method="get" id="form" name="SignUpForm" spellcheck="true">
+
+            <label for="name_input" class="name-label label">
+                <input type="text" aria-labelledby="name-label" name="name" placeholder=" " inputmode="text"
+                    autocapitalize="words" enterkeyhint="next" autocomplete="name" required autocorrect="on"
+                    id="name_input" pattern="[A-Za-z\s]+" title="Name should only contain letters and spaces."
+                    autofocus>
+
+                <span class="placeholder">Name:</span>
+            </label>
+
+            <label class="tel-label label" for="tel_input">
+                <input aria-labelledby="tel-label" placeholder=" " type="tel" name="number" autocomplete="tel"
+                    enterkeyhint="next" inputmode="numeric" pattern="0[789][01][0-9]{8}" id="tel_input" required
+                    title="Must use valid phone number format, e.g. 091-6456-9891.">
+                <span class="placeholder">Phone No:</span>
+            </label>
+
+            <label class="email-label label" for="email_inp">
+                <input aria-labelledby="email-label" placeholder=" " type="email" name="email" autocomplete="email"
+                    enterkeyhint="next" inputmode="email" required id="email_inp"
+                    title="Use proper E-mail, quit being a grandma">
+                <span class="placeholder">Email:</span>
+            </label>
+
+            <label class="pass-label label" for="pass_input">
+                <input aria-labelledby="pass-label" placeholder=" " type="password" name="pass" id="pass_input"
+                    autocomplete="current-password" enterkeyhint="done" inputmode="numeric" required minlength="8"
+                    maxlength="12" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                    title="Password must be 8-12 characters long and include at least one uppercase letter, one lowercase letter, special character and one number.">
+                <span class="placeholder">Password:</span>
+            </label>
+
+            <div class="checks">
+                <label id="news-label" for="news-check">
+                    <input type="checkbox" name="newsletter" aria-labelledby="news-label" id="news-check">
+                    <span class="check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
+                            <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                    </span>
+                    Subscribe to our<a href="#" class="news-link">Newsletter</a>
+                </label>
+                <label id="terms-label" for="terms-check">
+                    <input type="checkbox" name="terms" aria-labelledby="terms-label" checked required id="terms-check">
+                    <span class="check">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-check-icon lucide-check">
+                            <path d="M20 6 9 17l-5-5" />
+                        </svg>
+                    </span>
+                    I agree to the<a href="#" class="terms-link">Terms and Conditions</a>
+                </label>
+            </div>
+
+            <menu>
+                <button value="Submit" type="submit" onclick="form.requestSubmit()" class="formBtn">Submit</button>
+            </menu>
+
+        </form>
+        <p class="copyright">
+            &copy; 2024<a href="#" class="copyright-link">Domz Cafe.</a>All rights reserved.
+        </p>
+    </dialog>
+
     <main>
         <section id="home">
 
@@ -134,10 +212,10 @@
                         and a warm, welcoming atmosphere made just for you to rest and relax.
                     </p>
 
-                    <div class="hero-actions">
+                    <menu class="hero-actions">
                         <button class="primary-btn">View Menu</button>
                         <button class="secondary-btn">Reserve Table</button>
-                    </div>
+                </menu>
 
                     <ul class="hero-features">
                         <li class="feature">Freshly baked daily</li>
@@ -148,10 +226,11 @@
                 </div>
 
                 <div class="hero-img">
-                    <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/v1771798351/coffee_tb5zcf.png"
-                        alt="3D Image of a disposable paper coffee cup with a black lid" loading="eager"
+                    <!---->
+                    <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/v1771798170/coffee_mug_rohbib.png"
+                        alt="A 3D Image of a brown floating coffee mug" loading="eager"
                         decoding="async" width="500" height="400"
-                        onerror="this.onerror=null; this.src='/assets/images/coffee.png'">
+                        onerror="this.onerror=null; this.src='/assets/images/coffee_mug.png'">
                 </div>
 
             </div>
