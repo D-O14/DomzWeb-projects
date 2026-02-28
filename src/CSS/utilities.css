@@ -1,0 +1,64 @@
+:root{
+    --bg-light: hsl(0, 0%, 100%);
+    --bg-dark: hsl(0, 0%, 0%);
+    --bg-primary: hsl(210, 87%, 50%);
+    --bg-secondary: hsl(0, 0%, 20%); ; 
+    --bg-danger: hsl(5, 80%, 50%);
+    --txt-white: hsl(0, 0%, 90%);
+    --txt-muted: hsl(0, 0%, 35%);
+
+    --shadow: 0 0 2.5px inset var(--bg-light);
+
+    --padding-xsm: .5em 1em;
+    --padding-sm: .75em 1em;
+    --padding-xmd: 1rem 2rem;
+    --padding-md: 2rem 3rem;
+    --padding-lg: 4rem 5rem;
+    --padding-xlg: 5rem 5rem;
+
+    --btn-width-sm: 100px;
+    --btn-width-md: 200px;
+    --btn-width-lg: 400px;
+
+    --radius-1: 4px;
+    --radius-2: 6px;
+    --radius-3: 8px;
+    --radius-4: 12px;
+    --radius-5: 14px;
+    --radius-6: 16px;
+    --radius-7: 20px;
+    --radius-8: 24px;
+
+    --fw-thin: 100;
+    --fw-lighter: 200;
+    --fw-light: 300;
+    --fw-normal: 400;
+    --fw-md: 500;
+    --fw-bld: 600;
+    --fw-blder: 700;
+    --fw-heavy: 800;
+    --fw-lg: 900;
+
+    --border-base: none;
+    
+}
+
+body{
+    background: var(--bg-dark);
+}
+
+.btn-prime{
+    border: var(--border-base);
+    width: var(--btn-width-sm);
+    border-radius: var(--radius-2);
+    color: var(--txt-muted);
+    background: var(--bg-light);
+    padding: var(--padding-xsm);
+    font-weight: var(--fw-normal);
+}
+
+.btn-primary{
+    background: var(--bg-primary);
+    color: var(--txt-white);
+    font-weight: var(--fw-normal);
+}
