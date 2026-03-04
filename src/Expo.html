@@ -5,6 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
+    <link rel="stylesheet" href="css/utilities.css">
     <title>Domz Cafe - Expo</title>
 </head>
 
@@ -51,27 +52,6 @@
         font-family: system-ui;
     }
 
-    [popover]{
-        border: none;
-        padding: 1rem 1.25rem;
-        background: hsl(0, 0%, 13%);
-        color: hsl(0, 0%, 100%);
-        border-radius: 8px;
-        min-width: 220px;
-    }
-
-    #toast{
-        anchor-name: --toast;
-        position: fixed;
-        
-        left: 100px;
-    }
-
-    #toast-second{
-        position-anchor: --toast;
-        top: anchor(bottom);
-    }
-
 </style>
 
 <body>
@@ -87,32 +67,6 @@
                 <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
                 alt="Bakery image" loading="eager" decoding="async">
             </picture>-->
-
-            <form>
-                <label for="name">
-                    Name:
-                    <input type="text" name="name" required>
-                </label>
-
-                <label for="email">
-                    Email:
-                    <input type="email" name="email" required>
-                </label>
-
-                <button type="button" popovertarget="toast">Submit</button>
-            </form>
-
-            <div id="toast" popover>
-                Form Submitted Successfully!
-                <button popovertarget="toast" popovertargetaction="hide" aria-label="close">&times;</button>
-            </div>
-
-            <button popovertarget="toast-second">Toast</button>
-            <div id="toast-second" popover>
-                Another Toast stacked below!
-                <button popovertarget="toast-second" aria-label="close" popovertargetaction="hide">&times;</button>
-            </div>
-
         </section>
     </main>
 

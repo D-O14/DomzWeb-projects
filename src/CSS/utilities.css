@@ -2,12 +2,14 @@
     --bg-light: hsl(0, 0%, 100%);
     --bg-dark: hsl(0, 0%, 0%);
     --bg-primary: hsl(210, 87%, 50%);
-    --bg-secondary: hsl(0, 0%, 20%); ; 
+    --bg-secondary: hsl(0, 0%, 25%); ; 
     --bg-danger: hsl(5, 80%, 50%);
     --txt-white: hsl(0, 0%, 90%);
     --txt-muted: hsl(0, 0%, 35%);
+    --txt-color: hsl(0, 0%, 5%);
 
-    --shadow: 0 0 2.5px inset var(--bg-light);
+
+    --shadow: 0 0 2px var(--bg-dark);
 
     --padding-xsm: .5em 1em;
     --padding-sm: .75em 1em;
@@ -40,25 +42,81 @@
     --fw-lg: 900;
 
     --border-base: none;
+
+    --box-width: 25vmax;
+    --box-height: 25vmin;
+    --container-width: 50vmax;
+    --container-height: 50vmin;
     
 }
 
-body{
-    background: var(--bg-dark);
+button{
+    border: var(--border-base);
+    background: none;
 }
 
-.btn-prime{
-    border: var(--border-base);
-    width: var(--btn-width-sm);
-    border-radius: var(--radius-2);
+button:hover {
+    filter: brightness(.75);
+    transform: scale(1.15) translateY(-5px);
+}
+
+a{
+    text-decoration: none;
+    color: var(--txt-color);
+}
+
+li{
+    list-style: none;
+}
+
+nav, menu{
+    display: flex;
+}
+
+.btn, .btn-prime{
+    border-radius: var(--radius-1);
     color: var(--txt-muted);
-    background: var(--bg-light);
     padding: var(--padding-xsm);
     font-weight: var(--fw-normal);
+    box-shadow: var(--shadow);
+    transition: all .3s ease;
 }
 
 .btn-primary{
     background: var(--bg-primary);
     color: var(--txt-white);
-    font-weight: var(--fw-normal);
+}
+
+.btn-danger{
+    background: var(--bg-danger);
+    color: var(--txt-white);
+}
+
+.btn-secondary{
+    background: var(--bg-secondary);
+    color: var(--txt-white);
+}
+
+.box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--container-bg-light);
+    width: var(--box-width);
+    height: var(--box-height);
+    box-shadow: var(--shadow);
+    border: var(--border-base);
+    border-radius: var(--radius-3);
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--container-bg-light);
+    width: var(--container-width);
+    height: var(--container-height);
+    box-shadow: var(--shadow);
+    border: var(--border-base);
+    border-radius: var(--radius-3);
 }
