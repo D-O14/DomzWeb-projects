@@ -1,15 +1,42 @@
-:root{
-    --bg-light: hsl(0, 0%, 100%);
+*,
+*::before,
+*::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: normal;
+    text-rendering: optimizeLegibility;
+    font-optical-sizing: auto;
+    text-wrap: balance;
+    font-family: var(--font-fam);
+    font-weight: var(--fw-base);
+    font-size: var(--step-0);
+    line-height: 1.05em;
+    letter-spacing: .05em;
+}
+
+:root {
+    --light: hsl(0, 0%, 100%);
     --bg-dark: hsl(0, 0%, 0%);
     --bg-primary: hsl(210, 87%, 50%);
-    --bg-secondary: hsl(0, 0%, 25%); ; 
+    --bg-secondary: hsl(210, 10%, 40%);
     --bg-danger: hsl(5, 80%, 50%);
+    --dark: hsl(0, 0%, 15%);
+
     --txt-white: hsl(0, 0%, 90%);
     --txt-muted: hsl(0, 0%, 35%);
     --txt-color: hsl(0, 0%, 5%);
 
-
-    --shadow: 0 0 2px var(--bg-dark);
+    --shadow-base: 3px 1px 2px var(--bg-dark);
+    --shadow-1: 0px 0px 4px var(--bg-dark);
 
     --padding-xsm: .5em 1em;
     --padding-sm: .75em 1em;
@@ -31,10 +58,18 @@
     --radius-7: 20px;
     --radius-8: 24px;
 
+    --font-fam: "Electrolize", sans-serif;
+
+    --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+    --step-1: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+    --step-2: clamp(1.5rem, 1.3rem + 1.2vw, 2rem);
+    --step-3: clamp(2rem, 1.6rem + 2vw, 2.75rem);
+    --step-4: clamp(2.5rem, 2rem + 3vw, 3.5rem);
+
     --fw-thin: 100;
     --fw-lighter: 200;
     --fw-light: 300;
-    --fw-normal: 400;
+    --fw-base: 400;
     --fw-md: 500;
     --fw-bld: 600;
     --fw-blder: 700;
@@ -47,76 +82,100 @@
     --box-height: 25vmin;
     --container-width: 50vmax;
     --container-height: 50vmin;
-    
+
 }
 
-button{
+button {
+    font-family: inherit;
     border: var(--border-base);
     background: none;
+    transition: all .3s ease;
+    padding: var(--padding-xsm);
+    cursor: pointer;
 }
 
-button:hover {
+button:not(menu > button):hover {
     filter: brightness(.75);
     transform: scale(1.15) translateY(-5px);
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--txt-color);
 }
 
-li{
+li {
     list-style: none;
 }
 
-nav, menu{
+menu {
     display: flex;
+    gap: .5rem;
 }
 
-.btn, .btn-prime{
+nav {
+    padding: 1.5rem 2rem;
+
+    & ul {
+        display: flex;
+        gap: .75rem;
+    }
+
+    & menu {
+        margin-left: 1.5rem;
+    }
+}
+
+.btn,
+.btn-prime {
     border-radius: var(--radius-1);
     color: var(--txt-muted);
-    padding: var(--padding-xsm);
-    font-weight: var(--fw-normal);
-    box-shadow: var(--shadow);
-    transition: all .3s ease;
+    font-weight: var(--fw-base);
+    box-shadow: var(--shadow-base);
 }
 
-.btn-primary{
+.btn-primary {
     background: var(--bg-primary);
     color: var(--txt-white);
 }
 
-.btn-danger{
+.btn-danger {
     background: var(--bg-danger);
     color: var(--txt-white);
 }
 
-.btn-secondary{
+.btn-secondary {
     background: var(--bg-secondary);
     color: var(--txt-white);
+
+    &:hover {
+        filter: brightness(1.25);
+    }
 }
 
-.box{
+.box {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--container-bg-light);
     width: var(--box-width);
     height: var(--box-height);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-1);
     border: var(--border-base);
     border-radius: var(--radius-3);
 }
 
-.container{
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--container-bg-light);
     width: var(--container-width);
     height: var(--container-height);
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-1);
     border: var(--border-base);
     border-radius: var(--radius-3);
+
+    &::after {
+        content: "This is a container";
+    }
 }
