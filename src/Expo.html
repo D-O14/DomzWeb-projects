@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css/normalize.css">
-    <link rel="stylesheet" href="css/utilities.css">
+    <!--<link rel="stylesheet" href="css/utilities.css">-->
     <title>Domz Cafe - Expo</title>
 </head>
 
@@ -50,12 +50,20 @@
         padding: 0;
         box-sizing: border-box;
         font-family: system-ui;
+        transition: .3s ease;
     }
+
+    .container{
+        background: hsl(100, 50%, 15%);
+        width: 100px;
+        height: 100px;
+    }
+
 </style>
 
 <body>
     <main>
-        <section>
+        <section class="testimonials">
             <!--<picture>
                 <source 
                 media="(min-width: 1024px)"
@@ -65,11 +73,59 @@
                 sizes="100vw">
                 <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
                 alt="Bakery image" loading="eager" decoding="async">
-            </picture>-->
+            </picture>
+            <article>
+                <span>This is a testimonial</span>
+                <figure>
+                    <img src="https://drive.google.com/open?id=1mwPERVYMSf9RIPvV75mBfu4oemu6SU9w" alt="" width="100px" height="100px">
+                </figure>
+                <div class="testimonial">
+                    <div class="heading">
+                        <h1>Ogwai Dominion</h1>
+                        <a href="mailto:dominionogwai613@gmail.com">dominionogwai613@gmail.com</a>
+                    </div>
+                    <blockquote>
+                        "I was more than satisfied and impressed with the services provided and in such little time with
+                        efficiency too. My sales are now being boosted by almost 40% simply because of DomzWeb's
+                        redesign of my website. Will definitely recommend."
+                    </blockquote>
+                    <menu class="btns">
+                        <button class="LikeBtn">Like</button>
+                        <button class="DislikeBtn">Dislike</button>
+                    </menu>
+                </div>
+            </article>
+
+            <article>
+                <span>This is a testimonial</span>
+                <figure>
+                    <img src="https://drive.google.com/open?id=1mwPERVYMSf9RIPvV75mBfu4oemu6SU9w" alt="" width="100px" height="100px">
+                </figure>
+                <div class="testimonial">
+                    <div class="heading">
+                        <h1>Ogwai Dominion</h1>
+                        <a href="mailto:dominionogwai613@gmail.com">dominionogwai613@gmail.com</a>
+                    </div>
+                    <blockquote>
+                        "I was more than satisfied and impressed with the services provided and in such little time with
+                        efficiency too. My sales are now being boosted by almost 40% simply because of DomzWeb's
+                        redesign of my website. Will definitely recommend."
+                    </blockquote>
+                    <menu class="btns">
+                        <button class="LikeBtn">Like</button>
+                        <button class="DislikeBtn">Dislike</button>
+                    </menu>
+                </div>
+            </article>-->
+
+            <div class="container">
+                <div class="box"></div>
+            </div>
 
         </section>
     </main>
 
+    <script src="js/gsap.js"></script>
 </body>
 
 </html>
