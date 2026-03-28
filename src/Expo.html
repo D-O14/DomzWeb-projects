@@ -10,39 +10,6 @@
 </head>
 
 <style>
-    /*.card:hover .pic img,
-    .card:focus-within .pic img {
-        scale: 1.15;
-    }
-
-    @container (inline-size > 300px) {
-        .cards {
-            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-        }
-    }*/
-
-    /*.list img {
-        width: 100%;
-        break-inside: avoid;
-        filter: brightness(.5);
-        clip-path: circle(30%);
-        transition: .5s;     
-    }
-
-    .list img:hover {
-        filter: unset;
-        transform: scale(1.1);
-    }
-
-    .list {
-        columns: 5;
-        column-gap: 5px;
-    }
-
-    .list:hover img:not(:hover) {
-        filter: brightness(.5);
-    }*/
-
     *,
     *::before,
     *::after {
@@ -50,20 +17,151 @@
         padding: 0;
         box-sizing: border-box;
         font-family: system-ui;
-        transition: .3s ease;
+        transition: .3s ease-in-out;
     }
 
-    .container{
-        background: hsl(100, 50%, 15%);
-        width: 100px;
-        height: 100px;
+    @media(prefers-color-scheme: light) {
+        :root {
+            --color: hsl(0, 0%, 90%);
+            --accent-1: hsl(20, 100%, 50%);
+            --accent-2: hsl(0, 80%, 50%);
+            --color-muted: hsl(0, 0%, 35%);
+            --shadow:
+                0 4px 6px hsla(0, 0%, 0%, 5%),
+                0 10px 20px hsla(0, 0%, 0%, 1%),
+                0 20px 40px hsla(0, 0%, 0%, 15%);
+        }
     }
 
+    @media(prefers-color-scheme: dark) {
+        body {
+            background: hsl(0, 0%, 0%);
+        }
+
+        :root {
+            --bg: hsl(0, 0%, 5%);
+            --color: hsl(0, 0%, 80%);
+            --accent-1: hsl(10, 100%, 40%);
+            --accent-2: hsl(10, 80%, 40%);
+            --color-muted: hsl(0, 0%, 35%);
+            --shadow:
+                0 4px 6px hsla(0, 0%, 0%, 5%),
+                0 10px 20px hsla(0, 0%, 0%, 1%),
+                0 20px 40px hsla(0, 0%, 0%, 15%);
+        }
+
+        img {
+            filter: brightness(.5);
+        }
+
+
+        article:hover img {
+            filter: brightness(1);
+        }
+
+    }
+
+    article {
+        background: var(--bg);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: .5rem;
+        width: 350px;
+        height: auto;
+        box-shadow: var(--shadow);
+    }
+
+    article:hover {
+        transform: scale(1.05);
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+    }
+
+    menu{
+        display: inline-flex;
+        gap: 1rem;
+    }
+
+    h1 {
+        color: var(--color);
+    }
+
+    p {
+        color: var(--color-muted);
+        text-wrap: balance;
+        line-height: 1.5;
+    }
+
+    button {
+        border: none;
+        padding: .5em 1em;
+        border-radius: .25rem;
+    }
+
+    figure {
+        width: 100%;
+    }
+
+    figcaption {
+        position: absolute;
+        font-size: 1rem;
+        top: 0px;
+        right: 0px;
+        border: 2px inset var(--accent-1);
+        border-top-right-radius: .25rem;
+        border-top-left-radius: .5rem;
+        border-bottom-right-radius: 1rem;
+        padding: .5rem 1rem;
+        background: var(--accent-2);
+        color: var(--color);
+    }
+
+    img {
+        border-top-left-radius: .75rem;
+        border-top-right-radius: .75rem;
+        object-fit: cover;
+        display: block;
+        height: auto;
+        width: 100%;
+        aspect-ratio: 16/9;
+    }
+
+    .buy {
+        background: none;
+        border: 2px solid var(--accent-1);
+        color: var(--accent-1);
+    }
+
+    .buy:hover {
+        background: var(--accent-1);
+        color: var(--color);
+        border: 2px solid var(--accent-1);
+        transform: scale(.95) translateY(-5px);
+    }
+
+    .cards {
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+
+    .price{
+        color: var(--color);
+        font-size: 1.05rem;
+    }
 </style>
 
 <body>
     <main>
-        <section class="testimonials">
+        <section class="cards">
             <!--<picture>
                 <source 
                 media="(min-width: 1024px)"
@@ -73,59 +171,91 @@
                 sizes="100vw">
                 <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
                 alt="Bakery image" loading="eager" decoding="async">
-            </picture>
+            </picture>-->
+
             <article>
-                <span>This is a testimonial</span>
                 <figure>
-                    <img src="https://drive.google.com/open?id=1mwPERVYMSf9RIPvV75mBfu4oemu6SU9w" alt="" width="100px" height="100px">
+                    <img src="cafe_items (4).jpg" alt="" width="100px" height="100px">
+                    <figcaption>50% off</figcaption>
                 </figure>
-                <div class="testimonial">
-                    <div class="heading">
-                        <h1>Ogwai Dominion</h1>
-                        <a href="mailto:dominionogwai613@gmail.com">dominionogwai613@gmail.com</a>
-                    </div>
-                    <blockquote>
-                        "I was more than satisfied and impressed with the services provided and in such little time with
-                        efficiency too. My sales are now being boosted by almost 40% simply because of DomzWeb's
-                        redesign of my website. Will definitely recommend."
-                    </blockquote>
-                    <menu class="btns">
-                        <button class="LikeBtn">Like</button>
-                        <button class="DislikeBtn">Dislike</button>
+                <div class="card">
+                    <h1>Parfait Plate</h1>
+                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
+                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
+                    <menu>
+                        <button class="buy">Buy Item</button>
+                        <span class="price">$6.00</span>
                     </menu>
                 </div>
             </article>
 
             <article>
-                <span>This is a testimonial</span>
                 <figure>
-                    <img src="https://drive.google.com/open?id=1mwPERVYMSf9RIPvV75mBfu4oemu6SU9w" alt="" width="100px" height="100px">
+                    <img src="cafe_items (5).jpg" alt="" width="100px" height="100px">
+                    <figcaption>50% off</figcaption>
                 </figure>
-                <div class="testimonial">
-                    <div class="heading">
-                        <h1>Ogwai Dominion</h1>
-                        <a href="mailto:dominionogwai613@gmail.com">dominionogwai613@gmail.com</a>
-                    </div>
-                    <blockquote>
-                        "I was more than satisfied and impressed with the services provided and in such little time with
-                        efficiency too. My sales are now being boosted by almost 40% simply because of DomzWeb's
-                        redesign of my website. Will definitely recommend."
-                    </blockquote>
-                    <menu class="btns">
-                        <button class="LikeBtn">Like</button>
-                        <button class="DislikeBtn">Dislike</button>
+                <div class="card">
+                    <h1>Cherry Cake</h1>
+                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
+                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
+                    <menu class="btn">
+                        <button class="buy">Buy Item</button>
+                        <span class="price">$10.05</span>
                     </menu>
                 </div>
-            </article>-->
+            </article>
 
-            <div class="container">
-                <div class="box"></div>
-            </div>
+            <article>
+                <figure>
+                    <img src="cafe_items (6).jpg" alt="" width="100px" height="100px">
+                    <figcaption>50% off</figcaption>
+                </figure>
+                <div class="card">
+                    <h1>Fritter Buns (Pack)</h1>
+                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
+                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
+                    <menu class="btn">
+                        <button class="buy">Buy Item</button>
+                        <span class="price">$16.00</span>
+                    </menu>
+                </div>
+            </article>
+
+            <article>
+                <figure>
+                    <img src="cafe_items (7).jpg" alt="" width="100px" height="100px">
+                    <figcaption>50% off</figcaption>
+                </figure>
+                <div class="card">
+                    <h1>Strawberry Bread</h1>
+                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
+                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
+                    <menu class="btn">
+                        <button class="buy">Buy Item</button>
+                        <span class="price">$4.00</span>
+                    </menu>
+                </div>
+            </article>
+
+            <article>
+                <figure>
+                    <img src="cafe_items (8).jpg" alt="" width="100px" height="100px">
+                    <figcaption>50% off</figcaption>
+                </figure>
+                <div class="card">
+                    <h1>Garnished Doughnuts (Pack)</h1>
+                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
+                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
+                    <menu>
+                        <button class="buy">Buy Item</button>
+                        <span class="price">$12.00</span>
+                    </menu>
+                </div>
+            </article>
 
         </section>
     </main>
 
-    <script src="js/gsap.js"></script>
 </body>
 
 </html>
