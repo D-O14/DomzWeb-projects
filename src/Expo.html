@@ -20,238 +20,71 @@
         transition: .3s ease-in-out;
     }
 
-    @media(prefers-color-scheme: light) {
-        :root {
-            --color: hsl(0, 0%, 90%);
-            --accent-1: hsl(20, 100%, 50%);
-            --accent-2: hsl(0, 80%, 50%);
-            --color-muted: hsl(0, 0%, 35%);
-            --shadow:
-                0 4px 6px hsla(0, 0%, 0%, 5%),
-                0 10px 20px hsla(0, 0%, 0%, 1%),
-                0 20px 40px hsla(0, 0%, 0%, 15%);
-        }
-    }
-
-    @media(prefers-color-scheme: dark) {
-        body {
-            background: hsl(0, 0%, 0%);
-        }
-
-        :root {
-            --bg: hsl(0, 0%, 5%);
-            --color: hsl(0, 0%, 80%);
-            --accent-1: hsl(10, 100%, 40%);
-            --accent-2: hsl(10, 80%, 40%);
-            --color-muted: hsl(0, 0%, 35%);
-            --shadow:
-                0 4px 6px hsla(0, 0%, 0%, 5%),
-                0 10px 20px hsla(0, 0%, 0%, 1%),
-                0 20px 40px hsla(0, 0%, 0%, 15%);
-        }
-
-        img {
-            filter: brightness(.5);
-        }
-
-
-        article:hover img {
-            filter: brightness(1);
-        }
-
-    }
-
-    article {
-        background: var(--bg);
-        position: relative;
+    .categories {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border-radius: .5rem;
-        width: 350px;
-        height: auto;
-        box-shadow: var(--shadow);
-    }
-
-    article:hover {
-        transform: scale(1.05);
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        padding: 1.5rem 2rem;
-        gap: 1rem;
-    }
-
-    menu{
-        display: inline-flex;
-        gap: 1rem;
-    }
-
-    h1 {
-        color: var(--color);
-    }
-
-    p {
-        color: var(--color-muted);
-        text-wrap: balance;
-        line-height: 1.5;
-    }
-
-    button {
-        border: none;
-        padding: .5em 1em;
-        border-radius: .25rem;
-    }
-
-    figure {
-        width: 100%;
-    }
-
-    figcaption {
-        position: absolute;
-        font-size: 1rem;
-        top: 0px;
-        right: 0px;
-        border: 2px inset var(--accent-1);
-        border-top-right-radius: .25rem;
-        border-top-left-radius: .5rem;
-        border-bottom-right-radius: 1rem;
-        padding: .5rem 1rem;
-        background: var(--accent-2);
-        color: var(--color);
-    }
-
-    img {
-        border-top-left-radius: .75rem;
-        border-top-right-radius: .75rem;
-        object-fit: cover;
-        display: block;
-        height: auto;
-        width: 100%;
-        aspect-ratio: 16/9;
-    }
-
-    .buy {
-        background: none;
-        border: 2px solid var(--accent-1);
-        color: var(--accent-1);
-    }
-
-    .buy:hover {
-        background: var(--accent-1);
-        color: var(--color);
-        border: 2px solid var(--accent-1);
-        transform: scale(.95) translateY(-5px);
-    }
-
-    .cards {
-        padding: 1rem;
-        display: flex;
+        flex-direction: row;
         flex-wrap: wrap;
         gap: 1.5rem;
     }
 
-    .price{
-        color: var(--color);
-        font-size: 1.05rem;
+    div {
+        width: 25%;
+        flex-grow: 1;
+        height: auto;
+    }
+
+    img {
+        border-radius: .25em;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 16/9;
+        display: block;
+        object-fit: cover;
+        position: relative;
+    }
+
+    img:hover {
+        transform: scale(.95);
+    }
+
+    .img-overlay {
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        left: 0;
+        right: 100px;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.7);
+        font-weight: bold;
+        color: #fff;
     }
 </style>
 
 <body>
     <main>
-        <section class="cards">
-            <!--<picture>
-                <source 
-                media="(min-width: 1024px)"
-                srcset=
-                "https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_1200/cafe_14_pii7sq.webp 1200w,
-                https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_1800/cafe_14_pii7sq.webp 1800w"
-                sizes="100vw">
-                <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/f_auto,q_auto,w_900/cafe_14_pii7sq.webp" 
-                alt="Bakery image" loading="eager" decoding="async">
-            </picture>-->
+        <section class="categories">
+            <div>
+                <img src="cafe_items (4).jpg" alt="">
+            </div>
 
-            <article>
-                <figure>
-                    <img src="cafe_items (4).jpg" alt="" width="100px" height="100px">
-                    <figcaption>50% off</figcaption>
-                </figure>
-                <div class="card">
-                    <h1>Parfait Plate</h1>
-                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
-                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
-                    <menu>
-                        <button class="buy">Buy Item</button>
-                        <span class="price">$6.00</span>
-                    </menu>
-                </div>
-            </article>
+            <div>
+                <span class="img-overlay">Pastry</span>
+                <img src="cafe_items (5).jpg" alt="">
+            </div>
 
-            <article>
-                <figure>
-                    <img src="cafe_items (5).jpg" alt="" width="100px" height="100px">
-                    <figcaption>50% off</figcaption>
-                </figure>
-                <div class="card">
-                    <h1>Cherry Cake</h1>
-                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
-                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
-                    <menu class="btn">
-                        <button class="buy">Buy Item</button>
-                        <span class="price">$10.05</span>
-                    </menu>
-                </div>
-            </article>
+            <div>
+                <img src="cafe_items (6).jpg" alt="">
+            </div>
 
-            <article>
-                <figure>
-                    <img src="cafe_items (6).jpg" alt="" width="100px" height="100px">
-                    <figcaption>50% off</figcaption>
-                </figure>
-                <div class="card">
-                    <h1>Fritter Buns (Pack)</h1>
-                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
-                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
-                    <menu class="btn">
-                        <button class="buy">Buy Item</button>
-                        <span class="price">$16.00</span>
-                    </menu>
-                </div>
-            </article>
+            <div>
+                <img src="cafe_items (7).jpg" alt="">
+            </div>
 
-            <article>
-                <figure>
-                    <img src="cafe_items (7).jpg" alt="" width="100px" height="100px">
-                    <figcaption>50% off</figcaption>
-                </figure>
-                <div class="card">
-                    <h1>Strawberry Bread</h1>
-                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
-                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
-                    <menu class="btn">
-                        <button class="buy">Buy Item</button>
-                        <span class="price">$4.00</span>
-                    </menu>
-                </div>
-            </article>
-
-            <article>
-                <figure>
-                    <img src="cafe_items (8).jpg" alt="" width="100px" height="100px">
-                    <figcaption>50% off</figcaption>
-                </figure>
-                <div class="card">
-                    <h1>Garnished Doughnuts (Pack)</h1>
-                    <p>product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim laborum nemo
-                        iure explicabo impedit vitae in fuga rerum delectus a!</p>
-                    <menu>
-                        <button class="buy">Buy Item</button>
-                        <span class="price">$12.00</span>
-                    </menu>
-                </div>
-            </article>
+            <div>
+                <img src="cafe_items (8).jpg" alt="">
+            </div>
 
         </section>
     </main>
