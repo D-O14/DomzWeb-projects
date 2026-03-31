@@ -10,7 +10,6 @@
 </head>
 
 <style>
-
     *,
     *::before,
     *::after {
@@ -21,73 +20,66 @@
         transition: .3s ease-in-out;
     }
 
-    .categories {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-    }
-
-    div {
-        width: 25%;
-        flex-grow: 1;
-        height: auto;
-    }
-
-    img {
-        border-radius: .25em;
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16/9;
-        display: block;
-        object-fit: cover;
+    .hero{
         position: relative;
+        height: 100vh;
+        overflow: hidden;
     }
 
-    img:hover {
-        transform: scale(.95);
+    .slides{
+        position: relative;
+        height: 100%;
     }
 
-    .img-overlay {
-        border-bottom-right-radius: 8px;
-        border-bottom-left-radius: 8px;
+    img{
         position: absolute;
-        bottom: 0;
-        top: 0;
-        left: 0;
-        right: 100px;
-        padding: 12px;
-        background: rgba(0, 0, 0, 0.7);
-        font-weight: bold;
-        color: #fff;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        animation: fade 12s infinite;
     }
+
+    .slides img:nth-child(1){
+        animation-delay: 0s;
+    }
+
+    .slides img:nth-child(2){
+        animation-delay: 4s;
+    }
+
+    .slides img:nth-child(3){
+        animation-delay: 8s;
+    }
+
+    .slides img:nth-child(4){
+        animation-delay: 12s;
+    }
+
+    .slides img:nth-child(5){
+        animation-delay: 16s;
+    }
+
+    @keyframes fade{
+        0% { opacity: 0; }
+        10% { opacity: 1; }
+        30% { opacity: 1; }
+        40% { opacity: 0; }
+        100% { opacity: 0; }
+    }
+
 </style>
 
 <body>
     <main>
-        <section class="categories">
-            <!-- <div>
-                <img src="cafe_items (4).jpg" alt="">
-            </div>
-
-            <div>
-                <span class="img-overlay">Pastry</span>
-                <img src="cafe_items (5).jpg" alt="">
-            </div>
-
-            <div>
-                <img src="cafe_items (6).jpg" alt="">
-            </div>
-
-            <div>
-                <img src="cafe_items (7).jpg" alt="">
-            </div>
-
-            <div>
-                <img src="cafe_items (8).jpg" alt="">
-            </div>-->
-
-            <h1 class="text-4xl text-green-500 font-extrabold">Test</h1>
+        <section class="hero">
+                <div class="slides">
+                    <img src="Hotel_items (1).jpg" alt="" id="slide-1">
+                    <img src="Hotel_items (2).jpg" alt="" id="slide-2">
+                    <img src="cafe_items (2).jpg" alt="" id="slide-3">
+                    <img src="Hotel_items (3).jpg" alt="" id="slide-4">
+                    <img src="cafe_items (12).jpg" alt="" id="slide-5">
+                </div>
         </section>
     </main>
 
