@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .card {
+        background: var(--shade-4);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border-radius: .5rem;
+        width: 350px;
+        height: auto;
+        box-shadow: var(--shadow);
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+    .card-img {
+        width: 100%;
+    }
+
+    .image {
+        border-top-left-radius: .75rem;
+        border-top-right-radius: .75rem;
+        object-fit: cover;
+        display: block;
+        height: auto;
+        width: 100%;
+        aspect-ratio: 16/9;
+    }
+
+    .badge {
+        position: absolute;
+        font-size: 1rem;
+        top: 0px;
+        right: 0px;
+        border: 2px inset var(--sub-bg);
+        border-top-right-radius: .25rem;
+        border-top-left-radius: .5rem;
+        border-bottom-right-radius: 1rem;
+        padding: .5rem 1rem;
+        background: var(--bg-dark);
+        color: var(--txt-white);
+    }
+
+
+    .card-body {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+    }
+
+    .card-heading {
+        color: var(--txt-dark);
+    }
+
+    .card-txt {
+        color: var(--text-dark);
+        text-wrap: balance;
+        line-height: 1.5;
+    }
+
+
+    .card-items {
+        display: inline-flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .buy {
+        padding: .5em 1em;
+        border-radius: .25em;
+        background: none;
+        border: 2px solid var(--bg-dark);
+        color: var(--bg-dark);
+        font-weight: var(--fw-md);
+    }
+
+    .buy:hover {
+        background: var(--bg-dark);
+        color: var(--sub-bg);
+        border: 2px solid var(--bg-dark);
+        transform: scale(.95) translateY(-5px);
+    }
+
+    .price {
+        color: var(--txt-dark);
+        font-size: 1.05rem;
+    }
+</style>
+
+<body>
+    <section>
+        <article class="card">
+            <figure class="card-img">
+                <img src="cafe_items (7).jpg" alt="" width="100px" height="100px" class="image">
+                <figcaption class="badge">50% off</figcaption>
+            </figure>
+            <div class="card-body">
+                <h3 class="card-heading">Strawberry Bread</h3>
+                <p class="card-txt">product description. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim
+                    laborum nemo
+                    iure explicabo impedit vitae in fuga rerum delectus a!</p>
+                <div class="card-items">
+                    <button class="buy">Buy Item</button>
+                    <span class="price">$4.00</span>
+                </div>
+            </div>
+        </article>
+    </section>
+</body>
+
+</html>
