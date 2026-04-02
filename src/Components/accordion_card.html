@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        transition: all .5s ease;
+    }
+
+    .accordion {
+        max-width: 1500px;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        align-content: space-around;
+        gap: 1.25rem;
+        padding: 1.25rem;
+        margin: 150px auto;
+    }
+
+    .tab {
+        position: relative;
+        flex: 1;
+        height: inherit;
+        padding: 1.25rem;
+        cursor: pointer;
+        transition: flex .5s ease;
+    }
+
+    .tab img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        display: block;
+        border-radius: 1.5rem;
+    }
+
+    .tab:hover img {
+        opacity: .6;
+    }
+
+    .tab:hover {
+        flex: 4;
+    }
+</style>
+
+<body>
+    <div class="accordion">
+        <div class="tab">
+            <img src="Hotel_items (3).jpg" alt="">
+        </div>
+    
+        <div class="tab">
+            <img src="Hotel_items (2).jpg" alt="">
+        </div>
+    
+        <div class="tab">
+            <img src="Hotel_items (1).jpg" alt="">
+        </div>
+    
+        <div class="tab">
+            <img src="cafe_items (2).jpg" alt="">
+        </div>
+    
+        <div class="tab">
+            <img src="cafe_items (12).jpg" alt="">
+        </div>
+    </div>
+</body>
+</html>

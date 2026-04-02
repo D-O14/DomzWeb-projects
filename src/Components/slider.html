@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui;
+        transition: all .5s ease;
+    }
+
+    .slider {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 100px auto;
+    }
+
+    .slide {
+        width: 40%;
+        display: flex;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        border-radius: .5rem;
+    }
+
+    .slide::-webkit-scrollbar {
+        display: none;
+    }
+
+    img {
+        scroll-snap-align: start;
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+    }
+
+    a {
+        cursor: pointer;
+        text-decoration: none;
+        color: hsl(0, 0%, 0%);
+    }
+
+    button {
+        border: none;
+        border-radius: .5rem;
+        padding: .5em 1em;
+    }
+
+    .nav {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 1rem;
+        bottom: 1.25rem;
+        z-index: 1;
+
+    }
+
+    .nav a {
+        width: .5rem;
+        height: .5rem;
+        opacity: .75;
+        border-radius: 4rem;
+        background: hsl(0, 0%, 100%);
+    }
+
+    .nav a:hover {
+        opacity: 1;
+    }
+</style>
+
+<body>
+    <section class="slider">
+        <div class="slide">
+            <img src="Hotel_items (1).jpg" alt="" id="1">
+            <img src="Hotel_items (2).jpg" alt="" id="2">
+            <img src="Hotel_items (3).jpg" alt="" id="3">
+            <img src="cafe_items (1).jpg" alt="" id="4">
+            <img src="cafe_items (12).jpg" alt="" id="5">
+            <div class="nav">
+                <a href="#1">.</a>
+                <a href="#2">.</a>
+                <a href="#3">.</a>
+                <a href="#4">.</a>
+                <a href="#5">.</a>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
