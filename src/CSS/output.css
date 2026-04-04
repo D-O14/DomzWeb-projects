@@ -426,7 +426,6 @@ embed,
 object {
   display: block;
   /* 1 */
-  /*vertical-align: middle; */
 }
 
 /*
@@ -579,6 +578,10 @@ video {
   }
 }
 
+.fixed {
+  position: fixed;
+}
+
 .absolute {
   position: absolute;
 }
@@ -615,15 +618,6 @@ video {
   border-width: 1px;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.font-light {
-  font-weight: 300;
-}
-
 .uppercase {
   text-transform: uppercase;
 }
@@ -634,11 +628,6 @@ video {
 
 .italic {
   font-style: italic;
-}
-
-.text-blue-700 {
-  --tw-text-opacity: 1;
-  color: rgb(29 78 216 / var(--tw-text-opacity));
 }
 
 .outline {
