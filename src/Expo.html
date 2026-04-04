@@ -9,14 +9,24 @@
 </head>
 
 <style>
-    :root {
+    /*:root {
         --shadow:
             0 4px 6px hsla(0, 0%, 0%, 5%),
             0 10px 20px hsla(0, 0%, 0%, 1%),
             0 20px 40px hsla(0, 0%, 0%, 15%);
         interpolate-size: allow-keywords;
-        --bb: 1px solid hsla(0, 0%, 100%, 0.1);
+        --dark: hsl(220, 24%, 12%);
+        --dark-shade-1: hsl(220, 24%, 15%);
+        --dark-shade-2: hsl(220, 20%, 18%);
+        --light: hsl(0, 0%, 100%);
+        --light-shade: hsl(220, 100%, 97%);
+        --fw-base: 400;
+        --fw-sb: 600;
+    }
 
+    html {
+        scroll-behavior: smooth;
+        font-size: 1rem;
     }
 
     *,
@@ -26,34 +36,230 @@
         padding: 0;
         box-sizing: border-box;
         font-family: system-ui;
-        transition: all .5s ease;
     }
+
+    .nav {
+        padding: 1rem 5%;
+        height: 60px;
+    }
+
+    a {
+        color: var(--light);
+        text-decoration: none;
+    }
+
+    button {
+        border: none;
+        border-radius: .25em;
+        padding: .5em 1em;
+        font-size: 1rem;
+        font-weight: var(--fw-sb);
+    }
+
+    a,
+    button {
+        cursor: pointer;
+    }
+
+    .container {
+        max-width: 1120px;
+        margin-inline: 1.5rem;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--dark);
+        box-shadow: var(--shadow);
+        z-index: 1;
+    }
+
+    .lucide-logo,
+    .lucide-burger,
+    .lucide-close {
+        stroke: var(--light);
+        vertical-align: middle;
+    }
+
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        font-weight: var(--fw-sb);
+    }
+
+    .nav-toggle {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .lucide-burger,
+    .lucide-close {
+        position: absolute;
+        width: max-content;
+        height: max-content;
+        margin: 10px;
+        cursor: pointer;
+        transition: opacity .1s, transform .4s;
+    }
+
+    .lucide-close {
+        opacity: 0;
+    }
+
+    .navbar {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media (max-width: 1118px) {
+        .nav_menu {
+            position: absolute;
+            left: 0;
+            top: 3.5rem;
+            width: 100%;
+            height: calc(100vh - 3.5rem);
+            overflow: auto;
+            pointer-events: none;
+            opacity: 0;
+            transition: top .4s, opacity .3s;
+        }
+
+        .nav_menu::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .nav-list {
+            background: var(--dark);
+            padding-top: 1rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            background-color: var(--dark);
+            font-weight: var(--fw-sb);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color .3s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--dark-shade-1);
+        }
+    }
+
+    .show-menu {
+        pointer-events: all;
+        opacity: 1;
+        top: 3.5rem;
+    }
+
+    .show-icon .lucide-burger {
+        opacity: 0;
+        transform: rotate(90deg);
+    }
+
+    .show-icon .lucide-close {
+        opacity: 1;
+        transform: rotate(90deg);
+    }*/
 </style>
 
 <body>
-    <main>
-        <!--<header>
-            <nav>
-                <input type="checkbox" id="sidebar-active">
-                <label for="sidebar-active">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-menu-icon lucide-menu">
-                        <path d="M4 5h16" />
-                        <path d="M4 12h16" />
-                        <path d="M4 19h16" />
-                    </svg>
-                </label>
+
+    <h1 class="font-serif text-blue-950">This is a heading tag</h1>
+    <!--
+            <main>
+        <header>
+            <nav class="nav container">
+                <div class="navbar">
+                    <a href="" class="logo">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-logo">
+                            <path d="M20.341 6.484A10 10 0 0 1 10.266 21.85" />
+                            <path d="M3.659 17.516A10 10 0 0 1 13.74 2.152" />
+                            <circle cx="12" cy="12" r="3" />
+                            <circle cx="19" cy="5" r="2" />
+                            <circle cx="5" cy="19" r="2" />
+                        </svg>
+                        Domz ENT
+                    </a> 
+
+                    <div class="nav-toggle" id="nav_toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-burger">
+                            <path d="M3 5h18" />
+                            <path d="M3 12h18" />
+                            <path d="M3 19h18" />
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-close">
+                            <path d="M18 6 6 18" />
+                            <path d="m6 6 12 12" />
+                        </svg>
+                    </div>
+
+                </div>
+
+                <div class="nav_menu" id="nav-menu">
+                    <ul class="nav-list">
+                        <li><a href="#" class="nav-link">Home</a></li>
+
+                        <li><a href="#" class="nav-link">Company</a></li>
+
+                        <li class="dropdown">
+                            <div class="nav-link">
+                                Analytics
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-chevron">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </div>
+                        </li>
+
+                        <li><a href="#" class="nav-link">Products</a></li>
+
+                        <li class="dropdown">
+                            <div class="nav-link">
+                                Users
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    class="lucide lucide-chevron">
+                                    <path d="m6 9 6 6 6-6" />
+                                </svg>
+                            </div>
+                        </li>
+
+                        <li><a href="#" class="nav-link">Contact Us</a></li>
+                    </ul>
+                </div>
+                
             </nav>
-        </header>-->
+        </header>
     </main>
 
+    <script>
+        const showMenu = (toggleId, navId) => {
+            const toggle = document.getElementById(toggleId),
+            nav = document.getElementById(navId)
 
-    <!--<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x">
-        <path d="M18 6 6 18" />
-        <path d="m6 6 12 12" />
-    </svg>-->
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('show-menu')
+                toggle.classList.toggle('show-icon')
+            })
+        }
+
+        showMenu('nav_toggle', 'nav-menu');
+    </script>-->
 </body>
 
 </html>
