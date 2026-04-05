@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -17,14 +18,15 @@
         transition: .3s ease-in-out;
     }
 
-    body {
+    body{
         background: hsl(0, 0%, 0%);
     }
 
     section {
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        gap: 1rem;
     }
 
     article {
@@ -110,10 +112,10 @@
 <body>
     <main>
         <section>
-            <article>
+        <article>
                 <div class="card-header">
-                    <img src="/public/assets/images/Hotel_items (2).jpg" alt="">
-                    <img src="/public/assets/images/cafe_items (1).jpg" alt="">
+                    <img src="/public/assets/images/Hotel_items (2).jpg" alt="" class="cover">
+                    <img src="/public/assets/images/cafe_items (1).jpg" alt="" class="pfp">
                     <button>Follow</button>
                     <span class="badge">Admin</span>
                 </div>
@@ -125,6 +127,7 @@
                     <p>Upcoming Web Developer and UI/UX Expert.</p>
                 </div>
             </article>
+
         </section>
     </main>
 </body>
