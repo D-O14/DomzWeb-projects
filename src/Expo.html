@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/src/css/output.css">
+    <!--<link rel="stylesheet" href="/src/css/output.css">-->
     <title>Domz Cafe - Expo</title>
 </head>
 
@@ -174,7 +174,7 @@
 <body>
 
     <main>
-        <header>
+        <!--<header>
             <nav class="nav container">
                 <div class="navbar">
                     <a href="" class="logo">
@@ -244,22 +244,34 @@
                 </div>
 
             </nav>
-        </header>
+        </header>-->
+
+        <form action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="003bb2f2-0523-4683-84a5-5d16783bc5a6">
+            <label for="" id="name">Name</label>
+            <label for="" id="email">Email</label>
+            <label for="" id="message">Message</label>
+            <input type="text" name="name" required aria-labelledby="name">
+            <input type="email" name="email" required aria-labelledby="email">
+            <input type="hidden" name="from_name" value="Notifications">
+            <textarea name="message" required aria-labelledby="message"></textarea>
+            <button type="submit">Submit</button>
+          </form>
     </main>
 
 
     <script>
-        const showMenu = (toggleId, navId) => {
-            const toggle = document.getElementById(toggleId),
-                nav = document.getElementById(navId)
+        //const showMenu = (toggleId, navId) => {
+            //const toggle = document.getElementById(toggleId),
+                //nav = document.getElementById(navId)
 
-            toggle.addEventListener('click', () => {
-                nav.classList.toggle('show-menu')
-                toggle.classList.toggle('show-icon')
-            })
-        }
+            //toggle.addEventListener('click', () => {
+              //  nav.classList.toggle('show-menu')
+               // toggle.classList.toggle('show-icon')
+            //})
+        //}
 
-        showMenu('nav_toggle', 'nav-menu');
+        //showMenu('nav_toggle', 'nav-menu');
     </script>
 </body>
 
