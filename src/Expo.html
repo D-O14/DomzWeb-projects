@@ -246,17 +246,11 @@
             </nav>
         </header>-->
 
-        <form action="https://api.web3forms.com/submit" method="POST">
-            <input type="hidden" name="access_key" value="003bb2f2-0523-4683-84a5-5d16783bc5a6">
-            <label for="" id="name">Name</label>
-            <label for="" id="email">Email</label>
-            <label for="" id="message">Message</label>
-            <input type="text" name="name" required aria-labelledby="name">
-            <input type="email" name="email" required aria-labelledby="email">
-            <input type="hidden" name="from_name" value="Notifications">
-            <textarea name="message" required aria-labelledby="message"></textarea>
-            <button type="submit">Submit</button>
-          </form>
+        
+        <stripe-buy-button buy-button-id="buy_btn_1TKFuFEO0qq8Far14ioPg1u8"
+            publishable-key="pk_test_51TKFNdEO0qq8Far1ci0auC0oRZjqn8De7MLAUsW9jXGuUrDyTjPx9iaRm0pKo6fepQ7CuMjIFKGA5vun4CsIf5Lq00I2RJCb8k">
+        </stripe-buy-button>
+
     </main>
 
 
@@ -273,6 +267,7 @@
 
         //showMenu('nav_toggle', 'nav-menu');
     </script>
+    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </body>
 
 </html>
