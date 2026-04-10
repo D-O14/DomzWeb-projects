@@ -7,11 +7,19 @@
 	font-family: system-ui;
 }
 
-html{
+:root{
+	--primary: hsl(28, 80%, 52%);
+	--primary-hover: hsl(28, 80%, 42%);
+	--txt: hsl(0, 0%, 13%);
+	--muted: hsl(0, 0%, 47%);
+	--bg: hsl(0, 0%, 98%);
+}
+
+html {
 	scroll-behavior: smooth;
 }
 
-html::-webkit-scrollbar{
+html::-webkit-scrollbar {
 	display: none;
 }
 
@@ -23,20 +31,24 @@ html::-webkit-scrollbar{
 	interpolate-size: allow-keywords;
 }
 
-nav{
+nav {
 	position: fixed;
+	z-index: 1;
 	width: 100%;
 	padding: 1rem 5%;
 	display: flex;
 	justify-content: space-between;
 	background: hsl(0, 0%, 100%);
-	border-bottom: 2px solid hsl(0, 0%, 95%);
+	border: 2px solid hsl(0, 0%, 95%);
+	/*background: hsl(30, 76%, 48%);
+	color: hsl(0, 0%, 95%);*/
 }
 
-ul{
+ul {
 	list-style: none;
 	display: flex;
 	gap: 2rem;
+	color: hsl(0, 0%, 95%);
 }
 
 section {
@@ -56,7 +68,8 @@ p {
 	letter-spacing: 0.5px;
 }
 
-button, a{
+button,
+a {
 	cursor: pointer;
 }
 
@@ -91,57 +104,129 @@ img {
 	height: auto;
 	aspect-ratio: 16/9;
 	object-fit: cover;
-	border-top-left-radius: .5rem;
-	border-top-right-radius: .5rem;
+	border-radius: .5rem;
+	transition: .4s ease;
 }
 
-figure{
+img:hover {
+	transform: scale(1.05);
+}
+
+figure {
 	width: 100%;
 }
 
-article{
+article {
+	position: relative;
 	width: 100%;
 	max-width: 350px;
+	padding: 1rem 1rem 1rem;
 	height: auto;
 	display: flex;
 	flex-direction: column;
 	box-shadow: var(--shadow);
-	border-radius: .5rem;
+	border-radius: .75rem;
+	gap: 1rem;
 }
 
-#products{
+footer {
+	padding: 3rem 1rem 1rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+	background: hsl(30, 76%, 48%);
+	color: hsl(0, 0%, 95%);
+}
+
+#products {
+	position: relative;
+	padding-top: clamp(5rem, 10vw, 7.5rem);
+	padding-bottom: 160px;
 	gap: 5rem;
 }
 
-.products{
+.products {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
+	gap: 2rem;
+}
+
+#services{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 1rem;
 }
 
-.navbar{
+.service{
+	transition: .5s ease;
+}
+
+.service:hover{
+	transform: translateY(-5px);
+}
+/*#about {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 2.5rem;
+}*/
+
+.about {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.section-header h1,
+.section-header p {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.navbar {
 	display: flex;
 	align-items: center;
 	gap: 1rem;
 }
 
-.logo{
+/*.link{
+	color: hsl(0, 0%, 95%);
+}*/
+
+.logo {
 	font-size: 22px;
 	font-weight: 700;
 	letter-spacing: .5px;
+	color: inherit;
 }
 
-.active{
+.active {
+	position: relative;
 	font-weight: 600;
-	text-decoration: underline;
+	/*text-decoration: underline;
 	text-underline-offset: 4px;
-	text-decoration-thickness: 2px;
-	/*color: hsl(30, 76%, 48%);*/
+	text-decoration-thickness: 2px;*/
+	color: hsl(30, 76%, 48%);
 }
 
-.ReserveBtn{
+.active::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	bottom: -6px;
+	width: 100%;
+	height: 4px;
+	background: currentColor;
+	border-radius: 1rem;
+}
+
+.ReserveBtn {
+	color: inherit;
 	background: none;
 	border: 2px solid;
 	font-style: italic;
@@ -160,7 +245,9 @@ article{
 	gap: 1rem;
 }
 
-.ExploreBtn, .ViewBtn, .ReadBtn {
+.ExploreBtn,
+.ViewBtn,
+.ReadBtn {
 	padding: .5em 1em;
 	border-radius: .25em;
 	border: none;
@@ -169,22 +256,65 @@ article{
 	background: hsl(0, 0%, 95%);
 }
 
-.card-body{
-	padding: 2rem 1rem 1rem;
+.card-body {
 	display: flex;
 	flex-direction: column;
+	align-items: flex-start;
 	gap: 1rem;
 	margin: 10px;
 }
 
-.card-txt{
-	width: 40ch;
+.card-product {
+	font-size: 1.25rem;
+	font-weight: 600;
 }
 
-.section-header h1,
-.section-header p{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+.card-txt {
+	width: 40ch;
+	font-size: .85rem;
+	color: hsl(0, 0%, 50%);
+}
+
+.CardBtn {
+	color: hsl(0, 0%, 95%);
+	background: hsl(26, 100%, 48%);
+	transition: .3s ease;
+}
+
+.CardBtn:hover {
+	background: hsl(26, 100%, 40%);
+	transform: translateY(-2px);
+}
+
+.rate {
+	position: absolute;
+	top: 160px;
+	left: 24px;
+}
+
+.more {
+	position: absolute;
+	right: 40px;
+	top: 200px;
+	font-weight: 600;
+	font-size: 18px;
+}
+
+.price {
+	font-weight: 700;
+	font-size: 1.1rem;
+}
+
+.footer {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 2.5rem;
+}
+
+.footer ul {
+	opacity: .7;
+}
+
+.footer li {
+	margin-bottom: 8px;
 }
