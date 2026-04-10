@@ -11,6 +11,10 @@ html{
 	scroll-behavior: smooth;
 }
 
+html::-webkit-scrollbar{
+	display: none;
+}
+
 :root {
 	--shadow:
 		0 4px 6px hsla(0, 0%, 0%, 5%),
@@ -44,6 +48,7 @@ section {
 	/*padding-top: clamp(5rem, 10vw, 7.5rem);
 	padding-inline: clamp(4rem, 8vw, 8rem);*/
 	min-height: 60vh;
+	border-bottom: 4px solid hsl(0, 0%, 95%);
 }
 
 h1,
@@ -136,12 +141,18 @@ article{
 	/*color: hsl(30, 76%, 48%);*/
 }
 
-.OrderBtn{
+.ReserveBtn{
 	background: none;
 	border: 2px solid;
 	font-style: italic;
 	border-radius: 1rem;
+	transition: .5s ease;
 }
+
+/*.ReserveBtn:hover{
+	background: hsl(0, 0%, 0%);
+	color: hsl(0, 0%, 100%);
+}*/
 
 .about-content {
 	display: flex;
