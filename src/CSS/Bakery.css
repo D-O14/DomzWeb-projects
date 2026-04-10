@@ -1,175 +1,179 @@
+*::before,
+*::after,
 * {
 	margin: 0px;
 	padding: 0px;
 	box-sizing: border-box;
+	font-family: system-ui;
 }
 
-body {
-	background-image: url(images/bakery.jpg);
-	background-color: whitesmoke;
-	background-size: 1550px;
-	background-repeat: no-repeat;
-	color: white;
-	overflow-x: hidden;
+html{
+	scroll-behavior: smooth;
 }
 
-#h1 {
-	font-size: 70px;
-	text-align: right;
-	padding-right: 200px;
-	color: orange;
-	text-decoration: solid;
-	font-style: italic;
+:root {
+	--shadow:
+		0 4px 6px hsla(0, 0%, 0%, 5%),
+		0 10px 20px hsla(0, 0%, 0%, 1%),
+		0 20px 40px hsla(0, 0%, 0%, 15%);
+	interpolate-size: allow-keywords;
 }
 
-h2 p {
-	text-decoration: underline;
-	margin-top: 10px;
-}
-
-h2 {
-	text-align: center;
-	font-family: "Courier New", Courier, monospace;
-	margin-bottom: 20px;
-}
-
-h4 {
-	font-family: "Courier New", Courier, monospace;
-	font-size: 20px;
-	margin-left: 140px;
-	margin-bottom: 10px;
-}
-
-h6 {
-	text-align: center;
-}
-
-h6 button {
-	border: 2px solid;
-	border-radius: 20px;
-	border-color: white;
-	background-color: transparent;
-	color: orange;
-	font-size: 20px;
-	font-style: italic;
-	padding: 5.5px;
-	width: 240px;
-	margin-bottom: 200px;
-}
-
-h6 button:hover {
-	border-color: white;
-	background-color: orange;
-	color: white;
-	transition: 0.7s;
-}
-
-#text h2 {
-	color: black;
-	font-family: "Franklin Gothic Medium";
-	font-style: solid;
-	font-style: italic;
-	font-weight: 200;
+nav{
+	position: fixed;
+	width: 100%;
+	padding: 1rem 5%;
 	display: flex;
-	height: 200px;
+	justify-content: space-between;
+	background: hsl(0, 0%, 100%);
+	border-bottom: 2px solid hsl(0, 0%, 95%);
+}
+
+ul{
+	list-style: none;
+	display: flex;
+	gap: 2rem;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
-	justify-content: center;
-	align-items: bottom;
+	gap: 1rem;
+	/*padding-top: clamp(5rem, 10vw, 7.5rem);
+	padding-inline: clamp(4rem, 8vw, 8rem);*/
+	min-height: 60vh;
 }
 
-.container {
-	background-image: url(images/work2.jpg);
-	background-repeat: no-repeat;
-	width: 1550px;
-	height: 768px;
-}
-#text button {
-	color: white;
-	background-color: black;
-	border: 2px solid;
-	border-radius: 5px;
-	font-size: 20px;
-	font-style: italic;
-	padding: 5.5px;
-	width: 240px;
+h1,
+p {
+	letter-spacing: 0.5px;
 }
 
-#text h3 {
-	height: 40px;
+button, a{
+	cursor: pointer;
+}
+
+menu {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+p {
+	line-height: 1.5;
+	width: 60ch;
+}
+
+a {
+	font-size: 1rem;
+	text-decoration: none;
+	color: hsl(0, 0%, 0%);
+}
+
+button {
+	padding: .5em 1em;
+	border-radius: .25em;
+	border: none;
+	font-size: 1rem;
+	font-weight: 500;
+}
+
+img {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 16/9;
+	object-fit: cover;
+	border-top-left-radius: .5rem;
+	border-top-right-radius: .5rem;
+}
+
+figure{
+	width: 100%;
+}
+
+article{
+	width: 100%;
+	max-width: 350px;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+	box-shadow: var(--shadow);
+	border-radius: .5rem;
+}
+
+#products{
+	gap: 5rem;
+}
+
+.products{
 	display: flex;
 	justify-content: center;
-	align-items: top;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1rem;
 }
 
-#text button:hover {
-	background-color: turquoise;
+.navbar{
+	display: flex;
+	align-items: center;
+	gap: 1rem;
 }
 
-#p30 {
-	color: black;
-	font-size: 50px;
-	font-style: italic;
-	font-weight: 200;
+.logo{
+	font-size: 22px;
+	font-weight: 700;
+	letter-spacing: .5px;
+}
+
+.active{
+	font-weight: 600;
 	text-decoration: underline;
-	background-color: yellow;
+	text-underline-offset: 4px;
+	text-decoration-thickness: 2px;
+	/*color: hsl(30, 76%, 48%);*/
+}
+
+.OrderBtn{
+	background: none;
 	border: 2px solid;
-	border-radius: 10px;
-	text-align: center;
-	width: 1500px;
-}
-
-.p3 {
-	float: left;
-}
-
-.p5 {
-	float: left;
-}
-
-#p31 {
-	color: black;
-	font-size: 50px;
 	font-style: italic;
-	font-weight: 200;
-	text-decoration: underline;
-	background-color: darkblue;
-	border: 2px solid;
-	border-radius: 10px;
-	text-align: center;
-	width: 1500px;
+	border-radius: 1rem;
 }
 
-.p7 {
-	float: left;
+.about-content {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
-.p9 {
-	float: left;
+.ExploreBtn, .ViewBtn, .ReadBtn {
+	padding: .5em 1em;
+	border-radius: .25em;
+	border: none;
+	font-size: 1rem;
+	font-weight: 500;
+	background: hsl(0, 0%, 95%);
 }
 
-.menu {
-	background-color: orange;
-	height: 1200px;
-	margin: 0px;
-	padding: 0px;
-	border: 2px solid;
-	border-radius: 5px;
-	border-color: black;
-	color: black;
+.card-body{
+	padding: 2rem 1rem 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	margin: 10px;
 }
 
-.menu h1 {
-	text-align: center;
-	font-weight: bold;
-	font-style: italic;
-	font-size: 50px;
-	text-decoration: underline;
+.card-txt{
+	width: 40ch;
 }
 
-marquee {
-	background-color: black;
-}
-
-.head {
-	color: white;
+.section-header h1,
+.section-header p{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }

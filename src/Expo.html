@@ -9,7 +9,7 @@
 </head>
 
 <style>
-    /*:root {
+    :root {
         --shadow:
             0 4px 6px hsla(0, 0%, 0%, 5%),
             0 10px 20px hsla(0, 0%, 0%, 1%),
@@ -168,13 +168,13 @@
     .show-icon .lucide-close {
         opacity: 1;
         transform: rotate(90deg);
-    }*/
+    }
 </style>
 
 <body>
 
     <main>
-        <!--<header>
+        <header>
             <nav class="nav container">
                 <div class="navbar">
                     <a href="" class="logo">
@@ -244,30 +244,23 @@
                 </div>
 
             </nav>
-        </header>-->
-
-        
-        <stripe-buy-button buy-button-id="buy_btn_1TKFuFEO0qq8Far14ioPg1u8"
-            publishable-key="pk_test_51TKFNdEO0qq8Far1ci0auC0oRZjqn8De7MLAUsW9jXGuUrDyTjPx9iaRm0pKo6fepQ7CuMjIFKGA5vun4CsIf5Lq00I2RJCb8k">
-        </stripe-buy-button>
-
+        </header>
     </main>
 
 
     <script>
-        //const showMenu = (toggleId, navId) => {
-            //const toggle = document.getElementById(toggleId),
-                //nav = document.getElementById(navId)
+        const showMenu = (toggleId, navId) => {
+            const toggle = document.getElementById(toggleId),
+                nav = document.getElementById(navId)
 
-            //toggle.addEventListener('click', () => {
-              //  nav.classList.toggle('show-menu')
-               // toggle.classList.toggle('show-icon')
-            //})
-        //}
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('show-menu')
+                toggle.classList.toggle('show-icon')
+            })
+        }
 
-        //showMenu('nav_toggle', 'nav-menu');
+        showMenu('nav_toggle', 'nav-menu');
     </script>
-    <script async src="https://js.stripe.com/v3/buy-button.js"></script>
 </body>
 
 </html>
