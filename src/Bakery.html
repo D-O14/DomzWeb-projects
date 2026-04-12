@@ -21,8 +21,8 @@
         <nav>
             <a href="#" class="logo">DomzBakery</a>
             <div class="navbar">
-                <ul>
-                    <li><a href="" class="active">Home</a></li>
+                <ul class="menu">
+                    <li><a href="" class="link active">Home</a></li>
                     <li><a href="" class="link">Menu</a></li>
                     <li><a href="" class="link">Services</a></li>
                     <li><a href="" class="link">Products</a></li>
@@ -30,15 +30,19 @@
                 </ul>
             </div>
             <menu>
-                <button class="ReserveBtn">Reserve</button>
+                <button class="ReserveBtn" onclick="dialog.showModal()">Reserve</button>
             </menu>
         </nav>
     </header>
 
     <section id="home">
-        <h1>Welcome To Domz Bakery</h1>
+
+        <div class="section-header">
+            <h1>Welcome To Domz Bakery</h1>
+            <p class="section-p">A place of love, food and vibes.</p>
+        </div>
         <p>
-            A place of love, food and vibes. So come now, bring your friends and have yourselves not just a good time,
+            Come now, bring your friends and have yourselves not just a good time,
             but the best time, after all,
             The heart needs love, and so do the taste buds. Come now and treat both to an unforgettable experience.
         </p>
@@ -49,10 +53,9 @@
     </section>
 
     <section id="about">
-        <div class="about">
-            <h2>About Us</h2>
             <div class="about-content">
-                <p>
+                <h2>About Us</h2>
+                <p class="about-txt">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque saepe sed voluptate quasi, dicta pariatur
                     adipisci ex inventore corporis magnam cumque quis blanditiis exercitationem doloribus eum illum
                     reprehenderit dignissimos corrupti tenetur in minima aut ipsam dolor voluptatem. Doloribus odio sint
@@ -63,12 +66,16 @@
                     <a href="#" class="ReadBtn">Read More</a>
                 </menu>
             </div>
-        </div>
 
-        <picture class="about_img"></picture>
+            <div>          
+            <img src="/public/assets/images/cafe_items (12).jpg" alt="Image of a white man in an apron working behind a cafe counter with a tablet screen" 
+            loading="lazy" decoding="async" width="500" height="500" class="about-img">
+            </div>
+    
     </section>
 
-    <section id="services">
+    <!--<section id="services">
+        h2{our Services}
         <article class="service">
             <div>
                 <h3>Service</h3>
@@ -89,11 +96,11 @@
                 <p>description</p>
             </div>
         </article>
-    </section>
+    </section>-->
 
     <section id="products">
         <div class="section-header">
-            <h1 class="section-heading">-Products-</h1>
+            <h1 class="section-heading">-Our Products-</h1>
             <p class="section-txt">Try out our top rated products</p>
         </div>
 
@@ -101,13 +108,13 @@
 
         <div class="products">
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (4).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries" 
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -118,13 +125,13 @@
             </article>
 
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (7).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries" 
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -135,13 +142,13 @@
             </article>
 
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (6).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries"
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -152,13 +159,13 @@
             </article>
 
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries" 
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -169,13 +176,13 @@
             </article>
 
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries"
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -186,13 +193,13 @@
             </article>
 
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries" 
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -203,13 +210,13 @@
             </article>
 
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries" 
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -220,13 +227,13 @@
             </article>
 
             <article>
-                <figure>
+                <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100">
+                        alt="A plate filled with cream covered strawberries" 
+                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
-                    <span class="rate">⭐⭐⭐⭐⭐</span>
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
@@ -242,7 +249,7 @@
         <div class="footer">
             <div class="locations">
                 <h3>Locations</h3>
-                <ul>
+                <ul class="locations">
                     <li>123, Bakery St</li>
                     <li>456, Cake Ave</li>
                     <li>789, Pastry Blvd</li>
@@ -253,7 +260,7 @@
 
             <div class="links">
                 <h4>Quick Links</h4>
-                <ul>
+                <ul class="links">
                     <li><a href="http://" target="_blank" rel="noopener noreferrer">Socials</a></li>
                     <li><a href="http://" target="_blank" rel="noopener noreferrer">Instagram</a></li>
                     <li><a href="http://" target="_blank" rel="noopener noreferrer">Facebook</a></li>
@@ -264,7 +271,7 @@
 
             <div class="services">
                 <h4>Services</h4>
-                <ul>
+                <ul class="services">
                     <li>At-Home Deliveries</li>
                     <li>Custom Cake Designs</li>
                     <li>Birthday Party Catering</li>
@@ -275,14 +282,19 @@
 
             <div class="contacts">
                 <h4>Contact Us</h4>
-                <ul>
-                    <li><a href="mailto:domzbakery.com">info@domzbakery.com</a></li>
-                    <li><a href="tel: +23409164569891">+234 091 645 69891</a></li>
+                <ul class="contact">
+                    <li><a href="mailto:domzbakery.com" class="contact">info@domzbakery.com</a></li>
+                    <li><a href="tel: +23409164569891" class="contact">+234 091 645 69891</a></li>
                 </ul>
             </div>
         </div>
-        Copyright &copy;2026 All rights reserved &VerticalSeparator; DomzBakery
     </footer>
+
+    <div class="copy">
+        Website Designed by &nbsp;<a href="https://github.com/d-O14/DomzWeb-projects/">DomzWeb</a>&nbsp; Copyright &copy;2026 All rights reserved &VerticalSeparator; DomzBakery
+    </div>
+
+    <script src="/src/js/code.js"></script>
 </body>
 
 </html>
