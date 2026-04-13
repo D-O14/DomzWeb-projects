@@ -1,5 +1,6 @@
 const CardBtn = document.querySelectorAll(".CardBtn");
 const links = document.querySelectorAll(".link");
+const line = document.querySelector(".line");
 
 CardBtn.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -7,7 +8,7 @@ CardBtn.forEach(btn => {
             btn.textContent = "Added to Cart";
 
             setTimeout(() => {
-                btn.textContent = "Remove from Cart";                
+                btn.textContent = "Remove from Cart";
             }, 2000);
 
         } else if (btn.textContent === "Remove from Cart") {
@@ -21,8 +22,12 @@ CardBtn.forEach(btn => {
 })
 
 links.forEach(link => {
-    link.addEventListener("click", () => {
+    link.addEventListener("click", (e) => {
+        e.preventDefault()
         links.forEach(link => { link.classList.remove("active") })
         link.classList.add("active")
+
+        line.style.width = e.target.offsetWidth + "px";
+        line.style.left = e.target.offsetLeft + "px";
     })
 })

@@ -174,80 +174,18 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-family: sans-serif;
+        font-family: system-ui;
     }
 
-    body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-
-    .box {
-        width: 600px;
-        box-shadow: var(--shadow);
-        padding: 1.8rem;
-        border-radius: .5rem;
-    }
-
-    .tab-box {
-        width: 100%;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        border-bottom: 2px solid hsl(0, 0%, 80%);
-        position: relative;
-    }
-
-    .tab {
-        text-decoration: none;
+    button{
+        margin: 20px auto;
+        font-size: 1rem;
         border: none;
-        background: none;
-        color: hsl(0, 0%, 80%);
-        padding: 1.1rem;
-        cursor: pointer;
-        font-size: 1.1rem;
+        border-radius: .5rem;
+        padding: .5em 1em;
         font-weight: 600;
-        
     }
 
-    .tab.active{
-        color: hsl(247, 100%, 69%);
-    }
-
-    .content-box {
-        padding: 1.25rem;
-    }
-
-    .content {
-        display: none;
-        animation: moving .5s ease;
-    }
-
-    @keyframes moving{
-        from{transform: translateX(50px); opacity: 0;}
-        to{transform: translateX(0px); opacity: 1;}
-    }
-
-    .content.active{
-        display: block;
-    }
-
-    .content h2 {
-        margin-bottom: 10px;
-    }
-
-    .line{
-        position: absolute;
-        bottom: 10px;
-        left: 35px;
-        width: 50px;
-        height: 5px;
-        background: hsl(247, 100%, 69%);
-        border-radius: 1rem;
-        transition: all .3s ease;
-    }
 </style>
 
 <body>
@@ -325,44 +263,8 @@
             </nav>
         </header>-->
 
-        <div class="box">
-            <div class="tab-box">
-                <button class="tab active">Home</button>
-                <button class="tab">About</button>
-                <button class="tab">Blogs</button>
-                <button class="tab">Contact Us</button>
-                <div class="line"></div>
-            </div>
-            <div class="content-box">
-                <div class="content active">
-                    <h2>Home</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus officiis alias quasi
-                        repellendus veritatis corrupti animi itaque magnam, ullam perspiciatis architecto neque
-                        voluptatem aliquid, perferendis hic enim nihil saepe?</p>
-                </div>
+        <button id="myButton">My button</button>
 
-                <div class="content">
-                    <h2>About</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus officiis alias quasi
-                        repellendus veritatis corrupti animi itaque magnam, ullam perspiciatis architecto neque
-                        voluptatem aliquid, perferendis hic enim nihil saepe?</p>
-                </div>
-
-                <div class="content">
-                    <h2>Blogs</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus officiis alias quasi
-                        repellendus veritatis corrupti animi itaque magnam, ullam perspiciatis architecto neque
-                        voluptatem aliquid, perferendis hic enim nihil saepe?</p>
-                </div>
-
-                <div class="content">
-                    <h2>Contact Us</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam ducimus officiis alias quasi
-                        repellendus veritatis corrupti animi itaque magnam, ullam perspiciatis architecto neque
-                        voluptatem aliquid, perferendis hic enim nihil saepe?</p>
-                </div>
-            </div>
-        </div>
     </main>
 
 
@@ -379,34 +281,7 @@
 
         showMenu('nav_toggle', 'nav-menu');*/
 
-        const tabs = document.querySelectorAll(".tab");
-        const content = document.querySelectorAll(".content");
-        
 
-        /*tabs.forEach(tab => {
-            tab.addEventListener("click", () => {
-                tabs.forEach(tab=>{tab.classList.remove("active")})
-                tab.classList.add("active")
-                
-                var line = document.querySelector(".line");
-                line.style.width = e.target.offsetWidth + "px";
-                line.style.left = e.target.offsetLeft + "px";
-            })
-        })*/
-
-        tabs.forEach((tab, index) => {     
-            tab.addEventListener("click", (e) => {
-                tabs.forEach(tab => { tab.classList.remove("active") })
-                tab.classList.add("active")
-
-                var line = document.querySelector(".line");
-                line.style.width = e.target.offsetWidth + "px";
-                line.style.left = e.target.offsetLeft + "px";
-
-                content.forEach(content => {content.classList.remove("active")})
-                content[index].classList.add("active");
-        })
-    })
     </script>
 </body>
 

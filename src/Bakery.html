@@ -28,6 +28,7 @@
                     <li><a href="" class="link">Products</a></li>
                     <li><a href="" class="link">Contact Us</a></li>
                 </ul>
+                <div class="line"></div>
             </div>
             <menu>
                 <button class="ReserveBtn" onclick="dialog.showModal()">Reserve</button>
@@ -38,7 +39,7 @@
     <section id="home">
 
         <div class="section-header">
-            <h1>Welcome To Domz Bakery</h1>
+            <h1 class="home-header">Welcome To Domz Bakery</h1>
             <p class="section-p">A place of love, food and vibes.</p>
         </div>
         <p>
@@ -53,54 +54,183 @@
     </section>
 
     <section id="about">
-            <div class="about-content">
-                <h2>About Us</h2>
-                <p class="about-txt">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque saepe sed voluptate quasi, dicta pariatur
-                    adipisci ex inventore corporis magnam cumque quis blanditiis exercitationem doloribus eum illum
-                    reprehenderit dignissimos corrupti tenetur in minima aut ipsam dolor voluptatem. Doloribus odio sint
-                    consequatur repellat molestiae tenetur distinctio, nihil atque facilis dolores eveniet, unde, error
-                    accusamus libero illo id optio rem. Explicabo, iusto.
-                </p>
-                <menu>
-                    <a href="#" class="ReadBtn">Read More</a>
-                </menu>
-            </div>
+        <div class="about-content">
+            <h2 class="about-header">About Us</h2>
+            <p class="about-txt">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque saepe sed voluptate quasi, dicta pariatur
+                adipisci ex inventore corporis magnam cumque quis blanditiis exercitationem doloribus eum illum
+                reprehenderit dignissimos corrupti tenetur in minima aut ipsam dolor voluptatem. Doloribus odio sint
+                consequatur repellat molestiae tenetur distinctio, nihil atque facilis dolores eveniet, unde, error
+                accusamus libero illo id optio rem. Explicabo, iusto.
+            </p>
+            <menu>
+                <a href="#" class="ReadBtn">Read More</a>
+            </menu>
+        </div>
 
-            <div>          
-            <img src="/public/assets/images/cafe_items (12).jpg" alt="Image of a white man in an apron working behind a cafe counter with a tablet screen" 
-            loading="lazy" decoding="async" width="500" height="500" class="about-img">
-            </div>
-    
+        <div>
+            <img src="/public/assets/images/cafe_items (12).jpg"
+                alt="Image of a white man in an apron working behind a cafe counter with a tablet screen" loading="lazy"
+                decoding="async" width="500" height="500" class="about-img">
+        </div>
+
     </section>
 
-    <!--<section id="services">
-        h2{our Services}
-        <article class="service">
-            <div>
-                <h3>Service</h3>
-                <p>description</p>
-            </div>
-        </article>
+    <section id="services">
+        <div class="services">
+            <h2 class="services-header">Our Services</h2>
+            <div class="cards">
+                <article class="card">
+                    <div class="service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-bike">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M2 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M16 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M12 19l0 -4l-3 -3l5 -4l2 3l3 0" />
+                            <path d="M16 5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                        </svg>
+                        <h3 class="card-header">Home Deliveries</h3>
+                        <p class="section-txt">Freshly baked goods delivered straight to your doorstep, fast and
+                            reliable.</p>
+                        <a href="#" class="moreLink">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg></a>
+                    </div>
+                </article>
 
-        <article class="service">
-            <div>
-                <h3>Service</h3>
-                <p>description</p>
+                <article class="card">
+                    <div class="service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-palette">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+                            <path d="M7.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                            <path d="M11.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                            <path d="M15.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                        </svg>
+                        <h3 class="card-header">Custom Designs</h3>
+                        <p class="section-txt">Personalized creations tailored to your taste, style and special
+                            occasions.</p>
+                        <a href="#" class="moreLink">Learn More
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 3h8l-1 9h-6l-1 -9" />
+                            <path d="M7 18h2v3h-2l0 -3" />
+                            <path d="M20 3v12h-5c-.023 -3.681 .184 -7.406 5 -12" />
+                            <path d="M20 15v6h-1v-3" />
+                            <path d="M8 12l0 6" />
+                        </svg>
+                        <h3 class="card-header">Event Catering</h3>
+                        <p class="section-txt">From small gatherings to large events, we provide delicious,
+                            memorable experiences.</p>
+                        <a href="#" class="moreLink">Learn More
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-bike">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M2 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M16 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                            <path d="M12 19l0 -4l-3 -3l5 -4l2 3l3 0" />
+                            <path d="M16 5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                        </svg>
+                        <h3 class="card-header">Home Deliveries</h3>
+                        <p class="section-txt">Freshly baked goods delivered straight to your doorstep, fast and
+                            reliable.</p>
+                        <a href="#" class="moreLink">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg></a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-palette">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path
+                                d="M12 21a9 9 0 0 1 0 -18c4.97 0 9 3.582 9 8c0 1.06 -.474 2.078 -1.318 2.828c-.844 .75 -1.989 1.172 -3.182 1.172h-2.5a2 2 0 0 0 -1 3.75a1.3 1.3 0 0 1 -1 2.25" />
+                            <path d="M7.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                            <path d="M11.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                            <path d="M15.5 10.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+                        </svg>
+                        <h3 class="card-header">Custom Designs</h3>
+                        <p class="section-txt">Personalized creations tailored to your taste, style and special
+                            occasions.</p>
+                        <a href="#" class="moreLink">Learn More
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <div class="service">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 3h8l-1 9h-6l-1 -9" />
+                            <path d="M7 18h2v3h-2l0 -3" />
+                            <path d="M20 3v12h-5c-.023 -3.681 .184 -7.406 5 -12" />
+                            <path d="M20 15v6h-1v-3" />
+                            <path d="M8 12l0 6" />
+                        </svg>
+                        <h3 class="card-header">Event Catering</h3>
+                        <p class="section-txt">From small gatherings to large events, we provide delicious,
+                            memorable experiences.</p>
+                        <a href="#" class="moreLink">Learn More
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 16" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                <path d="m9 18 6-6-6-6" />
+                            </svg>
+                        </a>
+                    </div>
+                </article>
+
             </div>
-        </article>
-        
-        <article class="service">
-            <div>
-                <h3>Service</h3>
-                <p>description</p>
-            </div>
-        </article>
-    </section>-->
+        </div>
+    </section>
 
     <section id="products">
         <div class="section-header">
-            <h1 class="section-heading">-Our Products-</h1>
+            <h1 class="product-header">-Our Products-</h1>
             <p class="section-txt">Try out our top rated products</p>
         </div>
 
@@ -110,8 +240,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (4).jpg"
-                        alt="A plate filled with cream covered strawberries" 
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -127,8 +257,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (7).jpg"
-                        alt="A plate filled with cream covered strawberries" 
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -144,8 +274,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (6).jpg"
-                        alt="A plate filled with cream covered strawberries"
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -161,8 +291,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" 
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -178,8 +308,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries"
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -195,8 +325,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" 
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -212,8 +342,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" 
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -229,8 +359,8 @@
             <article>
                 <figure class="image">
                     <img src="/public/assets/images/cafe_items (5).jpg"
-                        alt="A plate filled with cream covered strawberries" 
-                        loading="lazy" width="100" height="100" decoding="async" class="card-img">
+                        alt="A plate filled with cream covered strawberries" loading="lazy" width="100" height="100"
+                        decoding="async" class="card-img">
                 </figure>
                 <div class="card-body">
                     <h1 class="card-product">Parfait plate</h1>
@@ -269,9 +399,9 @@
                 </ul>
             </div>
 
-            <div class="services">
+            <div>
                 <h4>Services</h4>
-                <ul class="services">
+                <ul>
                     <li>At-Home Deliveries</li>
                     <li>Custom Cake Designs</li>
                     <li>Birthday Party Catering</li>
@@ -291,7 +421,8 @@
     </footer>
 
     <div class="copy">
-        Website Designed by &nbsp;<a href="https://github.com/d-O14/DomzWeb-projects/">DomzWeb</a>&nbsp; Copyright &copy;2026 All rights reserved &VerticalSeparator; DomzBakery
+        Website Designed by &nbsp;<a href="https://github.com/d-O14/DomzWeb-projects/"
+            class="domzLink">DomzWeb</a>&nbsp; Copyright &copy;2026 All rights reserved &VerticalSeparator; DomzBakery
     </div>
 
     <script src="/src/js/code.js"></script>
