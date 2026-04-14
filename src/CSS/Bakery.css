@@ -19,9 +19,9 @@ html {
 	scroll-behavior: smooth;
 }
 
-html::-webkit-scrollbar {
+/*html::-webkit-scrollbar {
 	display: none;
-}
+}*/
 
 :root {
 	--shadow:
@@ -485,10 +485,10 @@ footer {
 	transform: translateX(5px);
 }
 
-.icon {
+/*.icon {
 	width: 40px;
 	height: 40px;
-}
+}*/
 
 .more {
 	display: inline-flex;
@@ -502,6 +502,86 @@ footer {
 
 .service-txt {
 	color: hsl(0, 0%, 45%);
+}
+
+.toast {
+	display: flex;
+	position: absolute;
+	top: 1500px;
+	right: 1.8rem;
+	border-radius: .75rem;
+	padding: 1.25rem 2.1rem;
+	background: hsl(0, 0%, 100%);
+	box-shadow: var(--shadow);
+	border-left: .4rem solid hsl(24, 96%, 52%);
+	overflow: hidden;
+	transition: .5s ease;
+	transform: translateX(calc(100% + 30px));
+}
+
+.toast.active {
+	transform: translateX(0);
+}
+
+.message {
+	display: flex;
+	flex-direction: column;
+	margin: 0 20px;
+}
+
+.toast-message, .toast-title{
+	color: hsl(0, 0%, 15%);
+}
+
+.icon-check {
+	fill: hsl(24, 96%, 52%);
+}
+
+.close{
+	background: none;
+}
+
+.icon-close {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	padding: .25rem;
+	cursor: pointer;
+	opacity: .7;
+	transition: .25s ease;
+}
+
+.icon-close:hover {
+	opacity: 1;
+}
+
+.progress {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: .2rem;
+	width: 100%;
+	background: hsl(0, 0%, 100%);
+}
+
+.progress.active::before {
+	animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+	100% {
+		right: 100%;
+	}
+}
+
+.progress::before {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	background: hsl(24, 96%, 52%);
 }
 
 @media(max-width: 768px) {

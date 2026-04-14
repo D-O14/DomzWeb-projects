@@ -25,7 +25,7 @@
                     <li><a href="" class="link active">Home</a></li>
                     <li><a href="" class="link">Menu</a></li>
                     <li><a href="" class="link">Services</a></li>
-                    <li><a href="" class="link">Products</a></li>
+                    <li><a href="#products" class="link">Products</a></li>
                     <li><a href="" class="link">Contact Us</a></li>
                 </ul>
                 <div class="line"></div>
@@ -176,7 +176,7 @@
 
                 <article class="card">
                     <div class="service">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-palette">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -201,7 +201,7 @@
 
                 <article class="card">
                     <div class="service">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="icon icon-tabler icons-tabler-outline icon-tabler-tools-kitchen">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -228,6 +228,31 @@
         </div>
     </section>
 
+    <div class="toast">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="currentColor"
+            class="icon icon-check">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+                d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+        </svg>
+    
+        <div class="message">
+            <strong class="toast-title">Success</strong>
+            <p class="toast-message">Item successfully added to cart</p>
+        </div>
+    
+        <button class="close" aria-label="close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"
+                class="icon icon-close">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path
+                    d="M6.707 5.293l5.293 5.292l5.293 -5.292a1 1 0 0 1 1.414 1.414l-5.292 5.293l5.292 5.293a1 1 0 0 1 -1.414 1.414l-5.293 -5.292l-5.293 5.292a1 1 0 1 1 -1.414 -1.414l5.292 -5.293l-5.292 -5.293a1 1 0 0 1 1.414 -1.414" />
+            </svg>
+        </button>
+    
+        <div class="progress"></div>
+    </div>
+
     <section id="products">
         <div class="section-header">
             <h1 class="product-header">-Our Products-</h1>
@@ -248,7 +273,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
@@ -265,7 +290,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
@@ -282,7 +307,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
@@ -299,7 +324,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
@@ -316,7 +341,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
@@ -333,7 +358,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
@@ -350,7 +375,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
@@ -367,7 +392,7 @@
                     <p class="card-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio aspernatur
                         ratione consectetur perspiciatis eum enim.</p>
                     <menu>
-                        <button class="CardBtn">Add to Cart</button>
+                        <button class="CardBtn" data-product="Parfait plate">Add to Cart</button>
                         <span class="price">$8.25</span>
                     </menu>
                 </div>
