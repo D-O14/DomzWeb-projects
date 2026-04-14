@@ -19,9 +19,13 @@ html {
 	scroll-behavior: smooth;
 }
 
-/*html::-webkit-scrollbar {
+html::-webkit-scrollbar {
 	display: none;
-}*/
+}
+
+body{
+	overflow-x: hidden;
+}
 
 :root {
 	--shadow:
@@ -40,8 +44,6 @@ nav {
 	justify-content: space-between;
 	background: hsl(0, 0%, 100%);
 	border: 2px solid hsl(0, 0%, 95%);
-	/*background: hsl(30, 76%, 48%);
-	color: hsl(0, 0%, 95%);*/
 }
 
 section {
@@ -364,6 +366,17 @@ footer {
 	color: var(--primary);
 }
 
+.LoginBtn{
+	background: hsl(26, 100%, 48%);
+	border: 1px solid transparent;
+	color: hsl(0, 0%, 100%);
+	border-radius: 1rem;
+}
+
+.LoginBtn:hover{
+	background: hsl(26, 100%, 40%);
+}
+
 .ReserveBtn:hover {
 	background: hsl(26, 100%, 48%);
 	color: hsl(0, 0%, 100%);
@@ -485,9 +498,12 @@ footer {
 	transform: translateX(5px);
 }
 
-/*.icon {
-	width: 40px;
-	height: 40px;
+.icon{
+	transition: all .3s ease;
+}
+
+/*.card:hover .icon{
+	color: hsl(30, 100%, 47%);
 }*/
 
 .more {
@@ -507,8 +523,8 @@ footer {
 .toast {
 	display: flex;
 	position: absolute;
-	top: 1500px;
-	right: 1.8rem;
+	top: 5.5rem;
+	/*right: 1.8rem;*/
 	border-radius: .75rem;
 	padding: 1.25rem 2.1rem;
 	background: hsl(0, 0%, 100%);
@@ -516,14 +532,53 @@ footer {
 	border-left: .4rem solid hsl(24, 96%, 52%);
 	overflow: hidden;
 	transition: .5s ease;
-	transform: translateX(calc(100% + 30px));
+	/*transform: translateX(calc(100% + 30px));*/
+	transform: translateY(calc(-100% + -88px));
+	opacity: 0;
+	width: 400px;
 }
 
 .toast.active {
-	transform: translateX(0);
+	transform: translateY(0);
+	opacity: 1;
 }
 
-.message {
+.toast.show{
+	animation: fade .4s ease forwards;
+}
+
+@keyframes fade{
+	from{
+		opacity: 0;
+		transform: translateY(calc(-100% + -88px));
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.toast.hide{
+	animation: hide .4s ease forwards;
+}
+
+@keyframes hide{
+	from{
+		opacity: 1;
+		transform: translateY(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateY(calc(-100% + -88px));
+	}
+}
+
+.message{
+	display: flex;
+	align-items: center;
+}
+
+.message-content {
 	display: flex;
 	flex-direction: column;
 	margin: 0 20px;

@@ -46,8 +46,9 @@ CardBtn.forEach(btn => {
         clearTimeout(timeout);
 
         message.textContent = text;
-        toast.classList.add("active");
-        progress.classList.add("active");
+
+        toast.classList.remove("hide","show");
+        progress.classList.remove("active");
 
         /*timeout = setTimeout(() => {
             toast.classList.remove("active");
@@ -56,15 +57,31 @@ CardBtn.forEach(btn => {
         timeout = setTimeout(() => {
             progress.classList.remove("active");
         }, 5300)*/
+
+        void toast.offsetWidth;
+
+
+        setTimeout(() => {
+            toast.classList.add("show");
+            progress.classList.add("active")
+        }, 10)
+
+        timeout = setTimeout(() => {
+            toast.classList.remove("show");
+            progress.classList.remove("active");
+        }, 5000)
+
+        timeout = setTimeout(hideToast, 5000);
     }
 
     closeBtn.addEventListener("click", () => {
-        toast.classList.remove("active");
+        clearTimeout(timeout)
+        hideToast()
 
-        setTimeout(() => {
+        /*setTimeout(() => {
             progress.classList.remove("active");
             clearTimeout(timeout);
-        }, 300)
+        }, 300)*/
     });
 
     links.forEach(link => {
@@ -78,3 +95,13 @@ CardBtn.forEach(btn => {
         })
     })
 })
+
+function hideToast() {
+    toast.classList.remove("show");
+    toast.classList.add("hide");
+    progress.classList.remove("active");
+
+    setTimeout(() => {
+        toast.classList.remove("hide");
+    }, 400)
+}
