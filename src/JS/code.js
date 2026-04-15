@@ -23,23 +23,6 @@ CardBtn.forEach(btn => {
             btn.textContent = "Add to Cart";
             showToast(`${ product } removed from cart`);
         }
-
-        /*btn.addEventListener("click", () => {
-            if (btn.textContent === "Add to Cart") {
-                btn.textContent = "Added to Cart";
-    
-                setTimeout(() => {
-                    btn.textContent = "Remove from Cart";
-                }, 2000);
-    
-            } else if (btn.textContent === "Remove from Cart") {
-                btn.textContent = "Removed from Cart";
-    
-                setTimeout(() => {
-                    btn.textContent = "Add to Cart";
-                }, 2000)
-            }
-        })*/
     })
 
     function showToast(text) {
@@ -50,16 +33,7 @@ CardBtn.forEach(btn => {
         toast.classList.remove("hide","show");
         progress.classList.remove("active");
 
-        /*timeout = setTimeout(() => {
-            toast.classList.remove("active");
-        }, 5000)
-
-        timeout = setTimeout(() => {
-            progress.classList.remove("active");
-        }, 5300)*/
-
         void toast.offsetWidth;
-
 
         setTimeout(() => {
             toast.classList.add("show");
@@ -78,10 +52,6 @@ CardBtn.forEach(btn => {
         clearTimeout(timeout)
         hideToast()
 
-        /*setTimeout(() => {
-            progress.classList.remove("active");
-            clearTimeout(timeout);
-        }, 300)*/
     });
 
     links.forEach(link => {
