@@ -14,6 +14,7 @@
 <body>
     <div class="wrapper">
         <h1>Sign Up</h1>
+        <p id="error"></p>
             <form action="" id="form">
                 <div>
                     <label for="name-input">
@@ -24,7 +25,7 @@
                             <path d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
                         </svg>
                     </label>
-                    <input type="text" name="name" id="name-input" placeholder="Enter your name">
+                    <input type="text" name="name" id="name-input" placeholder="Enter your name" autocomplete="off">
                 </div>
                 
                 <div>
@@ -37,7 +38,7 @@
                             <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
                         </svg>
                     </label>
-                    <input type="email" name="email" id="email-input" placeholder="Enter your E-mail">
+                    <input type="email" name="email" id="email-input" placeholder="Enter your E-mail" autocomplete="off">
                 </div>
 
                 <div>
@@ -67,7 +68,7 @@
                 <button type="submit" id="mySubmit">Sign Up</button>
 
             </form>
-            <p>Already have an account? <a href="/">Login</a></p>
+            <p>Already have an account? <a href="/src/login.html">Login</a></p>
     </div>
 
     <script src="/src/js/form.js"></script>

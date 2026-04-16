@@ -160,3 +160,7 @@ label{
 .incorrect input{
     border: 2px solid hsl(0, 100%, 65%);
 }
+
+#error{
+    color: hsl(0, 100%, 65%);
+}
