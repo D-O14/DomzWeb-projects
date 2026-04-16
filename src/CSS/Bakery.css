@@ -432,7 +432,8 @@ footer {
 	-webkit-text-stroke-color: red;
 }*/
 
-.services-header {
+.services-header,
+.formTitle {
 	font-size: 2rem;
 	letter-spacing: .5px;
 	background-color: hsl(30, 100%, 47%);
@@ -647,3 +648,4 @@ footer {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
+
