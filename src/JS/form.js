@@ -4,6 +4,7 @@ const email_input = document.getElementById("email-input");
 const password_input = document.getElementById("password-input");
 const repeatPassword_input = document.getElementById("repeat-password-input");
 const error_message = document.getElementById("error");
+const message = document.querySelector(".message");
 
 form.addEventListener("submit", (e) => {
     let errors = [];
@@ -15,6 +16,7 @@ form.addEventListener("submit", (e) => {
 
     if (errors.length > 0) {
         e.preventDefault(); 
+        message.classList.add("active")
         error_message.innerText = errors.join(" ");
     }
 })
@@ -83,6 +85,7 @@ allInputs.forEach(input => {
     input.addEventListener("input", () => {
         if (input.parentElement.classList.contains("incorrect")) {
             input.parentElement.classList.remove("incorrect");
+            message.classList.remove("active");
             error_message.innerText = "";
         }
     })

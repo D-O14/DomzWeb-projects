@@ -365,14 +365,15 @@ footer {
 	color: var(--primary);
 }
 
-.LoginBtn{
+.SignUpBtn{
+	padding: .5em 1em;
 	background: hsl(26, 100%, 48%);
 	border: 1px solid transparent;
 	color: hsl(0, 0%, 100%);
 	border-radius: 1rem;
 }
 
-.LoginBtn:hover{
+.SignUpBtn:hover{
 	background: hsl(26, 100%, 40%);
 }
 
@@ -501,10 +502,6 @@ footer {
 	transition: all .3s ease;
 }
 
-/*.card:hover .icon{
-	color: hsl(30, 100%, 47%);
-}*/
-
 .more {
 	display: inline-flex;
 	align-items: center;
@@ -523,7 +520,6 @@ footer {
 	display: flex;
 	position: absolute;
 	top: 5.5rem;
-	/*right: 1.8rem;*/
 	border-radius: .75rem;
 	padding: 1.25rem 2.1rem;
 	background: hsl(0, 0%, 100%);
@@ -531,7 +527,6 @@ footer {
 	border-left: .4rem solid hsl(24, 96%, 52%);
 	overflow: hidden;
 	transition: .5s ease;
-	/*transform: translateX(calc(100% + 30px));*/
 	transform: translateY(calc(-100% + -88px));
 	opacity: 0;
 	width: 400px;

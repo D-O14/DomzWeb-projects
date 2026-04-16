@@ -12,6 +12,10 @@
     --base-color: hsl(0, 0%, 100%);
     --txt-color: hsl(0, 0%, 20%);
     --input-color: hsl(252, 100%, 97%);
+    --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
 }
 
 body{
@@ -135,6 +139,7 @@ label{
 }
 
 .wrapper{
+    position: relative;
     height: 100vh;
     background: var(--base-color);
     width: max(40%, 600px);
@@ -162,5 +167,20 @@ label{
 }
 
 #error{
-    color: hsl(0, 100%, 65%);
+    color: hsl(0, 0%, 100%);
+}
+
+.message{
+    top: 1.8rem;
+    position: absolute;
+    background: hsl(0, 100%, 65%);
+    box-shadow: var(--shadow);
+    padding: .5rem 1rem;
+    border-radius: .25rem;
+    width: 400px;
+    display: none;
+}
+
+.active{
+    display: block;
 }
