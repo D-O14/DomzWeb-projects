@@ -296,6 +296,14 @@
 
         showMenu('nav_toggle', 'nav-menu');*/
 
+        const list = document.getElementById("myList");
+        let fruitList = ["Orange", "Mango", "Grape", "Lemon"]
+
+        fruitList.forEach(fruit => {
+            let newListItem = document.createElement("li");
+            newListItem.textContent = fruit;
+            list.appendChild(newListItem)
+        })
 
 
     </script>
