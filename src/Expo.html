@@ -178,7 +178,6 @@
     }
 
     body {
-        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -299,6 +298,11 @@
         gap: 1.5rem;
         flex-wrap: wrap;
     }
+
+    h1{
+        text-wrap: wrap;
+        font-size: 20px;
+    }
 </style>
 
 <body>
@@ -376,7 +380,7 @@
             </nav>
         </header>-->
         <section id="cards">
-            <article class="card">
+            <!--<article class="card">
                 <figure>
                     <img src="/public/assets/images/cafe_items (3).jpg" alt="Beautiful cupcake" class="product-img">
                 </figure>
@@ -405,7 +409,7 @@
                     <button class="cartBtn">Add To Cart</button>
 
                 </div>
-            </article>
+            </article>-->
         </section>
 
     </main>
@@ -481,29 +485,70 @@
         people.push(person1, person2)
         console.log(people)*/
 
+        
+        const section = document.getElementById("cards");
 
-        /*async function fetchData() {
+        async function fetchData() {
                 try{
-                    const res = await fetch(`https://dummyjson.com/products`);
+                    const res = await fetch(`https://dummyjson.com/products?limit=8`);
                     if (!res.ok) {
                         throw new Error("Resource not found 😢")
                     }
 
                    const data = await res.json();
-
                    const products = data.products;
+                   renderProducts(data.products)
 
                    products.forEach(product => {
                         console.log(product);
                    });
+
 
                 } catch(error){
                     console.error(error)
                 }
         }
 
-        fetchData()*/
-        let desc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque consequatur,odio accusantium quam dolor autem suscipit repudiandae ?"
+        function renderProducts(products){   
+            let cards = "";      
+            products.forEach(product => {
+                cards += `
+                <article class="card">
+                <figure>
+                    <img src="${product.thumbnail}" class="product-img">
+                </figure>
+                <div class="product">
+                    <div class="product-info">
+                        <h1 class="product-name">
+                            ${product.title}
+                        </h1>
+
+                        <span class="price">
+                            $${product.price}
+                        </span>
+                    </div>
+
+                    <p class="description">
+                        ${product.description}
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">New</span>
+                        <span class="tag">Popular</span>
+                    </div>
+
+                    <button class="cartBtn">Add To Cart</button>
+                </div>
+            </article>`;
+            });
+
+            section.innerHTML = cards;
+        }
+
+        
+        fetchData()
+
+        /*let desc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque consequatur,odio accusantium quam dolor autem suscipit repudiandae ?"
 
         const section = document.getElementById("cards");
         const card = document.createElement("article");
@@ -551,7 +596,7 @@
         div.append(productInfo, description, tags, button);
         productInfo.appendChild(myH1);
         productInfo.appendChild(span);
-        tags.append(tag1, tag2);
+        tags.append(tag1, tag2);*/
 
     </script>
 </body>
