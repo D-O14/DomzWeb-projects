@@ -189,7 +189,7 @@
         border-radius: .25rem;
         font-size: 1rem;
         font-weight: 600;
-        padding: .5em 1em;
+        padding: .75em 1em;
         cursor: pointer;
     }
 
@@ -198,6 +198,106 @@
         border-radius: .25rem;
         padding: .5rem 1rem;
         outline: none;
+    }
+
+    ul {
+        display: flex;
+        gap: .5rem;
+    }
+
+    figure {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 1rem;
+    }
+
+    figure:hover img {
+        transform: scale(1.1);
+        filter: grayscale(0);
+    }
+
+    img {
+        display: block;
+        aspect-ratio: 16/9;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transform: scale(1);
+        transition: .5s ease;
+        border-radius: 1rem;
+        filter: grayscale(1);
+    }
+
+
+    article {
+        max-width: 100%;
+        width: 450px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 1rem;
+        box-shadow: var(--shadow);
+        border-radius: 1rem;
+    }
+
+    p {
+        color: hsl(0, 0%, 40%);
+        line-height: 1.5;
+    }
+
+    .product {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1rem 1rem 1rem;
+    }
+
+    .product-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .price {
+        width: fit-content;
+        margin-left: 50%;
+        font-weight: 600;
+        font-weight: 1rem;
+        padding: .5rem 1rem;
+        border-radius: 1.25rem;
+        background: hsl(210, 80%, 50%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    .cartBtn {
+        border-radius: 1.25rem;
+        background: hsla(210, 80%, 50%);
+        color: hsl(0, 0%, 100%);
+        transition: .5s ease;
+    }
+
+    .cartBtn:hover {
+        scale: .95;
+    }
+
+    .tags {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .tag {
+        padding: .5rem 1rem;
+        color: hsla(0, 0%, 100%, .8);
+        border-radius: 1rem;
+        background: hsla(190, 80%, 50%, .5);
+    }
+
+    #cards {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
     }
 </style>
 
@@ -275,12 +375,41 @@
 
             </nav>
         </header>-->
+        <section id="cards">
+            <article class="card">
+                <figure>
+                    <img src="/public/assets/images/cafe_items (3).jpg" alt="Beautiful cupcake" class="product-img">
+                </figure>
+                <div class="product">
+                    <div class="product-info">
+                        <h1 class="product-name">
+                            Product 1
+                        </h1>
 
-        <ul id="myList">
-            <li>Apple</li>
-        </ul>
+                        <span class="price">
+                            &dollar;20.6
+                        </span>
+                    </div>
+
+                    <p class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque
+                        consequatur,
+                        odio accusantium quam dolor autem suscipit repudiandae?
+                    </p>
+
+                    <div class="tags">
+                        <span class="tag">New</span>
+                        <span class="tag">Popular</span>
+                    </div>
+
+                    <button class="cartBtn">Add To Cart</button>
+
+                </div>
+            </article>
+        </section>
 
     </main>
+
 
 
     <script>
@@ -296,15 +425,133 @@
 
         showMenu('nav_toggle', 'nav-menu');*/
 
-        const list = document.getElementById("myList");
-        let fruitList = ["Orange", "Mango", "Grape", "Lemon"]
 
-        fruitList.forEach(fruit => {
-            let newListItem = document.createElement("li");
-            newListItem.textContent = fruit;
-            list.appendChild(newListItem)
-        })
+        /*const person1 = {
+            name: "Drew Mcarthy",
+            age: 24,
+            gender: "Male",
+            isEmployed: true,
+            HasDisease: false,
+            isConvict: false,
+            criminalRecord: true,
+            hello: function (callback) {
+                setTimeout(() => {
+                    console.log(`${ this.name } says hello`)
+                    callback()
+                }, 2000)
+            }
 
+        }
+
+        const person2 = {
+            name: "Anna Beige",
+            age: 20,
+            gender: "Female",
+            isEmployed: true,
+            HasDisease: true,
+            isConvict: false,
+            criminalRecord: false,
+            hello: function () { console.log(`${ this.name } says hello`) }
+        }
+
+        person1.hello(() =>  { return person2.hello()} )
+
+        console.log(`${person1.name}`);
+        console.log(`${person1.name} is ${person1.age} years old`);
+        console.log(`${ person1.name } is a ${ person1.gender }`);
+        console.log(`${person1.name} is employed: ` + person1.isEmployed);
+        console.log(`${person1.name} has a disease: ` + person1.HasDisease);
+        console.log(`${person1.name} is a convict: ` + person1.isConvict); 
+        console.log(`${ person1.name } has a criminal record: ` + person1.criminalRecord);
+        person1.hello()
+     
+        person1.criminalRecord === true ? console.log(`${ person1.name } is NOT Eligible`) : console.log(`${ person1.name } is Eligible`)
+
+        console.log(`${person2.name}`);
+        console.log(`${person2.name} is ${person2.age} years old`);
+        console.log(`${ person2.name } is a ${ person2.gender }`);
+        console.log(`${person2.name} is employed: ` + person2.isEmployed);
+        console.log(`${person2.name} has a disease: ` + person2.HasDisease);
+        console.log(`${person2.name} is a convict: ` + person2.isConvict); 
+        console.log(`${ person2.name } has a criminal record: ` + person2.criminalRecord);
+
+        person2.criminalRecord === true ? console.log(`${person2.name} is NOT Eligible`) : console.log(`${ person2.name } is Eligible`)
+        
+        const people = []
+        people.push(person1, person2)
+        console.log(people)*/
+
+
+        /*async function fetchData() {
+                try{
+                    const res = await fetch(`https://dummyjson.com/products`);
+                    if (!res.ok) {
+                        throw new Error("Resource not found 😢")
+                    }
+
+                   const data = await res.json();
+
+                   const products = data.products;
+
+                   products.forEach(product => {
+                        console.log(product);
+                   });
+
+                } catch(error){
+                    console.error(error)
+                }
+        }
+
+        fetchData()*/
+        let desc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque consequatur,odio accusantium quam dolor autem suscipit repudiandae ?"
+
+        const section = document.getElementById("cards");
+        const card = document.createElement("article");
+        const fig = document.createElement("figure");
+
+        const img = document.createElement("img");
+        img.setAttribute("alt", "A plate of creamy strawberries");
+        img.src = "/public/assets/images/cafe_items (4).jpg"
+
+        const button = document.createElement("button")
+        button.textContent = "Add To Cart";
+        button.className = "cartBtn";
+
+        const div = document.createElement("div");
+        div.className = "product";
+
+        const description = document.createElement("p");
+        description.textContent = `${ desc }`;
+
+        const productInfo = document.createElement("div");
+        productInfo.className = "product-info";
+
+        const myH1 = document.createElement("h1");
+        myH1.textContent = "Product 02";
+
+        const span = document.createElement("span");
+        span.className = "price";
+        span.textContent = "$20.6";
+
+        const tags = document.createElement("div");
+        tags.className = "tags";
+
+        const tag1 = document.createElement("span");
+        tag1.className = "tag";
+        tag1.textContent = "New";
+
+        const tag2 = document.createElement("span");
+        tag2.className = "tag";
+        tag2.textContent = "Popular";
+
+
+        section.appendChild(card);
+        card.append(fig, img, div);
+        fig.append(img);
+        div.append(productInfo, description, tags, button);
+        productInfo.appendChild(myH1);
+        productInfo.appendChild(span);
+        tags.append(tag1, tag2);
 
     </script>
 </body>

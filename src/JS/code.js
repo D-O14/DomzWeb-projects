@@ -75,3 +75,4 @@ function hideToast() {
         toast.classList.remove("hide");
     }, 400)
 }
+
