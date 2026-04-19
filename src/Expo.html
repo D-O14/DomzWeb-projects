@@ -177,6 +177,14 @@
         font-family: system-ui;
     }
 
+    :root{
+        --first-color: hsl(220, 100%, 62%);
+        --title-color: hsl(220, 8%, 12%);
+        --text-color: hsl(220, 8%, 56%);
+        --body-color: hsl(220, 24%, 94%);
+        --container-color: hsl(220, 48%, 96%);
+    }
+
     body {
         display: flex;
         justify-content: center;
@@ -204,94 +212,6 @@
         gap: .5rem;
     }
 
-    figure {
-        width: 100%;
-        overflow: hidden;
-        border-radius: 1rem;
-    }
-
-    figure:hover img {
-        transform: scale(1.1);
-        filter: grayscale(0);
-    }
-
-    img {
-        display: block;
-        aspect-ratio: 16/9;
-        width: 100%;
-        height: auto;
-        object-fit: cover;
-        transform: scale(1);
-        transition: .5s ease;
-        border-radius: 1rem;
-        filter: grayscale(1);
-    }
-
-
-    article {
-        max-width: 100%;
-        width: 450px;
-        height: auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem 1rem;
-        box-shadow: var(--shadow);
-        border-radius: 1rem;
-    }
-
-    p {
-        color: hsl(0, 0%, 40%);
-        line-height: 1.5;
-    }
-
-    .product {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-        padding: 1rem 1rem 1rem;
-    }
-
-    .product-info {
-        display: flex;
-        align-items: center;
-    }
-
-    .price {
-        width: fit-content;
-        margin-left: 50%;
-        font-weight: 600;
-        font-weight: 1rem;
-        padding: .5rem 1rem;
-        border-radius: 1.25rem;
-        background: hsl(210, 80%, 50%);
-        color: hsl(0, 0%, 100%);
-    }
-
-    .cartBtn {
-        border-radius: 1.25rem;
-        background: hsla(210, 80%, 50%);
-        color: hsl(0, 0%, 100%);
-        transition: .5s ease;
-    }
-
-    .cartBtn:hover {
-        scale: .95;
-    }
-
-    .tags {
-        display: flex;
-        gap: 1rem;
-    }
-
-    .tag {
-        padding: .5rem 1rem;
-        color: hsla(0, 0%, 100%, .8);
-        border-radius: 1rem;
-        background: hsla(190, 80%, 50%, .5);
-    }
 
     #cards {
         display: flex;
@@ -299,10 +219,103 @@
         flex-wrap: wrap;
     }
 
-    h1{
-        text-wrap: wrap;
-        font-size: 20px;
+    .carousel{
+        position: relative;
+        max-width: 1120px;
+        padding-block: 5rem;
+        display: grid;
+        align-content: center;
+        row-gap: 2rem;
+        overflow: hidden;
+        height: 100vh;
+        mask-image: 
+        linear-gradient(
+            to right, 
+            rgba(0,0,0,0), 
+            rgba(0,0,0,1) 20%, 
+            rgba(0,0,0,0) 80%, 
+            rgba(0,0,0,1)
+        );
     }
+
+    .card{
+        width: 320px;
+        background: var(--container-color);
+        box-shadow: var(--shadow);
+        padding: 1.5em 1em 2.5em;
+        text-align: center;
+        border-radius: 1rem;
+    }
+
+    .carousel-img{
+        width: 5rem;
+        border-radius: 100%;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        margin: 0 auto .5rem;
+        transition: .4s ease;
+    }
+
+    .name, .number{
+        font: 500 1rem .985rem;
+        color: var(--title-color);
+    }
+
+    .name{
+        margin-bottom: 1.5rem;
+    }
+
+    .rating{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        column-gap: .5rem;
+        margin-bottom: .5rem;
+    }
+
+    .stars{
+        display: flex;
+        column-gap: .25rem;
+        font-size: 1rem;
+        color: var(--first-color);
+        cursor: pointer;
+        transition: transform .2s ease;
+    }
+
+    .card:hover .carousel-img{
+        transform: scale(1.2);
+    }
+
+    .stars .icon:hover{
+        transform: scale(1.3);
+    }
+
+    .carousel-content{
+        width: max-content;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        animation: scroll 18s linear infinite;
+       
+    }
+
+    .carousel-content:hover{
+        animation-play-state: paused;
+    }
+
+    .reverse{
+        flex-direction: row-reverse;
+        animation-direction: reverse;
+        animation-delay: -1s;
+    }
+
+    @keyframes scroll{
+        100%{
+            transform: translateX(-50%);
+        }
+    }
+
+
 </style>
 
 <body>
@@ -379,37 +392,9 @@
 
             </nav>
         </header>-->
-        <section id="cards">
-            <!--<article class="card">
-                <figure>
-                    <img src="/public/assets/images/cafe_items (3).jpg" alt="Beautiful cupcake" class="product-img">
-                </figure>
-                <div class="product">
-                    <div class="product-info">
-                        <h1 class="product-name">
-                            Product 1
-                        </h1>
 
-                        <span class="price">
-                            &dollar;20.6
-                        </span>
-                    </div>
-
-                    <p class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque
-                        consequatur,
-                        odio accusantium quam dolor autem suscipit repudiandae?
-                    </p>
-
-                    <div class="tags">
-                        <span class="tag">New</span>
-                        <span class="tag">Popular</span>
-                    </div>
-
-                    <button class="cartBtn">Add To Cart</button>
-
-                </div>
-            </article>-->
+        <section class="carousel">
+            
         </section>
 
     </main>
@@ -485,8 +470,8 @@
         people.push(person1, person2)
         console.log(people)*/
 
-        
-        const section = document.getElementById("cards");
+
+        /*const section = document.getElementById("cards");
 
         async function fetchData() {
                 try{
@@ -548,7 +533,7 @@
         
         fetchData()
 
-        /*let desc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque consequatur,odio accusantium quam dolor autem suscipit repudiandae ?"
+        let desc = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque consequatur,odio accusantium quam dolor autem suscipit repudiandae ?"
 
         const section = document.getElementById("cards");
         const card = document.createElement("article");
@@ -597,6 +582,8 @@
         productInfo.appendChild(myH1);
         productInfo.appendChild(span);
         tags.append(tag1, tag2);*/
+
+        
 
     </script>
 </body>

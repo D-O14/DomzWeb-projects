@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *::before,
+    *::after,
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    figure {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 1rem;
+    }
+
+    figure:hover img {
+        transform: scale(1.1);
+        filter: grayscale(0);
+    }
+
+    img {
+        display: block;
+        aspect-ratio: 16/9;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        transform: scale(1);
+        transition: .5s ease;
+        border-radius: 1rem;
+        filter: grayscale(1);
+    }
+
+
+    article {
+        max-width: 100%;
+        width: 450px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem 1rem;
+        box-shadow: var(--shadow);
+        border-radius: 1rem;
+    }
+
+
+    h1 {
+        text-wrap: wrap;
+        font-size: 20px;
+    }
+
+    p {
+        color: hsl(0, 0%, 40%);
+        line-height: 1.5;
+    }
+
+    .product {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1rem 1rem 1rem;
+    }
+
+    .product-info {
+        display: flex;
+        align-items: center;
+    }
+
+    .price {
+        width: fit-content;
+        margin-left: 50%;
+        font-weight: 600;
+        font-weight: 1rem;
+        padding: .5rem 1rem;
+        border-radius: 1.25rem;
+        background: hsl(210, 80%, 50%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    .cartBtn {
+        border-radius: 1.25rem;
+        background: hsla(210, 80%, 50%);
+        color: hsl(0, 0%, 100%);
+        transition: .5s ease;
+    }
+
+    .cartBtn:hover {
+        scale: .95;
+    }
+
+    .tags {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .tag {
+        padding: .5rem 1rem;
+        color: hsla(0, 0%, 100%, .8);
+        border-radius: 1rem;
+        background: hsla(190, 80%, 50%, .5);
+    }
+</style>
+
+<body>
+    <article class="card">
+        <figure>
+            <img src="/public/assets/images/cafe_items (3).jpg" alt="Beautiful cupcake" class="product-img">
+        </figure>
+        <div class="product">
+            <div class="product-info">
+                <h1 class="product-name">
+                    Product 1
+                </h1>
+
+                <span class="price">
+                    &dollar;20.6
+                </span>
+            </div>
+
+            <p class="description">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis ratione sequi itaque
+                consequatur,
+                odio accusantium quam dolor autem suscipit repudiandae?
+            </p>
+
+            <div class="tags">
+                <span class="tag">New</span>
+                <span class="tag">Popular</span>
+            </div>
+
+            <button class="cartBtn">Add To Cart</button>
+
+        </div>
+    </article>
+</body>
+
+</html>
