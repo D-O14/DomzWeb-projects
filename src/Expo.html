@@ -176,16 +176,17 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+        font-family: system-ui;
     }
 
-    body {
+    /*body {
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
         font-family: Verdana;
         text-align: center;
-    }
+    }*/
 
     button {
         border: none;
@@ -346,6 +347,13 @@
 
     .row:nth-of-type(even) {
         background: hsla(220, 80%, 90%, .5);
+    }
+
+    form{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: start;
     }
 </style>
 
@@ -622,6 +630,32 @@
             </article>-->
 
         </section>
+
+        <form action="">
+            <label for="check">
+                <input type="checkbox" id="check">
+                Subscribe
+            </label>
+            
+            <label for="visa">
+                <input type="radio" id="visa" name="radio" class="radio">
+                Visa
+            </label>
+            
+            <label for="master">
+                <input type="radio" id="master" name="radio" class="radio">
+                MasterCard
+            </label>
+            
+            <label for="payPal">
+                <input type="radio" id="payPal" name="radio" class="radio">
+                PayPal
+            </label>
+            
+            <button type="submit" id="mySubmit">Submit</button>
+        </form>
+        <p id="subParagraph"></p>
+        <p id="paymentParagraph"></p>
     </main>
 
 
@@ -750,7 +784,44 @@
         }
 
         table()*/
-        
+
+            const checkbox = document.getElementById("check");
+            const visa = document.getElementById("visa");
+            const master = document.getElementById("master");
+            const payPal = document.getElementById("payPal");
+            const button = document.getElementById("mySubmit")
+            const paragraph1 = document.getElementById("subParagraph");
+            const paragraph2 = document.getElementById("paymentParagraph");
+            const radio = document.querySelectorAll(".radio")
+
+            button.onclick = function(){
+                
+                if(checkbox.checked){
+                    paragraph1.textContent = "You are subscribed!"
+                    console.log(checkbox.value)
+                } else{
+                    paragraph1.textContent = "You are not subscribed!"
+                }
+
+                if(!checkbox.checked && radio){
+                    paragraph2.textContent = "Cannot make payments without subscription"
+                }
+
+                if(visa.checked){
+                    paragraph2.textContent = "You are paying with Visa"
+                } else if (master.checked){
+                    paragraph2.textContent = "You are paying with MasterCard"
+                } else if(payPal.checked){
+                    paragraph2.textContent = "You are paying with payPal"
+                } else{
+                    paragraph2.textContent = "Payment type must be selected"
+                }
+            }
+
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+            })
+
 
     </script>
 </body>
