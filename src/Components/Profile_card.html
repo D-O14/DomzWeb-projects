@@ -15,7 +15,6 @@
         padding: 0;
         box-sizing: border-box;
         font-family: system-ui;
-        transition: .3s ease-in-out;
     }
 
     body{
@@ -79,7 +78,7 @@
     }
 
     button {
-        border-radius: .5em;
+        border-radius: 1em;
         padding: .5em 1em;
         border: none;
         position: absolute;
@@ -107,6 +106,12 @@
         font-weight: 500;
         letter-spacing: .5px;
     }
+
+    .following{
+        background: hsl(0, 0%, 0%);
+        color: hsl(0, 0%, 90%);
+        border: 2px solid hsla(0, 0%, 20%, .9);
+    }
 </style>
 
 <body>
@@ -130,6 +135,14 @@
 
         </section>
     </main>
+
+    <script>
+        const button = document.querySelector("button")
+        button.addEventListener("click", () => {
+            button.textContent = "Following";
+            button.classList.add("following")
+        })
+    </script>
 </body>
 
 </html>
