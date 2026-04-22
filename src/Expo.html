@@ -189,6 +189,12 @@
         text-align: center;
     }
 
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
     button {
         border: none;
         border-radius: .25rem;
@@ -206,12 +212,12 @@
         outline: none;
     }
 
-    input:focus{ 
+    input:not(input[type="checkbox"], input[type="radio"]):focus {
         outline: 1px solid hsl(220, 100%, 65%);
         outline-offset: 1px;
     }
 
-    fieldset{
+    fieldset {
         display: flex;
         gap: .5rem;
         padding: 2rem 2rem 2rem;
@@ -365,9 +371,20 @@
         background: hsla(220, 80%, 90%, .5);
     }
 
-    label {
-        font-size: 3rem;
+    label{
+        display: flex;
+        align-items: center;
+        gap: .5rem;
     }
+
+    input[type="checkbox"]{
+        accent-color: hsl(220, 80%, 50%);
+    }
+
+    .textError{
+        color: hsl(0, 80%, 50%);
+    }
+
 </style>
 
 <body>
@@ -653,7 +670,19 @@
                 <legend>Local Storage</legend>
                 <div id="output"></div>
             </fieldset>-->
-        
+
+            <form action="" spellcheck="true" autocomplete="off">
+                <input type="text" id="text" placeholder="Enter your name" required>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <input type="number" id="number" placeholder="Enter your age" required>
+                <input type="password" id="password" placeholder="Create a password" required>
+                <label>
+                    <input type="checkbox" id="check">
+                    Newsletter
+                </label>
+                <button type="submit">Submit</button>
+            </form>
+
         </section>
 
     </main>
@@ -799,20 +828,20 @@
 
         console.log(items);
 
-        const filter = items.filter(item => 
+        const filter = items.filter(item =>
             item.price <= 100);
 
-        const html = filter.map(({name, price}) => {
-            return `<p>${name} - $${price}</p>`
+        const html = filter.map(({ name, price }) => {
+            return `<p>${ name } - $${ price }</p>`
         }).join("");
 
         /*document.querySelector("p").innerHTML = html;*/
-        
+
 
         const itemNames = items.map(item => {
             return item.name;
         });
-        
+
         /*document.querySelector("p").innerHTML = itemNames.join("<br>")*/
         console.log(itemNames)
 
@@ -831,7 +860,7 @@
         console.log(`Your discounted total is $${ discountTotal }`)
 
         const total = items.reduce((currentTotal, item) => {
-            return item.price  + currentTotal;
+            return item.price + currentTotal;
         }, 0);
 
         console.log(`Your total is $${ total }`)
@@ -840,8 +869,8 @@
         console.log(first, second, third, fourth, fifth, ...extra);
         console.log(...items)
 
-        items.forEach(({name, price}) => {
-            console.log(`${name}: $${price}`);
+        items.forEach(({ name, price }) => {
+            console.log(`${ name }: $${ price }`);
         })
 
         /*const keyInput = document.getElementById("inputKey")
@@ -864,24 +893,85 @@
             const value = localStorage.getItem(key);
 
             output.innerHTML += `${key}: ${value}<br />`
+        }*/
+
+        const form = document.querySelector("form")
+        const text = document.getElementById("text");
+        const email = document.getElementById("email");
+        const age = document.getElementById("number");
+        const password = document.getElementById("password");
+        const button = document.querySelector("button");
+        const check = document.getElementById("check");
+
+
+        button.addEventListener("click", (e) => {
+            e.preventDefault()
+        })
+
+        button.onclick = function () {
+            const user = {
+                name: text.value,
+                email: email.value,
+                age: age.value,
+                password: password.value,
+                newsletter: check.checked,
+            }
+
+            const user_serialized = JSON.stringify(user);
+            localStorage.setItem("user", user_serialized);
+            console.log(localStorage)
         }
 
-        let myObj = {
-            name: "Dominion",
-            age: 15,
-        };
+        const inputs = [];
+        inputs.push(text, email, age, password);
 
-        let myObj_serialized = JSON.stringify(myObj);
-        let myObj_deserialized  = JSON.parse(localStorage.getItem("myObj"))
+        button.addEventListener("click", (e) => { 
+            e.preventDefault();
+            if(text.value == "" || text.value == null){
+                const textError = document.createElement("p");
+                textError.className = "textError";
+                textError.textContent = "Name is required!";
+                document.body.appendChild(textError);
+                console.log(textError);
+            } else{
+                console.log(`Your name is ${text.value}`)
+            }
 
-        localStorage.setItem("myObj", myObj_serialized);
-        console.log(localStorage)
-        console.log(myObj_deserialized)*/
+            if(email.value == "" || email.value == null){
+                const emailError = document.createElement("p");
+                emailError.className = "textError";
+                emailError.textContent = "E-mail is required!";
+                document.body.appendChild(emailError);
+                console.log(emailError);
+            } else{
+                console.log(`Your E-mail is ${email.value}`)
+            }
 
-        localStorage.setItem("name", "Ogwai Dominion");
-        localStorage.setItem("age", "15");
-        localStorage.setItem("occupation", "Web Developer");
-        localStorage.setItem("company", "DomzWeb");
+            if(age.value == "" || age.value == null){
+                const ageError = document.createElement("p");
+                ageError.className = "textError";
+                ageError.textContent = "Age is required";
+                document.body.appendChild(ageError);
+                console.log(ageError);
+            } else{
+                console.log(`You are ${age.value} years old`)
+            }
+
+            if(password.value == "" || password.value == null){
+                const passError = document.createElement("p");
+                passError.className = "textError";
+                passError.textContent = "Password is required";
+                document.body.appendChild(passError);
+                console.log(passError);
+            } else{
+                console.log(`Your password is ${password.value}`)
+            }
+            
+        })
+
+
+        console.log(localStorage);
+
 
     </script>
 </body>
