@@ -181,6 +181,7 @@
 
     /*body {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         height: 100vh;
@@ -206,6 +207,7 @@
 
     ul {
         display: flex;
+        flex-direction: column;
         gap: .5rem;
     }
 
@@ -289,22 +291,22 @@
         transform: scale(1.3);
     }
 
-    #testimonials {
+    /*#testimonials {
         display: flex;
         gap: 1rem;
         width: max-content;
         display: flex;
         flex-wrap: wrap;
         gap: 1rem;
-        /*animation: scroll 18s linear infinite;
+        animation: scroll 18s linear infinite;
         mask-image: linear-gradient(
             to right, 
             rgba(0,0,0,0),
             rgba(0,0,0,1) 20%, 
             rgba(0,0,0,1) 80%, 
             rgba(0,0,0,0) 
-        );*/
-    }
+        );
+    }*/
 
     #testimonials:hover {
         animation-play-state: paused;
@@ -349,11 +351,8 @@
         background: hsla(220, 80%, 90%, .5);
     }
 
-    form{
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: start;
+    label {
+        font-size: 3rem;
     }
 </style>
 
@@ -629,33 +628,9 @@
                 </div>
             </article>-->
 
+            <p></p>
         </section>
 
-        <form action="">
-            <label for="check">
-                <input type="checkbox" id="check">
-                Subscribe
-            </label>
-            
-            <label for="visa">
-                <input type="radio" id="visa" name="radio" class="radio">
-                Visa
-            </label>
-            
-            <label for="master">
-                <input type="radio" id="master" name="radio" class="radio">
-                MasterCard
-            </label>
-            
-            <label for="payPal">
-                <input type="radio" id="payPal" name="radio" class="radio">
-                PayPal
-            </label>
-            
-            <button type="submit" id="mySubmit">Submit</button>
-        </form>
-        <p id="subParagraph"></p>
-        <p id="paymentParagraph"></p>
     </main>
 
 
@@ -785,42 +760,66 @@
 
         table()*/
 
-            const checkbox = document.getElementById("check");
-            const visa = document.getElementById("visa");
-            const master = document.getElementById("master");
-            const payPal = document.getElementById("payPal");
-            const button = document.getElementById("mySubmit")
-            const paragraph1 = document.getElementById("subParagraph");
-            const paragraph2 = document.getElementById("paymentParagraph");
-            const radio = document.querySelectorAll(".radio")
 
-            button.onclick = function(){
-                
-                if(checkbox.checked){
-                    paragraph1.textContent = "You are subscribed!"
-                    console.log(checkbox.value)
-                } else{
-                    paragraph1.textContent = "You are not subscribed!"
-                }
+        const items = [
+            { name: "Bike", price: 100 },
+            { name: "Televison", price: 200 },
+            { name: "Album", price: 10 },
+            { name: "Book", price: 5 },
+            { name: "Phone", price: 500 },
+            { name: "Computer", price: 1000 },
+            { name: "Keyboard", price: 25 },
+        ];
 
-                if(!checkbox.checked && radio){
-                    paragraph2.textContent = "Cannot make payments without subscription"
-                }
+        console.log(items);
 
-                if(visa.checked){
-                    paragraph2.textContent = "You are paying with Visa"
-                } else if (master.checked){
-                    paragraph2.textContent = "You are paying with MasterCard"
-                } else if(payPal.checked){
-                    paragraph2.textContent = "You are paying with payPal"
-                } else{
-                    paragraph2.textContent = "Payment type must be selected"
-                }
-            }
+        const filter = items.filter(item => 
+            item.price <= 100);
 
-            button.addEventListener("click", (e) => {
-                e.preventDefault();
-            })
+        const html = filter.map(({name, price}) => {
+            return `<p>${name} - $${price}</p>`
+        }).join("");
+
+        /*document.querySelector("p").innerHTML = html;*/
+        
+
+        const itemNames = items.map(item => {
+            return item.name;
+        });
+        
+        /*document.querySelector("p").innerHTML = itemNames.join("<br>")*/
+        console.log(itemNames)
+
+        items.forEach(item => {
+            console.log(item.name);
+        });
+
+        items.forEach(item => {
+            console.log(`$${ item.price }`);
+        });
+
+        const discountTotal = items.reduce((currentTotal, item) => {
+            return item.price * .5 + currentTotal;
+        }, 0);
+
+        console.log(`Your discounted total is $${ discountTotal }`)
+
+        const total = items.reduce((currentTotal, item) => {
+            return item.price  + currentTotal;
+        }, 0);
+
+        console.log(`Your total is $${ total }`)
+
+        /*const colors = ["Red", "Green", "Blue", "Black", "White"];
+        const [first, second, third, fourth, fifth, ...extra] = items;
+        console.log(first, second, third, fourth, fifth, ...extra);
+        console.log(...items)
+
+        items.forEach(({name, price}) => {
+            console.log(`${name}: $${price}`);
+        })*/
+
+
 
 
     </script>
