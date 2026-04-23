@@ -3,9 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My crud App Form</title>
 </head>
+<style>
+    *::before,
+    *::after,
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui, sans-serif;
+        transition: .3s ease;
+    }
+
+    :root{     
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+    }
+
+    body{
+        display: flex;
+        justify-content: center;
+    }
+
+    section{
+        display: flex;
+        align-items: center;
+        height: 100vh;
+    }
+
+    input[type="checkbox"]{
+        accent-color: hsl(220, 80%, 50%);
+        width: 1rem;
+    }
+
+    input[type="checkbox"]:focus{
+        outline: 1px solid hsl(0, 0%, 0%);
+    }
+
+    .textError{
+        color: hsl(0, 80%, 50%);
+    }
+
+    form {
+        display: flex;
+        width: 450px;
+        padding: 3em 3em 3em;
+        border-radius: .5rem;
+        flex-direction: column;
+        gap: 1rem;
+        box-shadow: var(--shadow);
+    }
+
+    button {
+        border: none;
+        border-radius: .25rem;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: .5em 1em;
+        cursor: pointer;
+        background: hsl(210, 100%, 50%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    button:hover{
+        background: hsl(210, 100%, 45%);
+    }
+
+    input {
+        border: 1px solid hsl(0, 0%, 80%);
+        border-radius: .25rem;
+        padding: .5em 1em;
+        height: 2.5rem;
+        outline: none;
+    }
+
+    input:not(input[type="checkbox"], input[type="radio"]):focus, 
+    input:not(input[type="checkbox"], input[type="radio"]):hover {
+        scale: 1.02;
+        outline: 1px solid hsl(220, 100%, 65%);
+        outline-offset: 1px;
+    }
+
+    label{
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+</style>
 <body>
+    <main>
+        <section>
+            <form action="/" method="get" target="_self" spellcheck="true" autocomplete="off" 
+            enctype="application/x-www-form-urlencoded">
+
+                <label for="name">
+                    Name:
+                    <input type="text" id="name" placeholder="John Doe" required name="Name"
+                     autofocus enterkeyhint="next">
+                </label>
+
+                <label for="email">
+                    Email:
+                    <input type="email" id="email" placeholder="Your_email@gmail.com" 
+                    required name="E-mail" enterkeyhint="next">
+                </label>
+
+                <label for="age">
+                    Age:
+                    <input type="number" id="age" placeholder="Enter your age" required 
+                    minlength="0" maxlength="120" name="Age" enterkeyhint="next">
+                </label>
+
+                <label for="password">
+                    Password:
+                    <input type="password" id="password" placeholder="P@$sw0rd" required 
+                    name="Password" minlength="6" maxlength="12" enterkeyhint="done">
+                </label>
+
+                <menu>
+                    <button type="submit">Submit</button>
+                </menu>
+            </form>
+        </section>
+    </main>
     
+    <script src="/src/js/crud.js"></script>
 </body>
 </html>
