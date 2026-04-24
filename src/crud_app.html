@@ -44,6 +44,8 @@
     }
 
     .textError{
+        font-size: .85rem;
+        font-weight: 400;    
         color: hsl(0, 80%, 50%);
     }
 
@@ -59,7 +61,7 @@
 
     button {
         border: none;
-        border-radius: .25rem;
+        border-radius: 1.25rem;
         font-size: 1rem;
         font-weight: 600;
         padding: .5em 1em;
@@ -93,6 +95,10 @@
         gap: .5rem;
     }
 
+    .error{
+        outline: 1px solid hsl(0, 80%, 50%);
+    }
+
 </style>
 <body>
     <main>
@@ -109,13 +115,13 @@
                 <label for="email">
                     Email:
                     <input type="email" id="email" placeholder="Your_email@gmail.com" 
-                    required name="E-mail" enterkeyhint="next">
+                    required name="E-mail" enterkeyhint="next" inputmode="email">
                 </label>
 
                 <label for="age">
                     Age:
                     <input type="number" id="age" placeholder="Enter your age" required 
-                    minlength="0" maxlength="120" name="Age" enterkeyhint="next">
+                    minlength="0" maxlength="120" name="Age" enterkeyhint="next" inputmode="numeric">
                 </label>
 
                 <label for="password">
@@ -124,9 +130,8 @@
                     name="Password" minlength="6" maxlength="12" enterkeyhint="done">
                 </label>
 
-                <menu>
                     <button type="submit">Submit</button>
-                </menu>
+            
             </form>
         </section>
     </main>

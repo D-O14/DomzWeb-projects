@@ -5,77 +5,107 @@ const age = document.getElementById("age");
 const password = document.getElementById("password");
 const button = document.querySelector("button");
 
-
-button.addEventListener("click", (e) => {
-    e.preventDefault()
-})
-
-button.onclick = function () {
-    const user = {
-        name: name.value,
-        email: email.value,
-        age: age.value,
-        password: password.value,
-    }
-
-    const user_serialized = JSON.stringify(user);
-    localStorage.setItem("user", user_serialized);
-    console.log(localStorage)
-}
+const namePattern = /^[A-Za-z\s]+$/gi;
+const agePattern = /^(?:1[0-1][0-9]|120|[1-9]?[0-9])$/;
+const passwordPattern = /^(?=.*[A-Za-z])(?=.*[_@#$%^&*!]).{6,12}$/;
 
 const inputs = [];
 inputs.push(name, email, age, password);
 
 button.addEventListener("click", (e) => {
     e.preventDefault();
+    
+    let isValid = true;
+
     if (name.value == "" || name.value == null) {
-        const textError = document.createElement("p");
-        textError.className = "textError";
-        textError.textContent = "Name is required!";
-        document.body.appendChild(textError);
-        console.log(textError);
+        showError(name, "Name is required")
+    } else if (!namePattern.test(name.value)) {
+        showError(name, "Name can only be made up of letters!");
     } else {
+        clearError(name)
         console.log(`Your name is ${ name.value }`)
     }
 
     if (email.value == "" || email.value == null) {
-        const emailError = document.createElement("p");
-        emailError.className = "textError";
-        emailError.textContent = "E-mail is required!";
-        document.body.appendChild(emailError);
-        console.log(emailError);
+        showError(email, "Email is required")
+    } else if (!email.value.includes("@")) {
+        showError(email,"E-mail must include @!");    
     } else {
+        clearError(email)
         console.log(`Your E-mail is ${ email.value }`)
     }
 
     if (age.value == "" || age.value == null) {
-        const ageError = document.createElement("p");
-        ageError.className = "textError";
-        ageError.textContent = "Age is required";
-        document.body.appendChild(ageError);
-        console.log(ageError);
+        showError(age, "Age is required");
+    } else if (age.value < 18) {
+        showError(age, "You cannot fill this form!")
     } else {
+        clearError(age)
         console.log(`You are ${ age.value } years old`)
     }
 
     if (password.value == "" || password.value == null) {
-        const passError = document.createElement("p");
-        passError.className = "textError";
-        passError.textContent = "Password is required";
-        document.body.appendChild(passError);
-        console.log(passError);
+        showError(password, "Password is required")
+    } else if (!passwordPattern.test(password.value)) {
+        showError(password, "Password pattern is not matched")
     } else {
+        clearError(password)
         console.log(`Your password is ${ password.value }`)
     }
 
+    if (isValid) {
+        const user = {
+            name: name.value,
+            email: email.value,
+            age: age.value,
+            password: password.value,
+        }
+
+        const user_serialized = JSON.stringify(user);
+        localStorage.setItem("user", user_serialized);
+        console.log(localStorage)
+        
+    }
 })
+
+name.addEventListener("input", () => {
+    name.value = name.value.replace(/\b\w/g, char => char.toUpperCase());
+})
+
+age.addEventListener("input", () => {
+    if (age.value > 120) {
+        age.value = 120;
+    }
+    age.value = age.value.replace(/\D/g, "")
+})
+
+function showError(input, message) {
+    let error = input.nextElementSibling;
+    if (!error || error.tagName !== "P") {
+        error = document.createElement("p");
+        error.className = "textError";
+        input.insertAdjacentElement("afterend", error)
+    }
+
+    error.textContent = message
+    input.classList.add("error")
+}
+
+function clearError(input) {
+    const error = input.nextElementSibling;
+    if (error && error.tagName === "p") {
+        error.style.display = "none";
+    }
+    input.classList.remove("error")
+}
+
 
 console.log(localStorage);
 
-const tableSection = document.getElementById("table")
+/*const tableSection = document.getElementById("table");
 
 const person1 = {
-    id: crypto.randomUUID,
+    id: crypto.randomUUID(),
     name: "Drew Mcarthy",
     age: 24,
     gender: "Male",
@@ -125,6 +155,7 @@ const person4 = {
     role: "Owner",
     DateOfBirth: "4/01/1973",
 }
+
 const person5 = {
     id: crypto.randomUUID(),
     name: "Lucas Elcastio",
@@ -182,4 +213,4 @@ function table() {
             </table>`;
 }
 
-table()
+table()*/
