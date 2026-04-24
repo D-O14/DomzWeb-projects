@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
 <style>
     *::before,
     *::after,
-    *{
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
@@ -16,36 +17,36 @@
         transition: .3s ease;
     }
 
-    :root{     
+    :root {
         --shadow:
             0 4px 6px hsla(0, 0%, 0%, 5%),
             0 10px 20px hsla(0, 0%, 0%, 1%),
             0 20px 40px hsla(0, 0%, 0%, 15%);
     }
 
-    body{
+    body {
         display: flex;
         justify-content: center;
     }
 
-    section{
+    section {
         display: flex;
         align-items: center;
         height: 100vh;
     }
 
-    input[type="checkbox"]{
+    input[type="checkbox"] {
         accent-color: hsl(220, 80%, 50%);
         width: 1rem;
     }
 
-    input[type="checkbox"]:focus{
+    input[type="checkbox"]:focus {
         outline: 1px solid hsl(0, 0%, 0%);
     }
 
-    .textError{
+    .textError {
         font-size: .85rem;
-        font-weight: 400;    
+        font-weight: 400;
         color: hsl(0, 80%, 50%);
     }
 
@@ -55,11 +56,11 @@
         padding: 3em 3em 3em;
         border-radius: .5rem;
         flex-direction: column;
-        gap: 1rem;
+        gap: 1.25rem;
         box-shadow: var(--shadow);
     }
 
-    button {
+    button:not(button[type="button"]) {
         border: none;
         border-radius: 1.25rem;
         font-size: 1rem;
@@ -70,7 +71,7 @@
         color: hsl(0, 0%, 100%);
     }
 
-    button:hover{
+    button:not(button[type="button"]):hover {
         background: hsl(210, 100%, 45%);
     }
 
@@ -80,62 +81,174 @@
         padding: .5em 1em;
         height: 2.5rem;
         outline: none;
+        width: 100%;
     }
 
-    input:not(input[type="checkbox"], input[type="radio"]):focus, 
-    input:not(input[type="checkbox"], input[type="radio"]):hover {
+    input:focus,
+    input:hover {
         scale: 1.02;
         outline: 1px solid hsl(220, 100%, 65%);
         outline-offset: 1px;
     }
 
-    label{
+    label {
         display: flex;
         flex-direction: column;
         gap: .5rem;
     }
 
-    .error{
+    input.error {
         outline: 1px solid hsl(0, 80%, 50%);
     }
 
+    input.error:focus,
+    input.error:hover {
+        outline: 1px solid hsl(0, 80%, 50%);
+    }
+
+    input.error {
+        outline: 1px solid hsl(0, 80%, 50%);
+    }
+
+    .label {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .lucide {
+        opacity: .6;
+        width: 1.25rem;
+        height: 1.25rem;
+        vertical-align: baseline;
+    }
+
+    .input-wrapper {
+        position: relative;
+    }
+
+    button[type="button"] {
+        vertical-align: middle;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        position: absolute;
+    }
 </style>
+
 <body>
     <main>
         <section>
-            <form action="/" method="get" target="_self" spellcheck="true" autocomplete="off" 
-            enctype="application/x-www-form-urlencoded">
-
+            <form action="/" method="get" target="_self" spellcheck="true" autocomplete="off"
+                enctype="application/x-www-form-urlencoded">
                 <label for="name">
-                    Name:
-                    <input type="text" id="name" placeholder="John Doe" required name="Name"
-                     autofocus enterkeyhint="next">
+                    <div class="label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-user">
+                            <path d="M17.925 20.056a6 6 0 0 0-11.851.001" />
+                            <circle cx="12" cy="11" r="4" />
+                            <circle cx="12" cy="12" r="10" />
+                        </svg>
+                        Name:
+                    </div>
+                    <input type="text" id="name" placeholder="John Doe" required name="Name" autofocus
+                        enterkeyhint="next">
                 </label>
 
                 <label for="email">
-                    Email:
-                    <input type="email" id="email" placeholder="Your_email@gmail.com" 
-                    required name="E-mail" enterkeyhint="next" inputmode="email">
+                    <div class="label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-mail-icon lucide-mail">
+                            <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+                            <rect x="2" y="4" width="20" height="16" rx="2" />
+                        </svg>
+                        E-mail:
+                    </div>
+                    <input type="email" id="email" placeholder="Your_email@gmail.com" required name="E-mail"
+                        enterkeyhint="next" inputmode="email">
                 </label>
 
                 <label for="age">
-                    Age:
-                    <input type="number" id="age" placeholder="Enter your age" required 
-                    minlength="0" maxlength="120" name="Age" enterkeyhint="next" inputmode="numeric">
+                    <div class="label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-calendar-days-icon lucide-calendar-days">
+                            <path d="M8 2v4" />
+                            <path d="M16 2v4" />
+                            <rect width="18" height="18" x="3" y="4" rx="2" />
+                            <path d="M3 10h18" />
+                            <path d="M8 14h.01" />
+                            <path d="M12 14h.01" />
+                            <path d="M16 14h.01" />
+                            <path d="M8 18h.01" />
+                            <path d="M12 18h.01" />
+                            <path d="M16 18h.01" />
+                        </svg>
+                        Age:
+                    </div>
+                    <input type="date" id="dob" placeholder="DD-MM-YYYY" required
+                        name="date" enterkeyhint="next">
                 </label>
 
                 <label for="password">
-                    Password:
-                    <input type="password" id="password" placeholder="P@$sw0rd" required 
-                    name="Password" minlength="6" maxlength="12" enterkeyhint="done">
+                    <div class="label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-lock-keyhole-icon lucide-lock-keyhole">
+                            <circle cx="12" cy="16" r="1" />
+                            <rect x="3" y="10" width="18" height="12" rx="2" />
+                            <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+                        </svg>
+                        Password:
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" id="password" placeholder="P@$sw0rd" required name="Password"
+                            minlength="6" maxlength="12" enterkeyhint="done">
+                        <button type="button" id="pass_toggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye">
+                                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
                 </label>
 
-                    <button type="submit">Submit</button>
-            
+                <label for="confirm_password">
+                    <div class="label">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-lock-keyhole-icon lucide-lock-keyhole">
+                            <circle cx="12" cy="16" r="1" />
+                            <rect x="3" y="10" width="18" height="12" rx="2" />
+                            <path d="M7 10V7a5 5 0 0 1 10 0v3" />
+                        </svg>
+                        confirm Password:
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirm_password" placeholder="[Password]" required
+                            name="confirm_password" minlength="6" maxlength="12" enterkeyhint="done">
+                        <button type="button" id="confirmPass_toggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye">
+                                <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </button>
+                    </div>
+                </label>
+
+                <button type="submit" id="submit">Submit</button>
+
             </form>
         </section>
     </main>
-    
+
     <script src="/src/js/crud.js"></script>
 </body>
+
 </html>
