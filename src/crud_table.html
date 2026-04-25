@@ -5,10 +5,144 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My CRUD App Table</title>
 </head>
+<style>
+    *::before,
+    *::after,
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui;
+        transition: .3s ease;
+    }
+
+    :root{
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+    }
+
+    section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: .75rem;
+        background: hsl(0, 0%, 100%);
+        overflow: hidden;
+    }
+
+    thead {
+        background: hsl(210, 40%, 98%);
+    }
+
+    th {
+        text-align: center;
+        padding: .9em;
+        font-size: .9em;
+        color: hsl(220, 9%, 46%);
+        text-transform: uppercase;
+        letter-spacing: .05em;
+        font-weight: 500;
+    }
+
+    td:not(.badge) {
+        padding: .9em;
+        border-top: 1px solid hsl(220, 13%, 91%);
+        font-size: .9em;
+    }
+
+    tr:hover{
+        background: hsl(210, 20%, 98%);
+    }
+
+    tr:nth-of-type(even){
+        background: hsl(0, 0%, 99%);
+    }
+
+    .actions{
+        display: flex;
+        gap: .5rem;
+    }
+
+    .btn{
+        border: none;
+        padding: .5em 1em;
+        border-radius: .5em;
+        cursor: pointer;
+        font-weight: 500;
+    }
+
+    .btn.edit{
+        background: hsl(204, 94%, 94%);
+        color: hsl(201, 96%, 32%);
+    }
+
+    .btn.delete{
+        background: hsl(0, 93%, 94%);
+        color: hsl(0, 74%, 42%);
+    }
+
+    .lucide{
+        width: 1.25em;
+        height: 1.25em;
+    }
+
+    /*.badge{
+        padding: .25em .65em;
+        border-radius: .5rem;
+        font-size: .75em;
+        font-weight: 500;
+        background: hsl(204, 94%, 94%);
+        color: hsl(201, 96%, 32%);
+    }*/
+
+    .id{
+        color: hsl(220, 9%, 46%);
+        max-width: 120px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    input[type="checkbox"]{
+        accent-color: hsl(201, 96%, 32%);
+        cursor: pointer;
+    }
+
+    .table-container{
+        padding: 1.25em;
+        background: hsl(210, 40%, 96%);
+        border-radius: .75em;
+    }
+</style>
 <body>
     <main>
-        <section id="table">
-
+        <section id="section">
+            <div class="table-container">
+                <table class="table">
+                    <thead class="header">
+                        <th>Select</th>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Date Of birth</th>
+                        <th>Age</th>
+                        <th>Gender</th>
+                        <th>Company</th>
+                        <th>Options</th>
+                    </thead>
+                    <tbody class="body" id="body">
+                
+                    </tbody>
+                    </table>
+            </div>
         </section>
     </main>    
 </body>

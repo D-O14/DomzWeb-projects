@@ -1,112 +1,120 @@
-const tableSection = document.getElementById("table");
+const tableBody = document.getElementById("body");
 
-const person1 = {
-    id: crypto.randomUUID(),
-    name: "Drew Mcarthy",
-    age: 24,
-    gender: "Male",
-    isEmployed: true,
-    hasDisease: false,
-    isConvict: false,
-    criminalRecord: true,
-    role: "Manager",
-    DateOfBirth: "26/05/2002",
-}
-
-const person2 = {
+const user1 = {
     id: crypto.randomUUID(),
     name: "Anna Beige",
+    email: "AnnaBg@gmail.com",
+    DateOfBirth: "16/09/1990",
     age: 36,
     gender: "Female",
-    isEmployed: true,
-    hasDisease: true,
-    isConvict: false,
-    criminalRecord: false,
-    role: "CEO",
-    DateOfBirth: "16/09/1990",
+    company: "Cevorex",
 }
 
-const person3 = {
+const user2 = {
     id: crypto.randomUUID(),
-    name: "Lucius Dornell",
-    age: 28,
-    gender: "Male",
-    isEmployed: false,
-    hasDisease: true,
-    isConvict: false,
-    criminalRecord: true,
-    role: "None",
-    DateOfBirth: "12/06/1998",
-}
-
-const person4 = {
-    id: crypto.randomUUID(),
-    name: "Anna Beige",
+    name: "Diana Carter",
+    email: "MSDC@gmail.net",
+    DateOfBirth: "4/01/1973",
     age: 47,
     gender: "Female",
-    isEmployed: true,
-    hasDisease: false,
-    isConvict: false,
-    criminalRecord: false,
-    role: "Owner",
-    DateOfBirth: "4/01/1973",
+    company: "DeFashv",
 }
 
-const person5 = {
+const user3 = {
     id: crypto.randomUUID(),
-    name: "Lucas Elcastio",
+    name: "Drew Mcarthy",
+    email: "Mcarthy_Drew@info.com",
+    DateOfBirth: "26/05/2002",
     age: 24,
     gender: "Male",
-    isEmployed: true,
-    hasDisease: false,
-    isConvict: false,
-    criminalRecord: false,
-    role: "Shareholder",
-    DateOfBirth: "13/11/2002",
+    company: "NYCPD",
 }
 
-const people = []
-people.push(person1, person2, person3, person4, person5);
-console.log(people)
+const user4 = {
+    id: crypto.randomUUID(),
+    name: "Lucas Elcastio",
+    eamil: "El_Dynst@info.net",
+    DateOfBirth: "13/11/2002",
+    age: 24,
+    gender: "Male",
+    company: "El Dynst",
+}
 
+const user5 = {
+    id: crypto.randomUUID(),
+    name: "Lucius Dornell",
+    email: "Ld_Empire@hotmail.net",
+    DateOfBirth: "12/06/1998",
+    age: 28,
+    gender: "Male",
+    company: "Empire",
+}
+
+const users = []
+users.push(user1, user2, user3, user4, user5);
+console.log(users);
+localStorage.setItem(users, JSON.stringify(users))
+console.log(localStorage)
 
 function table() {
     let rows = ""
-    people.forEach(person => {
+    users.forEach(user => {
         rows += `
             <tr class="row">
-                        <td>${ person.id }</td>
-                        <td>${ person.name }</td>
-                        <td>${ person.age }</td>
-                        <td>${ person.gender }</td>
-                        <td>${ person.hasDisease }</td>
-                        <td>${ person.criminalRecord }</td>
-                        <td>${ person.isConvict }</td>
-                        <td>${ person.isEmployed }</td>
-                        <td>${ person.role }</td>
-                        <td>${ person.DateOfBirth }</td>
+            
+                        <td><input type="checkbox"></td>
+                        <td class="id">${ user.id }</td>
+                        <td>${ user.name }</td>
+                        <td>${ user.email }</td>
+                        <td>${ user.DateOfBirth }</td>
+                        <td>${ user.age }</td>
+                        <td>${ user.gender }</td>
+                        <td>${ user.company }</td>
+                        <td>
+                        <div class="actions">
+                            <button class="btn edit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-pen">
+                            <path
+                                d="M14.364 13.634a2 2 0 0 0-.506.854l-.837 2.87a.5.5 0 0 0 .62.62l2.87-.837a2 2 0 0 0 .854-.506l4.013-4.009a1 1 0 0 0-3.004-3.004z" />
+                            <path d="M14.487 7.858A1 1 0 0 1 14 7V2" />
+                            <path d="M20 19.645V20a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l2.516 2.516" />
+                            <path d="M8 18h1" />
+                        </svg>
+                            </button>
+
+                            <button class="btn delete">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
+                <path d="M10 11v6" />
+                <path d="M14 11v6" />
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
+                <path d="M3 6h18" />
+                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+            </svg>
+                            </button>
+                        </div>
+                        </td>        
                     </tr> `
 
     })
 
-    tableSection.innerHTML = `
-            <table class="table">
-                <thead class="header">
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Age</th>
-                    <th>Gender</th>
-                    <th>Has Disease</th>
-                    <th>Criminal Record</th>
-                    <th>Imprisoned</th>
-                    <th>Employed</th>
-                    <th>Role</th>
-                    <th>Date Of birth</th>
-                </thead>
-                <tbody class="body">
-                    ${ rows }
-                </tbody>
-            </table>`;
-}
+    tableBody.innerHTML += `${rows}`
 
+}
 table()
+
+const deleteBtn = document.querySelector(".delete")
+deleteBtn.addEventListener("click", () => {
+    ShowDeleteModal(this)
+})
+
+function showDeleteModal() {
+    const modal = document.createElement("div")
+    modal.className = "modal";
+
+    modal.innerHTML = `
+        
+    `
+}
