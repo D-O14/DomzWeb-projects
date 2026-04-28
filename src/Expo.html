@@ -196,11 +196,11 @@
     }
 
     button {
-        border: none;
+        border: 2px solid transparent;
         border-radius: .25rem;
         font-size: 1rem;
         font-weight: 600;
-        padding: .6em 1em;
+        padding: .5em 1em;
         cursor: pointer;
     }
 
@@ -278,19 +278,6 @@
         gap: 1rem;
     }
 
-    h1 {
-        font-size: 25px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-    }
-
-    p {
-        text-transform: uppercase;
-        letter-spacing: .5px;
-        color: hsl(0, 0%, 50%);
-    }
-
     .comment-info {
         display: flex;
         align-items: center;
@@ -336,39 +323,6 @@
         100% {
             transform: translateX(-50%);
         }
-    }
-
-    table {
-        border-collapse: collapse;
-        border-radius: .5rem;
-        overflow: hidden;
-    }
-
-    thead {
-        background: hsl(220, 80%, 25%);
-        color: hsl(0, 0%, 90%);
-    }
-
-    th {
-        text-align: left;
-    }
-
-    th,
-    tr,
-    td {
-        padding: .5em 1em;
-    }
-
-    td+td {
-        border: 2px solid hsl(0, 0%, 90%);
-    }
-
-    td {
-        text-align: center;
-    }
-
-    .row:nth-of-type(even) {
-        background: hsla(220, 80%, 90%, .5);
     }
 </style>
 
@@ -644,19 +598,36 @@
                 </div>
             </article>-->
 
-            <!--<fieldset>
-                <legend>Insert Data</legend>
-                <input type="text" id="inputKey" placeholder="Enter Key...">
-                <input type="text" id="inputValue" placeholder="Enter Value...">
-                <button type="button" id="btnInsert">Submit Data</button>
-            </fieldset>
+            <button onclick="editModal.showModal()">Edit</button>
 
-            <fieldset>
-                <legend>Local Storage</legend>
-                <div id="output"></div>
-            </fieldset>-->
+            <dialog id="editModal">
+                <form action="">
+                    <label for="name">
+                        Name
+                        <input type="text" id="name" placeholder="John Doe">
+                    </label>
 
+                    <label for="email">
+                        E-mail
+                        <input type="email" id="email" placeholder="your_email2gmail.com">
+                    </label>
 
+                    <label for="date">
+                        Date Of Birth
+                        <input type="date" id="date">
+                    </label>
+
+                    <label for="gender">
+                        Gender
+                        <input type="text" id="gender" placeholder="Male/Female">
+                    </label>
+
+                    <label for="company">
+                        Company:
+                        <input type="text" id="company" placeholder="Company">
+                    </label>
+                </form>
+            </dialog>
         </section>
 
     </main>
@@ -664,7 +635,7 @@
 
 
     <script type="text/javascript">
-        
+
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)
@@ -736,29 +707,6 @@
         items.forEach(({ name, price }) => {
             console.log(`${ name }: $${ price }`);
         })
-
-        /*const keyInput = document.getElementById("inputKey")
-        const valueInput = document.getElementById("inputValue")
-        const btnInsert = document.getElementById("btnInsert")
-        const output = document.getElementById("output");
-
-        btnInsert.onclick = function(){
-            const key = keyInput.value;
-            const value = valueInput.value;
-
-            if(key && value){
-                localStorage.setItem(key, value);
-                location.reload()
-            }
-        }
-
-        for ( let i = 0; i < localStorage.length; i++){
-            const key = localStorage.key(i);
-            const value = localStorage.getItem(key);
-
-            output.innerHTML += `${key}: ${value}<br />`
-        }*/
-
 
     </script>
 </body>

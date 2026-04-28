@@ -33,7 +33,7 @@ const user3 = {
 const user4 = {
     id: crypto.randomUUID(),
     name: "Lucas Elcastio",
-    eamil: "El_Dynst@info.net",
+    email: "El_Dynst@info.net",
     DateOfBirth: "13/11/2002",
     age: 24,
     gender: "Male",
@@ -52,9 +52,8 @@ const user5 = {
 
 const users = []
 users.push(user1, user2, user3, user4, user5);
-console.log(users);
-localStorage.setItem(users, JSON.stringify(users))
-console.log(localStorage)
+/*localStorage.setItem("users", JSON.stringify(users))
+console.log(localStorage)*/
 
 function table() {
     let rows = ""
@@ -65,7 +64,7 @@ function table() {
                         <td><input type="checkbox"></td>
                         <td class="id">${ user.id }</td>
                         <td>${ user.name }</td>
-                        <td>${ user.email }</td>
+                        <td><a href="">${ user.email }</a></td>
                         <td>${ user.DateOfBirth }</td>
                         <td>${ user.age }</td>
                         <td>${ user.gender }</td>
@@ -100,21 +99,70 @@ function table() {
 
     })
 
-    tableBody.innerHTML += `${rows}`
+    tableBody.innerHTML += `${ rows }`
 
 }
+
 table()
 
-const deleteBtn = document.querySelector(".delete")
-deleteBtn.addEventListener("click", () => {
-    ShowDeleteModal(this)
+// Delete button / Modal trigger
+
+const deleteBtn = document.querySelectorAll(".delete")
+deleteBtn.forEach(delBtn => {
+    delBtn.onclick = function () { dialog.showModal() };
 })
 
-function showDeleteModal() {
-    const modal = document.createElement("div")
-    modal.className = "modal";
+// Confirmation Modal 
 
-    modal.innerHTML = `
-        
-    `
+const dialog = document.createElement("dialog")
+dialog.id = "dialog";
+dialog.className = "dialog";
+dialog.innerHTML = `
+    <div class="modal">
+        <h1>Confirm deletion</h1>
+        <div class="message">
+            <p class="message-content">Deletion is permanent! Would you like to proceed?</p>
+        </div>
+        <menu>
+            <button class="exit">Cancel</button>
+            <button class="close">Confirm</button>
+        <menu>
+    </div>
+        `
+document.body.appendChild(dialog);
+
+const confirmBtn = document.querySelector(".close");
+confirmBtn.onclick = function () {
+    dialog.close()
 }
+
+const cancelBtn = document.querySelector(".exit");
+cancelBtn.onclick = function () {
+    dialog.close()
+}
+
+// Edit Modal
+
+const editBtn = document.querySelectorAll(".edit")
+editBtn.forEach(editBtn => {
+    editBtn.onclick = function () {
+        editModal.showModal()
+    }
+})
+
+const editModal = document.createElement("dialog")
+editModal.innerHTML = `
+    <form>
+        <label for="name_input">
+            Name
+            <input type="text" placeholder="John Doe">
+        <label>
+        <button class="editModalBtn">
+            Okay
+        </button>
+    <form>
+`
+document.body.append(editModal)
+
+const editModalBtn = document.querySelector(".editModalBtn")
+editModalBtn.onclick = function () { editModal.close() }
