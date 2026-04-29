@@ -51,14 +51,14 @@
 
     form {
         display: grid;
-        grid-template-columns: repeat(1, 1fr);
+        grid-template-columns: repeat(1, auto);
         max-width: 100%;
         width: 450px;
         padding: 3em 3em 3em;
         border-radius: .5rem;
         gap: 1.25rem;
         box-shadow: var(--shadow);
-        margin: 0 auto;
+        margin: auto;
     }
 
     button:not(button[type="button"]) {
@@ -140,26 +140,76 @@
         position: absolute;
     }
 
-    .pass_inputs{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
     textarea{
         width: 100%;
     }
-
-    .inputs{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+    
+    .popover {
+        max-width: 100%;
+        width: 400px;
+        box-shadow: var(--shadow);
+        padding: 1em 2em;
+        border: none;
+        outline: 2px solid hsl(100, 80%, 50%);
+        outline-offset: 2px;
+        color: hsl(100, 100%, 20%);
+        background: hsl(100, 80%, 65%);
+        margin: 0 auto;
+        border-radius: .25rem;
+        animation: popOver .3s ease forwards;
+        transform: translateY(-100%) scale(0);
     }
 
-    @media(max-width: 600px){
-        .pass_inputs{
-            grid-template-columns: repeat(1, 1fr);
+    .toast {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+    }
+
+    @keyframes popOver {
+        100% {
+            transform: translateY(1.25rem) scale(1)
         }
+    }
+
+    .popover.close {
+        animation: popOut .3s ease forwards;
+    }
+
+    @keyframes popOut {
+        0% {
+            transform: translateY(0) scale(1);
+        }
+
+        100% {
+            transform: translateY(-100%) scale(0);
+        }
+    }
+
+    .toastBtn {
+        background: none;
+        border: none;
+    }
+
+    .icon-close {
+        width: 1rem;
+        height: 1rem;
+        color: hsl(0, 0%, 8%, .8);
+    }
+
+    .icon-check {
+        color: hsl(100, 100%, 20%);
+    }
+
+    .toast-content {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    strong {
+        font-size: 1.25rem;
     }
 
 </style>
@@ -183,6 +233,7 @@
                     <input type="text" id="name" placeholder="John Doe" required name="Name" autofocus
                         enterkeyhint="next">
                 </label>
+
                 <label for="email">
                     <div class="label">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -217,8 +268,7 @@
                         </div>
                         <input type="date" id="dob" placeholder="DD-MM-YYYY" required name="date" enterkeyhint="next">
                     </label>
-
-                    <div class="pass_inputs">  
+ 
                     <label for="password">
                         <div class="label">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -270,8 +320,8 @@
                             </button>
                         </div>
                     </label>
-                </div>
-                    <button type="submit" id="submit">Submit</button>
+            
+                <button type="submit" id="submit">Submit</button>
             </form>
         </section>
     </main>

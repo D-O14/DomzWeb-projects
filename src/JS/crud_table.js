@@ -151,18 +151,67 @@ editBtn.forEach(editBtn => {
 })
 
 const editModal = document.createElement("dialog")
+editModal.id = "editModal"
+editModal.className = "editModal"
 editModal.innerHTML = `
-    <form>
-        <label for="name_input">
-            Name
-            <input type="text" placeholder="John Doe">
-        <label>
-        <button class="editModalBtn">
-            Okay
-        </button>
-    <form>
+<form action="">
+<label for="name">
+    Name:
+    <input type="text" id="name" placeholder="John Doe">
+</label>
+
+<label for="email">
+    E-mail:
+    <input type="email" id="email" placeholder="your_email@gmail.com">
+</label>
+
+<label for="date">
+    Date of Birth:
+    <input type="date" id="date">
+</label>
+
+<label for="gender">
+    Gender:
+    <input type="text" id="gender" placeholder="Male/Female">
+</label>
+
+<label for="company">
+    Company:
+    <input type="text" id="company" placeholder="Company">
+</label>
+
+<button id="EditBtn" class="EditBtn" type="button" popovertarget="popover" popovertargetaction="show">Submit</button>
+</form>
 `
 document.body.append(editModal)
 
-const editModalBtn = document.querySelector(".editModalBtn")
+const editModalBtn = document.querySelector(".EditBtn")
+editModalBtn.addEventListener("click", (e) => { e.preventDefault() })
 editModalBtn.onclick = function () { editModal.close() }
+
+/*const popover = document.createElement("div")
+popover.setAttribute("popover", "manual")
+popover.id = "popover"
+popover.className = "popover"
+popover.innerHTML = `
+                <div class="toast">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+                        fill="currentColor" class="icon icon-check">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                            d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+                    </svg>
+                    <div class="toast-content">
+                        <strong>
+                            Success!
+                        </strong>
+                        <p>User has been updated successfully.</p>
+                    </div>
+                </div>
+        `
+document.body.append(popover)
+
+const toast = document.querySelector(".popover")
+setTimeout(() => {
+    toast.classList.add("close");
+}, 4000)*/

@@ -177,6 +177,7 @@
         padding: 0;
         box-sizing: border-box;
         font-family: system-ui;
+        transition: .3s ease;
     }
 
     body {
@@ -190,12 +191,14 @@
     }
 
     form {
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-columns: repeat(1, auto);
+        max-width: 100%;
+        width: 450px;
         gap: 1rem;
     }
 
-    button {
+    button:not(.toastBtn) {
         border: 2px solid transparent;
         border-radius: .25rem;
         font-size: 1rem;
@@ -208,11 +211,14 @@
         border: 1px solid hsl(0, 0%, 80%);
         border-radius: .25rem;
         padding: .5rem 1rem;
+        width: 100%;
         height: 40px;
         outline: none;
     }
 
-    input:not(input[type="checkbox"], input[type="radio"]):focus {
+    input:not(input[type="checkbox"], input[type="radio"]):focus,
+    input:not(input[type="checkbox"], input[type="radio"]):hover {
+        scale: 1.02;
         outline: 1px solid hsl(220, 100%, 65%);
         outline-offset: 1px;
     }
@@ -323,6 +329,75 @@
         100% {
             transform: translateX(-50%);
         }
+    }
+
+    .popover {
+
+        max-width: 100%;
+        width: 400px;
+        box-shadow: var(--shadow);
+        padding: 1em 2em;
+        border: none;
+        outline: 2px solid hsl(100, 80%, 50%);
+        outline-offset: 2px;
+        color: hsl(100, 100%, 20%);
+        background: hsl(100, 80%, 65%);
+        margin: 0 auto;
+        border-radius: .25rem;
+        animation: popOver .3s ease forwards;
+        transform: translateY(-100%) scale(0);
+    }
+
+    .toast {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
+    }
+
+    @keyframes popOver {
+        100% {
+            transform: translateY(1.25rem) scale(1)
+        }
+    }
+
+    .popover.close {
+        animation: popOut .3s ease forwards;
+    }
+
+    @keyframes popOut {
+        0% {
+            transform: translateY(0) scale(1);
+        }
+
+        100% {
+            transform: translateY(-100%) scale(0);
+        }
+    }
+
+    .toastBtn {
+        background: none;
+        border: none;
+    }
+
+    .icon-close {
+        width: 1rem;
+        height: 1rem;
+        color: hsl(0, 0%, 8%, .8);
+    }
+
+    .icon-check {
+        color: hsl(100, 100%, 20%);
+    }
+
+    .toast-content {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        gap: .5rem;
+    }
+
+    strong {
+        font-size: 1.25rem;
     }
 </style>
 
@@ -598,36 +673,7 @@
                 </div>
             </article>-->
 
-            <button onclick="editModal.showModal()">Edit</button>
 
-            <dialog id="editModal">
-                <form action="">
-                    <label for="name">
-                        Name
-                        <input type="text" id="name" placeholder="John Doe">
-                    </label>
-
-                    <label for="email">
-                        E-mail
-                        <input type="email" id="email" placeholder="your_email2gmail.com">
-                    </label>
-
-                    <label for="date">
-                        Date Of Birth
-                        <input type="date" id="date">
-                    </label>
-
-                    <label for="gender">
-                        Gender
-                        <input type="text" id="gender" placeholder="Male/Female">
-                    </label>
-
-                    <label for="company">
-                        Company:
-                        <input type="text" id="company" placeholder="Company">
-                    </label>
-                </form>
-            </dialog>
         </section>
 
     </main>
@@ -635,6 +681,24 @@
 
 
     <script type="text/javascript">
+        function showNotif(){
+            const notif = new Notification("New notification from DomzWeb!", {
+                body: "Your order is on its way 🚚",
+                icon: "/public/assets/images/cafe_items (1).jpg"
+            })
+
+        }
+
+        if(Notification.permission === "granted"){
+            showNotif()
+        } else if(Notification.permission !== "denied"){
+            Notification.requestPermission().then(permisson => {
+                if(permisson === "granted"){  
+                    showNotif()
+                }
+            })
+        }
+        
 
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
