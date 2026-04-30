@@ -32,6 +32,24 @@ form.addEventListener("submit", (e) => {
             password: password.value,
         }
 
+        function showNotif() {
+            const notif = new Notification("New notification from DomzWeb!", {
+                body: "Form submitted succesfully!"
+            })
+
+        }
+
+        if (Notification.permission === "granted") {
+            showNotif()
+        } else if (Notification.permission !== "denied") {
+            Notification.requestPermission().then(permisson => {
+                if (permisson === "granted") {
+                    showNotif()
+                }
+            })
+        }
+
+
         /*button.setAttribute("popovertarget", "popover")
         button.setAttribute("popovertargetaction", "show")
 
