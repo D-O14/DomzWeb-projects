@@ -331,11 +331,30 @@
         }
     }
 
+    .loadBtn{
+        position: relative;
+        background: hsl(220, 20%, 18%);
+        color: hsl(0, 0%, 90%);
+        border-radius: 1.25rem;
+    }    
+
+    .loadBtn:hover{
+        background: hsla(220, 20%, 18%, .8);
+    }
+
+    .loading .btn{
+        visibility: hidden;
+        opacity: 0;
+    }    
+
 </style>
 
 <body>
 
     <main>
+        <button class="loadBtn loading">
+           <span class="btn">Submit</span>
+        </button>
         <!--<header>
             <nav class="nav container">
                 <div class="navbar">
