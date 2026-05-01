@@ -1,3 +1,5 @@
+import {showError, clearError, validateName, validateEmail, validateDOB} from "./crud_form.js"
+
 const tableBody = document.getElementById("body");
 
 const user1 = {
@@ -188,6 +190,9 @@ document.body.append(editModal)
 const editModalBtn = document.querySelector(".EditBtn")
 editModalBtn.addEventListener("click", (e) => { e.preventDefault() })
 editModalBtn.onclick = function () { editModal.close() }
+
+const name_input = document.getElementById("name")
+name_input = validateName()
 
 /*const popover = document.createElement("div")
 popover.setAttribute("popover", "manual")

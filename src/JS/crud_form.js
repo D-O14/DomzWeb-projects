@@ -84,7 +84,7 @@ form.addEventListener("submit", (e) => {
     }
 });
 
-function validateName() {
+export function validateName() {
     name.value = name.value.replace(/\b\w/g, char => char.toUpperCase());
     name.value = name.value.replace(/\d/g, "");
     if (name.value === "" || name.value === null) {
@@ -102,7 +102,7 @@ function validateName() {
     }
 }
 
-function validateEmail() {
+export function validateEmail() {
     if (email.value === "" || email.value === null) {
         showError(email, "Email is required!");
         return false;
@@ -117,7 +117,7 @@ function validateEmail() {
     }
 }
 
-function validateDOB() {
+export function validateDOB() {
     const value = dob.value;
     const selectedDate = new Date(value);
     const today = new Date();
@@ -155,20 +155,6 @@ function validateConfirmPass() {
         return false;
     }  else {
         clearError(confirm_password)
-        return true;
-    }
-}
-function validatePass() {
-    if (password.value === "" || password.value === null) {
-        showError(password, "Password is required!");
-        return false;
-    } else if (!passwordPattern.test(password.value)) {
-        showError(password, "Password pattern is not matched!")
-        return false;
-    } else if (password.value <= 6) {
-        showError(password, "Password is too short")
-    } else {
-        clearError(password)
         return true;
     }
 }
@@ -220,7 +206,7 @@ dob.addEventListener("input", validateDOB);
 password.addEventListener("input", validatePass);
 confirm_password.addEventListener("input", validateConfirmPass);
 
-function showError(input, message) {
+export function showError(input, message) {
     let error = input.nextElementSibling;
     if (!error || error.tagName !== "P") {
         error = document.createElement("p");
@@ -232,7 +218,7 @@ function showError(input, message) {
     input.classList.add("error");
 }
 
-function clearError(input) {
+export function clearError(input) {
     const error = input.nextElementSibling;
     if (error && error.tagName === "P") {
         error.textContent = "";
