@@ -24,6 +24,17 @@ form.addEventListener("submit", (e) => {
 
     if (isValid) {
         button.textContent = "Submitted";
+        
+        /*button.onclick = function () {
+            button.classList.add("loading")
+            button.setAttribute("disabled", "true")
+
+            setTimeout(() => {
+                button.classList.remove("loading")
+                button.removeAttribute("disabled", "true")
+            }, 3000)       
+        }*/
+             
 
         const user = {
             name: name.value,
@@ -32,23 +43,9 @@ form.addEventListener("submit", (e) => {
             password: password.value,
         }
 
-        function showNotif() {
-            const notif = new Notification("New notification from DomzWeb!", {
-                body: "Form submitted succesfully!"
-            })
-
-        }
-
-        if (Notification.permission === "granted") {
-            showNotif()
-        } else if (Notification.permission !== "denied") {
-            Notification.requestPermission().then(permisson => {
-                if (permisson === "granted") {
-                    showNotif()
-                }
-            })
-        }
-
+        const user_serialized = JSON.stringify(user);
+        localStorage.setItem("user", user_serialized);
+        console.log(localStorage);
 
         /*button.setAttribute("popovertarget", "popover")
         button.setAttribute("popovertargetaction", "show")
@@ -79,11 +76,7 @@ form.addEventListener("submit", (e) => {
         setTimeout(() => {
             toast.classList.add("close");
         }, 4000)*/
-
-        const user_serialized = JSON.stringify(user);
-        localStorage.setItem("user", user_serialized);
-        console.log(localStorage);
-        
+    
         setTimeout(() => {
             form.reset();
             button.textContent = "Submit";

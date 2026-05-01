@@ -347,12 +347,40 @@
         opacity: 0;
     }    
 
+    .loading::after{
+        content: "";
+        position: absolute;
+        width: 1rem;
+        height: 1rem;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        border: 4px solid transparent;
+        border-top-color: hsl(0, 0%, 100%);
+        border-radius: 1.25rem;
+        animation: spinForward 1s linear 0s infinite;
+    }
+
+    @keyframes spinForward{
+        0%{
+            transform: rotate(0turn);
+            opacity: .5;
+        }
+
+        100%{
+            transform: rotate(1turn);
+            opacity: .5;
+        }
+    }
+
 </style>
 
 <body>
 
     <main>
-        <button class="loadBtn loading">
+        <button class="loadBtn">
            <span class="btn">Submit</span>
         </button>
         <!--<header>
@@ -637,7 +665,17 @@
 
 
     <script type="text/javascript">
-
+    const button = document.querySelector(".loadBtn")
+    button.onclick = function(){
+        button.classList.add("loading")
+        button.setAttribute("disabled", "true");
+        
+        setTimeout(() => {
+            button.removeAttribute("disabled", "true")
+            button.classList.remove("loading")
+            button.textContent = "Submitted"
+        }, 3000)
+    }
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)
