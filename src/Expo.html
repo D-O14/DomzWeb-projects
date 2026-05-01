@@ -330,57 +330,13 @@
             transform: translateX(-50%);
         }
     }
-
-    .loader{
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: hsl(0, 0%, 100%);
-    }
-
-    .loader-hidden{
-        opacity: 0;
-        visibility: hidden;
-        transition: all .75s ease;
-    }
-
-    .loader::after{
-        content: "";
-        width: 100px;
-        height: 100px;
-        border: 1.25rem solid transparent;
-        border-top-color: hsl(150, 80%, 50%);
-        border-bottom-color: hsl(150, 80%, 30%);
-        border-radius: 50%;
-        animation: spinner 1.75s linear 0s infinite forwards;
-    }
-
-    @keyframes spinner{
-        from{
-            transform: rotate(0turn);
-            border-top-color: hsl(150, 80%, 50%);
-            border-bottom-color: hsl(150, 80%, 30%);
-        }
-
-        to{
-            transform: rotate(1turn);
-            border-top-color: hsl(150, 80%, 30%);
-            border-bottom-color: hsl(150, 80%, 50%);
-        }
-    }
-
+    
 </style>
 
 <body>
-    <div class="loader"></div>
     <main>
-        <h1>Sample Content</h1>
-        <img src="/public/assets/images/abstract.jpg" alt="an abstract image" width="1000" height="500" loading="lazy" decoding="async">
+
+
         <!--<header>
             <nav class="nav container">
                 <div class="navbar">
@@ -655,7 +611,6 @@
                     <img src="/public/assets/images/cafe_items (10).jpg" alt="">
                 </div>
             </div>-->
-
         </section>
 
     </main>
@@ -663,17 +618,7 @@
 
 
     <script type="text/javascript">
-        const loader = document.querySelector(".loader")
-    
-        document.addEventListener("DOMContentLoaded", () => {
-            setTimeout(() => {
-                loader.classList.add("loader-hidden")
-            }, 3000)
-            loader.addEventListener("transitionend", () => {
-                document.body.removeChild(loader)
-            })
-        })
-    
+        
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)

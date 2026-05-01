@@ -194,7 +194,7 @@ popover.setAttribute("popover", "manual")
 popover.id = "popover"
 popover.className = "popover"
 popover.innerHTML = `
-                <div class="toast">
+                <div class="toast" role="alert">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
                         fill="currentColor" class="icon icon-check">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
