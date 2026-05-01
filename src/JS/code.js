@@ -76,3 +76,13 @@ function hideToast() {
     }, 400)
 }
 
+const loader = document.querySelector(".loader")
+
+document.addEventListener("DOMContentLoaded", () => {
+    setTimeout(() => {
+        loader.classList.add("loader-hidden")
+    }, 3000)
+    loader.addEventListener("transitionend", () => {
+        document.body.removeChild(loader)
+    })
+})

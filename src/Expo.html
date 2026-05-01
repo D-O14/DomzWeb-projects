@@ -331,58 +331,56 @@
         }
     }
 
-    .loadBtn{
-        position: relative;
-        background: hsl(220, 20%, 18%);
-        color: hsl(0, 0%, 90%);
-        border-radius: 1.25rem;
-    }    
-
-    .loadBtn:hover{
-        background: hsla(220, 20%, 18%, .8);
-    }
-
-    .loading .btn{
-        visibility: hidden;
-        opacity: 0;
-    }    
-
-    .loading::after{
-        content: "";
-        position: absolute;
-        width: 1rem;
-        height: 1rem;
+    .loader{
+        position: fixed;
         top: 0;
         left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-        border: 4px solid transparent;
-        border-top-color: hsl(0, 0%, 100%);
-        border-radius: 1.25rem;
-        animation: spinForward 1s linear 0s infinite;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: hsl(0, 0%, 100%);
     }
 
-    @keyframes spinForward{
-        0%{
+    .loader-hidden{
+        opacity: 0;
+        visibility: hidden;
+        transition: all .75s ease;
+    }
+
+    .loader::after{
+        content: "";
+        width: 100px;
+        height: 100px;
+        border: 1.25rem solid transparent;
+        border-top-color: hsl(150, 80%, 50%);
+        border-bottom-color: hsl(150, 80%, 30%);
+        border-radius: 50%;
+        animation: spinner 1.75s linear 0s infinite forwards;
+    }
+
+    @keyframes spinner{
+        from{
             transform: rotate(0turn);
-            opacity: .5;
+            border-top-color: hsl(150, 80%, 50%);
+            border-bottom-color: hsl(150, 80%, 30%);
         }
 
-        100%{
+        to{
             transform: rotate(1turn);
-            opacity: .5;
+            border-top-color: hsl(150, 80%, 30%);
+            border-bottom-color: hsl(150, 80%, 50%);
         }
     }
 
 </style>
 
 <body>
-
+    <div class="loader"></div>
     <main>
-        <button class="loadBtn">
-           <span class="btn">Submit</span>
-        </button>
+        <h1>Sample Content</h1>
+        <img src="/public/assets/images/abstract.jpg" alt="an abstract image" width="1000" height="500" loading="lazy" decoding="async">
         <!--<header>
             <nav class="nav container">
                 <div class="navbar">
@@ -665,17 +663,17 @@
 
 
     <script type="text/javascript">
-    const button = document.querySelector(".loadBtn")
-    button.onclick = function(){
-        button.classList.add("loading")
-        button.setAttribute("disabled", "true");
-        
-        setTimeout(() => {
-            button.removeAttribute("disabled", "true")
-            button.classList.remove("loading")
-            button.textContent = "Submitted"
-        }, 3000)
-    }
+        const loader = document.querySelector(".loader")
+    
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                loader.classList.add("loader-hidden")
+            }, 3000)
+            loader.addEventListener("transitionend", () => {
+                document.body.removeChild(loader)
+            })
+        })
+    
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)

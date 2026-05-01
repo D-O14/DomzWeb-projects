@@ -646,3 +646,45 @@ footer {
 	}
 }
 
+.loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: hsl(0, 0%, 100%);
+}
+
+.loader-hidden {
+	opacity: 0;
+	visibility: hidden;
+	transition: all .75s ease;
+}
+
+.loader::after {
+	content: "";
+	width: 150px;
+	height: 150px;
+	border: 1.25rem solid transparent;
+	border-top-color: hsl(30, 96%, 52%);
+	border-bottom-color: hsl(30, 76%, 48%);
+	border-radius: 50%;
+	animation: spinner 1.75s linear 0s infinite forwards;
+}
+
+@keyframes spinner {
+	from {
+		transform: rotate(0turn);
+		border-top-color: hsl(30, 96%, 52%);
+		border-bottom-color: hsl(30, 76%, 48%);
+	}
+
+	to {
+		transform: rotate(1turn);
+		border-top-color: hsl(30, 76%, 48%);
+		border-bottom-color: hsl(30, 96%, 52%);
+	}
+}
