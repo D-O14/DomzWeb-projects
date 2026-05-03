@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="A page of accordion cards with different images! Nothing special about them... except they're cool.">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="redirect" content="0; url=http://127.0.0.1/src/Components/accordion_card.html">
+    <title>A page with accordion cards</title>
 </head>
 
 <style>
@@ -25,7 +28,7 @@
         margin: 150px auto;
     }
 
-    .tab {
+    .card {
         position: relative;
         flex: 1;
         height: inherit;
@@ -34,7 +37,7 @@
         transition: flex .5s ease;
     }
 
-    .tab img {
+    .card img {
         position: absolute;
         inset: 0;
         width: 100%;
@@ -45,36 +48,36 @@
         border-radius: 1.5rem;
     }
 
-    .tab:hover img {
+    .card:hover img {
         opacity: .6;
     }
 
-    .tab:hover {
+    .card:hover {
         flex: 4;
     }
 </style>
 
 <body>
     <div class="accordion">
-        <div class="tab">
-            <img src="/public/assets/images/Hotel_items (3).jpg" alt="">
-        </div>
+        <figure class="card">
+            <img src="/public/assets/images/Hotel_items (3).jpg" alt="A white hotel with a glowing blue pool" loading="lazy" fetchpriority="high" decoding="async">
+        </figure>
     
-        <div class="tab">
-            <img src="/public/assets/images/Hotel_items (2).jpg" alt="">
-        </div>
+        <figure class="card">
+            <img src="/public/assets/images/Hotel_items (2).jpg" alt="A beach house with a pool with a person swimming inside it" loading="lazy" fetchpriority="high" decoding="async">
+        </figure>
     
-        <div class="tab">
-            <img src="/public/assets/images/Hotel_items (1).jpg" alt="">
-        </div>
+        <figure class="card">
+            <img src="/public/assets/images/Hotel_items (1).jpg" alt="A hotel with a pool and trees" loading="lazy" fetchpriority="high" decoding="async">
+        </figure>
     
-        <div class="tab">
-            <img src="/public/assets/images/cafe_items (2).jpg" alt="">
-        </div>
+        <figure class="card">
+            <img src="/public/assets/images/cafe_items (2).jpg" alt="A smiling brownskin lady working behind a tablet" loading="lazy" fetchpriority="high" decoding="async">
+        </figure>
     
-        <div class="tab">
-            <img src="/public/assets/images/cafe_items (12).jpg" alt="">
-        </div>
+        <figure class="card">
+            <img src="/public/assets/images/cafe_items (12).jpg" alt="A white man working behind a counter in a cafe" loading="lazy" fetchpriority="high" decoding="async">
+        </figure>
     </div>
 </body>
 </html>

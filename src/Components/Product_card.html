@@ -7,6 +7,40 @@
     <title>Document</title>
 </head>
 <style>
+    *::before,
+    *::after,
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont;
+        transition: .3s ease;
+    }
+
+    section{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60vh;
+    }
+
+    :root{
+        --shadow:
+			0 4px 6px rgba(0, 0, 0, 0.05),
+			0 10px 20px rgba(0, 0, 0, 0.01),
+			0 20px 40px rgba(0, 0, 0, 0.015);
+            --shade-4:
+			radial-gradient(circle at 70% 50%,
+				hsla(0, 0%, 0%, 0.05),
+				transparent 40%),
+			hsl(33, 48%, 88%);
+		--sub-bg: hsl(33, 48%, 88%);  
+		--txt-color: hsl(30, 50%, 25%);
+		--txt-white: hsl(0, 0%, 95%);
+        --bg-dark: hsl(17, 30%, 9%);
+        --fw-md: 500;
+    }
+
     .cards {
         display: flex;
         flex-wrap: wrap;
@@ -22,10 +56,11 @@
         width: 350px;
         height: auto;
         box-shadow: var(--shadow);
+        margin: auto;
     }
 
     .card:hover {
-        transform: scale(1.05);
+        transform: scale(1.02);
     }
 
     .card-img {
@@ -65,11 +100,11 @@
     }
 
     .card-heading {
-        color: var(--txt-dark);
+        color: var(--txt-color);
     }
 
     .card-txt {
-        color: var(--text-dark);
+        color: var(--txt-color);
         text-wrap: balance;
         line-height: 1.5;
     }
@@ -98,7 +133,7 @@
     }
 
     .price {
-        color: var(--txt-dark);
+        color: var(--txt-color);
         font-size: 1.05rem;
     }
 </style>

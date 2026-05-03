@@ -1,4 +1,4 @@
-import {showError, clearError, validateName, validateEmail, validateDOB} from "./crud_form.js"
+/*import {showError, clearError, validateName, validateEmail, validateDOB} from "./crud_form.js"*/
 
 const tableBody = document.getElementById("body");
 
@@ -109,9 +109,10 @@ table()
 
 // Delete button / Modal trigger
 
-const deleteBtn = document.querySelectorAll(".delete")
+const deleteBtn = document.querySelectorAll(".delete");
+let currentDelBtn = null;
 deleteBtn.forEach(delBtn => {
-    delBtn.onclick = function () { dialog.showModal() };
+    delBtn.onclick = function () { currentDelBtn = this; dialog.showModal(); }
 })
 
 // Confirmation Modal 
@@ -134,9 +135,11 @@ dialog.innerHTML = `
 document.body.appendChild(dialog);
 
 const confirmBtn = document.querySelector(".close");
-confirmBtn.onclick = function () {
+confirmBtn.addEventListener("click", () => {
+    const row = currentDelBtn.parentElement.parentElement.parentElement;
+    row.remove();
     dialog.close()
-}
+});
 
 const cancelBtn = document.querySelector(".exit");
 cancelBtn.onclick = function () {
@@ -147,16 +150,17 @@ cancelBtn.onclick = function () {
 
 const editBtn = document.querySelectorAll(".edit")
 editBtn.forEach(editBtn => {
-    editBtn.onclick = function () {
-        editModal.showModal()
-    }
+    editBtn.addEventListener("click", () => {
+        editModal.showModal();
+    })
 })
+
 
 const editModal = document.createElement("dialog")
 editModal.id = "editModal"
 editModal.className = "editModal"
 editModal.innerHTML = `
-<form action="">
+<form action="" method="dialog" id="form">
 <label for="name">
     Name:
     <input type="text" id="name" placeholder="John Doe">
@@ -188,11 +192,15 @@ editModal.innerHTML = `
 document.body.append(editModal)
 
 const editModalBtn = document.querySelector(".EditBtn")
+const form = document.getElementById("form")
 editModalBtn.addEventListener("click", (e) => { e.preventDefault() })
-editModalBtn.onclick = function () { editModal.close() }
+editModalBtn.onclick = function () {
+    form.reset();
+    setTimeout(() => {
+        editModal.close()
+    }, 500)
+}
 
-const name_input = document.getElementById("name")
-name_input = validateName()
 
 /*const popover = document.createElement("div")
 popover.setAttribute("popover", "manual")

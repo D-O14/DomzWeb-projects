@@ -7,8 +7,27 @@
     <title>Document</title>
 </head>
 <style>
+    *::before,
+    *::after,*{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    }
+
+    :root{
+        --shade-4:
+			radial-gradient(circle at 70% 50%,
+				hsla(0, 0%, 0%, 0.05),
+				transparent 40%),
+			hsl(33, 48%, 88%);
+		--bg-dark: hsl(17, 30%, 9%);
+        --accent: hsl(60, 56%, 91%);
+    }
+    
     dialog {
-        width: 45%;
+        width: 100%;
+        max-width: 750px;
         position: relative;
         margin: auto;
         padding: 3rem;
@@ -40,9 +59,9 @@
         animation: slideIn .5s ease-out forwards;
     }
 
-    /*dialog.closing {
-				animation: slideOut .5s ease-out forwards;
-			}*/
+    dialog.closing {
+		animation: slideOut .5s ease-out forwards;
+	}
 
     @keyframes slideIn {
         from {
@@ -53,6 +72,19 @@
         to {
             transform: translateY(0);
             opacity: 1;
+        }
+    }
+
+    @keyframes slideOut{
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        to {
+            transform: translateY(-100vh);
+            opacity: 0;
+            display: none;
         }
     }
 
@@ -316,9 +348,18 @@
             color: var(--bg-dark);
         }
     }
+
+    button:not(.close){
+        border: none;
+        border-radius: .25rem;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: .5em 1em;
+    }
 </style>
 
 <body>
+    <button onclick="drawer.showModal()">Show Dialog</button>
     <dialog id="drawer" aria-labelledby="drawer-title">
 
         <div class="form-title">
@@ -388,7 +429,7 @@
             </div>
 
             <menu>
-                <button value="Submit" type="button" class="formBtn" popovertarget="toast">Submit</button>
+                <button value="Submit" type="button" class="formBtn" id="button">Submit</button>
             </menu>
 
         </form>
@@ -396,6 +437,14 @@
             &copy; 2024<a href="#" class="copyright-link">Domz Cafe.</a>All rights reserved.
         </p>
     </dialog>
+
+    <script>
+        const button = document.getElementById("button");
+        const drawer = document.getElementById("drawer");
+        button.addEventListener("click", () => {
+            drawer.classList.add("closing")
+        })
+    </script>
 </body>
 
 </html>

@@ -237,10 +237,6 @@
         gap: .5rem;
     }
 
-    .card:hover .carousel-img {
-        transform: scale(1.2);
-    }
-
     .comment-img {
         position: absolute;
         display: block;
@@ -330,7 +326,41 @@
             transform: translateX(-50%);
         }
     }
-    
+
+    button {
+        border-radius: 1.25rem;
+        background: hsl(0, 0%, 10%);
+        color: hsl(0, 0%, 90%);
+    }
+
+    [popover] {
+        inset: unset;
+        bottom: anchor(top);
+        left: anchor(right);
+        padding: .5em 1em;
+        border: none;
+        border-radius: .25rem;
+        background: hsl(0, 0%, 10%);
+        color: hsl(0, 0%, 90%);
+        font-weight: 500;
+    }
+
+    .div {
+        width: 400px;
+        text-wrap: wrap;
+    }
+
+    figure{
+        width: 100%;
+    }
+
+    img{
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+    }
 </style>
 
 <body>
@@ -611,6 +641,12 @@
                     <img src="/public/assets/images/cafe_items (10).jpg" alt="">
                 </div>
             </div>-->
+
+            <div popover="manual" popovertargetaction="toggle" anchor="btn" id="div" class="div">
+                <p>This is a tooltip containing some very important information and shi. Please don't ignore!</p>
+            </div>
+            <button popovertarget="div" id="btn">?</button>
+
         </section>
 
     </main>
