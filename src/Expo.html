@@ -9,6 +9,16 @@
 </head>
 
 <style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui;
+        transition: all .3s ease;
+    }
+
     :root {
         --shadow:
             0 4px 6px hsla(0, 0%, 0%, 5%),
@@ -31,41 +41,51 @@
         font-size: 1rem;
     }
 
-    /**,
-    *::before,
-    *::after {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: system-ui;
+    figure{
+        width: 100%;
     }
 
-    .nav {
-        padding: 1rem 5%;
-        height: 60px;
+    img{
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16/9;
+        object-fit: cover;
     }
 
+    button {
+        border: 2px solid transparent;
+        border-radius: .25rem;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: .5em 1em;
+        cursor: pointer;
+    }
+
+    input {
+        border: 1px solid hsl(0, 0%, 80%);
+        border-radius: .25rem;
+        padding: .5rem 1rem;
+        width: 100%;
+        height: 40px;
+        outline: none;
+    }
+
+    input:not(input[type="checkbox"], input[type="radio"]):focus,
+    input:not(input[type="checkbox"], input[type="radio"]):hover {
+        scale: 1.02;
+        outline: 1px solid hsl(220, 100%, 65%);
+        outline-offset: 1px;
+    }
+    
     a {
         color: var(--light);
         text-decoration: none;
     }
 
-    button {
-        border: none;
-        border-radius: .25em;
-        padding: .5em 1em;
-        font-size: 1rem;
-        font-weight: var(--fw-sb);
-    }
-
     a,
     button {
         cursor: pointer;
-    }
-
-    .container {
-        max-width: 1120px;
-        margin-inline: 1.5rem;
     }
 
     header {
@@ -76,6 +96,16 @@
         background: var(--dark);
         box-shadow: var(--shadow);
         z-index: 1;
+    }
+        
+    .nav {
+        padding: 1rem 5%;
+        height: 60px;
+    }
+
+    .container {
+        max-width: 1120px;
+        margin-inline: 1.5rem;
     }
 
     .lucide-logo,
@@ -170,202 +200,11 @@
     .show-icon .lucide-close {
         opacity: 1;
         transform: rotate(90deg);
-    }*/
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: system-ui;
-        transition: .3s ease;
-    }
-
-    body {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        font-family: Verdana;
-        text-align: center;
-    }
-
-    form {
-        display: grid;
-        grid-template-columns: repeat(1, auto);
-        max-width: 100%;
-        width: 450px;
-        gap: 1rem;
-    }
-
-    button {
-        border: 2px solid transparent;
-        border-radius: .25rem;
-        font-size: 1rem;
-        font-weight: 600;
-        padding: .5em 1em;
-        cursor: pointer;
-    }
-
-    input {
-        border: 1px solid hsl(0, 0%, 80%);
-        border-radius: .25rem;
-        padding: .5rem 1rem;
-        width: 100%;
-        height: 40px;
-        outline: none;
-    }
-
-    input:not(input[type="checkbox"], input[type="radio"]):focus,
-    input:not(input[type="checkbox"], input[type="radio"]):hover {
-        scale: 1.02;
-        outline: 1px solid hsl(220, 100%, 65%);
-        outline-offset: 1px;
-    }
-
-    fieldset {
-        display: flex;
-        gap: .5rem;
-        padding: 2rem 2rem 2rem;
-        border-radius: .25rem;
-        margin-bottom: 1.25rem;
-    }
-
-    ul {
-        display: flex;
-        flex-direction: column;
-        gap: .5rem;
-    }
-
-    .comment-img {
-        position: absolute;
-        display: block;
-        width: 100%;
-        height: auto;
-        aspect-ratio: 16/9;
-        object-fit: cover;
-        left: 10rem;
-        top: -40px;
-        max-width: 8rem;
-        min-height: 8rem;
-        border-radius: 50%;
-        border: var(--border);
-    }
-
-    .comment-message {
-        line-height: 1.5;
-        text-align: center;
-    }
-
-    .testimonial {
-        position: relative;
-        max-width: 450px;
-        width: 100%;
-        height: auto;
-        box-shadow: var(--shadow);
-        padding: 1em 2em;
-        border-radius: 1rem;
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-    }
-
-    .comment {
-        padding: 3rem 1rem 1rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column-reverse;
-        gap: 1rem;
-    }
-
-    .comment-info {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .stars {
-        border-radius: 1rem;
-        padding: .25em .75em;
-        gap: .5rem;
-    }
-
-    .icon {
-        color: var(--rate-color);
-    }
-
-    .stars .icon:hover {
-        transform: scale(1.3);
-    }
-
-    /*#testimonials {
-        display: flex;
-        gap: 1rem;
-        width: max-content;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        animation: scroll 18s linear infinite;
-        mask-image: linear-gradient(
-            to right, 
-            rgba(0,0,0,0),
-            rgba(0,0,0,1) 20%, 
-            rgba(0,0,0,1) 80%, 
-            rgba(0,0,0,0) 
-        );
-    }*/
-
-    #testimonials:hover {
-        animation-play-state: paused;
-    }
-
-    @keyframes scroll {
-        100% {
-            transform: translateX(-50%);
-        }
-    }
-
-    button {
-        border-radius: 1.25rem;
-        background: hsl(0, 0%, 10%);
-        color: hsl(0, 0%, 90%);
-    }
-
-    [popover] {
-        inset: unset;
-        bottom: anchor(top);
-        left: anchor(right);
-        padding: .5em 1em;
-        border: none;
-        border-radius: .25rem;
-        background: hsl(0, 0%, 10%);
-        color: hsl(0, 0%, 90%);
-        font-weight: 500;
-    }
-
-    .div {
-        width: 400px;
-        text-wrap: wrap;
-    }
-
-    figure{
-        width: 100%;
-    }
-
-    img{
-        width: 100%;
-        height: auto;
-        display: block;
-        aspect-ratio: 16/9;
-        object-fit: cover;
     }
 </style>
 
 <body>
     <main>
-
 
         <!--<header>
             <nav class="nav container">
@@ -439,215 +278,7 @@
             </nav>
         </header>-->
 
-        <section class="testimonials" id="testimonials">
-            <!--<article class="testimonial">
-                <figure>
-                    <img class="comment-img" src="/public/assets/images/cafe_items (1).jpg" alt="testimonial image">
-                </figure>
-                <div class="comment">
-                    <div class="comment-info">
-                        <h1>Someone famous</h1>
-                        <p>Director of something</p>
-                    </div>
-                    <blockquote class="comment-message">
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt dolores provident iure
-                        officiis quo? Expedita incidunt placeat voluptas ipsam illo doloremque ipsum, aut asperiores
-                        accusantium, impedit inventore temporibus eius."</blockquote>
-
-                    <div class="stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                    </div>
-                </div>
-            </article>
-
-            <article class="testimonial">
-                <figure>
-                    <img class="comment-img" src="/public/assets/images/cafe_items (1).jpg" alt="testimonial image">
-                </figure>
-                <div class="comment">
-                    <div class="comment-info">
-                        <h1>Someone famous</h1>
-                        <p>Director of something</p>
-                    </div>
-                    <blockquote class="comment-message">
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt dolores provident iure
-                        officiis quo? Expedita incidunt placeat voluptas ipsam illo doloremque ipsum, aut asperiores
-                        accusantium, impedit inventore temporibus eius."</blockquote>
-
-                    <div class="stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                    </div>
-                </div>
-            </article>
-
-            <article class="testimonial">
-                <figure>
-                    <img class="comment-img" src="/public/assets/images/cafe_items (1).jpg" alt="testimonial image">
-                </figure>
-                <div class="comment">
-                    <div class="comment-info">
-                        <h1>Someone famous</h1>
-                        <p>Director of something</p>
-                    </div>
-                    <blockquote class="comment-message">
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt dolores provident iure
-                        officiis quo? Expedita incidunt placeat voluptas ipsam illo doloremque ipsum, aut asperiores
-                        accusantium, impedit inventore temporibus eius."</blockquote>
-
-                    <div class="stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                    </div>
-                </div>
-            </article>
-
-            <article class="testimonial">
-                <figure>
-                    <img class="comment-img" src="/public/assets/images/cafe_items (1).jpg" alt="testimonial image">
-                </figure>
-                <div class="comment">
-                    <div class="comment-info">
-                        <h1>Someone famous</h1>
-                        <p>Director of something</p>
-                    </div>
-                    <blockquote class="comment-message">
-                        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt dolores provident iure
-                        officiis quo? Expedita incidunt placeat voluptas ipsam illo doloremque ipsum, aut asperiores
-                        accusantium, impedit inventore temporibus eius."</blockquote>
-
-                    <div class="stars">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="currentColor" class="icon icon-star">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path
-                                d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z" />
-                        </svg>
-                    </div>
-                </div>
-            </article>-->
-            <!--<div class="container">
-                <div class="title">Food</div>
-                <div class="card">
-                    <img src="/public/assets/images/cafe_items (10).jpg" alt="">
-                </div>
-            </div>-->
-
-            <div popover="manual" popovertargetaction="toggle" anchor="btn" id="div" class="div">
-                <p>This is a tooltip containing some very important information and shi. Please don't ignore!</p>
-            </div>
-            <button popovertarget="div" id="btn">?</button>
-
-        </section>
+        
 
     </main>
 
@@ -666,9 +297,6 @@
         }
 
         showMenu('nav_toggle', 'nav-menu');*/
-
-        /**/
-
 
         const items = [
             { name: "Bike", price: 100 },
