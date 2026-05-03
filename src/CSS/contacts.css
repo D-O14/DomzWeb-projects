@@ -1,0 +1,32 @@
+*::before,
+*::after,
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
+    transition: .3s ease;
+}
+
+button{
+    padding: .5em 1em;
+    border: none;
+    border-radius: .25rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+input{
+    padding: .5em 1em;
+    height: 40px;
+    border: 1px solid hsl(0, 0%, 90%);
+    border-radius: .25rem;
+}
+
+img{
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}

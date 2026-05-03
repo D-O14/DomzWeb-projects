@@ -6,12 +6,12 @@
 }
 
 :root {
-	--body-color: #e4e9f7;
-	--sidebar-color: #fff;
-	--primary-color: #695cfe;
-	--primary-color-light: #f6f5ff;
-	--toggle-color: #ddd;
-	--text-color: #707070;
+	--body-color: hsl(224, 54%, 93%);
+	--sidebar-color: hsl(0, 0%, 100%);
+	--primary-color: hsl(245, 99%, 68%);
+	--primary-color-light: hsl(246, 100%, 98%);
+	--toggle-color: hsl(0, 0%, 87%);
+	--text-color: hsl(0, 0%, 44%);
 	--tran-02: all 0.2s ease;
 	--tran-03: all 0.3s ease;
 	--tran-04: all 0.4s ease;
