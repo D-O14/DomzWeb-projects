@@ -9,7 +9,6 @@ const user1 = {
     DateOfBirth: "16/09/1990",
     age: 36,
     gender: "Female",
-    company: "Cevorex",
 }
 
 const user2 = {
@@ -19,7 +18,6 @@ const user2 = {
     DateOfBirth: "4/01/1973",
     age: 47,
     gender: "Female",
-    company: "DeFashv",
 }
 
 const user3 = {
@@ -29,7 +27,6 @@ const user3 = {
     DateOfBirth: "26/05/2002",
     age: 24,
     gender: "Male",
-    company: "NYCPD",
 }
 
 const user4 = {
@@ -39,7 +36,6 @@ const user4 = {
     DateOfBirth: "13/11/2002",
     age: 24,
     gender: "Male",
-    company: "El Dynst",
 }
 
 const user5 = {
@@ -49,7 +45,6 @@ const user5 = {
     DateOfBirth: "12/06/1998",
     age: 28,
     gender: "Male",
-    company: "Empire",
 }
 
 const users = []
@@ -70,7 +65,6 @@ function table() {
                         <td>${ user.DateOfBirth }</td>
                         <td>${ user.age }</td>
                         <td>${ user.gender }</td>
-                        <td>${ user.company }</td>
                         <td>
                         <div class="actions">
                             <button class="btn edit">
@@ -155,7 +149,6 @@ editBtn.forEach(editBtn => {
     })
 })
 
-
 const editModal = document.createElement("dialog")
 editModal.id = "editModal"
 editModal.className = "editModal"
@@ -193,16 +186,17 @@ document.body.append(editModal)
 
 const editModalBtn = document.querySelector(".EditBtn")
 const form = document.getElementById("form")
-editModalBtn.addEventListener("click", (e) => { e.preventDefault() })
-editModalBtn.onclick = function () {
+editModalBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     form.reset();
+    editModalBtn.setAttribute("popovertarget", "popover")
+    editModalBtn.setAttribute("popovertargetaction", "show")
     setTimeout(() => {
         editModal.close()
     }, 500)
-}
+})
 
-
-/*const popover = document.createElement("div")
+const popover = document.createElement("div")
 popover.setAttribute("popover", "manual")
 popover.id = "popover"
 popover.className = "popover"
@@ -224,7 +218,7 @@ popover.innerHTML = `
         `
 document.body.append(popover)
 
-const toast = document.querySelector(".popover")
+/*const toast = document.querySelector(".popover")
 setTimeout(() => {
     toast.classList.add("close");
 }, 4000)*/

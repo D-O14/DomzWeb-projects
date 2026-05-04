@@ -72,7 +72,7 @@
         background: hsla(220, 20%, 18%, .8);
     }
 
-    input {
+    input:not(input[type="radio"]) {
         border: 1px solid hsl(0, 0%, 80%);
         border-radius: .25rem;
         padding: .5em 1em;
@@ -89,7 +89,7 @@
         outline-offset: 1px;
     }
 
-    label {
+    label:not(.male, .female) {
         display: flex;
         flex-direction: column;
         gap: .5rem;
@@ -240,6 +240,21 @@
         }
     }
 
+    .gender{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        border: 1px solid hsl(0, 0%, 50%);
+        border-radius: .25rem;
+        padding: .5em 1em;
+        height: 40px;
+    }
+
+    input[type="radio"]{
+        accent-color: hsl(220, 80%, 50%);
+    }
+
 </style>
 
 <body>
@@ -275,6 +290,22 @@
                     <input type="email" id="email" placeholder="Your_email@gmail.com" required name="E-mail"
                         enterkeyhint="next" inputmode="email">
                 </label>
+
+                <label>
+                    Gender
+                    <div class="gender">
+                        <label class="male" for="male">
+                            <input type="radio" name="gender" id="male" value="male">
+                            Male
+                        </label>
+                    
+                        <label class="female" for="female">
+                            <input type="radio" name="gender" id="female" value="female">
+                            Female
+                        </label>
+                        </div>
+                </label>
+                
                 
                 <label for="dob">
                         <div class="label">
