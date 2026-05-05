@@ -255,8 +255,10 @@
         padding: 3em 3em 3em;   
     }
 
-    
-    [popover] {
+    .toast {
+        display: flex;
+        align-items: center;
+        gap: .75rem;
         max-width: 100%;
         width: 400px;
         box-shadow: var(--shadow);
@@ -268,23 +270,18 @@
         background: hsl(100, 80%, 65%);
         margin: 0 auto;
         border-radius: .25rem;
-        animation: popOver .3s ease forwards;
+        animation: popOver .3s linear forwards;
         transform: translateY(-100%) scale(0);
     }
 
-    .toast {
-        display: flex;
-        align-items: center;
-        gap: .75rem;
-    }
-
     @keyframes popOver {
-        100% {
+        from{transform: translateY(-100%) scale(0);}
+        to {
             transform: translateY(1.25rem) scale(1)
         }
     }
 
-    .popover.close {
+    .toast.close {
         animation: popOut .3s ease forwards;
     }
 
@@ -296,17 +293,6 @@
         100% {
             transform: translateY(-100%) scale(0);
         }
-    }
-
-    .toastBtn {
-        background: none;
-        border: none;
-    }
-
-    .icon-close {
-        width: 1rem;
-        height: 1rem;
-        color: hsl(0, 0%, 8%, .8);
     }
 
     .icon-check {

@@ -6,7 +6,7 @@ const user1 = {
     id: crypto.randomUUID(),
     name: "Anna Beige",
     email: "AnnaBg@gmail.com",
-    DateOfBirth: "16/09/1990",
+    DateOfBirth: "1990-09-16",
     age: 36,
     gender: "Female",
 }
@@ -15,7 +15,7 @@ const user2 = {
     id: crypto.randomUUID(),
     name: "Diana Carter",
     email: "MSDC@gmail.net",
-    DateOfBirth: "4/01/1973",
+    DateOfBirth: "1973-01-04",
     age: 47,
     gender: "Female",
 }
@@ -24,7 +24,7 @@ const user3 = {
     id: crypto.randomUUID(),
     name: "Drew Mcarthy",
     email: "Mcarthy_Drew@info.com",
-    DateOfBirth: "26/05/2002",
+    DateOfBirth: "2002-05-26",
     age: 24,
     gender: "Male",
 }
@@ -33,7 +33,7 @@ const user4 = {
     id: crypto.randomUUID(),
     name: "Lucas Elcastio",
     email: "El_Dynst@info.net",
-    DateOfBirth: "13/11/2002",
+    DateOfBirth: "2002-11-13",
     age: 24,
     gender: "Male",
 }
@@ -42,15 +42,15 @@ const user5 = {
     id: crypto.randomUUID(),
     name: "Lucius Dornell",
     email: "Ld_Empire@hotmail.net",
-    DateOfBirth: "12/06/1998",
+    DateOfBirth: "1998-06-12",
     age: 28,
     gender: "Male",
 }
 
 const users = []
 users.push(user1, user2, user3, user4, user5);
-/*localStorage.setItem("users", JSON.stringify(users))
-console.log(localStorage)*/
+localStorage.setItem("users", JSON.stringify(users))
+console.log(localStorage)
 
 function table() {
     let rows = ""
@@ -133,75 +133,114 @@ confirmBtn.addEventListener("click", () => {
     const row = currentDelBtn.parentElement.parentElement.parentElement;
     row.remove();
     dialog.close()
+    document.body.removeChild(dialog)
+    showToast("Success", "User deleted successfully!");
+
+    setTimeout(() => {
+        toast.classList.add("close");
+    }, 3000)
+
+    setTimeout(() => {
+        document.body.removeChild(toast)
+    }, 4000)
 });
 
 const cancelBtn = document.querySelector(".exit");
 cancelBtn.onclick = function () {
-    dialog.close()
+    dialog.close();
+    document.body.removeChild(dialog)
 }
 
 // Edit Modal
+let currentRow = null;
 
 const editBtn = document.querySelectorAll(".edit")
 editBtn.forEach(editBtn => {
-    editBtn.addEventListener("click", () => {
+    editBtn.addEventListener("click", function() {
+        const row = this.parentElement.parentElement.parentElement;
+        currentRow = row;
+
+        const name = row.children[2].textContent;
+        const email = row.children[3].textContent;
+        const dob = row.children[4].textContent;
+        const gender = row.children[6].textContent;
+
+        document.getElementById("name").value = name;
+        document.getElementById("email").value = email;
+        document.getElementById("date").value = dob;
+        document.getElementById("gender").value = gender;
+
         editModal.showModal();
     })
 })
+
 
 const editModal = document.createElement("dialog")
 editModal.id = "editModal"
 editModal.className = "editModal"
 editModal.innerHTML = `
-<form action="" method="dialog" id="form">
+<form action="" id="form" autocomplete="off">
 <label for="name">
     Name:
-    <input type="text" id="name" placeholder="John Doe">
+    <input type="text" id="name" placeholder="John Doe" name="name">
 </label>
 
 <label for="email">
     E-mail:
-    <input type="email" id="email" placeholder="your_email@gmail.com">
+    <input type="email" id="email" placeholder="your_email@gmail.com" name="email">
 </label>
 
 <label for="date">
     Date of Birth:
-    <input type="date" id="date">
+    <input type="date" id="date" name="dob">
 </label>
 
 <label for="gender">
     Gender:
-    <input type="text" id="gender" placeholder="Male/Female">
+    <input type="text" id="gender" placeholder="Male/Female" name="gender">
 </label>
 
-<label for="company">
-    Company:
-    <input type="text" id="company" placeholder="Company">
-</label>
-
-<button id="EditBtn" class="EditBtn" type="button" popovertarget="popover" popovertargetaction="show">Submit</button>
+<button id="EditBtn" class="EditBtn">Submit</button>
 </form>
 `
 document.body.append(editModal)
 
-const editModalBtn = document.querySelector(".EditBtn")
-const form = document.getElementById("form")
-editModalBtn.addEventListener("click", (e) => {
+const form = document.getElementById("form");
+
+const toast = document.createElement("div");
+form.addEventListener("submit", function (e) {
     e.preventDefault();
-    form.reset();
-    editModalBtn.setAttribute("popovertarget", "popover")
-    editModalBtn.setAttribute("popovertargetaction", "show")
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const dob = document.getElementById("date").value;
+    const gender = document.getElementById("gender").value;
+
+    currentRow.children[2].textContent = name;
+    currentRow.children[3].textContent = email;
+    currentRow.children[4].textContent = formatTableDate(dob);
+    currentRow.children[6].textContent = gender;
+
     setTimeout(() => {
+        form.reset();
         editModal.close()
+        document.body.removeChild(editModal)
+        showToast("Success!", "User updated successfully")
     }, 500)
+
+    setTimeout(() => {
+        toast.classList.add("close");
+    }, 3000)
+
+    setTimeout(() => {
+        document.body.removeChild(toast)
+    },4000)
 })
 
-const popover = document.createElement("div")
-popover.setAttribute("popover", "manual")
-popover.id = "popover"
-popover.className = "popover"
-popover.innerHTML = `
-                <div class="toast" role="alert">
+function showToast(status, message) {
+    toast.className = "toast";
+    toast.setAttribute("role", "alert")
+    toast.innerHTML = `
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
                         fill="currentColor" class="icon icon-check">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -210,15 +249,27 @@ popover.innerHTML = `
                     </svg>
                     <div class="toast-content">
                         <strong>
-                            Success!
+                            ${status}
                         </strong>
-                        <p>User has been updated successfully.</p>
+                        <p>${message}</p>
                     </div>
-                </div>
         `
-document.body.append(popover)
+    document.body.prepend(toast)
+}
 
-/*const toast = document.querySelector(".popover")
-setTimeout(() => {
-    toast.classList.add("close");
-}, 4000)*/
+function formatTableDate(dateString) {
+    if (!dateString) return "";
+
+    const parts = dateString.split("-");
+
+    if (parts.length !== 3) return "";
+
+    const [day, month, year] = parts;
+
+    return `${ day }/${ month }/${ year }`
+}
+
+function loadUsers() {
+    const saved = localStorage.getItem("users")
+    users = saved ? JSON.parse(saved) : [];
+}
