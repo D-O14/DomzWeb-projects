@@ -130,7 +130,7 @@ document.body.appendChild(dialog);
 
 const confirmBtn = document.querySelector(".close");
 confirmBtn.addEventListener("click", () => {
-    const row = currentDelBtn.parentElement.parentElement.parentElement;
+    const row = currentDelBtn.closest("tr");
     row.remove();
     dialog.close()
     document.body.removeChild(dialog)
