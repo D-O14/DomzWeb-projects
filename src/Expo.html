@@ -202,6 +202,11 @@
         transform: rotate(90deg);
     }*/
 
+    .elements{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
 
 </style>
 
@@ -279,15 +284,35 @@
 
             </nav>
         </header>-->
-        \
+        <div class="elements">
+            <ul id="fruits">
+                <li>Apple</li>
+                <li id="orange">Orange</li>
+                <li>Banana</li>
+            </ul>
+            <ul id="veggies">
+                <li>Carrots</li>
+                <li id="onion">Onion</li>
+                <li>Potatoes</li>
+            </ul>
+            <ul id="desserts">
+                <li>Cake</li>
+                <li id="pie">Pie</li>
+                <li>Ice Cream</li>
+            </ul>
+        </div>
+        
     </main>
 
 
 
     <script type="text/javascript">
-        let userName = "Joshua";
-        let result = userName.endsWith(" ");
-        console.log(result)
+        const elem = document.getElementById("fruits")
+        const children = elem.children;
+        Array.from(children).forEach(child => {
+            child.style.background = "yellow";
+        })
+        children.style.background = "yellow"
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)
