@@ -129,7 +129,7 @@ dialog.innerHTML = `
 document.body.appendChild(dialog);
 
 const confirmBtn = document.querySelector(".close");
-confirmBtn.addEventListener("click", () => {
+confirmBtn.addEventListener("click", function () {
     const row = currentDelBtn.closest("tr");
     row.remove();
     dialog.close()
@@ -157,7 +157,7 @@ let currentRow = null;
 const editBtn = document.querySelectorAll(".edit")
 editBtn.forEach(editBtn => {
     editBtn.addEventListener("click", function() {
-        const row = this.parentElement.parentElement.parentElement;
+        const row = this.closest("tr");
         currentRow = row;
 
         const name = row.children[2].textContent;
