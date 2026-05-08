@@ -1,4 +1,13 @@
 /*import {showError, clearError, validateName, validateEmail, validateDOB} from "./crud_form.js"*/
+const title = document.title;
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        document.title = "Oy! You aren't finished here!"
+    } else if (document.visibilityState === "visible") {
+        document.title = title;
+    }
+})
 
 const tableBody = document.getElementById("body");
 

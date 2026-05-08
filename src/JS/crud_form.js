@@ -8,6 +8,16 @@ const button = document.getElementById("submit");
 const pass_toggle = document.getElementById("pass_toggle");
 const confirmPass_toggle = document.getElementById("confirmPass_toggle");
 
+const title = document.title;
+
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "hidden") {
+        document.title = "Oy! You aren't finished here!"
+    } else if (document.visibilityState === "visible") {
+        document.title = title;
+    }
+})
+
 const namePattern = /^[A-Za-z\s]+$/;
 const agePattern = /^(?:1[0-1][0-9]|120|[1-9]?[0-9])$/;
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*[_@#$%^&*!]).{6,12}$/;

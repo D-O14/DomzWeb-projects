@@ -202,12 +202,6 @@
         transform: rotate(90deg);
     }*/
 
-    .elements{
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
 </style>
 
 <body>
@@ -290,8 +284,15 @@
 
 
     <script type="text/javascript">
-        
+        const title = document.title;
 
+        document.addEventListener("visibilitychange", function() {
+            if(document.visibilityState === "hidden"){
+                document.title = "Oy! You aren't finished here!"
+            } else if(document.visibilityState === "visible"){
+                document.title = title;
+            }
+        })
 
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
