@@ -66,7 +66,6 @@
         border: 1px solid hsl(0, 0%, 80%);
         border-radius: .25rem;
         padding: .5rem 1rem;
-        width: 100%;
         height: 40px;
         outline: none;
     }
@@ -97,6 +96,7 @@
         box-shadow: var(--shadow);
         z-index: 1;
     }
+
 
     /*.nav {
         padding: 1rem 5%;
@@ -202,97 +202,93 @@
         transform: rotate(90deg);
     }*/
 
+
 </style>
 
 <body>
+    <!--<header>
+                <nav class="nav container">
+                    <div class="navbar">
+                        <a href="" class="logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-logo">
+                                <path d="M20.341 6.484A10 10 0 0 1 10.266 21.85" />
+                                <path d="M3.659 17.516A10 10 0 0 1 13.74 2.152" />
+                                <circle cx="12" cy="12" r="3" />
+                                <circle cx="19" cy="5" r="2" />
+                                <circle cx="5" cy="19" r="2" />
+                            </svg>
+                            Domz ENT
+                        </a>
+    
+                        <div class="nav-toggle" id="nav_toggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-burger">
+                                <path d="M3 5h18" />
+                                <path d="M3 12h18" />
+                                <path d="M3 19h18" />
+                            </svg>
+    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-close">
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                        </div>
+    
+                    </div>
+    
+                    <div class="nav_menu" id="nav-menu">
+                        <ul class="nav-list">
+                            <li><a href="#" class="nav-link">Home</a></li>
+    
+                            <li><a href="#" class="nav-link">Company</a></li>
+    
+                            <li class="dropdown">
+                                <div class="nav-link">
+                                    Analytics
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-chevron">
+                                        <path d="m6 9 6 6 6-6" />
+                                    </svg>
+                                </div>
+                            </li>
+    
+                            <li><a href="#" class="nav-link">Products</a></li>
+    
+                            <li class="dropdown">
+                                <div class="nav-link">
+                                    Users
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-chevron">
+                                        <path d="m6 9 6 6 6-6" />
+                                    </svg>
+                                </div>
+                            </li>
+    
+                            <li><a href="#" class="nav-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+    
+                </nav>
+            </header>-->
     <main>
 
-        <!--<header>
-            <nav class="nav container">
-                <div class="navbar">
-                    <a href="" class="logo">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-logo">
-                            <path d="M20.341 6.484A10 10 0 0 1 10.266 21.85" />
-                            <path d="M3.659 17.516A10 10 0 0 1 13.74 2.152" />
-                            <circle cx="12" cy="12" r="3" />
-                            <circle cx="19" cy="5" r="2" />
-                            <circle cx="5" cy="19" r="2" />
-                        </svg>
-                        Domz ENT
-                    </a>
-
-                    <div class="nav-toggle" id="nav_toggle">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-burger">
-                            <path d="M3 5h18" />
-                            <path d="M3 12h18" />
-                            <path d="M3 19h18" />
-                        </svg>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-close">
-                            <path d="M18 6 6 18" />
-                            <path d="m6 6 12 12" />
-                        </svg>
-                    </div>
-
-                </div>
-
-                <div class="nav_menu" id="nav-menu">
-                    <ul class="nav-list">
-                        <li><a href="#" class="nav-link">Home</a></li>
-
-                        <li><a href="#" class="nav-link">Company</a></li>
-
-                        <li class="dropdown">
-                            <div class="nav-link">
-                                Analytics
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-chevron">
-                                    <path d="m6 9 6 6 6-6" />
-                                </svg>
-                            </div>
-                        </li>
-
-                        <li><a href="#" class="nav-link">Products</a></li>
-
-                        <li class="dropdown">
-                            <div class="nav-link">
-                                Users
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="lucide lucide-chevron">
-                                    <path d="m6 9 6 6 6-6" />
-                                </svg>
-                            </div>
-                        </li>
-
-                        <li><a href="#" class="nav-link">Contact Us</a></li>
-                    </ul>
-                </div>
-
-            </nav>
-        </header>-->
-        
     </main>
 
 
-
-    <script type="text/javascript">
+    <script type="text/javascript" defer>
         const title = document.title;
 
-        document.addEventListener("visibilitychange", function() {
-            if(document.visibilityState === "hidden"){
-                document.title = "Oy! You aren't finished here!"
-            } else if(document.visibilityState === "visible"){
-                document.title = title;
-            }
-        })
+        document.addEventListener("visibilitychange", function() { 
+            document.visibilityState === "hidden" ? document.title = "Oy! You aren't finished here!" : document.title = title 
+        });
+
 
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
