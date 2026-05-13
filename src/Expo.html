@@ -277,7 +277,6 @@
                 </nav>
             </header>-->
 
-
     <main>
 
     </main>
@@ -285,31 +284,10 @@
 
     <script type="text/javascript" defer>
         const title = document.title;
-
         document.addEventListener("visibilitychange", function () {
             document.visibilityState === "hidden" ? document.title = "Oy! You aren't finished here!" : document.title = title
         });
-
-
-        /*let darkmode = localStorage.getItem("darkmode");
-        const themeBtn =  document.getElementById("themeSwitch");
-
-        const enableDarkMode = ()  => {
-            document.body.classList.add("darkmode")
-            localStorage.setItem("darkmode", "active");
-        }
-
-        const enableLightMode = ()  => {
-            document.body.classList.remove("darkmode")
-            localStorage.setItem("darkmode", null);
-        }
-
-        if(darkmode === "active") enableDarkMode();
-
-        themeBtn.addEventListener("click", () => {
-            darkmode = localStorage.getItem("darkmode")
-            darkmode !== "active" ? enableDarkMode() : enableLightMode(); 
-        })*/
+        
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)
@@ -321,63 +299,7 @@
         }
 
         showMenu('nav_toggle', 'nav-menu');*/
-
-        /*const items = [
-            { name: "Bike", price: 100 },
-            { name: "Televison", price: 200 },
-            { name: "Album", price: 10 },
-            { name: "Book", price: 5 },
-            { name: "Phone", price: 500 },
-            { name: "Computer", price: 1000 },
-            { name: "Keyboard", price: 25 },
-        ];
-
-        console.log(items);
-
-        const filter = items.filter(item =>
-            item.price <= 100);
-
-        const html = filter.map(({ name, price }) => {
-            return `<p>${ name } - $${ price }</p>`
-        }).join("");
-
-        /*document.querySelector("p").innerHTML = html;
-
-
-        const itemNames = items.map(item => {
-            return item.name;
-        });
-
-        document.querySelector("p").innerHTML = itemNames.join("<br>")
-        console.log(itemNames)
-
-        items.forEach(item => {
-            console.log(item.name);
-        });
-
-        items.forEach(item => {
-            console.log(`$${ item.price }`);
-        });
-
-        const discountTotal = items.reduce((currentTotal, item) => {
-            return item.price * .5 + currentTotal;
-        }, 0);
-
-        console.log(`Your discounted total is $${ discountTotal }`)
-
-        const total = items.reduce((currentTotal, item) => {
-            return item.price + currentTotal;
-        }, 0);
-
-        console.log(`Your total is $${ total }`)
-
-        const [first, second, third, fourth, fifth, ...extra] = items;
-        console.log(first, second, third, fourth, fifth, ...extra);
-        console.log(...items)
-
-        items.forEach(({ name, price }) => {
-            console.log(`${ name }: $${ price }`);
-        })*/
+        
 
     </script>
 </body>
