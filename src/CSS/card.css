@@ -1,0 +1,143 @@
+*::before,
+*::after,
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+:root {
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+}
+
+nav {
+    box-shadow: var(--shadow);
+    padding: .5em 1em;
+}
+
+button {
+    border-radius: .25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .75em 1em;
+    cursor: pointer;
+    background: none;
+    border: 1px solid hsl(0, 0%, 50%);
+}
+
+figure {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+
+figure:hover img {
+    transform: scale(1.1);
+    filter: grayscale(0);
+}
+
+img {
+    display: block;
+    aspect-ratio: 16/9;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: .5s ease;
+    border-radius: 1rem;
+    filter: grayscale(1);
+}
+
+
+article {
+    margin: auto;
+    max-width: 100%;
+    width: 450px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1rem;
+    box-shadow: var(--shadow);
+    border-radius: 1rem;
+}
+
+
+h1 {
+    text-wrap: wrap;
+    font-size: 20px;
+}
+
+p {
+    color: hsl(0, 0%, 40%);
+    line-height: 1.5;
+}
+
+.product {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1rem 1rem 1rem;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+}
+
+.price {
+    width: fit-content;
+    margin-left: 50%;
+    font-weight: 600;
+    font-weight: 1rem;
+    padding: .5rem 1rem;
+    border-radius: 1.25rem;
+    background: hsl(210, 80%, 50%);
+    color: hsl(0, 0%, 100%);
+}
+
+.cartBtn {
+    border-radius: 1.25rem;
+    background: hsl(210, 80%, 50%);
+    color: hsl(0, 0%, 100%);
+    transition: .5s ease;
+}
+
+.cartBtn:hover {
+    scale: .99;
+    background: hsl(210, 80%, 40%);
+}
+
+.tags {
+    display: flex;
+    gap: 1rem;
+}
+
+.tag {
+    padding: .5rem 1rem;
+    color: hsla(0, 0%, 100%, .8);
+    border-radius: 1rem;
+    background: hsla(190, 80%, 50%, .5);
+}
+
+.cards {
+    padding: 5rem;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 1rem;
+}
+
+.category {
+    position: absolute;
+    background: hsl(210, 80%, 50%);
+    color: hsl(0, 0%, 100%);
+    padding: .5em 1em;
+    border-radius: .5rem;
+    top: 10px;
+    left: 10px;
+}
