@@ -53,6 +53,7 @@ img {
 
 
 article {
+    position: relative;
     margin: auto;
     max-width: 100%;
     width: 450px;

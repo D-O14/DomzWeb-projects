@@ -1,19 +1,20 @@
 const products = [
-    { name: "Parfait Plate", price: 7.55, img: "/public/assets/images/cafe_items (4).jpg", category: "Pastry", tag_1: "New", tag_2: "Popular" },
+    { name: "Parfait Plate", price: 7.55, img: "/public/assets/images/cafe_items (4).jpg", category: "Combo", tag_1: "New", tag_2: "Popular" },
     { name: "Fruit Fritters", price: 2.35, img: "/public/assets/images/cafe_items (6).jpg", category: "Pastry", tag_1: "Most Rated", tag_2: "Popular" },
-    { name: "Strawberry Bread", price: 10.00, img: "/public/assets/images/cafe_items (7).jpg", category: "Pastry", tag_1: "Most Rated", tag_2: "Popular" },
+    { name: "Strawberry Bread", price: 10.00, img: "/public/assets/images/cafe_items (7).jpg", category: "Baked", tag_1: "Most Rated", tag_2: "Popular" },
     { name: "Chicken Pie", price: 12.5, img: "/public/assets/images/cafe_items (9).jpg", category: "Dish", tag_1: "Favorite", tag_2: "Most Ordered" },
-    /*{name: "Parfait Plate", price: 7.55, img: "", category: "Pastry", tag_1: "New", tag_2: "Popular"},
-    {name: "Parfait Plate", price: 7.55, img: "", category: "Pastry", tag_1: "New", tag_2: "Popular"},
-    {name: "Parfait Plate", price: 7.55, img: "", category: "Pastry", tag_1: "New", tag_2: "Popular"},
-    {name: "Parfait Plate", price: 7.55, img: "", category: "Pastry", tag_1: "New", tag_2: "Popular"},
-    {name: "Parfait Plate", price: 7.55, img: "", category: "Pastry", tag_1: "New", tag_2: "Popular"},
-    {name: "Parfait Plate", price: 7.55, img: "", category: "Pastry", tag_1: "New", tag_2: "Popular"},
-    {name: "Parfait Plate", price: 7.55, img: "", category: "Pastry", tag_1: "New", tag_2: "Popular"},*/
-]
+    { name: "Cold Coffee", price: 2.16, img: "/public/assets/images/coffee.png", category: "Coffee", tag_1: "Best", tag_2: "Popular" },
+    { name: "Banana Sandwich", price: 2.35, img: "/public/assets/images/pic_unsplash (6).jpg", category: "Combo", tag_1: "Most Rated", tag_2: "Popular" },
+    { name: "Cup 'O' Coffee", price: 10.00, img: "/public/assets/images/pic_unsplash (7).jpg", category: "Coffee", tag_1: "Most Rated", tag_2: "Popular" },
+    { name: "Mug 'O' Coffee", price: 12.5, img: "/public/assets/images/pic_unsplash (9).jpg", category: "Coffee", tag_1: "Favorite", tag_2: "Most Ordered" },
+    { name: "Cheese Cake", price: 7.55, img: "/public/assets/images/pic_unsplash (4).jpg", category: "Pastry", tag_1: "New", tag_2: "Popular" },
+    { name: "Salad", price: 2.35, img: "/public/assets/images/pic_unsplash (5).jpg", category: "Dish", tag_1: "Most Rated", tag_2: "Popular" },
+    { name: "Cocktail", price: 10.00, img: "/public/assets/images/pic_unsplash (2).jpg", category: "Drink", tag_1: "Most Rated", tag_2: "Popular" },
+    { name: "Pancakes", price: 12.5, img: "/public/assets/images/pic_unsplash (3).jpg", category: "Meal", tag_1: "Favorite", tag_2: "Most Ordered" },
+];
 
 const section = document.querySelector(".cards");
-const filterBtn = document.querySelector("button")
+const filterBtn = document.querySelector("button");
 
 function renderCards() {
     let cards = ""
@@ -61,7 +62,7 @@ renderCards();
 function filterCards() {
     filterBtn.addEventListener("click", () => {
         const filteredProducts = products.filter((product) => {
-            return product.category === "Pastry";
+            return product?.category === "Coffee";
         });
         console.log(filteredProducts)
     })
