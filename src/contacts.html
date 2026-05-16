@@ -10,76 +10,118 @@
 </head>
 
 <body>
-    <h1 class="heading">WhatsApp</h1>
-    <h2>
-        <div class="AI">
-            <img src="wp.jpg" width="30px" alt="">
-            <input type="text" class="whatsapp" placeholder="Ask Meta AI or Search">
+    <header>
+        <div class="options">
+            <h1 class="heading">Whats<span>App</span></h1>
+            <button class="optBtn">...</button>
         </div>
-    </h2>
-    <div>
-        <div class="container">
-            <h1 style="text-align: center;">Contacts List</h1>
-            <div id="Contacts-List">
-                <div class="profile">
-                    <div class="profile-img">
-                        <img src="tm1.jpg" alt="">
-                    </div>
-                    <div class="profile-message">
-                        <h3>Bryan</h3>
-                        <input type="text" placeholder="Message Bryan"> 
-                        <button>Send</button>
-                    </div>
-                </div><hr>
+        <nav>
+            <input type="search" name="searchInput" class="searchInput" placeholder="Search Something">
+        </nav>
+    </header>
 
-                <div class="profile">
-                    <div class="profile-img">
-                        <img src="tm4.jpg" alt="">
-                    </div>
-                    <div class="profile-message">
-                        <h3>Daniel</h3>
-                        <input type="text" placeholder="Message Daniel"> 
-                        <button>Send</button>
-                    </div>
-                </div><hr>
+    <menu class="menu">
+        <button class="menuBtn">New Group</button>
+        <button class="menuBtn">Linked Devices</button>
+        <button class="menuBtn">Starred</button>
+        <button class="menuBtn">Settings</button>
+    </menu>
 
-                <div class="profile">
-                    <div class="profile-img">
-                        <img src="tm8.jpg" alt="">
-                    </div>
-                    <div class="profile-message">
-                        <h3>Ezekiel</h3>
-                        <input type="text" placeholder="Message Ezekiel"> 
-                        <button>Send</button>
-                    </div>
-                </div><hr>
-                
-                <div class="profile">
-                    <div class="profile-img">
-                        <img src="tm2.jpg" alt="">
-                    </div>
-                    <div class="profile-message">
-                        <h3>Zoe</h3>
-                        <input type="text" placeholder="Message Zoe"> 
-                        <button>Send</button>
-                    </div>
-                </div><hr>
+    <div class="group">
+        <button class="groupBtn active">All</button>
+        <button class="groupBtn">Unread</button>
+        <button class="groupBtn">Favourites</button>
+        <button class="groupBtn">Groups</button>
+        <button class="groupBtn">+</button>
+    </div>
 
-                <div class="profile">
-                    <div class="profile-img">
-                        <img src="/" alt="">
-                    </div>
-                    <div class="profile-message">
-                        <h3>Cassandra</h3>
-                        <input type="text" placeholder="Message Cassandra"> 
-                        <button>Send</button>
-                    </div>
-                </div><hr>
+    <div class="contacts_list">
+        <article class="profile">
+            <img src="/public/assets/images/cafe_items (2).jpg" alt="" decoding="async" fetchpriority="auto"
+                loading="lazy" width="100px" height="100px">
+            <div class="contact">
+                <h2>Contact Name</h2>
+                <p class="msg">Message From Contact...</p>
             </div>
-        </div>
+            <menu>
+                <button class="msgBtn">Message</button>
+            </menu>
+        </article>
 
+        <article class="profile">
+            <img src="/public/assets/images/Hotel_items (2).jpg" alt="" decoding="async" fetchpriority="auto"
+                loading="lazy" width="100px" height="100px">
+            <div class="contact">
+                <h2>Contact Name</h2>
+                <p class="msg">Message From Contact...</p>
+            </div>
+            <menu>
+                <button class="msgBtn">Message</button>
+            </menu>
+        </article>
+
+        <article class="profile">
+            <img src="/public/assets/images/cafe_items (7).jpg" alt="" decoding="async" fetchpriority="auto"
+                loading="lazy" width="100px" height="100px">
+            <div class="contact">
+                <h2>Contact Name</h2>
+                <p class="msg">Message From Contact...</p>
+            </div>
+            <menu>
+                <button class="msgBtn">Message</button>
+            </menu>
+        </article>
+
+        <article class="profile">
+            <img src="/public/assets/images/Hotel_items (1).jpg" alt="" decoding="async" fetchpriority="auto"
+                loading="lazy" width="100px" height="100px">
+            <div class="contact">
+                <h2>Contact Name</h2>
+                <p class="msg">Message From Contact...</p>
+            </div>
+            <menu>
+                <button class="msgBtn">Message</button>
+            </menu>
+        </article>
+
+        <article class="profile">
+            <img src="/public/assets/images/cafe_items (5).jpg" alt="" decoding="async" fetchpriority="auto"
+                loading="lazy" width="100px" height="100px">
+            <div class="contact">
+                <h2>Contact Name</h2>
+                <p class="msg">Message From Contact...</p>
+            </div>
+            <menu>
+                <button class="msgBtn">Message</button>
+            </menu>
+        </article>
+
+        <article class="profile">
+            <img src="/public/assets/images/cafe_items (10).jpg" alt="" decoding="async" fetchpriority="auto"
+                loading="lazy" width="100px" height="100px">
+            <div class="contact">
+                <h2>Contact Name</h2>
+                <p class="msg">Message From Contact...</p>
+            </div>
+            <menu>
+                <button class="msgBtn">Message</button>
+            </menu>
+        </article>
+
+        <article class="profile">
+            <img src="/public/assets/images/Hotel_items (3).jpg" alt="" decoding="async" fetchpriority="auto"
+                loading="lazy" width="100px" height="100px">
+            <div class="contact">
+                <h2>Contact Name</h2>
+                <p class="msg">Message From Contact...</p>
+            </div>
+            <menu>
+                <button class="msgBtn">Message</button>
+            </menu>
+        </article>
     </div>
 
 </body>
 
+<script src="/src/js/contacts.js"></script>
 </html>
