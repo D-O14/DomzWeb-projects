@@ -11,55 +11,9 @@ document.addEventListener("visibilitychange", function () {
 
 const tableBody = document.getElementById("body");
 
-const user1 = {
-    id: crypto.randomUUID(),
-    name: "Anna Beige",
-    email: "AnnaBg@gmail.com",
-    DateOfBirth: "1990-09-16",
-    age: 36,
-    gender: "Female",
-}
-
-const user2 = {
-    id: crypto.randomUUID(),
-    name: "Diana Carter",
-    email: "MSDC@gmail.net",
-    DateOfBirth: "1973-01-04",
-    age: 47,
-    gender: "Female",
-}
-
-const user3 = {
-    id: crypto.randomUUID(),
-    name: "Drew Mcarthy",
-    email: "Mcarthy_Drew@info.com",
-    DateOfBirth: "2002-05-26",
-    age: 24,
-    gender: "Male",
-}
-
-const user4 = {
-    id: crypto.randomUUID(),
-    name: "Lucas Elcastio",
-    email: "El_Dynst@info.net",
-    DateOfBirth: "2002-11-13",
-    age: 24,
-    gender: "Male",
-}
-
-const user5 = {
-    id: crypto.randomUUID(),
-    name: "Lucius Dornell",
-    email: "Ld_Empire@hotmail.net",
-    DateOfBirth: "1998-06-12",
-    age: 28,
-    gender: "Male",
-}
-
-const users = []
-users.push(user1, user2, user3, user4, user5);
-localStorage.setItem("users", JSON.stringify(users))
-console.log(localStorage)
+const users = [
+    JSON.parse(localStorage.getItem("users"))
+]
 
 function table() {
     let rows = ""
@@ -165,7 +119,7 @@ let currentRow = null;
 
 const editBtn = document.querySelectorAll(".edit")
 editBtn.forEach(editBtn => {
-    editBtn.addEventListener("click", function() {
+    editBtn.addEventListener("click", function () {
         const row = this.closest("tr");
         currentRow = row;
 
@@ -243,10 +197,10 @@ form.addEventListener("submit", function (e) {
 
     setTimeout(() => {
         document.body.removeChild(toast)
-    },4000)
+    }, 4000)
 })
 
-function showToast(status, message) {
+export function showToast(status, message) {
     toast.className = "toast";
     toast.setAttribute("role", "alert")
     toast.innerHTML = `
@@ -258,9 +212,9 @@ function showToast(status, message) {
                     </svg>
                     <div class="toast-content">
                         <strong>
-                            ${status}
+                            ${ status }
                         </strong>
-                        <p>${message}</p>
+                        <p>${ message }</p>
                     </div>
         `
     document.body.prepend(toast)
@@ -277,6 +231,7 @@ function formatTableDate(dateString) {
 
     return `${ day }/${ month }/${ year }`
 }
+
 
 function loadUsers() {
     const saved = localStorage.getItem("users")

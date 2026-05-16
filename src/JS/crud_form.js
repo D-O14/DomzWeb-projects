@@ -45,48 +45,19 @@ form.addEventListener("submit", (e) => {
             }, 3000)       
         }*/
              
-
+        const users = JSON.parse(localStorage.getItem("users")) || []
         const user = {
+            id: crypto.randomUUID(),
             name: name.value,
             email: email.value,
             dateOfBirth: dob.value,
             password: password.value,
         }
 
-        const user_serialized = JSON.stringify(user, null, "\t");
-        localStorage.setItem("user", user_serialized);
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users, null, "\t"));
         console.log(localStorage);
 
-        /*button.setAttribute("popovertarget", "popover")
-        button.setAttribute("popovertargetaction", "show")
-
-        const popover = document.createElement("div")
-        popover.setAttribute("popover", "manual")
-        popover.id = "popover"
-        popover.className = "popover"
-        popover.innerHTML = `
-                <div class="toast" role="alert">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                        fill="currentColor" class="icon icon-check">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
-                    </svg>
-                    <div class="toast-content">
-                        <strong>
-                            Success!
-                        </strong>
-                        <p>User has been updated successfully.</p>
-                    </div>
-                </div>
-        `
-        document.body.append(popover)
-
-        const toast = document.querySelector(".popover")
-        setTimeout(() => {
-            toast.classList.add("close");
-        }, 4000)*/
-    
         setTimeout(() => {
             form.reset();
             button.textContent = "Submit";
