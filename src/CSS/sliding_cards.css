@@ -12,14 +12,21 @@ body {
 }
 
 .cards {
-    display: flex;
-    gap: 1.5rem;
+    width: 100%;
+    display: flex;;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-snap-align: start;
     scroll-behavior: smooth;
 }
 
+.cards::-webkit-scrollbar{
+    display: none;
+}
+
 article {
+    max-width: 100%;
+    width: 450px;
     color: hsl(0, 0%, 90%);
     box-shadow:
         0 4px 6px hsla(0, 0%, 0%, 5%),

@@ -87,7 +87,7 @@
         cursor: pointer;
     }
 
-    /*header {
+    header {
         position: fixed;
         top: 0;
         left: 0;
@@ -95,7 +95,7 @@
         background: var(--dark);
         box-shadow: var(--shadow);
         z-index: 1;
-    }*/
+    }
 
 
     /*.nav {
@@ -202,6 +202,14 @@
         transform: rotate(90deg);
     }*/
 
+    .slide {
+        width: 40%;
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-align: start;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+    }
 </style>
 
 <body>
@@ -277,7 +285,14 @@
                 </nav>
             </header>-->
     <main>
-        
+        <div class="slider">
+            <div class="slide">
+                <img src="/public/assets/images/abstract.jpg" alt="">
+                <img src="/public/assets/images/cafe_items (3).jpg" alt="">
+                <img src="/public/assets/images/Hotel_items (2).jpg" alt="">
+                <img src="/public/assets/images/pic_unsplash (1).jpg" alt="">
+            </div>
+        </div>
     </main>
 
 
