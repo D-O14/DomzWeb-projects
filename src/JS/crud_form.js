@@ -7,12 +7,15 @@ const confirm_password = document.getElementById("confirm_password");
 const button = document.getElementById("submit");
 const pass_toggle = document.getElementById("pass_toggle");
 const confirmPass_toggle = document.getElementById("confirmPass_toggle");
+const male = document.getElementById("male");
+const female = document.getElementById("female");
+const genderGroup = document.querySelector(".gender")
 
 const title = document.title;
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        document.title = "Oy! You aren't finished here!"
+        document.title = "Oi! You aren't finished here!"
     } else if (document.visibilityState === "visible") {
         document.title = title;
     }
@@ -30,7 +33,8 @@ form.addEventListener("submit", (e) => {
         validateName() &&
         validateEmail() &&
         validateDOB() &&
-        validatePass();
+        validatePass() &&
+        getGender();
 
     if (isValid) {
         button.textContent = "Submitted";
@@ -52,10 +56,12 @@ form.addEventListener("submit", (e) => {
             email: email.value,
             dateOfBirth: dob.value,
             password: password.value,
+            age: calcAge(),
+            gender: getGender()
         }
-
+        console.log(user);
         users.push(user);
-        localStorage.setItem("users", JSON.stringify(users, null, "\t"));
+        localStorage.setItem("users", JSON.stringify(users));
         console.log(localStorage);
 
         setTimeout(() => {
@@ -65,7 +71,7 @@ form.addEventListener("submit", (e) => {
     }
 });
 
-export function validateName() {
+function validateName() {
     name.value = name.value.replace(/\b\w/g, char => char.toUpperCase());
     name.value = name.value.replace(/\d/g, "");
     if (name.value === "" || name.value === null) {
@@ -83,7 +89,7 @@ export function validateName() {
     }
 }
 
-export function validateEmail() {
+ function validateEmail() {
     if (email.value === "" || email.value === null) {
         showError(email, "Email is required!");
         return false;
@@ -98,7 +104,31 @@ export function validateEmail() {
     }
 }
 
-export function validateDOB() {
+function getGender() {
+    let gender = "";
+    
+    if (male.checked) {
+        gender = "Male"
+        return true;
+    }
+
+    if (female.checked) {
+        gender = "Female";
+        return true;
+    }
+
+    if (!male.checked && !female.checked) {
+        showError(genderGroup, "Please select a gender");
+        return false;
+    }
+    
+    clearError(genderGroup);
+    return true;   
+    
+    return gender;
+}
+
+ function validateDOB() {
     const value = dob.value;
     const selectedDate = new Date(value);
     const today = new Date();
@@ -114,6 +144,18 @@ export function validateDOB() {
         return true;
     }
 };
+
+function calcAge() {
+    const today = new Date();
+    const birthDate = new Date(dob.value);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || monthDiff === 0 && today.getDate() < birthDate.getDate()) {
+        age--
+    }
+
+    return age;
+}
 
 function validatePass() {
     if (password.value === "" || password.value === null) {
@@ -187,7 +229,7 @@ dob.addEventListener("input", validateDOB);
 password.addEventListener("input", validatePass);
 confirm_password.addEventListener("input", validateConfirmPass);
 
-export function showError(input, message) {
+ function showError(input, message) {
     let error = input.nextElementSibling;
     if (!error || error.tagName !== "P") {
         error = document.createElement("p");
@@ -199,7 +241,7 @@ export function showError(input, message) {
     input.classList.add("error");
 }
 
-export function clearError(input) {
+ function clearError(input) {
     const error = input.nextElementSibling;
     if (error && error.tagName === "P") {
         error.textContent = "";

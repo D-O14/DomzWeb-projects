@@ -3,7 +3,7 @@ const title = document.title;
 
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
-        document.title = "Oy! You aren't finished here!"
+        document.title = "Oi! You aren't finished here!"
     } else if (document.visibilityState === "visible") {
         document.title = title;
     }
@@ -11,9 +11,7 @@ document.addEventListener("visibilitychange", function () {
 
 const tableBody = document.getElementById("body");
 
-const users = [
-    JSON.parse(localStorage.getItem("users"))
-]
+const users = JSON.parse(localStorage.getItem("users")) || []
 
 function table() {
     let rows = ""
@@ -25,7 +23,7 @@ function table() {
                         <td class="id">${ user.id }</td>
                         <td>${ user.name }</td>
                         <td><a href="">${ user.email }</a></td>
-                        <td>${ user.DateOfBirth }</td>
+                        <td>${ user.dateOfBirth }</td>
                         <td>${ user.age }</td>
                         <td>${ user.gender }</td>
                         <td>
@@ -96,7 +94,7 @@ confirmBtn.addEventListener("click", function () {
     const row = currentDelBtn.closest("tr");
     row.remove();
     dialog.close()
-    document.body.removeChild(dialog)
+    /*document.body.removeChild(dialog)*/
     showToast("Success", "User deleted successfully!");
 
     setTimeout(() => {
@@ -111,7 +109,7 @@ confirmBtn.addEventListener("click", function () {
 const cancelBtn = document.querySelector(".exit");
 cancelBtn.onclick = function () {
     dialog.close();
-    document.body.removeChild(dialog)
+    /*document.body.removeChild(dialog)*/
 }
 
 // Edit Modal
@@ -220,7 +218,7 @@ export function showToast(status, message) {
     document.body.prepend(toast)
 }
 
-function formatTableDate(dateString) {
+/*function formatTableDate(dateString) {
     if (!dateString) return "";
 
     const parts = dateString.split("-");
@@ -230,10 +228,12 @@ function formatTableDate(dateString) {
     const [day, month, year] = parts;
 
     return `${ day }/${ month }/${ year }`
-}
+}*/
 
 
-function loadUsers() {
-    const saved = localStorage.getItem("users")
-    users = saved ? JSON.parse(saved) : [];
+/*function loadUsers() {
+    const saved = localStorage.getItem("users");
+    saved ? JSON.parse(saved) : [];
 }
+
+loadUsers()*/
