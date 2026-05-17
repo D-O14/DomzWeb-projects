@@ -1,6 +1,6 @@
-/*import {showError, clearError, validateName, validateEmail, validateDOB} from "./crud_form.js"*/
-const title = document.title;
+//import { calcAge } from "./crud_form.js";
 
+const title = document.title;
 document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") {
         document.title = "Oi! You aren't finished here!"
@@ -9,9 +9,11 @@ document.addEventListener("visibilitychange", function () {
     }
 })
 
+let selectedUserId = null;
+
 const tableBody = document.getElementById("body");
 
-const users = JSON.parse(localStorage.getItem("users")) || []
+let users = JSON.parse(localStorage.getItem("users")) || []
 
 function table() {
     let rows = ""
@@ -23,7 +25,7 @@ function table() {
                         <td class="id">${ user.id }</td>
                         <td>${ user.name }</td>
                         <td><a href="">${ user.email }</a></td>
-                        <td>${ user.dateOfBirth }</td>
+                        <td>${user.dateOfBirth }</td>
                         <td>${ user.age }</td>
                         <td>${ user.gender }</td>
                         <td>
@@ -40,7 +42,7 @@ function table() {
                         </svg>
                             </button>
 
-                            <button class="btn delete">
+                            <button class="btn delete" data-id="${user.id}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
                 <path d="M10 11v6" />
@@ -67,7 +69,7 @@ table()
 const deleteBtn = document.querySelectorAll(".delete");
 let currentDelBtn = null;
 deleteBtn.forEach(delBtn => {
-    delBtn.onclick = function () { currentDelBtn = this; dialog.showModal(); }
+    delBtn.onclick = function () { currentDelBtn = this; selectedUserId = currentDelBtn.dataset.id; dialog.showModal(); }
 })
 
 // Confirmation Modal 
@@ -93,8 +95,9 @@ const confirmBtn = document.querySelector(".close");
 confirmBtn.addEventListener("click", function () {
     const row = currentDelBtn.closest("tr");
     row.remove();
-    dialog.close()
-    /*document.body.removeChild(dialog)*/
+    dialog.close();
+    users = users.filter(user => user.id !== selectedUserId);
+    localStorage.setItem("users", JSON.stringify(users));
     showToast("Success", "User deleted successfully!");
 
     setTimeout(() => {
@@ -109,7 +112,6 @@ confirmBtn.addEventListener("click", function () {
 const cancelBtn = document.querySelector(".exit");
 cancelBtn.onclick = function () {
     dialog.close();
-    /*document.body.removeChild(dialog)*/
 }
 
 // Edit Modal
@@ -179,7 +181,7 @@ form.addEventListener("submit", function (e) {
 
     currentRow.children[2].textContent = name;
     currentRow.children[3].textContent = email;
-    currentRow.children[4].textContent = formatTableDate(dob);
+    currentRow.children[4].textContent = dob;
     currentRow.children[6].textContent = gender;
 
     setTimeout(() => {
@@ -217,23 +219,3 @@ export function showToast(status, message) {
         `
     document.body.prepend(toast)
 }
-
-/*function formatTableDate(dateString) {
-    if (!dateString) return "";
-
-    const parts = dateString.split("-");
-
-    if (parts.length !== 3) return "";
-
-    const [day, month, year] = parts;
-
-    return `${ day }/${ month }/${ year }`
-}*/
-
-
-/*function loadUsers() {
-    const saved = localStorage.getItem("users");
-    saved ? JSON.parse(saved) : [];
-}
-
-loadUsers()*/

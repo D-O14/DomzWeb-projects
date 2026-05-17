@@ -28,7 +28,7 @@ const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     const isValid =
         validateName() &&
         validateEmail() &&
@@ -38,7 +38,7 @@ form.addEventListener("submit", (e) => {
 
     if (isValid) {
         button.textContent = "Submitted";
-        
+
         /*button.onclick = function () {
             button.classList.add("loading")
             button.setAttribute("disabled", "true")
@@ -48,7 +48,7 @@ form.addEventListener("submit", (e) => {
                 button.removeAttribute("disabled", "true")
             }, 3000)       
         }*/
-             
+
         const users = JSON.parse(localStorage.getItem("users")) || []
         const user = {
             id: crypto.randomUUID(),
@@ -59,8 +59,22 @@ form.addEventListener("submit", (e) => {
             age: calcAge(),
             gender: getGender()
         }
+
+        const existingUser = users.find(user => {
+            return user.email === email.value
+        })
+
+        if (existingUser) {
+            existingUser.name = name.value;
+            existingUser.email = email.value;
+            existingUser.gender = getGender();
+            existingUser.dateOfBirth = dob.value;
+            existingUser.password = password.value;
+        } else {
+            users.push(user)
+        }
+
         console.log(user);
-        users.push(user);
         localStorage.setItem("users", JSON.stringify(users));
         console.log(localStorage);
 
@@ -89,14 +103,14 @@ function validateName() {
     }
 }
 
- function validateEmail() {
+function validateEmail() {
     if (email.value === "" || email.value === null) {
         showError(email, "Email is required!");
         return false;
     } else if (!email.value.includes("@")) {
         showError(email, "E-mail must include @!");
         return false;
-    } else if(!emailPattern.test(email.value)){
+    } else if (!emailPattern.test(email.value)) {
         showError(email, "E-mail must contain .net or .com after @!")
     } else {
         clearError(email)
@@ -105,47 +119,43 @@ function validateName() {
 }
 
 function getGender() {
-    let gender = "";
-    
     if (male.checked) {
-        gender = "Male"
-        return true;
+        return "Male";
     }
 
     if (female.checked) {
-        gender = "Female";
-        return true;
+        return "Female";
     }
 
     if (!male.checked && !female.checked) {
         showError(genderGroup, "Please select a gender");
         return false;
     }
-    
-    clearError(genderGroup);
-    return true;   
-    
-    return gender;
 }
 
- function validateDOB() {
+function validateDOB() {
     const value = dob.value;
     const selectedDate = new Date(value);
     const today = new Date();
+    const age = calcAge();
 
     if (!value) {
         showError(dob, "Date of birth is required");
         return false;
     } else if (selectedDate > today) {
         showError(dob, "Bisch, you ain't no time traveller");
-        return false;  
+        return false;
+    } else if (age < 18) {
+        showError(dob, "You must be 18 years old!");
+        return false;
     } else {
         clearError(dob);
         return true;
     }
+
 };
 
-function calcAge() {
+export function calcAge() {
     const today = new Date();
     const birthDate = new Date(dob.value);
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -176,7 +186,7 @@ function validateConfirmPass() {
     if (password.value !== confirm_password.value) {
         showError(confirm_password, "Passwords do not match");
         return false;
-    }  else {
+    } else {
         clearError(confirm_password)
         return true;
     }
@@ -229,7 +239,7 @@ dob.addEventListener("input", validateDOB);
 password.addEventListener("input", validatePass);
 confirm_password.addEventListener("input", validateConfirmPass);
 
- function showError(input, message) {
+function showError(input, message) {
     let error = input.nextElementSibling;
     if (!error || error.tagName !== "P") {
         error = document.createElement("p");
@@ -241,7 +251,7 @@ confirm_password.addEventListener("input", validateConfirmPass);
     input.classList.add("error");
 }
 
- function clearError(input) {
+function clearError(input) {
     const error = input.nextElementSibling;
     if (error && error.tagName === "P") {
         error.textContent = "";
