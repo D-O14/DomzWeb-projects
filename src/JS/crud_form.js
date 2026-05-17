@@ -152,10 +152,9 @@ function validateDOB() {
         clearError(dob);
         return true;
     }
-
 };
 
-export function calcAge() {
+function calcAge() {
     const today = new Date();
     const birthDate = new Date(dob.value);
     let age = today.getFullYear() - birthDate.getFullYear();
