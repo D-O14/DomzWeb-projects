@@ -9,7 +9,7 @@ const pass_toggle = document.getElementById("pass_toggle");
 const confirmPass_toggle = document.getElementById("confirmPass_toggle");
 const male = document.getElementById("male");
 const female = document.getElementById("female");
-const genderGroup = document.querySelector(".gender")
+const genderGroup = document.querySelector(".gender");
 
 const title = document.title;
 
@@ -19,106 +19,109 @@ document.addEventListener("visibilitychange", function () {
     } else if (document.visibilityState === "visible") {
         document.title = title;
     }
-})
+});
 
 const namePattern = /^[A-Za-z\s]+$/;
 const agePattern = /^(?:1[0-1][0-9]|120|[1-9]?[0-9])$/;
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*[_@#$%^&*!]).{6,12}$/;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-form.addEventListener("submit", (e) => {
-    e.preventDefault();
+if (form) {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
 
-    const isValid =
-        validateName() &&
-        validateEmail() &&
-        validateDOB() &&
-        validatePass() &&
-        getGender();
+        const isValid =
+            validateName(name) &&
+            validateEmail(email) &&
+            validateDOB() &&
+            validatePass(password) &&
+            getGender();
 
-    if (isValid) {
-        button.textContent = "Submitted";
+        if (isValid) {
+            button.textContent = "Submitted";
 
-        /*button.onclick = function () {
-            button.classList.add("loading")
-            button.setAttribute("disabled", "true")
+            /*button.onclick = function () {
+                button.classList.add("loading")
+                button.setAttribute("disabled", "true")
+    
+                setTimeout(() => {
+                    button.classList.remove("loading")
+                    button.removeAttribute("disabled", "true")
+                }, 3000)       
+            }*/
+
+            const users = JSON.parse(localStorage.getItem("users")) || []
+            const user = {
+                id: crypto.randomUUID(),
+                name: name.value,
+                email: email.value,
+                dateOfBirth: dob.value,
+                password: password.value,
+                age: calcAge(dob.value),
+                gender: getGender()
+            }
+
+            const existingUser = users.find(user => {
+                return user.email === email.value
+            })
+
+            if (existingUser) {
+                existingUser.name = name.value;
+                existingUser.email = email.value;
+                existingUser.gender = getGender();
+                existingUser.dateOfBirth = dob.value;
+                existingUser.age = calcAge(dob.value);
+                existingUser.password = password.value;
+            } else {
+                users.push(user)
+            }
+
+            console.log(user);
+            localStorage.setItem("users", JSON.stringify(users));
+            console.log(localStorage);
 
             setTimeout(() => {
-                button.classList.remove("loading")
-                button.removeAttribute("disabled", "true")
-            }, 3000)       
-        }*/
-
-        const users = JSON.parse(localStorage.getItem("users")) || []
-        const user = {
-            id: crypto.randomUUID(),
-            name: name.value,
-            email: email.value,
-            dateOfBirth: dob.value,
-            password: password.value,
-            age: calcAge(),
-            gender: getGender()
+                form.reset();
+                button.textContent = "Submit";
+            }, 500)
         }
+    });
+}
 
-        const existingUser = users.find(user => {
-            return user.email === email.value
-        })
-
-        if (existingUser) {
-            existingUser.name = name.value;
-            existingUser.email = email.value;
-            existingUser.gender = getGender();
-            existingUser.dateOfBirth = dob.value;
-            existingUser.password = password.value;
-        } else {
-            users.push(user)
-        }
-
-        console.log(user);
-        localStorage.setItem("users", JSON.stringify(users));
-        console.log(localStorage);
-
-        setTimeout(() => {
-            form.reset();
-            button.textContent = "Submit";
-        }, 500)
-    }
-});
-
-function validateName() {
-    name.value = name.value.replace(/\b\w/g, char => char.toUpperCase());
-    name.value = name.value.replace(/\d/g, "");
-    if (name.value === "" || name.value === null) {
-        showError(name, "Name is required!");
+export function validateName(Input) {
+    Input.value = Input.value.replace(/\b\w/g, char => char.toUpperCase());
+    Input.value = Input.value.replace(/\d/g, "");
+    if (Input.value === "" || Input.value === null) {
+        showError(Input, "Name is required!");
         return false;
-    } else if (!namePattern.test(name.value)) {
-        showError(name, "Name can only be made up of letters!");
+    } else if (!namePattern.test(Input.value)) {
+        showError(Input, "Name can only be made up of letters!");
         return false;
-    } else if (name.value === "User") {
-        showError(name, `Name cannot be ${ name.value }`);
+    } else if (Input.value === "User") {
+        showError(Input, `Name cannot be ${ Input.value }`);
         return false;
     } else {
-        clearError(name);
+        clearError(Input);
         return true;
     }
 }
 
-function validateEmail() {
-    if (email.value === "" || email.value === null) {
-        showError(email, "Email is required!");
+export function validateEmail(Input) {
+    if (Input.value === "" || Input.value === null) {
+        showError(Input, "Email is required!");
         return false;
-    } else if (!email.value.includes("@")) {
-        showError(email, "E-mail must include @!");
+    } else if (!Input.value.includes("@")) {
+        showError(Input, "E-mail must include @!");
         return false;
-    } else if (!emailPattern.test(email.value)) {
-        showError(email, "E-mail must contain .net or .com after @!")
+    } else if (!emailPattern.test(Input.value)) {
+        showError(Input, "E-mail must contain .net or .com after @!")
     } else {
-        clearError(email)
+        clearError(Input)
         return true;
     }
 }
 
-function getGender() {
+export function getGender() {
     if (male.checked) {
         return "Male";
     }
@@ -133,30 +136,30 @@ function getGender() {
     }
 }
 
-function validateDOB() {
-    const value = dob.value;
+export function validateDOB(Input) {
+    const value = Input.value;
     const selectedDate = new Date(value);
     const today = new Date();
-    const age = calcAge();
+    const age = calcAge(Input.value);
 
     if (!value) {
-        showError(dob, "Date of birth is required");
+        showError(Input, "Date of birth is required");
         return false;
     } else if (selectedDate > today) {
-        showError(dob, "Bisch, you ain't no time traveller");
+        showError(Input, "Bisch, you ain't no time traveller");
         return false;
     } else if (age < 18) {
-        showError(dob, "You must be 18 years old!");
+        showError(Input, "You must be 18 years old!");
         return false;
     } else {
-        clearError(dob);
+        clearError(Input);
         return true;
     }
 };
 
-function calcAge() {
+export function calcAge(date) {
     const today = new Date();
-    const birthDate = new Date(dob.value);
+    const birthDate = new Date(date);   
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();
     if (monthDiff < 0 || monthDiff === 0 && today.getDate() < birthDate.getDate()) {
@@ -166,23 +169,23 @@ function calcAge() {
     return age;
 }
 
-function validatePass() {
-    if (password.value === "" || password.value === null) {
-        showError(password, "Password is required!");
+function validatePass(Input) {
+    if (Input.value === "" || Input.value === null) {
+        showError(Input, "Password is required!");
         return false;
-    } else if (!passwordPattern.test(password.value)) {
-        showError(password, "Password pattern is not matched!")
+    } else if (!passwordPattern.test(Input.value)) {
+        showError(Input, "Password pattern is not matched!")
         return false;
-    } else if (password.value <= 6) {
-        showError(password, "Password is too short")
+    } else if (Input.value <= 6) {
+        showError(Input, "Password is too short")
     } else {
-        clearError(password)
+        clearError(Input)
         return true;
     }
 }
 
 function validateConfirmPass() {
-    if (password.value !== confirm_password.value) {
+    if (confirm_password.value !== confirm_password.value) {
         showError(confirm_password, "Passwords do not match");
         return false;
     } else {
@@ -191,54 +194,71 @@ function validateConfirmPass() {
     }
 }
 
-pass_toggle.addEventListener("click", () => {
-    if (password.type === "password") {
-        password.type = "text";
-        pass_toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off">
-        <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
-        <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
-        <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
-        <path d="m2 2 20 20" />
-    </svg>`
-    } else {
-        password.type = "password"
-        pass_toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye">
-        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-        <circle cx="12" cy="12" r="3" />
-    </svg>`
-    }
-})
-
-confirmPass_toggle.addEventListener("click", () => {
-    if (confirm_password.type === "password") {
-        confirm_password.type = "text";
-        confirmPass_toggle.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+if (pass_toggle) {
+    pass_toggle.addEventListener("click", () => {
+        if (password.type === "password") {
+            password.type = "text";
+            pass_toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off">
             <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
             <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
             <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
             <path d="m2 2 20 20" />
         </svg>`
-    } else {
-        confirm_password.type = "password";
-        confirmPass_toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye">
-        <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
-        <circle cx="12" cy="12" r="3" />
-    </svg>`
-    }
-})
+        } else {
+            password.type = "password"
+            pass_toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye">
+            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+            <circle cx="12" cy="12" r="3" />
+        </svg>`
+        }
+    })
+}
 
-name.addEventListener("input", validateName);
-email.addEventListener("input", validateEmail);
-dob.addEventListener("input", validateDOB);
-password.addEventListener("input", validatePass);
-confirm_password.addEventListener("input", validateConfirmPass);
+if (confirmPass_toggle) {
+    confirmPass_toggle.addEventListener("click", () => {
+        if (confirm_password.type === "password") {
+            confirm_password.type = "text";
+            confirmPass_toggle.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-off-icon lucide-eye-off">
+                <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49" />
+                <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242" />
+                <path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143" />
+                <path d="m2 2 20 20" />
+            </svg>`
+        } else {
+            confirm_password.type = "password";
+            confirmPass_toggle.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eye-icon lucide-eye">
+            <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+            <circle cx="12" cy="12" r="3" />
+        </svg>`
+        }
+    })
+}
 
-function showError(input, message) {
+if (name) {
+    name.addEventListener("input", () => { validateName(name) });   
+}
+if (email) {
+    email.addEventListener("input", () => { validateEmail(email) });   
+}
+
+if (dob) {
+    dob.addEventListener("input", () => { validateDOB });   
+}
+
+if (password) {
+    password.addEventListener("input", () => { validatePass(password) });    
+}
+
+if (confirm_password) {
+    confirm_password.addEventListener("input", validateConfirmPass);
+}
+
+export function showError(input, message) {
     let error = input.nextElementSibling;
     if (!error || error.tagName !== "P") {
         error = document.createElement("p");
@@ -250,7 +270,7 @@ function showError(input, message) {
     input.classList.add("error");
 }
 
-function clearError(input) {
+export function clearError(input) {
     const error = input.nextElementSibling;
     if (error && error.tagName === "P") {
         error.textContent = "";

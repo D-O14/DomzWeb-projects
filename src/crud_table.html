@@ -225,7 +225,7 @@
         gap: 1rem;
     }
 
-    input:not(input[type="checkbox"]) {
+    input:not(input[type="checkbox"], input[type="radio"]) {
         border: 1px solid hsl(0, 0%, 80%);
         border-radius: .25rem;
         padding: .5rem 1rem;
@@ -241,7 +241,11 @@
         outline-offset: 1px;
     }
 
-    label {
+    input[type="radio"]{
+        accent-color: hsl(220, 80%, 50%);
+    }
+
+    label:not(.male, .female) {
         display: flex;
         flex-direction: column;
         align-items: start;
@@ -309,6 +313,34 @@
     strong {
         font-size: 1.25rem;
     }
+
+    .gender{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+        border: 1px solid hsl(0, 0%, 50%);
+        border-radius: .25rem;
+        padding: .5em 1em;
+        height: 40px;
+        width: 100%;
+    }
+
+    input:not(input[type="radio"]).error:focus,
+    input:not(input[type="radio"]).error:hover {
+        outline: 1px solid hsl(0, 80%, 50%);
+    }
+
+    input.error {
+        outline: 1px solid hsl(0, 80%, 50%);
+    }
+
+    .textError {
+        font-size: .85rem;
+        font-weight: 400;
+        color: hsl(0, 80%, 50%);
+    }
+
 </style>
 <body>
     <main>
@@ -316,7 +348,6 @@
             <div class="table-container">
                 <table class="table">
                     <thead class="header">
-                        <th>Select</th>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>

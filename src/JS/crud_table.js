@@ -1,4 +1,4 @@
-//import { calcAge } from "./crud_form.js";
+import { calcAge, getGender, validateName, validateEmail, validateDOB } from "./crud_form.js";
 
 const title = document.title;
 document.addEventListener("visibilitychange", function () {
@@ -10,9 +10,7 @@ document.addEventListener("visibilitychange", function () {
 })
 
 let selectedUserId = null;
-
 const tableBody = document.getElementById("body");
-
 let users = JSON.parse(localStorage.getItem("users")) || []
 
 function table() {
@@ -20,17 +18,15 @@ function table() {
     users.forEach(user => {
         rows += `
             <tr class="row">
-            
-                        <td><input type="checkbox"></td>
                         <td class="id">${ user.id }</td>
                         <td>${ user.name }</td>
                         <td><a href="">${ user.email }</a></td>
-                        <td>${user.dateOfBirth }</td>
+                        <td>${ user.dateOfBirth }</td>
                         <td>${ user.age }</td>
                         <td>${ user.gender }</td>
                         <td>
                         <div class="actions">
-                            <button class="btn edit">
+                            <button class="btn edit" data-id="${ user.id }">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                             class="lucide lucide-pen">
@@ -42,7 +38,7 @@ function table() {
                         </svg>
                             </button>
 
-                            <button class="btn delete" data-id="${user.id}">
+                            <button class="btn delete" data-id="${ user.id }">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
                 <path d="M10 11v6" />
@@ -58,7 +54,11 @@ function table() {
 
     })
 
-    tableBody.innerHTML += `${ rows }`
+    tableBody.innerHTML = `${ rows }`
+
+    /*if (users.length === 0) {
+        
+    }*/
 
 }
 
@@ -115,23 +115,23 @@ cancelBtn.onclick = function () {
 }
 
 // Edit Modal
-let currentRow = null;
 
 const editBtn = document.querySelectorAll(".edit")
 editBtn.forEach(editBtn => {
-    editBtn.addEventListener("click", function () {
-        const row = this.closest("tr");
-        currentRow = row;
+    editBtn.addEventListener("click", () => {
+        selectedUserId = editBtn.dataset.id;
+        const user = users.find(user => { return user.id === selectedUserId });
 
-        const name = row.children[2].textContent;
-        const email = row.children[3].textContent;
-        const dob = row.children[4].textContent;
-        const gender = row.children[6].textContent;
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const dobInput = document.getElementById("date");
+        const male = document.getElementById("male");
+        const female = document.getElementById("female");
+        
 
-        document.getElementById("name").value = name;
-        document.getElementById("email").value = email;
-        document.getElementById("date").value = dob;
-        document.getElementById("gender").value = gender;
+        nameInput.value = user.name;
+        emailInput.value = user.email;
+        dobInput.value = user.dateOfBirth;
 
         editModal.showModal();
     })
@@ -158,34 +158,62 @@ editModal.innerHTML = `
     <input type="date" id="date" name="dob">
 </label>
 
-<label for="gender">
-    Gender:
-    <input type="text" id="gender" placeholder="Male/Female" name="gender">
+<label>
+    Gender
+        <div class="gender">
+            <label class="male" for="male">
+                <input type="radio" name="gender" id="male" value="male">
+                Male
+            </label>
+
+            <label class="female" for="female">
+                <input type="radio" name="gender" id="female" value="female">
+                Female
+            </label>
+        </div>
 </label>
 
-<button id="EditBtn" class="EditBtn">Submit</button>
+<menu>
+    <button class="cancelEdit">Cancel<button>
+    <button id="editBtn" class="editBtn">Submit</button>
+</menu>
+
 </form>
 `
 document.body.append(editModal)
 
-const form = document.getElementById("form");
+const cancel = document.querySelector(".cancelEdit");
+cancel.addEventListener("click", () => {
+    editModal.close();
+})
 
-const toast = document.createElement("div");
-form.addEventListener("submit", function (e) {
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const dobInput = document.getElementById("date");
+
+nameInput.addEventListener("input", () => { validateName(nameInput) })
+emailInput.addEventListener("input", () => { validateEmail(emailInput) })
+dobInput.addEventListener("input", () => { validateDOB(dobInput) })
+
+const form = document.getElementById("form");
+form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const dob = document.getElementById("date").value;
-    const gender = document.getElementById("gender").value;
+    const user = users.find(user => user.id === selectedUserId );
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const dobInput = document.getElementById("date");
+    /*const genderInput = document.getElementById("gender");*/
 
-    currentRow.children[2].textContent = name;
-    currentRow.children[3].textContent = email;
-    currentRow.children[4].textContent = dob;
-    currentRow.children[6].textContent = gender;
+    user.name = nameInput.value;
+    user.email = emailInput.value;
+    user.dateOfBirth = dobInput.value;
+    /*user.gender = genderInput.value;*/
+
+    localStorage.setItem("users", JSON.stringify(users));
+    table()
 
     setTimeout(() => {
-        form.reset();
         editModal.close()
         document.body.removeChild(editModal)
         showToast("Success!", "User updated successfully")
@@ -200,7 +228,8 @@ form.addEventListener("submit", function (e) {
     }, 4000)
 })
 
-export function showToast(status, message) {
+const toast = document.createElement("div");
+function showToast(status, message) {
     toast.className = "toast";
     toast.setAttribute("role", "alert")
     toast.innerHTML = `
