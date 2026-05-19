@@ -54,11 +54,20 @@ function table() {
 
     })
 
-    tableBody.innerHTML = `${ rows }`
+    tableBody.innerHTML = `${ rows }`;
+    attachEditEvents()
 
-    /*if (users.length === 0) {
-        
-    }*/
+    if (users.length === 0) {
+        rows = `
+            <tr>
+                <td class="placeholder" colspan="7">
+                    <strong class="placeholder-msg">No Users Yet</strong>
+                </td>
+            </tr>
+            
+        `   
+        tableBody.innerHTML = `${ rows }`
+    }
 
 }
 
@@ -86,7 +95,7 @@ dialog.innerHTML = `
         <menu>
             <button class="exit">Cancel</button>
             <button class="close">Confirm</button>
-        <menu>
+        </menu>
     </div>
         `
 document.body.appendChild(dialog);
@@ -116,26 +125,28 @@ cancelBtn.onclick = function () {
 
 // Edit Modal
 
-const editBtn = document.querySelectorAll(".edit")
-editBtn.forEach(editBtn => {
-    editBtn.addEventListener("click", () => {
-        selectedUserId = editBtn.dataset.id;
-        const user = users.find(user => { return user.id === selectedUserId });
+function attachEditEvents() {
+    const editBtn = document.querySelectorAll(".edit")
+    editBtn.forEach(editBtn => {
+        editBtn.addEventListener("click", () => {
+            selectedUserId = editBtn.dataset.id;
+            const user = users.find(user => { return user.id === selectedUserId });
 
-        const nameInput = document.getElementById("name");
-        const emailInput = document.getElementById("email");
-        const dobInput = document.getElementById("date");
-        const male = document.getElementById("male");
-        const female = document.getElementById("female");
-        
+            const nameInput = document.getElementById("name");
+            const emailInput = document.getElementById("email");
+            const dobInput = document.getElementById("date");
+            console.log(user.gender)
+            const genderInput = document.querySelector(`input[name="gender"][value="${ user.gender }"]`);
 
-        nameInput.value = user.name;
-        emailInput.value = user.email;
-        dobInput.value = user.dateOfBirth;
+            nameInput.value = user.name;
+            emailInput.value = user.email;
+            dobInput.value = user.dateOfBirth;
+            genderInput.checked = true;
 
-        editModal.showModal();
-    })
-})
+            editModal.showModal();
+        });
+    });
+};
 
 
 const editModal = document.createElement("dialog")
@@ -162,19 +173,19 @@ editModal.innerHTML = `
     Gender
         <div class="gender">
             <label class="male" for="male">
-                <input type="radio" name="gender" id="male" value="male">
+                <input type="radio" name="gender" id="male" value="Male">
                 Male
             </label>
 
             <label class="female" for="female">
-                <input type="radio" name="gender" id="female" value="female">
+                <input type="radio" name="gender" id="female" value="Female">
                 Female
             </label>
         </div>
 </label>
 
-<menu>
-    <button class="cancelEdit">Cancel<button>
+<menu class="editMenu">
+    <button class="cancelEdit" type="button">Cancel</button>
     <button id="editBtn" class="editBtn">Submit</button>
 </menu>
 
@@ -199,23 +210,23 @@ const form = document.getElementById("form");
 form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const user = users.find(user => user.id === selectedUserId );
+    const user = users.find(user => user.id === selectedUserId);
     const nameInput = document.getElementById("name");
     const emailInput = document.getElementById("email");
     const dobInput = document.getElementById("date");
-    /*const genderInput = document.getElementById("gender");*/
+    const selectedGender = document.querySelector('input[name="gender"]:checked')?.value;
 
     user.name = nameInput.value;
     user.email = emailInput.value;
     user.dateOfBirth = dobInput.value;
-    /*user.gender = genderInput.value;*/
+    user.age = calcAge(dobInput.value);
+    user.gender = selectedGender;
 
     localStorage.setItem("users", JSON.stringify(users));
-    table()
+    table();
 
     setTimeout(() => {
         editModal.close()
-        document.body.removeChild(editModal)
         showToast("Success!", "User updated successfully")
     }, 500)
 
@@ -226,19 +237,32 @@ form.addEventListener("submit", (e) => {
     setTimeout(() => {
         document.body.removeChild(toast)
     }, 4000)
-})
+});
+
 
 const toast = document.createElement("div");
 function showToast(status, message) {
+    /*let icon = "";
+    if (status === "Success") {
+        icon = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+        fill="currentColor" class="icon icon-check">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path
+            d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+    </svg>`
+    } else {
+        icon = "";
+    }*/
     toast.className = "toast";
+    toast.classList.add(status);
     toast.setAttribute("role", "alert")
     toast.innerHTML = `
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
-                        fill="currentColor" class="icon icon-check">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
-                    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
+    fill="currentColor" class="icon icon-check">
+    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+    <path
+        d="M17 3.34a10 10 0 1 1 -14.995 8.984l-.005 -.324l.005 -.324a10 10 0 0 1 14.995 -8.336zm-1.293 5.953a1 1 0 0 0 -1.32 -.083l-.094 .083l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.403 1.403l.083 .094l2 2l.094 .083a1 1 0 0 0 1.226 0l.094 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z" />
+</svg>
                     <div class="toast-content">
                         <strong>
                             ${ status }
@@ -247,4 +271,7 @@ function showToast(status, message) {
                     </div>
         `
     document.body.prepend(toast)
+    return toast;
 }
+
+//window.addEventListener("offline", showToast("Failure!", "You are offline!", "failure"))

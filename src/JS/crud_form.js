@@ -10,6 +10,7 @@ const confirmPass_toggle = document.getElementById("confirmPass_toggle");
 const male = document.getElementById("male");
 const female = document.getElementById("female");
 const genderGroup = document.querySelector(".gender");
+const span = document.querySelector("span");
 
 const title = document.title;
 
@@ -33,30 +34,30 @@ if (form) {
         const isValid =
             validateName(name) &&
             validateEmail(email) &&
-            validateDOB() &&
+            validateDOB(dob) &&
             validatePass(password) &&
+            validateConfirmPass(confirm_password) &&
             getGender();
 
         if (isValid) {
-            button.textContent = "Submitted";
+            span.textContent = "Submitted";
 
-            /*button.onclick = function () {
-                button.classList.add("loading")
-                button.setAttribute("disabled", "true")
-    
-                setTimeout(() => {
-                    button.classList.remove("loading")
-                    button.removeAttribute("disabled", "true")
-                }, 3000)       
-            }*/
+            button.classList.add("loading")
+            button.setAttribute("disabled", "true")
+
+            setTimeout(() => {
+                button.classList.remove("loading")
+                button.removeAttribute("disabled") 
+            }, 3000)
+
 
             const users = JSON.parse(localStorage.getItem("users")) || []
             const user = {
                 id: crypto.randomUUID(),
                 name: name.value,
                 email: email.value,
-                dateOfBirth: dob.value,
                 password: password.value,
+                dateOfBirth: dob.value,
                 age: calcAge(dob.value),
                 gender: getGender()
             }
@@ -82,8 +83,13 @@ if (form) {
 
             setTimeout(() => {
                 form.reset();
-                button.textContent = "Submit";
-            }, 500)
+                span.textContent = "Submit";
+                document.title = "Redirecting..."
+            }, 4000)
+
+            setTimeout(() => {
+                window.location.href = "/src/crud_table.html"
+            }, 4500)
         }
     });
 }
@@ -159,7 +165,7 @@ export function validateDOB(Input) {
 
 export function calcAge(date) {
     const today = new Date();
-    const birthDate = new Date(date);   
+    const birthDate = new Date(date);
     let age = today.getFullYear() - birthDate.getFullYear();
     const monthDiff = today.getMonth() - birthDate.getMonth();
     if (monthDiff < 0 || monthDiff === 0 && today.getDate() < birthDate.getDate()) {
@@ -184,12 +190,12 @@ function validatePass(Input) {
     }
 }
 
-function validateConfirmPass() {
-    if (confirm_password.value !== confirm_password.value) {
-        showError(confirm_password, "Passwords do not match");
+function validateConfirmPass(Input) {
+    if (Input.value !== password.value) {
+        showError(Input, "Passwords do not match");
         return false;
     } else {
-        clearError(confirm_password)
+        clearError(Input)
         return true;
     }
 }
@@ -240,22 +246,22 @@ if (confirmPass_toggle) {
 }
 
 if (name) {
-    name.addEventListener("input", () => { validateName(name) });   
+    name.addEventListener("input", () => { validateName(name) });
 }
 if (email) {
-    email.addEventListener("input", () => { validateEmail(email) });   
+    email.addEventListener("input", () => { validateEmail(email) });
 }
 
 if (dob) {
-    dob.addEventListener("input", () => { validateDOB });   
+    dob.addEventListener("input", () => { validateDOB(dob) });
 }
 
 if (password) {
-    password.addEventListener("input", () => { validatePass(password) });    
+    password.addEventListener("input", () => { validatePass(password) });
 }
 
 if (confirm_password) {
-    confirm_password.addEventListener("input", validateConfirmPass);
+    confirm_password.addEventListener("input", () => { validateConfirmPass(confirm_password) });
 }
 
 export function showError(input, message) {
