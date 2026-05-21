@@ -53,7 +53,7 @@
         object-fit: cover;
     }
 
-    button {
+    button:not(.del) {
         border: 2px solid transparent;
         border-radius: .25rem;
         font-size: 1rem;
@@ -96,7 +96,6 @@
         box-shadow: var(--shadow);
         z-index: 1;
     }
-
 
     /*.nav {
         padding: 1rem 5%;
@@ -276,12 +275,14 @@
     
                 </nav>
             </header>-->
+
     <main>
-        
+
     </main>
 
 
     <script type="text/javascript" defer>
+        
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)

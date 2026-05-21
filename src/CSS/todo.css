@@ -1,0 +1,62 @@
+*::before, 
+*::after, 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+    transition:  all .3s ease;
+}
+
+:root {
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    interpolate-size: allow-keywords;
+}
+
+p { outline: none; }
+
+.disabled {
+    background: hsl(0, 0%, 90%, .5);
+    color: hsl(0, 0%, 80%, .5);
+    cursor: not-allowed;
+}
+
+.todo {
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+.date {
+    font-style: italic;
+    color: hsl(0, 0%, 50%);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    width: 500px;
+    height: auto;
+    border-radius: .5rem;
+}
+
+input[type="checkbox"] {
+    accent-color: hsl(210, 80%, 50%);
+}
+
+.done {
+    text-decoration: line-through;
+    opacity: .5;
+}
+
+.del {
+    background: none;
+    border: none;
+    cursor: pointer;
+}

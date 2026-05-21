@@ -241,7 +241,7 @@ form.addEventListener("submit", (e) => {
 
 
 const toast = document.createElement("div");
-function showToast(status, message) {
+export function showToast(status, message) {
     /*let icon = "";
     if (status === "Success") {
         icon = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24"
@@ -273,5 +273,3 @@ function showToast(status, message) {
     document.body.prepend(toast)
     return toast;
 }
-
-//window.addEventListener("offline", showToast("Failure!", "You are offline!", "failure"))
