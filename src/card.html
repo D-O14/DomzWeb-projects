@@ -11,26 +11,40 @@
 <body>
     <main>
         <section>
-            <header>
-                <nav>
-                    <button id="category">Category</button>
-                    <label>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-search">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                            <path d="M21 21l-6 -6" />
-                        </svg>
-                        <input type="search" id="searchInput" autocomplete="off" placeholder="Search">
-                    </label>
-                </nav>
-            </header>
+
+            <div class="elems">
+                <div class="filter">
+                    <button class="trigger">Filter By</button>
+                    <!--<div class="icon"></div>-->
+                    <div class="menu">
+                        <button data-filter="new" class="filterBtn">New</button>
+                        <button data-filter="popular" class="filterBtn">Popular</button>
+                        <button data-filter="rated" class="filterBtn">Most Rated</button>
+                        <button data-filter="expensive" class="filterBtn">Most Expensive</button>
+                        <button data-filter="cheap" class="filterBtn">Least Expensive</button>
+                    </div>
+                </div>
+
+                <label>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-search">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                        <path d="M21 21l-6 -6" />
+                    </svg>
+                    <input type="search" id="searchInput" autocomplete="off" placeholder="Search">
+                </label>
+            </div>
+
+
             <div class="cards">
-    
+
             </div>
         </section>
     </main>
 </body>
 
 <script type="text/javascript" src="/src/js/card.js" defer></script>
+
 </html>

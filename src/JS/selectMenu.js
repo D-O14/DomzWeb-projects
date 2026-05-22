@@ -1,22 +1,22 @@
 const menu = document.querySelector("article");
 const select = document.querySelector(".select");
-const optGroup = document.querySelector("optgroup");
+const ul = document.querySelector("ul");
 const searchInput = document.querySelector("input");
 
 let countries = ["Afghanistan", "Algeria", "Argentina", "Australia", "Bangladesh", "Belgium", "Bhutan", "Brazil", "Canada",
-    "China", "Denmark", "Ethiopia", "Finland", "France", "Germany", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Italy",
+    "China", "Denmark", "Ethiopia", "Finland", "France", "Germany", "Hungary", "Iceland", "India", "Ireland", "Indonesia", "Iran", "Italy",
     "Japan", "Malaysia", "Maldives", "Mexico", "Morocco", "Nepal", "Netherlands", "Nigeria", "Norway", "Pakistan", "Peru", "Russia",
     "Romania", "South Africa", "Spain", "Sri Lanka", "Sweden", "Switzerland", "Thailand", "Turkey", "Uganda", "Ukraine", "United States",
     "United Kingdom", "Vietnam"
 ];
 
 function renderCountry(array) {
-    let options = "";
+    let lists = "";
     array.forEach(array => {
-        options += `<option onclick="updateName(this)">${ array }</option>`;
+        lists += `<li onclick="updateName(this)">${ array }</li>`;
     });
 
-    optGroup.innerHTML = options;
+    ul.innerHTML = lists;
 }
 
 renderCountry(countries);
