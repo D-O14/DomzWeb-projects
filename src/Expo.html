@@ -53,7 +53,7 @@
         object-fit: cover;
     }
 
-    button:not(.del) {
+    button {
         border: 2px solid transparent;
         border-radius: .25rem;
         font-size: 1rem;
@@ -70,8 +70,8 @@
         outline: none;
     }
 
-    input:not(input[type="checkbox"], input[type="radio"]):focus,
-    input:not(input[type="checkbox"], input[type="radio"]):hover {
+    input:not(input[type="checkbox"], input[type="radio"], input[type="range"]):focus,
+    input:not(input[type="checkbox"], input[type="radio"], input[type="range"]):hover {
         scale: 1.02;
         outline: 1px solid hsl(220, 100%, 65%);
         outline-offset: 1px;
@@ -201,6 +201,19 @@
         transform: rotate(90deg);
     }*/
 
+
+    label {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        align-items: start;
+    }
+
+    input[type="range"]{
+        accent-color: hsl(210, 80%, 50%);
+    }
+
+
 </style>
 
 <body>
@@ -275,13 +288,28 @@
     
                 </nav>
             </header>-->
+    <form action="">
+        <label for="search">
+            Pick a date
+            <input type="date" list="dates">
+        </label>
+
+        <datalist id="dates">
+            <option value="2002-01-01"></option>
+            <option value="2005-04-01"></option>
+            <option value="1902-06-31"></option>
+            <option value="2012-07-14"></option>
+            <option value="2000-03-01"></option>
+            <option value="2006-05-11"></option>
+        </datalist>
+    </form>
     <main>
-        
+
     </main>
 
 
     <script type="text/javascript" defer>
-        
+
         /*const showMenu = (toggleId, navId) => {
             const toggle = document.getElementById(toggleId),
                 nav = document.getElementById(navId)
