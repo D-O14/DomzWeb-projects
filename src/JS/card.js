@@ -15,6 +15,7 @@ const products = [
 
 const section = document.querySelector(".cards");
 const filterBtn = document.querySelector("button");
+const searchInput = document.querySelector("input");
 
 function renderCards(items) {
     let cards = "";
@@ -65,3 +66,13 @@ filterBtn.addEventListener("click", () => {
     
     renderCards(filteredProducts);
 });
+
+searchInput.addEventListener("keyup", () => {
+    let arr = [];
+    let searchedVal = searchInput.value.toLowerCase();
+    const searchedCards = products.filter(product => {
+        return product.toLowerCase().startsWith(searchedVal) || product.toLowerCase().includes(searchedVal);
+    })
+
+    renderCards(searchedCards);
+})
