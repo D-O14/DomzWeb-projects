@@ -16,18 +16,45 @@
     interpolate-size: allow-keywords;
 }
 
+body{
+    background: hsl(210, 80%, 5%, .9);
+}
+
 p { outline: none; }
 
-.disabled {
+:disabled {
     background: hsl(0, 0%, 90%, .5);
     color: hsl(0, 0%, 80%, .5);
     cursor: not-allowed;
+    pointer-events: none;
 }
 
 .todo {
     display: flex;
-    gap: .5rem;
     align-items: center;
+    gap: 1rem;
+    background: hsl(210, 80%, 8%);
+    padding: 1em;
+    border-radius: 1rem;
+}
+.todo:hover{
+    transform: translateY(-2px);
+}
+
+.list-wrapper{
+    flex: 1;
+    /*display: flex;
+    align-items: center;
+    gap: .5rem;*/
+}
+
+.list-wrapper p{
+    margin-bottom: .3rem;
+}
+
+.list-wrapper span{
+    font-size: .8rem;
+    opacity: .7;
 }
 
 .date {
@@ -59,4 +86,43 @@ input[type="checkbox"] {
     background: none;
     border: none;
     cursor: pointer;
+}
+
+label,
+.list,
+.del
+{ color: hsl(0, 0%, 100%); }
+
+input[type="text"]{
+    padding: .5em 1em;
+    width: 300px;
+    height: 40px;
+    border-radius: .25rem;
+    border: none;
+    background: hsl(210, 80%, 5%, .5);
+    caret-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 100%);
+    outline: none;
+}
+
+button{
+    border: none;
+    padding: .5em 1em;
+    border-radius: .25rem;
+    color: hsl(0, 0%, 100%);
+    font-weight: 600;
+    background: hsl(210, 80%, 40%);
+    cursor: pointer;
+}
+
+form{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.empty-state{
+    color: hsl(0, 0%, 50%);
+    font-style: italic;
+    font-weight: 400;
 }

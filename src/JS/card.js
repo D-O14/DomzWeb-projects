@@ -16,23 +16,23 @@ const products = [
 const section = document.querySelector(".cards");
 const filterBtn = document.querySelector("button");
 
-function renderCards() {
-    let cards = ""
-    products.forEach(product => {
+function renderCards(items) {
+    let cards = "";
+    items.map(item => {
         cards += `
-    <article class="card">   
+        <article class="card">   
         <figure>
-            <img src="${ product.img }" class="product-img">
-            <span class="category">${ product.category }</span>
+            <img src="${ item.img }" class="product-img">
+            <span class="category">${ item.category }</span>
         </figure>
         <div class="product">
             <div class="product-info">
                 <h1 class="product-name">
-                    ${ product.name }
+                    ${ item.name }
                 </h1>
 
                 <span class="price">
-                    $${ product.price }
+                    $${ item.price }
                 </span>
             </div>
 
@@ -43,29 +43,25 @@ function renderCards() {
             </p>
 
             <div class="tags">
-                <span class="tag">${ product.tag_1 }</span>
-                <span class="tag">${ product.tag_2 }</span>
+                <span class="tag">${ item.tag_1 }</span>
+                <span class="tag">${ item.tag_2 }</span>
             </div>
 
             <button class="cartBtn">Add To Cart</button>
 
         </div>
-    </article>
-    `
+    </article>`
+    }).join("");
+
+    section.innerHTML = cards;
+}
+
+renderCards(products);
+
+filterBtn.addEventListener("click", () => {
+    const filteredProducts = products.filter(product => {
+        return product.category === "Drink";
     });
-
-    section.innerHTML += `${ cards }`;
-}
-
-renderCards();
-
-function filterCards() {
-    filterBtn.addEventListener("click", () => {
-        const filteredProducts = products.filter((product) => {
-            return product?.category === "Coffee";
-        });
-        console.log(filteredProducts)
-    })
-}
-
-filterCards()
+    
+    renderCards(filteredProducts);
+});

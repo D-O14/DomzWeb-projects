@@ -9,13 +9,6 @@ const message = document.querySelector(".toast-message");
 const title = document.title;
 document.addEventListener("visibilitychange", function () {
     document.visibilityState === "hidden" ? document.title = "Oy! You aren't finished here!" : document.title = title;
-    /*if(document.visibilityState === "hidden"){
-        notification = new Notification("Message From DomzWeb", {
-            body: "Come back, please. 🥺",
-            silent: true,
-            tag: "notif"
-        })
-    } else{ notification.close() }*/
 });
 
 let timeout;

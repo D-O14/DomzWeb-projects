@@ -1,11 +1,8 @@
 const groupBtn = document.querySelectorAll(".groupBtn")
 groupBtn.forEach(groupBtn => {
     groupBtn.addEventListener("click", () => {
-        if (groupBtn.classList.contains("active")) {
             groupBtn.classList.remove("active")
-        } else {
             groupBtn.classList.add("active")
-        }
     })
 });
 

@@ -2,6 +2,16 @@ const input = document.querySelector("input");
 const addBtn = document.querySelector(".addBtn");
 const div = document.querySelector("div");
 const form = document.querySelector("form")
+const tabs = document.querySelectorAll(".tab")
+tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+        if (tab.classList.contains("active")) {
+            tab.classList.remove("active")
+        } else {
+            tab.classList.add("active")
+        }
+    })
+})
 
 function createTask() {
     const date = new Date();
@@ -105,13 +115,26 @@ function renderList() {
         lists += `
                 <div class="todo" data-id="${ task.id }">
                     <input type="checkbox" class="check">
-                    <p class="list" contenteditable="true">${ task.text }</p>
-                    <span class="date">${ task.createdAt }</span>
+                    <div class="list-wrapper"> 
+                        <p class="list" contenteditable="true">${ task.text }</p>
+                        <span class="date">${ task.createdAt }</span>
+                    </div>
                     <button class="del" aria-label="delete button">${ icon }</button>
                 </div>`;
     });
 
     div.innerHTML = `${ lists }`
+
+    if (tasks.length === 0) {
+        lists = `
+        <div>
+            <p class="empty-state">
+                No tasks yet. Start creating some
+            </p>
+        </div>`
+
+        div.innerHTML = `${ lists }`
+    }
 }
 
 addBtn.addEventListener("click", e => {
