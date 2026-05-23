@@ -5,7 +5,7 @@ links.forEach(link => {
     })
 })
 
-const navMenu = document.getElementById("nav-menu");
+const navMenu = document.getElementById("nav-list");
 const navToggle = document.getElementById("nav-toggle");
 const navClose = document.getElementById("nav-close");
 
@@ -20,8 +20,3 @@ if (navClose) {
         navMenu.classList.remove("show-menu")
     })
 };
-
-/*window.addEventListener("orientationchange", () => {
-    navToggle.remove();
-    navClose.remove();
-})*/
