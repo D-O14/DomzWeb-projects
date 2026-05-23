@@ -10,6 +10,8 @@ let countries = ["Afghanistan", "Algeria", "Argentina", "Australia", "Bangladesh
     "United Kingdom", "Vietnam"
 ];
 
+let countries = new Set(countries);
+
 function renderCountry(array) {
     let lists = "";
     array.forEach(array => {
