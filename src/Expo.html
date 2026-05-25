@@ -27,19 +27,184 @@
         interpolate-size: allow-keywords;
     }
 
-    .icon{
-        width: 1.25rem;
-        height: 1.25rem;
+    header {
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: hsl(0, 0%, 0%);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        color: hsl(0, 0%, 100%);
+        padding: 1em 2em;
+        height: 60px;
+        position: relative;
+    }
+
+    menu {
+        display: flex;
+        gap: 1rem;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        color: inherit;
+        font-weight: 600;
+    }
+
+    button {
+        padding: .5em 1em;
+        border-radius: 5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        border: 1px solid transparent;
+    }
+
+    a,
+    button {
+        cursor: pointer;
+    }
+
+    .menu {
+        display: flex;
+        color: hsl(0, 0%, 100%);
+    }
+
+    .link {
+        padding: .5em 1em;
+    }
+
+    .icon {
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+
+    .sign {
+        border: 1px solid hsl(0, 0%, 50%);
+        background: none;
+        color: hsl(0, 0%, 100%);
+    }
+
+    .nav-toggle {
+        position: relative;
+        width: 1.8rem;
+        height: 1.8rem;
+        cursor: pointer;
+    }
+
+    .menu,
+    .close {
+        position: absolute;
+        width: fit-content;
+        height: fit-content;
+    }
+
+    .close {
+        opacity: 0;
+    }
+
+    @media screen and (max-width: 1150px) {
+        .nav {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: hsl(0, 0%, 0%);
+            padding-block: 4em;
+            /*opacity: 0;
+            pointer-events: none;*/
+        }
+
+        .menu {
+            flex-direction: column;
+            text-align: start;
+            gap: 1.5rem;
+        }
+    }
+
+    .nav.show-nav {
+        top: 0;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .show-icon .menu {
+        opacity: 0;
+        transform: rotate(360deg);
+    }
+
+    .show-icon .close {
+        opacity: 1;
+        transform: rotate(180deg);
+    }
+
+    .link {
+        padding: 1em 2em;
+    }
+
+    .link:hover {
+        background: hsl(0, 0%, 10%);
+        transform: translateY(-5px);
     }
 </style>
 
 <body>
     <main>
-        
+        <header>
+            <nav>
+                <a href="" class="logo">DomzWeb</a>
+
+                <div class="nav" id="nav">
+                    <ul class="menu">
+                        <a href="" class="link active">Home</a>
+                        <a href="" class="link">About</a>
+                        <a href="" class="link">Services</a>
+                        <a href="" class="link">Products</a>
+                        <a href="" class="link">Blog</a>
+                    </ul>
+                </div>
+
+                <div class="nav-toggle" id="nav-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon menu">
+                        <path d="M3 4H21V6H3V4ZM3 11H21V13H3V11ZM3 18H21V20H3V18Z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="icon close">
+                        <path
+                            d="M11.9997 10.5865L16.9495 5.63672L18.3637 7.05093L13.4139 12.0007L18.3637 16.9504L16.9495 18.3646L11.9997 13.4149L7.04996 18.3646L5.63574 16.9504L10.5855 12.0007L5.63574 7.05093L7.04996 5.63672L11.9997 10.5865Z">
+                        </path>
+                    </svg>
+                </div>
+
+                <menu>
+                    <button class="btn login">Login</button>
+                    <button class="btn sign">Sign Up</button>
+                </menu>
+
+            </nav>
+        </header>
     </main>
 </body>
 
 <script type="text/javascript" defer>
+    const showMenu = (toggleId, navId) => {
+        const toggle = document.getElementById(toggleId),
+            nav = document.getElementById(navId)
+
+        toggle.addEventListener('click', () => {
+            nav.classList.toggle('show-nav')
+            toggle.classList.toggle('show-icon')
+        })
+    }
+
+    showMenu("nav-toggle", "nav");
+
 
 </script>
 

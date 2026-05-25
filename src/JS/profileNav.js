@@ -1,6 +1,7 @@
 const navMenu = document.getElementById("nav-list");
 const navToggle = document.getElementById("nav-toggle");
 const navClose = document.getElementById("nav-close");
+const dropdown = document.getElementById("dropdown");
 
 const links = document.querySelectorAll("a");
 links.forEach(link => {
@@ -27,10 +28,10 @@ if (navClose) {
 };
 
 const showDropdown = (dropdownId) => {
-    const dropdown = document.getElementById(dropdownId)
+    const dropdownList = document.getElementById(dropdownId);
     dropdown.addEventListener("click", () => {
-        dropdown.classList.toggle("show")
+        dropdownList.classList.toggle("show-dropdown")
     })
 };
 
-showDropdown("dropdown");
+showDropdown("dropdown-list");
