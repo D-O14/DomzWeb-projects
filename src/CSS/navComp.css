@@ -80,6 +80,7 @@ button {
 }
 
 .link {
+    opacity: .5;
     padding: .5em 1em;
 }
 
@@ -114,6 +115,20 @@ button {
 
 .close {
     opacity: 0;
+}
+
+.nav::-webkit-scrollbar {
+    width: 7px;
+}
+
+.nav::-webkit-scrollbar-track {
+    background: hsl(0, 0%, 20%);
+    border-radius: 5rem;
+}
+
+.nav::-webkit-scrollbar-thumb {
+    background: hsl(0, 0%, 10%);
+    border-radius: 5rem;
 }
 
 @media screen and (max-width: 1110px) {
@@ -153,20 +168,9 @@ button {
         width: 100%;
     }
 
-    .nav::-webkit-scrollbar {
-        width: 7px;
+    .dropdown:hover {
+        background: hsl(0, 0%, 8%);
     }
-
-    .nav::-webkit-scrollbar-track {
-        background: hsl(0, 0%, 20%);
-        border-radius: 5rem;
-    }
-
-    .nav::-webkit-scrollbar-thumb {
-        background: hsl(0, 0%, 10%);
-        border-radius: 5rem;
-    }
-
 }
 
 @media screen and (max-width: 500px) {
@@ -174,11 +178,18 @@ button {
         top: -100%;
         left: 0;
         width: 100%;
+        /*border-top: 2px solid hsl(0, 0%, 25%, .5);*/
     }
 
     .nav.show-nav {
-        top: 0;
+        top: 3.75rem;
     }
+
+    .dropdown-menu {
+        margin-inline: 1em 1.5em;
+        align-items: stretch;
+    }
+
 }
 
 @media screen and (min-width: 1118px) {
@@ -209,6 +220,7 @@ button {
     position: relative;
     cursor: pointer;
     font-weight: 500;
+    border-radius: .25rem;
 }
 
 .dropdown:hover .link {
@@ -220,6 +232,7 @@ button {
     overflow: hidden;
     border-radius: .25rem;
     background: hsl(0, 0%, 8%);
+    z-index: 1;
 }
 
 .dropdown:hover .dropdown-menu {
