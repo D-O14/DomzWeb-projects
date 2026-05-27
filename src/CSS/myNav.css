@@ -81,7 +81,7 @@ button {
 
 .link {
     opacity: .5;
-    padding: .5em 1em;
+    padding: 1em 1.5em;
 }
 
 .icon {
@@ -132,6 +132,13 @@ button {
 }
 
 @media screen and (max-width: 1110px) {
+    menu {
+        width: 100%;
+        align-items: baseline;
+        flex-direction: column;
+        padding: .5em 1em;
+    }
+
     .nav {
         flex-direction: column;
         gap: 4rem;
@@ -150,18 +157,11 @@ button {
     .menu {
         flex-direction: column;
         width: 100%;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .nav-toggle {
         display: block;
-    }
-
-    menu {
-        width: 100%;
-        align-items: baseline;
-        flex-direction: column;
-        padding: .5em 1em;
     }
 
     .btn {
@@ -178,7 +178,7 @@ button {
         top: -100%;
         left: 0;
         width: 100%;
-        /*border-top: 2px solid hsl(0, 0%, 25%, .5);*/
+        border-top: 2px solid hsl(0, 0%, 25%, .5);
     }
 
     .nav.show-nav {
@@ -189,7 +189,6 @@ button {
         margin-inline: 1em 1.5em;
         align-items: stretch;
     }
-
 }
 
 @media screen and (min-width: 1118px) {
