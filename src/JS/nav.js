@@ -5,7 +5,7 @@ links.forEach(link => {
     })
 })
 
-const navMenu = document.getElementById("nav-list");
+const navMenu = document.getElementById("nav-menu");
 const navToggle = document.getElementById("nav-toggle");
 const navClose = document.getElementById("nav-close");
 

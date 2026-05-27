@@ -1,0 +1,143 @@
+:root {
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    interpolate-size: allow-keywords;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+}
+
+section {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img {
+    width: 100%;
+    border-radius: .5rem;
+    height: auto;
+    aspect-ratio: 16/9;
+    display: block;
+    object-fit: cover;
+    transition: transform .3s ease;
+}
+
+h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: hsl(0, 0%, 10%);
+    transition: color .3s ease;
+}
+
+p {
+    line-height: 1lh;
+    font-size: .95rem;
+    margin-bottom: 1.25rem;
+    color: hsl(0, 0%, 40%);
+    transition: color .3s ease;
+}
+
+span {
+    display: inline-flex;
+    align-items: center;
+    gap: .25rem;
+    font-size: 1rem;
+    transition: color .3s ease;
+}
+
+button {
+    display: inline-flex;
+    align-items: center;
+    border: none;
+    gap: .5rem;
+    padding: .5em 1em;
+    border-radius: .5rem;
+    font-weight: 500;
+    background: hsl(10, 0%, 5%);
+    color: hsl(0, 0%, 90%);
+    transition: background .3s ease;
+    cursor: pointer;
+}
+
+.card {
+    max-width: 300px;
+    width: 100%;
+    height: 350px;
+    box-shadow: var(--shadow);
+    padding: .25rem;
+    text-align: start;
+    transition: transform .3s ease;
+    position: relative;
+    border-radius: 1.25rem;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-content {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: 1.25rem;
+    transition: transform .3s ease;
+    border-bottom-left-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: hsl(0, 0%, 27%);
+}
+
+
+.card:hover .card-content {
+    background: linear-gradient(to top, hsla(217, 76%, 16%, 0.9), hsla(216, 86%, 59%, 0));
+    transform: translateY(-3px);
+    border-bottom-left-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+}
+
+.card:hover img {
+    height: 340px;
+}
+
+.card:hover h2,
+.card:hover span,
+.card:hover p {
+    color: hsl(0, 0%, 90%);
+}
+
+.card:hover button {
+    color: hsl(0, 0%, 25%);
+    background: hsl(0, 0%, 100%);
+}
+
+.card:hover .lucide-badge-check {
+    fill: hsl(210, 80%, 50%);
+    color: hsl(0, 0%, 90%);
+}
+
+.lucide-badge-check {
+    color: hsl(210, 80%, 50%);
+    font-size: 30px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
