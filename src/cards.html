@@ -5,39 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cards</title>
-    <link rel="preload" as="style" href="/src/css/card.css" onload="this.rel='stylesheet'">
+    <link rel="preload" as="style" href="/src/css/cards.css" onload="this.rel='stylesheet'">
 </head>
 
 <body>
-    <main>
-        <section>
+    <!--<header>
+        <nav>
+            <div class="filter">
+                <button class="trigger">Filter By</button>
 
-            <div class="elems">
-                <div class="filter">
-                    <button class="trigger">Filter By</button>
-                    <!--<div class="icon"></div>-->
-                    <div class="menu">
-                        <button data-filter="new" class="filterBtn">New</button>
-                        <button data-filter="popular" class="filterBtn">Popular</button>
-                        <button data-filter="rated" class="filterBtn">Most Rated</button>
-                        <button data-filter="expensive" class="filterBtn">Most Expensive</button>
-                        <button data-filter="cheap" class="filterBtn">Least Expensive</button>
-                    </div>
+                <div class="menu">
+                    <button data-filter="new" class="filterBtn">New</button>
+                    <button data-filter="popular" class="filterBtn">Popular</button>
+                    <button data-filter="rated" class="filterBtn">Most Rated</button>
+                    <button data-filter="expensive" class="filterBtn">Most Expensive</button>
+                    <button data-filter="cheap" class="filterBtn">Least Expensive</button>
                 </div>
-
-                <label>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="icon icon-search">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                        <path d="M21 21l-6 -6" />
-                    </svg>
-                    <input type="search" id="searchInput" autocomplete="off" placeholder="Search">
-                </label>
             </div>
 
+            <label>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon search">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                    <path d="M21 21l-6 -6" />
+                </svg>
+                <input type="search" id="searchInput" autocomplete="off" placeholder="Search">
+            </label>
+        </nav>
+    </header>-->
 
+    <main>
+        <section>
             <div class="cards">
 
             </div>
@@ -45,6 +45,6 @@
     </main>
 </body>
 
-<script type="text/javascript" src="/src/js/card.js" defer></script>
+<script type="text/javascript" src="/src/js/cards.js" defer></script>
 
 </html>
