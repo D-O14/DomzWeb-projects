@@ -1,17 +1,9 @@
 const input = document.querySelector("input");
 const addBtn = document.querySelector(".addBtn");
 const div = document.querySelector("div");
-const form = document.querySelector("form")
-const tabs = document.querySelectorAll(".tab")
-tabs.forEach(tab => {
-    tab.addEventListener("click", () => {
-        if (tab.classList.contains("active")) {
-            tab.classList.remove("active")
-        } else {
-            tab.classList.add("active")
-        }
-    })
-})
+const form = document.querySelector("form");
+const toast = document.createElement("div");
+const template = document.querySelector("template");
 
 function createTask() {
     const date = new Date();
@@ -110,22 +102,17 @@ let icon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewB
 
 function renderList() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    let lists = "";
     tasks.forEach(task => {
-        lists += `
-                <div class="todo" data-id="${ task.id }">
-                    <input type="checkbox" class="check">
-                    <div class="list-wrapper"> 
-                        <p class="list" contenteditable="true">${ task.text }</p>
-                        <span class="date">${ task.createdAt }</span>
-                    </div>
-                    <button class="del" aria-label="delete button">${ icon }</button>
-                </div>`;
+        const todo = template.content.cloneNode(true);
+        todo.querySelector(".list").textContent = `${ task.text }`;
+        todo.querySelector(".date").textContent = `${ task.createdAt }`;
+        //todo.querySelector(".del").textContent = `${ icon }`;
+        todo.querySelector(".todo").dataset.id = `${ task.id }`;
+
+        div.append(todo);
     });
 
-    div.innerHTML = `${ lists }`
-
-    if (tasks.length === 0) {
+    /*if (tasks.length === 0) {
         lists = `
         <div>
             <p class="empty-state">
@@ -134,7 +121,7 @@ function renderList() {
         </div>`
 
         div.innerHTML = `${ lists }`
-    }
+    }*/
 }
 
 addBtn.addEventListener("click", e => {
@@ -174,10 +161,16 @@ div.addEventListener("click", e => {
             tasks = tasks.filter(task => { return task.id !== id });
             localStorage.setItem("tasks", JSON.stringify(tasks));
             renderList();
-            const notif = new Notification("Message from domzTasks", {
-                body: "Task Completed!"
-            })
+            showToast("Success!", "Task completed!")
         }, 2000)
+
+        setTimeout(() => {
+            toast.classList.add("close");
+        }, 4000);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 4500);
     }
 
     const delBtn = e.target.closest(".del")
@@ -188,11 +181,26 @@ div.addEventListener("click", e => {
         let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
         tasks = tasks.filter(task => { return task.id !== id });
         localStorage.setItem("tasks", JSON.stringify(tasks));
+        showToast("Success!", "Task deleted!");
 
-        const notif = new Notification("Message from domzTasks", {
-            body: "Task deleted"
-        })
+        setTimeout(() => {
+            toast.classList.add("close");
+        }, 4000);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 4500);
     }
+
 });
 
 window.addEventListener("load", () => { renderList() });
+
+function showToast(status, message) {
+    toast.className = "toast";
+    toast.innerHTML = `
+        <strong>${ status }</strong>
+        <p>${ message }</p>
+    `
+    document.body.prepend(toast);
+}

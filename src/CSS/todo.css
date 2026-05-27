@@ -126,3 +126,43 @@ form{
     font-style: italic;
     font-weight: 400;
 }
+
+.toast{
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    box-shadow: var(--shadow);
+    padding: 1em 2em;
+    color: hsl(0, 0%, 100%);
+    background: hsl(210, 80%, 8%);
+    border-radius: .5rem;
+    transform: translateY(-100%) scale(0);
+    margin: 0 auto;
+    animation: popOver .3s linear forwards;
+}
+
+@keyframes popOver {
+    from {
+        transform: translateY(-100%) scale(0);
+    }
+
+    to {
+        transform: translateY(1.25rem) scale(1)
+    }
+}
+
+.toast.close {
+    animation: popOut .3s ease forwards;
+}
+
+@keyframes popOut {
+    0% {
+        transform: translateY(0) scale(1);
+    }
+
+    100% {
+        transform: translateY(-100%) scale(0);
+    }
+}

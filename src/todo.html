@@ -14,8 +14,20 @@
         </form>
         
         <div class="container">
-        
+
+            <template>
+                <div class="todo" data-id="">
+                    <input type="checkbox" class="check">
+                    <div class="list-wrapper">
+                        <p class="list" contenteditable="true"></p>
+                        <span class="date"></span>
+                    </div>
+                    <button class="del" aria-label="delete button"></button>
+                </div>
+            </template>
+            
         </div>
+
     </main>
     
 </body>
