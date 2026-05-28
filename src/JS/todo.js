@@ -1,9 +1,10 @@
 const input = document.querySelector("input");
 const addBtn = document.querySelector(".addBtn");
-const div = document.querySelector("div");
+const container = document.querySelector(".container");
 const form = document.querySelector("form");
 const toast = document.createElement("div");
-const template = document.querySelector("template");
+const taskTemplate = document.querySelector("#taskTemplate");
+const emptyTemplate = document.querySelector("#emptyTemplate");
 
 function createTask() {
     const date = new Date();
@@ -91,37 +92,23 @@ function formatDate() {
     }, 60000);
 }*/
 
-let icon = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash">
-                <path d="M10 11v6" />
-                <path d="M14 11v6" />
-                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" />
-                <path d="M3 6h18" />
-                <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
-            </svg>`;
-
 function renderList() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    container.innerHTML = "";
+
     tasks.forEach(task => {
-        const todo = template.content.cloneNode(true);
+        const todo = taskTemplate.content.cloneNode(true);
         todo.querySelector(".list").textContent = `${ task.text }`;
         todo.querySelector(".date").textContent = `${ task.createdAt }`;
-        //todo.querySelector(".del").textContent = `${ icon }`;
         todo.querySelector(".todo").dataset.id = `${ task.id }`;
 
-        div.append(todo);
+        container.append(todo);
     });
 
-    /*if (tasks.length === 0) {
-        lists = `
-        <div>
-            <p class="empty-state">
-                No tasks yet. Start creating some
-            </p>
-        </div>`
-
-        div.innerHTML = `${ lists }`
-    }*/
+    if (tasks.length === 0) {
+        const emptyState = emptyTemplate.content.cloneNode(true);
+        container.append(emptyState);
+    }
 }
 
 addBtn.addEventListener("click", e => {
@@ -138,7 +125,7 @@ validateInput();
 
 input.addEventListener("input", validateInput);
 
-div.addEventListener("input", e => {
+container.addEventListener("input", e => {
     if (e.target.classList.contains("list")) {
         const todo = e.target.closest(".todo");
         const id = todo.dataset.id;
@@ -149,7 +136,7 @@ div.addEventListener("input", e => {
     }
 }, true);
 
-div.addEventListener("click", e => {
+container.addEventListener("click", e => {
     if (e.target.classList.contains("check")) {
         const todo = e.target.closest(".todo");
         const id = todo.dataset.id;
@@ -161,16 +148,16 @@ div.addEventListener("click", e => {
             tasks = tasks.filter(task => { return task.id !== id });
             localStorage.setItem("tasks", JSON.stringify(tasks));
             renderList();
-            showToast("Success!", "Task completed!")
-        }, 2000)
+            //showToast("Success!", "Task completed!")
+        }, 1000)
 
-        setTimeout(() => {
+        /*setTimeout(() => {
             toast.classList.add("close");
-        }, 4000);
+        }, 3000);
 
         setTimeout(() => {
             toast.remove();
-        }, 4500);
+        }, 3500);*/
     }
 
     const delBtn = e.target.closest(".del")
@@ -181,15 +168,15 @@ div.addEventListener("click", e => {
         let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
         tasks = tasks.filter(task => { return task.id !== id });
         localStorage.setItem("tasks", JSON.stringify(tasks));
-        showToast("Success!", "Task deleted!");
+        //showToast("Success!", "Task deleted!");
 
-        setTimeout(() => {
+        /*setTimeout(() => {
             toast.classList.add("close");
-        }, 4000);
+        }, 3000);
 
         setTimeout(() => {
             toast.remove();
-        }, 4500);
+        }, 3500);*/
     }
 
 });

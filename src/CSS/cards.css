@@ -110,14 +110,13 @@ img {
     border-radius: 1.25rem 0 1.25rem 0;
     background: hsl(25, 90%, 50%);
     color: hsla(0, 0%, 100%);
-    transition: .5s ease;
 }
 
 .cartBtn:hover {
-    background: hsl(25, 90%, 50%);
     width: 100%;
     scale: .95;
     border-bottom: 4px solid hsl(25, 90%, 40%);
+    background: hsl(25, 90%, 40%);
 }
 
 .cartBtn span {

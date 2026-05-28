@@ -3,14 +3,13 @@ const body = document.querySelector("body"),
 	toggle = body.querySelector(".sidebar"),
 	searchBtn = body.querySelector(".search-box"),
 	modeSwitch = body.querySelector(".toggle-switch"),
-	modeText = body.querySelector(".mode-text");
+	modeText = body.querySelector(".mode-text"),
+	links = body.querySelectorAll("a");
+
+links.forEach(link => { link.addEventListener("click", (e) => { e.preventDefault() }) });
 
 toggle.addEventListener("click", () => {
 	sidebar.classList.toggle("close");
-});
-
-searchBtn.addEventListener("click", () => {
-	sidebar.classList.remove("close");
 });
 
 modeSwitch.addEventListener("click", () => {

@@ -21,7 +21,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        transition: all .3s ease;
+        transition: all .5s ease;
         font-family: system-ui;
     }
 
@@ -33,288 +33,45 @@
         interpolate-size: allow-keywords;
     }
 
-    button {
-        appearance: none;
-        padding: .5em 1em;
-        font-size: 1rem;
-        font-weight: 600;
-        border-radius: .25rem;
-        border: 1px solid transparent;
-    }
-
-    a,
-    button {
-        cursor: pointer;
-        color: inherit;
-        display: inline-flex;
+    body{
+        display: flex;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
+        min-height: 100dvh;
     }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    button {
-        text-transform: capitalize;
-    }
-
-    p,
-    span,
-    blockquote,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        line-height: 1.5;
-        letter-spacing: .5px;
-    }
-
-    img {
-        width: 100%;
-        height: 100%;
-        display: block;
-        aspect-ratio: 16/9;
-        object-fit: cover;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 350px;
+    .flexbox{
         display: flex;
-        flex-direction: column;
-        padding: .5em;
-        border-radius: .5rem;
-        box-shadow: var(--shadow);
-        gap: 1rem;
+        flex-wrap: wrap;
+        width: 500px;
+        height: 500px;
+        border: 4px solid;
     }
 
-    .card-content {
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        padding: 1em 1em 1em;
-        gap: 1rem;
-    }
-
-    .card-header {
-        background: hsla(16, 100%, 66%, .15);
-        position: relative;
-        width: 100%;
-        height: 200px;
-        border-radius: .5rem;
-    }
-
-    .cartBtn {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        border-radius: 1.25rem 0 1.25rem 0;
-        background: hsl(25, 90%, 50%);
-        color: hsla(0, 0%, 100%);
-        transition: .5s ease;
-    }
-
-    .cartBtn:hover {
-        background: hsl(25, 90%, 50%);
-        width: 100%;
-        scale: .95;
-        border-bottom: 4px solid hsl(25, 90%, 40%);
-    }
-
-    .cartBtn span {
-        display: none;
-        opacity: 0;
-        transform: translateX(-5px);
-    }
-
-    .cartBtn:hover span {
-        display: block;
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    .likeBtn {
-        padding: .25em .25em;
-        border-radius: 50%;
-        color: hsl(0, 0%, 10%);
-        background: hsl(0, 0%, 100%);
-        box-shadow: var(--shadow);
-    }
-
-    .options {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: absolute;
-        padding: .5em 1em;
-        top: 0;
-        right: 0;
-        z-index: 1;
-    }
-
-    .category {
-        position: absolute;
-        top: -10px;
-        left: -20px;
-        font-weight: 600;
-        color: hsl(0, 0%, 100%);
-        background: hsl(16, 100%, 66%);
-        padding: .5em 1em;
-        border-radius: .5rem;
-        box-shadow: var(--shadow);
-    }
-
-    .desc {
-        display: -webkit-box;
-        line-clamp: 2;
-        -webkit-line-clamp: 2;
-        opacity: .75;
-        text-align: start;
-        max-width: 25ch;
-        margin-bottom: 1.25rem;
-    }
-
-    .specs {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .rating {
-        display: inline-flex;
-        align-items: center;
-        font-weight: 600;
-        gap: .5rem;
-    }
-
-    .star {
-        color: hsl(51, 100%, 50%);
-    }
-
-    .icon {
-        width: 1.5rem;
-        height: 1.5rem;
-        vertical-align: middle;
-        transform: translateY(0) translateX(0);
-        cursor: pointer;
-    }
-
-    .price {
-        font-size: 1.25rem;
-        font-weight: 600;
-    }
-
-    .tags {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: .75rem;
-    }
-
-    .tag {
+    .box{
         flex: 1;
-        padding: .25em .75em;
-        font-size: 1rem;
-        font-weight: 600;
-        text-transform: capitalize;
-        border: 1px solid hsl(16, 100%, 66%);
-        color: hsl(16, 100%, 66%);
+        padding: .5em 1em;
+        background: hsl(340, 57%, 64%);
+        width: 100px;
+        height: 100px;
+        border: 8px solid hsl(0, 80%, 50%);
         border-radius: .5rem;
-        text-align: center;
     }
+
 </style>
 
 <body>
     <main>
-        <template>
-            <article class="card">
-                <div class="card-header">
-                    <img src="/public/assets/images/coffee.png" alt="Decorative Image" class="img">
-                    <span class="category">Drink</span>
-                    <div class="options">
-                        <button class="likeBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="icon heart">
-                                <path
-                                    d="M12 8.81056L13.6352 6.48845C14.2721 5.58412 15.3179 5 16.5 5C18.433 5 20 6.567 20 8.5C20 11.3788 18.0407 14.1215 15.643 16.3358C14.4877 17.4027 13.3237 18.2603 12.4451 18.8521C12.2861 18.9592 12.1371 19.0571 11.9999 19.1456C11.8627 19.0571 11.7137 18.9592 11.5547 18.8521C10.6761 18.2604 9.51216 17.4028 8.35685 16.3358C5.95926 14.1216 4 11.3788 4 8.5C4 6.567 5.567 5 7.5 5C8.68209 5 9.72794 5.58412 10.3648 6.48845L12 8.81056ZM10.5557 3.92626C9.68172 3.3412 8.63071 3 7.5 3C4.46243 3 2 5.46243 2 8.5C2 16 11.9999 21.4852 11.9999 21.4852C11.9999 21.4852 22 16 22 8.5C22 5.46243 19.5376 3 16.5 3C15.3693 3 14.3183 3.3412 13.4443 3.92626C12.8805 4.3037 12.3903 4.78263 12 5.33692C11.6097 4.78263 11.1195 4.3037 10.5557 3.92626Z">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card-content">
-                    <div class="tags">
-                        <span class="tag tag_1">Popular</span>
-                        <span class="tag tag_2">450kcal</span>
-                        <span class="rating">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                class="icon star">
-                                <path
-                                    d="M11.9998 17L6.12197 20.5902L7.72007 13.8906L2.48926 9.40983L9.35479 8.85942L11.9998 2.5L14.6449 8.85942L21.5104 9.40983L16.2796 13.8906L17.8777 20.5902L11.9998 17Z">
-                                </path>
-                            </svg>
-                            4.7
-                        </span>
-                    </div>
-                    <div class="specs">
-                        <h1 class="name">Coffee Cup</h1>
-                        <span class="price">$16.6</span>
-                    </div>
-
-                    <p class="desc">
-                        Creamy iced coffee with cocoa foam made from pure, fresh, imported cocoa beans.
-                    </p>
-
-                    <menu class="specs">
-                        <button class="cartBtn" aria-label="Add To Cart Button">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-                                stroke="none" class="icon cart">
-                                <path
-                                    d="M4.00436 6.41686L0.761719 3.17422L2.17593 1.76001L5.41857 5.00265H20.6603C21.2126 5.00265 21.6603 5.45037 21.6603 6.00265C21.6603 6.09997 21.6461 6.19678 21.6182 6.29L19.2182 14.29C19.0913 14.713 18.7019 15.0027 18.2603 15.0027H6.00436V17.0027H17.0044V19.0027H5.00436C4.45207 19.0027 4.00436 18.5549 4.00436 18.0027V6.41686ZM6.00436 7.00265V13.0027H17.5163L19.3163 7.00265H6.00436ZM5.50436 23.0027C4.67593 23.0027 4.00436 22.3311 4.00436 21.5027C4.00436 20.6742 4.67593 20.0027 5.50436 20.0027C6.33279 20.0027 7.00436 20.6742 7.00436 21.5027C7.00436 22.3311 6.33279 23.0027 5.50436 23.0027ZM17.5044 23.0027C16.6759 23.0027 16.0044 22.3311 16.0044 21.5027C16.0044 20.6742 16.6759 20.0027 17.5044 20.0027C18.3328 20.0027 19.0044 20.6742 19.0044 21.5027C19.0044 22.3311 18.3328 23.0027 17.5044 23.0027Z">
-                                </path>
-                            </svg>
-                            <span>Add To Cart</span>
-                        </button>
-                    </menu>
-                </div>
-            </article>
-        </template>
-
-        <div class="cards">
-
+        <div class="flexbox">
+            <div class="box">box-1</div>
+            <div class="box">box-2</div>
+            <div class="box">box-3</div>
         </div>
     </main>
 </body>
 
 <script type="text/javascript" defer>
-    const products = [
-        { name: "product 1", price: 15.01, tag_1: "Popular", tag_2: "150kcal", category: "Drink" },
-        { name: "product 2", price: 16.6, tag_1: "popular", tag_2: "450kcal", category: "Pastry" },
-        { name: "product 3", price: 25.5, tag_1: "New", tag_2: "750kcal", category: "Food" },
-    ]
-
-    const cards = document.querySelector(".cards");
-    const template = document.querySelector("template");
     
-    products.map(product => {
-        const card = template.content.cloneNode(true);
-        card.querySelector(".name").textContent = `${ product.name }`;
-        card.querySelector(".price").textContent = `$${ product.price }`;
-        card.querySelector(".tag_1").textContent = `${ product.tag_1 }`;
-        card.querySelector(".tag_2").textContent = `${ product.tag_2 }`;
-        card.querySelector(".category").textContent = `${ product.category }`;
-
-        cards.append(card);
-    })
-
 </script>
 
 </html>

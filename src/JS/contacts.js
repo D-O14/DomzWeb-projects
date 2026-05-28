@@ -1,8 +1,8 @@
-const groupBtn = document.querySelectorAll(".groupBtn")
-groupBtn.forEach(groupBtn => {
+const groupBtns = document.querySelectorAll(".groupBtn");
+groupBtns.forEach(groupBtn => {
     groupBtn.addEventListener("click", () => {
-            groupBtn.classList.remove("active")
-            groupBtn.classList.add("active")
+        groupBtns.forEach(groupBtn => { groupBtn.classList.remove("active") });
+        groupBtn.classList.add("active");
     })
 });
 

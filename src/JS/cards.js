@@ -24,7 +24,7 @@ const template = document.querySelector("template");
 
 
 function renderCards(items) {
-    items.forEach(item => {
+    items.map(item => {
         const card = template.content.cloneNode(true);
         card.querySelector(".name").textContent = `${ item.name }`;
         card.querySelector(".price").textContent = `$${ item.price }`;
@@ -32,15 +32,16 @@ function renderCards(items) {
         card.querySelector(".category").textContent = `${ item.category }`;
         card.querySelector(".tag_1").textContent = `${ item.tag_1 }`;
         card.querySelector(".tag_2").textContent = `${ item.tag_2 }`;
-        //card.querySelector(".rating").textContent = `${ item.rating }`;
+        card.querySelector(".rating").innerHTML += `${ item.rating }`;
 
         cardSection.append(card);
     })
+
 }
 
 renderCards(products);
 
-filter.addEventListener("click", () => { menu.classList.toggle("open") });
+/*filter.addEventListener("click", () => { menu.classList.toggle("open") });
 
 buttons.forEach(button => {
     button.addEventListener("click", () => {
@@ -110,4 +111,4 @@ searchInput.addEventListener("input", (e) => {
         searchProducts(e.target.value);
     }, 500)
 });
-
+*/
