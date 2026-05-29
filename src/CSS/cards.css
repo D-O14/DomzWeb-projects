@@ -68,19 +68,18 @@ img {
 }
 
 .cards{
-    display: flex;
-    align-items: center;
+    display: grid;
+    /*align-items: center;
     justify-content: center;
-    /*grid-template-rows: repeat(3, 350px);
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));*/
-    flex-wrap: wrap;
-    gap: 2.5rem;
-    padding: 2.5em;
+    flex-wrap: wrap;*/
+    grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5em;
 }
 
 .card {
     display: flex;
-    flex: 0 0 350px;
+    /*flex: 0 0 350px;*/
     flex-direction: column;
     padding: .5em;
     border-radius: .5rem;
