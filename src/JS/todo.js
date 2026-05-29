@@ -18,7 +18,6 @@ function createTask() {
 
     tasks.push(task)
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log(localStorage);
 
     renderList();
     form.reset();
@@ -101,6 +100,8 @@ function renderList() {
         todo.querySelector(".list").textContent = `${ task.text }`;
         todo.querySelector(".date").textContent = `${ task.createdAt }`;
         todo.querySelector(".todo").dataset.id = `${ task.id }`;
+        todo.querySelector("#check").id = `task-${ task.id }`;
+        todo.querySelector("label").setAttribute("for", `task-${ task.id }`);
 
         container.append(todo);
     });

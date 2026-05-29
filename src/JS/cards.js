@@ -20,12 +20,13 @@ const filter = document.querySelector(".filter");
 const menu = document.querySelector(".menu");
 const buttons = document.querySelectorAll(".filterBtn");
 */
-const template = document.querySelector("template");
+const cardTemplate = document.querySelector("template");
 
 
 function renderCards(items) {
-    items.map(item => {
-        const card = template.content.cloneNode(true);
+    cardSection.innerHTML = "";
+    items.forEach(item => {
+        const card = cardTemplate.content.cloneNode(true);
         card.querySelector(".name").textContent = `${ item.name }`;
         card.querySelector(".price").textContent = `$${ item.price }`;
         card.querySelector(".img").src = `${ item.img }`;

@@ -71,6 +71,8 @@ img {
     display: flex;
     align-items: center;
     justify-content: center;
+    /*grid-template-rows: repeat(3, 350px);
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));*/
     flex-wrap: wrap;
     gap: 2.5rem;
     padding: 2.5em;
