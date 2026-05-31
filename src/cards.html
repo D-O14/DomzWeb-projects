@@ -9,9 +9,9 @@
 </head>
 
 <body>
-    <!--<header>
+    <header>
         <nav>
-            <div class="filter">
+            <!--<div class="filter">
                 <button class="trigger">Filter By</button>
 
                 <div class="menu">
@@ -21,20 +21,57 @@
                     <button data-filter="expensive" class="filterBtn">Most Expensive</button>
                     <button data-filter="cheap" class="filterBtn">Least Expensive</button>
                 </div>
-            </div>
+            </div>-->
 
-            <label>
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon search">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                    <path d="M21 21l-6 -6" />
-                </svg>
-                <input type="search" id="searchInput" autocomplete="off" placeholder="Search">
-            </label>
+            <div class="search-box">
+                <label class="box">
+                    <span class="loader"></span>
+                    <input type="search" class="search" placeholder="Search Products" autocomplete="off">
+                    <button class="cancel">&times;</button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon search">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                        <path d="M21 21l-6 -6" />
+                    </svg>
+                </label>
+
+                <div class="results">
+                    <template class="resCardTemp">
+                        <article class="rescard">
+                            <figure class="resCard-img">
+                                <img src="/" alt="product image" class="img">
+                            </figure>
+                            <div class="resCard-content">
+                                <div class="info">
+                                    <h1 class="product-name"></h1>
+                                    <p class="description">Creamy iced coffee with cocoa foam made from pure, fresh, imported
+                                        cocoa beans.
+                                    </p>
+                                </div>
+
+                                <div class="details">
+                                    <span class="category"></span>
+                                    <span class="price"></span>
+                                </div>
+                            </div>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                class="icon arrow">
+                                <path
+                                    d="M5.63589 19.7784L4.22169 18.3644L15.657 6.92908L10.0712 6.92908V4.92908L19.0712 4.92908L19.0712 13.9291H17.0712L17.0712 8.34326L5.63589 19.7784Z">
+                                </path>
+                            </svg>
+                        </article>
+                    </template>
+
+                    <template class="empty">
+                        <p class="empty-state">No Results Found</p>
+                    </template>
+                </div>
+            </div>
         </nav>
-    </header>-->
+    </header>
 
     <main>
         <section>
@@ -42,7 +79,7 @@
                 <template id="cardTemplate">
                     <article class="card">
                         <div class="card-header">
-                            <img src="/" alt="Decorative Image" class="img">
+                            <img src="/" alt="Product Image" class="img">
                             <span class="category"></span>
                             <div class="options">
                                 <button class="likeBtn">

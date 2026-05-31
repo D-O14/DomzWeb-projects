@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Creation Form</title>
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="/src/css/acc_form.css">
+</head>
+<body>
+    <main>
+        <section>
+            <form autocomplete="off">
+                <label for="fileInp">
+                    <input type="file" name="file" id="fileInp">
+                </label>
+                <label for="nameInp">
+                    <input type="text" name="name" id="nameInp" placeholder="John Doe">
+                </label>
+
+                <label for="userNameInp">
+                    <input type="text" name="name" id="userNameInp" placeholder="@John_123">
+                </label>
+
+                <label for="emailInp">
+                    <input type="email" name="email" id="emailInp" placeholder="johndoe@gmail.com">
+                </label>
+
+                <label for="passInp">
+                    <input type="password" name="password" id="passInp" placeholder="p@$s_w0rd">
+                </label>
+
+                <label for="bio">
+                    <textarea name="bio" id="bio" placeholder="Some info about me ( optional )"></textarea>
+                </label>
+                <button>Create Account</button>
+            </form>
+        </section>
+    </main>
+</body>
+
+<script src="/src/js/acc_form.js" defer></script>
+</html>

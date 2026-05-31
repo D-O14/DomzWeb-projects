@@ -77,9 +77,7 @@ if (form) {
                 users.push(user)
             }
 
-            console.log(user);
             localStorage.setItem("users", JSON.stringify(users));
-            console.log(localStorage);
 
             setTimeout(() => {
                 form.reset();

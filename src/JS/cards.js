@@ -1,10 +1,10 @@
 const products = [
-    { name: "Parfait Plate", price: 7.55, img: "/public/assets/images/cafe_items (4).jpg", category: "Fruity", tag_1: "New", tag_2: "Popular", rating: 4.65},
-    { name: "Fruit Fritters", price: 2.35, img: "/public/assets/images/cafe_items (6).jpg", category: "Fruity", tag_1: "New", tag_2: "Popular", rating: 4.8},
+    { name: "Parfait Plate", price: 7.55, img: "/public/assets/images/cafe_items (4).jpg", category: "Fruit", tag_1: "New", tag_2: "Popular", rating: 4.65},
+    { name: "Fruit Fritters", price: 2.35, img: "/public/assets/images/cafe_items (6).jpg", category: "Fruit", tag_1: "New", tag_2: "Popular", rating: 4.8},
     { name: "Strawberry Bread", price: 10.00, img: "/public/assets/images/cafe_items (7).jpg", category: "Baked", tag_1: "New", tag_2: "Popular", rating: 5.0},
     { name: "Chicken Pie", price: 12.5, img: "/public/assets/images/cafe_items (9).jpg", category: "Baked", tag_1: "Favorite", tag_2: "New", rating: 4.95},
     { name: "Coffee Cup", price: 2.16, img: "/public/assets/images/coffee.png", category: "Drink", tag_1: "Popular", tag_2: "450kcal", rating: 4.16},
-    { name: "Banana Sandwich", price: 2.35, img: "/public/assets/images/pic_unsplash (6).jpg", category: "Fruity", tag_1: "Popular", tag_2: "New", rating: 4.16 },
+    { name: "Banana Sandwich", price: 2.35, img: "/public/assets/images/pic_unsplash (6).jpg", category: "Fruit", tag_1: "Popular", tag_2: "New", rating: 4.16 },
     { name: "Cup 'O' Coffee", price: 10.00, img: "/public/assets/images/pic_unsplash (7).jpg", category: "Drink", tag_1: "Popular", tag_2: "New", rating: 4.16 },
     { name: "Mug 'O' Coffee", price: 12.5, img: "/public/assets/images/pic_unsplash (9).jpg", category: "Drink", tag_1: "Favorite", tag_2: "Popular", rating: 4.16 },
     { name: "Cheese Cake", price: 7.55, img: "/public/assets/images/pic_unsplash (4).jpg", category: "Pastry", tag_1: "New", tag_2: "New", rating: 3.76 },
@@ -14,14 +14,22 @@ const products = [
 ];
 
 const cardSection = document.querySelector(".cards");
-/*const filterBtn = document.querySelector("button");
-const searchInput = document.querySelector("input");
-const filter = document.querySelector(".filter");
-const menu = document.querySelector(".menu");
-const buttons = document.querySelectorAll(".filterBtn");
-*/
-const cardTemplate = document.querySelector("template");
+const searchBox = document.querySelector(".search");
+const resultBox = document.querySelector(".results");
+const resCard = document.querySelector(".resCardTemp");
+const loader = document.querySelector(".loader");
+const empty = document.querySelector(".empty");
+const cancel = document.querySelector(".cancel");
+const cardTemplate = document.querySelector("#cardTemplate");
 
+searchBox.addEventListener("focus", () => {
+    const box = searchBox.closest(".box");
+    box.classList.add("focus");
+    resultBox.classList.add("active");
+    const myUrl = new URLSearchParams(window.location.search);
+    myUrl.set("url", "/search");
+    history.replaceState({}, "", `?${ myUrl.toString() }`);
+})
 
 function renderCards(items) {
     cardSection.innerHTML = "";
@@ -42,74 +50,59 @@ function renderCards(items) {
 
 renderCards(products);
 
-/*filter.addEventListener("click", () => { menu.classList.toggle("open") });
+function loadResults(items) {
+    resultBox.innerHTML = "";
+    items.forEach(item => {
+        /*const results = resCard.content.cloneNode(true);
+        results.querySelector(".img").src = `${ item.img }`;
+        results.querySelector(".name").textContent = `${ item.name }`;
+        results.querySelector(".price").textContent = `$${ item.price }`;
+        results.querySelector(".category").textContent = `${ item.category }`;
+        resultBox.append(results);*/
+    });
+}
 
-buttons.forEach(button => {
-    button.addEventListener("click", () => {
-        filterBtn.textContent = button.textContent;
-        menu.classList.remove("open");
+loadResults(products);
 
-        buttons.forEach(button => {
-            button.classList.remove("active");
-        })
 
-        button.classList.add("active");
-    })
-})
+function searchProducts(items) {
+    let searchedVal = searchBox.value.toLowerCase();
+    const searchedRes = items.filter(item => {
+        return item.name.toLowerCase().startsWith(searchedVal) || item.name.toLowerCase().includes(searchedVal);
+    });
 
-menu.addEventListener("click", e => {
-    const button = e.target.closest("button");
-    const filter = button.dataset.filter;
-    if (!button) return;
+    loadResults(searchedRes);
 
-    if (filter === "cheap") {
-        const filtered = products.filter(product => {
-            return product.price < 10;
-        })
-        console.log(filter, filtered)
-        renderCards(filtered);
-    } else if (filter === "new") {
-        const filtered = products.filter(product => {
-            return product.tag_1 === "New";
-        })
-        console.log(filter, filtered)
-        renderCards(filtered);
-    } else if (filter === "rated") {
-        const filtered = products.filter(product => {
-            return product.tag_1 === "New";
-        })
-        console.log(filter, filtered)
-        renderCards(filtered);
-    } else if (filter === "expensive") {
-        const filtered = products.filter(product => {
-            return product.price >= 10;
-        })
-        console.log(filter, filtered)
-        renderCards(filtered);
-    } else if (filter === "popular") {
-        const filtered = products.filter(product => {
-            return product.tag_1 === "Popular";
-        })
-        console.log(filter, filtered)
-        renderCards(filtered);
-    }
-})
+    const myUrl = new URLSearchParams(window.location.search);
+    myUrl.set("search", searchedVal);
+    history.replaceState({}, "", `?${ myUrl.toString() }`);
 
-function searchProducts(value) {
-    let arr = [];
-    let searchedVal = searchInput.value.toLowerCase();
-    const searchedCards = products.filter(product => {
-        return product.name.toLowerCase().startsWith(searchedVal) && product.name.toLowerCase().includes(searchedVal);
-    });    
-
-    renderCards(searchedCards);
+    if (searchedRes.length === 0) {
+        resultBox.innerHTML = "";
+        const emptyState = empty.content.cloneNode(true);
+        resultBox.append(emptyState);
+    };
 }
 
 let timeout;
-searchInput.addEventListener("input", (e) => {
+searchBox.addEventListener("input", (e) => {
     clearTimeout(timeout);
+    loader.classList.add("loading");
     timeout = setTimeout(() => {
-        searchProducts(e.target.value);
-    }, 500)
+        searchProducts(products);
+        loader.classList.remove("loading");
+    }, 1000);
+
+    searchBox.value.trim() === "" ? cancel.classList.remove("visible") : cancel.classList.add("visible");
 });
-*/
+
+cancel.addEventListener("click", () => {
+    searchBox.value = "";
+    loadResults(products);
+})
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "/" && e.ctrlKey) {
+        searchBox.focus();
+    }
+})
