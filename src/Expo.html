@@ -33,9 +33,17 @@
         interpolate-size: allow-keywords;
     }
 
-    body {
-        background: hsl(220, 50%, 10%);
-        color: hsl(0, 0%, 20%);
+    a,
+    button {
+        cursor: pointer;
+    }
+
+    button {
+        font-size: 1rem;
+        font-weight: 600;
+        padding: .5em 1em;
+        border: 1px solid transparent;
+        border-radius: .25rem;
     }
 
     img {
@@ -46,15 +54,166 @@
         object-fit: cover;
     }
 
+    .success {
+        color: hsl(100, 80%, 15%);
+        background: hsl(100, 80%, 50%);
+        outline: 4px solid hsl(100, 80%, 25%);
+        outline-offset: 2px;
+    }
+
+    .failure {
+        color: hsl(0, 80%, 15%);
+        background: hsla(0, 80%, 50%, .75);
+        outline: 4px solid hsl(0, 80%, 25%);
+        outline-offset: 2px
+    }
+
+    .toast {
+        opacity: 0;
+        scale: 0;
+        width: 500px;
+        padding: 2em;
+        border-radius: .25rem;
+        margin: 50px auto;
+        transform: translateY(-50%);
+        animation: pop .3s linear 0s forwards;
+    }
+
+    @keyframes pop {
+        from {
+            opacity: 0;
+            scale: 0;
+            transform: translateY(-50%);
+        }
+
+        to {
+            opacity: 1;
+            scale: 1;
+            transform: translateY(0);
+        }
+    }
+
+    p {
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .close {
+        animation: popOut .3s linear 0s
+    }
+
+    @keyframes popOut {
+        from {
+            opacity: 1;
+            scale: 1;
+            transform: translateY(0);
+        }
+
+        to {
+            opacity: 0;
+            scale: 0;
+            transform: translateY(-50%);
+        }
+    }
+
+    .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: hsl(0, 0%, 100%);
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .loader::after {
+        content: "";
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        border: 1.25rem solid hsl(0, 0%, 90%);
+        border-top: 1.25rem solid hsl(0, 0%, 20%);
+        backdrop-filter: blur(4px);
+        animation: spinner .75s linear 0s infinite forwards;
+    }
+
+    @keyframes spinner {
+        from {
+            transform: rotate(0turn);
+        }
+
+        to {
+            transform: rotate(1turn);
+        }
+    }
+
+    .visible {
+        opacity: 1;
+        visibility: visible;
+    }
 </style>
 
 <body>
-    
-
+    <div class="loader"></div>
 </body>
 
 <script type="text/javascript" defer>
-    
+    const spinner = document.querySelector(".loader");
+    const toast = document.createElement("div");
+    function showToast(type, msg) {
+        toast.className = "toast";
+        toast.classList.add(type);
+        toast.setAttribute("role", "alert")
+        toast.innerHTML = `<p>${ msg }</p> `
+
+        document.body.prepend(toast);
+
+        setTimeout(() => {
+            toast.classList.add("close");
+        }, 3000);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 3500);
+    }
+
+    const productAPI = 'https://dummyjson.com/products';
+    async function getProducts() {
+        try {
+            const res = await fetch(productAPI);
+            if(!res.ok){
+                throw new Error("Fetch Failed")
+            }
+            const products = await res.json();
+            setTimeout(() => {
+                spinner.classList.add('visible');
+            }, 500)
+
+            setTimeout(() =>{
+                products.products.forEach(product => {
+                    console.log(`Product Name: ${ product.title }\nPrice: $${ product.price }\nDescription: ${ product.description }\n`);
+                });
+            }, 3000)
+        } catch (error) {
+            setTimeout(() => {
+                showToast("failure", "Oops! Failed to fetch products");  
+            }, 3200);
+        } finally {
+            setTimeout(() => {
+                spinner.classList.remove("visible");
+                spinner.remove();
+                showToast("success", "Fetch Complete");
+            }, 3500);
+        }
+    }
+
+    getProducts();
 
 </script>
 
