@@ -28,15 +28,18 @@ button{
     font-size: 1rem;
     font-weight: 600;
     border: 1px solid transparent;
-    border-radius: .5em;
+    border-radius: .25em;
+    cursor: pointer;
 }
 
 dialog{
-    margin: 0 100px;
+    margin: auto;
     box-shadow: var(--shadow);
     border: none;
     border-radius: .5em;
-    max-width: 100%;
+    width: 100%;
+    max-width: 450px;
+    transform: translateY(-100%);
 }
 
 .dialog{
@@ -44,38 +47,94 @@ dialog{
     flex-direction: column;
     gap: 1em;
     width: 100%;
+    max-width: 445px;
     padding: 1em 2em;
+    border-radius: .5em;
 }
 
 p{
-    max-width: 60ch;
+    
+    color: hsl(0, 0%, 50%);
 }
 
 menu{
-    background: hsla(200, 200%,97%);
+    background: hsl(200, 210%,97%);
     padding: 1em 2em;
     width: 100%;
 }
 
 .cancel{
     background: none;
-    color: hsla(200, 200%, 7%);
+    color: hsl(200, 240%, 17%);
+}
+
+.dismiss{
+    color: hsl(0, 0%, 100%);
+    background: hsl(0, 90%, 45%);
+}
+
+menu{
+    display: flex;
+    justify-content: flex-end;
+    border-radius: .5em;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+.dialog-heading{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: hsl(210, 250%, 22%);
+}
+
+.dialog-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.close{
+    background: none;
+    color: hsl(0, 0%, 70%);
+}
+
+dialog[open]{
+    animation: slide .5s ease forwards;
+}
+
+@keyframes slide{
+    from{
+        transform: translateY(-100%);
+    }
+
+    to{
+        transform: translateY(0);
+    }
+}
+
+::backdrop{
+    background: hsla(0, 0%, 10%, .5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
 }
 </style>
 
 <body>
     <button id="delBtn">Delete account</button>
-    <dialog open="true">
+    <dialog>
         <div class="dialog">
-            <h1>Deactivate Account?</h1>
+            <div class="dialog-header">
+                <h1 class="dialog-heading">Deactivate Account?</h1>
+                <button class="close">X</button>
+            </div>
             <p>Are you sure you want to deactivate your account? By doing this you will
                 lose all of your saved data and will not be able to retrieve it.
             </p>
-            <menu>
-                <button id="cancelBtn" class="cancel">Cancel</button>
-                <button id="dismissBtn" class="deactivate">Deactivate</button>
-            </menu>
         </div>
+        <menu>
+            <button id="cancelBtn" class="cancel">Cancel</button>
+            <button id="dismissBtn" class="dismiss">Deactivate</button>
+        </menu>
     </dialog>
 </body>
 
@@ -84,10 +143,15 @@ menu{
     const dialog = document.querySelector("dialog");
     const cancelBtn = document.getElementById("cancelBtn");
     const dismissBtn = document.getElementById("dismissBtn");
+    const closeBtn = document.querySelector(".close");
 
     delBtn.addEventListener("click", () => {
         dialog.showModal();
     });
+
+    closeBtn.onclick = () => {
+            dialog.close();
+    }
 
     cancelBtn.onclick = () => {
         dialog.close();
