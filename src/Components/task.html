@@ -1,11 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Task Component</title>
 </head>
+
+<style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui;
+        transition: .3s ease;
+    }
+
+    :root {
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+    }
+
+    .task {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: .5rem;
+        max-width: 250px;
+        width: 100%;
+        padding: 1em;
+        box-shadow: var(--shadow);
+    }
+
+    .task-actions {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+        width: 100%;
+    }
+
+    .time {
+        color: hsl(210, 100%, 50%);
+    }
+
+    input[type="checkbox"]{
+        position: relative;
+        opacity: 0;
+    }
+
+    .checkbox{
+        width: 1em;
+        height: 1em;
+        border: 1px solid;
+        border-radius: 1em;
+        cursor: pointer;
+        position: absolute;
+    }
+
+    .task:hover{
+        transform: translateY(-3px);
+    }
+</style>
+
 <body>
-    
+    <div class="tasks">
+        <div class="task">
+            <div class="task-actions">
+                <input type="checkbox" id="checkbox">
+                <span class="checkbox"></span>
+                <label>Shoot Video</label>
+            </div>
+            <p class="time">8:00</p>
+        </div>
+    </div>
 </body>
+
 </html>
