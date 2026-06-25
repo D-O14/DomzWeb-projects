@@ -1,13 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Card</title>
+    <title>Product Card Component</title>
 </head>
+
+<style>
+    *::before,
+    *::after,
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui;
+        transition: .3s ease;
+    }
+
+    :root {
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+    }
+
+    h1 {
+        text-transform: uppercase;
+        font-weight: 900;
+        color: hsl(0, 100%, 50%);
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+    }
+
+    figure {
+        width: 100%;
+    }
+
+    output {
+        padding: .25em .5em;
+        font-weight: 500;
+    }
+
+    button {
+        font-weight: 600;
+        padding: .5em 1em;
+        border: 1px transparent;
+        cursor: pointer;
+    }
+
+    a {
+        color: hsl(0, 0%, 50%);
+        text-decoration: underline;
+    }
+
+    .product {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        max-width: 550px;
+        border-radius: .5em;
+        box-shadow: var(--shadow);
+        margin: 100px auto;
+    }
+
+    .card {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        gap: 1em;
+        padding: 2em;
+    }
+
+    .desc {
+        color: hsl(0, 0%, 50%);
+    }
+
+    .info {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .price {
+        font-weight: 600;
+        font-size: 1.5em;
+    }
+
+    .content {
+        display: flex;
+        gap: 1em;
+        align-items: center;
+    }
+
+    .actions {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .button-menu {
+        border-radius: .25em;
+        border: 1px solid hsl(0, 0%, 80%);
+    }
+
+    .button-menu button {
+        background: none;
+        border: 1px solid hsl(0, 0%, 80%);
+    }
+
+    .cart-button {
+        width: 50%;
+        background: hsl(0, 100%, 50%);
+        color: hsl(0, 0%, 100%);
+        border-radius: 5rem;
+    }
+
+    /*.cards{
+        padding: 1em;
+        display: grid;
+        grid-template-columns: repeat(2, 500px);
+        gap: 1rem;
+    }*/
+</style>
+
 <body>
-    <article>
-        
-    </article>
+    <div class="cards">
+        <article class="product">
+            <figure>
+                <img src=" " alt="">
+            </figure>
+            <div class="card">
+                <h1>Product Name</h1>
+
+                <div class="info">
+                    <span class="price">$22.67</span>
+                    <span class="rating">&star;4.3</span>
+                </div>
+
+                <p class="desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae et reprehenderit iusto fugit,
+                    quidem
+                    nobis alias, temporibus doloremque, tempore repudiandae quasi neque. Minus culpa commodi dicta ut
+                    ipsa
+                    vel placeat!
+                </p>
+
+                <div class="content">
+                    QUANTITY:
+                    <menu class="button-menu">
+                        <button>-</button>
+                        <output>1</output>
+                        <button>+</button>
+                    </menu>
+                </div>
+
+                <menu class="actions">
+                    <button class="cart-button">ADD TO CART</button>
+                    <a href="">View Details</a>
+                </menu>
+            </div>
+        </article>
+
+        <!--<article class="product">
+            <figure>
+                <img src="/public/assets/images/abstract.jpg" alt="">
+            </figure>
+            <div class="card">
+                <h1>Product Name</h1>
+
+                <div class="info">
+                    <span class="price">$22.67</span>
+                    <span class="rating">&star;4.3</span>
+                </div>
+
+                <p class="desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae et reprehenderit iusto fugit,
+                    quidem
+                    nobis alias, temporibus doloremque, tempore repudiandae quasi neque. Minus culpa commodi dicta ut
+                    ipsa
+                    vel placeat!
+                </p>
+
+                <div class="content">
+                    QUANTITY:
+                    <menu class="button-menu">
+                        <button>-</button>
+                        <output>1</output>
+                        <button>+</button>
+                    </menu>
+                </div>
+
+                <menu class="actions">
+                    <button class="cart-button">ADD TO CART</button>
+                    <a href="">View Details</a>
+                </menu>
+            </div>
+        </article>
+
+        <article class="product">
+            <figure>
+                <img src="/public/assets/images/abstract.jpg" alt="">
+            </figure>
+            <div class="card">
+                <h1>Product Name</h1>
+
+                <div class="info">
+                    <span class="price">$22.67</span>
+                    <span class="rating">&star;4.3</span>
+                </div>
+
+                <p class="desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae et reprehenderit iusto fugit,
+                    quidem
+                    nobis alias, temporibus doloremque, tempore repudiandae quasi neque. Minus culpa commodi dicta ut
+                    ipsa
+                    vel placeat!
+                </p>
+
+                <div class="content">
+                    QUANTITY:
+                    <menu class="button-menu">
+                        <button>-</button>
+                        <output>1</output>
+                        <button>+</button>
+                    </menu>
+                </div>
+
+                <menu class="actions">
+                    <button class="cart-button">ADD TO CART</button>
+                    <a href="">View Details</a>
+                </menu>
+            </div>
+        </article>
+
+        <article class="product">
+            <figure>
+                <img src="/public/assets/images/abstract.jpg" alt="">
+            </figure>
+            <div class="card">
+                <h1>Product Name</h1>
+
+                <div class="info">
+                    <span class="price">$22.67</span>
+                    <span class="rating">&star;4.3</span>
+                </div>
+
+                <p class="desc">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae et reprehenderit iusto fugit,
+                    quidem
+                    nobis alias, temporibus doloremque, tempore repudiandae quasi neque. Minus culpa commodi dicta ut
+                    ipsa
+                    vel placeat!
+                </p>
+
+                <div class="content">
+                    QUANTITY:
+                    <menu class="button-menu">
+                        <button>-</button>
+                        <output>1</output>
+                        <button>+</button>
+                    </menu>
+                </div>
+
+                <menu class="actions">
+                    <button class="cart-button">ADD TO CART</button>
+                    <a href="">View Details</a>
+                </menu>
+            </div>
+        </article>-->
+    </div>
+
 </body>
+
 </html>
