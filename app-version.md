@@ -23,6 +23,7 @@
 - Filters.
 - Searchable content.
 - Full page editing: Contains amount of characters.
+- Pinned Notes
 
 **Version-4**:
 - Firebase Server and Database Integration.
