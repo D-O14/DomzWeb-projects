@@ -10,6 +10,7 @@
 - Edited tag (possibly).
 - Use `localstorage` to save settings.
 - Relative Date of Creation.
+- Modal to create note
 
 **Version-2**:
 - Date Sorting (replaces `Relative Date of Creation`).
@@ -20,10 +21,11 @@
 **Version-3**:
 - Sidebar.
 - Filters.
-- Searchable content
-- Full page editing.
+- Searchable content.
+- Full page editing: Contains amount of characters.
 
 **Version-4**:
+- Firebase Server and Database Integration.
 - Account Creation and syncing.
 - Folder Creation.
 - Shareable notes.
@@ -33,6 +35,7 @@
 - Rich text editing
 - Special commands: Allow commands using "/" e.g. "/link" to create a link. Inspo from Notion.
 - Attachments: Allow attachment of files, excel tables, word documents, images and even powerpoint slides.
+- Auto-complete and auto-correct in full page editing with AI(if possible)
 
 **Version-6/Final Update**:
 - React-based restructuring & UI changes. 
