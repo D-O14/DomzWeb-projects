@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carousel component</title>
+    <title>Carousel-component component</title>
 </head>
 
 <style>
@@ -29,7 +29,7 @@
         scroll-behavior: smooth;
     }
 
-    body{
+    body {
         height: 100vh;
         display: flex;
         align-items: center;
@@ -43,112 +43,287 @@
         aspect-ratio: 16/9;
         object-fit: cover;
         border: 2px solid;
+        border-radius: .5em;
     }
 
-    h1{
+    figure {
+        width: 100%;
+        height: 100%;
+    }
+
+    h1 {
         font-size: 1.25rem;
         font-weight: 500;
     }
 
-    .carousel{
+    .carousel-component {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .carousel {
         display: flex;
         align-items: center;
         overflow-x: auto;
-        max-width: 1000px;
-        gap: 1em;
-        padding: 2em;
+        width: 100%;
+        height: 500px;
+        padding: 1em;
     }
 
-    ::-webkit-scrollbar{
+    ::-webkit-scrollbar {
         display: none;
     }
 
-    .img-card{
-        flex: 1 0 300px;
+    .card {
+        width: 275px;
+        height: 325px;
         border-radius: .5em;
         box-shadow: var(--shadow);
         position: relative;
+        opacity: .8;
+        margin-right: -40px;
     }
 
-    .img-card:hover img{
+    /*.card:hover img{
         transform: scale(1.05);
-    }
+    }*/
 
-    .info{
+    .info {
         display: flex;
         flex-direction: column;
         padding: 1.5em;
+        position: absolute;
+        bottom: 0;
     }
 
-    .price{
+    .price {
         position: absolute;
         top: 10px;
         right: 10px;
         font-weight: 500;
     }
 
-    .rating{
+    .rating {
         font-weight: 500;
+    }
+
+    .card.active {
+        opacity: 1;
+        transform: translateY(-5px) scale(1.05);
+        z-index: 1;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5em;
+        width: 100%;
+    }
+
+    .prev,
+    .next {
+        background: none;
+        border: none;
+        border-radius: 5em;
+        box-shadow: 0 0 1.5px;
+        padding: .5em 1em;
+        cursor: pointer;
+    }
+
+    .indicator {
+        width: 12px;
+        height: 12px;
+        padding: .25em;
+        border: none;
+        border-radius: 5em;
+        cursor: pointer;
+        opacity: .6;
+    }
+
+    .indicator.active {
+        width: 28px;
+        border-radius: 20px;
+        background: hsl(210, 100%, 50%);
+        opacity: 1;
     }
 </style>
 
 <body>
-    <div class="carousel">
-        <article class="img-card">
-            <figure>
-                <img src="/public/assets/images/abstract.jpg" alt="">
-            </figure>
-            <div class="info">
-                <h1>Special Pizza</h1>
-                <span class="rating">4.5&star;</span>
-            </div>
-            <span class="price">$20</span>
-        </article>
+    <section class="carousel-component">
 
-        <article class="img-card">
-            <figure>
-                <img src="/public/assets/images/cafe_items (1).jpg" alt="">
-            </figure>
-            <div class="info">
-                <h1>Straw Cake</h1>
-                <span class="rating">4.5&star;</span>
+        <div class="carousel">
+            <article class="card">
+                <figure>
+                    <img src="/public/assets/images/abstract.jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Special Pizza</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
                 <span class="price">$20</span>
-            </div>
-        </article>
+            </article>
 
-        <article class="img-card">
-            <figure>
-                <img src="/public/assets/images/cafe_items (2).jpg" alt="">
-            </figure>
-            <div class="info">
-                <h1>Vanilla Cake</h1>
-                <span class="rating">4.5&star;</span>
+            <article class="card">
+                <figure>
+                    <img src="/public/assets/images/cafe_items (1).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Straw Cake</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
                 <span class="price">$20</span>
-            </div>
-        </article>
+            </article>
 
-        <article class="img-card">
-            <figure>
-                <img src="/public/assets/images/cafe_items (3).jpg" alt="">
-            </figure>
-            <div class="info">
-                <h1>Meatball</h1>
-                <span class="rating">4.5&star;</span>
+            <article class="card active">
+                <figure>
+                    <img src="/public/assets/images/cafe_items (2).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Vanilla Cake</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
                 <span class="price">$20</span>
-            </div>
-        </article>
+            </article>
 
-        <article class="img-card">
-            <figure>
-                <img src="/public/assets/images/cafe_items (4).jpg" alt="">
-            </figure>
-            <div class="info">
-                <h1>Burger</h1>
-                <span class="rating">4.5&star;</span>
+            <article class="card">
+                <figure>
+                    <img src="/public/assets/images/cafe_items (3).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Meatball</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
                 <span class="price">$20</span>
-            </div>
-        </article>
-    </div>
+            </article>
+
+            <article class="card">
+                <figure>
+                    <img src="/public/assets/images/cafe_items (4).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Burger</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
+                <span class="price">$20</span>
+            </article>
+        </div>
+
+        <menu class="controls">
+            <button class="prev">&#10094;</button>
+            <menu class="indicators">
+                <button class="indicator" aria-label="Go to slide 1">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 2">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 3">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 4">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 5">
+                    <span></span>
+                </button>
+            </menu>
+            <button class="next">&#10095;</button>
+        </menu>
+
+    </section>
 </body>
+<script>
+    const indicators = document.querySelectorAll(".indicator");
+    const carousel = document.querySelector(".carousel");
+    const cards = document.querySelectorAll(".card");
+    const next = document.querySelector(".next");
+    const prev = document.querySelector(".prev");
+    let currentIndex = 2;
+
+    function updateCarousel() {
+        cards.forEach(card => {
+            card.classList.remove("active");
+        });
+        cards[currentIndex].classList.add("active");
+        cards[currentIndex].scrollIntoView({
+            behavior: "smooth",
+            inline: "center"
+        });
+    };
+
+    let autoPlay = setInterval(() => {
+        currentIndex++;
+        if (currentIndex >= cards.length) {
+            currentIndex = 0;
+        };
+        updateCarousel();
+    }, 2000);
+
+    carousel.addEventListener("mouseenter", () => {
+        clearInterval(autoPlay);
+    });
+
+    carousel.addEventListener("mouseleave", () => {
+        autoPlay = setInterval(nextSlide(), 2000);
+    });
+
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener("click", () => {
+            currentIndex = index;
+            updateCarousel();
+            indicators.forEach(indicator => {
+                indicator.classList.remove("active");
+            });
+
+            indicators[index].classList.add("active");
+        });
+    });
+
+
+    next.addEventListener("click", () => { nextSlide() });
+    prev.addEventListener("click", () => { prevSlide() });
+
+    function nextSlide() {
+        currentIndex++;
+        if (currentIndex >= cards.length) {
+            currentIndex = 0;
+        }
+        updateCarousel();
+    }
+
+    function prevSlide() {
+        currentIndex--;
+        if (currentIndex < 0) {
+            currentIndex = cards.length - 1;
+        }
+        updateCarousel();
+    };
+
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+            currentIndex++;
+            if (currentIndex >= cards.length) {
+                currentIndex = 0;
+            };
+            updateCarousel();
+        }
+
+        if (e.key === "ArrowLeft") {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = cards.length - 1;
+            };
+            updateCarousel();
+        }
+    })
+</script>
 
 </html>
