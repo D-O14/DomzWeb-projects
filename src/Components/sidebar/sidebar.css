@@ -1,0 +1,155 @@
+*::before,
+*::after,
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+    transition: .3s ease;
+}
+
+html{scroll-behavior: smooth;}
+
+:root{
+    --base-clr:hsl(233, 21%, 8%);
+    --line-clr: hsl(233, 6%, 27%);
+    --hover-clr:hsl(229, 20%, 17%);
+    --text-clr: hsl(240, 22%, 92%);
+    --accent-clr: hsl(238, 100%, 68%);
+    --secondary-text-clr: hsl(229, 12%, 72%);
+}
+
+body{
+    min-height: 100dvh;
+    background: var(--base-clr);
+    color: var(--text-clr);
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+
+main{padding: min(30px, 7%);}
+
+button{
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+}
+
+p{
+    color: var(--secondary-text-clr);
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+ul {
+    list-style: none;
+}
+
+svg{
+    flex-shrink: 0;
+    fill: var(--text-clr);
+}
+
+span{
+    flex-grow: 1;
+}
+
+a:hover,
+.dropdown-btn:hover{
+    background: var(--hover-clr);
+}
+
+.sidebar{
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    width: 250px;
+    padding: .25em 1em;
+    background: var(--base-clr);
+    border-right: 1px solid var(--line-clr);
+}
+
+.sub-menu{
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: .3s ease-in-out;
+
+    div{
+        overflow: hidden;
+    }
+
+    a{padding-left: 2em;}
+}
+
+.toggle{
+    margin-left: auto;
+    padding: 1em;
+    border: none;
+    border-radius: .5em;
+    background: none;
+    cursor: pointer;
+    color: var(--secondary-text-clr);
+}
+
+.rotate{
+    transform: rotate(-180deg);
+}
+
+.close{
+    padding: 5px;
+    width: 60px;
+    overflow: hidden;
+}
+
+.show{
+    grid-template-rows: 1fr;
+}
+
+.sidebar > ul > li:first-child{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1em;
+}
+
+.logo{
+    font-weight: 600;
+}
+
+.active a{
+    color: var(--accent-clr);
+    svg{
+        fill: var(--accent-clr);
+    }
+}
+
+.sidebar a,
+.dropdown-btn,
+.logo{
+    border-radius: .5em;
+    padding: .85em;
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    color: var(--text-clr);
+    text-decoration: none;
+
+}
+
+.dropdown-btn{
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-wrap: nowrap;
+}
+
+.container{
+    border: 1px solid var(--line-clr);
+    border-radius: 1em;
+    margin-bottom: 1.25em;
+    padding: min(3em, 15%);
+}
+
+h2,p{margin-top: 1em;}

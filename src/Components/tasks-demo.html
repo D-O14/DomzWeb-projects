@@ -172,69 +172,53 @@
                         <h1>Today</h1>
                         <span class="number">4</span>
                     </div>
-                    <div class="task">
-                        <label class="label">
-                            <input type="checkbox">
-                            <span class="checkbox"></span>
-                            Morning Run
-                        </label>
-                        <p class="time">7:00</p>
-                    </div>
-                    <div class="task">
-                        <label class="label">
-                            <input type="checkbox">
-                            <span class="checkbox"></span>
-                            Go Grocery Shopping
-                        </label>
-                        <p class="time">9:00</p>
-                    </div>
-                    <div class="task">
-                        <label class="label">
-                            <input type="checkbox">
-                            <span class="checkbox"></span>
-                            Reply to E-mails
-                        </label>
-                        <p class="time">12:00</p>
-                    </div>
-                    <div class="task">
-                        <label class="label">
-                            <input type="checkbox">
-                            <span class="checkbox"></span>
-                            Discuss Plan with Client
-                        </label>
-                        <p class="time">17:00</p>
-                    </div>
-                </div>
 
-                <div class="tomorrow">
-                    <div class="section-info">
-                        <h1>Tomorrow</h1>
-                        <span class="number">2</span>
-                    </div>
-
-                    <div class="task">
-                        <label class="label">
-                            <input type="checkbox">
-                            <span class="checkbox"></span>
-                            Shoot Video
-                        </label>
-                        <p class="time">8:00</p>
-                    </div>
-
-                    <div class="task">
-                        <label class="label">
-                            <input type="checkbox">
-                            <span class="checkbox"></span>
-                            Host Project Meeting
-                        </label>
-                        <p class="time">14:00</p>
-                    </div>
+                    <template>
+                        <div class="task">
+                            <label class="label">
+                                <input type="checkbox" class="check">
+                                <span class="checkbox"></span>
+                            </label>
+                            <span class="time"></span>
+                        </div>
+                    </template>
                 </div>
             </div>
         </section>
     </main>
 </body>
 <script>
+    const tasksSection = document.querySelector(".today");
+    const template = document.querySelector("template");
+    const taskInput = document.getElementById("taskInput");
+    const taskBtn = document.querySelector(".taskBtn");
+
+    let suffix;
+    let hours = new Date().getHours();
+    let minutes = new Date().getMinutes();
+    hours > 12 ? suffix = "PM" : suffix = "AM";
+    const currentTime = `${ hours }:${ minutes }${ suffix }`;
+
+    const tasks = [
+        task = {
+            title: taskInput.value,
+            time: currentTime,
+            id: crypto.randomUUID(),
+        },
+    ]
+
+    function addTask(section, array) {
+        section.innerHTML === "";
+        array.forEach(arr => {
+            const task = template.content.cloneNode(true);
+            task.querySelector(".label").textContent = arr.title;
+            task.querySelector(".time").textContent = arr.time;
+            console.log(task);
+            section.append(task);
+        });
+    };
+
+    taskBtn.addEventListener("click", () => { addTask(tasksSection, tasks) });
 
 </script>
 
