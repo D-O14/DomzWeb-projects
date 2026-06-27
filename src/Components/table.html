@@ -1,11 +1,162 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Table Component</title>
 </head>
+
+<style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: system-ui;
+        transition: all .3s ease;
+    }
+
+    :root {
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+    }
+
+    .table-container {
+        padding: 1.25em;
+        border-radius: .5em;
+        background: hsl(0, 0%, 95%);
+    }
+
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    table {
+        max-width: 100%;
+        overflow: hidden;
+        border-radius: .5em;
+        border-collapse: collapse;
+        overflow: hidden;
+        background: hsl(0, 0%, 100%);
+    }
+
+    thead {
+        width: 100%;
+        background: hsl(210, 40%, 8%);
+    }
+
+    th {
+        padding: 1em;
+        text-align: left;
+        letter-spacing: .05em;
+        font-weight: 500;
+        color: hsl(0, 0%, 100%);
+    }
+
+    td {
+        padding: 1em;
+    }
+
+    tr {
+        text-align: left;
+        border-bottom: 1px solid hsl(0, 0%, 80%);
+    }
+
+    .row:nth-of-type(odd) {
+        background: hsl(0, 0%, 99%);
+    }
+
+    input[type="checkbox"]{
+        cursor: pointer;
+        position: relative;
+        opacity: 0;
+    }
+
+    .check{
+        width: 1em;
+        height: 1em;
+        border: 1px solid;
+        border-radius: .25em;
+        cursor: pointer;
+        position: absolute;
+    }
+
+    .checkbox{
+        display: flex;
+        align-items: center;
+    }
+
+</style>
+
 <body>
-    
+    <section>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <th>
+                        <label class="checkbox">
+                            <span class="check"></span>
+                            <input type="checkbox" aria-labelledby="checkbox">
+                        </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Ordered</th>
+                    <th>Status</th>
+                    <th>From</th>
+                    <th>To</th>
+                </thead>
+                <tbody>
+                    <tr class="row">
+                        <td>
+                            <label class="checkbox">
+                                <span class="check"></span>
+                                <input type="checkbox" aria-labelledby="checkbox">
+                            </label>
+                        </td>
+                        <td>Anne Sullivan</td>
+                        <td>Microwave</td>
+                        <td>Shipping</td>
+                        <td>Lagos</td>
+                        <td>Benin</td>
+                    </tr>
+                    <tr class="row">
+                        <td>
+                            <label class="checkbox">
+                                <span class="check"></span>
+                                <input type="checkbox" aria-labelledby="checkbox">
+                            </label>
+                        </td>
+                        <td>Helen Keller</td>
+                        <td>Goggles</td>
+                        <td>Delivered</td>
+                        <td>Abuja</td>
+                        <td>PortHarcourt</td>
+                    </tr>
+                    <tr class="row">
+                        <td>
+                            <label class="checkbox">
+                                <span class="check"></span>
+                                <input type="checkbox" aria-labelledby="checkbox">
+                            </label>
+                        </td>
+                        <td>Gabrielle Evans</td>
+                        <td>Pull up bar</td>
+                        <td>On the way</td>
+                        <td>Benin</td>
+                        <td>Lagos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
 </body>
+
 </html>
