@@ -58,11 +58,13 @@
 
     section {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        /*flex-direction: column;
+        align-items: center;*/
+        justify-content: center;
     }
 
-    input {
+    input[type="text"] {
+        flex: 1;
         height: 40px;
         padding: 1em;
         border: none;
@@ -73,18 +75,17 @@
         box-shadow: inset 1px 1px 2px hsl(0, 0%, 80%);
     }
 
+    .app{
+        width: 100%;
+        max-width: 700px;
+    }
+
     .tasks {
         border-radius: .5em;
         width: 100%;
         max-width: 50%;
         padding: 1em;
         margin: 0 auto;
-    }
-
-    .today,
-    .tomorrow {
-        border-radius: .5em;
-        padding: 1em;
     }
 
     .task {
@@ -96,19 +97,24 @@
         border-bottom: 1px solid hsl(0, 0%, 80%);
     }
 
+    .taskInput{
+        display: flex;
+        gap: 1em;
+    }
+
     .label {
         display: flex;
         align-items: center;
         gap: 1em;
-        width: 100%;
     }
 
-    .time {
+    .task-date {
         color: hsl(210, 100%, 50%);
     }
 
     input[type="checkbox"] {
-        position: relative;
+        position: absolute;
+        cursor: pointer;
         opacity: 0;
     }
 
@@ -118,7 +124,6 @@
         border: 1px solid hsl(0, 0%, 50%);
         border-radius: .25em;
         cursor: pointer;
-        position: absolute;
     }
 
     .task:hover {
@@ -129,17 +134,6 @@
         .tasks {
             max-width: 100%;
         }
-    }
-
-    .section-info {
-        display: flex;
-        align-items: center;
-        gap: 1em;
-    }
-
-    .number {
-        font-size: .95rem;
-        opacity: .6;
     }
 
     .controls button {
@@ -153,33 +147,30 @@
 </style>
 
 <body>
+    <nav>
+        <h1>Inbox</h1>
+        <menu class="controls">
+            <button>&UpArrowDownArrow;</button>
+            <button>&hellip;</button>
+        </menu>
+    </nav>
     <main>
-        <nav>
-            <h1>Inbox</h1>
-            <menu class="controls">
-                <button>&UpArrowDownArrow;</button>
-                <button>&hellip;</button>
-            </menu>
-        </nav>
         <section>
-            <div class="taskInput">
-                <input type="text" id="taskInput" placeholder="Add Task">
-                <button class="taskBtn">Add Task</button>
-            </div>
-            <div class="tasks">
-                <div class="today">
-                    <div class="section-info">
-                        <h1>Today</h1>
-                        <span class="number">4</span>
-                    </div>
+            <div class="app">
+                <div class="taskInput">
+                    <input type="text" id="taskInput" placeholder="Add Task">
+                    <button class="taskBtn">Add Task</button>
+                </div>
 
+                <div class="tasks">
                     <template>
                         <div class="task">
                             <label class="label">
                                 <input type="checkbox" class="check">
                                 <span class="checkbox"></span>
+                                <span class="task-title"></span>
                             </label>
-                            <span class="time"></span>
+                            <span class="task-date"></span>
                         </div>
                     </template>
                 </div>
@@ -187,38 +178,47 @@
         </section>
     </main>
 </body>
+
 <script>
-    const tasksSection = document.querySelector(".today");
+    const tasks = [];
+    const tasksSection = document.querySelector(".tasks");
     const template = document.querySelector("template");
     const taskInput = document.getElementById("taskInput");
     const taskBtn = document.querySelector(".taskBtn");
 
-    let suffix;
-    let hours = new Date().getHours();
-    let minutes = new Date().getMinutes();
-    hours > 12 ? suffix = "PM" : suffix = "AM";
-    const currentTime = `${ hours }:${ minutes }${ suffix }`;
-
-    const tasks = [
-        task = {
-            title: taskInput.value,
-            time: currentTime,
+    taskBtn.addEventListener("click", () => {
+        console.log(tasks);
+        const task = {
             id: crypto.randomUUID(),
-        },
-    ]
+            taskName: taskInput.value.trim(),
+            createdAt: getCurrentTime(),
+            alarm: null,
+            completed: false,
+        };
+
+        tasks.unshift(task);
+        addTask(tasksSection, tasks);
+        taskInput.value = "";
+    });
+
+    function getCurrentTime() {
+        let hours = String(new Date().getHours()).padStart(2, "0");
+        let minutes = String(new Date().getMinutes()).padStart(2, "0");
+        let suffix = hours >= 12 ? "PM" : "AM";
+        return `${ hours }:${ minutes }${ suffix }`;
+    }
 
     function addTask(section, array) {
         section.innerHTML === "";
         array.forEach(arr => {
             const task = template.content.cloneNode(true);
-            task.querySelector(".label").textContent = arr.title;
-            task.querySelector(".time").textContent = arr.time;
-            console.log(task);
+            task.querySelector(".task-title").textContent = arr.taskName;
+            task.querySelector(".task-date").textContent = arr.createdAt;
+            task.querySelector(".check").id = arr.id;
+            task.querySelector(".label").htmlFor = arr.id;
             section.append(task);
         });
     };
-
-    taskBtn.addEventListener("click", () => { addTask(tasksSection, tasks) });
 
 </script>
 
