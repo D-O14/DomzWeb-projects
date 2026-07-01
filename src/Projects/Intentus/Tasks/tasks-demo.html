@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks Application Demo</title>
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="tasks-demo.css">
+</head>
+
+<body>
+    <header>
+        <nav class="task-nav">
+            <h1 class="app-name">Tasks</h1>
+            <div class="taskSearch">
+                <input type="text" id="searchInput" class="searchInput" placeholder="Search Tasks">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="icon search">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                    <path d="M21 21l-6 -6" />
+                </svg>
+            </div>
+            <menu class="sort">
+                <button class="sortBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide arrow-up-down">
+                        <path d="m21 16-4 4-4-4" />
+                        <path d="M17 20V4" />
+                        <path d="m3 8 4-4 4 4" />
+                        <path d="M7 4v16" />
+                    </svg>
+                </button>
+            </menu>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <div class="app">
+                <div class="tasks">
+                    <div class="tasks-header">
+                        <h1 class="header">Today</h1>
+                        <span class="value"></span>
+                    </div>
+
+                    <div class="tasks-content">
+                        <template class="task-template">
+                            <div class="task">
+                                <label class="label">
+                                    <input type="checkbox" class="check">
+                                    <span class="checkbox"></span>
+                                    <span class="task-title"></span>
+                                </label>
+                                <span class="task-date"></span>
+                            </div>
+                        </template>
+
+                        <template class="empty-template">
+                            <div class="empty-state">
+                                <h2>Nothing here yet.</h2>
+                                <p>Tap the compose button below to create your first task.</p>
+                            </div>
+                        </template>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <button class="taskBtn">+</button>
+        <dialog>
+            <div class="dialog">
+                <label for="taskInput" class="label">New Task</label>
+                <input type="text" placeholder="Add Tasks" id="taskInput" class="taskInput">
+                <menu class="actions">
+                    <button class="reminder">Add Reminder</button>
+                    <button class="save">Save</button>
+                </menu>
+            </div>
+        </dialog>
+    </main>
+</body>
+
+<script src="tasks-demo.js" type="text/javascript" defer></script>
+
+</html>

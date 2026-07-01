@@ -1,0 +1,376 @@
+/* Universal styles */
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui;
+    transition: .3s ease;
+}
+
+/* Root: Variable Source */
+
+:root {
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    --accent-clr: hsl(210, 100%, 50%);
+    --clr: hsl(200, 100%, 96%);
+    --bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
+    --plain-clr: hsl(0, 0%, 100%);
+    --muted-clr: hsl(0, 0%, 50%);
+    --muted: hsl(0, 0%, 80%);
+}
+
+/* Primitives */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 1.25rem;
+    margin-left: 15px;
+}
+
+button {
+    border: none;
+    padding: .5em 1em;
+    border-radius: .25em;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+/* Navbar Content */
+
+.task-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2em;
+    height: 40px;
+    width: min(1100px, 90%);
+}
+
+.sort {
+    display: flex;
+    align-items: center;
+}
+
+.sortBtn {
+    background: none;
+}
+
+/* Search box elements */
+
+.taskSearch {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    border-radius: 2em;
+    position: relative;
+    /*background: hsl(0, 0%, 98%);
+        box-shadow: inset 1px 1px 2px hsl(0, 0%, 80%);*/
+}
+
+.search {
+    position: absolute;
+    right: 0;
+    padding: 1em;
+    border-radius: 5em;
+    color: var(--plain-clr);
+    background: var(--acc-clr);
+}
+
+.searchInput {
+    width: 0%;
+    height: 40px;
+    border: none;
+    outline: none;
+    border-radius: 5em;
+    background: var(--clr);
+    box-shadow: var(--bxs);
+}
+
+.search:hover .searchInput {
+    width: 50%;
+}
+
+/* Application Start */
+
+.app {
+    width: 100%;
+    max-width: 700px;
+}
+
+/* Tasks Container */
+
+.tasks {
+    display: flex;
+    flex-direction: column;
+    padding: 2em;
+}
+
+.tasks-content {
+    border-radius: .4em;
+    width: 100%;
+    max-width: 65%;
+    padding: 1em;
+    margin: 0px auto;
+    margin-top: 20px;
+    box-shadow: 0px 0px 2px;
+}
+
+.tasks-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: .5em;
+    margin-left: 3em;
+}
+
+.value {
+    color: var(--muted-clr);
+}
+
+/* Task Component Structure */
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1em;
+    border-bottom: 1px solid var(--clr);
+}
+
+.task:hover {
+    transform: translateY(-3px);
+}
+
+.task-date {
+    color: var(--accent-clr);
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+/* Add task button */
+
+.taskBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5em;
+    color: var(--plain-clr);
+    background: var(--accent-clr);
+    position: absolute;
+    bottom: 45px;
+    right: 45px;
+    padding-inline: .75em;
+}
+
+/* Custom checkbox */
+
+.check {
+    position: absolute;
+    cursor: pointer;
+    opacity: 0;
+}
+
+.checkbox {
+    width: 1em;
+    height: 1em;
+    border-radius: .25em;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    border: 1px solid var(--muted-clr);
+}
+
+.checkbox::after {
+    content: "";
+    width: 5px;
+    height: 10px;
+    transform: rotate(45deg) scale(0);
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    border-right: 2px solid var(--plain-clr);
+    border-bottom: 2px solid var(--plain-clr);
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+}
+
+.check:checked+.checkbox {
+    background: var(--accent-clr);
+    border-color: var(--accent-clr);
+}
+
+.check:checked+.checkbox::after {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+.check:active+.checkbox {
+    transform: scale(.9);
+}
+
+.check:checked+.lucide-check {
+    scale: 1;
+}
+
+.lucide-check {
+    scale: 0;
+    width: 1em;
+    height: 1em;
+    stroke: var(--plain-clr);
+}
+
+/* Placeholder Content */
+
+.empty-state {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: .15em;
+}
+
+.empty-state h2 {
+    font-size: 1.2em;
+}
+
+.empty-state p {
+    color: var(--muted-clr);
+}
+
+/* Open Dialog button */
+
+.add {
+    padding: .25em .75em;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Dialog Structure */
+
+dialog {
+    margin: auto;
+    box-shadow: var(--shadow);
+    border: none;
+    border-radius: .5em;
+    transform: translateY(-100%);
+    background: hsl(0, 0%, 25%);
+    color: hsl(0, 0%, 100%);
+}
+
+/* Dialog content */
+
+.dialog {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    padding: 1em 2em;
+    border-radius: .5em;
+}
+
+.taskInput {
+    padding: 1em 2em;
+    border-radius: .25rem;
+    width: 100%;
+    height: 40px;
+    background: hsl(0, 0%, 30%);
+    border: 1px solid transparent;
+    outline: none;
+    caret-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 100%);
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.label {
+    font-weight: 500;
+}
+
+/* Actions */
+
+.reminder {
+    border-radius: 5rem;
+    color: hsl(0, 0%, 100%);
+    background: hsla(0, 0%, 35%);
+}
+
+.save {
+    background: none;
+    font-weight: 600;
+    color: inherit;
+}
+
+/* Animation States */
+
+dialog[open] {
+    animation: slide .5s ease forwards;
+}
+
+@keyframes slide {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Pseudo classes */
+
+:disabled {
+    opacity: .5;
+}
+
+::placeholder {
+    color: hsl(0, 0%, 50%);
+}
+
+::backdrop {
+    background: hsla(0, 0%, 10%, .5);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+/* Media query for mobile */
+
+@media screen and (max-width: 768px) {
+    nav {
+        width: 100%;
+    }
+
+    .tasks-content {
+        max-width: 100%;
+    }
+}
