@@ -95,7 +95,7 @@ section {
     padding: 1em;
     border-radius: 5em;
     color: var(--plain-clr);
-    background: var(--acc-clr);
+    background: var(--accent-clr);
 }
 
 .searchInput {
@@ -186,7 +186,7 @@ section {
     position: absolute;
     bottom: 45px;
     right: 45px;
-    padding-inline: .75em;
+    padding: 1em;
 }
 
 /* Custom checkbox */
@@ -260,7 +260,7 @@ section {
     font-size: 1.2em;
 }
 
-.empty-state p {
+.empty-msg {
     color: var(--muted-clr);
 }
 
