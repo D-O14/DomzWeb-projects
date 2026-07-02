@@ -18,11 +18,16 @@
         0 10px 20px hsla(0, 0%, 0%, 1%),
         0 20px 40px hsla(0, 0%, 0%, 15%);
     --accent-clr: hsl(210, 100%, 50%);
+    --accent-dark-shade: hsl(210, 100%, 40%);
+    --accent-light-shade: hsl(210, 100%, 90%);
     --clr: hsl(200, 100%, 96%);
     --bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
     --plain-clr: hsl(0, 0%, 100%);
+    --dark: hsl(0, 0%, 10%);
+    --plain-shade: hsl(0, 0%, 95%);
     --muted-clr: hsl(0, 0%, 50%);
     --muted: hsl(0, 0%, 80%);
+    --glass-clr: hsla(0, 0%, 10%, .5);
 }
 
 /* Primitives */
@@ -78,63 +83,51 @@ section {
 
 /* Search box elements */
 
-.taskSearch {
+.task-search {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: end;
     border-radius: 2em;
     position: relative;
-    /*background: hsl(0, 0%, 98%);
-        box-shadow: inset 1px 1px 2px hsl(0, 0%, 80%);*/
+    overflow: hidden;
 }
 
-.search {
-    position: absolute;
-    right: 0;
-    padding: 1em;
-    border-radius: 5em;
-    color: var(--plain-clr);
-    background: var(--accent-clr);
-}
-
-.searchInput {
-    width: 0%;
+.search-input {
+    width: 100%;
     height: 40px;
     border: none;
     outline: none;
+    padding: .75em;
     border-radius: 5em;
     background: var(--clr);
     box-shadow: var(--bxs);
+    caret-color: var(--accent-clr);
 }
 
-.search:hover .searchInput {
-    width: 50%;
-}
-
-/* Application Start */
-
-.app {
-    width: 100%;
-    max-width: 700px;
+.search-box {
+    position: absolute;
+    right: 0;
+    padding: .75em;
+    border-radius: 5em;
+    display: inline-flex;
+    align-items: center;
+    color: var(--plain-clr);
+    background: var(--accent-clr);
 }
 
 /* Tasks Container */
 
 .tasks {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     padding: 2em;
 }
 
-.tasks-content {
-    border-radius: .4em;
-    width: 100%;
-    max-width: 65%;
-    padding: 1em;
-    margin: 0px auto;
-    margin-top: 20px;
-    box-shadow: 0px 0px 2px;
+.tasks-wrapper {
+    width: min(400px, 90%);
 }
 
 .tasks-header {
@@ -142,7 +135,16 @@ section {
     align-items: center;
     justify-content: start;
     gap: .5em;
-    margin-left: 3em;
+    margin-bottom: 1em;
+}
+
+.tasks-content {
+    border-radius: .4em;
+    width: 95%;
+    padding: 1em;
+    margin: 0px auto;
+    margin-top: 20px;
+    box-shadow: 0px 0px 2px;
 }
 
 .value {
@@ -155,9 +157,8 @@ section {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
     padding: 1em;
-    border-bottom: 1px solid var(--clr);
+    border-bottom: 1px solid var(--muted);
 }
 
 .task:hover {
@@ -168,7 +169,7 @@ section {
     color: var(--accent-clr);
 }
 
-.label {
+.content {
     display: flex;
     align-items: center;
     gap: 1em;
@@ -181,12 +182,22 @@ section {
     align-items: center;
     justify-content: center;
     border-radius: 5em;
-    color: var(--plain-clr);
-    background: var(--accent-clr);
     position: absolute;
     bottom: 45px;
     right: 45px;
-    padding: 1em;
+    padding: .75em;
+    color: var(--plain-clr);
+    background: var(--accent-clr);
+    box-shadow: 2px 2px 3px hsla(210, 100%, 50%, .75);
+}
+
+.taskBtn:hover {
+    scale: 1.15;
+    box-shadow: 3px 3px 3px hsla(210, 100%, 50%, .75);
+}
+
+.taskBtn:hover svg {
+    fill: currentColor;
 }
 
 /* Custom checkbox */
@@ -264,24 +275,15 @@ section {
     color: var(--muted-clr);
 }
 
-/* Open Dialog button */
-
-.add {
-    padding: .25em .75em;
-    font-size: 1rem;
-    font-weight: 600;
-}
-
 /* Dialog Structure */
 
 dialog {
     margin: auto;
-    box-shadow: var(--shadow);
     border: none;
-    border-radius: .5em;
-    transform: translateY(-100%);
-    background: hsl(0, 0%, 25%);
-    color: hsl(0, 0%, 100%);
+    border-radius: .35em;
+    box-shadow: var(--shadow);
+    background: var(--plain-clr);
+    transform: translateY(100%);
 }
 
 /* Dialog content */
@@ -300,17 +302,17 @@ dialog {
     border-radius: .25rem;
     width: 100%;
     height: 40px;
-    background: hsl(0, 0%, 30%);
-    border: 1px solid transparent;
     outline: none;
-    caret-color: hsl(0, 0%, 100%);
-    color: hsl(0, 0%, 100%);
+    box-shadow: var(--bxs);
+    background: var(--plain-shade);
+    caret-color: var(--accent-clr);
+    border: 1px solid transparent;
 }
 
 .actions {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .label {
@@ -319,31 +321,51 @@ dialog {
 
 /* Actions */
 
-.reminder {
-    border-radius: 5rem;
-    color: hsl(0, 0%, 100%);
-    background: hsla(0, 0%, 35%);
+.saveTask {
+    font-weight: 600;
+    background: none;
+    opacity: .65;
+    padding: .25em .75em;
+    text-align: center;
+    border-radius: 5em;
+    color: var(--accent-clr);
+    border: 2px solid var(--accent-clr);
 }
 
-.save {
-    background: none;
-    font-weight: 600;
-    color: inherit;
+.saveTask:hover {
+    scale: .95;
+    color: var(--plain-clr);
+    background: var(--accent-clr);
+    border-top: 2px inset var(--accent-clr);
 }
 
 /* Animation States */
 
-dialog[open] {
-    animation: slide .5s ease forwards;
+dialog.open {
+    animation: slideIn .5s ease forwards;
 }
 
-@keyframes slide {
+dialog.closing {
+    animation: slideOut .5s ease forwards;
+}
+
+@keyframes slideIn {
     from {
-        transform: translateY(-100%);
+        transform: translateY(100%);
     }
 
     to {
         transform: translateY(0);
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-100%);
     }
 }
 
@@ -353,12 +375,8 @@ dialog[open] {
     opacity: .5;
 }
 
-::placeholder {
-    color: hsl(0, 0%, 50%);
-}
-
 ::backdrop {
-    background: hsla(0, 0%, 10%, .5);
+    background: var(--glass-clr);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
 }
@@ -366,11 +384,17 @@ dialog[open] {
 /* Media query for mobile */
 
 @media screen and (max-width: 768px) {
-    nav {
-        width: 100%;
+    .tasks-content {
+        width: 95%;
     }
 
-    .tasks-content {
-        max-width: 100%;
+    .search-input{
+        width: 0%;
+    }
+
+    .task-search:hover .search-input,
+    .task-search:focus-within .search-input {
+        width: 100%;
+        transition: .5s ease;
     }
 }

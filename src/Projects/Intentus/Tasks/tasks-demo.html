@@ -12,14 +12,16 @@
     <header>
         <nav class="task-nav">
             <h1 class="app-name">Tasks</h1>
-            <div class="taskSearch">
-                <input type="text" id="searchInput" class="searchInput" placeholder="Search Tasks">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="lucide search">
-                    <path d="m21 21-4.34-4.34" />
-                    <circle cx="11" cy="11" r="8" />
-                </svg>
+            <div class="task-search">
+                <input type="search" id="searchInput" class="search-input" placeholder="Search Tasks">
+                <span class="search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide search">
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </svg>
+                </span>
             </div>
             <menu class="sort">
                 <button class="sortBtn">
@@ -37,9 +39,9 @@
     </header>
 
     <main>
-        <section>
-            <div class="app">
-                <div class="tasks">
+        <section class="tasks">
+                <div class="tasks-wrapper">
+                    
                     <div class="tasks-header">
                         <h1 class="header">Today</h1>
                         <span class="value"></span>
@@ -48,7 +50,7 @@
                     <div class="tasks-content">
                         <template class="task-template">
                             <div class="task">
-                                <label class="label">
+                                <label class="content">
                                     <input type="checkbox" class="check">
                                     <span class="checkbox"></span>
                                     <span class="task-title"></span>
@@ -60,20 +62,22 @@
                         <template class="empty-template">
                             <div class="empty-state">
                                 <h2>Nothing here yet.</h2>
-                                <p class="empty-msg">Tap the  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" class="lucide pen">
-                                        <path d="M13 21h8" />
-                                        <path
-                                            d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-                                    </svg> 
-                                    button below to create your first task.</p>
+                                <p class="empty-msg">Tap the
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="lucide pen">
+                                            <path d="M13 21h8" />
+                                            <path
+                                                d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                        </svg>
+                                    </span>
+                                    button below to create your first task.
+                                </p>
                             </div>
                         </template>
-
                     </div>
                 </div>
-            </div>
         </section>
         <button class="taskBtn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -84,13 +88,14 @@
                     d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
             </svg>
         </button>
+
         <dialog>
             <div class="dialog">
                 <label for="taskInput" class="label">New Task</label>
-                <input type="text" placeholder="Add Tasks" id="taskInput" class="taskInput">
+                <input type="text" placeholder="Add a new task" id="taskInput" class="taskInput">
                 <menu class="actions">
-                    <button class="reminder">Add Reminder</button>
-                    <button class="save">Save</button>
+                    <!--<button class="reminder">Add Reminder</button>-->
+                    <button class="saveTask">Save Task</button>
                 </menu>
             </div>
         </dialog>
