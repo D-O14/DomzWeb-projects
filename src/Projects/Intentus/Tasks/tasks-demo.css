@@ -12,23 +12,52 @@
 
 /* Root: Variable Source */
 
-:root {
-    --shadow:
-        0 4px 6px hsla(0, 0%, 0%, 5%),
-        0 10px 20px hsla(0, 0%, 0%, 1%),
-        0 20px 40px hsla(0, 0%, 0%, 15%);
-    --accent-clr: hsl(210, 100%, 50%);
-    --accent-dark-shade: hsl(210, 100%, 40%);
-    --accent-light-shade: hsl(210, 100%, 90%);
-    --clr: hsl(200, 100%, 96%);
-    --bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
-    --plain-clr: hsl(0, 0%, 100%);
-    --dark: hsl(0, 0%, 10%);
-    --plain-shade: hsl(0, 0%, 95%);
-    --muted-clr: hsl(0, 0%, 50%);
-    --muted: hsl(0, 0%, 80%);
-    --glass-clr: hsla(0, 0%, 10%, .5);
-}
+    :root {
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+        --accent-clr: hsl(210, 100%, 50%);
+        --accent-dark-shade: hsl(210, 100%, 40%);
+        --accent-light-shade: hsl(210, 100%, 90%);
+        --clr: hsl(200, 100%, 96%);
+        --bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
+        --plain-clr: hsl(0, 0%, 100%);
+        --dark: hsl(0, 0%, 10%);
+        --plain-shade: hsl(0, 0%, 95%);
+        --muted-clr: hsl(0, 0%, 50%);
+        --muted: hsl(0, 0%, 80%);
+        --task-bxs: 0px 0px 2px;
+        --glass-clr: hsla(0, 0%, 10%, .5);
+    }
+
+/*@media (prefers-color-scheme: dark) {
+    body {
+        background: var(--dark);
+        color: var(--plain-clr);
+    }
+
+    :root {
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+        --accent-clr-1: hsl(0, 0%, 19%);
+        --accent-clr-2: hsl(210, 100%, 5%);
+        --accent-dark-shade: hsl(210, 100%, 40%);
+        --accent-light-shade: hsl(0, 0%, 9%);
+        --clr: hsl(200, 100%, 96%);
+        --bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
+        --plain-clr: hsl(0, 0%, 100%);
+        --dark: hsl(0, 0%, 5%);
+        --plain-shade: hsl(0, 0%, 25%);
+        --muted-clr: hsl(0, 0%, 50%);
+        --muted: hsl(0, 0%, 80%);
+        --glass-clr: hsla(0, 0%, 10%, .5);
+        --task-bxs: 1px 1px 3px hsl(0, 0%, 20%);
+        --btn-clr: hsl(0, 0%, 100%);
+    }
+}*/
 
 /* Primitives */
 
@@ -78,6 +107,7 @@ section {
 }
 
 .sortBtn {
+    color: inherit;
     background: none;
 }
 
@@ -100,9 +130,9 @@ section {
     outline: none;
     padding: .75em;
     border-radius: 5em;
-    background: var(--clr);
     box-shadow: var(--bxs);
     caret-color: var(--accent-clr);
+    background: var(--clr);
 }
 
 .search-box {
@@ -144,10 +174,10 @@ section {
     padding: 1em;
     margin: 0px auto;
     margin-top: 20px;
-    box-shadow: 0px 0px 2px;
+    box-shadow: var(--task-bxs);
 }
 
-.value {
+.count {
     color: var(--muted-clr);
 }
 
@@ -158,6 +188,9 @@ section {
     align-items: center;
     justify-content: space-between;
     padding: 1em;
+}
+
+.task:not(:last-child) {
     border-bottom: 1px solid var(--muted);
 }
 
@@ -166,13 +199,17 @@ section {
 }
 
 .task-date {
-    color: var(--accent-clr);
+    color: var(--accent-clr-1);
 }
 
 .content {
     display: flex;
     align-items: center;
     gap: 1em;
+}
+
+.task.completed .task-title {
+    text-decoration: line-through;
 }
 
 /* Add task button */
@@ -275,6 +312,10 @@ section {
     color: var(--muted-clr);
 }
 
+.empty-img {
+    scale: .9;
+}
+
 /* Dialog Structure */
 
 dialog {
@@ -284,6 +325,7 @@ dialog {
     box-shadow: var(--shadow);
     background: var(--plain-clr);
     transform: translateY(100%);
+    opacity: 0;
 }
 
 /* Dialog content */
@@ -352,20 +394,24 @@ dialog.closing {
 @keyframes slideIn {
     from {
         transform: translateY(100%);
+        opacity: 0;
     }
 
     to {
         transform: translateY(0);
+        opacity: 1;
     }
 }
 
 @keyframes slideOut {
     from {
         transform: translateY(0);
+        opacity: 1;
     }
 
     to {
-        transform: translateY(-100%);
+        transform: translateY(100%);
+        opacity: 0;
     }
 }
 
@@ -381,6 +427,25 @@ dialog.closing {
     backdrop-filter: blur(4px);
 }
 
+/* utilities */
+.focus{
+    animation: hover 1s linear 0s infinite forwards;
+}
+
+@keyframes hover{
+    0%{
+        transform: translateY(0);
+    }
+
+    50%{
+        transform: translateY(-5px);
+    }
+
+    100%{
+        transform: translateY(0);
+    }
+}
+
 /* Media query for mobile */
 
 @media screen and (max-width: 768px) {
@@ -388,7 +453,7 @@ dialog.closing {
         width: 95%;
     }
 
-    .search-input{
+    .search-input {
         width: 0%;
     }
 

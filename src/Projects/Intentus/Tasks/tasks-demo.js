@@ -7,6 +7,7 @@ const taskBtn = document.querySelector(".taskBtn");
 const saveBtn = document.querySelector(".saveTask");
 const dialog = document.querySelector("dialog");
 const taskInput = document.querySelector(".taskInput");
+const count = document.querySelector(".count");
 
 document.addEventListener("DOMContentLoaded", () => {
     renderTasks(tasksSection, tasks);
@@ -20,7 +21,7 @@ function addTask(array, input) {
         createdAt: getCurrentTime(),
         alarm: null,
         completed: false,
-        tags: [null, null],
+        tag: null,
     };
 
     array.unshift(task);
@@ -38,21 +39,25 @@ function getCurrentTime() {
 
 function renderTasks(section, array) {
     section.innerHTML = "";
-    document.querySelector(".value").textContent = array.length > 0 ? array.length : 0;
+    taskCounter(tasks);
 
     if (array.length === 0) {
+        taskBtn.classList.add("focus");
         section.append(empty.content.cloneNode(true));
         return;
+    } else {
+        taskBtn.classList.remove("focus");
+        array.forEach(arr => {
+            const task = template.content.cloneNode(true);
+            task.querySelector(".task").dataset.id = arr.id;
+            task.querySelector(".task-title").textContent = arr.taskName;
+            task.querySelector(".task-date").textContent = arr.createdAt;
+            task.querySelector(".check").checked = arr.completed;
+            task.querySelector(".task").classList.toggle("completed", arr.completed);
+            section.append(task);
+        });
     }
 
-    array.forEach(arr => {
-        const task = template.content.cloneNode(true);
-        task.querySelector(".task-title").textContent = arr.taskName;
-        task.querySelector(".task-date").textContent = arr.createdAt;
-        task.querySelector(".check").id = arr.id;
-        task.querySelector(".content").htmlFor = arr.id;
-        section.append(task);
-    });
 };
 
 function validateTask(input, button) {
@@ -69,8 +74,36 @@ function searchTasks(array, input) {
         return arr.taskName.toLowerCase().includes(searched);
     });
     renderTasks(tasksSection, searchedTasks);
+
+    if (searchedTasks.length === 0) {
+        console.log("No Results Found");
+    }
 }
 
+function toggleTask(e) {
+    const checkbox = e.target.closest(".check");
+    if (checkbox) {
+        const taskElem = checkbox.closest(".task");
+        const id = taskElem.dataset.id;
+        const task = tasks.find(task => { return task.id === id });
+        task.completed = !task.completed;
+    } else {
+        return;
+    }
+    renderTasks(tasksSection, tasks);
+    taskCounter(tasks);
+};
+
+function taskCounter(array) {
+    const completed = array.filter(arr => { return arr.completed });
+    if (completed.length === 0) {
+        count.textContent = array.length;
+    } else {
+        count.textContent = `${ completed.length } / ${ array.length }`;
+    }
+}
+
+tasksSection.addEventListener("click", toggleTask);
 searchInput.addEventListener("input", () => { searchTasks(tasks, searchInput) });
 
 taskBtn.addEventListener("click", () => {
@@ -79,11 +112,11 @@ taskBtn.addEventListener("click", () => {
 });
 
 saveBtn.addEventListener("click", () => {
-    dialog.classList.remove("open");
     dialog.classList.add("closing");
     addTask(tasks, taskInput);
     setTimeout(() => {
         dialog.close();
+        dialog.classList.remove("open");
         dialog.classList.remove("closing");
     }, 500);
 });

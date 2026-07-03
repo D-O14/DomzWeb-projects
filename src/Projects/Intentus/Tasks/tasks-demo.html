@@ -44,12 +44,12 @@
                     
                     <div class="tasks-header">
                         <h1 class="header">Today</h1>
-                        <span class="value"></span>
+                        <span class="count"></span>
                     </div>
 
                     <div class="tasks-content">
                         <template class="task-template">
-                            <div class="task">
+                            <div class="task" data-id="">
                                 <label class="content">
                                     <input type="checkbox" class="check">
                                     <span class="checkbox"></span>
@@ -61,6 +61,7 @@
 
                         <template class="empty-template">
                             <div class="empty-state">
+                                <img src="mobile illustration.svg" alt="" class="empty-img">
                                 <h2>Nothing here yet.</h2>
                                 <p class="empty-msg">Tap the
                                     <span>
