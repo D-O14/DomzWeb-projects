@@ -8,58 +8,96 @@
     box-sizing: border-box;
     font-family: system-ui;
     transition: .3s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
 }
 
 /* Root: Variable Source */
 
-    :root {
-        --shadow:
-            0 4px 6px hsla(0, 0%, 0%, 5%),
-            0 10px 20px hsla(0, 0%, 0%, 1%),
-            0 20px 40px hsla(0, 0%, 0%, 15%);
-        --accent-clr: hsl(210, 100%, 50%);
-        --accent-dark-shade: hsl(210, 100%, 40%);
-        --accent-light-shade: hsl(210, 100%, 90%);
-        --clr: hsl(200, 100%, 96%);
-        --bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
-        --plain-clr: hsl(0, 0%, 100%);
-        --dark: hsl(0, 0%, 10%);
-        --plain-shade: hsl(0, 0%, 95%);
-        --muted-clr: hsl(0, 0%, 50%);
-        --muted: hsl(0, 0%, 80%);
-        --task-bxs: 0px 0px 2px;
-        --glass-clr: hsla(0, 0%, 10%, .5);
-    }
+:root {
+    /* Surfaces */
+    --bg-page: hsl(0, 0%, 100%);
+    --bg-dialog: hsl(0, 0%, 100%);
+    --bg-card: hsl(0, 0%, 100%);
+    --bg-menu: hsl(0, 0%, 100%);
+    --bg-input: hsl(200, 100%, 96%);
+    --bg-search: hsl(200, 100%, 96%);
+
+    /* Text */
+    --txt-muted: hsl(0, 0%, 80%);
+    --txt-secondary: hsl(0, 0%, 80%);
+    --txt-on-accent: hsl(0, 0%, 100%);
+
+    /* Accents */
+    --accent: hsl(210, 100%, 50%);
+    --accent-soft: hsl(210, 100%, 90%);
+    --accent-hover: hsl(210, 100%, 40%);
+
+    /* Borders */
+    --border: hsl(0, 0%, 50%);
+    --checkbox-border: hsl(0, 0%, 80%);
+    --muted-shade: hsl(0, 0%, 95%);
+    --glass-clr: hsla(0, 0%, 10%, .5);
+
+    /* Shadows */
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    --shadow-task: 0px 0px 2px;
+    --shadow-input: inset 1px 1px 2px hsl(0, 0%, 80%);
+    --shadow-fab: 2px 2px 3px hsla(210, 100%, 50%, .75);
+    --shadow-fab-hover: 3px 3px 3px hsla(210, 100%, 50%, .75);
+
+}
 
 /*@media (prefers-color-scheme: dark) {
     body {
         background: var(--dark);
-        color: var(--plain-clr);
+        color: var(--plain);
     }
 
     :root {
-        --shadow:
-            0 4px 6px hsla(0, 0%, 0%, 5%),
+        --shadow: 0 4px 6px hsla(0, 0%, 0%, 5%),
             0 10px 20px hsla(0, 0%, 0%, 1%),
             0 20px 40px hsla(0, 0%, 0%, 15%);
-        --accent-clr-1: hsl(0, 0%, 19%);
-        --accent-clr-2: hsl(210, 100%, 5%);
-        --accent-dark-shade: hsl(210, 100%, 40%);
-        --accent-light-shade: hsl(0, 0%, 9%);
-        --clr: hsl(200, 100%, 96%);
-        --bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
-        --plain-clr: hsl(0, 0%, 100%);
-        --dark: hsl(0, 0%, 5%);
-        --plain-shade: hsl(0, 0%, 25%);
-        --muted-clr: hsl(0, 0%, 50%);
-        --muted: hsl(0, 0%, 80%);
+        --task-bxs: 0px 0px 2px;
+        --input-bxs: inset 1px 1px 2px hsl(0, 0%, 80%);
+
+        --accent: hsl(210, 100%, 50%);
+        --accent-dark: hsl(210, 100%, 40%);
+        --accent-light: hsl(210, 100%, 90%);
+
+        --btn-shadow: 2px 2px 3px hsla(210, 100%, 50%, .75);
+        --btn-shadow-hover: 3px 3px 3px hsla(210, 100%, 50%, .75);
+
+        --base: hsl(200, 100%, 96%);
+        --plain: hsl(0, 0%, 100%);
+        --dark: hsl(0, 0%, 10%);
+        --muted: hsl(0, 0%, 50%);
+        --shade: hsl(0, 0%, 80%);
+        --muted-shade: hsl(0, 0%, 95%);
         --glass-clr: hsla(0, 0%, 10%, .5);
-        --task-bxs: 1px 1px 3px hsl(0, 0%, 20%);
-        --btn-clr: hsl(0, 0%, 100%);
     }
 }*/
 
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
 /* Primitives */
+
+body {
+    overscroll-behavior: none;
+}
 
 header {
     position: sticky;
@@ -68,6 +106,11 @@ header {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+}
+
+img {
+    user-select: none;
+    pointer-events: none;
 }
 
 h1 {
@@ -82,7 +125,7 @@ button {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    user-select: none;
     touch-action: manipulation;
 }
 
@@ -132,9 +175,9 @@ section {
     outline: none;
     padding: .75em;
     border-radius: 5em;
-    box-shadow: var(--bxs);
-    caret-color: var(--accent-clr);
-    background: var(--clr);
+    box-shadow: var(--input-bxs);
+    caret-color: var(--accent);
+    background: var(--base);
 }
 
 .search-box {
@@ -144,8 +187,8 @@ section {
     border-radius: 5em;
     display: inline-flex;
     align-items: center;
-    color: var(--plain-clr);
-    background: var(--accent-clr);
+    color: var(--plain);
+    background: var(--accent);
 }
 
 /* Tasks Container */
@@ -180,7 +223,7 @@ section {
 }
 
 .count {
-    color: var(--muted-clr);
+    color: var(--shade);
 }
 
 /* Task Component Structure */
@@ -201,7 +244,7 @@ section {
 }
 
 .task-date {
-    color: var(--accent-clr-1);
+    color: var(--accent);
 }
 
 .content {
@@ -225,14 +268,14 @@ section {
     bottom: 45px;
     right: 45px;
     padding: .75em;
-    color: var(--plain-clr);
-    background: var(--accent-clr);
-    box-shadow: 2px 2px 3px hsla(210, 100%, 50%, .75);
+    color: var(--plain);
+    background: var(--accent);
+    box-shadow: var(--btn-shadow);
 }
 
 .taskBtn:hover {
     scale: 1.15;
-    box-shadow: 3px 3px 3px hsla(210, 100%, 50%, .75);
+    box-shadow: var(--btn-shadow-hover);
 }
 
 .taskBtn:hover svg {
@@ -256,7 +299,7 @@ section {
     justify-content: center;
     align-items: center;
     position: relative;
-    border: 1px solid var(--muted-clr);
+    border: 1px solid var(--shade);
 }
 
 .checkbox::after {
@@ -267,14 +310,14 @@ section {
     position: absolute;
     left: 50%;
     top: 45%;
-    border-right: 2px solid var(--plain-clr);
-    border-bottom: 2px solid var(--plain-clr);
+    border-right: 2px solid var(--plain);
+    border-bottom: 2px solid var(--plain);
     transform: translate(-50%, -50%) rotate(45deg) scale(0);
 }
 
 .check:checked+.checkbox {
-    background: var(--accent-clr);
-    border-color: var(--accent-clr);
+    background: var(--accent);
+    border-color: var(--accent);
 }
 
 .check:checked+.checkbox::after {
@@ -293,7 +336,7 @@ section {
     scale: 0;
     width: 1em;
     height: 1em;
-    stroke: var(--plain-clr);
+    stroke: var(--plain);
 }
 
 /* Placeholder Content */
@@ -304,6 +347,7 @@ section {
     justify-content: center;
     flex-direction: column;
     padding: .15em;
+    padding-top: .15em;
 }
 
 .empty-state h2 {
@@ -311,7 +355,7 @@ section {
 }
 
 .empty-msg {
-    color: var(--muted-clr);
+    color: var(--shade);
 }
 
 .empty-img {
@@ -325,7 +369,7 @@ dialog {
     border: none;
     border-radius: .35em;
     box-shadow: var(--shadow);
-    background: var(--plain-clr);
+    background: var(--plain);
     transform: translateY(100%);
     opacity: 0;
 }
@@ -347,9 +391,9 @@ dialog {
     width: 100%;
     height: 40px;
     outline: none;
-    box-shadow: var(--bxs);
-    background: var(--plain-shade);
-    caret-color: var(--accent-clr);
+    box-shadow: var(--input-bxs);
+    background: var(--muted-shade);
+    caret-color: var(--accent);
     border: 1px solid transparent;
 }
 
@@ -372,15 +416,15 @@ dialog {
     padding: .25em .75em;
     text-align: center;
     border-radius: 5em;
-    color: var(--accent-clr);
-    border: 2px solid var(--accent-clr);
+    color: var(--accent);
+    border: 2px solid var(--accent);
 }
 
 .saveTask:hover {
     scale: .95;
-    color: var(--plain-clr);
-    background: var(--accent-clr);
-    border-top: 2px inset var(--accent-clr);
+    color: var(--plain);
+    background: var(--accent);
+    border-top: 2px inset var(--accent);
 }
 
 /* Animation States */
@@ -430,21 +474,24 @@ dialog.closing {
 }
 
 /* utilities */
-.focus{
+.focus {
     animation: hover 1s linear 0s infinite forwards;
 }
 
-@keyframes hover{
-    0%{
-        transform: translateY(0);
+@keyframes hover {
+    0% {
+        transform: scale(.9);
+        box-shadow: var(--btn-shadow);
     }
 
-    50%{
-        transform: translateY(-5px);
+    50% {
+        transform: scale(1.05);
+        box-shadow: var(--btn-shadow-hover);
     }
 
-    100%{
-        transform: translateY(0);
+    100% {
+        transform: scale(.9);
+        box-shadow: var(--btn-shadow);
     }
 }
 
