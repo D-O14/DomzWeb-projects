@@ -82,6 +82,8 @@ button {
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
 }
 
 section {
