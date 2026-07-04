@@ -12,14 +12,18 @@
 :root{
     --bg-surface: hsl(256, 89%, 85%);
     --bg-secondary: hsl(220, 27%, 96%);
+    --bg-download: hsl(177, 72%, 92%);
+    --bg-danger: hsl(358, 74%, 92%);
+    --bg-link: hsl(210, 100%, 92%);
     --bg-menu: hsl(0, 0%, 100%);
+
 
     --txt-primary: hsl(225, 6%, 24%);
     --txt-secondary: hsl(224, 5%, 56%);
 
-    --download-clr: hsl(177, 72%, 42%);
-    --danger-clr: hsl(358, 74%, 49%);
-    --link-clr: hsl(210, 100%, 50%);
+    --color-download: hsl(177, 72%, 42%);
+    --color-danger: hsl(358, 74%, 49%);
+    --color-link: hsl(210, 100%, 50%);
 
     --shadow-menu: 0 10px 20px hsla(0, 0%, 25%, .15);
 }
@@ -43,6 +47,9 @@ button{ color: inherit; }
     align-items: center;
     justify-content: center;
 }
+
+.context-hidden{ scale: 0; }
+.context-shown{ scale: 1; }
 
 .menu{
     width: 100%;
@@ -101,10 +108,21 @@ button{ color: inherit; }
     right: 8px;
 }
 
-.delete:hover{ color: var(--danger-clr); }
-.copy-link:hover { color: var(--link-clr); }
-.download:hover {color: var(--download-clr)}
+.delete:hover{ 
+    color: var(--color-danger); 
+    background: var(--bg-danger);
+}
 
-.download:hover svg {stroke: var(--download-clr)}
-.copy-link:hover svg{stroke: var(--link-clr)}
-.delete:hover svg { stroke: var(--danger-clr); }
+.copy-link:hover { 
+    color: var(--color-link); 
+    background: var(--bg-link);
+}
+
+.download:hover {
+    color: var(--color-download); 
+    background: var(--bg-download);
+}
+
+.download:hover svg {stroke: var(--color-download)}
+.copy-link:hover svg{stroke: var(--color-link)}
+.delete:hover svg { stroke: var(--color-danger); }
