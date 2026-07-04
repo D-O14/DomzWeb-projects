@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Component</title>
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="carousel.css">
+</head>
+
+<body>
+    <section class="carousel-component">
+
+        <div class="carousel">
+            <article class="card">
+                <figure>
+                    <img src="abstract.jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Special Pizza</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
+                <span class="price">$20</span>
+            </article>
+
+            <article class="card">
+                <figure>
+                    <img src="cafe_items (1).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Straw Cake</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
+                <span class="price">$20</span>
+            </article>
+
+            <article class="card active">
+                <figure>
+                    <img src="cafe_items (2).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Vanilla Cake</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
+                <span class="price">$20</span>
+            </article>
+
+            <article class="card">
+                <figure>
+                    <img src="cafe_items (3).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Meatball</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
+                <span class="price">$20</span>
+            </article>
+
+            <article class="card">
+                <figure>
+                    <img src="cafe_items (4).jpg" alt="" decoding="async" fetchpriority="high"
+                        loading="lazy">
+                </figure>
+                <div class="info">
+                    <h1>Burger</h1>
+                    <span class="rating">4.5&star;</span>
+                </div>
+                <span class="price">$20</span>
+            </article>
+        </div>
+
+        <menu class="controls">
+            <button class="prev">&#10094;</button>
+            <menu class="indicators">
+                <button class="indicator" aria-label="Go to slide 1">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 2">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 3">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 4">
+                    <span></span>
+                </button>
+                <button class="indicator" aria-label="Go to slide 5">
+                    <span></span>
+                </button>
+            </menu>
+            <button class="next">&#10095;</button>
+        </menu>
+
+    </section>
+</body>
+<script src="carousel.js" defer></script>
+
+</html>

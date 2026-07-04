@@ -1,4 +1,5 @@
 const tasks = [];
+const body = document.body;
 const tasksSection = document.querySelector(".tasks-content");
 const template = document.querySelector(".task-template");
 const empty = document.querySelector(".empty-template");
@@ -8,8 +9,15 @@ const saveBtn = document.querySelector(".saveTask");
 const dialog = document.querySelector("dialog");
 const taskInput = document.querySelector(".taskInput");
 const count = document.querySelector(".count");
+const toggle = document.querySelector(".toggle");
 
 document.addEventListener("DOMContentLoaded", () => {
+    let theme = localStorage.getItem("theme");
+    if (theme === "darkmode") {
+        body.classList.add("dark-mode");
+    } else {
+        toggle.setAttribute("aria-checked","false")
+    };
     renderTasks(tasksSection, tasks);
     validateTask(taskInput, saveBtn);
 });
@@ -102,6 +110,17 @@ function taskCounter(array) {
         count.textContent = `${ completed.length } / ${ array.length }`;
     }
 }
+
+function themeSwitch() {
+    toggle.addEventListener("click", () => {
+        body.classList.toggle("dark-mode");
+        const isDark = body.classList.contains("dark-mode");
+        localStorage.setItem("theme", isDark ? "darkmode" : "lightmode");
+        toggle.setAttribute("aria-checked", isDark);
+    });
+}
+
+themeSwitch();
 
 tasksSection.addEventListener("click", toggleTask);
 searchInput.addEventListener("input", () => { searchTasks(tasks, searchInput) });
