@@ -201,6 +201,16 @@
         opacity: 1;
         transform: rotate(90deg);
     }*/
+
+    button{
+        touch-action: none;
+    }
+
+    .dot{
+        position: absolute;
+        background: red;
+        transform: translate(-50%, -50%);
+    }
 </style>
 
 <body>
@@ -275,6 +285,7 @@
     
                 </nav>
             </header>-->
+            <button>button</button>
 
     <main>
 
@@ -305,6 +316,39 @@
         }
 
         showMenu('nav_toggle', 'nav-menu');*/
+
+        const button = document.querySelector("button");
+        button.addEventListener("pointerdown", (e) => {
+            const dot = document.createElement("div");
+            dot.classList.add("dot");
+            dot.id = e.pointerId;
+            position(e, dot);
+            document.body.append(dot);
+        });
+
+        button.addEventListener("pointermove", (e) => {
+            const dot = document.getElementById(e.pointerId);
+            if(dot === null) return;
+            //console.log(e);
+            position(e, dot);
+        });
+
+        button.addEventListener("pointercancel", (e) => {
+            console.log("cancel");
+        })
+
+        button.addEventListener("pointerup", () => {
+            const dot = document.getElementById(e.pointerId);
+            if (dot === null) return;
+            dot.remove();
+        });
+
+        function position(e, dot){
+            dot.style.width = `${e.width * 10}px`;
+            dot.style.height = `${e.height * 10}px`;
+            dot.style.top = `${e.pageX}px`;
+            dot.style.left = `${e.pageY}px`;
+        }
 
     </script>
 </body>

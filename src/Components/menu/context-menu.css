@@ -1,0 +1,110 @@
+*::before,
+*::after,
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: .3s ease-in-out;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root{
+    --bg-surface: hsl(256, 89%, 85%);
+    --bg-secondary: hsl(220, 27%, 96%);
+    --bg-menu: hsl(0, 0%, 100%);
+
+    --txt-primary: hsl(225, 6%, 24%);
+    --txt-secondary: hsl(224, 5%, 56%);
+
+    --download-clr: hsl(177, 72%, 42%);
+    --danger-clr: hsl(358, 74%, 49%);
+    --link-clr: hsl(210, 100%, 50%);
+
+    --shadow-menu: 0 10px 20px hsla(0, 0%, 25%, .15);
+}
+
+body{
+    background: var(--bg-surface);
+    color: var(--txt-primary);
+}
+
+li { list-style: none; }
+button{ color: inherit; }
+
+.container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu{
+    width: 100%;
+    max-width: 200px;
+    display: flex;
+    flex-direction: column;
+    border-radius: .5em;
+    background: var(--bg-menu);
+}
+
+.menu-list{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+}
+
+.menu-list + .menu-list{ border-top: 1px solid hsl(0, 0%, 87%); }
+
+.menu-item{
+    position: relative;
+    list-style: none;
+}
+
+.menu-btn{
+    width: 100%;
+    text-align: left;
+    display: inline-flex;
+    align-items: center;
+    padding: .5em 1em;
+    padding-right: 2.25em;
+    border-radius: .5em;
+    background: none;
+    border: 1px solid transparent;
+}
+
+.menu-btn:hover svg{ stroke: var(--txt-primary); }
+
+.menu-btn:hover { 
+    scale: .95;
+    transform: translateY(-5px);
+    background: var(--bg-secondary);
+}
+
+.menu-btn svg{
+    flex-shrink: 0;
+    width: 1.25em;
+    height: 1.25em;
+    margin-right: 10px;
+    stroke: var(--txt-secondary);
+}
+
+.menu-btn svg:nth-of-type(2){
+    margin-right: 0;
+    position: absolute;
+    right: 8px;
+}
+
+.delete:hover{ color: var(--danger-clr); }
+.copy-link:hover { color: var(--link-clr); }
+.download:hover {color: var(--download-clr)}
+
+.download:hover svg {stroke: var(--download-clr)}
+.copy-link:hover svg{stroke: var(--link-clr)}
+.delete:hover svg { stroke: var(--danger-clr); }
