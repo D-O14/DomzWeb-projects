@@ -1,11 +1,4 @@
-const menu = document.querySelector(".menu");
-const primaryMenu = document.querySelector(".primary");
-const secondaryMenu = document.querySelector(".secondary");
-const dangerMenu = document.querySelector(".danger");
-const template = document.querySelector("template")
-const url = location.href;
-
-const icons = {
+export const icons = {
     share: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-share2-icon lucide-share-2">
     <circle cx="18" cy="5" r="3" />
@@ -14,7 +7,7 @@ const icons = {
     <line x1="8.59" x2="15.42" y1="13.51" y2="17.49" />
     <line x1="15.41" x2="8.59" y1="6.51" y2="10.49" />
 </svg>`,
-    edit: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    rename: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil">
     <path
         d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
@@ -64,65 +57,3 @@ const icons = {
     <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
 </svg>`,
 };
-
-groups = {
-    primary: primaryMenu,
-    secondary: secondaryMenu,
-    danger: dangerMenu,
-};
-
-menuItems = [
-    { label: "Share", icon: icons.share, section: "primary" },
-    { label: "Edit", icon: icons.edit, section: "primary" },
-    { label: "Copy Link", icon: icons.link, section: "secondary", className: "copy-link", action: () => { copy(url) } },
-    { label: "Move to", icon: icons.folder, section: "secondary" },
-    { label: "Copy to", icon: icons.copy, section: "secondary" },
-    { label: "Archive", icon: icons.archive, section: "secondary" },
-    { label: "Make Private", icon: icons.private, section: "secondary" },
-    { label: "Download", icon: icons.download, section: "secondary", className: "download" },
-    { label: "Delete", icon: icons.delete, section: "danger", className: "delete" },
-];
-
-menuItems.forEach(menuItem => {
-    const item = template.content.cloneNode(true);
-    const menuBtn = item.querySelector(".menu-btn");
-    menuBtn.addEventListener("click", () => { menuItem.action() });
-    if (menuItem.className) { menuBtn.classList.add(menuItem.className) };
-    menuBtn.innerHTML = `${ menuItem.icon }${ menuItem.label }`;
-    groups[menuItem.section].append(item);
-});
-
-function copy(text) {
-    navigator.clipboard.writeText(text);
-    console.log(`${ text } copied to clipboard`);
-};
-
-function showMenu() {
-    menu.classList.remove("context-hidden");
-    menu.classList.add("context-shown");   
-}
-
-document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-    showMenu();
-});
-
-document.addEventListener("pointerdown", (e) => {
-    if (!menu.contains(e.target)) {
-        menu.classList.remove("context-shown");
-        menu.classList.add("context-hidden");
-    };
-});
-
-document.addEventListener("keydown", (e) => {
-    e.preventDefault();
-    if (e.key === "Escape" && menu.classList.contains("context-shown")) {
-        menu.classList.remove("context-shown");
-        menu.classList.add("context-hidden");
-    } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "r") {
-        location.reload();
-        console.log("refreshed");
-    } else if (e.ctrlKey && e.key.toLowerCase() === "m") {
-        showMenu();
-    };
-});
