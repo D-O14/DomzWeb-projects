@@ -1,5 +1,5 @@
 # Context Menu: 
-    A re-usable component that performs certain actions.
+    A context menu is a general-purpose component with the ability to perform certain actions based on the buttons clicked on it.
 
 ## Completed
 - [x] Made Menu Dynamic
@@ -25,3 +25,7 @@
 ## Ideas
 - Command palette compatibility
 - Mobile bottom sheet
+
+## Will be used by
+- Notes App
+- Dashboard

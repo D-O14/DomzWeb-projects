@@ -3,6 +3,7 @@ const body = document.body;
 const tasksSection = document.querySelector(".tasks-content");
 const template = document.querySelector(".task-template");
 const empty = document.querySelector(".empty-template");
+const emptySearch = document.querySelector(".empty-search");
 const searchInput = document.getElementById("searchInput");
 const taskBtn = document.querySelector(".taskBtn");
 const saveBtn = document.querySelector(".saveTask");
@@ -84,7 +85,9 @@ function searchTasks(array, input) {
     renderTasks(tasksSection, searchedTasks);
 
     if (searchedTasks.length === 0) {
-        console.log("No Results Found");
+        tasksSection.innerHTML = "";
+        const noRes = emptySearch.content.cloneNode(true);
+        tasksSection.append(noRes);
     }
 }
 
