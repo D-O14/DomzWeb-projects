@@ -12,7 +12,7 @@ A component built for expanding and collapsing content vertically. It is mostly 
 - [] Add dynamic counter
 
 ## Ideas
-- Can evolve into FAQ management system
+- Evolve into FAQ management system
 - Renders data from a server 
 
 ## Will be used by
