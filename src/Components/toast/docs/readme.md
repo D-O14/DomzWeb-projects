@@ -16,6 +16,8 @@ A toast, also known as a notification is a component built to display feedback t
 - [] Add timer
 - [] Add theme-based variation
 
+# events
+
 # Ideas
 - Make dismissable via slide gesture on mobile
 
