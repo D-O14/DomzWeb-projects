@@ -23,11 +23,27 @@
     - [] Edit Content
 
 ## Events
+- contextmenu event handler: to enable right click to reveal the menu
+- pointerdown: to exit the context menu
+- keydown: to check keys pressed and perform actions based on them
+
 ## Dependencies
+- none
+
 ## Browser APIs
+- none
+
 ## Accessibility
+- `Esc` keyboard event escapes the menu when open (closes it)
+- Can be focused
+    # to-do
+    - [] Add aria-attributes
 
 ## Concepts Learned
+- Pointer events
+- Dynamic object rendering
+- Using functions from objects
+- context menu event listener
 
 ## Ideas
 - Command palette compatibility
