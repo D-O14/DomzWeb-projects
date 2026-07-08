@@ -31,7 +31,11 @@
 - none
 
 ## Browser APIs
-- none
+- `Clipboard API`:
+    for copying text:
+    ```js
+    navigator.clipboard.writeText();
+    ```
 
 ## Accessibility
 - `Esc` keyboard event escapes the menu when open (closes it)

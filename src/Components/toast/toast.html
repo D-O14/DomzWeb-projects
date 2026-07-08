@@ -8,13 +8,26 @@
 </head>
 
 <body>
-    <button class="btn" data-alert="0">Message</button>
-    <button class="btn" data-alert="1">Complete</button>
-    <button class="btn" data-alert="2">Delete</button>
+    <button class="btn btn-1" data-status="message">Message</button>
+    <button class="btn btn-2" data-status="success">Complete</button>
+    <button class="btn btn-3" data-status="error">Delete</button>
+    <button class="btn btn-4" data-status="warning">Storage</button>
 
-    <div class="notifications">
-        
+    <div class="toasts">
+        <template>
+            <div class="toast">
+                <span class="icon"></span>
+                <div>
+                    <strong class="status"></strong>
+                    <p class="toast-msg"></p>
+                </div>
+                <button class="close-btn">
+
+                </button>      
+            </div>
+        </template>
     </div>
+    
 </body>
 
 <script src="toast.js" defer></script>
