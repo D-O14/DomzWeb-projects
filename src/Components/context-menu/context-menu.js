@@ -110,7 +110,7 @@ function showMenu() {
 }
 
 document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     showMenu();
 });
 
