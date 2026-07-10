@@ -1,7 +1,8 @@
-const template = document.querySelector("template");
-let isOnline = true
 let intervalId;
+let endpoint = "";
+let isOnline = true;
 let previousState = true;
+const template = document.querySelector("template");
 
 const icons = {
     wifi: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -23,6 +24,12 @@ const icons = {
 </svg>`,
 };
 
+function monitorConnection(url) { endpoint = url };
+document.addEventListener("DOMContentLoaded", () => {
+    monitorConnection("https://jsonplaceholder.typicode.com/posts");
+    checkConnection(endpoint);
+});
+
 function displayDialog() {
     const popup = template.content.cloneNode(true);
     const dialog = popup.querySelector(".popup");
@@ -37,33 +44,33 @@ function displayDialog() {
 const popup = displayDialog();
 document.body.append(popup.dialog);
 
-const checkConnection = async () => {
+async function checkConnection(endpoint) {
     previousState = isOnline;
-    console.log("Checking connection");
     try {
-        const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const response = await fetch(endpoint);
         isOnline = response.status >= 200 && response.status < 300;
     } catch (error) {
         isOnline = false;
-    }
 
-    if (!previousState && isOnline) {
+        if (previousState && !isOnline) {
+            popup.popUpIcon.innerHTML = icons.noWifi;
+            popup.button.removeAttribute("disabled");
+            popup.popUpTitle.textContent = "No Internet Connection";
+            popup.popUpDesc.innerHTML = `Internet connection unavailable. Attempting reconnect in <span class='timer'>10</span> seconds.`;
+            handlePopUp(isOnline);
+        }
+    }
+    if (!isOnline && !previousState) { handlePopUp(isOnline) }
+    else if (!previousState && isOnline) {
         popup.popUpIcon.innerHTML = icons.wifi;
         popup.button.setAttribute("disabled", "true");
         popup.popUpTitle.textContent = "Connection Restored";
         popup.popUpDesc.textContent = "Your device has been re-connected to the internet successsfully";
         handlePopUp(isOnline);
-    } else if (previousState && !isOnline) {
-        popup.popUpIcon.innerHTML = icons.noWifi;
-        popup.button.removeAttribute("disabled");
-        popup.popUpTitle.textContent = "No Internet Connection";
-        popup.popUpDesc.innerHTML = `Internet connection unavailable. Attempting reconnect in <span class='timer'>10</span> seconds.`;
-        handlePopUp(isOnline);
     }
 };
 
 function handlePopUp(status) {
-    //let timer = 10;
     popup.timer = popup.popUpDesc.querySelector(".timer");
     popup.dialog.classList.add("show");
 
@@ -71,7 +78,7 @@ function handlePopUp(status) {
         popup.dialog.classList.add("online");
         clearInterval(intervalId);
         timer = 10;
-        setTimeout(() => { popup.classList.remove("show") }, 2000);
+        setTimeout(() => { popup.dialog.classList.remove("show") }, 2000);
     } else {
         popup.dialog.classList.remove("online");
         clearInterval(intervalId);
@@ -81,16 +88,16 @@ function handlePopUp(status) {
         intervalId = setInterval(() => {
             timer--;
             popup.timer.textContent = timer;
-            console.log(timer);
             if (timer === 0) {
                 console.log("Checking connection again");
                 clearInterval(intervalId);
-                checkConnection();
+                checkConnection(endpoint);
             };
         }, 1000);
     }
 };
 
 const reconnectBtn = popup.button;
-reconnectBtn.addEventListener("click", () => { checkConnection() });
-setInterval(() => { isOnline && checkConnection(); }, 3000);
+reconnectBtn.addEventListener("click", () => {
+    checkConnection(endpoint);
+});
