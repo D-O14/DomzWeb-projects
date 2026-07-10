@@ -1,10 +1,10 @@
-let isOnline = true
-let timer = 10;
-let intervalId;
 const template = document.querySelector("template");
+let isOnline = true
+let intervalId;
+let previousState = true;
 
 const icons = {
-    wifi: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    wifi: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-wifi-icon lucide-wifi">
     <path d="M12 20h.01" />
     <path d="M2 8.82a15 15 0 0 1 20 0" />
@@ -30,33 +30,41 @@ function displayDialog() {
     const popUpDesc = popup.querySelector(".desc");
     const popUpIcon = popup.querySelector(".icon");
     const timer = popup.querySelector(".timer");
-    return { dialog, popUpTitle, popUpDesc, popUpDesc, popUpIcon };
+    const button = popup.querySelector(".reconnectBtn");
+    return { dialog, popUpTitle, popUpDesc, popUpDesc, popUpIcon, timer, button };
 }
 
 const popup = displayDialog();
 document.body.append(popup.dialog);
 
 const checkConnection = async () => {
+    previousState = isOnline;
+    console.log("Checking connection");
     try {
         const response = await fetch("https://jsonplaceholder.typicode.com/posts");
         isOnline = response.status >= 200 && response.status < 300;
-
-        /*popup.popUpTitle.textContent = "Connection Restored";
-        popup.popUpDesc.textContent = "Your device has been re-connected to the internet successsfully";
-        popup.popUpIcon.innerHTML = icons.wifi;*/
     } catch (error) {
         isOnline = false;
-
-        popup.popUpTitle.textContent = "No Internet Connection";
-        popup.popUpDesc.innerHTML = `Internet connection unavailable. Attempting reconnect in ${ popup.timer } seconds.`;
-        popup.popUpIcon.innerHTML = icons.noWifi;
     }
-    /*timer = 10;
-    clearInterval(intervalId);*/
-    handlePopUp(isOnline);
+
+    if (!previousState && isOnline) {
+        popup.popUpIcon.innerHTML = icons.wifi;
+        popup.button.setAttribute("disabled", "true");
+        popup.popUpTitle.textContent = "Connection Restored";
+        popup.popUpDesc.textContent = "Your device has been re-connected to the internet successsfully";
+        handlePopUp(isOnline);
+    } else if (previousState && !isOnline) {
+        popup.popUpIcon.innerHTML = icons.noWifi;
+        popup.button.removeAttribute("disabled");
+        popup.popUpTitle.textContent = "No Internet Connection";
+        popup.popUpDesc.innerHTML = `Internet connection unavailable. Attempting reconnect in <span class='timer'>10</span> seconds.`;
+        handlePopUp(isOnline);
+    }
 };
 
 function handlePopUp(status) {
+    //let timer = 10;
+    popup.timer = popup.popUpDesc.querySelector(".timer");
     popup.dialog.classList.add("show");
 
     if (status) {
@@ -64,23 +72,25 @@ function handlePopUp(status) {
         clearInterval(intervalId);
         timer = 10;
         setTimeout(() => { popup.classList.remove("show") }, 2000);
-        return
-    };
-
-    popup.classList.remove("online");
-    clearInterval(intervalId);
-    timer = 10;
-    popup.timer.textContent = timer;
-
-    intervalId = setInterval(() => {
-        timer--;
+    } else {
+        popup.dialog.classList.remove("online");
+        clearInterval(intervalId);
+        timer = 10;
         popup.timer.textContent = timer;
-        if (timer === 0) {
-            clearInterval(intervalId);
-            checkConnection()
-        };
-    }, 1000);
+
+        intervalId = setInterval(() => {
+            timer--;
+            popup.timer.textContent = timer;
+            console.log(timer);
+            if (timer === 0) {
+                console.log("Checking connection again");
+                clearInterval(intervalId);
+                checkConnection();
+            };
+        }, 1000);
+    }
 };
 
-reconnect.addEventListener("click", () => { checkConnection() });
+const reconnectBtn = popup.button;
+reconnectBtn.addEventListener("click", () => { checkConnection() });
 setInterval(() => { isOnline && checkConnection(); }, 3000);

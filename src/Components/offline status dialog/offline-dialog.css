@@ -54,7 +54,12 @@ button{
     background: var(--bg-popup);
     transform: translate(-50%);
     visibility: hidden;
+    border: none;
     border-top: 3px solid var(--clr-border);
+}
+
+.details{
+    width: 100%;
 }
 
 .show{
@@ -64,7 +69,7 @@ button{
 
 .icon {
     width: 40px;
-    height: 35px;
+    height: 40px;
     display: flex;
     border-radius: 5em;
     color: var(--clr-icon);
@@ -83,11 +88,9 @@ button{
     color: var(--clr-desc);
 }
 
-.timer{
-    font-weight: bold;
-}
+.timer{font-weight: bold;}
 
-.reconnect{
+.reconnectBtn{
     color: var(--base-clr);
     background: var(--bg-button);
 }
@@ -100,7 +103,7 @@ button{
     background: hsl(145, 63%, 49%);
 }
 
-.online .reconnect{
+:disabled{
     pointer-events: none;
     background: hsl(0, 0%, 75%);
 }
