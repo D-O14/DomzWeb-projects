@@ -1,0 +1,83 @@
+*::before,
+*::after,
+* {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    transition: all .3s ease;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+
+    --bg-page: hsl(0, 0%, 100%);
+    --clr: hsl(0, 0%, 10%);
+    --input-clr: var(--clr);
+    --border: hsl(0, 0%, 80%);
+    --bxs: hsl(0, 0%, 80%);
+    --caret-color: hsl(210, 100%, 50%);
+}
+
+/*@media(prefers-color-scheme: dark) {
+    :root {
+        --bg-page: hsl(0, 0%, 15%);
+        --clr: hsl(0, 0%, 100%);
+        --input-clr: var(--clr); 
+        --shadow: 0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+
+        --border: 1px solid hsla(0, 0%, 58%,.5);
+        --bxs: hsl(0, 0%, 10%);
+        --caret-color: hsl(210, 100%, 50%);
+    }
+}*/
+
+body{
+    color: var(--clr);
+    background: var(--bg-page);
+}
+
+input {
+    flex: 1;
+    width: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    color: var(--input-clr);
+    caret-color: var(--caret-color);
+}
+
+label {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: space-between;
+}
+
+svg {
+    vertical-align: middle;
+    transform: translate(0);
+}
+
+::-webkit-search-cancel-button {
+    display: none;
+}
+
+.search-bar {
+    width: 50%;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    border-radius: .5rem;
+    margin: 100px auto;
+    position: relative;
+    border: var(--border);
+    box-shadow: 2px 2px 6px var(--bxs);
+}
