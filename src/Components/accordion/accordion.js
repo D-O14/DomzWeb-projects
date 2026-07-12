@@ -100,37 +100,9 @@ function renderAccordion(items) {
         const accordionHeader = accordionItem.querySelector(".accordion-header");
         const accordionContent = accordionItem.querySelector(".accordion-content");
         const accordionBody = accordionItem.querySelector(".accordion-body");
-        const helpfulBtn = accordionItem.querySelector(".helpfulBtn");
-        const notHelpfulBtn = accordionItem.querySelector(".notHelpfulBtn");
         accordionHeader.textContent = `${ accordion.question }`;
         accordionContent.textContent = `${ accordion.answer }`;
-        helpfulBtn.innerHTML = `${ icons.thumbsUp } <span>${ accordion.helpful }</span>`; 
-        notHelpfulBtn.innerHTML = `${ icons.thumbsDown } <span>${ accordion.notHelpful }</span>`; 
         columns[accordion.column].append(accordionItem);
-
-        function vote(type) {
-            if (currentVote === type) return;
-            if (currentVote === "helpful") { accordion.helpful-- };
-            if (currentVote === "notHelpful") { accordion.notHelpful-- };
-            helpfulBtn.classList.remove("active");
-            notHelpfulBtn.classList.remove("active");
-
-            if (type === "helpful") {
-                accordion.helpful++;
-                helpfulBtn.classList.add("active");
-            } else {
-                accordion.notHelpful++;
-                notHelpfulBtn.classList.add("active");
-            }
-            const helpfulCount = helpfulBtn.querySelector("span");
-            const notHelpfulCount = notHelpfulBtn.querySelector("span");
-            helpfulCount.textContent = `${ accordion.helpful }`;
-            notHelpfulCount.textContent = `${ accordion.notHelpful }`;
-            currentVote = type;
-        };
-
-        helpfulBtn.addEventListener("click", () => { vote("helpful") });
-        notHelpfulBtn.addEventListener("click", () => { vote("notHelpful") });
     });
 };
 
@@ -154,6 +126,3 @@ function setUpAccordion() {
 }
 
 setUpAccordion();
-
-const helpfulBtn = accordionElem.querySelector(".helpfulBtn");
-const notHelpfulBtn = accordionElem.querySelector(".notHelpfulBtn");

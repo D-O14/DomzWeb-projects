@@ -4,3 +4,6 @@
 - Built functions
 - Separated logic
 - Created darkmode theme
+- Tested
+- Used dummy data
+- Created no results content

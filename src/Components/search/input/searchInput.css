@@ -17,6 +17,7 @@
         0 20px 40px hsla(0, 0%, 0%, 15%);
 
     --bg-page: hsl(0, 0%, 100%);
+    --bg-input: var(--bg-page);
     --clr: hsl(0, 0%, 10%);
     --input-clr: var(--clr);
     --border: hsl(0, 0%, 80%);
@@ -24,9 +25,10 @@
     --caret-color: hsl(210, 100%, 50%);
 }
 
-/*@media(prefers-color-scheme: dark) {
+@media(prefers-color-scheme: dark) {
     :root {
         --bg-page: hsl(0, 0%, 15%);
+        --bg-input: hsl(0, 0%, 12%);
         --clr: hsl(0, 0%, 100%);
         --input-clr: var(--clr); 
         --shadow: 0 4px 6px hsla(0, 0%, 0%, 5%),
@@ -37,7 +39,7 @@
         --bxs: hsl(0, 0%, 10%);
         --caret-color: hsl(210, 100%, 50%);
     }
-}*/
+}
 
 body{
     color: var(--clr);
@@ -49,12 +51,13 @@ input {
     width: 100%;
     outline: none;
     border: none;
-    background: none;
     color: var(--input-clr);
+    background: var(--bg-input);
     caret-color: var(--caret-color);
 }
 
 label {
+    width: 100%;
     display: flex;
     gap: 1em;
     align-items: center;
@@ -78,6 +81,6 @@ svg {
     border-radius: .5rem;
     margin: 100px auto;
     position: relative;
-    border: var(--border);
+    background: var(--bg-input);
     box-shadow: 2px 2px 6px var(--bxs);
 }

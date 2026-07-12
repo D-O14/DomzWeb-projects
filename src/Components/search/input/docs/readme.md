@@ -9,9 +9,10 @@ This is a simple search component that consists of an input that text is typed i
 ## to-do
 - [] Add spinner
 - [] Add animation
+- [] Add debouncing
 
 ## dependencies
 - none
 
-- browser APIs
+- Browser APIs
 - none
