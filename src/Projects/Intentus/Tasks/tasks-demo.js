@@ -23,7 +23,15 @@ document.addEventListener("DOMContentLoaded", () => {
     validateTask(taskInput, saveBtn);
 });
 
+document.addEventListener("pointerdown", (e) => {
+    if (dialog.classList.contains("open") && !dialog.contains(e.target)) {
+        dialog.classList.remove("open");
+        dialog.classList.add("closing");
+    };
+});
+
 function addTask(array, input) {
+    //input.replace(/\b\w/g, char => char.toUpperCase());
     const task = {
         id: crypto.randomUUID(),
         taskName: input.value.trim(),
@@ -86,8 +94,8 @@ function searchTasks(array, input) {
 
     if (searchedTasks.length === 0) {
         tasksSection.innerHTML = "";
-        const noRes = emptySearch.content.cloneNode(true);
-        tasksSection.append(noRes);
+        const noResults = emptySearch.content.cloneNode(true);
+        tasksSection.append(noResults);
     }
 }
 

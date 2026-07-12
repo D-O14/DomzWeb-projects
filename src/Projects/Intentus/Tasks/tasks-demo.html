@@ -28,8 +28,9 @@
             </div>
             <menu class="controls">
                 <button class="toggle" id="toggle" role="switch" aria-checked="false" aria-label="toggle dark mode">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide sun">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide sun">
                         <circle cx="12" cy="12" r="4" />
                         <path d="M12 2v2" />
                         <path d="M12 20v2" />
@@ -40,8 +41,8 @@
                         <path d="m6.34 17.66-1.41 1.41" />
                         <path d="m19.07 4.93-1.41 1.41" />
                     </svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide moon">
                         <path d="M18 5h4" />
                         <path d="M20 3v4" />
@@ -65,48 +66,61 @@
 
     <main>
         <section class="tasks">
-                <div class="tasks-wrapper">
-                    
-                    <div class="tasks-header">
-                        <h1 class="header">Today</h1>
-                        <span class="count"></span>
-                    </div>
+            <div class="tasks-wrapper">
 
-                    <div class="tasks-content">
-                        <template class="task-template">
-                            <div class="task" data-id="">
-                                <label class="content">
-                                    <input type="checkbox" class="check">
-                                    <span class="checkbox"></span>
-                                    <span class="task-title"></span>
-                                </label>
-                                <span class="task-date"></span>
-                            </div>
-                        </template>
-
-                        <template class="empty-template">
-                            <div class="empty-state">
-                                <img src="mobile illustration.svg" alt="" class="empty-img">
-                                <h2>Nothing here yet.</h2>
-                                <p class="empty-msg">Tap the
-                                    <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                            stroke-linecap="round" stroke-linejoin="round" class="lucide pen">
-                                            <path d="M13 21h8" />
-                                            <path
-                                                d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
-                                        </svg>
-                                    </span>
-                                    button below to create your first task.
-                                </p>
-                            </div>
-                        </template>
-                        <template class="empty-search">
-                            <img src="search-illustr.svg" alt="">
-                        </template>
-                    </div>
+                <div class="tasks-header">
+                    <h1 class="header">Today</h1>
+                    <span class="count"></span>
                 </div>
+
+                <div class="tasks-content">
+                    <template class="task-template">
+                        <div class="task" data-id="">
+                            <label class="content">
+                                <input type="checkbox" class="check">
+                                <span class="checkbox"></span>
+                                <span class="task-title"></span>
+                            </label>
+                            <span class="task-date"></span>
+                        </div>
+                    </template>
+
+                    <template class="empty-template">
+                        <div class="empty-state">
+                            <img src="mobile illustration.svg" alt="" class="empty-img">
+                            <h2>Nothing here yet.</h2>
+                            <p class="empty-msg">Tap the
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide pen">
+                                        <path d="M13 21h8" />
+                                        <path
+                                            d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                    </svg>
+                                </span>
+                                button below to create your first task.
+                            </p>
+                        </div>
+                    </template>
+                    <template class="empty-search">
+                        <div class="no-results">
+                            <img src="search-illustr.svg" alt="">
+                            <h2>No results found...</h2>
+                            <p class="empty-msg">
+                                Try putting in another query instead
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide search">
+                                        <path d="m21 21-4.34-4.34" />
+                                        <circle cx="11" cy="11" r="8" />
+                                    </svg>
+                                </span>
+                            </p>
+                        </div>     
+                    </template>
+                </div>
+            </div>
         </section>
         <button class="taskBtn">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"

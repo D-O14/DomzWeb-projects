@@ -11,6 +11,9 @@ This is a simple search component that consists of an input that text is typed i
 - [] Add animation
 - [] Add debouncing
 
+## uses
+Used to filter through items of all sorts of different categories, e.g. products
+
 ## dependencies
 - none
 
