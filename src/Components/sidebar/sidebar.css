@@ -18,3 +18,21 @@ html{scroll-behavior: smooth;}
     --accent-clr: hsl(238, 100%, 68%);
     --secondary-text-clr: hsl(229, 12%, 72%);
 }
+
+body{
+    min-height: 100vh;
+    color: var(--text-clr);
+    background: var(--base-clr);
+    display: grid;
+    grid-template-columns: auto, 1fr;
+}
+
+main{
+    padding: min(30px, 7%);
+}
+
+main p{
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: var(--secondary-text-clr);
+}
