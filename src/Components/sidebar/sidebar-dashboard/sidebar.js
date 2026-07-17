@@ -97,6 +97,7 @@ icons = {
 
 }
 
+
 sidebarLinks = [
     { name: "Dashboard", icon: icons.dashboard, location: "sidebar.html", className: "active", menu: "dashboard" },
     { name: "Orders", icon: icons.receipt, location: "orders.html", menu: "dashboard" },

@@ -55,9 +55,34 @@
     --border: 1px solid hsla(220, 25%, 25%, .5);
 }
 
-::view-transition{
+/*@view-transition{
     navigation: auto;
 }
+
+::view-transition-group(root){
+    animation-duration: 1s;
+    animation-timing-function: ease;
+}
+
+::view-transition-old(root){
+    animation-name: slideOut;
+}
+
+::view-transition-new(root){
+    animation-name: slideIn;
+}
+
+@keyframes slideOut{
+    to{
+        transform: translateX(-100vw);
+    }
+}
+
+@keyframes slideIn{
+    from{
+        transform: translateX(100vw);
+    }
+}*/
 
 body {
     background: var(--bg-page);
