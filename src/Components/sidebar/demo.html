@@ -8,14 +8,66 @@
 </head>
 
 <style>
-    
+
 </style>
 
 <body>
+    <nav class="sidebar">
+        <ul class="menu-dashboard"></ul>
+        <ul class="menu-dropdown"></ul>
+        <ul class="menu-actions"></ul>
+    </nav>
 
+    <template>
+        <li>
+            <a href="">
+                <span></span>
+            </a>
+        </li>
+    </template>
 </body>
 
 <script type="text/javascript" defer>
+    
+        /*indicator.style.top = active.offsetTop + "px";
+        indicator.style.height = active.offsetHeight + "px";
+        
+        themeBtn.addEventListener("click", () => {
+            document.body.classList.toggle("darkmode");
+        });*/
+
+        /*anchors.forEach(a => {
+            a.addEventListener("click", (e) => {
+                e.preventDefault();
+            })
+        })
+        
+        menuBtn.addEventListener("click", () => {
+            if (subMenu.classList.contains("open")) {
+                subMenu.classList.remove("open");
+                subMenu.style.height = "0px";
+            } else {
+                subMenu.classList.add("open");
+                subMenu.style.height = subMenu.scrollHeight + "px";
+            }
+        });
+        
+        links.forEach(link => {
+            link.addEventListener("click", () => {
+                links.forEach(link => { link.classList.remove("active") });
+                indicator.style.top = link.offsetTop + "px";
+                indicator.style.height = link.offsetHeight + "px";
+                indicator.classList.add("moving");
+                indicator.addEventListener("transitionend", () => {
+                    links.forEach(link => { link.classList.remove("active") });
+                    link.classList.add("active");
+                });
+                setTimeout(() => {
+                    indicator.classList.remove("moving");
+                }, 300);
+            })
+        });*/
 
 </script>
+
 </html>

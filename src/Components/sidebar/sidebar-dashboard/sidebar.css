@@ -134,6 +134,10 @@ li[class="logout"]:hover svg {
     stroke: var(--txt-danger);
 }
 
+::-webkit-scrollbar{
+    display: none;
+}
+
 a,
 button,
 li {
@@ -155,8 +159,8 @@ svg {
     min-height: 100vh;
     width: 250px;
     padding: 5px 1em;
-    position: sticky;
-    top: 0;
+    /*position: sticky;
+    top: 0;*/
     overflow-y: auto;
     align-self: start;
     text-wrap: nowrap;
@@ -170,10 +174,6 @@ svg {
     color: var(--txt-accent);
     transition: color .35s ease;
 }
-
-/*.active {
-        background: var(--accent);
-    }*/
 
 .sidebar-logo {
     display: flex;
@@ -218,13 +218,10 @@ svg {
 
 .active-indicator {
     position: absolute;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
+    left: 0px;
     border-radius: .5em;
-    background: var(--accent);
-    border-left: 2px solid var(--txt-accent);
     transition: all .35s ease;
+    border-left: 2px solid var(--txt-accent);
 }
 
 .moving {
@@ -249,6 +246,11 @@ svg {
 
 .collapsed .logo {
     display: none;
+}
+
+.collapsed .active-indicator{
+    width: 100%;
+    background: var(--accent);
 }
 
 .themeBtn .sun {
