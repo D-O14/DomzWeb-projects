@@ -98,29 +98,60 @@ icons = {
 }
 
 sidebarLinks = [
-    { name: "Dashboard", icon: icons.dashboard, location: "", className: "active", menu: "dashboard" },
-    { name: "Orders", icon: icons.receipt, location: "", menu: "dashboard" },
-    { name: "Products", icon: icons.block, location: "", menu: "dashboard" },
-    { name: "Inventory", icon: icons.inventory, location: "", menu: "dashboard" },
-    { name: "Online Store", icon: icons.store, location: "", menu: "dashboard" },
-    { name: "Analytics", icon: icons.barChart, location: "", menu: "dropdown" },
-    { name: "Settings", icon: icons.settings, location: "", menu: "actions" },
-    { name: "Help & Support", icon: icons.question, location: "", menu: "actions" },
-    { name: "Accounts", icon: icons.profile, location: "", menu: "actions" },
+    { name: "Dashboard", icon: icons.dashboard, location: "sidebar.html", className: "active", menu: "dashboard" },
+    { name: "Orders", icon: icons.receipt, location: "orders.html", menu: "dashboard" },
+    { name: "Products", icon: icons.block, location: "products.html", menu: "dashboard" },
+    { name: "Inventory", icon: icons.inventory, location: "inventory.html", menu: "dashboard" },
+    { name: "Online Store", icon: icons.store, location: "store.html", menu: "dashboard" },
+    { name: "Analytics", icon: icons.barChart, location: "analytics.html", menu: "dropdown" },
+    { name: "Settings", icon: icons.settings, location: "settings.html", menu: "actions" },
+    { name: "Help & Support", icon: icons.question, location: "help.html", menu: "actions" },
+    { name: "Accounts", icon: icons.profile, location: "accounts.html", menu: "actions" },
 ];
 
-sidebarLinks.forEach(link => {
-    const item = template.content.cloneNode(true);
-    const anchor = item.querySelector("a");
-    anchor.href = link.location;
-    anchor.innerHTML += `${link.icon}`;  
-    item.querySelector("span").textContent = link.name;
-    console.log(item);
-});
-
-function sideBar() {
-    
+function sideBar(array, template) {
+    array.forEach(arr => {
+        const item = template.content.cloneNode(true);
+        const list = item.querySelector("li");
+        const anchor = item.querySelector("a");
+        const icon = anchor.querySelector(".icon");
+        anchor.href = arr.location;
+        icon.innerHTML += `${ arr.icon }`;
+        if (arr.className) { list.classList.add(arr.className) };
+        item.querySelector(".text").textContent = arr.name;
+        menus[arr.menu].append(item)
+    });
 }
+
+sideBar(sidebarLinks, template);
+
+const active = document.querySelector(".active");
+const anchors = document.querySelectorAll("a");
+indicator.style.top = active.offsetTop + "px";
+indicator.style.height = active.offsetHeight + "px";
+
+/*anchors.forEach(a => {
+    a.addEventListener("click", (e) => {
+        e.preventDefault();
+    });
+})*/
+
+const links = document.querySelectorAll(".link");
+links.forEach(link => {
+    link.addEventListener("click", () => {
+        links.forEach(link => { link.classList.remove("active") });
+        indicator.style.top = link.offsetTop + "px";
+        indicator.style.height = link.offsetHeight + "px";
+        indicator.classList.add("moving");
+        indicator.addEventListener("transitionend", () => {
+            links.forEach(link => { link.classList.remove("active") });
+            link.classList.add("active");
+        });
+        setTimeout(() => {
+            indicator.classList.remove("moving");
+        }, 300);
+    })
+});
 
 toggleBtn.addEventListener("click", () => {
     sidebar.classList.toggle("collapsed");
