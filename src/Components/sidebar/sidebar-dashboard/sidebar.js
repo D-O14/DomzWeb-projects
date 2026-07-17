@@ -1,4 +1,3 @@
-
 const indicator = document.querySelector(".active-indicator");
 const active = document.querySelector(".active");
 //const themeBtn = document.querySelector(".themeBtn");

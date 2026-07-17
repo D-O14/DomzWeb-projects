@@ -21,6 +21,9 @@
     - [] Make Content downloadable
     - [] Copy notes
     - [] Edit Content
+- [] Add aria-attributes
+- [] Learn Web Share API
+- [] Add functionality to other buttons
 
 ## Events
 - contextmenu event handler: to enable right click to reveal the menu
@@ -40,8 +43,6 @@
 ## Accessibility
 - `Esc` keyboard event escapes the menu when open (closes it)
 - Can be focused
-    # to-do
-    - [] Add aria-attributes
 
 ## Concepts Learned
 - Pointer events
@@ -55,4 +56,4 @@
 
 ## Will be used by
 - Notes App
-- Dashboard
+- Dashboards
