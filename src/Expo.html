@@ -280,60 +280,7 @@
     </main>
 
     <script type="text/javascript" defer>
-        class Rect {
-            constructor(_width, _height, _bg) {
-                let width = this.width = _width;
-                let height = this.height = _height;
-                let bg = this.bg = _bg;
-            }
-
-            getArea() {
-                const area = `${ this.width * this.height }`;
-                return area;
-            }
-
-            print(item) {
-                const p = document.createElement("p");
-                p.textContent = `This is a ${ this.width }x${ this.height } ${ this.bg } rectangle with an area 
-                of ${ this.getArea() }cm`;
-                document.body.append(p);
-            }
-        };
-
-        class Square {
-            constructor(_width, _height) {
-                let width = this.width = _width;
-                let height = this.height = _height;
-            }
-
-            get area() {
-                const area = `${ this.width * this.height }`;
-                return area;
-            }
-        };
-
-        rects = [
-            myRect1 = new Rect(3, 5, "blue"),
-            myRect2 = new Rect(10, 5, "red"),
-            myRect3 = new Rect(4, 15, "oxblood"),
-            myRect4 = new Rect(12, 12, "dodgerblue"),
-        ];
-
-        rects.forEach(rect => { rect.print() });
-
-        console.log(...rects);
-
-        squares = [
-            mySquare1 = new Square(10, 5),
-            mySquare2 = new Square(24, 2),
-            mySquare3 = new Square(6, 36),
-            mySquare4 = new Square(1, 100),
-        ];
-
-        squares.forEach(square => { 
-            console.log(square);
-        });
-
+        
 
         const title = document.title;
         document.addEventListener("visibilitychange", function () {
