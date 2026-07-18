@@ -1,7 +1,36 @@
-const linkTemplate = document.querySelector(".link-template");
-const sidebarTemplate = document.querySelector(".sidebar-template");
+const linkTemplate = document.createElement("template");
+linkTemplate.className = "link-template"; 
+linkTemplate.innerHTML = `
+    <li class="link">
+        <a href="">
+            <span class="icon"></span>
+            <span class="text"></span>
+        </a>
+    </li>
+`;
+const sidebarTemplate = document.createElement("template");
+sidebarTemplate.className = "sidebar-template";
+sidebarTemplate.innerHTML = `
+        <nav class="sidebar">
+            <li class="sidebar-logo">
+                <span class="logo">DomzWeb</span>
+                <button id="toggle-btn" class="toggle-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide panel">
+                        <rect width="18" height="18" x="3" y="3" rx="2" />
+                        <path d="M9 3v18" />
+                    </svg>
+                </button>
+            </li>
+            <div class="active-indicator"></div>
+            <ul class="menu-dashboard"></ul>
+            <ul class="menu-dropdown"></ul>
+            <ul class="menu-actions"></ul>
+            </nav>
+`
 
-icons = {
+const icons = {
     dashboard: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide dashboard">
@@ -85,7 +114,7 @@ icons = {
         </svg>`,
 }
 
-sidebarLinks = [
+const sidebarLinks = [
     { name: "Dashboard", icon: icons.dashboard, location: "sidebar.html", className: "active", menu: "dashboard" },
     { name: "Orders", icon: icons.receipt, location: "orders.html", menu: "dashboard" },
     { name: "Products", icon: icons.block, location: "products.html", menu: "dashboard" },
@@ -104,7 +133,7 @@ function sideBar(array, template, menus) {
         const anchor = item.querySelector("a");
         const icon = anchor.querySelector(".icon");
         anchor.href = arr.location;
-        icon.innerHTML =  arr.icon;
+        icon.innerHTML = arr.icon;
         if (arr.className) { list.classList.add(arr.className) };
         item.querySelector(".text").textContent = arr.name;
         menus[arr.menu].append(item)
@@ -164,3 +193,4 @@ class AppSidebar extends HTMLElement {
     }
 }
 customElements.define("app-sidebar", AppSidebar);
+export default AppSidebar;
