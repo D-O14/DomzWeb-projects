@@ -20,6 +20,41 @@
             Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
+    :root {
+    --bg-page: hsl(250, 22%, 8%);
+    --bg-danger: hsl(358, 74%, 12%);
+
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    --bxs: 2px 4px 0px hsl(0, 0%, 5%);
+
+    --accent: hsla(220, 100%, 16%, .5);
+
+    --txt-clr: hsl(240, 20%, 92%);
+    --txt-danger: hsl(358, 74%, 49%);
+    --txt-accent: hsl(210, 100%, 46%);
+
+    --hover-btn: var(--accent);
+    --hover-clr: hsl(229, 20%, 12%);
+
+    --border: 1px solid hsla(220, 25%, 25%, .5);
+}
+
+body {
+    background: var(--bg-page);
+    color: var(--txt-clr);
+    display: grid;
+    min-height: 100vh;
+    transition: .3s ease;
+    grid-template-columns: auto 1fr;
+}
+
+main{
+    padding: 20px;
+}
+
 /*@view-transition {
         navigation: auto;
     }
@@ -50,14 +85,18 @@
     }*/
 </style>
 <body>
-    <h1>This is your Online Store</h1>
-    <p>This is your very own personal storefront where you have an overview of everything you're managing with our 
-        app, your sales, assets, products, inventory, clients, ratings, and so on. All of it is recorded here.
-        If you wish, you can make this a shared storefront to work with others, a public storefront to sell to 
-        other people and launch on apps like Shopify, or a private storefront to manage your assets and trade with 
-        other users.  
-    </p>
+    <app-sidebar></app-sidebar>
+    <main>
+        <h1>This is your Online Store</h1>
+        <p>This is your very own personal storefront where you have an overview of everything you're managing with our
+            app, your sales, assets, products, inventory, clients, ratings, and so on. All of it is recorded here.
+            If you wish, you can make this a shared storefront to work with others, a public storefront to sell to
+            other people and launch on apps like Shopify, or a private storefront to manage your assets and trade with
+            other users.
+        </p>
+    </main>
     <a href="sidebar.html">Home</a>
 </body>
 
+<script src="sidebar.js"></script>
 </html>

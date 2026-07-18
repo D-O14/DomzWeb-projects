@@ -20,6 +20,41 @@
         Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+:root {
+    --bg-page: hsl(250, 22%, 8%);
+    --bg-danger: hsl(358, 74%, 12%);
+
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    --bxs: 2px 4px 0px hsl(0, 0%, 5%);
+
+    --accent: hsla(220, 100%, 16%, .5);
+
+    --txt-clr: hsl(240, 20%, 92%);
+    --txt-danger: hsl(358, 74%, 49%);
+    --txt-accent: hsl(210, 100%, 46%);
+
+    --hover-btn: var(--accent);
+    --hover-clr: hsl(229, 20%, 12%);
+
+    --border: 1px solid hsla(220, 25%, 25%, .5);
+}
+
+body {
+    background: var(--bg-page);
+    color: var(--txt-clr);
+    display: grid;
+    min-height: 100vh;
+    transition: .3s ease;
+    grid-template-columns: auto 1fr;
+}
+
+main{
+    padding: 20px;
+}
+
 /*@view-transition {
         navigation: auto;
     }
@@ -50,9 +85,13 @@
     }*/
 </style>
 <body>
-    <h1>This is the Analytics page</h1>
-    <p>Here, you can get an overview of all your sales, products, ratings, and customers</p>
-    <a href="sidebar.html">Home</a>
+    <app-sidebar></app-sidebar>
+    <main>
+        <h1>This is the Analytics page</h1>
+        <p>Here, you can get an overview of all your sales, products, ratings, and customers</p>
+        <a href="sidebar.html">Home</a>
+    </main>
 </body>
 
+<script src="sidebar.js"></script>
 </html>

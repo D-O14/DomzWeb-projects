@@ -93,6 +93,10 @@ body {
     grid-template-columns: auto 1fr;
 }
 
+main{
+    padding: 20px;
+}
+
 ul {
     list-style: none;
 }

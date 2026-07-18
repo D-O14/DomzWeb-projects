@@ -1,17 +1,5 @@
-const indicator = document.querySelector(".active-indicator");
-const toggleBtn = document.querySelector(".toggle-btn");
-const sidebar = document.querySelector(".sidebar");
-
-const template = document.querySelector("template");
-const dashboardMenu = document.querySelector(".menu-dashboard");
-const dropdownMenu = document.querySelector(".menu-dropdown");
-const actionsMenu = document.querySelector(".menu-actions");
-
-menus = {
-    dashboard: dashboardMenu,
-    dropdown: dropdownMenu,
-    actions: actionsMenu,
-}
+const linkTemplate = document.querySelector(".link-template");
+const sidebarTemplate = document.querySelector(".sidebar-template");
 
 icons = {
     dashboard: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -97,7 +85,6 @@ icons = {
         </svg>`,
 }
 
-
 sidebarLinks = [
     { name: "Dashboard", icon: icons.dashboard, location: "sidebar.html", className: "active", menu: "dashboard" },
     { name: "Orders", icon: icons.receipt, location: "orders.html", menu: "dashboard" },
@@ -110,50 +97,70 @@ sidebarLinks = [
     { name: "Accounts", icon: icons.profile, location: "accounts.html", menu: "actions" },
 ];
 
-function sideBar(array, template) {
+function sideBar(array, template, menus) {
     array.forEach(arr => {
         const item = template.content.cloneNode(true);
         const list = item.querySelector("li");
         const anchor = item.querySelector("a");
         const icon = anchor.querySelector(".icon");
         anchor.href = arr.location;
-        icon.innerHTML += `${ arr.icon }`;
+        icon.innerHTML =  arr.icon;
         if (arr.className) { list.classList.add(arr.className) };
         item.querySelector(".text").textContent = arr.name;
         menus[arr.menu].append(item)
     });
 }
 
-sideBar(sidebarLinks, template);
+class AppSidebar extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        const style = document.createElement("link");
+        style.rel = "stylesheet";
+        style.href = "sidebar.css";
+        const sidebar = sidebarTemplate.content.cloneNode(true);
+        shadow.append(style);
+        shadow.append(sidebar);
 
-const active = document.querySelector(".active");
-const anchors = document.querySelectorAll("a");
-indicator.style.top = active.offsetTop + "px";
-indicator.style.height = active.offsetHeight + "px";
+        const nav = shadow.querySelector(".sidebar");
+        const indicator = shadow.querySelector(".active-indicator");
+        const toggleBtn = shadow.querySelector(".toggle-btn");
+        const dashboardMenu = shadow.querySelector(".menu-dashboard");
+        const dropdownMenu = shadow.querySelector(".menu-dropdown");
+        const actionsMenu = shadow.querySelector(".menu-actions");
 
-/*anchors.forEach(a => {
-    a.addEventListener("click", (e) => {
-        e.preventDefault();
-    });
-})*/
+        const menus = {
+            dashboard: dashboardMenu,
+            dropdown: dropdownMenu,
+            actions: actionsMenu,
+        }
 
-const links = document.querySelectorAll(".link");
-links.forEach(link => {
-    link.addEventListener("click", () => {
-        links.forEach(link => { link.classList.remove("active") });
-        indicator.style.top = link.offsetTop + "px";
-        indicator.style.height = link.offsetHeight + "px";
-        indicator.classList.add("moving");
-        indicator.addEventListener("transitionend", () => {
-            links.forEach(link => { link.classList.remove("active") });
-            link.classList.add("active");
+        sideBar(sidebarLinks, linkTemplate, menus);
+
+        const active = shadow.querySelector(".active");
+        indicator.style.top = active.offsetTop + "px";
+        indicator.style.height = active.offsetHeight + "px";
+
+        const links = shadow.querySelectorAll(".link");
+        links.forEach(link => {
+            link.addEventListener("click", () => {
+                links.forEach(link => { link.classList.remove("active") });
+                indicator.style.top = link.offsetTop + "px";
+                indicator.style.height = link.offsetHeight + "px";
+                indicator.classList.add("moving");
+                indicator.addEventListener("transitionend", () => {
+                    links.forEach(link => { link.classList.remove("active") });
+                    link.classList.add("active");
+                });
+                setTimeout(() => {
+                    indicator.classList.remove("moving");
+                }, 300);
+            })
         });
-        setTimeout(() => {
-            indicator.classList.remove("moving");
-        }, 300);
-    })
-});
 
-toggleBtn.addEventListener("click", () => {
-    sidebar.classList.toggle("collapsed");
-});
+        toggleBtn.addEventListener("click", () => {
+            nav.classList.toggle("collapsed");
+        });
+    }
+}
+customElements.define("app-sidebar", AppSidebar);
