@@ -1,5 +1,7 @@
+const currentPage = window.location.pathname.split("/").pop();
+console.log(currentPage);
 const linkTemplate = document.createElement("template");
-linkTemplate.className = "link-template"; 
+linkTemplate.className = "link-template";
 linkTemplate.innerHTML = `
     <li class="link">
         <a href="">
@@ -145,7 +147,9 @@ class AppSidebar extends HTMLElement {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         const style = document.createElement("link");
-        style.rel = "stylesheet";
+        style.rel = "preload";
+        style.as = "style";
+        style.onload = function () { this.rel = "stylesheet" };
         style.href = "sidebar.css";
         const sidebar = sidebarTemplate.content.cloneNode(true);
         shadow.append(style);
@@ -166,26 +170,30 @@ class AppSidebar extends HTMLElement {
 
         sideBar(sidebarLinks, linkTemplate, menus);
 
-        const active = shadow.querySelector(".active");
+        /*const active = shadow.querySelector(".active");
         indicator.style.top = active.offsetTop + "px";
-        indicator.style.height = active.offsetHeight + "px";
+        indicator.style.height = active.offsetHeight + "px";*/
 
         const links = shadow.querySelectorAll(".link");
         links.forEach(link => {
+            link.classList.remove("active");
+            const href = link.querySelector("a").getAttribute("href");
+            if (href === currentPage) {
+                link.classList.add("active");
+                indicator.style.top = `${ link.offsetTop }px`;
+                indicator.style.height = `${ link.offsetHeight }px`;
+            }
+
             link.addEventListener("click", () => {
                 links.forEach(link => { link.classList.remove("active") });
-                indicator.style.top = link.offsetTop + "px";
-                indicator.style.height = link.offsetHeight + "px";
+                indicator.style.top = `${ link.offsetTop }px`;
+                indicator.style.height = `${ link.offsetHeight }px`;
                 indicator.classList.add("moving");
-                indicator.addEventListener("transitionend", () => {
-                    links.forEach(link => { link.classList.remove("active") });
-                    link.classList.add("active");
-                });
                 setTimeout(() => {
                     indicator.classList.remove("moving");
                 }, 300);
-            })
-        });
+            });
+        })
 
         toggleBtn.addEventListener("click", () => {
             nav.classList.toggle("collapsed");
