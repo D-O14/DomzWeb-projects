@@ -241,7 +241,7 @@
     
                     <div class="nav_menu" id="nav-menu">
                         <ul class="nav-list">
-                            <li><a href="#" class="nav-link">Home</a></li>
+                            <li><a href="#" class="nav-link">HomeBtn</a></li>
     
                             <li><a href="#" class="nav-link">Company</a></li>
     
@@ -276,11 +276,55 @@
                 </nav>
             </header>-->
 
-    <main>
+    <button class="homeBtn">Home</button>
+    <button class="aboutBtn">About</button>
+    <main id="app">
+        <template>
+            <h1></h1>
+            <p></p>
+        </template>
     </main>
 
     <script type="text/javascript" defer>
-        
+        const app = document.getElementById("app");
+        const template = document.querySelector("template");
+        const homeBtn = document.querySelector(".homeBtn");
+        const aboutBtn = document.querySelector(".aboutBtn");
+
+        homeBtn.addEventListener("click", () => {
+            history.pushState({}, "", "?Home");
+            router("Home");
+        })
+
+        aboutBtn.addEventListener("click", () => {
+            history.pushState({}, "", "?About");
+            router("About")
+        })
+
+        function showHome() {
+            app.innerHTML = `
+            <h1>Home page</h1>
+            <p>This is the home page.</p>
+            `
+        }
+        function showAbout() {
+            app.innerHTML = `
+            <h1>About Us</h1>
+            <p>This is the about page.</p>
+            `
+        }
+
+        function router(path) {
+            if (path === "?" || "Home") { showHome() };
+            if (path === "About") { showAbout() };
+        }
+
+        window.addEventListener("popstate", () => {
+            router(window.location.pathname);
+        });
+
+        const page = window.location.search.slice(1);
+        router(page || "Home");
 
         const title = document.title;
         document.addEventListener("visibilitychange", function () {

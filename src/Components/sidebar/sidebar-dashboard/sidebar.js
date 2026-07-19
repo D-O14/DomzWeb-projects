@@ -1,3 +1,6 @@
+const app = document.getElementById("app");
+const dashboardTemplate = document.getElementById("dashboard-template");
+
 const currentPage = window.location.pathname.split("/").pop();
 console.log(currentPage);
 const linkTemplate = document.createElement("template");
@@ -117,16 +120,22 @@ const icons = {
 }
 
 const sidebarLinks = [
-    { name: "Dashboard", icon: icons.dashboard, location: "sidebar.html", className: "active", menu: "dashboard" },
-    { name: "Orders", icon: icons.receipt, location: "orders.html", menu: "dashboard" },
-    { name: "Products", icon: icons.block, location: "products.html", menu: "dashboard" },
-    { name: "Inventory", icon: icons.inventory, location: "inventory.html", menu: "dashboard" },
-    { name: "Online Store", icon: icons.store, location: "store.html", menu: "dashboard" },
-    { name: "Analytics", icon: icons.barChart, location: "analytics.html", menu: "dropdown" },
-    { name: "Settings", icon: icons.settings, location: "settings.html", menu: "actions" },
-    { name: "Help & Support", icon: icons.question, location: "help.html", menu: "actions" },
-    { name: "Accounts", icon: icons.profile, location: "accounts.html", menu: "actions" },
+    { title: "Dashboard", icon: icons.dashboard, path: "sidebar.html", className: "active", menu: "dashboard", template: dashboardTemplate },
+    { title: "Orders", icon: icons.receipt, path: "orders.html", menu: "dashboard" },
+    { title: "Products", icon: icons.block, path: "products.html", menu: "dashboard" },
+    { title: "Inventory", icon: icons.inventory, path: "inventory.html", menu: "dashboard" },
+    { title: "Online Store", icon: icons.store, path: "store.html", menu: "dashboard" },
+    { title: "Analytics", icon: icons.barChart, path: "analytics.html", menu: "dropdown" },
+    { title: "Settings", icon: icons.settings, path: "settings.html", menu: "actions" },
+    { title: "Help & Support", icon: icons.question, path: "help.html", menu: "actions" },
+    { title: "Accounts", icon: icons.profile, path: "accounts.html", menu: "actions" },
 ];
+
+/*function router(path) {
+    const route = sidebarLinks.find(route => route.path === path);
+    if (!route) return;
+    app.replaceChildren(route.template.content.cloneNode(true));
+}*/
 
 function sideBar(array, template, menus) {
     array.forEach(arr => {
@@ -134,10 +143,10 @@ function sideBar(array, template, menus) {
         const list = item.querySelector("li");
         const anchor = item.querySelector("a");
         const icon = anchor.querySelector(".icon");
-        anchor.href = arr.location;
+        anchor.href = arr.path;
         icon.innerHTML = arr.icon;
         if (arr.className) { list.classList.add(arr.className) };
-        item.querySelector(".text").textContent = arr.name;
+        item.querySelector(".text").textContent = arr.title;
         menus[arr.menu].append(item)
     });
 }
@@ -186,6 +195,7 @@ class AppSidebar extends HTMLElement {
 
             link.addEventListener("click", () => {
                 links.forEach(link => { link.classList.remove("active") });
+                link.classList.add("active");
                 indicator.style.top = `${ link.offsetTop }px`;
                 indicator.style.height = `${ link.offsetHeight }px`;
                 indicator.classList.add("moving");
