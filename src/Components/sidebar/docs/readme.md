@@ -20,30 +20,33 @@ Note: This component has variations, therefore logic is re-used and transferred 
 - [✔] Built dropdown
 
 ## To-do:
-- [] Make dynamic
-- [] Use for navigation:
-    - [] MPA navigation:
-        - [] Learn cross-document transitions
-    - [] SPA navigation
-        - [] Learn view transitions
-- [] Make into web component 
+- [✔] Make dynamic
+- [✔] Use for navigation:
+    - [✔] MPA navigation:
+        - [✔] Learn cross-document transitions
+    - [✔] SPA navigation
+        - [✔] Learn view transitions
+- [✔] Make into web component 
 - [] Use resize observer
 - [] Add dropdown icon
-- [] Add links that go somewhere
+- [✔] Add links that go somewhere
 
 ## Issues
 - Rough Hover state
 - Page scrolling
 - Dimmed text on active
 - Invisible text in light mode 
+- Active indicator issues
+- Doesn't have default routing
 - Color change before active indication
 
 ## Dependencies
 - none
 
 ## Browser APIs
-- OffsetHeight & OffsetTop
 - ScrollHeight
+- OffsetHeight & OffsetTop
+- Class & Constructor
 
 ## Ideas
 - Tooltips on collapsed state

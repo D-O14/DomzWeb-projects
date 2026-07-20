@@ -312,3 +312,11 @@ svg {
     height: 60px;
     padding: 1em;
 }
+
+.home-link{
+    color: var(--txt-accent);
+    border: 2px solid var(--accent);
+    padding: .5em 1em;
+    width: fit-content;
+    margin-top: 5px;
+}
