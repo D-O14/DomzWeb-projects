@@ -55,46 +55,46 @@
     --border: 1px solid hsla(220, 25%, 25%, .5);
 }
 
-/*@view-transition{
+@view-transition {
     navigation: auto;
 }
 
-::view-transition-group(root){
+::view-transition-group(root) {
     animation-duration: 1s;
     animation-timing-function: ease;
 }
 
-::view-transition-old(root){
+::view-transition-old(page-content) {
     animation-name: slideOut;
 }
 
-::view-transition-new(root){
+::view-transition-new(page-content) {
     animation-name: slideIn;
 }
 
-@keyframes slideOut{
-    to{
-        transform: translateX(-100vw);
+@keyframes slideOut {
+    to {
+        transform: translateY(-100vw);
     }
 }
 
-@keyframes slideIn{
-    from{
-        transform: translateX(100vw);
+@keyframes slideIn {
+    from {
+        transform: translateY(100vw);
     }
-}*/
+}
 
 body {
     background: var(--bg-page);
     color: var(--txt-clr);
     display: grid;
     min-height: 100vh;
-    transition: .3s ease;
     grid-template-columns: auto 1fr;
 }
 
-main{
+main {
     padding: 20px;
+    view-transition-name: page-content;
 }
 
 ul {
@@ -167,7 +167,7 @@ li[class="logout"]:hover svg {
     stroke: var(--txt-danger);
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     display: none;
 }
 
@@ -202,7 +202,7 @@ svg {
     border-radius: .5em;
     box-shadow: var(--bxs);
     border-right: var(--border);
-    transition: all .3s ease;
+    
 }
 
 .active a {
@@ -283,7 +283,7 @@ svg {
     display: none;
 }
 
-.collapsed .active-indicator{
+.collapsed .active-indicator {
     width: 100%;
     background: var(--accent);
 }

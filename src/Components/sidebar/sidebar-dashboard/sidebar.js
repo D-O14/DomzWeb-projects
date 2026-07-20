@@ -1,8 +1,15 @@
 const app = document.getElementById("app");
 const dashboardTemplate = document.getElementById("dashboard-template");
+const ordersTemplate = document.getElementById("orders-template");
+const settingsTemplate = document.getElementById("settings-template");
+const productsTemplate = document.getElementById("products-template");
+const storeTemplate = document.getElementById("store-template");
+const inventoryTemplate = document.getElementById("inventory-template");
+const helpTemplate = document.getElementById("help-template");
+const accountsTemplate = document.getElementById("accounts-template");
+const analyticsTemplate = document.getElementById("analytics-template");
 
 const currentPage = window.location.pathname.split("/").pop();
-console.log(currentPage);
 const linkTemplate = document.createElement("template");
 linkTemplate.className = "link-template";
 linkTemplate.innerHTML = `
@@ -120,22 +127,84 @@ const icons = {
 }
 
 const sidebarLinks = [
-    { title: "Dashboard", icon: icons.dashboard, path: "sidebar.html", className: "active", menu: "dashboard", template: dashboardTemplate },
-    { title: "Orders", icon: icons.receipt, path: "orders.html", menu: "dashboard" },
-    { title: "Products", icon: icons.block, path: "products.html", menu: "dashboard" },
-    { title: "Inventory", icon: icons.inventory, path: "inventory.html", menu: "dashboard" },
-    { title: "Online Store", icon: icons.store, path: "store.html", menu: "dashboard" },
-    { title: "Analytics", icon: icons.barChart, path: "analytics.html", menu: "dropdown" },
-    { title: "Settings", icon: icons.settings, path: "settings.html", menu: "actions" },
-    { title: "Help & Support", icon: icons.question, path: "help.html", menu: "actions" },
-    { title: "Accounts", icon: icons.profile, path: "accounts.html", menu: "actions" },
+    { title: "Dashboard", icon: icons.dashboard, path: "/DomzWeb-projects/Dashboard", className: "active", menu: "dashboard" },
+    { title: "Orders", icon: icons.receipt, path: "/DomzWeb-projects/Orders", menu: "dashboard" },
+    { title: "Products", icon: icons.block, path: "/DomzWeb-projects/Products", menu: "dashboard" },
+    { title: "Inventory", icon: icons.inventory, path: "/DomzWeb-projects/Inventory", menu: "dashboard" },
+    { title: "Online Store", icon: icons.store, path: "/DomzWeb-projects/Store", menu: "dashboard" },
+    { title: "Analytics", icon: icons.barChart, path: "/DomzWeb-projects/Analytics", menu: "dropdown" },
+    { title: "Settings", icon: icons.settings, path: "/DomzWeb-projects/Settings", menu: "actions" },
+    { title: "Help & Support", icon: icons.question, path: "/DomzWeb-projects/Help&Support", menu: "actions" },
+    { title: "Accounts", icon: icons.profile, path: "/DomzWeb-projects/Accounts", menu: "actions" },
 ];
 
-/*function router(path) {
-    const route = sidebarLinks.find(route => route.path === path);
-    if (!route) return;
-    app.replaceChildren(route.template.content.cloneNode(true));
-}*/
+const routes = {
+    "/DomzWeb-projects/Dashboard": {
+        render: showDashboard,
+        title: "Dashboard"
+    },
+    "/DomzWeb-projects/Orders": {
+        render: showOrders,
+        title: "Orders"
+    },
+    "/DomzWeb-projects/Settings": {
+        render: showSettings,
+        title: "Settings"
+    },
+    "/DomzWeb-projects/Store": {
+        render: showStore,
+        title: "Online Store"
+    },
+    "/DomzWeb-projects/Accounts": {
+        render: showAccounts,
+        title: "Your Accounts"
+    },
+    "/DomzWeb-projects/Analytics": {
+        render: showAnalytics,
+        title: "Analytics"
+    },
+    "/DomzWeb-projects/Help&Support": {
+        render: showHelp,
+        title: "Help & Support"
+    },
+    "/DomzWeb-projects/Products": {
+        render: showProducts,
+        title: "Products"
+    },
+    "/DomzWeb-projects/Inventory": {
+        render: showInventory,
+        title: "Inventory"
+    },
+}
+
+function renderPage(template) {
+    const page = template.content.cloneNode(true);
+    app.replaceChildren(page);
+}
+
+function showDashboard() { renderPage(dashboardTemplate) };
+function showOrders() { renderPage(ordersTemplate) };
+function showSettings() { renderPage(settingsTemplate) };
+function showProducts() { renderPage(productsTemplate) };
+function showInventory() { renderPage(inventoryTemplate) };
+function showStore() { renderPage(storeTemplate) };
+function showAccounts() { renderPage(accountsTemplate) };
+function showAnalytics() { renderPage(analyticsTemplate) };
+function showHelp() { renderPage(helpTemplate) };
+
+function router() {
+    const path = window.location.pathname;
+    const route = routes[path] || routes["/DomzWeb-projects/"];
+    document.title = route.title;
+    try {
+        route.render();   
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+window.addEventListener("popstate", () => { router() });
+//router();
 
 function sideBar(array, template, menus) {
     array.forEach(arr => {
@@ -182,6 +251,16 @@ class AppSidebar extends HTMLElement {
         /*const active = shadow.querySelector(".active");
         indicator.style.top = active.offsetTop + "px";
         indicator.style.height = active.offsetHeight + "px";*/
+
+        const anchors = shadow.querySelectorAll("a");
+        anchors.forEach(a => {
+            a.addEventListener("click", (e) => {
+                e.preventDefault();
+                const href = a.getAttribute("href");
+                history.pushState({}, "", href);
+                router();
+            });
+        })
 
         const links = shadow.querySelectorAll(".link");
         links.forEach(link => {

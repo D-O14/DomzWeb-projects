@@ -50,11 +50,12 @@
         grid-template-columns: auto 1fr;
     }
 
-    main{
-    padding: 20px;
-}
+    main {
+        padding: 20px;
+        view-transition-name: page-content;
+    }
 
-    /*@view-transition {
+    @view-transition {
         navigation: auto;
     }
 
@@ -63,11 +64,11 @@
         animation-timing-function: ease;
     }
 
-    ::view-transition-old(root) {
+    ::view-transition-old(page-content) {
         animation-name: slideOut;
     }
 
-    ::view-transition-new(root) {
+    ::view-transition-new(page-content) {
         animation-name: slideIn;
     }
 
@@ -81,7 +82,7 @@
         from {
             transform: translateY(100vw);
         }
-    }*/
+    }
 </style>
 
 <body>
@@ -96,4 +97,5 @@
 </body>
 
 <script src="sidebar.js" type="module" defer></script>
+
 </html>

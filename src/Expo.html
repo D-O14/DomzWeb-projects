@@ -279,52 +279,34 @@
     <button class="homeBtn">Home</button>
     <button class="aboutBtn">About</button>
     <main id="app">
-        <template>
-            <h1></h1>
-            <p></p>
+        <template class="home-template">
+            <h1>Home Page</h1>
+            <p>This is the home page</p>
+        </template>
+        <template class="about-template">
+            <h1>About Us</h1>
+            <p>This is the about page</p>
         </template>
     </main>
 
     <script type="text/javascript" defer>
         const app = document.getElementById("app");
-        const template = document.querySelector("template");
+        const homeTemplate = document.querySelector(".home-template");
+        const aboutTemplate = document.querySelector(".about-template");
         const homeBtn = document.querySelector(".homeBtn");
         const aboutBtn = document.querySelector(".aboutBtn");
 
+
         homeBtn.addEventListener("click", () => {
-            history.pushState({}, "", "?Home");
-            router("Home");
+            history.pushState({}, "", "/DomzWeb-projects/Home");
+            router();
         })
 
         aboutBtn.addEventListener("click", () => {
-            history.pushState({}, "", "?About");
-            router("About")
-        })
-
-        function showHome() {
-            app.innerHTML = `
-            <h1>Home page</h1>
-            <p>This is the home page.</p>
-            `
-        }
-        function showAbout() {
-            app.innerHTML = `
-            <h1>About Us</h1>
-            <p>This is the about page.</p>
-            `
-        }
-
-        function router(path) {
-            if (path === "?" || "Home") { showHome() };
-            if (path === "About") { showAbout() };
-        }
-
-        window.addEventListener("popstate", () => {
-            router(window.location.pathname);
+            history.pushState({}, "", "/DomzWeb-projects/About");
+            router();
         });
 
-        const page = window.location.search.slice(1);
-        router(page || "Home");
 
         const title = document.title;
         document.addEventListener("visibilitychange", function () {

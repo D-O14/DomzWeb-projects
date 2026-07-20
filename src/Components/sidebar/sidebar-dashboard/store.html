@@ -53,9 +53,10 @@ body {
 
 main{
     padding: 20px;
+    view-transition-name: page-content;
 }
 
-/*@view-transition {
+@view-transition {
         navigation: auto;
     }
 
@@ -64,11 +65,11 @@ main{
         animation-timing-function: ease;
     }
 
-    ::view-transition-old(root) {
+    ::view-transition-old(page-content) {
         animation-name: slideOut;
     }
 
-    ::view-transition-new(root) {
+    ::view-transition-new(page-content) {
         animation-name: slideIn;
     }
 
@@ -82,7 +83,7 @@ main{
         from {
             transform: translateY(100vw);
         }
-    }*/
+    }
 </style>
 <body>
     <app-sidebar></app-sidebar>
@@ -94,8 +95,8 @@ main{
             other people and launch on apps like Shopify, or a private storefront to manage your assets and trade with
             other users.
         </p>
+        <a href="sidebar.html">Home</a>
     </main>
-    <a href="sidebar.html">Home</a>
 </body>
 
 <script src="sidebar.js" type="module" defer></script>
