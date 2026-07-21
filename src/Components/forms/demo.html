@@ -1,11 +1,396 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Progress form demo</title>
 </head>
+
+<style>
+    *::before,
+    *::after,
+    * {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        box-sizing: border-box;
+        transition: all .3s ease-in-out;
+        -webkit-tap-highlight-color: transparent;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+            Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+
+    :root {
+        --bg-dark: hsl(0, 0%, 0%);
+        --bg-form: hsl(0, 0%, 100%);
+        --bg-btn: hsl(251, 76%, 50%);
+        --bg-container: hsl(251, 61%, 52%);
+
+        --accent: var(--bg-container);
+
+        --clr-stepper: hsl(251, 61%, 92%);
+        --clr-pseudo: hsl(251, 61%, 52%);
+        --clr-plain: hsl(250, 50%, 95%);
+        --clr-muted: hsl(0, 0%, 56%);
+
+        --brdr-muted: 1px solid hsl(220, 5%, 80%);
+
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+    }
+
+    body{
+        min-height: 100vh; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    button {
+        /*width: 100%;*/
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        padding: .5em 1em;
+        border-radius: 5px;
+        color: var(--clr-plain);
+        background: var(--bg-btn);
+        touch-action: manipulation;
+        border: 1px solid transparent;
+    }
+
+    menu {
+        display: flex;
+        gap: .75em;
+    }
+
+    input {
+        width: 100%;
+        height: 40px;
+        outline: none;
+        padding: .5em 1em;
+        border-radius: 5px;
+        caret-color: var(--accent);
+        border: var(--brdr-muted);
+    }
+
+    input:focus-within {
+        outline-offset: 1px;
+        outline: 1px solid var(--accent);
+    }
+
+    li {
+        list-style: none;
+        position: relative;
+        margin-top: 48px;
+        margin-left: 40px;
+        font-size: 1rem;
+        color: var(--clr-muted);
+        counter-increment: container 1;
+    }
+
+    p {
+        font-size: 12px;
+        margin-top: 15px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25em;
+        padding: 67px 50px;
+    }
+
+    form:not(.active) {
+        opacity: 0;
+        display: none;
+        transform: translateX(-250px);
+    }
+
+    p:not(.active) {
+        opacity: 0;
+        scale: 0;
+        display: none;
+    }
+
+    form.active {
+        opacity: 1;
+        transform: translateX(0) translateY(0);
+    }
+
+    p.active {
+        opacity: 1;
+        scale: 1;
+        display: block;
+    }
+
+    .progress-form {
+        height: 500px;
+        width: 800px;
+        display: flex;
+        justify-content: center;
+        border-radius: .5em;
+        box-shadow: var(--shadow);
+        background: var(--bg-form);
+    }
+
+    .stepper-container {
+        width: 35%;
+        height: 100%;
+        padding: 2em;
+        display: flex;
+        gap: 1.25em;
+        align-items: baseline;
+        color: var(--clr-plain);
+        flex-direction: column;
+        border-top-left-radius: .5em;
+        border-bottom-left-radius: .5em;
+        background: var(--bg-container);
+    }
+
+    .steps {
+        text-align: left;
+    }
+
+    .stepper {
+        font-weight: 700;
+        font-size: 13px;
+        position: relative;
+        counter-reset: container 0;
+    }
+
+    .stepper li::before {
+        content: counter(container);
+        line-height: 25px;
+        text-align: center;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        left: -40px;
+        z-index: 1;
+        border-radius: 50%;
+        background: var(--bg-dark);
+    }
+
+    .stepper li::after {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 70px;
+        top: -70px;
+        left: -27px;
+        z-index: 0;
+        background: var(--bg-dark);
+    }
+
+    .stepper li:nth-child(1)::after {
+        display: none;
+    }
+
+    .stepper li.active {
+        color: var(--clr-stepper);
+    }
+
+    .stepper li.active::before {
+        color: var(--clr-pseudo);
+    }
+
+    .stepper li.active::after {
+        background: hsl(0, 0%, 100%);
+    }
+
+    .stepper li.active::before {
+        background: hsl(0, 0%, 100%);
+    }
+
+    .forms {
+        width: 65%;
+        height: 100%;
+        border-radius: 1.25em;
+    }
+
+    @media (max-width: 750px) {
+
+        button{width: 100%;}
+        label {margin-top: 20px;}
+
+        .progress-form {
+            height: scroll;
+            height: auto;
+            max-width: 450px;
+        }
+
+        .forms {
+            width: 100%;
+        }
+
+        /*.user-card {
+            height: 261px;
+        }*/
+
+        .stepper-container {
+            display: none;
+        }
+    }
+</style>
+
 <body>
-    
+    <div class="progress-form">
+
+        <div class="stepper-container">
+            <div class="heading">
+                <h3>Sign Up Form</h3>
+            </div>
+            <div class="steps">
+                <h3>Step <span class="step-num">1</span></h3>
+                <p class="step-content active">Enter your personal details so we can get to know you.</p>
+                <p class="step-content">Let us know about your degree of education.</p>
+                <p class="step-content">We'd like to know about your prior work experience.</p>
+                <p class="step-content">Boost your profile by adding a picture to show yourself.</p>
+            </div>
+            <ul class="stepper">
+                <li class="active">About Yourself</li>
+                <li>Education</li>
+                <li>Work Experience</li>
+                <li>Profile Picture</li>
+            </ul>
+        </div>
+
+        <div class="forms">
+
+            <form class="form active">
+                <!--<div class="text">
+                    <h2>Your Personal Information</h2>
+                    <p>Enter your personal information to get closer to companies</p>
+                </div>-->
+                <label>
+                    <input type="text" id="name" placeholder="Your name. Is it John?">
+                </label>
+                <label>
+                    <input type="email" id="email" placeholder="Your Email. Don't make us guess">
+                </label>
+                <label>
+                    <input type="text" id="number" placeholder="Your Number. So we can contact you">
+                </label>
+                <label>
+                    <input type="text" id="address" placeholder="Your Address. So we can find you">
+                </label>
+                <menu>
+                    <button class="nxtBtn">Next</button>
+                </menu>
+            </form>
+
+            <form class="form">
+                <label>
+                    <input type="text" placeholder="What school did you go to?">
+                </label>
+                <label>
+                    <input type="email" placeholder="What's their board name?">
+                </label>
+                <label>
+                    <input type="text" placeholder="You went to college? Which?">
+                </label>
+                <label>
+                    <input type="text" placeholder="What'd you study?">
+                </label>
+
+                <menu>
+                    <button class="backBtn">Back</button>
+                    <button class="nxtBtn">Next</button>
+                </menu>
+            </form>
+
+            <form class="form">
+                <label>
+                    <input type="text" placeholder="Your first work experience">
+                </label>
+                <label>
+                    <input type="email" placeholder="What about your second?">
+                </label>
+                <label>
+                    <input type="text" placeholder="Is there a third?">
+                </label>
+                <menu>
+                    <button class="backBtn">Back</button>
+                    <button class="nxtBtn">Next</button>
+                </menu>
+            </form>
+            <form class="form">
+                <div class="drop-box">
+                    <input type="file" hidden id="filePicker">
+                    <button class="uploadBtn">Choose file</button>
+                </div>
+                <menu>
+                    <button class="backBtn">Back</button>
+                    <button class="submitBtn">Submit</button>
+                </menu>
+            </form>
+
+        </div>
+    </div>
 </body>
+
+<script type="text/javascript" defer>
+    const forms = document.querySelectorAll("form");
+    const submitBtn = document.querySelector(".submitBtn");
+    const nxtBtn = document.querySelectorAll(".nxtBtn");
+    const backBtn = document.querySelectorAll(".backBtn");
+    //const mainForm = document.querySelectorAll(".main");
+    const steps = document.querySelectorAll("li");
+    const stepContent = document.querySelectorAll(".step-content");
+    const stepNum = document.querySelector(".step-num");
+    /*const dropArea = document.querySelector(".drop-box");
+    const button = dropArea.querySelector("button");
+    const input = dropArea.querySelector("input");*/
+    let index = 0;
+
+    nxtBtn.forEach(btn => {
+        btn.addEventListener("click", () => {
+            index++;
+            updateForm();
+            progressForward();
+            contentChange();
+        });
+    });
+
+    backBtn.forEach(btn => {
+        btn.addEventListener("click", () => {
+            index--;
+            updateForm();
+            progressBackward();
+            contentChange();
+        });
+    });
+
+    function updateForm() {
+        forms.forEach(form => {
+            form.classList.remove("active");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+                form.reset();
+            })
+        });
+        forms[index].classList.add("active");
+    }
+
+    function progressForward() {
+        stepNum.innerHTML = index + 1;
+        steps[index].classList.add("active");
+    }
+
+    function progressBackward() {
+        let formNum = index + 1;
+        stepNum.innerHTML = formNum;
+        steps[formNum].classList.remove("active");
+    }
+
+    function contentChange() {
+        stepContent.forEach(step => { step.classList.remove("active") });
+        stepContent[index].classList.add("active");
+    }
+</script>
+
 </html>

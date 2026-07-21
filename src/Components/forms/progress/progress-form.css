@@ -160,7 +160,7 @@ select {
 }
 
 .progress-bar li.active::after {
-    background: white;
+    background: hsl(0, 0%, 100%);
 }
 
 .progress-bar li:first-child::after {
@@ -223,11 +223,11 @@ select {
     gap: 1.25em;
 }
 
-.buttons:nth-child(1) {
+/*.buttons:nth-child(1) {
     color: var(--clr-dark);
     border: var(--brdr-dark);
     background: var(--bg-card);
-}
+}*/
 
 .user-card {
     width: 100%;
@@ -278,16 +278,6 @@ select {
     outline: var(--brdr-dark);
     background: var(--bg-card);
 }
-
-/*.detail p {
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.detail p a{
-    text-decoration: none;
-    container: hsl(240, 100%, 50%);
-}*/
 
 @media (max-width: 750px) {
     .container {
