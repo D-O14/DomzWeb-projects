@@ -27,14 +27,15 @@ Note: This component has variations, therefore logic is re-used and transferred 
     - [✔] SPA navigation
         - [✔] Learn view transitions
 - [✔] Make into web component 
-- [] Use resize observer
-- [] Add dropdown icon
+- ~~[] Use resize observer~~
+- ~~[] Add dropdown icon~~
 - [✔] Add links that go somewhere
+- refactor css
 
 ## Issues
 - Rough Hover state
 - Page scrolling
-- Dimmed text on active
+- ~~Dimmed text on active~~ (fixed)
 - Invisible text in light mode 
 - Active indicator issues
 - Doesn't have default routing
