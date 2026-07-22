@@ -38,16 +38,19 @@
                         <p>Enter your personal details so we can get to know you.</p>
                     </div>
                     <label>
-                        <span class="icon"></span>
+                        <span class="icon" data-icon="user"></span>
                         <input type="text" id="name" placeholder="Your name. Is it John?">
                     </label>
                     <label>
+                        <span class="icon" data-icon="mail"></span>
                         <input type="email" id="email" placeholder="Your Email. Don't make us guess">
                     </label>
                     <label>
+                        <span class="icon" data-icon="phone"></span>
                         <input type="text" id="number" placeholder="Your Number. So we can contact you">
                     </label>
                     <label>
+                        <span class="icon" data-icon="location"></span>
                         <input type="text" id="address" placeholder="Your Address. So we can find you">
                     </label>
                     <menu>
@@ -63,20 +66,27 @@
                         <p>Tell us about your education and degrees.</p>
                     </div>
                     <label>
+                        <span class="icon" data-icon="school"></span>
                         <input type="text" placeholder="What school did you go to?">
                     </label>
                     <label>
+                        <span class="icon" data-icon="board"></span>
                         <input type="email" placeholder="What's their board name?">
                     </label>
                     <label>
+                        <span class="icon" data-icon="university"></span>
                         <input type="text" placeholder="You went to college? Which?">
                     </label>
                     <label>
+                        <span class="icon" data-icon="diploma"></span>
                         <input type="text" placeholder="What'd you study?">
                     </label>
 
                     <menu>
-                        <button class="backBtn">Back</button>
+                        <button class="backBtn">
+                            <span></span>
+                            Back
+                        </button>
                         <button class="nxtBtn">Next</button>
                     </menu>
                 </form>
@@ -89,6 +99,7 @@
                         <p>Tell us all about your experience in the working field.</p>
                     </div>
                     <label>
+                        <!--<span class="icon" data-icon="business"></span>-->
                         <input type="text" placeholder="Your first work experience">
                     </label>
                     <label>
@@ -98,7 +109,10 @@
                         <input type="text" placeholder="Is there a third?">
                     </label>
                     <menu>
-                        <button class="backBtn">Back</button>
+                        <button class="backBtn">
+                            <span></span>
+                            Back
+                        </button>
                         <button class="nxtBtn">Next</button>
                     </menu>
                 </form>
@@ -111,19 +125,26 @@
                         <p>Upload a picture of yourself so we can know you better.</p>
                     </div>
                     <div class="drop-box">
-                        <h4>Pick an image, any image.</h4>
+                        <span class="icon" data-icon="image"></span>
+                        <h4>Choose an image. Any <a href="" class="uploadBtn">Image</a>.</h4>
+                        <p>PNG, JPEG, AVIF, WEBP, JPG</p>
                         <input type="file" hidden id="filePicker">
-                        <button class="uploadBtn">Choose file</button>
                     </div>
                     <menu>
-                        <button class="backBtn">Back</button>
-                        <button class="submitBtn">Submit</button>
+                        <button class="backBtn">
+                            <span></span>
+                            Back
+                        </button>
+                        <button class="submitBtn">
+                            Submit
+                            <span class="icon" data-icon="check"></span>
+                        </button>
                     </menu>
                 </form>
             </template>
 
-            <template class="completed-template">
-                
+            <template class="form-completed">
+                <img src="../../../Assets/Illustrations/Completed steps.gif" alt="">
             </template>
         </div>
     </div>
