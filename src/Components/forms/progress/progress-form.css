@@ -48,6 +48,12 @@ body {
     background: var(--bg-page);
 }
 
+h2 {
+    display: inline-flex;
+    align-items: center;
+    gap: .5em;
+}
+
 button {
     text-align: center;
     font-size: 1em;
@@ -87,36 +93,50 @@ input {
     width: 100%;
     outline: none;
     background: none;
+    padding: .75em 1em;
     border: 1px solid transparent;
 }
 
 label {
     width: 100%;
     display: flex;
-    gap: .75em;
     align-items: center;
-    padding: .5em 1em;
-    border-radius: 5px;
-    padding-left: 20px;
+    border-radius: 8px;
     overflow: hidden;
     border: var(--brdr-muted);
     background: var(--bg-input);
     box-shadow: var(--input-shadow);
 }
 
-label svg{
+textarea {
+    resize: none;
+    width: 100%;
+    outline: none;
+    padding: .75em 1em;
+    border-radius: 8px;
+    border: var(--brdr-muted);
+    background: var(--bg-input);
+    box-shadow: var(--input-shadow);
+}
+
+label svg {
     width: 22px;
     height: 22px;
     stroke: hsl(250, 80%, 90%);
 }
 
-label .icon{
-    padding: .25em;
-    border-radius: 5em;
+label .icon {
+    height: 100%;
+    /*border-radius: 5em;*/
+    padding: .25em .5em;
+    /*transform: translateX(-12px);*/
     background: var(--accent);
+    border-top-right-radius: 5em;
+    border-bottom-right-radius: 5em;
 }
 
-label:focus-within {
+label:focus-within,
+textarea:focus-within {
     outline-offset: 1px;
     outline: 1px solid var(--accent);
 }
@@ -132,21 +152,25 @@ li {
 }
 
 form {
+    position: absolute;
     display: flex;
+    width: 100%;
+    height: 100%;
     gap: 1.5em;
-    padding: 67px 50px;
+    padding: 50px 50px;
     flex-direction: column;
 }
 
 form:not(.active) {
     opacity: 0;
-    display: none;
-    transform: translateX(-250px);
+    pointer-events: none;
+    transform: translateX(40px);
 }
 
 form.active {
     opacity: 1;
-    transform: translateX(0) translateY(0);
+    pointer-events: all;
+    transform: translateX(0);
 }
 
 .step-content {
@@ -155,14 +179,10 @@ form.active {
 }
 
 .step-content:not(.active) {
-    opacity: 0;
-    scale: 0;
     display: none;
 }
 
 .step-content.active {
-    opacity: 1;
-    scale: 1;
     display: block;
 }
 
@@ -247,7 +267,8 @@ form.active {
 
 .forms {
     width: 65%;
-    height: 100%;
+    overflow: hidden;
+    position: relative;
     border-radius: 1.25em;
 }
 

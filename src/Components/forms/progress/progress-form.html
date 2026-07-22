@@ -34,11 +34,11 @@
             <template class="form-template">
                 <form class="form active">
                     <div class="text">
-                        <h2>Your Personal Info</h2>
+                        <h2> <span class="icon" data-icon="user"></span> Your Personal Info</h2>
                         <p>Enter your personal details so we can get to know you.</p>
                     </div>
                     <label>
-                        <span class="icon" data-icon="user"></span>
+                        <span class="icon" data-icon="account"></span>
                         <input type="text" id="name" placeholder="Your name. Is it John?">
                     </label>
                     <label>
@@ -62,26 +62,25 @@
             <template class="form-template">
                 <form class="form">
                     <div class="text">
-                        <h2>Degree of Education</h2>
+                        <h2><span class="icon" data-icon="education"></span> Degree of Education</h2>
                         <p>Tell us about your education and degrees.</p>
                     </div>
                     <label>
                         <span class="icon" data-icon="school"></span>
-                        <input type="text" placeholder="What school did you go to?">
-                    </label>
-                    <label>
-                        <span class="icon" data-icon="board"></span>
-                        <input type="email" placeholder="What's their board name?">
-                    </label>
-                    <label>
-                        <span class="icon" data-icon="university"></span>
                         <input type="text" placeholder="You went to college? Which?">
                     </label>
                     <label>
-                        <span class="icon" data-icon="diploma"></span>
+                        <span class="icon" data-icon="calendar"></span>
+                        <input type="date">
+                    </label>
+                    <label>
+                        <span class="icon" data-icon="study"></span>
                         <input type="text" placeholder="What'd you study?">
                     </label>
-
+                    <label>
+                        <span class="icon" data-icon="diploma"></span>
+                        <input type="text" placeholder="You have a degree in?">
+                    </label>
                     <menu>
                         <button class="backBtn">
                             <span></span>
@@ -95,19 +94,23 @@
             <template class="form-template">
                 <form class="form">
                     <div class="text">
-                        <h2>Work Experience</h2>
+                        <h2><span class="icon" data-icon="business"></span> Work Experience</h2>
                         <p>Tell us all about your experience in the working field.</p>
                     </div>
                     <label>
-                        <!--<span class="icon" data-icon="business"></span>-->
-                        <input type="text" placeholder="Your first work experience">
+                        <span class="icon" data-icon="company"></span>
+                        <input type="text" placeholder="What company have you worked for?">
                     </label>
                     <label>
-                        <input type="email" placeholder="What about your second?">
+                        <span class="icon" data-icon="hierarchy"></span>
+                        <input type="email" placeholder="What role did you play?">
                     </label>
                     <label>
-                        <input type="text" placeholder="Is there a third?">
+                        <input type="text" placeholder="How many years did you work with them?">
                     </label>
+                    <textarea>
+
+                    </textarea>
                     <menu>
                         <button class="backBtn">
                             <span></span>
@@ -121,7 +124,7 @@
             <template class="form-template">
                 <form class="form">
                     <div class="text">
-                        <h2>Your Profile Picture</h2>
+                        <h2><span class="icon" data-icon="camera"></span> Your Profile Picture</h2>
                         <p>Upload a picture of yourself so we can know you better.</p>
                     </div>
                     <div class="drop-box">
