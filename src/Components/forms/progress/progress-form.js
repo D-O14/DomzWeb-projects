@@ -2,7 +2,7 @@ import { icons } from "../../../Assets/Icons/icons.js";
 
 const steps = document.querySelectorAll("li");
 const formsContainer = document.querySelector(".forms");
-const stepNum = document.querySelector(".step-num");
+//const stepNum = document.querySelector(".step-num");
 const stepContent = document.querySelectorAll(".step-content");
 const formsTemplate = document.querySelectorAll(".form-template");
 const formCompleted = document.querySelector(".form-completed");
@@ -12,7 +12,7 @@ function renderForms(template, container) {
     template.forEach(template => {
         const form = template.content.cloneNode(true);
         container.append(form);
-        initializeIcons(container);
+        initializeIcons();
     });
 }
 
@@ -35,7 +35,6 @@ nxtBtn.forEach(btn => {
         index++;
         updateForm();
         progressForward();
-        contentChange();
     });
 });
 
@@ -45,7 +44,6 @@ backBtn.forEach(btn => {
         index--;
         updateForm();
         progressBackward();
-        contentChange();
     });
 });
 
@@ -54,8 +52,8 @@ submitBtn.addEventListener("click", () => {
     formsContainer.replaceChildren(submitted);
 });
 
-function initializeIcons(container) {
-    const svgs = container.querySelectorAll(".icon");
+function initializeIcons() {
+    const svgs = document.querySelectorAll(".icon");
     svgs.forEach(svg => { svg.innerHTML = icons[svg.dataset.icon] });
 }
 
@@ -70,20 +68,11 @@ function updateForm() {
     forms[index].classList.add("active");
 }
 
-function progressForward() {
-    stepNum.innerHTML = index + 1;
-    steps[index].classList.add("active");
-}
+function progressForward() { steps[index].classList.add("active") };
 
 function progressBackward() {
     let formNum = index + 1;
-    stepNum.innerHTML = formNum;
     steps[formNum].classList.remove("active");
-}
-
-function contentChange() {
-    stepContent.forEach(step => { step.classList.remove("active") });
-    stepContent[index].classList.add("active");
 }
 
 button.onclick = () => { input.click() };

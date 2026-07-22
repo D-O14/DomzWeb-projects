@@ -109,14 +109,24 @@ label {
 }
 
 textarea {
+    height: 100px;
     resize: none;
-    width: 100%;
     outline: none;
     padding: .75em 1em;
     border-radius: 8px;
     border: var(--brdr-muted);
     background: var(--bg-input);
     box-shadow: var(--input-shadow);
+}
+
+label,
+textarea {
+    flex: 0 0 auto;
+}
+
+input,
+textarea {
+    caret-color: var(--accent);
 }
 
 label svg {
@@ -127,9 +137,7 @@ label svg {
 
 label .icon {
     height: 100%;
-    /*border-radius: 5em;*/
     padding: .25em .5em;
-    /*transform: translateX(-12px);*/
     background: var(--accent);
     border-top-right-radius: 5em;
     border-bottom-right-radius: 5em;
@@ -142,13 +150,14 @@ textarea:focus-within {
 }
 
 li {
+    display: inline-flex;
+    align-items: center;
+    gap: .6em;
     list-style: none;
     position: relative;
-    margin-top: 40px;
-    margin-left: 40px;
+    margin-top: 50px;
     font-size: 1rem;
     color: var(--clr-muted);
-    counter-increment: container 1;
 }
 
 form {
@@ -187,7 +196,7 @@ form.active {
 }
 
 .progress-form {
-    height: 500px;
+    height: 540px;
     width: 800px;
     display: flex;
     justify-content: center;
@@ -202,6 +211,7 @@ form.active {
     padding: 2em;
     display: flex;
     gap: 1.25em;
+    position: relative;
     align-items: baseline;
     color: var(--clr-plain);
     flex-direction: column;
@@ -218,20 +228,21 @@ form.active {
     font-weight: 700;
     font-size: 13px;
     position: relative;
-    counter-reset: container 0;
 }
 
-.stepper li::before {
-    content: counter(container);
-    line-height: 25px;
-    text-align: center;
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    left: -40px;
+.stepper li .icon {
     z-index: 1;
+    width: 40px;
+    height: 40px;
+    display: grid;
     border-radius: 50%;
+    position: relative;
+    place-items: center;
     background: var(--bg-dark);
+}
+
+.stepper li.active svg {
+    stroke: var(--accent);
 }
 
 .stepper li::after {
@@ -240,7 +251,7 @@ form.active {
     width: 2px;
     height: 70px;
     top: -60px;
-    left: -27px;
+    left: 20px;
     z-index: 0;
     background: var(--bg-dark);
 }
@@ -253,7 +264,7 @@ form.active {
     color: var(--clr-stepper);
 }
 
-.stepper li.active::before {
+.stepper li.active .active {
     color: var(--clr-pseudo);
 }
 
@@ -261,7 +272,7 @@ form.active {
     background: var(--bg-light);
 }
 
-.stepper li.active::before {
+.stepper li.active .icon {
     background: var(--bg-light);
 }
 
