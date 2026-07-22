@@ -18,16 +18,13 @@ function renderForms(template, container) {
 
 renderForms(formsTemplate, formsContainer);
 
-const link = document.querySelector("a");
 const forms = formsContainer.querySelectorAll("form");
 const submitBtn = formsContainer.querySelector(".submitBtn");
 const nxtBtn = formsContainer.querySelectorAll(".nxtBtn");
 const backBtn = formsContainer.querySelectorAll(".backBtn");
 const dropBox = formsContainer.querySelector(".drop-box");
-const button = dropBox.querySelector("a");
 const input = dropBox.querySelector("input");
-
-link.addEventListener("click", (e) => { e.preventDefault() });
+const nameInput = document.getElementById("name");
 
 nxtBtn.forEach(btn => {
     btn.innerHTML += icons.chevronRight;
@@ -75,4 +72,20 @@ function progressBackward() {
     steps[formNum].classList.remove("active");
 }
 
-button.onclick = () => { input.click() };
+function showError(input, message) {
+    //const field = input.closest("label");
+    const error = input.closest(".textError");
+    input.classList.add("error");
+    error.textContent = message;
+    console.log(input);
+    console.log(error);
+    return false;
+}
+
+function clearError(input) { 
+    //const error = input.closest(".textError");
+    input.classList.remove("error");
+    return true;
+}
+
+dropBox.addEventListener("click", () => { input.click() });

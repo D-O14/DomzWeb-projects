@@ -15,13 +15,6 @@
             <div class="heading">
                 <h3>Sign Up Form</h3>
             </div>
-            <!--<div class="steps">
-                <h3>Step <span class="step-num">1</span></h3>
-                <p class="step-content active">Enter your personal details so we can get to know you.</p>
-                <p class="step-content">Let us know about your degree of education.</p>
-                <p class="step-content">We'd like to know about your prior work experience.</p>
-                <p class="step-content">Boost your profile by adding a picture to show yourself.</p>
-            </div>-->
             <ul class="stepper">
                 <li class="active">
                     <span class="icon" data-icon="user"></span>
@@ -52,6 +45,7 @@
                     <label>
                         <span class="icon" data-icon="account"></span>
                         <input type="text" id="name" placeholder="Your name. Is it John?">
+                        <p class="textError" aria-live="polite"></p>
                     </label>
                     <label>
                         <span class="icon" data-icon="mail"></span>
@@ -140,7 +134,7 @@
                     </div>
                     <div class="drop-box">
                         <span class="icon" data-icon="image"></span>
-                        <h4>Choose an image. Any <a href="" class="uploadBtn">Image</a>.</h4>
+                        <h4>Choose an image. Any <button class="uploadBtn">Image</button>.</h4>
                         <p>PNG, JPEG, AVIF, WEBP, JPG</p>
                         <input type="file" hidden id="filePicker">
                     </div>
