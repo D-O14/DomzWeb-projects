@@ -37,27 +37,42 @@
 
         <div class="forms">
             <template class="form-template">
-                <form class="form active">
+                <form class="form active" autocapitalize="words" autocomplete="on" autocorrect="on">
                     <div class="text">
-                        <h2> <span class="icon" data-icon="user"></span> Your Personal Info</h2>
+                        <h2><span class="icon" data-icon="user"></span> Your Personal Info</h2>
                         <p>Enter your personal details so we can get to know you.</p>
                     </div>
                     <label>
-                        <span class="icon" data-icon="account"></span>
-                        <input type="text" id="name" placeholder="Your name. Is it John?">
-                        <p class="textError" aria-live="polite"></p>
+                        <div class="input">
+                            <span class="icon" data-icon="account"></span>
+                            <input type="text" name="Full name" enterkeyhint="next" required id="name"
+                                placeholder="Your name. Is it John?">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="mail"></span>
-                        <input type="email" id="email" placeholder="Your Email. Don't make us guess">
+                        <div class="input">
+                            <span class="icon" data-icon="mail"></span>
+                            <input type="email" name="Email" enterkeyhint="next" required id="email"
+                                placeholder="Your Email. Don't make us guess">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="phone"></span>
-                        <input type="text" id="number" placeholder="Your Number. So we can contact you">
+                        <div class="input">
+                            <span class="icon" data-icon="phone"></span>
+                            <input type="text" enterkeyhint="next" required id="number"
+                                placeholder="Your Number. So we can contact you" name="Phone Number">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="location"></span>
-                        <input type="text" id="address" placeholder="Your Address. So we can find you">
+                        <div class="input">
+                            <span class="icon" data-icon="location"></span>
+                            <input type="text" enterkeyhint="done" required id="address"
+                                placeholder="Your Address. So we can find you" name="Address">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <menu>
                         <button class="nxtBtn">Next</button>
@@ -66,26 +81,41 @@
             </template>
 
             <template class="form-template">
-                <form class="form">
+                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on">
                     <div class="text">
                         <h2><span class="icon" data-icon="education"></span> Degree of Education</h2>
                         <p>Tell us about your education and degrees.</p>
                     </div>
                     <label>
-                        <span class="icon" data-icon="school"></span>
-                        <input type="text" placeholder="You went to college? Which?">
+                        <div class="input">
+                            <span class="icon" data-icon="school"></span>
+                            <input type="text" name="Name of college" enterkeyhint="next" required
+                                placeholder="You went to college? Which?">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="calendar"></span>
-                        <input type="date">
+                        <div class="input">
+                            <span class="icon" data-icon="calendar"></span>
+                            <input type="date" enterkeyhint="next" required>
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="study"></span>
-                        <input type="text" placeholder="What'd you study?">
+                        <div class="input">
+                            <span class="icon" data-icon="study"></span>
+                            <input type="text" name="Course of study" enterkeyhint="next" required
+                                placeholder="What'd you study?">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="diploma"></span>
-                        <input type="text" placeholder="You have a degree in?">
+                        <div class="input">
+                            <span class="icon" data-icon="diploma"></span>
+                            <input type="text" name="Degree" enterkeyhint="done" required
+                                placeholder="You have a degree in?">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <menu>
                         <button class="backBtn">
@@ -98,24 +128,40 @@
             </template>
 
             <template class="form-template">
-                <form class="form">
+                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on">
                     <div class="text">
                         <h2><span class="icon" data-icon="business"></span> Work Experience</h2>
                         <p>Tell us all about your experience in the working field.</p>
                     </div>
                     <label>
-                        <span class="icon" data-icon="company"></span>
-                        <input type="text" placeholder="What company have you worked for?">
+                        <div class="input">
+                            <span class="icon" data-icon="company"></span>
+                            <input type="text" enterkeyhint="next" required name="Company name"
+                                placeholder="What company have you worked for?">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="hierarchy"></span>
-                        <input type="email" placeholder="What role did you play?">
+                        <div class="input">
+                            <span class="icon" data-icon="hierarchy"></span>
+                            <input type="text" name="Job Title" enterkeyhint="next" required
+                                placeholder="What role did you play?">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
-                        <span class="icon" data-icon="time"></span>
-                        <input type="text" placeholder="How many years did you work with them?">
+                        <div class="input">
+                            <span class="icon" data-icon="time"></span>
+                            <input type="number" enterkeyhint="next" min="1" max="50" required name="Job Duration"
+                                placeholder="How many years did you work with them?">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
                     </label>
-                    <textarea placeholder="What were your responsibilities?"></textarea>
+                    <label>
+                        <textarea placeholder="What were your responsibilities? (optional)" enterkeyhint="done"
+                            maxlength="200"></textarea>
+                        <p class="chars" aria-live="polite"></p>
+                    </label>
                     <menu>
                         <button class="backBtn">
                             <span></span>
@@ -136,7 +182,7 @@
                         <span class="icon" data-icon="image"></span>
                         <h4>Choose an image. Any <button class="uploadBtn">Image</button>.</h4>
                         <p>PNG, JPEG, AVIF, WEBP, JPG</p>
-                        <input type="file" hidden id="filePicker">
+                        <input type="file" hidden id="filePicker" accept="image/*">
                     </div>
                     <menu>
                         <button class="backBtn">
