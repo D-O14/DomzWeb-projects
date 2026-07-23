@@ -30,6 +30,14 @@ const emailInput = document.getElementById("email");
 const numberInput = document.getElementById("number");
 const addressInput = document.getElementById("address");
 const textArea = document.querySelector("textarea");
+const addressPattern = /[A-Za-z0-9\s][^@#%^%]/g;
+console.log(addressPattern.test("12@ Main Street"));
+console.log(addressPattern.test("15B King's Road"));
+console.log(addressPattern.test("No. 8 Allen Avenue"));
+console.log(addressPattern.test("12/4 Victoria Close"));
+console.log(addressPattern.test("742 Evergreen Terrace"));
+const emailPattern = /^[\w\d\._-][^\s@]\w{3,8}\.\w/;
+console.log(emailPattern.test("d_ominion@gmail.com"));
 
 textArea.addEventListener("input", () => { charCount() });
 

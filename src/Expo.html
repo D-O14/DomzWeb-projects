@@ -276,37 +276,11 @@
                 </nav>
             </header>-->
 
-    <button class="homeBtn">Home</button>
-    <button class="aboutBtn">About</button>
-    <main id="app">
-        <template class="home-template">
-            <h1>Home Page</h1>
-            <p>This is the home page</p>
-        </template>
-        <template class="about-template">
-            <h1>About Us</h1>
-            <p>This is the about page</p>
-        </template>
+    <main>
+
     </main>
 
     <script type="text/javascript" defer>
-        const app = document.getElementById("app");
-        const homeTemplate = document.querySelector(".home-template");
-        const aboutTemplate = document.querySelector(".about-template");
-        const homeBtn = document.querySelector(".homeBtn");
-        const aboutBtn = document.querySelector(".aboutBtn");
-
-
-        homeBtn.addEventListener("click", () => {
-            history.pushState({}, "", "/DomzWeb-projects/Home");
-            router();
-        })
-
-        aboutBtn.addEventListener("click", () => {
-            history.pushState({}, "", "/DomzWeb-projects/About");
-            router();
-        });
-
 
         const title = document.title;
         document.addEventListener("visibilitychange", function () {

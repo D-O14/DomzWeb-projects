@@ -46,7 +46,7 @@
                         <div class="input">
                             <span class="icon" data-icon="account"></span>
                             <input type="text" name="Full name" enterkeyhint="next" required id="name"
-                                placeholder="Your name. Is it John?">
+                                placeholder="Your name. Is it John?" pattern=" /\b[A-Za-z'-\s^0-9]+$/g">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -62,7 +62,7 @@
                         <div class="input">
                             <span class="icon" data-icon="phone"></span>
                             <input type="text" enterkeyhint="next" required id="number"
-                                placeholder="Your Number. So we can contact you" name="Phone Number">
+                                placeholder="Your Number. So we can contact you" name="Phone Number" pattern="^\+?[0-9\s()-]{7,20}">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -153,7 +153,7 @@
                         <div class="input">
                             <span class="icon" data-icon="time"></span>
                             <input type="number" enterkeyhint="next" min="1" max="50" required name="Job Duration"
-                                placeholder="How many years did you work with them?">
+                                placeholder="How many years did you work with them?" pattern="/\d\s(year|years|month|months|week|weeks)/">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
