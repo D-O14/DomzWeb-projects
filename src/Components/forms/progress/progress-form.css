@@ -344,10 +344,10 @@ form.active {
     border: 1px solid transparent;
 }
 
-.drop-box:hover{
+/*.drop-box:hover{
     scale: .99;
     background: var(--box-hover);
-}
+}*/
 
 .chevron-left,
 .chevron-right {
