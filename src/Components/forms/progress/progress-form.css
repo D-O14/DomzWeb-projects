@@ -34,6 +34,7 @@
 
     --box-hover: hsla(250, 80%, 95%, .5);
 
+    --brdr-error: hsl(0, 72%, 51%);
     --brdr-box: 3px dotted hsl(0, 0%, 64%);
     --brdr-muted: 1px solid hsl(220, 5%, 80%);
     --brdr-hover: 2px solid hsla(0, 0%, 100%, .5);
@@ -156,7 +157,7 @@ textarea {
 }
 
 label .input.error {
-    outline: 1px solid var(--clr-error);
+    outline: 1px solid var(--brdr-error);
 }
 
 label .input .icon.error {

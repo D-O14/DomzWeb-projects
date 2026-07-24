@@ -55,7 +55,7 @@
                         <div class="input">
                             <span class="icon" data-icon="mail"></span>
                             <input type="email" name="Email" enterkeyhint="next" required id="email"
-                                placeholder="Your Email. Don't make us guess" inputmode="email">
+                                placeholder="Your Email. Please don't make us guess" inputmode="email">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -94,14 +94,15 @@
                         <div class="input">
                             <span class="icon" data-icon="school"></span>
                             <input type="text" name="Name of college" enterkeyhint="next" required
-                                placeholder="You went to college? Which?">
+                                placeholder="You went to college? Which?" id="school">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
                         <div class="input">
                             <span class="icon" data-icon="calendar"></span>
-                            <input type="date" name="Year of graduation" enterkeyhint="next" required>
+                            <input type="date" id="date" name="Year of graduation" enterkeyhint="next" required
+                                max="2026-07-24">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -109,7 +110,7 @@
                         <div class="input">
                             <span class="icon" data-icon="study"></span>
                             <input type="text" name="Course of study" enterkeyhint="next" required
-                                placeholder="What'd you study?">
+                                placeholder="What'd you study?" id="study">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -117,7 +118,7 @@
                         <div class="input">
                             <span class="icon" data-icon="diploma"></span>
                             <input type="text" name="Degree" enterkeyhint="done" required
-                                placeholder="You have a degree in?">
+                                placeholder="Your degree awarded is?" id="degree">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -142,7 +143,7 @@
                         <div class="input">
                             <span class="icon" data-icon="company"></span>
                             <input type="text" enterkeyhint="next" required name="Company name"
-                                placeholder="What company have you worked for?">
+                                placeholder="What company have you worked for?" id="company">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -150,7 +151,7 @@
                         <div class="input">
                             <span class="icon" data-icon="hierarchy"></span>
                             <input type="text" name="Job Title" enterkeyhint="next" required
-                                placeholder="What role did you play?">
+                                placeholder="What role did you play?" id="role">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -158,8 +159,8 @@
                         <div class="input">
                             <span class="icon" data-icon="time"></span>
                             <input type="icon" enterkeyhint="next" min="1" max="50" required name="Job Duration"
-                                placeholder="How many years did you work with them?"
-                                pattern="\d\s(year|years|month|months|week|weeks)">
+                                id="years" placeholder="How many years did you work with them?"
+                                pattern="\d{1,2}\s(year|years|month|months|week|weeks)">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
