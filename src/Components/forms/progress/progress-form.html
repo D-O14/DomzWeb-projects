@@ -37,7 +37,8 @@
 
         <div class="forms">
             <template class="form-template">
-                <form class="form active" autocapitalize="words" autocomplete="on" autocorrect="on">
+                <form class="form active" autocapitalize="words" autocomplete="on" autocorrect="on" novalidate
+                    spellcheck="true">
                     <div class="text">
                         <h2><span class="icon" data-icon="user"></span> Your Personal Info</h2>
                         <p>Enter your personal details so we can get to know you.</p>
@@ -46,7 +47,7 @@
                         <div class="input">
                             <span class="icon" data-icon="account"></span>
                             <input type="text" name="Full name" enterkeyhint="next" required id="name"
-                                placeholder="Your name. Is it John?" pattern=" /\b[A-Za-z'-\s^0-9]+$/g">
+                                placeholder="Your name. Is it John?" pattern="^[A-Za-z\s]+$">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -54,15 +55,16 @@
                         <div class="input">
                             <span class="icon" data-icon="mail"></span>
                             <input type="email" name="Email" enterkeyhint="next" required id="email"
-                                placeholder="Your Email. Don't make us guess">
+                                placeholder="Your Email. Don't make us guess" inputmode="email">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
                     <label>
                         <div class="input">
                             <span class="icon" data-icon="phone"></span>
-                            <input type="text" enterkeyhint="next" required id="number"
-                                placeholder="Your Number. So we can contact you" name="Phone Number" pattern="^\+?[0-9\s()-]{7,20}">
+                            <input type="tel" enterkeyhint="next" required id="number"
+                                placeholder="Your Number. So we can contact you" name="Phone Number"
+                                pattern="^[+?0-9\s]{7,20}" inputmode="tel" maxlength="20">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -70,18 +72,20 @@
                         <div class="input">
                             <span class="icon" data-icon="location"></span>
                             <input type="text" enterkeyhint="done" required id="address"
-                                placeholder="Your Address. So we can find you" name="Address">
+                                placeholder="Your Address. So we can find you" name="Address"
+                                pattern="^[A-Za-z0-9\s\.,]+$">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
                     <menu>
-                        <button class="nxtBtn">Next</button>
+                        <button class="nxtBtn" type="button">Next</button>
                     </menu>
                 </form>
             </template>
 
             <template class="form-template">
-                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on">
+                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on" novalidate
+                    spellcheck="true">
                     <div class="text">
                         <h2><span class="icon" data-icon="education"></span> Degree of Education</h2>
                         <p>Tell us about your education and degrees.</p>
@@ -97,7 +101,7 @@
                     <label>
                         <div class="input">
                             <span class="icon" data-icon="calendar"></span>
-                            <input type="date" enterkeyhint="next" required>
+                            <input type="date" name="Year of graduation" enterkeyhint="next" required>
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -118,17 +122,18 @@
                         <p class="error-text" aria-live="polite"></p>
                     </label>
                     <menu>
-                        <button class="backBtn">
+                        <button class="backBtn" type="button">
                             <span></span>
                             Back
                         </button>
-                        <button class="nxtBtn">Next</button>
+                        <button class="nxtBtn" type="button">Next</button>
                     </menu>
                 </form>
             </template>
 
             <template class="form-template">
-                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on">
+                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on" novalidate
+                    spellcheck="true">
                     <div class="text">
                         <h2><span class="icon" data-icon="business"></span> Work Experience</h2>
                         <p>Tell us all about your experience in the working field.</p>
@@ -152,8 +157,9 @@
                     <label>
                         <div class="input">
                             <span class="icon" data-icon="time"></span>
-                            <input type="number" enterkeyhint="next" min="1" max="50" required name="Job Duration"
-                                placeholder="How many years did you work with them?" pattern="/\d\s(year|years|month|months|week|weeks)/">
+                            <input type="icon" enterkeyhint="next" min="1" max="50" required name="Job Duration"
+                                placeholder="How many years did you work with them?"
+                                pattern="\d\s(year|years|month|months|week|weeks)">
                         </div>
                         <p class="error-text" aria-live="polite"></p>
                     </label>
@@ -163,11 +169,11 @@
                         <p class="chars" aria-live="polite"></p>
                     </label>
                     <menu>
-                        <button class="backBtn">
+                        <button class="backBtn" type="button">
                             <span></span>
                             Back
                         </button>
-                        <button class="nxtBtn">Next</button>
+                        <button class="nxtBtn" type="button">Next</button>
                     </menu>
                 </form>
             </template>
@@ -185,7 +191,7 @@
                         <input type="file" hidden id="filePicker" accept="image/*">
                     </div>
                     <menu>
-                        <button class="backBtn">
+                        <button class="backBtn" type="button">
                             <span></span>
                             Back
                         </button>

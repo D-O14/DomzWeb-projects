@@ -30,30 +30,28 @@ const emailInput = document.getElementById("email");
 const numberInput = document.getElementById("number");
 const addressInput = document.getElementById("address");
 const textArea = document.querySelector("textarea");
-const addressPattern = /[A-Za-z0-9\s][^@#%^%]/g;
-console.log(addressPattern.test("12@ Main Street"));
-console.log(addressPattern.test("15B King's Road"));
-console.log(addressPattern.test("No. 8 Allen Avenue"));
-console.log(addressPattern.test("12/4 Victoria Close"));
-console.log(addressPattern.test("742 Evergreen Terrace"));
-const emailPattern = /^[\w\d\._-][^\s@]\w{3,8}\.\w/;
-console.log(emailPattern.test("d_ominion@gmail.com"));
 
 textArea.addEventListener("input", () => { charCount() });
 
 inputs.forEach(input => {
     input.addEventListener("input", () => {
-        validateInput(inputs, input);
+        validateInput(input);
+        if (input === nameInput) { validateName() };
+        if (input === emailInput) { validateEmail() };
+        if (input === numberInput) { validateNumber() };
+        if (input === addressInput) { validateAddress() };
     });
-    if (input === nameInput) { validateName  };
-    if (input === emailInput) { validateEmail };
-    if (input === numberInput) { validateNumber };
-    if (input === addressInput) { validateAddress };
 });
 
 nxtBtn.forEach(btn => {
     btn.innerHTML += icons.chevronRight;
     btn.addEventListener("click", () => {
+        const valid =
+            validateName() &&
+            validateEmail() &&
+            validateName() &&
+            validateAddress();
+        if (!valid) return;
         index++;
         updateForm();
         progressForward();
@@ -70,6 +68,7 @@ backBtn.forEach(btn => {
 });
 
 submitBtn.addEventListener("click", () => {
+    forms.forEach(form => { form.reset() });
     const submitted = formCompleted.content.cloneNode(true);
     formsContainer.replaceChildren(submitted);
 });
@@ -80,13 +79,7 @@ function initializeIcons() {
 }
 
 function updateForm() {
-    forms.forEach(form => {
-        form.classList.remove("active");
-        form.addEventListener("submit", (e) => {
-            e.preventDefault();
-            form.reset();
-        })
-    });
+    forms.forEach(form => { form.classList.remove("active") });
     forms[index].classList.add("active");
 }
 
@@ -97,66 +90,49 @@ function progressBackward() {
 }
 
 function validateName() {
-    if (nameInput.value.trim() === "") {
-        nameInput.setCustomValidity("Name field must not be empty!");
-        showError(nameInput, "Name field must not be empty!");
+    if (!validateInput(nameInput)) return false;
+    nameInput.value = nameInput.value.replace(/\d/g, "");
+    nameInput.value = nameInput.value.replace(/\b\w/g, char => char.toUpperCase());
+    if (nameInput.value === "User") {
+        showError(nameInput, "Oi! You can't do that!");
         return false;
     } else {
         clearError(nameInput);
-        nameInput.setCustomValidity("");
         return true;
     };
-}
+};
 
 function validateEmail() {
-    if (emailInput.value.trim() === "") {
-        emailInput.setCustomValidity("E-mail must be provided!");
-        showError(emailInput, "E-mail must be provided!");
-        return false;
-    } else {
-        clearError(emailInput);
-        emailInput.setCustomValidity("");
-        return true;
-    };
-}
+    if (!validateInput(emailInput)) return false;
+    emailInput.value = emailInput.value.trim().toLowerCase();
+    return true;
+};
 
 function validateNumber() {
-    if (numberInput.value.trim() === "") {
-        numberInput.setCustomValidity("A phone number is required!");
-        showError(numberInput, "A phone number is required!");
-        return false;
-    } else {
-        clearError(numberInput);
-        numberInput.setCustomValidity("");
-        return true;
-    };
-}
+    if (!validateInput(numberInput)) return false;
+    numberInput.value = numberInput.value.replace(/[A-Za-z]/, "");
+    return true;
+};
 
 function validateAddress() {
-    if (addressInput.value.trim() === "") {
-        addressInput.setCustomValidity("Your house address is needed!");
-        showError(addressInput, "Your house address is needed!");
+    if (!validateInput(addressInput)) return false;
+    return true;
+};
+
+function validateInput(input) {
+    if (!input.checkValidity()) {
+        if (input.validity.valueMissing) {
+            showError(input, `${ input.name } is required!`);
+        } else if (input.validity.typeMismatch) {
+            showError(input, "Please type in a proper value!");
+        } else if (input.validity.patternMismatch) {
+            showError(input, "Please follow the appropriate format!");
+        }
         return false;
     } else {
-        addressInput.setCustomValidity("");
-        clearError(addressInput);
+        clearError(input);
         return true;
-    };
-}
-
-function validateInput(inputs, field) {
-    inputs.forEach(input => {
-        const name = input.name;
-        if (input.value.trim() === "") {
-            showError(input, "This field must not be empty");
-            input.setCustomValidity(`${ name } is required!`);
-            return false;
-        } else {
-            clearError(input);
-            input.setCustomValidity("");
-            return true;
-        }
-    })
+    }
 };
 
 function charCount() {

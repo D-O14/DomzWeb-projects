@@ -30,6 +30,9 @@
     --clr-paragraph: hsl(0, 0%, 64%);
     --clr-heading: hsl(0, 0%, 18%);
     --clr-error: hsl(0, 90%, 50%);
+    --clr-char: hsl(251, 61%, 62%);
+
+    --box-hover: hsla(250, 80%, 95%, .5);
 
     --brdr-box: 3px dotted hsl(0, 0%, 64%);
     --brdr-muted: 1px solid hsl(220, 5%, 80%);
@@ -236,7 +239,7 @@ form.active {
 .chars{
     font-size: 12px;
     text-align: right;
-    color: var(--clr-muted);
+    color: var(--clr-char);
 }
 
 .stepper {
@@ -338,6 +341,11 @@ form.active {
     color: var(--accent);
     text-decoration: none;
     border: 1px solid transparent;
+}
+
+.drop-box:hover{
+    scale: .99;
+    background: var(--box-hover);
 }
 
 .chevron-left,
