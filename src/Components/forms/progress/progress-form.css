@@ -165,7 +165,7 @@ label .input .icon.error {
 }
 
 .error-text {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--clr-error);
 }
 
@@ -372,13 +372,16 @@ form.active {
         width: 100%;
     }
 
+    form{
+        padding: 30px 50px;
+        gap: 1em;
+    }
+
     .input {
-        margin-top: 20px;
+        margin-top: 15px;
     }
 
     .progress-form {
-        height: scroll;
-        height: auto;
         max-width: 450px;
     }
 
@@ -388,5 +391,9 @@ form.active {
 
     .stepper-container {
         display: none;
+    }
+
+    .error-text{
+        height: 15px;
     }
 }
