@@ -327,3 +327,8 @@ class="lucide line-chart"><path d="M12 16v5" /><path d="M16 14.639V21" /><path d
     hierarchy: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="tabler hierarchy"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 5a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M6 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M10 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M18 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M2 19a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M14 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /><path d="M5 17l2 -3" /><path d="M9 10l2 -3" /><path d="M13 7l2 3" /><path d="M17 14l2 3" /><path d="M15 14l-2 3" /><path d="M9 14l2 3" /></svg>`,
     time: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-hourglass-icon lucide-hourglass"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>`,
 };
+
+export function initializeIcons(root) {
+    const svgs = root.querySelectorAll(".icon");
+    svgs.forEach(svg => { svg.innerHTML = icons[svg.dataset.icon] });
+};

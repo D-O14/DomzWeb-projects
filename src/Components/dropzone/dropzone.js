@@ -1,4 +1,5 @@
 import { icons } from "../../Assets/Icons/icons";
+import { initializeIcons } from "../../Assets/Icons/icons";
 
 const template = document.createElement("template");
 template.innerHTML = `
@@ -93,10 +94,6 @@ class DropZone extends HTMLElement {
 customElements.define("drop-zone", DropZone);
 export default DropZone;
 
-function initializeIcons(root) {
-    const svgs = root.querySelectorAll(".icon");
-    svgs.forEach(svg => { svg.innerHTML = icons[svg.dataset.icon] });
-};
 
 function previewFile(file, data) {
     if(!validateFile(file, data)) return;

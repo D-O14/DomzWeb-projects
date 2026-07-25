@@ -18,6 +18,7 @@ A dropzone is a component that gives access to local files in a device, allowing
 - file picker input
 
 ## Browser APIs
+- ~~File Reader API~~ (scrapped)
 - CreateObjectURL
 - URL constructor
 - Custom elements

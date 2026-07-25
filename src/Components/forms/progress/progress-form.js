@@ -1,4 +1,7 @@
 import { icons } from "../../../Assets/Icons/icons.js";
+import { initializeIcons } from "../../../Assets/Icons/icons.js";
+import { charCount } from "../../../Utilities/utilities.js";
+import { getFields, showError, clearError } from "../../../Utilities/validation.js";
 
 const steps = document.querySelectorAll("li");
 const formsContainer = document.querySelector(".forms");
@@ -11,7 +14,7 @@ function renderForms(template, container) {
     template.forEach(template => {
         const form = template.content.cloneNode(true);
         container.append(form);
-        initializeIcons();
+        initializeIcons(document);
     });
 }
 
@@ -43,11 +46,34 @@ const roleInput = document.getElementById("role");
 const yearsInput = document.getElementById("years");
 const textArea = document.querySelector("textarea");
 
-textArea.addEventListener("input", () => { charCount() });
+const rules = new Map([
+    [nameInput, {
+        required: true,
+        min: 3,
+        max: 50,
+        msg: "Your full name must be provided!"
+    }],
+
+    [emailInput, {
+        required: true,
+        type: "email",
+        msg: "E-mail should not be left empty!"
+    }],
+
+    [phoneInput, {
+        min: 7,
+        max: 20,
+        msg: "Your phone number is required to contact you!"
+    }],
+
+    [addressInput, { msg: "Your house address is needed!" }],
+])
+
+textArea.addEventListener("input", () => { charCount(textArea) });
 
 inputs.forEach(input => {
     input.addEventListener("input", () => {
-        validateInput(input);
+        validateInput(input, rules.get(input));
         if (input === nameInput) { validateName() };
         if (input === emailInput) { validateEmail() };
         if (input === phoneInput) { validatePhone() };
@@ -86,11 +112,6 @@ submitBtn.addEventListener("click", () => {
     const submitted = formCompleted.content.cloneNode(true);
     formsContainer.replaceChildren(submitted);
 });
-
-function initializeIcons() {
-    const svgs = document.querySelectorAll(".icon");
-    svgs.forEach(svg => { svg.innerHTML = icons[svg.dataset.icon] });
-}
 
 function updateForm() {
     forms.forEach(form => { form.classList.remove("active") });
@@ -131,7 +152,6 @@ function validateWorkForm() {
 
 function validateName() {
     if (!validateInput(nameInput)) return false;
-    nameInput.value = nameInput.value.replace(/\d/g, "");
     nameInput.value = nameInput.value.replace(/\b\w/g, char => char.toUpperCase());
     if (nameInput.value === "User" || nameInput.value === "Admin") {
         showError(nameInput, "Oi! You can't do that!");
@@ -180,36 +200,36 @@ function validateDate() {
     }
 }
 
-function validateStudy() { 
+function validateStudy() {
     if (!validateInput(studyInput)) return false;
     studyInput.value = studyInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
-function validateDegree() { 
+function validateDegree() {
     if (!validateInput(degreeInput)) return false;
     degreeInput.value = degreeInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
-function validateCompany() { 
+function validateCompany() {
     if (!validateInput(companyInput)) return false;
     companyInput.value = companyInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
-function validateRole() { 
-    if (!validateInput(roleInput)) return false;
+function validateRole() {
+    if (!validateInput(roleInput, rules?.get(roleInput))) return false;
     roleInput.value = roleInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
-function validateYears() { 
+function validateYears() {
     if (!validateInput(yearsInput)) return false;
     return true
 };
 
-function validateInput(input) {
+function validateInput(input, config) {
     if (!input.checkValidity()) {
         if (input.validity.valueMissing) {
             showError(input, `${ input.name } is required!`);
@@ -225,32 +245,3 @@ function validateInput(input) {
     }
 };
 
-function charCount() {
-    const label = textArea.closest("label");
-    const charCount = label.querySelector("p");
-    const max = textArea.getAttribute("maxlength");
-    const chars = textArea.value.length;
-    charCount.textContent = `${ chars } / ${ max } characters`;
-};
-
-function showError(input, message) {
-    const inputDiv = input.closest("div");
-    const icon = inputDiv.querySelector("span");
-    const field = input.closest("label");
-    const error = field.querySelector(".error-text");
-    inputDiv.classList.add("error");
-    icon.classList.add("error");
-    error.textContent = message;
-    return false;
-}
-
-function clearError(input) {
-    const inputDiv = input.closest("div");
-    const field = input.closest("label");
-    const icon = inputDiv.querySelector("span");
-    const error = field.querySelector(".error-text");
-    inputDiv.classList.remove("error");
-    icon.classList.remove("error");
-    error.textContent = "";
-    return true;
-}
