@@ -60,7 +60,7 @@ h2 {
     gap: .5em;
 }
 
-button:not(.uploadBtn) {
+button {
     text-align: center;
     font-size: 1em;
     font-weight: 600;
@@ -74,7 +74,7 @@ button:not(.uploadBtn) {
     box-shadow: 0px 0px 3px var(--accent);
 }
 
-button:not(.uploadBtn),
+button,
 span {
     display: inline-flex;
     align-items: center;
@@ -82,7 +82,7 @@ span {
     gap: .5em;
 }
 
-button:not(.uploadBtn):hover {
+button:hover {
     scale: .95;
     border-radius: .5em;
     caret-color: var(--accent);
@@ -309,46 +309,6 @@ form.active {
     color: var(--clr-muted);
 }
 
-.drop-box {
-    cursor: pointer;
-    width: 100%;
-    display: flex;
-    margin: 10px;
-    padding: 30px;
-    border-radius: .5em;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
-    border: var(--brdr-box);
-}
-
-.drop-box h4 {
-    font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 5px;
-    color: var(--clr-heading);
-}
-
-.drop-box p {
-    font-size: 13px;
-    color: var(--clr-paragraph);
-}
-
-.drop-box button {
-    cursor: pointer;
-    font-size: 1rem;
-    background: none;
-    font-weight: 600;
-    color: var(--accent);
-    text-decoration: none;
-    border: 1px solid transparent;
-}
-
-/*.drop-box:hover{
-    scale: .99;
-    background: var(--box-hover);
-}*/
-
 .chevron-left,
 .chevron-right {
     width: 16px;
@@ -368,7 +328,7 @@ form.active {
 
 @media (max-width: 750px) {
 
-    button:not(.uploadBtn) {
+    button {
         width: 100%;
     }
 

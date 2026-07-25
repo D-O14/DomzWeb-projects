@@ -27,8 +27,6 @@ const forms = formsContainer.querySelectorAll("form");
 const submitBtn = formsContainer.querySelector(".submitBtn");
 const nxtBtn = formsContainer.querySelectorAll(".nxtBtn");
 const backBtn = formsContainer.querySelectorAll(".backBtn");
-const dropBox = formsContainer.querySelector(".drop-box");
-const input = dropBox.querySelector("input");
 
 const inputs = document.querySelectorAll("[required]");
 const nameInput = document.getElementById("name");
@@ -255,5 +253,3 @@ function clearError(input) {
     error.textContent = "";
     return true;
 }
-
-dropBox.addEventListener("click", () => { input.click() });

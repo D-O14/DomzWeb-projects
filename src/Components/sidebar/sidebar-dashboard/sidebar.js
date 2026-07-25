@@ -205,5 +205,6 @@ class AppSidebar extends HTMLElement {
         });
     }
 }
+
 customElements.define("app-sidebar", AppSidebar);
 export default AppSidebar;
