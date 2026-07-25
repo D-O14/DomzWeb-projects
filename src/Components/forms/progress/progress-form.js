@@ -24,10 +24,11 @@ const validators = [
 ];
 
 const forms = formsContainer.querySelectorAll("form");
-const submitBtn = formsContainer.querySelector(".submitBtn");
 const nxtBtn = formsContainer.querySelectorAll(".nxtBtn");
 const backBtn = formsContainer.querySelectorAll(".backBtn");
+const submitBtn = formsContainer.querySelector(".submitBtn");
 
+const dropZone = document.querySelector("drop-zone");
 const inputs = document.querySelectorAll("[required]");
 const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");

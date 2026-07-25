@@ -144,7 +144,7 @@ class AppSidebar extends HTMLElement {
         style.rel = "preload";
         style.as = "style";
         style.onload = function () { this.rel = "stylesheet" };
-        style.href = "sidebar.css";
+        style.href = new URL("./sidebar.css", import.meta.url);
         const sidebar = sidebarTemplate.content.cloneNode(true);
         shadow.append(style);
         shadow.append(sidebar);

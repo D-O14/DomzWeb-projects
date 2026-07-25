@@ -31,7 +31,7 @@ class DropZone extends HTMLElement {
         style.rel = "preload";
         style.as = "style";
         style.onload = () => { style.rel = "stylesheet" };
-        style.href = "dropzone.css";
+        style.href = new URL("./dropzone.css", import.meta.url);
         shadow.append(style);
         shadow.append(dropZone);
 
