@@ -1,7 +1,8 @@
-import { icons } from "../../../Assets/Icons/icons.js";
-import { initializeIcons } from "../../../Assets/Icons/icons.js";
 import { charCount } from "../../../Utilities/utilities.js";
-import { validateInput, getFields, showError, clearError, validateDate } from "../../../Utilities/validation.js";
+import { icons, initializeIcons } from "../../../Assets/Icons/icons.js";
+import { validateDate, initializeDate } from "../../../Utilities/date.js"
+import { validateInput, validateName, validateEmail, validatePhone, getFields, showError, clearError }
+    from "../../../Utilities/validation.js";
 
 const steps = document.querySelectorAll("li");
 const formsContainer = document.querySelector(".forms");
@@ -48,9 +49,15 @@ const textArea = document.querySelector("textarea");
 
 const formRules = {
     name: {
+        minWords: 2,
+        maxWords: 3,
+        allowNumbers: false,
         messages: {
+            rangeOverflow: "Please use a maximum of three names!",
+            rangeUnderFlow: "Your full name is required!",
             valueMissing: "Your full name must be provided!",
-            patternMismatch: "Please type in a proper name!",
+            typeMismatch: "Names do not contain numbers! Type a proper name!",
+            patternMismatch: "Special characters other than hyphens, periods, and apsotrophes aren't allowed!",
         },
     },
 
@@ -77,7 +84,7 @@ const formRules = {
 
     graduation: {
         date: { future: false },
-        messages: {rangeOverflow: "You can't sign this form if you haven't graduated!"}
+        messages: { rangeOverflow: "You can't sign this form if you haven't graduated!" }
     },
     birthay: {
         date: {
@@ -94,11 +101,12 @@ const formRules = {
 textArea.addEventListener("input", () => { charCount(textArea) });
 
 inputs.forEach(input => {
+    if (input === dateInput) { initializeDate(input, formRules) };
     input.addEventListener("input", () => {
         validateInput(input, formRules);
-        if (input === nameInput) { validateName() };
-        if (input === emailInput) { validateEmail() };
-        if (input === phoneInput) { validatePhone() };
+        if (input === nameInput) { validateName(input, formRules) };
+        if (input === emailInput) { validateEmail(input, formRules) };
+        if (input === phoneInput) { validatePhone(input, formRules) };
         if (input === addressInput) { validateAddress() };
         if (input === schoolInput) { validateSchool() };
         if (input === dateInput) { validateDate(input, formRules) };
@@ -171,30 +179,6 @@ function validateWorkForm() {
         validateYears()
     );
 }
-
-function validateName() {
-    if (!validateInput(nameInput, formRules)) return false;
-    nameInput.value = nameInput.value.replace(/\b\w/g, char => char.toUpperCase());
-    if (nameInput.value === "User" || nameInput.value === "Admin") {
-        showError(nameInput, "Oi! You can't do that!");
-        return false;
-    } else {
-        clearError(nameInput);
-        return true;
-    };
-};
-
-function validateEmail() {
-    if (!validateInput(emailInput, formRules)) return false;
-    emailInput.value = emailInput.value.trim().toLowerCase();
-    return true;
-};
-
-function validatePhone() {
-    if (!validateInput(phoneInput, formRules)) return false;
-    phoneInput.value = phoneInput.value.replace(/[A-Za-z]/, "");
-    return true;
-};
 
 function validateAddress() {
     if (!validateInput(addressInput, formRules)) return false;

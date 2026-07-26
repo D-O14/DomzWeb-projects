@@ -24,6 +24,7 @@
 
 # 24th July 2026
 - Fixed validation issues
+- Fixed date issue
 - Successfully validated forms
 - Added dropzone component to upload form section 
 
