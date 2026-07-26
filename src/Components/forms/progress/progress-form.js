@@ -1,7 +1,7 @@
 import { icons } from "../../../Assets/Icons/icons.js";
 import { initializeIcons } from "../../../Assets/Icons/icons.js";
 import { charCount } from "../../../Utilities/utilities.js";
-import { getFields, showError, clearError } from "../../../Utilities/validation.js";
+import { validateInput, getFields, showError, clearError, validateDate } from "../../../Utilities/validation.js";
 
 const steps = document.querySelectorAll("li");
 const formsContainer = document.querySelector(".forms");
@@ -46,40 +46,62 @@ const roleInput = document.getElementById("role");
 const yearsInput = document.getElementById("years");
 const textArea = document.querySelector("textarea");
 
-const rules = new Map([
-    [nameInput, {
-        required: true,
-        min: 3,
-        max: 50,
-        msg: "Your full name must be provided!"
-    }],
+const formRules = {
+    name: {
+        messages: {
+            valueMissing: "Your full name must be provided!",
+            patternMismatch: "Please type in a proper name!",
+        },
+    },
 
-    [emailInput, {
-        required: true,
-        type: "email",
-        msg: "E-mail should not be left empty!"
-    }],
+    email: {
+        messages: {
+            valueMissing: "E-mail should not be left empty!",
+            typeMismatch: "Please enter a valid E-mail!",
+        }
+    },
 
-    [phoneInput, {
-        min: 7,
-        max: 20,
-        msg: "Your phone number is required to contact you!"
-    }],
+    phone: {
+        messages: {
+            valueMissing: "Your phone number is required to contact you!",
+            patternMismatch: "Please enter a valid phone number",
+        }
+    },
 
-    [addressInput, { msg: "Your house address is needed!" }],
-])
+    address: {
+        messages: {
+            valueMissing: "Your house address is needed!",
+            patternMismatch: "Please type in an appropriate address",
+        },
+    },
+
+    graduation: {
+        date: { future: false },
+        messages: {rangeOverflow: "You can't sign this form if you haven't graduated!"}
+    },
+    birthay: {
+        date: {
+            future: false,
+            minAge: 18,
+        },
+        messages: {
+            rangeOverflow: "You can't sign this form if you haven't been born yet!",
+            minAge: "You can't sign this form if you aren't 18 yet!"
+        }
+    }
+}
 
 textArea.addEventListener("input", () => { charCount(textArea) });
 
 inputs.forEach(input => {
     input.addEventListener("input", () => {
-        validateInput(input, rules.get(input));
+        validateInput(input, formRules);
         if (input === nameInput) { validateName() };
         if (input === emailInput) { validateEmail() };
         if (input === phoneInput) { validatePhone() };
         if (input === addressInput) { validateAddress() };
         if (input === schoolInput) { validateSchool() };
-        if (input === dateInput) { validateDate() };
+        if (input === dateInput) { validateDate(input, formRules) };
         if (input === studyInput) { validateStudy() };
         if (input === degreeInput) { validateDegree() };
         if (input === companyInput) { validateCompany() };
@@ -136,7 +158,7 @@ function validateInfoForm() {
 function validateEducationForm() {
     return (
         validateSchool() &&
-        validateDate() &&
+        validateDate(dateInput, formRules) &&
         validateStudy() &&
         validateDegree()
     );
@@ -151,7 +173,7 @@ function validateWorkForm() {
 }
 
 function validateName() {
-    if (!validateInput(nameInput)) return false;
+    if (!validateInput(nameInput, formRules)) return false;
     nameInput.value = nameInput.value.replace(/\b\w/g, char => char.toUpperCase());
     if (nameInput.value === "User" || nameInput.value === "Admin") {
         showError(nameInput, "Oi! You can't do that!");
@@ -163,85 +185,53 @@ function validateName() {
 };
 
 function validateEmail() {
-    if (!validateInput(emailInput)) return false;
+    if (!validateInput(emailInput, formRules)) return false;
     emailInput.value = emailInput.value.trim().toLowerCase();
     return true;
 };
 
 function validatePhone() {
-    if (!validateInput(phoneInput)) return false;
+    if (!validateInput(phoneInput, formRules)) return false;
     phoneInput.value = phoneInput.value.replace(/[A-Za-z]/, "");
     return true;
 };
 
 function validateAddress() {
-    if (!validateInput(addressInput)) return false;
+    if (!validateInput(addressInput, formRules)) return false;
     return true;
 };
 
 function validateSchool() {
-    if (!validateInput(schoolInput)) return false;
+    if (!validateInput(schoolInput, formRules)) return false;
     schoolInput.value = schoolInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 }
 
-function validateDate() {
-    if (!validateInput(dateInput)) return false;
-    const selectedDate = new Date(dateInput.value);
-    dateInput.max = new Date().toISOString().split("T")[0];
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (selectedDate > today) {
-        showError(dateInput, "You can't sign this form if you haven't graudated!");
-        return false;
-    } else {
-        clearError(dateInput);
-        return true;
-    }
-}
-
 function validateStudy() {
-    if (!validateInput(studyInput)) return false;
+    if (!validateInput(studyInput, formRules)) return false;
     studyInput.value = studyInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
 function validateDegree() {
-    if (!validateInput(degreeInput)) return false;
+    if (!validateInput(degreeInput, formRules)) return false;
     degreeInput.value = degreeInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
 function validateCompany() {
-    if (!validateInput(companyInput)) return false;
+    if (!validateInput(companyInput, formRules)) return false;
     companyInput.value = companyInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
 function validateRole() {
-    if (!validateInput(roleInput, rules?.get(roleInput))) return false;
+    if (!validateInput(roleInput, formRules)) return false;
     roleInput.value = roleInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
 function validateYears() {
-    if (!validateInput(yearsInput)) return false;
+    if (!validateInput(yearsInput, formRules)) return false;
     return true
 };
-
-function validateInput(input, config) {
-    if (!input.checkValidity()) {
-        if (input.validity.valueMissing) {
-            showError(input, `${ input.name } is required!`);
-        } else if (input.validity.typeMismatch) {
-            showError(input, "Please type in a proper value!");
-        } else if (input.validity.patternMismatch) {
-            showError(input, "Please follow the appropriate format!");
-        }
-        return false;
-    } else {
-        clearError(input);
-        return true;
-    }
-};
-
