@@ -1,11 +1,11 @@
 import { validateDate } from "./date";
 import { wordCounter } from "./utilities";
 
-const validators = {
+export const validators = {
     name: validateName,
     email: validateEmail,
     phone: validatePhone,
-    date: validateDate,
+    graduation: validateDate,
 }
 
 export function validateInput(input, ruleset) {
@@ -56,45 +56,36 @@ export function validateName(input, rules) {
     if (!validateInput(input, rules)) return false;
     const nameRules = rules[input.name] ?? {};
     const msg = nameRules.messages ?? {};
+    const reserved = ["user", "admin"];
     const wordCount = wordCounter(input.value);
-    input.value = input.value.trim().toLowerCase();
-    input.value = input.value.replace(/\b\w/g, char => char.toUpperCase());
+    const words = input.value.trim().split(/\s+/);
+    const reservedWords = words.some(word => reserved.includes(word));
     if (nameRules?.minWords === 2) {
         if (wordCount < 2) {
             showError(input, msg.rangeUnderFlow ?? "Your full name is required!");
             return false;
         }
     }
-
     if (nameRules?.maxWords === 3) {
         if (wordCount > 3) {
             showError(input, msg.rangeOverflow ?? "Cannot use more than three given names!");
             return false;
         }
     }
-
-    if (!nameRules.allowNumbers && /\d/.test(input.value)) {
-        showError(input, msg.typeMismatch ?? "Numbers cannot be used in names!");
+    if (reservedWords) {
+        showError(input, "You aren't allowed to use that name!");
         return false;
     }
-
-    if (input.value === "User Admin") {
-        showError(input, "Oi! You can't do that!");
-        return false;
-    }
-
     clearError(input);
     return true;
 };
 
 export function validateEmail(input, rules) {
     if (!validateInput(input, rules)) return false;
-    input.value = input.value.trim().toLowerCase();
     return true;
 };
 
 export function validatePhone(input, rules) {
     if (!validateInput(input, rules)) return false;
-    input.value = input.value.replace(/[A-Za-z]/, "");
     return true;
 }; 

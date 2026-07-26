@@ -7,3 +7,16 @@ export function charCount(textArea) {
 };
 
 export function wordCounter(text) { return text.trim().split(/\s+/).filter(Boolean).length };
+
+export function format(input, formatRules) {
+    const rules = formatRules[input.name] ?? {};
+    if (rules.trim) {
+        input.value = input.value.trim();   
+    } 
+    if (rules.capitalize) {
+        input.value = input.value.replace(/\b\w/g, char => char.toUpperCase());   
+    }
+    if (rules.lowercase) { 
+        input.value = input.value.trim().toLowerCase();
+    }
+};

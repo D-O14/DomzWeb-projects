@@ -13,24 +13,34 @@
         autocorrect="on" spellcheck="true" autocapitalize="on">
         <drop-zone></drop-zone>
         <label>
-            <input type="text" placeholder="text">
-            <p class="text-error"></p>
+            <input type="text" placeholder="text" enterkeyhint="next" required id="username" name="username" pattern=""
+                autofocus>
+            <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="text" placeholder="text">
-            <p class="text-error"></p>
+            <input type="email" placeholder="email" enterkeyhint="next" required id="email" name="email">
+            <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="text" placeholder="text">
-            <p class="text-error"></p>
+            <input type="password" placeholder="password" enterkeyhint="next" required id="password" name="password"
+                pattern="">
+            <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="text" placeholder="text">
-            <p class="text-error"></p>
+            <input type="date" enterkeyhint="next" required id="date" name="birthday">
+            <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="text" placeholder="text">
-            <p class="text-error"></p>
+            <input type="text" placeholder="handle" enterkeyhint="next" required id="handle" name="handle" pattern="">
+            <p class="text-error" aria-live="polite"></p>
+        </label>
+        <label>
+            <input type="tel" placeholder="phone number" enterkeyhint="next" required id="contact" name="phone"
+                pattern="" minlength="7" maxlength="20">
+            <p class="text-error" aria-live="polite"></p>
+        </label>
+        <label>
+            <textarea placeholder="Tell others about yourself" maxlength="200" name="bio"></textarea>
         </label>
         <menu>
             <button type="button">Submit</button>
@@ -39,6 +49,5 @@
 </body>
 
 <script src="account-form.js" type="module" defer></script>
-<script src="../../Components/dropzone/dropzone.js"></script>
-
+<script src="../../Components/dropzone/dropzone.js" type="module"></script>
 </html>

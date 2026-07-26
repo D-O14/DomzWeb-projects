@@ -1,8 +1,7 @@
-import { charCount } from "../../../Utilities/utilities.js";
+import { charCount, format } from "../../../Utilities/utilities.js";
 import { icons, initializeIcons } from "../../../Assets/Icons/icons.js";
 import { validateDate, initializeDate } from "../../../Utilities/date.js"
-import { validateInput, validateName, validateEmail, validatePhone, getFields, showError, clearError }
-    from "../../../Utilities/validation.js";
+import { validateInput, validators, getFields, showError, clearError } from "../../../Utilities/validation.js";
 
 const steps = document.querySelectorAll("li");
 const formsContainer = document.querySelector(".forms");
@@ -21,7 +20,7 @@ function renderForms(template, container) {
 
 renderForms(formsTemplate, formsContainer);
 
-const validators = [
+const validateForm = [
     validateInfoForm,
     validateEducationForm,
     validateWorkForm,
@@ -51,7 +50,6 @@ const formRules = {
     name: {
         minWords: 2,
         maxWords: 3,
-        allowNumbers: false,
         messages: {
             rangeOverflow: "Please use a maximum of three names!",
             rangeUnderFlow: "Your full name is required!",
@@ -98,30 +96,67 @@ const formRules = {
     }
 }
 
+const formatRules = {
+    name: {
+        trim: true,
+        capitalize: true
+    },
+
+    email: {
+        trim: true,
+        lowercase: true
+    },
+
+    address: {
+        trim: true,
+        capitalize: true
+    },
+
+    school: {
+        trim: true,
+        capitalize: true
+    },
+
+    study: {
+        trim: true,
+        capitalize: true
+    },
+
+    degree: {
+        trim: true,
+        capitalize: true
+    },
+
+    company: {
+        trim: true,
+        capitalize: true
+    },
+};
+
 textArea.addEventListener("input", () => { charCount(textArea) });
 
 inputs.forEach(input => {
     if (input === dateInput) { initializeDate(input, formRules) };
     input.addEventListener("input", () => {
-        validateInput(input, formRules);
-        if (input === nameInput) { validateName(input, formRules) };
-        if (input === emailInput) { validateEmail(input, formRules) };
-        if (input === phoneInput) { validatePhone(input, formRules) };
+        validateInput(input, formRules)
+        const validator = validators[input.name];
+        if (validator) { validator(input, formRules) };
         if (input === addressInput) { validateAddress() };
         if (input === schoolInput) { validateSchool() };
-        if (input === dateInput) { validateDate(input, formRules) };
         if (input === studyInput) { validateStudy() };
         if (input === degreeInput) { validateDegree() };
         if (input === companyInput) { validateCompany() };
         if (input === roleInput) { validateRole() };
         if (input === yearsInput) { validateYears() };
     });
+
+    input.addEventListener("blur", () => { format(input, formatRules) });
 });
 
 nxtBtn.forEach(btn => {
     btn.innerHTML += icons.chevronRight;
     btn.addEventListener("click", () => {
-        if (!validators[index]()) return;
+        if (!validateForm[index]()) return;
         index++;
         updateForm();
         progressForward();
@@ -156,9 +191,9 @@ function progressBackward() {
 
 function validateInfoForm() {
     return (
-        validateName() &&
-        validateEmail() &&
-        validatePhone() &&
+        validators.name(nameInput, formRules) &&
+        validators.email(emailInput, formRules) &&
+        validators.phone(phoneInput, formRules) &&
         validateAddress()
     );
 }
@@ -166,7 +201,7 @@ function validateInfoForm() {
 function validateEducationForm() {
     return (
         validateSchool() &&
-        validateDate(dateInput, formRules) &&
+        validate.graduation(dateInput, formRules) &&
         validateStudy() &&
         validateDegree()
     );
@@ -187,31 +222,26 @@ function validateAddress() {
 
 function validateSchool() {
     if (!validateInput(schoolInput, formRules)) return false;
-    schoolInput.value = schoolInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 }
 
 function validateStudy() {
     if (!validateInput(studyInput, formRules)) return false;
-    studyInput.value = studyInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
 function validateDegree() {
     if (!validateInput(degreeInput, formRules)) return false;
-    degreeInput.value = degreeInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
 function validateCompany() {
     if (!validateInput(companyInput, formRules)) return false;
-    companyInput.value = companyInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 
 function validateRole() {
     if (!validateInput(roleInput, formRules)) return false;
-    roleInput.value = roleInput.value.replace(/\b\w/g, char => char.toUpperCase());
     return true;
 };
 

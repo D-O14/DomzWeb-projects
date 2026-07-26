@@ -1,0 +1,14 @@
+button{
+    padding: .5em 1em;
+    border-radius: .5em;
+    touch-action: manipulation;
+    border: 1px solid transparent;
+}
+
+input{
+    height: 40px;
+    outline: none;
+    padding: .5em 1em;
+    border-radius: .25em;
+    border: 1px solid hsl(0, 0%, 50%);
+}
