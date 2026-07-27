@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Creation Form</title>
-    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="account-form.css">
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="./account-form.css">
 </head>
 
 <body>
@@ -13,32 +13,51 @@
         autocorrect="on" spellcheck="true" autocapitalize="on">
         <drop-zone></drop-zone>
         <label>
-            <input type="text" placeholder="What would you like to be called?" enterkeyhint="next" required
-                id="username" name="username" pattern="" autofocus>
-            <p class="text-error" aria-live="polite"></p>
+            <div class="input">
+                <span class="icon"></span>
+                <input type="text" placeholder="What would you like to be called?" enterkeyhint="next" required
+                    id="username" name="username" pattern="^[A-Za-z\s'.\-]+$" autofocus>
+            </div>
+            <p class="error-text" aria-live="polite"></p>
         </label>
         <label>
-            <input type="text" placeholder="Please provide a handle e.g. @johndoe" enterkeyhint="next" required
-                id="handle" name="handle">
-            <p class="text-error" aria-live="polite"></p>
+            <div class="input">
+                <span class="icon"></span>
+                <input type="text" placeholder="Please provide a handle e.g. @johndoe" enterkeyhint="next" required
+                    id="handle" name="handle">
+            </div>
+            <p class="error-text" aria-live="polite"></p>
         </label>
         <label>
-            <input type="email" placeholder="What's your E-mail?" enterkeyhint="next" required id="email" name="email">
-            <p class="text-error" aria-live="polite"></p>
+            <div class="input">
+                <span class="icon"></span>
+                <input type="email" placeholder="What's your E-mail?" enterkeyhint="next" required id="email"
+                    name="email" inputmode="email">
+            </div>
+            <p class="error-text" aria-live="polite"></p>
         </label>
         <label>
-            <input type="password" placeholder="Set up a safe and secure password" enterkeyhint="next" required
-                id="password" name="password" pattern="">
-            <p class="text-error" aria-live="polite"></p>
+            <div class="input">
+                <span class="icon"></span>
+                <input type="password" placeholder="Set up a safe and secure password" enterkeyhint="next" required
+                    id="password" name="password" pattern="">
+            </div>
+            <p class="error-text" aria-live="polite"></p>
         </label>
         <label>
-            <input type="date" enterkeyhint="next" required id="date" name="birthday">
-            <p class="text-error" aria-live="polite"></p>
+            <div class="input">
+                <span class="icon"></span>
+                <input type="date" enterkeyhint="next" required id="date" name="birthday">
+            </div>
+            <p class="error-text" aria-live="polite"></p>
         </label>
         <label>
-            <input type="tel" placeholder="What number do we use to contact you?" enterkeyhint="next" required
-                id="contact" name="contact" pattern="" minlength="7" maxlength="20">
-            <p class="text-error" aria-live="polite"></p>
+            <div class="input">
+                <span class="icon"></span>
+                <input type="tel" placeholder="What number do we use to contact you?" enterkeyhint="next" required id="contact"
+                    name="contact" pattern="^[+?0-9\s]{7,20}" minlength="7" maxlength="20">
+            </div>
+            <p class="error-text" aria-live="polite"></p>
         </label>
         <label>
             <textarea placeholder="Tell us a bit about yourself" maxlength="200" name="bio"></textarea>
@@ -49,7 +68,7 @@
     </form>
 </body>
 
-<script src="account-form.js" type="module" defer></script>
+<script src="./account-form.js" type="module" defer></script>
 <script src="../../Components/dropzone/dropzone.js" type="module"></script>
 
 </html>

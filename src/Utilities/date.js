@@ -1,4 +1,4 @@
-import { validateInput } from "./validation";
+import { validateInput, showError, clearError } from "./validation.js";
 
 export function initializeDate(input, rules) {
     const dateRules = rules[input.name] ?? {};
@@ -9,18 +9,16 @@ export function initializeDate(input, rules) {
 
 export function validateDate(input, rules) {
     if (!validateInput(input, rules)) return false;
+    console.log("Date rules");
     const dateRules = rules[input.name] ?? {};
     const msg = dateRules.messages ?? {};
     const selectedDate = new Date(input.value);
     const today = new Date().toISOString().split("T")[0];
-    if (dateRules?.date?.future === false) {
+    if (dateRules.date.future === false) {
         input.max = new Date().toISOString().split("T")[0];
         if (selectedDate > today) {
             showError(input, msg.rangeOverflow ?? "Oi! You can't set future dates!");
             return false;
-        } else {
-            clearError(input);
-            return true;
         }
     } else {
         clearError(input);

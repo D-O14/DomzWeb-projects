@@ -3,8 +3,11 @@ import { wordCounter } from "./utilities";
 
 export const validators = {
     name: validateName,
+    username: validateName,
     email: validateEmail,
     phone: validatePhone,
+    contact: validatePhone,
+    birthday: validateDate,
     graduation: validateDate,
 }
 

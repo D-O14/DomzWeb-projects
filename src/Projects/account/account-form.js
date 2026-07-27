@@ -4,7 +4,7 @@ import { validateDate, initializeDate } from "../../Utilities/date.js"
 import { validateInput, validators, getFields, showError, clearError } from "../../Utilities/validation.js";
 
 const accountRules = {
-    name: {
+    username: {
         minWords: 2,
         maxWords: 3,
         messages: {
@@ -23,7 +23,7 @@ const accountRules = {
         }
     },
 
-    phone: {
+    contact: {
         messages: {
             valueMissing: "Your phone number is required to contact you!",
             patternMismatch: "Please enter a valid phone number",
@@ -42,8 +42,20 @@ const accountRules = {
     }
 }
 
+const formatRules = {
+    name: {
+        trim: true,
+        capitalize: true
+    },
+
+    email: {
+        trim: true,
+        lowercase: true
+    },
+};
+
 const inputs = document.querySelectorAll("input");
-const nameInput = document.getElementById("name");
+const nameInput = document.getElementById("username");
 const dateInput = document.getElementById("date");
 const textArea = document.querySelector("textarea");
 const emailInput = document.getElementById("email");
@@ -54,9 +66,9 @@ const passwordInput = document.getElementById("password");
 inputs.forEach(input => {
     if (input === dateInput) { initializeDate(input, accountRules) };
     input.addEventListener("input", () => {
-        console.log("Validating...");
+        validateInput(input, accountRules);
             const validator = validators[input.name];
             if (validator) { validator(input, accountRules) };
         });
-        //input.addEventListener("blur", () => { format(input, formatRules) });
+        input.addEventListener("blur", () => { format(input, formatRules) });
 });
