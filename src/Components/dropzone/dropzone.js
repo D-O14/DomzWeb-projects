@@ -128,7 +128,7 @@ function previewFile(file, data) {
 function validateFile(file, data) {
     if (!file) return false;
 
-    if (file.size > 520000) {
+    if (file.size > 5250000) {
         removePreview(data);
         return false;
     }

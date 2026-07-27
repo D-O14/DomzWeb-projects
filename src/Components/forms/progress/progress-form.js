@@ -138,7 +138,7 @@ textArea.addEventListener("input", () => { charCount(textArea) });
 inputs.forEach(input => {
     if (input === dateInput) { initializeDate(input, formRules) };
     input.addEventListener("input", () => {
-        validateInput(input, formRules)
+        //validateInput(input, formRules);
         const validator = validators[input.name];
         if (validator) { validator(input, formRules) };
         if (input === addressInput) { validateAddress() };

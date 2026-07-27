@@ -1,2 +1,24 @@
 @import "../../Styles/resets.css";
 @import "../../Styles/base.css";
+@import "../../Styles/variables.css";
+
+:root {
+    --bg-page: hsl(0, 0%, 8%);
+
+    --accent: hsl(251, 61%, 52%);
+
+    --brdr-box: 2px dashed hsl(0, 0%, 64%);
+
+    --clr-paragraph: hsl(0, 0%, 64%);
+    --clr-heading: hsl(0, 0%, 18%);
+}
+
+/*body{
+    background: var(--bg-page);
+}*/
+
+input{
+    background: none;
+    border: 1px solid transparent;
+    border-bottom: 1px solid var(--accent);
+}

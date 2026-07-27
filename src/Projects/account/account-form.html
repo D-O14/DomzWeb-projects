@@ -13,17 +13,22 @@
         autocorrect="on" spellcheck="true" autocapitalize="on">
         <drop-zone></drop-zone>
         <label>
-            <input type="text" placeholder="text" enterkeyhint="next" required id="username" name="username" pattern=""
-                autofocus>
+            <input type="text" placeholder="What would you like to be called?" enterkeyhint="next" required
+                id="username" name="username" pattern="" autofocus>
             <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="email" placeholder="email" enterkeyhint="next" required id="email" name="email">
+            <input type="text" placeholder="Please provide a handle e.g. @johndoe" enterkeyhint="next" required
+                id="handle" name="handle">
             <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="password" placeholder="password" enterkeyhint="next" required id="password" name="password"
-                pattern="">
+            <input type="email" placeholder="What's your E-mail?" enterkeyhint="next" required id="email" name="email">
+            <p class="text-error" aria-live="polite"></p>
+        </label>
+        <label>
+            <input type="password" placeholder="Set up a safe and secure password" enterkeyhint="next" required
+                id="password" name="password" pattern="">
             <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
@@ -31,16 +36,12 @@
             <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="text" placeholder="handle" enterkeyhint="next" required id="handle" name="handle" pattern="">
+            <input type="tel" placeholder="What number do we use to contact you?" enterkeyhint="next" required
+                id="contact" name="contact" pattern="" minlength="7" maxlength="20">
             <p class="text-error" aria-live="polite"></p>
         </label>
         <label>
-            <input type="tel" placeholder="phone number" enterkeyhint="next" required id="contact" name="phone"
-                pattern="" minlength="7" maxlength="20">
-            <p class="text-error" aria-live="polite"></p>
-        </label>
-        <label>
-            <textarea placeholder="Tell others about yourself" maxlength="200" name="bio"></textarea>
+            <textarea placeholder="Tell us a bit about yourself" maxlength="200" name="bio"></textarea>
         </label>
         <menu>
             <button type="button">Submit</button>
@@ -50,4 +51,5 @@
 
 <script src="account-form.js" type="module" defer></script>
 <script src="../../Components/dropzone/dropzone.js" type="module"></script>
+
 </html>

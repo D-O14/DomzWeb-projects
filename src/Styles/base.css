@@ -1,14 +1,38 @@
-button{
+@import "./variables.css";
+
+button {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
     padding: .5em 1em;
     border-radius: .5em;
     touch-action: manipulation;
     border: 1px solid transparent;
 }
 
-input{
+input {
     height: 40px;
     outline: none;
     padding: .5em 1em;
-    border-radius: .25em;
-    border: 1px solid hsl(0, 0%, 50%);
+    border-radius: .5em;
+    border: 1px solid var(--muted);
+}
+
+textarea {
+    height: 100px;
+    resize: none;
+    outline: none;
+    padding: .75em 1em;
+    border-radius: 8px;
+}
+
+input,textarea{
+    width: 70%;
+    flex: 0 0 auto;
+}
+
+form{
+    display: flex;
+    gap: 1.5em;
+    flex-direction: column;
 }
