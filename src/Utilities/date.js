@@ -9,7 +9,6 @@ export function initializeDate(input, rules) {
 
 export function validateDate(input, rules) {
     if (!validateInput(input, rules)) return false;
-    console.log("Date rules");
     const dateRules = rules[input.name] ?? {};
     const msg = dateRules.messages ?? {};
     const selectedDate = new Date(input.value);

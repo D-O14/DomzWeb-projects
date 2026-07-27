@@ -3,7 +3,7 @@ import { icons, initializeIcons } from "../../Assets/Icons/icons";
 const template = document.createElement("template");
 template.innerHTML = `
 <div class="drop-zone">
-    <span class="icon" data-icon="download"></span>
+    <span class="icon" data-icon="upload"></span>
     <h4>Choose or drop a file. Any <button class="uploadBtn">file</button>.</h4>
     <p>JPG, WEBP, PDF, DOCX, MP3....</p>
     <div class="preview-container">

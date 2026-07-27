@@ -30,7 +30,7 @@ const accountRules = {
         }
     },
 
-    birthay: {
+    birthday: {
         date: {
             future: false,
             minAge: 18,
@@ -43,7 +43,7 @@ const accountRules = {
 }
 
 const formatRules = {
-    name: {
+    username: {
         trim: true,
         capitalize: true
     },
@@ -56,15 +56,16 @@ const formatRules = {
 
 const inputs = document.querySelectorAll("input");
 const nameInput = document.getElementById("username");
-const dateInput = document.getElementById("date");
+//const dateInput = document.getElementById("date");
 const textArea = document.querySelector("textarea");
 const emailInput = document.getElementById("email");
 const handleInput = document.getElementById("handle");
-const contactInput = document.getElementById("contact");
 const passwordInput = document.getElementById("password");
 
+textArea.addEventListener("input", () => { charCount(textArea) });
+
 inputs.forEach(input => {
-    if (input === dateInput) { initializeDate(input, accountRules) };
+    //if (input === dateInput) { initializeDate(input, accountRules) };
     input.addEventListener("input", () => {
         validateInput(input, accountRules);
             const validator = validators[input.name];
@@ -72,3 +73,5 @@ inputs.forEach(input => {
         });
         input.addEventListener("blur", () => { format(input, formatRules) });
 });
+
+initializeIcons(document);
