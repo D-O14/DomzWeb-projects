@@ -36,21 +36,24 @@ export function getFields(input) {
     return {
         container, icon: container.querySelector("span"),
         field, error: field.querySelector(".error-text"),
+        //errorIcon: field.querySelector(".icon"),
     }
 }
 
 export function showError(input, message) {
-    const { container, icon, error } = getFields(input);
+    const { container, icon, error, errorIcon } = getFields(input);
     container.classList.add("error");
     icon.classList.add("error");
+    //errorIcon.dataset.icon = "exclaim";
     error.textContent = message;
     return false;
 }
 
 export function clearError(input) {
-    const { container, icon, error } = getFields(input);
+    const { container, icon, error, errorIcon } = getFields(input);
     container.classList.remove("error");
     icon.classList.remove("error");
+    //errorIcon.dataset.icon = "";
     error.textContent = "";
     return true;
 }

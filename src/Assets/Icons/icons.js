@@ -333,5 +333,11 @@ class="lucide line-chart"><path d="M12 16v5" /><path d="M16 14.639V21" /><path d
 
 export function initializeIcons(root) {
     const svgs = root.querySelectorAll(".icon");
-    svgs.forEach(svg => { svg.innerHTML = icons[svg.dataset.icon] });
+    svgs.forEach(svg => {
+        if (svg.dataset.icon) {
+            svg.innerHTML = icons[svg.dataset.icon];   
+        } else {
+            svg.dataset.icon = "";
+        }
+    });
 };
