@@ -12,12 +12,13 @@
     --accent: hsl(251, 61%, 52%);
     --outline-accent: hsl(251, 61%, 32%);
 
-    --brdr-focus: 2px solid var(--accent);
     --brdr-bottom-error: var(--clr-error);
+    --brdr-focus: 2px solid var(--accent);
     --brdr-box: 2px dashed hsl(0, 0%, 64%);
     --brdr-pseudo: 1px solid hsl(0, 0%, 64%, .5);
-    --brdr-error: 1px solid hsla(15, 82%, 57%, 0.3);
+    --brdr-error: 1px solid hsla(5, 62%, 57%, 0.73);
     --brdr-glass: 1px solid hsla(240, 65%, 43%, 0.3);
+    --brdr-login: 2px solid hsla(250, 65%, 43%, 0.3);
 
     --clr-muted: hsl(0, 0%, 80%);
     --clr-error: hsl(0, 61%, 52%);
@@ -53,7 +54,7 @@ img {
 form {
     width: 100%;
     height: 100%;
-    padding: 20px 50px;
+    padding: 15px 50px;
 }
 
 button:not(.loginBtn) {
@@ -105,9 +106,9 @@ menu{
     gap: 1em;
 }
 
-.input:focus-within::before {
+/*.input:focus-within::before {
     width: 100%;
-}
+}*/
 
 .input {
     position: relative;
@@ -117,7 +118,7 @@ menu{
     height: 40px;
     flex: 0 0 auto;
     padding: .5em 1em;
-    border-radius: 4px;
+    border-radius: 8px;
     overflow: hidden;
     border: var(--brdr-glass);
     backdrop-filter: blur(10px);
@@ -126,17 +127,79 @@ menu{
     -webkit-backdrop-filter: blur(10px);
 }
 
+.top{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.left{
+    position: absolute;
+    left: 0;
+    height: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.bottom{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.right{
+    position: absolute;
+    right: 0;
+    height: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.input:focus-within .top{
+    opacity: 1;
+    width: 100%;
+    border-radius: .5em;
+    transition-delay: .1s;
+}
+
+.input:focus-within .left{
+    opacity: 1;
+    height: 100%;
+    border-radius: .5em;
+    transition-delay: .25s;
+}
+
+.input:focus-within .bottom{
+    opacity: 1;
+    width: 100%;
+    border-radius: .5em;
+    transition-delay: .3s;
+}
+
+.input:focus-within .right{
+    opacity: 1;
+    height: 100%;
+    border-radius: .5em;
+    transition-delay: .45s;
+}
+
 .loginBtn{
     width: 100%;
     padding: .5em 1em;
     text-align: center;
     border-radius: .25em;
-    border: var(--brdr-glass);
+    border: var(--brdr-login);
     background: var(--bg-container);
     box-shadow: 5px 5px 5px hsla(250, 60%, 12%, .45);
 }
 
-.input::before {
+/*.input::before {
     content: '';
     position: absolute;
     width: 0%;
@@ -145,36 +208,42 @@ menu{
     transition: .75s ease;
     border: 1px solid transparent;
     border-bottom: var(--brdr-focus);
-}
-
-.input::after {
-    content: "";
-    position: absolute;
-    width: 1px;
-    height: 20px;
-    background: none;
-    transform: translateX(25px);
-    border-right: var(--brdr-pseudo);
-}
+}*/
 
 .input.error {
-    border: var(--brdr-error);
+    /*border: var(--brdr-error);*/
     background: var(--bg-error);
     animation: shake .25s linear;
 }
 
-.input.error::before {
+.input.error .top{
+    width: 100%;
+    border: var(--brdr-error);
+}
+
+.input.error .left{
+    width: 100%;
+    border: var(--brdr-error);
+}
+
+.input.error .right{
+    width: 100%;
+    border: var(--brdr-error);
+}
+
+.input.error .bottom{
+    width: 100%;
+    border: var(--brdr-error);
+}
+
+/*.input.error::before {
     width: 100%;
     border-bottom-color: var(--brdr-bottom-error);
-}
-
-.icon.error svg {
-    stroke: var(--clr-error);
-}
-
-/*.input span.icon.error{
-    background: var(--clr-error);
 }*/
+
+.input span.icon.error{
+    background: var(--clr-error);
+}
 
 .container {
     width: 1000px;
@@ -183,7 +252,7 @@ menu{
     border-radius: .5em;
     justify-content: center;
     background: var(--bg-container);
-    /*box-shadow: var(--shadow-container);*/
+    box-shadow: var(--shadow-container);
 }
 
 .image {
@@ -204,79 +273,6 @@ menu{
 .form {
     width: 55%;
 }
-
-/*.check {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    gap: .5em;
-    color: var(--clr-muted);
-}
-
-.custom-checkbox {
-    cursor: pointer;
-    z-index: 1;
-    width: 14px;
-    height: 14px;
-    border-radius: 4px;
-    position: absolute;
-    background: var(--bg-checkbox);
-    border: 1px solid var(--brdr-pseudo);
-}
-
-.custom-checkbox:hover{
-    outline-offset: 1px;
-    outline: 1px solid var(--accent);
-}
-
-.checkbox:checked+.custom-checkbox {
-    background: var(--accent);
-}
-
-.checkbox {
-    position: absolute;
-    cursor: pointer;
-    opacity: 0;
-}
-
-.custom-checkbox {
-    width: 1em;
-    height: 1em;
-    border-radius: .25em;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    background: var(--bg-checkbox);
-    border: 1px solid var(--brdr-pseudo);
-}
-
-.custom-checkbox::after {
-    content: "";
-    width: 5px;
-    height: 10px;
-    transform: rotate(45deg) scale(0);
-    position: absolute;
-    left: 50%;
-    top: 45%;
-    border-right: 2px solid var(--clr-plain);
-    border-bottom: 2px solid var(--clr-plain);
-    transform: translate(-50%, -50%) rotate(45deg) scale(0);
-}
-
-.checkbox:checked+.custom-checkbox {
-    background: var(--accent);
-    border-color: var(--accent);
-}
-
-.checkbox:checked+.custom-checkbox::after {
-    transform: translate(-50%, -50%) rotate(45deg) scale(1);
-}
-
-.checkbox:active+.custom-checkbox {
-    transform: scale(.9);
-}*/
 
 .loading .button-text{
     opacity: 0;
@@ -322,11 +318,12 @@ menu{
 
 .form-heading p {
     font-size: 12px;
-    margin-top: 10px;
+    margin-top: 5px;
     color: var(--clr-paragraph);
 }
 
-/*.icon {
+.input-group .icon,
+.input .icon {
     width: 10%;
     padding: .5em;
     display: grid;
@@ -338,15 +335,15 @@ menu{
 }
 
 .input-group .icon {
-    width: 20%;
-}*/
+    width: 22%;
+}
 
 .icon svg {
     width: 18px;
     height: 18px;
     vertical-align: middle;
     transform: translate(0);
-    stroke: var(--accent);
+    stroke: var(--clr-plain);
 }
 
 .error-text {
@@ -381,7 +378,7 @@ menu{
     }
 }
 
-.planet,.planetary,.xyflow{
+.planet{
     position: absolute;
     fill: var(--clr-plain);
     top: -450px;
