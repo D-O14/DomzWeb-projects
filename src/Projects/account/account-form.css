@@ -4,22 +4,34 @@
 :root {
     --bg-btn: hsl(251, 81%, 52%);
     --bg-page: hsl(251, 60%, 12%);
-    --bg-container: hsl(261, 41%, 12%);
+    --bg-error: hsla(0, 61%, 52%, .15);
+    --bg-container: hsla(0, 0%, 5%, .95);
+    --bg-glass: hsla(240, 65%, 43%, 0.19);
 
     --accent: hsl(251, 61%, 52%);
     --outline-accent: hsl(251, 61%, 32%);
 
+    --brdr-focus: 2px solid var(--accent);
+    --brdr-bottom-error: var(--clr-error);
     --brdr-box: 2px dashed hsl(0, 0%, 64%);
+    --brdr-pseudo: 1px solid hsl(0, 0%, 64%, .5);
+    --brdr-error: 1px solid hsla(15, 82%, 57%, 0.3);
+    --brdr-glass: 1px solid hsla(240, 65%, 43%, 0.3);
 
+    --clr-error: hsl(0, 61%, 52%);
     --clr-plain: hsl(0, 0%, 100%);
     --clr-char: hsl(251, 61%, 62%);
     --clr-paragraph: hsl(0, 0%, 64%);
     --clr-heading: hsl(0, 0%, 18%);
 
+    --btn-hover: hsl(251, 71%, 46%);
+
     --shadow:
         0 4px 6px hsla(0, 0%, 0%, 5%),
         0 10px 20px hsla(0, 0%, 0%, 1%),
         0 20px 40px hsla(0, 0%, 0%, 15%);
+    --shadow-container: 0px 8px 32px var(--accent);
+    --shadow-glass: 0 4px 30px hsla(0, 0%, 0%, 0.1);
 }
 
 body {
@@ -51,7 +63,7 @@ button {
 
 button:hover {
     scale: .98;
-    background: hsl(251, 71%, 46%);
+    background: var(--btn-hover);
 }
 
 input {
@@ -61,11 +73,11 @@ input {
 
 textarea {
     border-radius: .5em;
-    background: rgba(38, 38, 179, 0.19);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: var(--brdr-glass);
     backdrop-filter: blur(10px);
+    background: var(--bg-glass);
+    box-shadow: var(--shadow-glass);
     -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(38, 38, 179, 0.3);
     /*background: hsla(250, 61%, 12%, .5);
     background: hsla(250, 15%, 16%, .55);
     box-shadow: inset 4px 12px 16px hsla(261, 41%, 12%);*/
@@ -73,13 +85,13 @@ textarea {
 
 input,
 textarea {
-    color: hsl(0, 0%, 100%);
+    color: var(--clr-plain);
     caret-color: var(--accent);
 }
 
 textarea:focus-within {
-    outline: 2px solid var(--outline-accent);
     outline-offset: 1px;
+    outline: 2px solid var(--outline-accent);
 }
 
 .input:focus-within::before {
@@ -97,16 +109,16 @@ textarea:focus-within {
     padding: .5em 1em;
     border-radius: 4px;
     overflow: hidden;
+    border: var(--brdr-glass);
+    backdrop-filter: blur(10px);
+    background: var(--bg-glass);
+    box-shadow: var(--shadow-glass);
+    -webkit-backdrop-filter: blur(10px);
     /*background: hsla(250, 61%, 12%, .5);
     border: 1px solid transparent;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
     background: hsla(250, 15%, 16%, .55);*/
-    background: rgba(38, 38, 179, 0.19);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(38, 38, 179, 0.3);
     /*box-shadow: inset 0px 8px 32px hsla(261, 41%, 12%);*/
 }
 
@@ -118,7 +130,7 @@ textarea:focus-within {
     bottom: 0;
     transition: .75s ease;
     border: 1px solid transparent;
-    border-bottom: 2px solid var(--accent);
+    border-bottom: var(--brdr-focus);
 }
 
 .input::after {
@@ -128,22 +140,22 @@ textarea:focus-within {
     height: 20px;
     background: none;
     transform: translateX(25px);
-    border-right: 1px solid hsl(0, 0%, 64%, .5);
+    border-right: var(--brdr-pseudo);
 }
 
 .input.error {
+    border: var(--brdr-error);
+    background: var(--bg-error);
     animation: shake .25s linear;
-    background: hsl(0, 61%, 52%, .15);
-    border: 1px solid hsla(15, 82%, 57%, 0.3);
 }
 
 .input.error::before {
     width: 100%;
-    border-bottom-color: hsl(0, 61%, 52%);
+    border-bottom-color: var(--brdr-bottom-error);
 }
 
 .icon.error svg {
-    stroke: hsl(0, 61%, 52%);
+    stroke: var(--clr-error);
 }
 
 .container {
@@ -153,11 +165,9 @@ textarea:focus-within {
     display: flex;
     border-radius: .5em;
     justify-content: center;
-    background: hsla(0, 0%, 5%, .95);
-    box-shadow: 0px 8px 32px var(--accent);
+    background: var(--bg-container);
+    box-shadow: var(--shadow-container);
 }
-
-/**/
 
 .image {
     width: 45%;
@@ -203,7 +213,7 @@ textarea:focus-within {
 .error-text {
     font-size: 13px;
     margin-top: 5px;
-    color: hsl(0, 61%, 52%);
+    color: var(--clr-error);
 }
 
 .chars {
