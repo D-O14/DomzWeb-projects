@@ -7,7 +7,7 @@
     --bg-checkbox: hsl(1, 0%, 12%);
     --bg-error: hsla(0, 61%, 52%, .15);
     --bg-container: hsla(0, 0%, 5%, .95);
-    --bg-glass: hsla(240, 65%, 43%, 0.19);
+    --bg-glass: hsla(250, 65%, 43%, 0.19);
 
     --accent: hsl(251, 61%, 52%);
     --outline-accent: hsl(251, 61%, 32%);
@@ -53,10 +53,10 @@ img {
 form {
     width: 100%;
     height: 100%;
-    padding: 25px 50px;
+    padding: 20px 50px;
 }
 
-button {
+button:not(.loginBtn) {
     width: 100%;
     border-radius: .25em;
     color: var(--clr-plain);
@@ -80,14 +80,11 @@ input:not(input[type="checkbox"]) {
 
 textarea {
     border-radius: .5em;
+    backdrop-filter: blur(10px);;
     border: var(--brdr-glass);
-    backdrop-filter: blur(10px);
     background: var(--bg-glass);
     box-shadow: var(--shadow-glass);
     -webkit-backdrop-filter: blur(10px);
-    /*background: hsla(250, 61%, 12%, .5);
-    background: hsla(250, 15%, 16%, .55);
-    box-shadow: inset 4px 12px 16px hsla(261, 41%, 12%);*/
 }
 
 input,
@@ -99,6 +96,13 @@ textarea {
 textarea:focus-within {
     outline-offset: 1px;
     outline: 2px solid var(--outline-accent);
+}
+
+menu{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
 }
 
 .input:focus-within::before {
@@ -120,12 +124,16 @@ textarea:focus-within {
     background: var(--bg-glass);
     box-shadow: var(--shadow-glass);
     -webkit-backdrop-filter: blur(10px);
-    /*background: hsla(250, 61%, 12%, .5);
-    border: 1px solid transparent;
-    backdrop-filter: blur(2px);
-    -webkit-backdrop-filter: blur(2px);
-    background: hsla(250, 15%, 16%, .55);*/
-    /*box-shadow: inset 0px 8px 32px hsla(261, 41%, 12%);*/
+}
+
+.loginBtn{
+    width: 100%;
+    padding: .5em 1em;
+    text-align: center;
+    border-radius: .25em;
+    border: var(--brdr-glass);
+    background: var(--bg-container);
+    box-shadow: 5px 5px 5px hsla(250, 60%, 12%, .45);
 }
 
 .input::before {
@@ -164,6 +172,10 @@ textarea:focus-within {
     stroke: var(--clr-error);
 }
 
+/*.input span.icon.error{
+    background: var(--clr-error);
+}*/
+
 .container {
     width: 1000px;
     height: 600px;
@@ -171,7 +183,7 @@ textarea:focus-within {
     border-radius: .5em;
     justify-content: center;
     background: var(--bg-container);
-    box-shadow: var(--shadow-container);
+    /*box-shadow: var(--shadow-container);*/
 }
 
 .image {
@@ -193,7 +205,7 @@ textarea:focus-within {
     width: 55%;
 }
 
-.check {
+/*.check {
     width: 100%;
     display: flex;
     align-items: center;
@@ -201,7 +213,7 @@ textarea:focus-within {
     color: var(--clr-muted);
 }
 
-/*.custom-checkbox {
+.custom-checkbox {
     cursor: pointer;
     z-index: 1;
     width: 14px;
@@ -266,6 +278,30 @@ textarea:focus-within {
     transform: scale(.9);
 }*/
 
+.loading .button-text{
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading::after{
+    content: "";
+    width: 1.25em;
+    height: 1.25em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    opacity: .75;
+    background: none;
+    border-radius: 5em;
+    border: 3px solid transparent;
+    border-top-color: var(--clr-plain);
+    border-bottom-color: var(--clr-plain);
+    animation: spin 1s linear infinite;
+}
+
 .input-group {
     display: grid;
     gap: 1em;
@@ -281,6 +317,7 @@ textarea:focus-within {
 
 .form-heading h1 {
     font-size: 30px;
+    color: var(--clr-plain);
 }
 
 .form-heading p {
@@ -289,8 +326,8 @@ textarea:focus-within {
     color: var(--clr-paragraph);
 }
 
-/*.icon:not(.input-group .icon) {
-    width: 13%;
+/*.icon {
+    width: 10%;
     padding: .5em;
     display: grid;
     place-items: center;
@@ -301,10 +338,7 @@ textarea:focus-within {
 }
 
 .input-group .icon {
-    width: 12%;
-    padding: .5em;
-    background: var(--accent);
-    transform: translateX(-15px);
+    width: 20%;
 }*/
 
 .icon svg {
@@ -339,4 +373,18 @@ textarea:focus-within {
     100% {
         transform: translateX(0);
     }
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+.planet,.planetary,.xyflow{
+    position: absolute;
+    fill: var(--clr-plain);
+    top: -450px;
+    width: 60px;
+    height: 60px;
 }

@@ -54,6 +54,19 @@ const formatRules = {
     },
 };
 
+const buttonText = document.querySelectorAll(".loginBtn .text");
+buttonText.forEach(btnTxt => { btnTxt.textContent = "" });
+const button = document.querySelector(".submitBtn");
+button.addEventListener("click", () => {
+    const icon = button.querySelector(".icon");
+    button.classList.add("loading");
+    icon.dataset.icon = "infinity";
+    //document.title = "Creating Account...";
+    setTimeout(() => {
+        button.classList.remove("loading");
+        icon.dataset.icon = "";
+    }, 3000);
+})
 const inputs = document.querySelectorAll("input");
 const nameInput = document.getElementById("username");
 //const dateInput = document.getElementById("date");
