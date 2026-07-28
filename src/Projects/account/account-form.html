@@ -6,16 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Creation Form</title>
     <link rel="preload" as="style" onload="this.rel='stylesheet'" href="./account-form.css">
+    <!--<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Edu+VIC+WA+NT+Hand:wght@400..700&family=Electrolize&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Sanchez:ital@0;1&display=swap"
+        rel="stylesheet">-->
 </head>
 
 <body>
     <div class="container">
         <div class="image">
             <img src="../../Assets/Images/abstract-waves.jpg" alt="">
+            <div class="image-text">
+                <!--<h1>Create an account now.</h1>-->
+                <p>Access your workspace anywhere, anytime.</p>
+            </div>
         </div>
         <div class="form">
+            <!---->
             <form action="../../Components/Profile_card.html" enctype="multipart/form-data" novalidate autocomplete="on"
                 autocorrect="on" spellcheck="true" autocapitalize="on">
+                <!--<div class="form-heading">
+                    <h1>Create an account</h1>
+                    <p>Already have an account? <a href="#">Sign in</a></p>
+                </div>-->
                 <!--<drop-zone></drop-zone>-->
                 <div class="input-group">
                     <label>
@@ -65,6 +79,11 @@
                         name="bio"></textarea>
                     <p class="chars" aria-live="polite"></p>
                 </label>
+                <!--<label class="check">
+                    <span class="custom-checkbox"></span>
+                    <input type="checkbox" class="checkbox">
+                    I agree to the <a href="">Terms & Conditions</a>
+                </label>-->
                 <menu>
                     <button type="button">Create Account</button>
                 </menu>

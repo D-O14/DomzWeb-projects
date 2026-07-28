@@ -41,7 +41,7 @@ export function getFields(input) {
 }
 
 export function showError(input, message) {
-    const { container, icon, error, errorIcon } = getFields(input);
+    const { container, icon, error } = getFields(input);
     container.classList.add("error");
     icon.classList.add("error");
     //errorIcon.dataset.icon = "exclaim";
@@ -50,7 +50,7 @@ export function showError(input, message) {
 }
 
 export function clearError(input) {
-    const { container, icon, error, errorIcon } = getFields(input);
+    const { container, icon, error } = getFields(input);
     container.classList.remove("error");
     icon.classList.remove("error");
     //errorIcon.dataset.icon = "";

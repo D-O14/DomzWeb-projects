@@ -10,7 +10,7 @@ button {
     border: 1px solid transparent;
 }
 
-input {
+input:not(input[type="checkbox"]) {
     height: 40px;
     outline: none;
     background: none;
@@ -27,7 +27,7 @@ textarea {
     border-radius: 8px;
 }
 
-input,textarea{
+input:not(input[type="checkbox"]),textarea{
     width: 100%;
     flex: 0 0 auto;
 }
