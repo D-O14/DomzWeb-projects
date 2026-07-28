@@ -2,15 +2,16 @@
 @import "../../Styles/base.css";
 
 :root {
+    --bg-btn: hsl(251, 81%, 52%);
     --bg-page: hsl(251, 60%, 12%);
     --bg-container: hsl(261, 41%, 12%);
 
     --accent: hsl(251, 61%, 52%);
-    --btn-accent: hsl(251, 81%, 52%);
     --outline-accent: hsl(251, 61%, 32%);
 
     --brdr-box: 2px dashed hsl(0, 0%, 64%);
 
+    --clr-plain: hsl(0, 0%, 100%);
     --clr-char: hsl(251, 61%, 62%);
     --clr-paragraph: hsl(0, 0%, 64%);
     --clr-heading: hsl(0, 0%, 18%);
@@ -44,8 +45,8 @@ form {
 button {
     width: 100%;
     border-radius: .25em;
-    color: hsl(0, 0%, 100%);
-    background: var(--btn-accent);
+    color: var(--clr-plain);
+    background: var(--bg-btn);
 }
 
 button:hover {
@@ -60,11 +61,13 @@ input {
 
 textarea {
     border-radius: .5em;
-    border: 1px solid transparent;
+    background: rgba(38, 38, 179, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    background: hsla(250, 61%, 12%, .5);
-    /*background: hsla(250, 15%, 16%, .55);
+    border: 1px solid rgba(38, 38, 179, 0.3);
+    /*background: hsla(250, 61%, 12%, .5);
+    background: hsla(250, 15%, 16%, .55);
     box-shadow: inset 4px 12px 16px hsla(261, 41%, 12%);*/
 }
 
@@ -92,14 +95,19 @@ textarea:focus-within {
     height: 40px;
     flex: 0 0 auto;
     padding: .5em 1em;
-    border-radius: 5px;
+    border-radius: 4px;
     overflow: hidden;
-    background: hsla(250, 61%, 12%, .5);
+    /*background: hsla(250, 61%, 12%, .5);
     border: 1px solid transparent;
     backdrop-filter: blur(2px);
     -webkit-backdrop-filter: blur(2px);
-    /*background: hsla(250, 15%, 16%, .55);
-    box-shadow: inset 0px 8px 32px hsla(261, 41%, 12%);*/
+    background: hsla(250, 15%, 16%, .55);*/
+    background: rgba(38, 38, 179, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(38, 38, 179, 0.3);
+    /*box-shadow: inset 0px 8px 32px hsla(261, 41%, 12%);*/
 }
 
 .input::before {
@@ -113,7 +121,7 @@ textarea:focus-within {
     border-bottom: 2px solid var(--accent);
 }
 
-.input::after{
+.input::after {
     content: "";
     position: absolute;
     width: 1px;
@@ -124,7 +132,9 @@ textarea:focus-within {
 }
 
 .input.error {
+    animation: shake .25s linear;
     background: hsl(0, 61%, 52%, .15);
+    border: 1px solid hsla(15, 82%, 57%, 0.3);
 }
 
 .input.error::before {
@@ -146,6 +156,8 @@ textarea:focus-within {
     background: hsla(0, 0%, 5%, .95);
     box-shadow: 0px 8px 32px var(--accent);
 }
+
+/**/
 
 .image {
     width: 45%;
@@ -198,4 +210,18 @@ textarea:focus-within {
     font-size: 12px;
     text-align: right;
     color: var(--clr-char);
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
 }
