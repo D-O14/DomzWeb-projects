@@ -85,7 +85,7 @@
                         <span class="top"></span>
                         <span class="left"></span>
                         <input type="password" placeholder="P-@$_sw0rd" enterkeyhint="next" required id="password"
-                            name="password">
+                            name="password" maxlength="12" pattern="[0-9A-Za-z@_$&%?\-]*">
                             <span class="right"></span>
                             <span class="bottom"></span>
                     </div>
@@ -97,17 +97,17 @@
                     <p class="chars" aria-live="polite"></p>
                 </label>
                 <button type="button" class="submitBtn">
-                    <span class="icon" data-icon=""></span>
                     <span class="button-text">
                         Create Account
                     </span>
+                    <!--<span class="icon" data-icon="create"></span>-->
                 </button>
                 <menu>
-                    <button class="loginBtn">
+                    <button class="loginBtn" type="button">
                         <span class="text">Google</span>
                         <span class="icon" data-icon="google"></span>
                     </button>
-                    <button class="loginBtn">
+                    <button class="loginBtn" type="button">
                         <span class="text">Apple</span>
                         <span class="icon" data-icon="apple"></span>
                     </button>

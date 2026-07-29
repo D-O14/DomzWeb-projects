@@ -19,4 +19,10 @@ export function format(input, formatRules) {
     if (rules.lowercase) { 
         input.value = input.value.trim().toLowerCase();
     }
+    if (rules.noSpace) {
+        input.value = input.value.replace(/\b\s/g, "");
+    }
+    if (rules.noSymbol) {
+        input.value = input.value.replace(/\b[@]/, "");
+    }
 };

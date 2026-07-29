@@ -211,7 +211,7 @@ menu{
 }*/
 
 .input.error {
-    /*border: var(--brdr-error);*/
+    border: var(--brdr-error);
     background: var(--bg-error);
     animation: shake .25s linear;
 }
@@ -222,12 +222,12 @@ menu{
 }
 
 .input.error .left{
-    width: 100%;
+    height: 100%;
     border: var(--brdr-error);
 }
 
 .input.error .right{
-    width: 100%;
+    height: 100%;
     border: var(--brdr-error);
 }
 
@@ -343,7 +343,14 @@ menu{
     height: 18px;
     vertical-align: middle;
     transform: translate(0);
+}
+
+.input .icon svg{
     stroke: var(--clr-plain);
+}
+
+.loginBtn .icon svg{
+    stroke: var(--accent);
 }
 
 .error-text {
@@ -384,4 +391,8 @@ menu{
     top: -450px;
     width: 60px;
     height: 60px;
+}
+
+.submitBtn .icon svg{
+    stroke: var(--clr-plain);
 }

@@ -52,7 +52,7 @@ const formRules = {
         maxWords: 3,
         messages: {
             rangeOverflow: "Please use a maximum of three names!",
-            rangeUnderFlow: "Your full name is required!",
+            rangeUnderflow: "Your full name is required!",
             valueMissing: "Your full name must be provided!",
             typeMismatch: "Names do not contain numbers! Type a proper name!",
             patternMismatch: "Special characters other than hyphens, periods, and apsotrophes aren't allowed!",
