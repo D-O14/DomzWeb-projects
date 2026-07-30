@@ -96,8 +96,6 @@ submitBtn.addEventListener("click", () => {
     }, 5000);
     initializeIcons(submitBtn);
 });
-const buttonText = document.querySelectorAll(".loginBtn .text");
-buttonText.forEach(btnTxt => { btnTxt.textContent = "" });
 const inputs = document.querySelectorAll("input");
 const passwordInput = document.getElementById("password");
 const textArea = document.querySelector("textarea");
