@@ -3,13 +3,19 @@ import { icons, initializeIcons } from "../../Assets/Icons/icons.js";
 import { validateDate, initializeDate } from "../../Utilities/date.js"
 import { validateInput, validators, getFields, showError, clearError } from "../../Utilities/validation.js";
 
+const form = document.querySelector("form");
+const inputs = document.querySelectorAll("input");
+const textArea = document.querySelector("textarea");
+const submitBtn = document.querySelector(".submitBtn");
+const passwordInput = document.getElementById("password");
+
 const accountRules = {
     username: {
         maxLength: 20,
         minWords: null,
         maxWords: 2,
-        splitWords: true,
-        reserved: ["R$ndomJ-ohn12", "randomJohn", "John Doe", "Jane Doe", "randomJane"],
+        format: true,
+        reserved: ["R$ndomJ-ohn12", "John Doe", "Jane Doe"],
         messages: {
             reservedError: "You can't use this username!",
             rangeOverflow: "Keep it short and simple jorr!",
@@ -18,7 +24,7 @@ const accountRules = {
     },
 
     handle: {
-        splitWords: true,
+        format: true,
         reserved: ["johndoe", "janedoe"],
         messages: {
             patternMismatch: `You can't use that symbol!`,
@@ -28,7 +34,7 @@ const accountRules = {
     },
 
     email: {
-        splitWords: false,
+        format: true,
         reserved: ["jonathandoe@gmail.com", "janedoe@gmail.com"],
         messages: {
             reservedError: "I know that's not your E-mail!",
@@ -38,7 +44,7 @@ const accountRules = {
     },
 
     contact: {
-        splitWords: false,
+        format: true,
         reserved: ["+144 500 391 065", "+144500391065", "144500391065", "144 500 391 065"],
         messages: {
             reservedError: "That's not even a real number!",
@@ -50,7 +56,7 @@ const accountRules = {
     password: {
         maxLength: 12,
         minLength: 8,
-        splitWords: false,
+        format: true,
         reserved: ["P-@$_sw0rd", "P-@$sw0rd", "P@$sw0rd"],
         messages: {
             reservedError: "Nice try, but we can't allow you to do that!",
@@ -83,8 +89,12 @@ const formatRules = {
     }
 };
 
-const form = document.querySelector("form");
-const submitBtn = document.querySelector(".submitBtn");
+form.addEventListener("submit", e => {
+    e.preventDefault();
+    const isValid = validateForm(inputs, accountRules);
+    if (!isValid) return;
+});
+
 submitBtn.addEventListener("click", () => {
     const icon = submitBtn.querySelector(".icon");
     submitBtn.classList.add("loading");
@@ -96,43 +106,51 @@ submitBtn.addEventListener("click", () => {
     }, 5000);
     initializeIcons(submitBtn);
 });
-const inputs = document.querySelectorAll("input");
-const passwordInput = document.getElementById("password");
-const textArea = document.querySelector("textarea");
-textArea.addEventListener("input", () => {
-    charCount(textArea);
-});
-textArea.addEventListener("blur", () => {
-    format(textArea, formatRules);
-});
 
-inputs.forEach(input => {
-    if (input === passwordInput) {
-        const field = input.closest("label");
-        const toggle = field.querySelector(".toggle");
-        toggle.addEventListener("click", () => {
-            if (input.type === "password") {
-                input.type = "text";
-                toggle.dataset.icon = "eyeOff";
-                initializeIcons(field);
-            } else {
-                input.type = "password";
-                toggle.dataset.icon = "eyeOn";
-                initializeIcons(field);
-            }
-        });
-    };
-    input.addEventListener("input", () => {
-        validateInput(input, accountRules);
-        const validator = validators[input.name];
-        if (validator) { validator(input, accountRules) };
+function validateForm(array, rules) {
+    let valid = true;
+    array.forEach(arr => {
+        format(arr, formatRules);
+        const validator = validators[arr.name];
+        if (!validateInput(arr, rules)) { valid = false };
+        if (validator) { valid = false };
     });
-    input.addEventListener("blur", () => { format(input, formatRules) });
-});
+    return valid;
+}
+
+function initializeInputs(array, rules, form) {
+    array.forEach(arr => {
+        arr.addEventListener("input", () => {
+            validateInput(arr, rules);
+            const validator = validators[arr.name];
+            if (validator) { validator(arr, rules) };
+        });
+        arr.addEventListener("blur", () => { format(arr, form) });
+    });
+}
+
+function initiailizeTextArea(area, rules) {
+    area.addEventListener("input", () => { charCount(area) });
+    area.addEventListener("blur", () => { format(area, rules) });
+}
+
+function initializeToggle(input) {
+    const field = input.closest("label");
+    const toggle = field.querySelector(".toggle");
+    toggle.addEventListener("click", () => {
+        if (input.type === "password") {
+            input.type = "text";
+            toggle.dataset.icon = "eyeOff";
+            initializeIcons(field);
+        } else {
+            input.type = "password";
+            toggle.dataset.icon = "eyeOn";
+            initializeIcons(field);
+        }
+    });
+}
 
 initializeIcons(document);
-
-form.addEventListener("submit", e => {
-    e.preventDefault();
-    console.log("Form has been submitted");
-});
+initializeToggle(passwordInput);
+initiailizeTextArea(textArea, formatRules);
+initializeInputs(inputs, accountRules, formatRules);

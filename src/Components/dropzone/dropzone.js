@@ -3,9 +3,11 @@ import { icons, initializeIcons } from "../../Assets/Icons/icons";
 const template = document.createElement("template");
 template.innerHTML = `
 <div class="drop-zone">
-    <span class="icon" data-icon="upload"></span>
-    <h4>Choose or drop a file. Any <button class="uploadBtn">file</button>.</h4>
-    <p>JPG, WEBP, PDF, DOCX, MP3....</p>
+<span class="icon" data-icon="upload"></span>
+<div class="dropzone-content">
+<h4>Choose or drop a file. Any <button class="uploadBtn">file</button>.</h4>
+<p>JPG, WEBP, PDF, DOCX, MP3....</p>
+</div>
     <div class="preview-container">
         <template class="img-preview">
             <img alt="">
@@ -95,7 +97,7 @@ export default DropZone;
 
 
 function previewFile(file, data) {
-    if(!validateFile(file, data)) return;
+    if (!validateFile(file, data)) return;
     const url = URL.createObjectURL(file);
 
     if (file.type.startsWith("image/")) {

@@ -17,6 +17,7 @@ export function validateInput(input, ruleset) {
     const rules = ruleset[input.name] ?? {};
     const messages = rules.messages ?? {};
     const validity = input.validity;
+    validateReserved(input, ruleset);
     if (!input.checkValidity()) {
         if (validity.valueMissing) {
             showError(input, messages.valueMissing ?? "This field must not be left empty!");
@@ -138,24 +139,16 @@ export function validatePassword(input, rules) {
 export function validateReserved(input, rules) {
     const reserved = rules.reserved ?? [];
     const msg = rules.messages ?? {};
-    if (rules.splitWords) {
+    const normalize = str => str.trim().replace(/\s+/, "").toLowerCase();
+    if (rules.format) {
         if (reserved) {
-            const value = input.value.trim().toLowerCase().split(/\s+/);
-            const reservedVal = value.some(val =>  reserved.includes(val));
-            if (reservedVal) {
+            const value = normalize(input.value);
+            const isReserved = reserved.some(val =>  normalize(val) === value);
+            if (isReserved) {
                 showError(input, msg.reservedError);
                 return false;
             }
         }   
     }
-
-    if (!rules.splitWords) {
-        if (reserved) {
-            const value = input.value.trim();
-            if (reserved.includes(value)) {
-                showError(input, msg.reservedError);
-                return false;
-            }
-        }   
-    }
+    return true;
 }

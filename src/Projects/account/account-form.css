@@ -3,6 +3,7 @@
 
 :root {
     --bg-btn: hsl(251, 81%, 52%);
+    --bg-box: hsla(250, 65%, 43%, 0.3);
     --bg-page: hsl(251, 60%, 12%);
     --bg-checkbox: hsl(1, 0%, 12%);
     --bg-error: hsla(0, 61%, 52%, .15);
@@ -14,18 +15,25 @@
 
     --brdr-bottom-error: var(--clr-error);
     --brdr-focus: 2px solid var(--accent);
-    --brdr-box: 2px dashed hsl(0, 0%, 64%);
+    --brdr-box: 2px dashed var(--accent);
     --brdr-pseudo: 1px solid hsl(0, 0%, 64%, .5);
     --brdr-error: 1px solid hsla(5, 62%, 57%, 0.73);
     --brdr-glass: 1px solid hsla(240, 65%, 43%, 0.3);
     --brdr-login: 2px solid hsla(250, 65%, 43%, 0.3);
 
+    --clr-icon: var(--accent);
     --clr-muted: hsl(0, 0%, 80%);
     --clr-error: hsl(0, 61%, 52%);
     --clr-plain: hsl(0, 0%, 100%);
     --clr-char: hsl(251, 61%, 62%);
     --clr-paragraph: hsl(0, 0%, 64%);
     --clr-heading: hsl(0, 0%, 18%);
+
+    --pd-box: 15px;
+
+    --scale: 1;
+    --opacity: 1;
+    --content-height: 50px;
 
     --btn-hover: hsl(251, 71%, 46%);
 
@@ -81,7 +89,8 @@ input:not(input[type="checkbox"]) {
 
 textarea {
     border-radius: .5em;
-    backdrop-filter: blur(10px);;
+    backdrop-filter: blur(10px);
+    ;
     border: var(--brdr-glass);
     background: var(--bg-glass);
     box-shadow: var(--shadow-glass);
@@ -99,7 +108,7 @@ textarea:focus-within {
     outline: 2px solid var(--outline-accent);
 }
 
-menu{
+menu {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -123,7 +132,7 @@ menu{
     -webkit-backdrop-filter: blur(10px);
 }
 
-.top{
+.top {
     position: absolute;
     top: 0;
     right: 0;
@@ -132,7 +141,7 @@ menu{
     border: 1px solid var(--accent);
 }
 
-.left{
+.left {
     position: absolute;
     left: 0;
     height: 0%;
@@ -140,7 +149,7 @@ menu{
     border: 1px solid var(--accent);
 }
 
-.bottom{
+.bottom {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -149,7 +158,7 @@ menu{
     border: 1px solid var(--accent);
 }
 
-.right{
+.right {
     position: absolute;
     right: 0;
     height: 0%;
@@ -157,35 +166,35 @@ menu{
     border: 1px solid var(--accent);
 }
 
-.input:focus-within .top{
+.input:focus-within .top {
     opacity: 1;
     width: 100%;
     border-radius: .5em;
     transition-delay: .1s;
 }
 
-.input:focus-within .left{
+.input:focus-within .left {
     opacity: 1;
     height: 100%;
     border-radius: .5em;
     transition-delay: .25s;
 }
 
-.input:focus-within .bottom{
+.input:focus-within .bottom {
     opacity: 1;
     width: 100%;
     border-radius: .5em;
     transition-delay: .3s;
 }
 
-.input:focus-within .right{
+.input:focus-within .right {
     opacity: 1;
     height: 100%;
     border-radius: .5em;
     transition-delay: .45s;
 }
 
-.loginBtn{
+.loginBtn {
     width: 100%;
     padding: .5em 1em;
     text-align: center;
@@ -201,31 +210,31 @@ menu{
     animation: shake .25s linear;
 }
 
-.input.error .top{
+.input.error .top {
     width: 100%;
     border: var(--brdr-error);
 }
 
-.input.error .left{
+.input.error .left {
     height: 100%;
     border: var(--brdr-error);
 }
 
-.input.error .right{
+.input.error .right {
     height: 100%;
     border: var(--brdr-error);
 }
 
-.input.error .bottom{
+.input.error .bottom {
     width: 100%;
     border: var(--brdr-error);
 }
 
-.input.error  .icon.toggle svg{
+.input.error .icon.toggle svg {
     stroke: var(--clr-error);
 }
 
-.input span.icon.error{
+.input span.icon.error {
     background: var(--clr-error);
 }
 
@@ -258,13 +267,13 @@ menu{
     width: 55%;
 }
 
-.loading .button-text{
+.loading .button-text {
     width: 0%;
     opacity: 0;
     text-wrap: nowrap;
 }
 
-.loading .icon svg{
+.loading .icon svg {
     transform: scale(1.95);
 }
 
@@ -308,7 +317,7 @@ menu{
     width: 22%;
 }
 
-.input .icon.toggle svg{
+.input .icon.toggle svg {
     stroke: var(--accent);
 }
 
@@ -319,11 +328,11 @@ menu{
     transform: translate(0);
 }
 
-.input .icon svg{
+.input .icon svg {
     stroke: var(--clr-plain);
 }
 
-.loginBtn .icon svg{
+.loginBtn .icon svg {
     stroke: var(--accent);
 }
 
@@ -337,6 +346,12 @@ menu{
     font-size: 12px;
     text-align: right;
     color: var(--clr-char);
+}
+
+.loginBtn .text {
+    width: 0%;
+    scale: 0;
+    opacity: 0;
 }
 
 @keyframes shake {
@@ -359,10 +374,37 @@ menu{
     }
 }
 
-.image-text .icon svg{
+.image-text .icon svg {
     position: absolute;
     fill: var(--clr-plain);
     top: -450px;
     width: 60px;
     height: 60px;
+}
+
+@media screen and (max-width: 700px){
+    form{padding-block: 25px;}
+
+    /*.image{display: none;}
+    .form{width: 90%;}*/
+    
+    ::placeholder{
+        color: var(--clr-paragraph);
+    }
+
+    .image{width: 100%;}
+
+    .image-text{display: none;}
+
+    .form{
+        width: 100%;
+        position: absolute;
+        left: 0;
+    }
+
+    .container{
+        box-shadow: none;
+        width: 100vw;
+        height: 100dvh;
+    }
 }
