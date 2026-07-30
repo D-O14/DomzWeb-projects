@@ -2,8 +2,8 @@ export function charCount(textArea) {
     const label = textArea.closest("label");
     const charCount = label.querySelector("p");
     const max = textArea.getAttribute("maxlength");
-    const chars = textArea.value.length;
-    charCount.textContent = `${ chars } / ${ max } characters`;
+    const count = textArea.value.replace(/[\s]/gu, "").length;
+    charCount.textContent = `${ count } / ${ max } characters`;
 };
 
 export function wordCounter(text) { return text.trim().split(/\s+/).filter(Boolean).length };
@@ -16,13 +16,25 @@ export function format(input, formatRules) {
     if (rules.capitalize) {
         input.value = input.value.replace(/\b\w/g, char => char.toUpperCase());   
     }
+    if (rules.capitalizeFirst) {
+        input.value = input.value.replace(/\b\w/, char => char.toUpperCase());   
+    }
     if (rules.lowercase) { 
         input.value = input.value.trim().toLowerCase();
+    }
+    if (rules.noSymbol) {
+        input.value = input.value.replace(/[@#$%^\*&!/=]/g, "")
     }
     if (rules.noSpace) {
         input.value = input.value.replace(/\b\s/g, "");
     }
-    if (rules.noSymbol) {
-        input.value = input.value.replace(/\b[@]/, "");
+    if (rules.addSpace) {
+        input.value = input.value.replace(/([.!?])(\S)/g, "$1 $2");
+    }
+    if (rules.removeSpace) {
+        input.value = input.value.replace(/\s{2,}/g, " ");
+    }
+    if (rules.sentenceCase) {
+        input.value = input.value.replace(/([.!?]\s*)([a-z])/g, char => char.toUpperCase());
     }
 };

@@ -36,7 +36,7 @@
                             <span class="top"></span>
                             <span class="left"></span>
                             <input type="text" placeholder="R$ndomJ-ohn12" enterkeyhint="next" required id="username"
-                                name="username" pattern="^[A-Za-z\s'.\-]+$" autofocus>
+                                name="username" pattern="^[A-Za-z0-9\s'.@\$\-]+$" autofocus>
                                 <span class="right"></span>
                                 <span class="bottom"></span>
                         </div>
@@ -48,7 +48,7 @@
                             <span class="top"></span>
                             <span class="left"></span>
                             <input type="text" placeholder="@johndoe" enterkeyhint="next" required id="handle"
-                                name="handle">
+                                name="handle" pattern="^[A-Za-z0-9.\-\s]*">
                                 <span class="right"></span>
                                 <span class="bottom"></span>
                         </div>
@@ -100,6 +100,7 @@
                     <span class="button-text">
                         Create Account
                     </span>
+                    <span class="icon" data-icon="infinity"></span>
                     <!--<span class="icon" data-icon="create"></span>-->
                 </button>
                 <menu>

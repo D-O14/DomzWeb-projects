@@ -3,6 +3,7 @@ import { wordCounter } from "./utilities";
 
 export const validators = {
     name: validateName,
+    handle: validateName,
     username: validateName,
     email: validateEmail,
     phone: validatePhone,
@@ -67,10 +68,8 @@ export function validateName(input, rules) {
     if (!validateInput(input, rules)) return false;
     const nameRules = rules[input.name] ?? {};
     const msg = nameRules.messages ?? {};
-    const reserved = ["user", "admin"];
     const wordCount = wordCounter(input.value);
-    const words = input.value.trim().split(/\s+/);
-    const reservedWords = words.some(word => reserved.includes(word));
+    validateReserved(input, nameRules);
     if (nameRules?.minWords === 2) {
         if (wordCount < 2) {
             showError(input, msg.rangeUnderflow ?? "Your full name is required!");
@@ -78,7 +77,7 @@ export function validateName(input, rules) {
         }
     } else if (nameRules?.minWords === null) {
         if (wordCount < 2) {
-            return true;   
+            return true;
         }
     }
 
@@ -93,22 +92,20 @@ export function validateName(input, rules) {
             return false;
         }
     }
-    
-    if (reservedWords) {
-        showError(input, "You aren't allowed to use that name!");
-        return false;
-    }
-    clearError(input);
     return true;
 };
 
 export function validateEmail(input, rules) {
     if (!validateInput(input, rules)) return false;
+    const emailRules = rules[input.name] ?? {};
+    validateReserved(input, emailRules);
     return true;
 };
 
 export function validatePhone(input, rules) {
     if (!validateInput(input, rules)) return false;
+    const phoneRules = rules[input.name] ?? {};
+    validateReserved(input, phoneRules);
     return true;
 };
 
@@ -116,18 +113,25 @@ export function validatePassword(input, rules) {
     if (!validateInput(input, rules)) return false;
     const passRules = rules[input.name] ?? {};
     const msg = passRules.messages ?? {};
-    const reserved = ["P-@$_sw0rd"];
-    const codes = input.value.trim().split(/\s+/);
-    const reservedCodes = codes.some(word => reserved.includes(word));
+    validateReserved(input, passRules);
     if (passRules?.minLength === 8) {
         if (input.value.length < 8) {
             console.log(input.validity);
             showError(input, msg.rangeUnderflow ?? "Please meet a quota of 8-12 characers!");
             return false;
         }
-    } if (reservedCodes) {
-        showError(input, "Nice try, but we can't allow you to do that!");
-        return false;
     }
     return true;
+}
+
+export function validateReserved(input, rules) {
+    const reserved = rules.reserved ?? [];
+    const msg = rules.messages ?? {};
+    if (reserved) {
+        const value = input.value.trim();
+        if (reserved.includes(value)) {
+            showError(input, msg.reservedError);
+            return false;
+        }
+    }
 }

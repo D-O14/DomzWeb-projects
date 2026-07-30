@@ -50,7 +50,9 @@ const formRules = {
     name: {
         minWords: 2,
         maxWords: 3,
+        reserved: ["user", "admin"],
         messages: {
+            reservedError: "You can't use that name!",
             rangeOverflow: "Please use a maximum of three names!",
             rangeUnderflow: "Your full name is required!",
             valueMissing: "Your full name must be provided!",
