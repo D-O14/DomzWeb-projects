@@ -22,9 +22,6 @@ export function format(input, formatRules) {
     if (rules.lowercase) { 
         input.value = input.value.trim().toLowerCase();
     }
-    if (rules.noSymbol) {
-        input.value = input.value.replace(/[@#$%^\*&!/=]/g, "")
-    }
     if (rules.noSpace) {
         input.value = input.value.replace(/\b\s/g, "");
     }

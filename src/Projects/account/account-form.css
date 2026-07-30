@@ -106,10 +106,6 @@ menu{
     gap: 1em;
 }
 
-/*.input:focus-within::before {
-    width: 100%;
-}*/
-
 .input {
     position: relative;
     display: flex;
@@ -199,17 +195,6 @@ menu{
     box-shadow: 5px 5px 5px hsla(250, 60%, 12%, .45);
 }
 
-/*.input::before {
-    content: '';
-    position: absolute;
-    width: 0%;
-    left: 0;
-    bottom: 0;
-    transition: .75s ease;
-    border: 1px solid transparent;
-    border-bottom: var(--brdr-focus);
-}*/
-
 .input.error {
     border: var(--brdr-error);
     background: var(--bg-error);
@@ -236,10 +221,9 @@ menu{
     border: var(--brdr-error);
 }
 
-/*.input.error::before {
-    width: 100%;
-    border-bottom-color: var(--brdr-bottom-error);
-}*/
+.input.error  .icon.toggle svg{
+    stroke: var(--clr-error);
+}
 
 .input span.icon.error{
     background: var(--clr-error);
@@ -281,8 +265,7 @@ menu{
 }
 
 .loading .icon svg{
-    width: 20px;
-    height: 20px;
+    transform: scale(1.95);
 }
 
 .input-group {
@@ -310,7 +293,7 @@ menu{
 }
 
 .input-group .icon,
-.input .icon {
+.input .icon:not(.toggle) {
     width: 10%;
     padding: .5em;
     display: grid;
@@ -321,8 +304,12 @@ menu{
     border-bottom-left-radius: .25em;
 }
 
-.input-group .icon {
+.input-group .icon:not(.toggle) {
     width: 22%;
+}
+
+.input .icon.toggle svg{
+    stroke: var(--accent);
 }
 
 .icon svg {

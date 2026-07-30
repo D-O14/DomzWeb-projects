@@ -8,7 +8,8 @@ const accountRules = {
         maxLength: 20,
         minWords: null,
         maxWords: 2,
-        reserved: ["R$ndomJ-ohn12"],
+        splitWords: true,
+        reserved: ["R$ndomJ-ohn12", "randomJohn", "John Doe", "Jane Doe", "randomJane"],
         messages: {
             reservedError: "You can't use this username!",
             rangeOverflow: "Keep it short and simple jorr!",
@@ -17,16 +18,18 @@ const accountRules = {
     },
 
     handle: {
-        reserved: ["johndoe"],
+        splitWords: true,
+        reserved: ["johndoe", "janedoe"],
         messages: {
-            patternMismatch: `You aren't allowed to use that symbol!`,
+            patternMismatch: `You can't use that symbol!`,
             reservedError: "Too generic. Try another one!",
             valueMissing: "We need a way to refer to you!",
         }
     },
 
     email: {
-        reserved: ["jonathandoe@gmail.com"],
+        splitWords: false,
+        reserved: ["jonathandoe@gmail.com", "janedoe@gmail.com"],
         messages: {
             reservedError: "I know that's not your E-mail!",
             valueMissing: "E-mail should not be left empty!",
@@ -35,6 +38,7 @@ const accountRules = {
     },
 
     contact: {
+        splitWords: false,
         reserved: ["+144 500 391 065", "+144500391065", "144500391065", "144 500 391 065"],
         messages: {
             reservedError: "That's not even a real number!",
@@ -46,7 +50,8 @@ const accountRules = {
     password: {
         maxLength: 12,
         minLength: 8,
-        reserved: ["P-@$_sw0rd"],
+        splitWords: false,
+        reserved: ["P-@$_sw0rd", "P-@$sw0rd", "P@$sw0rd"],
         messages: {
             reservedError: "Nice try, but we can't allow you to do that!",
             patternMismatch: "Please adhere to the provided password format!",
@@ -66,7 +71,6 @@ const formatRules = {
     handle: {
         trim: true,
         noSpace: true,
-        noSymbol: true,
         lowercase: true,
     },
 
@@ -79,20 +83,21 @@ const formatRules = {
     }
 };
 
-const buttonText = document.querySelectorAll(".loginBtn .text");
-buttonText.forEach(btnTxt => { btnTxt.textContent = "" });
-const button = document.querySelector(".submitBtn");
-button.addEventListener("click", () => {
-    const icon = button.querySelector(".icon");
-    button.classList.add("loading");
-    icon.dataset.icon = "infinity";
+const form = document.querySelector("form");
+const submitBtn = document.querySelector(".submitBtn");
+submitBtn.addEventListener("click", () => {
+    const icon = submitBtn.querySelector(".icon");
+    submitBtn.classList.add("loading");
+    icon.dataset.icon = "bounce";
     setTimeout(() => {
-        button.classList.remove("loading");
+        submitBtn.classList.remove("loading");
         icon.dataset.icon = "";
         icon.textContent = "";
-    }, 3000);
-    initializeIcons(button);
-})
+    }, 5000);
+    initializeIcons(submitBtn);
+});
+const buttonText = document.querySelectorAll(".loginBtn .text");
+buttonText.forEach(btnTxt => { btnTxt.textContent = "" });
 const inputs = document.querySelectorAll("input");
 const passwordInput = document.getElementById("password");
 const textArea = document.querySelector("textarea");
@@ -120,15 +125,16 @@ inputs.forEach(input => {
         });
     };
     input.addEventListener("input", () => {
-        format(input, formatRules);
         validateInput(input, accountRules);
         const validator = validators[input.name];
         if (validator) { validator(input, accountRules) };
     });
-    input.addEventListener("blur", () => { 
-        format(input, formatRules);
-        //validateInput(input, accountRules);
-    });
+    input.addEventListener("blur", () => { format(input, formatRules) });
 });
 
 initializeIcons(document);
+
+form.addEventListener("submit", e => {
+    e.preventDefault();
+    console.log("Form has been submitted");
+});

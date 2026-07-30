@@ -3,8 +3,8 @@ import { wordCounter } from "./utilities";
 
 export const validators = {
     name: validateName,
-    handle: validateName,
     username: validateName,
+    handle: validateHandle,
     email: validateEmail,
     phone: validatePhone,
     contact: validatePhone,
@@ -95,6 +95,18 @@ export function validateName(input, rules) {
     return true;
 };
 
+export function validateHandle(input, rules) {
+    if (!validateInput(input, rules)) return false;
+    const handleRules = rules[input.name] ?? {};
+    const msg = handleRules.messages ?? {};
+    validateReserved(input, handleRules);
+    if (input.value.startsWith("@")) {
+        showError(input, "Can't use '@' at the beginning!");  
+        return false;
+    };
+    return true;
+}
+
 export function validateEmail(input, rules) {
     if (!validateInput(input, rules)) return false;
     const emailRules = rules[input.name] ?? {};
@@ -126,11 +138,24 @@ export function validatePassword(input, rules) {
 export function validateReserved(input, rules) {
     const reserved = rules.reserved ?? [];
     const msg = rules.messages ?? {};
-    if (reserved) {
-        const value = input.value.trim();
-        if (reserved.includes(value)) {
-            showError(input, msg.reservedError);
-            return false;
-        }
+    if (rules.splitWords) {
+        if (reserved) {
+            const value = input.value.trim().toLowerCase().split(/\s+/);
+            const reservedVal = value.some(val =>  reserved.includes(val));
+            if (reservedVal) {
+                showError(input, msg.reservedError);
+                return false;
+            }
+        }   
+    }
+
+    if (!rules.splitWords) {
+        if (reserved) {
+            const value = input.value.trim();
+            if (reserved.includes(value)) {
+                showError(input, msg.reservedError);
+                return false;
+            }
+        }   
     }
 }
