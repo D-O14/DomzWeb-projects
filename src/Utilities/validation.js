@@ -116,7 +116,6 @@ export function validatePassword(input, rules) {
     validateReserved(input, passRules);
     if (passRules?.minLength === 8) {
         if (input.value.length < 8) {
-            console.log(input.validity);
             showError(input, msg.rangeUnderflow ?? "Please meet a quota of 8-12 characers!");
             return false;
         }

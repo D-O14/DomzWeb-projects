@@ -86,20 +86,15 @@ button.addEventListener("click", () => {
     const icon = button.querySelector(".icon");
     button.classList.add("loading");
     icon.dataset.icon = "infinity";
-    //document.title = "Creating Account...";
     setTimeout(() => {
         button.classList.remove("loading");
         icon.dataset.icon = "";
+        icon.textContent = "";
     }, 3000);
+    initializeIcons(button);
 })
 const inputs = document.querySelectorAll("input");
-/*const usernameInput = document.getElementById("username");
-const contactInput = document.getElementById("contact");
-const textArea = document.querySelector("textarea");
-const emailInput = document.getElementById("email");
-const handleInput = document.getElementById("handle");
-const passwordInput = document.getElementById("password");*/
-
+const passwordInput = document.getElementById("password");
 const textArea = document.querySelector("textarea");
 textArea.addEventListener("input", () => {
     charCount(textArea);
@@ -109,13 +104,31 @@ textArea.addEventListener("blur", () => {
 });
 
 inputs.forEach(input => {
-    //if (input === passwordInput) { input.addEventListener("click", () => { input.type = "text" }) };
+    if (input === passwordInput) {
+        const field = input.closest("label");
+        const toggle = field.querySelector(".toggle");
+        toggle.addEventListener("click", () => {
+            if (input.type === "password") {
+                input.type = "text";
+                toggle.dataset.icon = "eyeOff";
+                initializeIcons(field);
+            } else {
+                input.type = "password";
+                toggle.dataset.icon = "eyeOn";
+                initializeIcons(field);
+            }
+        });
+    };
     input.addEventListener("input", () => {
+        format(input, formatRules);
         validateInput(input, accountRules);
         const validator = validators[input.name];
         if (validator) { validator(input, accountRules) };
     });
-    input.addEventListener("blur", () => { format(input, formatRules) });
+    input.addEventListener("blur", () => { 
+        format(input, formatRules);
+        //validateInput(input, accountRules);
+    });
 });
 
 initializeIcons(document);
