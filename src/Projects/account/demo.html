@@ -6,15 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account form demo</title>
 </head>
+<style>
+    @import "../../Styles/resets.css";
+    @import "../../Styles/base.css";
+
+    body {
+        height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    input:not(input[type="checkbox"]) {
+        width: 250px;
+    }
+
+    p {
+        margin-top: 5px;
+    }
+
+    label {
+        position: relative;
+    }
+
+</style>
 
 <body>
-    <button>Button</button>
-    <input type="text" placeholder="password">
+    <label for="">
+        <input type="text" placeholder="password">
+        <div class="password-box">
+            <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"
+                    class="icon icon-tabler icons-tabler-filled icon-tabler-shield-checkered">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M11.013 12v9.754a13 13 0 0 1 -8.733 -9.754h8.734zm9.284 3.794a13 13 0 0 1 -7.283 5.951l-.001 -9.745h8.708a12.96 12.96 0 0 1 -1.424 3.794zm-9.283 -13.268l-.001 7.474h-8.986c-.068 -1.432 .101 -2.88 .514 -4.282a1 1 0 0 1 1.005 -.717a11 11 0 0 0 7.192 -2.256l.276 -.219zm1.999 7.474v-7.453l-.09 -.073a11 11 0 0 0 7.189 2.537l.342 -.01a1 1 0 0 1 1.005 .717c.413 1.403 .582 2.85 .514 4.282h-8.96z" />
+                </svg>`
+            </span>
+            <div class="content">
+                <h3>Suggest a strong password</h3>
+                <p>And save to your Google account</p>
+            </div>
+        </div>
+    </label>
 </body>
-
 <script>
-
-    const button = document.querySelector("button");
+    const label = document.querySelector("label");
+    const box = document.querySelector(".password-box");
     const input = document.querySelector("input");
 
     const passwordRules = {
@@ -49,11 +88,14 @@
         return password;
     }
 
+    label.addEventListener("focusin", () => {
+        box.classList.add("visible");
+    });
 
-    button.addEventListener("click", () => {
+    box.addEventListener("click", () => {
         const password = generatePassword(passwordRules);
+        box.classList.remove("visible");
         input.value = password;
-        console.log(`Your password is ${ password }`);
     })
 
 </script>

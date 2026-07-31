@@ -1,11 +1,11 @@
 @import "../../Styles/resets.css";
 
 :root {
-    --bg-box: hsl(0, 0%, 100%);
+    --bg-dropzone: hsl(0, 0%, 100%);
 
     --accent: hsl(251, 61%, 52%);
 
-    --brdr-box: 2px dashed hsl(0, 0%, 64%);
+    --brdr-dropzone: 2px dashed hsl(0, 0%, 64%);
 
     --clr-icon: hsl(0, 0%, 5%);
     --clr-paragraph: hsl(0, 0%, 64%);

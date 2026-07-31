@@ -3,12 +3,37 @@ import { icons, initializeIcons } from "../../Assets/Icons/icons.js";
 import { validateDate, initializeDate } from "../../Utilities/date.js"
 import { validateInput, validators, getFields, showError, clearError } from "../../Utilities/validation.js";
 
-const title = document.title;
+let passwordSuggested = false;
+let title = document.title;
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input");
 const textArea = document.querySelector("textarea");
 const submitBtn = document.querySelector(".submitBtn");
 const passwordInput = document.getElementById("password");
+const passwordLabel = passwordInput.closest("label");
+const passwordBox = passwordLabel.querySelector(".password-box");
+
+passwordInput.addEventListener("focus", () => {
+    if (passwordSuggested) return;
+    if (passwordInput.value.trim()) return;
+    passwordBox.classList.add("visible");
+});
+
+passwordInput.addEventListener("blur", () => {
+    setTimeout(() => {2
+        passwordBox.classList.remove("visible");
+    }, 100);
+});
+
+passwordInput.addEventListener("input", () => {
+    passwordBox.classList.remove("visible");
+});
+
+passwordBox.addEventListener("click", () => {
+    passwordInput.value = generatePassword(accountRules.password);
+    passwordSuggested = true;
+    passwordBox.classList.remove("visible");
+});
 
 const accountRules = {
     username: {
@@ -125,7 +150,7 @@ function generatePassword(rules) {
     allowedChars += rules.numbers ? charSets.number : "";
     allowedChars += rules.symbols ? charSets.symbols : "";
 
-    for (i = 0; i < rules.maxLength; i++) {
+    for (let i = 0; i < rules.maxLength; i++) {
         const randomIndex = Math.floor(Math.random() * allowedChars.length);
         password += allowedChars[randomIndex];
     };
