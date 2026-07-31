@@ -453,28 +453,33 @@ label{
 }
 
 @media screen and (max-width: 700px){
+    body{height: 100dvh;}
     form{padding-block: 25px;}
-
-    /*.image{display: none;}
-    .form{width: 90%;}*/
+    .image{display: none;}
+    .form{width: 90%;}
     
-    ::placeholder{
+    /*::placeholder{
         color: var(--clr-paragraph);
     }
+    .image{
+        width: 100%;
+    }
+    .image-text{display: none;}*/
 
-    .image{width: 100%;}
-
-    .image-text{display: none;}
+    .password-box{
+        top: 40px;
+        left: 0px;
+    }
 
     .form{
         width: 100%;
-        position: absolute;
-        left: 0;
+        /*position: absolute;
+        left: 0;*/
     }
 
     .container{
         box-shadow: none;
-        width: 100vw;
         height: 100dvh;
+        width: 100dvw;
     }
 }
