@@ -17,7 +17,7 @@ export function validateInput(input, ruleset) {
     const rules = ruleset[input.name] ?? {};
     const messages = rules.messages ?? {};
     const validity = input.validity;
-    validateReserved(input, ruleset);
+    validateReserved(input, rules);
     if (!input.checkValidity()) {
         if (validity.valueMissing) {
             showError(input, messages.valueMissing ?? "This field must not be left empty!");

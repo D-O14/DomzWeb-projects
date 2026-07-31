@@ -1,8 +1,9 @@
-import { charCount, format } from "../../Utilities/utilities.js";
+import { charCount, format, showLoader, hideLoader } from "../../Utilities/utilities.js";
 import { icons, initializeIcons } from "../../Assets/Icons/icons.js";
 import { validateDate, initializeDate } from "../../Utilities/date.js"
 import { validateInput, validators, getFields, showError, clearError } from "../../Utilities/validation.js";
 
+const title = document.title;
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input");
 const textArea = document.querySelector("textarea");
@@ -56,8 +57,12 @@ const accountRules = {
     password: {
         maxLength: 12,
         minLength: 8,
+        numbers: true,
+        lowerCase: true,
+        upperCase: true,
+        symbols: true,
         format: true,
-        reserved: ["P-@$_sw0rd", "P-@$sw0rd", "P@$sw0rd"],
+        reserved: ["P-@$_sw0rd", "P-@$sw0rd", "P@$sw0rd", "password"],
         messages: {
             reservedError: "Nice try, but we can't allow you to do that!",
             patternMismatch: "Please adhere to the provided password format!",
@@ -89,23 +94,44 @@ const formatRules = {
     }
 };
 
+const charSets = {
+    lower: "abcdefghijklmnopqrstuvwxyz",
+    upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+    number: "0123456789",
+    symbols: "@$%^*_&?-!",
+}
+
 form.addEventListener("submit", e => {
     e.preventDefault();
     const isValid = validateForm(inputs, accountRules);
     if (!isValid) return;
+    showLoader(submitBtn);
+    toggleForm(true);
+    title = "Creating Account...";
+    setTimeout(() => {
+        form.reset();
+        hideLoader(submitBtn);
+        toggleForm(false);
+        title = "Account Created!";
+    }, 5000);
 });
 
-submitBtn.addEventListener("click", () => {
-    const icon = submitBtn.querySelector(".icon");
-    submitBtn.classList.add("loading");
-    icon.dataset.icon = "bounce";
-    setTimeout(() => {
-        submitBtn.classList.remove("loading");
-        icon.dataset.icon = "";
-        icon.textContent = "";
-    }, 5000);
-    initializeIcons(submitBtn);
-});
+function generatePassword(rules) {
+    let allowedChars = "";
+    let password = "";
+
+    allowedChars += rules.lowerCase ? charSets.lower : "";
+    allowedChars += rules.upperCase ? charSets.upper : "";
+    allowedChars += rules.numbers ? charSets.number : "";
+    allowedChars += rules.symbols ? charSets.symbols : "";
+
+    for (i = 0; i < rules.maxLength; i++) {
+        const randomIndex = Math.floor(Math.random() * allowedChars.length);
+        password += allowedChars[randomIndex];
+    };
+
+    return password;
+}
 
 function validateForm(array, rules) {
     let valid = true;
@@ -113,7 +139,7 @@ function validateForm(array, rules) {
         format(arr, formatRules);
         const validator = validators[arr.name];
         if (!validateInput(arr, rules)) { valid = false };
-        if (validator) { valid = false };
+        if (validator && !validator(arr, rules)) { valid = false };
     });
     return valid;
 }
@@ -134,7 +160,7 @@ function initiailizeTextArea(area, rules) {
     area.addEventListener("blur", () => { format(area, rules) });
 }
 
-function initializeToggle(input) {
+function toggleInput(input) {
     const field = input.closest("label");
     const toggle = field.querySelector(".toggle");
     toggle.addEventListener("click", () => {
@@ -150,7 +176,13 @@ function initializeToggle(input) {
     });
 }
 
+function toggleForm(state) { 
+    inputs.forEach(input => { input.disabled = state });
+    textArea.disabled = state;
+    submitBtn.disabled = state;
+};
+
 initializeIcons(document);
-initializeToggle(passwordInput);
+toggleInput(passwordInput);
 initiailizeTextArea(textArea, formatRules);
 initializeInputs(inputs, accountRules, formatRules);

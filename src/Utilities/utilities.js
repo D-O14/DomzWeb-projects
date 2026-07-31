@@ -1,3 +1,5 @@
+import { initializeIcons } from "../Assets/Icons/icons";
+
 export function charCount(textArea) {
     const label = textArea.closest("label");
     const charCount = label.querySelector("p");
@@ -6,7 +8,9 @@ export function charCount(textArea) {
     charCount.textContent = `${ count } / ${ max } characters`;
 };
 
-export function wordCounter(text) { return text.trim().split(/\s+/).filter(Boolean).length };
+export function wordCounter(text) {
+    return text.trim().split(/\s+/).filter(Boolean).length
+};
 
 export function format(input, formatRules) {
     const rules = formatRules[input.name] ?? {};
@@ -35,3 +39,17 @@ export function format(input, formatRules) {
         input.value = input.value.replace(/([.!?]\s*)([a-z])/g, char => char.toUpperCase());
     }
 };
+
+export function showLoader(btn) {
+    const icon = btn.querySelector(".icon");
+    btn.classList.add("loading");
+    icon.dataset.icon = "bounce";
+    initializeIcons(btn);
+}
+
+export function hideLoader(btn) {
+    const icon = btn.querySelector(".icon");
+    btn.classList.remove("loading");
+    icon.dataset.icon = "";
+    icon.textContent = "";
+}

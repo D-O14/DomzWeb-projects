@@ -77,6 +77,26 @@ button:hover {
     background: var(--btn-hover);
 }
 
+button:disabled{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+input:disabled{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+input:disabled .input{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+textarea:disabled{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
 a {
     color: var(--accent);
     text-decoration: none;
@@ -320,6 +340,8 @@ menu {
 .input .icon.toggle svg {
     stroke: var(--accent);
 }
+
+.toggle{cursor: pointer;}
 
 .icon svg {
     width: 18px;

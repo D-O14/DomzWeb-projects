@@ -1,11 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account form demo</title>
 </head>
+
 <body>
-    
+    <button>Button</button>
+    <input type="text" placeholder="password">
 </body>
+
+<script>
+
+    const button = document.querySelector("button");
+    const input = document.querySelector("input");
+
+    const passwordRules = {
+        length: 12,
+        numbers: true,
+        lowerCase: true,
+        upperCase: true,
+        symbols: true,
+    };
+
+    const charSets = {
+        lower: "abcdefghijklmnopqrstuvwxyz",
+        upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        number: "0123456789",
+        symbols: "@$%^*_&?-!",
+    }
+
+    function generatePassword(rules) {
+        let allowedChars = "";
+        let password = "";
+
+        allowedChars += rules.lowerCase ? charSets.lower : "";
+        allowedChars += rules.upperCase ? charSets.upper : "";
+        allowedChars += rules.numbers ? charSets.number : "";
+        allowedChars += rules.symbols ? charSets.symbols : "";
+
+        for (i = 0; i < rules.length; i++) {
+            const randomIndex = Math.floor(Math.random() * allowedChars.length);
+            password += allowedChars[randomIndex];
+        };
+
+        return password;
+    }
+
+
+    button.addEventListener("click", () => {
+        const password = generatePassword(passwordRules);
+        input.value = password;
+        console.log(`Your password is ${ password }`);
+    })
+
+</script>
+
 </html>
