@@ -1,5 +1,6 @@
 import { validateDate } from "./date";
 import { wordCounter } from "./utilities";
+import { isValidPhoneNumber } from 'libphonenumber-js'
 
 export const validators = {
     name: validateName,
@@ -118,7 +119,12 @@ export function validateEmail(input, rules) {
 export function validatePhone(input, rules) {
     if (!validateInput(input, rules)) return false;
     const phoneRules = rules[input.name] ?? {};
-    validateReserved(input, phoneRules);
+    if(!validateReserved(input, phoneRules)) return false;
+    const phone = isValidPhoneNumber(input.value, "NG");
+    if (!phone) {
+        showError(input, "Cannot use an invalid phone number!");
+        return false;
+    }
     return true;
 };
 

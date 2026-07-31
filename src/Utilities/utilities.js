@@ -1,4 +1,5 @@
 import { initializeIcons } from "../Assets/Icons/icons";
+import { AsYouType } from "libphonenumber-js";
 
 export function charCount(textArea) {
     const label = textArea.closest("label");
@@ -37,6 +38,10 @@ export function format(input, formatRules) {
     }
     if (rules.sentenceCase) {
         input.value = input.value.replace(/([.!?]\s*)([a-z])/g, char => char.toUpperCase());
+    }
+    if (rules.phoneFormat) {
+        const formatter = new AsYouType("NG");
+        input.value = formatter.input(input.value);
     }
 };
 

@@ -472,7 +472,7 @@ label{
     }
 
     .form{
-        width: 100%;
+        width: 90%;
         /*position: absolute;
         left: 0;*/
     }
@@ -482,4 +482,8 @@ label{
         height: 100dvh;
         width: 100dvw;
     }
+}
+
+@media screen and (max-width: 400px){
+    form{width: 100%;}
 }

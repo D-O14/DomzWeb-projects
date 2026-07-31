@@ -13,28 +13,6 @@ const passwordInput = document.getElementById("password");
 const passwordLabel = passwordInput.closest("label");
 const passwordBox = passwordLabel.querySelector(".password-box");
 
-passwordInput.addEventListener("focus", () => {
-    if (passwordSuggested) return;
-    if (passwordInput.value.trim()) return;
-    passwordBox.classList.add("visible");
-});
-
-passwordInput.addEventListener("blur", () => {
-    setTimeout(() => {2
-        passwordBox.classList.remove("visible");
-    }, 100);
-});
-
-passwordInput.addEventListener("input", () => {
-    passwordBox.classList.remove("visible");
-});
-
-passwordBox.addEventListener("click", () => {
-    passwordInput.value = generatePassword(accountRules.password);
-    passwordSuggested = true;
-    passwordBox.classList.remove("visible");
-});
-
 const accountRules = {
     username: {
         maxLength: 20,
@@ -71,7 +49,7 @@ const accountRules = {
 
     contact: {
         format: true,
-        reserved: ["+144 500 391 065", "+144500391065", "144500391065", "144 500 391 065"],
+        reserved: ["+144 500 391 065", "144500391065"],
         messages: {
             reservedError: "That's not even a real number!",
             valueMissing: "Your phone number is required to contact you!",
@@ -110,6 +88,10 @@ const formatRules = {
         lowercase: true,
     },
 
+    contact: {
+        phoneFormat: true,
+    },
+
     bio: {
         trim: true,
         addSpace: true,
@@ -123,13 +105,19 @@ const charSets = {
     lower: "abcdefghijklmnopqrstuvwxyz",
     upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
     number: "0123456789",
-    symbols: "@$%^*_&?-!",
+    symbols: "@$%_&?-!",
 }
 
 form.addEventListener("submit", e => {
     e.preventDefault();
     const isValid = validateForm(inputs, accountRules);
     if (!isValid) return;
+    /*const formData = new FormData(form);
+    formData.append("id", crypto.randomUUID());
+    for (let key of formData.keys()) {
+        console.log(`${key}: ${formData.get(key)}`);
+    }
+    console.log(Array.from(formData));*/
     showLoader(submitBtn);
     toggleForm(true);
     title = "Creating Account...";
@@ -139,6 +127,29 @@ form.addEventListener("submit", e => {
         toggleForm(false);
         title = "Account Created!";
     }, 5000);
+});
+
+passwordInput.addEventListener("focus", () => {
+    if (passwordSuggested) return;
+    if (passwordInput.value.trim()) return;
+    passwordBox.classList.add("visible");
+});
+
+passwordInput.addEventListener("blur", () => {
+    setTimeout(() => {
+        2
+        passwordBox.classList.remove("visible");
+    }, 100);
+});
+
+passwordInput.addEventListener("input", () => {
+    passwordBox.classList.remove("visible");
+});
+
+passwordBox.addEventListener("click", () => {
+    passwordInput.value = generatePassword(accountRules.password);
+    passwordSuggested = true;
+    passwordBox.classList.remove("visible");
 });
 
 function generatePassword(rules) {
