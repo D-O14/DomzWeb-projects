@@ -20,6 +20,9 @@
 
     --width: 350px;
 
+    --mg-top: 0px;
+    --display: block;
+
     --shadow:
         0 4px 6px hsla(0, 0%, 0%, 5%),
         0 10px 20px hsla(0, 0%, 0%, 1%),
@@ -51,19 +54,21 @@ video {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    border: var(--brdr-box);
-    background: var(--bg-box);
+    border: var(--brdr-dropzone);
+    background: var(--bg-dropzone);
 }
 
 .drop-zone h4 {
     font-size: 1rem;
     font-weight: 400;
     margin-bottom: 5px;
+    margin-top: var(--mg-top);
     color: var(--clr-heading);
 }
 
 .drop-zone p {
     font-size: 13px;
+    display: var(--display);
     color: var(--clr-paragraph);
 }
 

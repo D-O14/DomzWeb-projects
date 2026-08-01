@@ -65,7 +65,7 @@ class DropZone extends HTMLElement {
         dropzone.addEventListener("click", () => { filePicker.click() });
         dropzone.addEventListener("dragover", (e) => {
             e.preventDefault();
-            shadow.classList.add("over")
+            dropzone.classList.add("over");
         });
 
         dropzone.addEventListener("drop", (e) => {

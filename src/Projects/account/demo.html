@@ -16,15 +16,168 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        background: hsl(0, 0%, 0%);
+    }
+
+    .cover .img-preview {
+        width: 100%;
+        height: auto;
+        display: block;
+        aspect-ratio: 16/9;
+        object-fit: cover;
+        border-radius: .5em;
+    }
+
+    .drop-zone {
+        width: 350px;
+        position: relative;
+    }
+
+    .cover {
+        width: 100%;
+        height: 150px;
+        border-radius: .5em;
+        background: hsla(260, 95%, 53%);
+    }
+
+    .pfp {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        left: 16px;
+        bottom: -40px;
+        border-radius: 5em;
+        background: hsla(210, 100%, 56%);
+    }
+
+    .cover,
+    .pfp {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .pfp .icon svg {
+        width: 20px;
+        height: 20px;
+        color: hsl(0, 0%, 90%);
+    }
+
+    .pfp .img-preview img{
+        width: 100%;
+        height: 100%;
+        border-radius: 5em;
+    }
+
+    .cover .icon svg {
+        width: 30px;
+        height: 30px;
+        color: hsl(0, 0%, 90%);
     }
 </style>
 
 <body>
-
+    <div class="drop-zone">
+        <div class="cover zone">
+            <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="tabler camera-spark">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M11.5 20h-6.5a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v3" />
+                    <path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                    <path
+                        d="M19 22.5a4.75 4.75 0 0 1 3.5 -3.5a4.75 4.75 0 0 1 -3.5 -3.5a4.75 4.75 0 0 1 -3.5 3.5a4.75 4.75 0 0 1 3.5 3.5" />
+                </svg>
+            </span>
+            <div class="img-preview">
+                <img src=" " alt="">
+            </div>
+            <input type="file" hidden name="profile picture" placeholder="filePicker">
+        </div>
+        <div class="pfp zone">
+            <span class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="tabler camera-spark">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                        d="M11.5 20h-6.5a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v3" />
+                    <path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                    <path
+                        d="M19 22.5a4.75 4.75 0 0 1 3.5 -3.5a4.75 4.75 0 0 1 -3.5 -3.5a4.75 4.75 0 0 1 -3.5 3.5a4.75 4.75 0 0 1 3.5 3.5" />
+                </svg>
+            </span>
+            <div class="img-preview">
+                <img src=" " alt="">
+            </div>
+            <input type="file" hidden name="profile picture" placeholder="filepicker">
+        </div>
+    </div>
 </body>
 
 <script type="module" defer>
+    const zones = document.querySelectorAll(".zone");
+    zones.forEach(zone => {
+        const data = {
+            input: zone.querySelector("input"),
+            icon: zone.querySelector(".icon"),
+            img: zone.querySelector("img"),
+            preview: zone.querySelector(".img-preview"),
+        }
 
+        zone.addEventListener("click", () => { data.input.click() });
+        zone.addEventListener("dragover", (e) => { e.preventDefault() });
+        zone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            const fileLength = e.dataTransfer.files.length;
+            const files = e.dataTransfer.files;
+            if (fileLength) {
+                data.input.files = files;
+                previewFile(files[0], data);
+            };
+        });
+
+        data.input.addEventListener("change", () => {
+            const file = data.input.files[0];
+            previewFile(file, data);
+        });
+    });
+
+    function previewFile(file, data) {
+        if (!validateFile(file, data)) return;
+        const img = data.img;
+        const url = URL.createObjectURL(file)
+        img.onload = () => { URL.revokeObjectURL(url) };
+        img.src = url;
+        showPreview(img, data);
+        data.preview.innerHTML = "";
+        data.preview.append(img);
+    }
+
+    function validateFile(file, data) {
+        if (!file) return false;
+
+        if (file.size > 5250000) {
+            removePreview(data);
+            return false;
+        }
+        return true;
+    }
+
+    function showPreview(file, data) {
+        file.hidden = false;
+        data.icon.hidden = true;
+        data.preview.innerHTML = "";
+    }
+
+    function removePreview(data) {
+        data.input.value = "";
+        data.icon.hidden = false;
+        data.preview.innerHTML = "";
+    }
 </script>
 
 </html>
