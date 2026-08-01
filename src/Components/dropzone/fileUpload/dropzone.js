@@ -1,4 +1,4 @@
-import { icons, initializeIcons } from "../../Assets/Icons/icons";
+import { icons, initializeIcons } from "../../../Assets/Icons/icons";
 
 const template = document.createElement("template");
 template.innerHTML = `

@@ -3,8 +3,10 @@ import { icons, initializeIcons } from "../../Assets/Icons/icons.js";
 import { validateDate, initializeDate } from "../../Utilities/date.js"
 import { validateInput, validators, getFields, showError, clearError } from "../../Utilities/validation.js";
 
-let passwordSuggested = false;
+const indexedB = indexedDB;
 let title = document.title;
+let passwordSuggested = false;
+const req = indexedB.open("Users", 1);
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input");
 const textArea = document.querySelector("textarea");
@@ -108,25 +110,54 @@ const charSets = {
     symbols: "@$%_&?-!",
 }
 
-form.addEventListener("submit", e => {
+req.onsuccess = () => {
+    const db = req.result;
+}
+req.onerror = (e) => {
+    console.log(e);
+    console.error("An error has occurred within the database!");
+};
+
+req.onupgradeneeded = () => {
+    const db = req.result;
+    const store = db.createObjectStore("users", { keyPath: "id" });
+};
+
+form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    const formData = new FormData(form);
+    formData.append("access_key", "5e2c2ee8-aa85-430b-81b0-8f39e3767f71");
     const isValid = validateForm(inputs, accountRules);
     if (!isValid) return;
-    /*const formData = new FormData(form);
-    formData.append("id", crypto.randomUUID());
-    for (let key of formData.keys()) {
-        console.log(`${key}: ${formData.get(key)}`);
-    }
-    console.log(Array.from(formData));*/
     showLoader(submitBtn);
     toggleForm(true);
-    title = "Creating Account...";
-    setTimeout(() => {
-        form.reset();
+    console.log([...formData.entries()]);
+
+    try {
+        const user = createUser(formData);
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+            console.log(data);
+            console.log(response.status);
+            throw new Error(data.message);
+        } else {
+            form.reset();
+            saveUser(user);
+            location.href = "./account card/account.html";
+        }
+
+    } catch (error) {
+        console.error(error);
+    } finally {
         hideLoader(submitBtn);
         toggleForm(false);
-        title = "Account Created!";
-    }, 5000);
+    }
 });
 
 passwordInput.addEventListener("focus", () => {
@@ -151,6 +182,26 @@ passwordBox.addEventListener("click", () => {
     passwordSuggested = true;
     passwordBox.classList.remove("visible");
 });
+
+function createUser(formData) {
+    return {
+        id: crypto.randomUUID(),
+        username: formData.get("username"),
+        handle: formData.get("handle"),
+        email: formData.get("email"),
+        contact: formData.get("contact"),
+        password: formData.get("password"),
+        bio: formData.get("bio"),
+    };
+}
+
+function saveUser(user) {
+    const db = req.result;
+    const transaction = db.transaction("users", "readwrite");
+    const store = transaction.objectStore("users");
+    store.put(user);
+    transaction.oncomplete = () => { db.close() };
+}
 
 function generatePassword(rules) {
     let allowedChars = "";
@@ -212,7 +263,7 @@ function toggleInput(input) {
     });
 }
 
-function toggleForm(state) { 
+function toggleForm(state) {
     inputs.forEach(input => { input.disabled = state });
     textArea.disabled = state;
     submitBtn.disabled = state;
