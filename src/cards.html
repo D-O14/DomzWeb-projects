@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cards</title>
     <link rel="preload" as="style" href="/src/css/cards.css" onload="this.rel='stylesheet'">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Asimovian&family=DM+Serif+Text:ital@0;1&family=Electrolize&family=Manrope:wght@200..800&family=Paprika&family=Playwrite+NZ+Basic:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
@@ -30,7 +35,8 @@
                         <template id="resCardTemp">
                             <article class="resCard" data-id="">
                                 <figure class="resCard-img">
-                                    <img src="/" alt="product image" class="img">
+                                    <img src="/" alt="product image" class="img" loading="lazy" decoding="async" 
+                                    fetchpriority="high" sizes="{max-width: 768px} 100%, 50%">
                                 </figure>
                                 <div class="resCard-content">
                                     <div class="info">
@@ -61,7 +67,16 @@
                     </div>
                 </div>
 
-                <button class="filter">Filter</button>
+                <button class="filter">
+                    Filter
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-filter">
+                        <path d="M2 5h20" />
+                        <path d="M6 12h12" />
+                        <path d="M9 19h6" />
+                    </svg>
+                </button>
             </div>
 
             <div class="filters">
@@ -80,7 +95,8 @@
                 <template id="cardTemplate">
                     <article class="card">
                         <div class="card-header">
-                            <img src="/" alt="Product Image" class="img">
+                            <img src="/" alt="Product Image" class="img" loading="lazy" decoding="async" 
+                            fetchpriority="high" sizes="{max-width: 768px} 100%, 50%">
                             <span class="category"></span>
                             <div class="options">
                                 <button class="likeBtn">
@@ -130,13 +146,33 @@
                         </div>
                     </article>
                 </template>
+
+                <template class="skeleton">
+                    <article class="skeleton-card">
+                        <div class="skeleton-img"></div>
+
+                        <div class="skeleton-content">
+                            <div class="skeleton-tags">
+                                <div class="skeleton-tag"></div>
+                                <div class="skeleton-tag"></div>
+                                <div class="skeleton-rating"></div>
+                            </div>
+
+                            <div class="skeleton-name"></div>
+                            <div class="skeleton-price"></div>
+
+                            <div class="skeleton-desc"></div>
+                            <div class="skeleton-btn"></div>
+                        </div>
+                    </article>
+                </template>
             </div>
         </section>
     </main>
 </body>
 
 <script type="text/javascript" src="/src/js/cards.js" defer>
-    
+
 </script>
 
 </html>
