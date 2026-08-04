@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress form component</title>
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="progress-form.css">
+</head>
+
+<body>
+    <div class="progress-form">
+
+        <div class="stepper-container">
+            <div class="heading">
+                <h3>Sign Up Form</h3>
+            </div>
+            <ul class="stepper">
+                <li class="active">
+                    <span class="icon" data-icon="user"></span>
+                    About Yourself
+                </li>
+                <li>
+                    <span class="icon" data-icon="education"></span>
+                    Education
+                </li>
+                <li>
+                    <span class="icon" data-icon="business"></span>
+                    Work Experience
+                </li>
+                <li>
+                    <span class="icon" data-icon="camera"></span>
+                    Profile Picture
+                </li>
+            </ul>
+        </div>
+
+        <div class="forms">
+            <template class="form-template">
+                <form class="form active" autocapitalize="words" autocomplete="on" autocorrect="on" novalidate
+                    spellcheck="true">
+                    <div class="text">
+                        <h2><span class="icon" data-icon="user"></span> Your Personal Info</h2>
+                        <p>Enter your personal details so we can get to know you.</p>
+                    </div>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="account"></span>
+                            <input type="text" name="name" enterkeyhint="next" required id="name"
+                                placeholder="Your name. Is it John?" pattern="^[A-Za-z\s'.\-]+$">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="mail"></span>
+                            <input type="email" name="email" enterkeyhint="next" required id="email"
+                                placeholder="Your Email. Please don't make us guess" inputmode="email">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="phone"></span>
+                            <input type="tel" enterkeyhint="next" required id="number"
+                                placeholder="Your Number. So we can contact you" name="phone"
+                                pattern="^[+?0-9\s]{7,20}" inputmode="tel" maxlength="20">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="location"></span>
+                            <input type="text" enterkeyhint="done" required id="address"
+                                placeholder="Your Address. So we can find you" name="address"
+                                pattern="^[A-Za-z0-9\s\.,]+$">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <menu>
+                        <button class="nxtBtn" type="button">Next</button>
+                    </menu>
+                </form>
+            </template>
+
+            <template class="form-template">
+                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on" novalidate
+                    spellcheck="true">
+                    <div class="text">
+                        <h2><span class="icon" data-icon="education"></span> Degree of Education</h2>
+                        <p>Tell us about your education and degrees.</p>
+                    </div>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="school"></span>
+                            <input type="text" name="Name of college" enterkeyhint="next" required
+                                placeholder="You went to college? Which?" id="school">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="calendar"></span>
+                            <input type="date" id="date" name="graduation" enterkeyhint="next" required
+                                max="2026-07-25">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="study"></span>
+                            <input type="text" name="Course of study" enterkeyhint="next" required
+                                placeholder="What'd you study?" id="study">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="diploma"></span>
+                            <input type="text" name="Degree" enterkeyhint="done" required
+                                placeholder="Your degree awarded is?" id="degree">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <menu>
+                        <button class="backBtn" type="button">
+                            <span></span>
+                            Back
+                        </button>
+                        <button class="nxtBtn" type="button">Next</button>
+                    </menu>
+                </form>
+            </template>
+
+            <template class="form-template">
+                <form class="form" autocapitalize="words" autocomplete="on" autocorrect="on" novalidate
+                    spellcheck="true">
+                    <div class="text">
+                        <h2><span class="icon" data-icon="business"></span> Work Experience</h2>
+                        <p>Tell us all about your experience in the working field.</p>
+                    </div>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="company"></span>
+                            <input type="text" enterkeyhint="next" required name="Company name"
+                                placeholder="What company have you worked for?" id="company">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="hierarchy"></span>
+                            <input type="text" name="Job Title" enterkeyhint="next" required
+                                placeholder="What role did you play?" id="role">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <div class="input">
+                            <span class="icon" data-icon="time"></span>
+                            <input type="icon" enterkeyhint="next" min="1" max="50" required name="Job Duration"
+                                id="years" placeholder="How many years did you work with them?"
+                                pattern="\d{1,2}\s(year|years|month|months|week|weeks)">
+                        </div>
+                        <p class="error-text" aria-live="polite"></p>
+                    </label>
+                    <label>
+                        <textarea placeholder="What were your responsibilities? (optional)" enterkeyhint="done"
+                            maxlength="200"></textarea>
+                        <p class="chars" aria-live="polite"></p>
+                    </label>
+                    <menu>
+                        <button class="backBtn" type="button">
+                            <span></span>
+                            Back
+                        </button>
+                        <button class="nxtBtn" type="button">Next</button>
+                    </menu>
+                </form>
+            </template>
+
+            <template class="form-template">
+                <form class="form" enctype="multipart/form-data" method="post">
+                    <div class="text">
+                        <h2><span class="icon" data-icon="camera"></span> Your Profile Picture</h2>
+                        <p>Upload a picture of yourself so we can know you better.</p>
+                    </div>
+                    <drop-zone></drop-zone>
+                    <menu>
+                        <button class="backBtn" type="button">
+                            <span></span>
+                            Back
+                        </button>
+                        <button class="submitBtn">
+                            Submit
+                            <span class="icon" data-icon="check"></span>
+                        </button>
+                    </menu>
+                </form>
+            </template>
+
+            <template class="form-completed">
+                <img src="../../../Assets/Illustrations/Completed steps.gif" alt="">
+            </template>
+        </div>
+    </div>
+</body>
+<script src="progress-form.js" type="module" defer></script>
+<script src="../../dropzone/dropzone.js" type="module" defer></script>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Modal Component</title>
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="confirm-dialog.css">
+</head>
+
+<body>
+    <button id="delBtn">Delete account</button>
+    <dialog>
+        <div class="dialog">
+            <div class="dialog-header">
+                <h1 class="dialog-heading">Deactivate Account?</h1>
+                <button class="close">X</button>
+            </div>
+            <p>Are you sure you want to deactivate your account? By doing this you will
+                lose all of your saved data and will not be able to retrieve it.
+            </p>
+        </div>
+        <menu>
+            <button id="cancelBtn" class="cancel">Cancel</button>
+            <button id="dismissBtn" class="dismiss">Deactivate</button>
+        </menu>
+    </dialog>
+</body>
+
+<script src="confirm-dialog.js" defer></script>
+</html>

@@ -5,7 +5,8 @@
 		"cloudinary": "^2.8.0",
 		"cors": "^2.8.5",
 		"firebase": "^12.9.0",
-		"gsap": "^3.13.0"
+		"gsap": "^3.13.0",
+		"libphonenumber-js": "^1.13.10"
 	},
 	"name": "website-development",
 	"version": "1.0.0",

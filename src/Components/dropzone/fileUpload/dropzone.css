@@ -1,0 +1,106 @@
+@import "../../Styles/resets.css";
+
+:root {
+    --bg-dropzone: hsl(0, 0%, 100%);
+
+    --accent: hsl(251, 61%, 52%);
+
+    --brdr-dropzone: 2px dashed hsl(0, 0%, 64%);
+
+    --clr-icon: hsl(0, 0%, 5%);
+    --clr-paragraph: hsl(0, 0%, 64%);
+    --clr-heading: hsl(0, 0%, 18%);
+
+    --scale: 1;
+    --opacity: 1;
+    --content-width: 100%;
+    --content-height: 100%;
+
+    --pd-box: 30px;
+
+    --width: 350px;
+
+    --mg-top: 0px;
+    --display: block;
+
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+}
+
+body{
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+img,
+video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+.drop-zone {
+    cursor: pointer;
+    width: var(--width);
+    display: flex;
+    margin: 10px;
+    padding: var(--pd-box);
+    border-radius: .5em;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border: var(--brdr-dropzone);
+    background: var(--bg-dropzone);
+}
+
+.drop-zone h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-top: var(--mg-top);
+    color: var(--clr-heading);
+}
+
+.drop-zone p {
+    font-size: 13px;
+    display: var(--display);
+    color: var(--clr-paragraph);
+}
+
+.drop-zone svg{
+    stroke: var(--clr-icon);
+}
+
+.drop-zone button {
+    cursor: pointer;
+    font-size: 1rem;
+    background: none;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1px solid transparent;
+}
+
+.dropzone-content{
+    scale: var(--scale);
+    opacity: var(--opacity);
+    width: var(--content-width);
+    height: var(--content-height);
+}
+
+.preview-container{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+}
+
+.over {
+    border-style: solid;
+}

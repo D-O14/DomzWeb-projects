@@ -15,7 +15,7 @@
 </head>
 
 <style>
-    *,
+    /*,
     *::before,
     *::after {
         margin: 0;
@@ -24,6 +24,8 @@
         transition: all .5s ease;
         font-family: system-ui;
     }
+        transition: all .3s ease;
+    }*/
 
     :root {
         --shadow:
@@ -59,36 +61,227 @@
     button {
         cursor: pointer;
     }
+
+    /*header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: var(--dark);
+        box-shadow: var(--shadow);
+        z-index: 1;
+    }*/
+
+
+    /*.nav {
+        padding: 1rem 5%;
+        height: 60px;
+    }
+
+    .container {
+        max-width: 1120px;
+        margin-inline: 1.5rem;
+    }
+
+    .lucide-logo,
+    .lucide-burger,
+    .lucide-close {
+        stroke: var(--light);
+        vertical-align: middle;
+    }
+
+    .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+        font-weight: var(--fw-sb);
+    }
+
+    .nav-toggle {
+        width: 2rem;
+        height: 2rem;
+    }
+
+    .lucide-burger,
+    .lucide-close {
+        position: absolute;
+        width: max-content;
+        height: max-content;
+        margin: 10px;
+        cursor: pointer;
+        transition: opacity .1s, transform .4s;
+    }
+
+    .lucide-close {
+        opacity: 0;
+    }
+
+    .navbar {
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    @media (max-width: 1118px) {
+        .nav_menu {
+            position: absolute;
+            left: 0;
+            top: 3.5rem;
+            width: 100%;
+            height: calc(100vh - 3.5rem);
+            overflow: auto;
+            pointer-events: none;
+            opacity: 0;
+            transition: top .4s, opacity .3s;
+        }
+
+        .nav_menu::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .nav-list {
+            background: var(--dark);
+            padding-top: 1rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            background-color: var(--dark);
+            font-weight: var(--fw-sb);
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color .3s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--dark-shade-1);
+        }
+    }
+
+    .show-menu {
+        pointer-events: all;
+        opacity: 1;
+        top: 3.5rem;
+    }
+
+    .show-icon .lucide-burger {
+        opacity: 0;
+        transform: rotate(90deg);
+    }
+
+    .show-icon .lucide-close {
+        opacity: 1;
+        transform: rotate(90deg);
+    }*/
+
 </style>
 
 <body>
-
+    <!--<header>
+                <nav class="nav container">
+                    <div class="navbar">
+                        <a href="" class="logo">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-logo">
+                                <path d="M20.341 6.484A10 10 0 0 1 10.266 21.85" />
+                                <path d="M3.659 17.516A10 10 0 0 1 13.74 2.152" />
+                                <circle cx="12" cy="12" r="3" />
+                                <circle cx="19" cy="5" r="2" />
+                                <circle cx="5" cy="19" r="2" />
+                            </svg>
+                            Domz ENT
+                        </a>
+    
+                        <div class="nav-toggle" id="nav_toggle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-burger">
+                                <path d="M3 5h18" />
+                                <path d="M3 12h18" />
+                                <path d="M3 19h18" />
+                            </svg>
+    
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-close">
+                                <path d="M18 6 6 18" />
+                                <path d="m6 6 12 12" />
+                            </svg>
+                        </div>
+    
+                    </div>
+    
+                    <div class="nav_menu" id="nav-menu">
+                        <ul class="nav-list">
+                            <li><a href="#" class="nav-link">Home</a></li>
+    
+                            <li><a href="#" class="nav-link">Company</a></li>
+    
+                            <li class="dropdown">
+                                <div class="nav-link">
+                                    Analytics
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-chevron">
+                                        <path d="m6 9 6 6 6-6" />
+                                    </svg>
+                                </div>
+                            </li>
+    
+                            <li><a href="#" class="nav-link">Products</a></li>
+    
+                            <li class="dropdown">
+                                <div class="nav-link">
+                                    Users
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-chevron">
+                                        <path d="m6 9 6 6 6-6" />
+                                    </svg>
+                                </div>
+                            </li>
+    
+                            <li><a href="#" class="nav-link">Contact Us</a></li>
+                        </ul>
+                    </div>
+    
+                </nav>
+            </header>-->
     <main>
-        
     </main>
 
+
+    <script type="text/javascript" defer>
+        const title = document.title;
+        document.addEventListener("visibilitychange", function () {
+            document.visibilityState === "hidden" ? document.title = "Oy! You aren't finished here!" : document.title = title;
+            /*if(document.visibilityState === "hidden"){
+                notification = new Notification("Message From DomzWeb", {
+                    body: "Come back, please. 🥺",
+                    silent: true,
+                    tag: "notif"
+                })
+            } else{ notification.close() }*/
+        });
+
+        /*const showMenu = (toggleId, navId) => {
+            const toggle = document.getElementById(toggleId),
+                nav = document.getElementById(navId)
+
+            toggle.addEventListener('click', () => {
+                nav.classList.toggle('show-menu')
+                toggle.classList.toggle('show-icon')
+            })
+        }
+
+        showMenu('nav_toggle', 'nav-menu');*/
+
+
+    </script>
 </body>
-
-<script type="text/javascript" defer>
-    const queryStr = location.search;
-    const usp = new URLSearchParams(queryStr);
-    usp.set("pageName", "domzweb");
-    usp.set("pageAuthor", "domzski");
-    usp.set("pageType", "notes application");
-    console.log(usp.toString());
-
-    for(const[key, value] of usp){
-        console.log(`value for ${key} = ${value}`);
-    };
-
-    console.log(location);
-    console.log(location.pathname);
-    console.log(location.toString());
-    console.log(location.port);
-    console.log(location.protocol);
-    console.log(location.origin);
-    console.log(location.href);
-
-</script>
 
 </html>

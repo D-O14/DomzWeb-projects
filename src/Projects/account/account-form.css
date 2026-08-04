@@ -1,0 +1,489 @@
+@import "../../Styles/resets.css";
+@import "../../Styles/base.css";
+
+:root {
+    --bg-box: hsl(250, 65%, 10%);
+    --bg-btn: hsl(251, 81%, 52%);
+    --bg-page: hsl(251, 60%, 12%);
+    --bg-checkbox: hsl(1, 0%, 12%);
+    --bg-error: hsla(0, 61%, 52%, .15);
+    --bg-container: hsla(0, 0%, 2%);
+    --bg-glass: hsla(250, 65%, 43%, 0.19);
+    --bg-dropzone: hsla(250, 65%, 43%, 0.3);
+
+    --accent: hsl(251, 61%, 52%);
+    --outline-accent: hsl(251, 61%, 32%);
+
+    --brdr-bottom-error: var(--clr-error);
+    --brdr-focus: 2px solid var(--accent);
+    --brdr-dropzone: 2px dashed var(--accent);
+    --brdr-pseudo: 1px solid hsl(0, 0%, 64%, .5);
+    --brdr-error: 1px solid hsla(5, 62%, 57%, 0.73);
+    --brdr-glass: 1px solid hsla(240, 65%, 43%, 0.3);
+    --brdr-login: 2px solid hsla(250, 65%, 43%, 0.3);
+
+    --clr-icon: var(--accent);
+    --clr-muted: hsl(0, 0%, 80%);
+    --clr-error: hsl(0, 61%, 52%);
+    --clr-plain: hsl(0, 0%, 100%);
+    --clr-char: hsl(251, 61%, 62%);
+    --clr-paragraph: hsl(0, 0%, 64%);
+    --clr-heading: hsl(0, 0%, 48%);
+
+    --pd-box: 15px;
+
+    --scale: 1;
+    --opacity: 1;
+    --display: none;
+    --mg-top: 5px;
+
+    --btn-hover: hsl(251, 71%, 46%);
+    --box-hover: hsl(251, 71%, 16%);
+
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    --shadow-container: 0px 8px 32px var(--accent);
+    --shadow-glass: 0 4px 30px hsla(0, 0%, 0%, 0.1);
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: var(--bg-page);
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    border-radius: .5em;
+}
+
+form {
+    width: 100%;
+    height: 100%;
+    padding: 25px 50px;
+    position: relative;
+}
+
+button:not(.loginBtn) {
+    width: 100%;
+    border-radius: .25em;
+    color: var(--clr-plain);
+    background: var(--bg-btn);
+}
+
+button:hover {
+    scale: .98;
+    background: var(--btn-hover);
+}
+
+button:disabled{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+input:disabled{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+input:disabled .input{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+textarea:disabled{
+    opacity: .75;
+    cursor: not-allowed;
+}
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+input:not(input[type="checkbox"]) {
+    flex: 1;
+    width: 100%;
+}
+
+textarea {
+    border-radius: .5em;
+    backdrop-filter: blur(10px);
+    border: var(--brdr-glass);
+    background: var(--bg-glass);
+    box-shadow: var(--shadow-glass);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+input,
+textarea {
+    color: var(--clr-plain);
+    caret-color: var(--accent);
+}
+
+textarea:focus-within {
+    outline-offset: 1px;
+    outline: 2px solid var(--outline-accent);
+}
+
+menu {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+}
+
+label{
+    position: relative;
+}
+
+.input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .25em;
+    height: 40px;
+    flex: 0 0 auto;
+    padding: .5em 1em;
+    border-radius: 8px;
+    overflow: hidden;
+    border: var(--brdr-glass);
+    backdrop-filter: blur(10px);
+    background: var(--bg-glass);
+    box-shadow: var(--shadow-glass);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.left {
+    position: absolute;
+    left: 0;
+    height: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.right {
+    position: absolute;
+    right: 0;
+    height: 0%;
+    opacity: 0;
+    border: 1px solid var(--accent);
+}
+
+.input:focus-within .top {
+    opacity: 1;
+    width: 100%;
+    border-radius: .5em;
+    transition-delay: .1s;
+}
+
+.input:focus-within .left {
+    opacity: 1;
+    height: 100%;
+    border-radius: .5em;
+    transition-delay: .25s;
+}
+
+.input:focus-within .bottom {
+    opacity: 1;
+    width: 100%;
+    border-radius: .5em;
+    transition-delay: .3s;
+}
+
+.input:focus-within .right {
+    opacity: 1;
+    height: 100%;
+    border-radius: .5em;
+    transition-delay: .45s;
+}
+
+.loginBtn {
+    width: 100%;
+    padding: .5em 1em;
+    text-align: center;
+    border-radius: .25em;
+    border: var(--brdr-login);
+    background: var(--bg-container);
+    box-shadow: 5px 5px 5px hsla(250, 60%, 12%, .45);
+}
+
+.input.error {
+    border: var(--brdr-error);
+    background: var(--bg-error);
+    animation: shake .25s linear;
+}
+
+.input.error .top {
+    width: 100%;
+    border: var(--brdr-error);
+}
+
+.input.error .left {
+    height: 100%;
+    border: var(--brdr-error);
+}
+
+.input.error .right {
+    height: 100%;
+    border: var(--brdr-error);
+}
+
+.input.error .bottom {
+    width: 100%;
+    border: var(--brdr-error);
+}
+
+.input.error .icon.toggle svg {
+    stroke: var(--clr-error);
+}
+
+.input span.icon.error {
+    background: var(--clr-error);
+}
+
+.container {
+    width: 1000px;
+    height: 600px;
+    display: flex;
+    position: relative;
+    border-radius: .5em;
+    justify-content: center;
+    background: var(--bg-container);
+    box-shadow: var(--shadow-container);
+}
+
+.image {
+    width: 45%;
+    padding: .25em;
+    position: relative;
+}
+
+.image-text {
+    font-size: 25px;
+    font-weight: 400;
+    bottom: 60px;
+    left: 20px;
+    position: absolute;
+    color: var(--clr-plain);
+}
+
+.form {
+    width: 55%;
+}
+
+.loading .button-text {
+    width: 0%;
+    opacity: 0;
+    text-wrap: nowrap;
+}
+
+.loading .icon svg {
+    transform: scale(1.95);
+}
+
+.input-group {
+    display: grid;
+    gap: 1em;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.form-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.form-heading h1 {
+    font-size: 30px;
+    color: var(--clr-plain);
+}
+
+.form-heading p {
+    font-size: 12px;
+    margin-top: 5px;
+    color: var(--clr-paragraph);
+}
+
+.input-group .icon,
+.input .icon:not(.toggle) {
+    width: 10%;
+    padding: .5em;
+    display: grid;
+    place-items: center;
+    background: var(--accent);
+    transform: translateX(-15px);
+    border-top-left-radius: .25em;
+    border-bottom-left-radius: .25em;
+}
+
+.input-group .icon:not(.toggle) {
+    width: 22%;
+}
+
+.password-box {
+    position: absolute;
+    width: fit-content;
+    padding: 1em;
+    display: flex;
+    scale: 0;
+    opacity: 0;
+    top: 30px;
+    left: -250px;
+    gap: .5em;
+    z-index: 1;
+    align-items: center;
+    text-align: center;
+    border-radius: .25em;
+    color: var(--clr-plain);
+    background: var(--bg-box);
+}
+
+.password-box:hover {
+    background: var(--box-hover);
+}
+
+.password-box h3 {
+    font-size: 1rem;
+}
+
+.password-box p {
+    font-size: 13px;
+    color: var(--clr-paragraph);
+}
+
+.visible {
+    scale: 1;
+    opacity: 1;
+}
+
+.password-box .icon svg {
+    width: 36px;
+    height: 36px;
+    fill: var(--accent);
+}
+
+.input .icon.toggle svg {
+    stroke: var(--accent);
+}
+
+.toggle{cursor: pointer;}
+
+.icon svg {
+    width: 18px;
+    height: 18px;
+    vertical-align: middle;
+    transform: translate(0);
+}
+
+.input .icon svg {
+    stroke: var(--clr-plain);
+}
+
+.loginBtn .icon svg {
+    stroke: var(--accent);
+}
+
+.error-text {
+    font-size: 13px;
+    margin-top: 5px;
+    color: var(--clr-error);
+}
+
+.chars {
+    font-size: 12px;
+    text-align: right;
+    color: var(--clr-char);
+}
+
+.loginBtn .text {
+    width: 0%;
+    scale: 0;
+    opacity: 0;
+}
+
+@keyframes shake {
+    0% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(1turn);
+    }
+}
+
+.image-text .icon svg {
+    position: absolute;
+    fill: var(--clr-plain);
+    top: -450px;
+    width: 60px;
+    height: 60px;
+}
+
+@media screen and (max-width: 700px){
+    body{height: 100dvh;}
+    form{
+        padding: 20px;
+    }
+
+    .input-group{
+        margin-top: 20px;
+    }
+
+    .image{display: none;}
+    .form{width: 90%;}
+
+    .password-box{
+        top: 40px;
+        left: 0px;
+    }
+
+    .form{
+        width: 90%;
+    }
+
+    .container{
+        box-shadow: none;
+        height: 100dvh;
+        width: 100dvw;
+    }
+}
+
+@media screen and (max-width: 400px){
+    form{width: 100%;}
+}

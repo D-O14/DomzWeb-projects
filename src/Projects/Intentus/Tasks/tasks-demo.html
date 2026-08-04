@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks Application Demo</title>
+    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="tasks-demo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="task-nav">
+            <h1 class="app-name">Tasks</h1>
+            <div class="task-search">
+                <input type="search" id="searchInput" class="search-input" placeholder="Search Tasks">
+                <span class="search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide search">
+                        <path d="m21 21-4.34-4.34" />
+                        <circle cx="11" cy="11" r="8" />
+                    </svg>
+                </span>
+            </div>
+            <menu class="controls">
+                <button class="toggle" id="toggle" role="switch" aria-checked="false" aria-label="toggle dark mode">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide sun">
+                        <circle cx="12" cy="12" r="4" />
+                        <path d="M12 2v2" />
+                        <path d="M12 20v2" />
+                        <path d="m4.93 4.93 1.41 1.41" />
+                        <path d="m17.66 17.66 1.41 1.41" />
+                        <path d="M2 12h2" />
+                        <path d="M20 12h2" />
+                        <path d="m6.34 17.66-1.41 1.41" />
+                        <path d="m19.07 4.93-1.41 1.41" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide moon">
+                        <path d="M18 5h4" />
+                        <path d="M20 3v4" />
+                        <path
+                            d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401" />
+                    </svg>
+                </button>
+                <button class="sortBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide arrow-up-down">
+                        <path d="m21 16-4 4-4-4" />
+                        <path d="M17 20V4" />
+                        <path d="m3 8 4-4 4 4" />
+                        <path d="M7 4v16" />
+                    </svg>
+                </button>
+            </menu>
+        </nav>
+    </header>
+
+    <main>
+        <section class="tasks">
+            <div class="tasks-wrapper">
+
+                <div class="tasks-header">
+                    <h1 class="header">Today</h1>
+                    <span class="count"></span>
+                </div>
+
+                <div class="tasks-content">
+                    <template class="task-template">
+                        <div class="task" data-id="">
+                            <label class="content">
+                                <input type="checkbox" class="check">
+                                <span class="checkbox"></span>
+                                <span class="task-title"></span>
+                            </label>
+                            <span class="task-date"></span>
+                        </div>
+                    </template>
+
+                    <template class="empty-template">
+                        <div class="empty-state">
+                            <img src="../../../Assets/Illustrations/mobile illustration.svg" alt="" class="empty-img">
+                            <h2>Nothing here yet.</h2>
+                            <p class="empty-msg">Tap the
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide pen">
+                                        <path d="M13 21h8" />
+                                        <path
+                                            d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                    </svg>
+                                </span>
+                                button below to create your first task.
+                            </p>
+                        </div>
+                    </template>
+                    <template class="empty-search">
+                        <div class="no-results">
+                            <img src="../../../Assets/Illustrations/search-illustr.svg" alt="">
+                            <h2>No results found...</h2>
+                            <p class="empty-msg">
+                                Try putting in another query instead
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide search">
+                                        <path d="m21 21-4.34-4.34" />
+                                        <circle cx="11" cy="11" r="8" />
+                                    </svg>
+                                </span>
+                            </p>
+                        </div>     
+                    </template>
+                </div>
+            </div>
+        </section>
+        <button class="taskBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide pen">
+                <path d="M13 21h8" />
+                <path
+                    d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+            </svg>
+        </button>
+
+        <dialog>
+            <div class="dialog">
+                <label for="taskInput" class="label">New Task</label>
+                <input type="text" placeholder="Add a new task" id="taskInput" class="taskInput">
+                <menu class="actions">
+                    <!--<button class="reminder">Add Reminder</button>-->
+                    <button class="saveTask">Save Task</button>
+                </menu>
+            </div>
+        </dialog>
+    </main>
+</body>
+
+<script src="tasks-demo.js" type="text/javascript" defer></script>
+
+</html>
