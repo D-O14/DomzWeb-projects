@@ -24,13 +24,15 @@ body {
 
 img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 100%;
     aspect-ratio: 16/9;
-    border-radius: .5em;
+    object-fit: cover;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
 }
 
 .drop-zone {
+    width: 400px;
     position: relative;
 }
 

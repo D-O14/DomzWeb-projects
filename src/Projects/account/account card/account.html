@@ -13,21 +13,8 @@
             <div class="cards">
                 <template>
                     <article>
-                        <div class="drop-zone">
-                            <div class="cover zone">
-                                <span class="icon" data-icon="cameraSpark"></span>
-                                <div class="img-preview">
-                                    <img src=" " alt="" hidden>
-                                </div>
-                                <input type="file" hidden name="profile picture" placeholder="filePicker">
-                            </div>
-                            <div class="pfp zone">
-                                <div class="img-preview">
-                                    <span class="icon" data-icon="cameraSpark"></span>
-                                    <img src=" " alt="" hidden>
-                                </div>
-                                <input type="file" hidden name="profile picture" placeholder="filepicker">
-                            </div>
+                        <div class="card-header">
+                            <img-upload></img-upload>
                             <button>Follow</button>
                         </div>
                         <div class="card-body">
@@ -42,9 +29,8 @@
             </div>
         </section>
     </main>
-
 </body>
 
 <script src="./account.js" type="module" defer></script>
-
+<script type="module" src="../../../Components/dropzone/imgUpload/dropzone.js"></script>
 </html>

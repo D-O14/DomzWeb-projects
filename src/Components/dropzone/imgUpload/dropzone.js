@@ -23,7 +23,6 @@ template.innerHTML = `
 </div>
 `;
 
-
 function previewFile(file, data) {
     if (!validateFile(file, data)) return;
     const img = data.img;
@@ -60,27 +59,28 @@ function removePreview(data) {
 class ImgUpload extends HTMLElement {
     constructor() {
         super();
+        const zones = template.content.cloneNode(true);
+        const dropzone = zones.querySelector(".drop-zone");
+        initializeIcons(dropzone);
         const shadow = this.attachShadow({ mode: "open" });
         const style = document.createElement("link");
         style.rel = "preload";
         style.as = "style";
         style.onload = () => { style.rel = "stylesheet" };
-        style.href = new URL("./imgUpload.css", import.meta.url);
+        style.href = new URL("./dropzone.css", import.meta.url);
         shadow.append(style);
-
-        shadow.append(zones);
-        const zones = document.querySelectorAll(".zone");
-        zones.forEach(zone => {
+        shadow.append(dropzone);
+        const uploads = dropzone.querySelectorAll(".zone");
+        uploads.forEach(upload => {
             const data = {
-                input: zone.querySelector("input"),
-                icon: zone.querySelector(".icon"),
-                img: zone.querySelector("img"),
-                preview: zone.querySelector(".img-preview"),
+                input: upload.querySelector("input"),
+                icon: upload.querySelector(".icon"),
+                img: upload.querySelector("img"),
+                preview: upload.querySelector(".img-preview"),
             }
-
-            zone.addEventListener("click", () => { data.input.click() });
-            zone.addEventListener("dragover", (e) => { e.preventDefault() });
-            zone.addEventListener("drop", (e) => {
+            upload.addEventListener("click", () => { data.input.click() });
+            upload.addEventListener("dragover", (e) => { e.preventDefault() });
+            upload.addEventListener("drop", (e) => {
                 e.preventDefault();
                 const fileLength = e.dataTransfer.files.length;
                 const files = e.dataTransfer.files;
@@ -99,3 +99,4 @@ class ImgUpload extends HTMLElement {
 }
 
 customElements.define("img-upload", ImgUpload);
+export default ImgUpload;
