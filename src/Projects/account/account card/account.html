@@ -4,32 +4,47 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your account</title>
-    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="./account.css">
+    <title>Your Account</title>
 </head>
 
 <body>
     <main>
         <section>
-        <article>
-                <div class="card-header">
-                    <img src="/public/assets/images/Hotel_items (2).jpg" alt="" class="cover">
-                    <img src="/public/assets/images/cafe_items (1).jpg" alt="" class="pfp">
-                    <button>Follow</button>
-                    <span class="badge">Admin</span>
-                </div>
-                <div class="card-body">
-                    <div class="handle">
-                        <h3>Domzski</h3>
-                        <a href="#">@domzweb</a>
-                    </div>
-                    <p>Upcoming Web Developer and UI/UX Expert.</p>
-                </div>
-            </article>
-
+            <div class="cards">
+                <template>
+                    <article>
+                        <div class="drop-zone">
+                            <div class="cover zone">
+                                <span class="icon" data-icon="cameraSpark"></span>
+                                <div class="img-preview">
+                                    <img src=" " alt="" hidden>
+                                </div>
+                                <input type="file" hidden name="profile picture" placeholder="filePicker">
+                            </div>
+                            <div class="pfp zone">
+                                <div class="img-preview">
+                                    <span class="icon" data-icon="cameraSpark"></span>
+                                    <img src=" " alt="" hidden>
+                                </div>
+                                <input type="file" hidden name="profile picture" placeholder="filepicker">
+                            </div>
+                            <button>Follow</button>
+                        </div>
+                        <div class="card-body">
+                            <div class="handle">
+                                <h3></h3>
+                                <a href="#" class="tag"></a>
+                            </div>
+                            <p></p>
+                        </div>
+                    </article>
+                </template>
+            </div>
         </section>
     </main>
+
 </body>
 
-<script type="module" src="./account.js" defer></script>
+<script src="./account.js" type="module" defer></script>
+
 </html>

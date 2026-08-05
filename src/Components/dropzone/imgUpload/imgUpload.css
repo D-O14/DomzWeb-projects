@@ -1,5 +1,17 @@
-@import "../../Styles/resets.css";
-@import "../../Styles/base.css";
+@import "@styles/base/resets.css";
+@import "@styles/base/base.css";
+
+:root {
+    --bg-cover: hsl(220, 95%, 23%);
+
+    --clr-plain: hsl(0, 0%, 90%);
+
+    --shadow: 0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+
+    --brdr-pfp: 4px solid hsl(0, 0%, 0%);
+}
 
 body {
     height: 100dvh;
@@ -8,15 +20,6 @@ body {
     justify-content: center;
     flex-direction: column;
     background: hsl(0, 0%, 0%);
-}
-
-
-.img-preview {
-    width: 100%;
-    height: 100%;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    border-radius: .5em;
 }
 
 img {
@@ -28,16 +31,22 @@ img {
 }
 
 .drop-zone {
-    width: 350px;
-    height: fit-content;
     position: relative;
 }
 
-.cover {
+.img-preview {
     width: 100%;
-    height: 150px;
+    height: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
     border-radius: .5em;
-    background: hsl(260, 95%, 53%);
+}
+
+.cover {
+    height: 120px;
+    background: var(--bg-cover);
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
 }
 
 .pfp {
@@ -47,7 +56,7 @@ img {
     left: 16px;
     bottom: -40px;
     border-radius: 5em;
-    background: hsla(210, 100%, 56%);
+    border: var(--brdr-pfp);
 }
 
 .cover,
@@ -82,5 +91,5 @@ img {
     left: 0;
     margin: auto;
     position: absolute;
-    color: hsl(0, 0%, 90%);
+    color: var(--clr-plain);
 }

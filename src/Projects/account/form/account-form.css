@@ -1,5 +1,5 @@
-@import "../../Styles/resets.css";
-@import "../../Styles/base.css";
+@import "@styles/base/resets.css";
+@import "@styles/base/base.css";
 
 :root {
     --bg-box: hsl(250, 65%, 10%);

@@ -1,6 +1,7 @@
-import { charCount, format, showLoader, hideLoader } from "@utils/utilities.js";
-import { icons, initializeIcons } from "@assets/Icons/icons.js";
+import "./account-form.css";
 import { validateDate, initializeDate } from "@utils/date.js"
+import { icons, initializeIcons } from "@assets/Icons/icons.js";
+import { charCount, format, showLoader, hideLoader } from "@utils/utilities.js";
 import { validateInput, validators, getFields, showError, clearError } from "@utils/validation.js";
 
 const indexedB = indexedDB;
@@ -123,7 +124,7 @@ req.onupgradeneeded = () => {
     const store = db.createObjectStore("users", { keyPath: "id" });
 };
 
-form.addEventListener("submit", async (e) => {
+form.addEventListener("submit", e => {
     e.preventDefault();
     const formData = new FormData(form);
     formData.append("access_key", "5e2c2ee8-aa85-430b-81b0-8f39e3767f71");
