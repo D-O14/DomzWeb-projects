@@ -1,7 +1,7 @@
-import { charCount, format, showLoader, hideLoader } from "../../Utilities/utilities.js";
-import { icons, initializeIcons } from "../../Assets/Icons/icons.js";
-import { validateDate, initializeDate } from "../../Utilities/date.js"
-import { validateInput, validators, getFields, showError, clearError } from "../../Utilities/validation.js";
+import { charCount, format, showLoader, hideLoader } from "@utils/utilities.js";
+import { icons, initializeIcons } from "@assets/Icons/icons.js";
+import { validateDate, initializeDate } from "@utils/date.js"
+import { validateInput, validators, getFields, showError, clearError } from "@utils/validation.js";
 
 const indexedB = indexedDB;
 let title = document.title;
