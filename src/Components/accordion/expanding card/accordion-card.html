@@ -10,51 +10,7 @@
 </head>
 
 <style>
-    *{
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-        transition: all .5s ease;
-    }
-
-    .accordion {
-        max-width: 1500px;
-        height: 500px;
-        display: flex;
-        align-items: center;
-        align-content: space-around;
-        gap: 1.25rem;
-        padding: 1.25rem;
-        margin: 150px auto;
-    }
-
-    .card {
-        position: relative;
-        flex: 1;
-        height: inherit;
-        padding: 1.25rem;
-        cursor: pointer;
-        transition: flex .5s ease;
-    }
-
-    .card img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        aspect-ratio: 16/9;
-        object-fit: cover;
-        display: block;
-        border-radius: 1.5rem;
-    }
-
-    .card:hover img {
-        opacity: .6;
-    }
-
-    .card:hover {
-        flex: 4;
-    }
+    
 </style>
 
 <body>
@@ -80,4 +36,6 @@
         </figure>
     </div>
 </body>
+
+<script type="module" src="./accordion-card.js" defer></script>
 </html>
