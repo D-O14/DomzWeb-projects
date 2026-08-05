@@ -1,6 +1,7 @@
-import { validateDate } from "./date";
-import { wordCounter } from "./utilities";
-import { isValidPhoneNumber } from 'libphonenumber-js'
+import { validateDate } from "./date.js";
+import { wordCounter } from "./utilities.js";
+import { isValidPhoneNumber } from 'libphonenumber-js';
+import { initializeIcons } from "../Assets/Icons/icons.js";
 
 export const validators = {
     name: validateName,
@@ -39,29 +40,29 @@ export function validateInput(input, ruleset) {
 export function getFields(input) {
     const container = input.closest("div");
     const field = input.closest("label");
-    const top = field.querySelector(".top");
     return {
         container, icon: container.querySelector("span"),
         field, error: field.querySelector(".error-text"),
-        //errorIcon: field.querySelector(".icon"),
-        top
+        errorIcon: field.querySelector(".error-icon"),
     }
+    initializeIcons(field);
 }
 
 export function showError(input, message) {
-    const { container, icon, error } = getFields(input);
+    const { container, icon, error, errorIcon } = getFields(input);
     container.classList.add("error");
     icon.classList.add("error");
-    //errorIcon.dataset.icon = "exclaim";
+    errorIcon.dataset.icon = "exclaim";
     error.textContent = message;
+    initializeIcons(field);
     return false;
 }
 
 export function clearError(input) {
-    const { container, icon, error } = getFields(input);
+    const { container, icon, error, errorIcon } = getFields(input);
     container.classList.remove("error");
     icon.classList.remove("error");
-    //errorIcon.dataset.icon = "";
+    errorIcon.dataset.icon = "";
     error.textContent = "";
     return true;
 }

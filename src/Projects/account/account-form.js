@@ -129,35 +129,15 @@ form.addEventListener("submit", async (e) => {
     formData.append("access_key", "5e2c2ee8-aa85-430b-81b0-8f39e3767f71");
     const isValid = validateForm(inputs, accountRules);
     if (!isValid) return;
-    showLoader(submitBtn);
     toggleForm(true);
-    console.log([...formData.entries()]);
-
-    try {
-        const user = createUser(formData);
-        const response = await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            body: formData
-        });
-
-        const data = await response.json();
-
-        if (!response.ok || !data.success) {
-            console.log(data);
-            console.log(response.status);
-            throw new Error(data.message);
-        } else {
-            form.reset();
-            saveUser(user);
-            location.href = "./account card/account.html";
-        }
-
-    } catch (error) {
-        console.error(error);
-    } finally {
+    showLoader(submitBtn);
+    const user = createUser(formData);
+    saveUser(user);
+    setTimeout(() => {
         hideLoader(submitBtn);
         toggleForm(false);
-    }
+        location.href = "./account card/account.html";
+    }, 5000);
 });
 
 passwordInput.addEventListener("focus", () => {

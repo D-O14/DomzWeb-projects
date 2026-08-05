@@ -1,4 +1,4 @@
-import { initializeIcons } from "../Assets/Icons/icons";
+import { initializeIcons } from "../Assets/Icons/icons.js";
 import { AsYouType } from "libphonenumber-js";
 
 export function charCount(textArea) {
