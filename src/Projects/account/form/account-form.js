@@ -172,8 +172,8 @@ function createUser(formData) {
         contact: formData.get("contact"),
         password: formData.get("password"),
         bio: formData.get("bio"),
-        avatar: null, 
         cover: null, 
+        avatar: null, 
     };
 }
 
