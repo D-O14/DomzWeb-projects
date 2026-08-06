@@ -127,7 +127,6 @@ req.onupgradeneeded = () => {
 form.addEventListener("submit", e => {
     e.preventDefault();
     const formData = new FormData(form);
-    formData.append("access_key", "5e2c2ee8-aa85-430b-81b0-8f39e3767f71");
     const isValid = validateForm(inputs, accountRules);
     if (!isValid) return;
     toggleForm(true);
@@ -137,8 +136,8 @@ form.addEventListener("submit", e => {
     setTimeout(() => {
         hideLoader(submitBtn);
         toggleForm(false);
-        location.href = "./account card/account.html";
-    }, 5000);
+        location.href = "../account card/account.html";
+    }, 500);
 });
 
 passwordInput.addEventListener("focus", () => {
@@ -173,6 +172,8 @@ function createUser(formData) {
         contact: formData.get("contact"),
         password: formData.get("password"),
         bio: formData.get("bio"),
+        avatar: null, 
+        cover: null, 
     };
 }
 

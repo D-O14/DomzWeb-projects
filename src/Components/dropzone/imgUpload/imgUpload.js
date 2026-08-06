@@ -6,14 +6,14 @@ document.addEventListener("drop", e => { e.preventDefault() });
 const template = document.createElement("template");
 template.innerHTML = `
 <div class="drop-zone">
-<div class="cover zone">
+<div class="cover zone" type="cover">
     <span class="icon" data-icon="cameraSpark"></span>
     <div class="img-preview">
         <img src=" " alt="" hidden>
     </div>
     <input type="file" hidden name="profile picture" placeholder="filePicker">
 </div>
-<div class="pfp zone">
+<div class="pfp zone" type="avatar">
     <div class="img-preview">
         <span class="icon" data-icon="cameraSpark"></span>
         <img src=" " alt="" hidden>
@@ -67,9 +67,9 @@ class ImgUpload extends HTMLElement {
         style.rel = "preload";
         style.as = "style";
         style.onload = () => { style.rel = "stylesheet" };
-        style.href = new URL("./dropzone.css", import.meta.url);
+        style.href = new URL("./imgUpload.css", import.meta.url);
         shadow.append(style);
-        shadow.append(dropzone);
+        shadow.append(zones);
         const uploads = dropzone.querySelectorAll(".zone");
         uploads.forEach(upload => {
             const data = {
@@ -77,7 +77,8 @@ class ImgUpload extends HTMLElement {
                 icon: upload.querySelector(".icon"),
                 img: upload.querySelector("img"),
                 preview: upload.querySelector(".img-preview"),
-            }
+            };
+            this.uploads = {};
             upload.addEventListener("click", () => { data.input.click() });
             upload.addEventListener("dragover", (e) => { e.preventDefault() });
             upload.addEventListener("drop", (e) => {
@@ -89,14 +90,33 @@ class ImgUpload extends HTMLElement {
                     previewFile(files[0], data);
                 };
             });
-
             data.input.addEventListener("change", () => {
+                const type = upload.getAttribute("type");
+                this.uploads[type] = data;
                 const file = data.input.files[0];
                 previewFile(file, data);
+
+                this.dispatchEvent(
+                    new CustomEvent("image-selected", {
+                        detail: { file, type },
+                        bubbles: true
+                    })
+                );
             });
         });
+    };
+
+    setImage(type, file) {
+        const data = this.uploads[type];
+
+        if (!data) return;
+
+        previewFile(file, data);
     }
 }
 
 customElements.define("img-upload", ImgUpload);
+console.log("ImgUpload registered");
+console.log(customElements.get("img-upload"));
+console.log(import.meta.url);
 export default ImgUpload;
