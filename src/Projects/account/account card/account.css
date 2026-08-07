@@ -57,10 +57,10 @@ article {
     scroll-snap-align: start;
 }
 
-h1 {
+/*h1 {
     font-size: 25px;
     color: var(--clr-plain);
-}
+}*/
 
 .cards {
     display: flex;
