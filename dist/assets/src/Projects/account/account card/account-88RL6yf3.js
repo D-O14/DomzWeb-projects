@@ -1,4 +1,4 @@
-import"../../../../modulepreload-polyfill-DS6cw923.js";import{t as e}from"../../../../icons-Cghu45S2.js";function t(e,t,n){let r=e.transaction(t,n);return{transaction:r,store:r.objectStore(t)}}document.addEventListener(`dragover`,e=>{e.preventDefault()}),document.addEventListener(`drop`,e=>{e.preventDefault()});var n=document.createElement(`template`);n.innerHTML=`
+import"../../../../modulepreload-polyfill-loNJNkyP.js";import{t as e}from"../../../../icons-DazonMdW.js";function t(e,t,n){let r=e.transaction(t,n);return{transaction:r,store:r.objectStore(t)}}document.addEventListener(`dragover`,e=>{e.preventDefault()}),document.addEventListener(`drop`,e=>{e.preventDefault()});var n=document.createElement(`template`);n.innerHTML=`
 <div class="drop-zone">
     <div class="cover zone" type="cover">
         <div class="img-preview">

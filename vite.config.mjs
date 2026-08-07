@@ -24,11 +24,14 @@ function getEntries(directories) {
     return entries;
 }
 
-const pages = getEntries([
-    "src/Apps",
-    "src/Projects",
-    "src/Websites",
-]);
+const pages = {
+    main: path.resolve(__dirname, "./index.html"),
+    ...getEntries([
+        "src/Apps",
+        "src/Projects",
+        "src/Websites",
+    ])
+};
 
 export default defineConfig({
     base: "/DomzWeb-projects/",
