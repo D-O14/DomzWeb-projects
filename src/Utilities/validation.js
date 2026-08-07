@@ -43,18 +43,14 @@ export function getFields(input) {
     return {
         container, icon: container.querySelector("span"),
         field, error: field.querySelector(".error-text"),
-        //errorIcon: field.querySelector(".error-icon"),
     }
-    initializeIcons(field);
 }
 
 export function showError(input, message) {
     const { container, icon, error } = getFields(input);
     container.classList.add("error");
     icon.classList.add("error");
-    //errorIcon.dataset.icon = "exclaim";
     error.textContent = message;
-    initializeIcons(field);
     return false;
 }
 
@@ -62,7 +58,6 @@ export function clearError(input) {
     const { container, icon, error } = getFields(input);
     container.classList.remove("error");
     icon.classList.remove("error");
-    //errorIcon.dataset.icon = "";
     error.textContent = "";
     return true;
 }
