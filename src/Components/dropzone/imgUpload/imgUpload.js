@@ -9,7 +9,7 @@ template.innerHTML = `
     <div class="cover zone" type="cover">
         <div class="img-preview">
             <span class="icon" data-icon="cameraSpark"></span>
-            <img src=" " alt="" hidden>
+            <img src=" " alt="Your account cover image" hidden height="120px" width="400px" loading="lazy" decoding="async">
         </div>
         <input type="file" hidden name="cover" placeholder="filePicker">
     </div>
@@ -17,7 +17,7 @@ template.innerHTML = `
     <div class="pfp zone" type="avatar">
         <div class="img-preview">
             <span class="icon" data-icon="cameraSpark"></span>
-            <img src=" " alt="" hidden>
+            <img src=" " alt="Your avatar profile image" hidden height="80px" width="80px" loading="lazy" decoding="async">
         </div>
         <input type="file" hidden name="avatar" placeholder="filepicker">
     </div>
