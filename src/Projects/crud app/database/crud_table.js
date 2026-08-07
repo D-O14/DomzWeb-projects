@@ -1,4 +1,4 @@
-import { calcAge, getGender, validateName, validateEmail, validateDOB } from "./crud_form.js";
+import { calcAge, getGender, validateName, validateEmail, validateDOB } from "../form/crud_form.js";
 
 const title = document.title;
 document.addEventListener("visibilitychange", function () {

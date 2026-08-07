@@ -1,3 +1,5 @@
+import "./bakery.css";
+
 const CardBtn = document.querySelectorAll(".CardBtn");
 const links = document.querySelectorAll(".link");
 const line = document.querySelector(".line");
