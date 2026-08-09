@@ -1,8 +1,8 @@
 import { icons, initializeIcons } from "../../../Assets/Icons/icons";
+import { createStyle, createTemplate } from "@utils/component.js";
 
-const template = document.createElement("template");
-template.innerHTML = `
-<div class="drop-zone">
+const template = createTemplate(
+`<div class="drop-zone">
 <span class="icon" data-icon="upload"></span>
 <div class="dropzone-content">
 <h4>Choose or drop a file. Any <button class="uploadBtn">file</button>.</h4>
@@ -20,8 +20,9 @@ template.innerHTML = `
         </template>
     </div>
     <input type="file" id="filePicker" hidden>
-</div>
-`;
+</div>`
+);
+
 const dropZone = template.content.cloneNode(true);
 const events = ["dragleave", "dragend"];
 
@@ -29,11 +30,7 @@ class DropZone extends HTMLElement {
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
-        const style = document.createElement("link");
-        style.rel = "preload";
-        style.as = "style";
-        style.onload = () => { style.rel = "stylesheet" };
-        style.href = new URL("./dropzone.css", import.meta.url);
+        const style = createStyle("./dropzone.css", import.meta.url);
         shadow.append(style);
         shadow.append(dropZone);
 

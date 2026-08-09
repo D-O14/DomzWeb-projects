@@ -9,6 +9,11 @@ export function charCount(textArea) {
     charCount.textContent = `${ count } / ${ max } characters`;
 };
 
+export function copy(text) {
+    navigator.clipboard.writeText(text);
+    console.log(`${ text } copied to clipboard`);
+};
+
 export function wordCounter(text) {
     return text.trim().split(/\s+/).filter(Boolean).length
 };

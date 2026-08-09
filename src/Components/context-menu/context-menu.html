@@ -4,28 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Context Menu Component">
+    <meta property="og:description" content="A multi-purpose menu designed for multiple operations in an app.">
     <title>Context Menu Component</title>
-    <link rel="preload" onload="this.rel='stylesheet'" as="style" href="context-menu.css">
 </head>
 
 <body>
-    <div class="container">
-        <menu class="menu context-hidden">
-            <ul class="menu-list primary"></ul>
-            <ul class="menu-list secondary"></ul>
-            <ul class="menu-list danger"></ul>
-        </menu>
-
-        <template class="menu-template">
-            <li class="menu-item">
-                <button class="menu-btn">
-
-                </button>
-            </li>
-        </template>
-    </div>
+        <div class="card"></div>
+        <context-menu></context-menu>
 </body>
 
-<script src="context-menu.js" defer></script>
-
+<script src="./context-menu.js" type="module" defer></script>
 </html>

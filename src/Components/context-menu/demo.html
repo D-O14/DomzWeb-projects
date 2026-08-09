@@ -1,11 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Context Menu Features</title>
 </head>
+
 <body>
-    
+
 </body>
+
+<script type="module" defer>
+    import { icons } from "@assets/Icons/icons.js";
+
+    class menuItem {
+        constructor(_label, _icon, _section) {
+            this.icon = _icon;
+            this.label = _label;
+            this.section = _section;
+        };
+
+        display() { console.log(`${ this.label }`) };
+    };
+
+    const menuItems = [
+        { menuItem: new menuItem("Delete", icons.delete, "danger") },
+        { menuitem: new menuItem("copy", icons.copy, "secondary") },
+        { menuItem: new menuItem("Share", icons.share, "primary") },
+        { menuItem: new menuItem("Edit", icons.edit, "primary") },
+        { menuItem: new menuItem("Copy Link", icons.link, "secondary") },
+        { menuItem: new menuItem("Move to", icons.folder, "secondary") },
+        { menuItem: new menuItem("Archive", icons.archive, "secondary") },
+        { menuItem: new menuItem("Download", icons.download, "secondary") },
+        { menuItem: new menuItem("View Details", icons.exclaimOutline, "secondary") },
+    ];
+
+    menuItems.forEach(menuItem => { console.log(menuItem) });
+
+    const menuItem1 = new menuItem("Lock", icons.userLock, "secondary");
+    const menuItem2 = new menuItem("Make private", icons.private, "secondary");
+    menuItem2.display();
+
+</script>
+
 </html>
