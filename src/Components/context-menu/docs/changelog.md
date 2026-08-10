@@ -1,0 +1,17 @@
+# Undocumented
+- Modified UI
+- Added Keyboard Events
+- Added Glassmorphism in the design
+- Added functionality to other buttons
+- Added Positioning
+- Made Menu Dynamic
+- Added Copy Link Action
+- Added Right Click
+- Added Click outside to exit
+- Used ClassNames 
+- Used Icons Library
+- Added section separation
+- Added Pointer support
+- Added Animation
+- Used Web Share API
+- Made into web component

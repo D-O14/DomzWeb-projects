@@ -1,9 +1,14 @@
-const indicators = document.querySelectorAll(".indicator");
-const carousel = document.querySelector(".carousel");
-const cards = document.querySelectorAll(".card");
-const next = document.querySelector(".next");
-const prev = document.querySelector(".prev");
-let currentIndex = 2;
+import "./carousel.css";
+import { icons } from "@assets/Icons/icons.js";
+import { createTemplate, createStyle } from "@utils/component.js";
+
+const carouselItems = [
+    { img: "../../Assets/Images/pic_unsplash(6).jpg", name: "Special Pizza", price: "", },
+    { img: "../../Assets/Images/pic_unsplash(3).jpg", name: "Straw Cake", price: "", },
+    { img: "../../Assets/Images/pic_unsplash(1).jpg", name: "Vanilla Cake", price: "", },
+    { img: "../../Assets/Images/pic_unsplash(2).jpg", name: "Meatball", price: "", },
+    { img: "../../Assets/Images/pic_unsplash(4).jpg", name: "Burger", price: "", },
+]
 
 function updateCarousel() {
     cards.forEach(card => {

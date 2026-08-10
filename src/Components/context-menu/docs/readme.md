@@ -12,18 +12,18 @@
 - [✔] Section separation
 - [✔] Pointer support
 - [✔] Added Animation
+- [✔] Added Positioning
 
 ## To-do
-- [] Nested Menus
-- [] Turn into web component
+- [✔] Turn into web component
 - [] Re-use in notes app:
-    - [] Use Web Share API
+    - [✔] Use Web Share API
     - [] Make Content downloadable
-    - [] Copy notes
+    - [✔] Copy notes
     - [] Edit Content
-- [] Add aria-attributes
-- [] Learn Web Share API
-- [] Add functionality to other buttons
+- [✔] Add aria-attributes
+- [✔] Learn Web Share API
+- [✔] Add functionality to other buttons
 
 ## Events
 - contextmenu event handler: to enable right click to reveal the menu
@@ -39,19 +39,28 @@
     ```js
     navigator.clipboard.writeText();
     ```
+- Web Share API for sharing content: 
+```js
+navigator.share();
+```
+- Web components
 
 ## Accessibility
 - `Esc` keyboard event escapes the menu when open (closes it)
 - Can be focused
+- Arrow down keys for navigating to the previous item
+- Arrow up keys for navigating to the next item
+- First item is focused on initial open
+- Previously selected item is focused on next open
 
 ## Concepts Learned
 - Pointer events
+- Accessibility
 - Dynamic object rendering
 - Using functions from objects
 - context menu event listener
 
 ## Ideas
-- Command palette compatibility
 - Mobile bottom sheet
 
 ## Will be used by

@@ -1,4 +1,6 @@
 @import "@styles/base/resets.css";
+@import "@assets/designs/shadows/shadows.css";
+@import "@assets/designs/animations/animations.css";
 
 :root {
     --bg-surface: hsla(250, 80%, 95%);
@@ -18,12 +20,7 @@
     --clr-danger: hsl(358, 74%, 49%);
     --clr-link: hsl(210, 100%, 50%);
 
-    --shadow-menu: 
-        4px 0px 2px hsla(224, 71%, 4%, 0.06),
-        -16px 2px 7px hsla(224, 71%, 4%, 0.05),
-        -35px 4px 16px hsla(224, 71%, 4%, 0.04),
-        -62px 7px 28px hsla(224, 71%, 4%, 0.02),
-        -97px 11px 44px hsla(224, 71%, 4%, 0.01);
+    --shadow-menu: var(--shadow);
 }
 
 body {
@@ -60,51 +57,16 @@ button {
     -webkit-backdrop-filter: blur(8px);
 }
 
-.menu-hidden {
-    animation: scaleOut .5s ease forwards;
-}
-
-.menu-shown {
-    animation: scaleIn .5s ease forwards;
-}
+.menu-hidden { animation: scaleOut .5s ease forwards; }
+.menu-shown { animation: scaleIn .5s ease forwards; }
 
 .card{
-    width: 200px;
-    height: 200px;
+    width: 250px;
+    height: 250px;
+    padding: 1em;
     border-radius: .5em;
+    text-align: left;
     box-shadow: var(--shadow-menu);
-}
-
-/*.card:hover{
-    box-shadow: inset 4px 4px 16px hsla(0, 0%, 8%, .16);
-}*/
-
-@keyframes scaleIn {
-    from {
-        /*transform-origin: top right;*/
-        transform: translateY(-40px) scale(0);
-        opacity: 0;
-    }
-
-    to {
-        /*transform-origin: center;*/
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes scaleOut {
-    from {
-        /*transform-origin: center;*/
-        transform: translateY(0) scale(1);
-        opacity: 1;
-    }
-
-    to {
-        /*transform-origin: top right;*/
-        transform: translateY(-40px) scale(0);
-        opacity: 0;
-    }
 }
 
 .menu-list {
@@ -115,9 +77,7 @@ button {
 
 }
 
-.menu-list+.menu-list {
-    border-top: var(--brdr-divider);
-}
+.menu-list+.menu-list { border-top: var(--brdr-divider); }
 
 .menu-item {
     width: 100%;
@@ -139,9 +99,7 @@ button {
     border: 1px solid transparent;
 }
 
-.menu-btn:hover svg {
-    stroke: var(--txt-primary);
-}
+.menu-btn:hover svg { stroke: var(--txt-primary); }
 
 .menu-item:hover {
     scale: .95;
@@ -156,17 +114,13 @@ button {
     stroke: var(--txt-secondary);
 }
 
-.menu-btn svg:nth-of-type(2) {
-    margin-right: 0;
-    position: absolute;
-    right: 8px;
-}
-
 .copy-link:hover,
 .copy-link.focused {
     color: var(--clr-link);
     background: var(--bg-link);
 }
+
+.copy-link:hover svg { stroke: var(--clr-link); }
 
 .download:hover,
 .download.focused {
@@ -175,28 +129,20 @@ button {
 }
 
 .download:hover svg,
-.download.focused svg {
-    stroke: var(--clr-download)
-}
+.download.focused svg { stroke: var(--clr-download); }
 
-.copy-link:hover svg {
-    stroke: var(--clr-link)
-}
+.delete { color: var(--clr-danger); }
 
-.delete {
-    color: var(--clr-danger);
-}
-
-.delete svg {
-    stroke: var(--clr-danger);
-}
+.delete svg { stroke: var(--clr-danger); }
 
 .delete:hover,
-.delete.focused {
-    background: var(--bg-danger);
-}
+.delete.focused { background: var(--bg-danger); }
 
 .delete:hover svg,
-.delete.focused svg {
-    stroke: var(--clr-danger);
+.delete.focused svg { stroke: var(--clr-danger); }
+
+.deleted{
+    transform-origin: bottom left;
+    transition: .5s ease-in-out;
+    transform: scale(0);
 }

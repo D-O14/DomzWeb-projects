@@ -1,3 +1,4 @@
+import "./sidebar.css";
 import { icons } from "../../../Assets/Icons/icons.js"; 
 
 const app = document.getElementById("app");

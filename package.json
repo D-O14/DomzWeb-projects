@@ -20,8 +20,8 @@
 		"dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"tailwindcss": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch",
-		"build:css": "tailwindcss -i ./src/css/input.css -o ./src/css/output.css --minify"
+		"tailwindcss": "tailwindcss -i ./src/Styles/tailwindcss/input.css -o ./src/Styles/tailwindcss/output.css --watch",
+		"build:css": "tailwindcss -i ./src/Styles/tailwindcss/input.css -o ./src/Styles/tailwindcss/output.css --minify"
 	},
 	"devDependencies": {
 		"autoprefixer": "^10.4.24",

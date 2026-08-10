@@ -3,5 +3,8 @@
             0 4px 6px hsla(0, 0%, 0%, 5%),
             0 10px 20px hsla(0, 0%, 0%, 1%),
             0 20px 40px hsla(0, 0%, 0%, 15%);
+            
     --muted: hsl(0, 0%, 50%);
+
+    --clr-plain: hsl(0, 0%, 100%);
 }
