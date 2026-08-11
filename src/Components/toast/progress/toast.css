@@ -1,0 +1,81 @@
+body {
+    position: relative;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    width: 100%;
+    max-width: 450px;
+    gap: 1.5em;
+    opacity: 0;
+    display: flex;
+    padding: 1.25em;
+    overflow: hidden;
+    align-items: center;
+    transform: scale(0);
+    border-radius: .5rem;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    transition: .5s ease-in-out;
+    border-left: 4px solid hsl(250, 80%, 50%);
+}
+
+.toast .checkmark svg {
+    width: 28px;
+    height: 28px;
+    border-radius: 5rem;
+    fill: hsl(250, 80%, 50%);
+    box-shadow: 0px 0px 10px hsl(250, 80%, 60%);
+}
+
+.close {
+    cursor: pointer;
+}
+
+.content {
+    width: 100%;
+    position: relative;
+}
+
+.hide {
+    animation: scaleOut .3s ease-in-out;
+}
+
+.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 3px;
+    width: 100%;
+}
+
+.visible .progress::before {
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+    to {
+        right: 100%;
+    }
+}
+
+.progress::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background: hsl(250, 80%, 50%);
+}
