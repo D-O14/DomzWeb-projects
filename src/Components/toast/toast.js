@@ -1,16 +1,43 @@
 import "./toast.css";
+import { createTemplate, createStyles } from "@utils/component.js";
 import { icons, initializeIcons } from "@assets/Icons/icons.js";
 
-const activeToasts = []; 
+const template = createTemplate(
+    `<div class="toast">
+    <span class="icon"></span>
+    <div>
+        <strong class="status"></strong>
+        <p class="toast-msg"></p>
+    </div>
+    <button class="close-btn">
+
+    </button>      
+</div>`
+);
+
+const variants = {
+    success: { icon: icons.check },
+    error: { icon: icons.error },
+    warning: { icon: icons.warning },
+    message: { icon: icons.message }
+};
+
+class toast{
+    constructor() {
+        super();
+    }
+}
+
+const activeToasts = [];
 const buttons = document.querySelectorAll(".btn");
 const template = document.querySelector("template");
 const toasts = document.querySelector(".toasts");
 
 const toastIcons = {
-    success: icons.check,
-    error: icons.error,
-    warning: icons.warning,
-    message: icons.message,
+    //success: ,
+    //error: icons.error,
+    //warning: icons.warning,
+    //message: icons.message,
 };
  
 function showToast(status, icon, message) {
