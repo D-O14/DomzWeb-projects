@@ -20,7 +20,6 @@ html {
 }
 
 @media (prefers-reduced-motion: reduce) {
-
     *::before,
     *::after,
     * {
@@ -30,32 +29,50 @@ html {
 }
 
 :root {
-    --bg-menu: hsla(0, 0%, 95%, .275);
+    --box-shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+
     --bg-danger: hsl(0, 90%, 45%);
-    --bg-danger-btn: hsl(0, 90%, 95%);
-    --bg-danger-icon: hsla(0, 90%, 95%, .5);
+    --bg-update: hsl(0, 0%, 10%);
+    --bg-confirm: var(--clr-confirm);
+    --bg-danger-icon: hsla(0, 90%, 90%, .65);
+    --bg-confirm-icon: hsl(210, 90%, 90%, .65);
+    --bg-update-icon: hsl(0, 0%, 70%, .65);
+
+    --btn-hover: hsl(0, 0%, 95%);
+    --danger-btn-hover: hsl(0, 90%, 35%);
+    --confirm-btn-hover: hsl(210, 67%, 35%);
+    --update-btn-hover: hsl(0, 0%, 25%);
 
     --clr-danger: var(--bg-danger);
-    --clr-close: hsl(240, 40%, 17%);
-    --clr-heading: hsl(210, 50%, 22%);
+    --clr-update: var(--bg-update);
+    --clr-confirm: hsl(210, 67%, 45%);
+    --clr-primary: hsl(0, 0%, 0%);
 
-    --backdrop: hsla(0, 0%, 10%, .5);
+    --brdr-btn: 1px solid hsl(0, 0%, 80%);
+}
 
-    --brdr-danger: 4px solid var(--bg-danger);
-    --brdr-top: 1px solid hsl(0, 0%, 88%);
+h1 {
+    color: var(--clr-primary);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+p {
+    font-size: 16px;
+    color: var(--muted);
 }
 
 dialog {
-    width: 100%;
+    max-width: 100%;
     margin: auto;
-    border: none;
-    max-width: 500px;
-    box-shadow: var(--shadow);
-    border-top: var(--brdr-danger);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-bottom-left-radius: .25em;
-    border-bottom-right-radius: .25em;
+    width: 450px;
+    padding: 1.5em;
+    border-radius: .5em;
+    border: var(--brdr-dialog);
+    box-shadow: var(--box-shadow);
 }
 
 dialog.open {
@@ -66,31 +83,29 @@ dialog.closing {
     animation: slideOut .5s ease forwards;
 }
 
-p { color: var(--muted); }
+menu {
+    display: flex;
+    gap: 1em;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
 
 span.icon {
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    padding: .25em .5em;
+    padding: .6em .45em;
+    border-radius: .25em;
     background: var(--bg-danger-icon);
+    box-shadow: var(--icon-shadow);
 }
 
 span.icon svg {
-    width: 24px;
-    height: 24px;
+    display: inline;
+    transform: translate(0);
+    vertical-align: middle;
     stroke: var(--clr-danger);
 }
 
-menu {
-    width: 100%;
-    display: flex;
-    gap: 1em;
-    margin-top: 1em;
-    padding: 1em 2em;
-    border-top: var(--brdr-top);
-    background: var(--bg-menu);
-    justify-content: flex-end;
+button:focus-within{
+    border: 2px solid;
 }
 
 ::backdrop {
@@ -100,33 +115,58 @@ menu {
 }
 
 .dialog {
-    gap: 1em;
-    width: 100%;
     display: flex;
-    padding: 1em 2em;
-    align-items: start;
-    justify-content: flex-start;
+    gap: 1em;
+    flex-direction: column;
 }
 
-.cancel {
-    background: none;
-    color: var(--clr-close);
-}
-
-.delete {
-    color: var(--clr-danger);
-    background: var(--bg-danger-btn);
-}
-
-.dialog-heading {
-    font-size: 1.5rem;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.header {
+.dialogs{
     display: flex;
     align-items: center;
-    justify-content: start;
-    gap: .75em;
+}
+
+.heading {
+    margin-top: 20px;
+}
+
+.dismissBtn {
+    background: none;
+}
+
+.confirmBtn {
+    background: none;
+    color: var(--clr-plain);
+    background: var(--bg-danger);
+}
+
+.confirm .icon{
+    background: var(--bg-confirm-icon);
+}
+
+.confirm .icon svg{
+    stroke: var(--clr-confirm);
+}
+
+.confirm .confirmBtn{
+    background: var(--bg-confirm);
+}
+
+.confirm .confirmBtn:hover{
+    background: var(--confirm-btn-hover);
+}
+
+.update .icon{
+    background: var(--bg-update-icon);
+}
+
+.update .icon svg{
+    stroke: var(--clr-update);
+}
+
+.update .confirmBtn{
+    background: var(--bg-update);
+}
+
+.update .confirmBtn:hover{
+    background: var(--update-btn-hover);
 }
