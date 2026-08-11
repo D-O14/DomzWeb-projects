@@ -81,6 +81,12 @@ span.icon svg {
     stroke: var(--clr-danger);
 }
 
+::backdrop {
+    background: var(--backdrop);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
 .dialog {
     display: flex;
     gap: 2em;
@@ -93,19 +99,10 @@ span.icon svg {
 
 .dismissBtn {
     background: none;
-    border: var(--brdr-btn);
 }
 
 .dangerBtn {
     background: none;
     color: var(--clr-plain);
     background: var(--bg-danger);
-}
-
-.dismissBtn:hover {
-    background: var(--btn-hover);
-}
-
-.dangerBtn:hover {
-    background: var(--danger-btn-hover);
 }

@@ -6,19 +6,19 @@
     <title>Dynamic Confirmation dialog</title>
 </head>
 <body>
-    <dialog>
+    <dialog open>
         <div class="dialog">
             <div class="content">
-                <span class="icon" data-icon="delete"></span>
+                <span class="icon bg-red-200" data-icon="delete"></span>
                 <h1 class="heading">Are you sure you want to delete this folder?</h1>
                 <p>This action cannot be undone</p>
             </div>
             <menu>
-                <button class="dismissBtn hover:bg-gray-100 rounded-md pr-4 pl-4">Cancel</button>
+                <button class="dismissBtn hover:bg-gray-100 border-gray-400 rounded-md pr-4 pl-4">Cancel</button>
                 <button class="dangerBtn hover:bg-red-800 rounded-md pr-4 pl-4">Delete</button>
             </menu>
         </div>
-        </dialog>
+    </dialog>
 </body>
 <script type="module" src="./confirm-dialog.js"></script>
 </html>
