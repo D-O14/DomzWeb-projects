@@ -26,34 +26,62 @@
             Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    
+    :root {
+        --bg-success-icon: hsl(162, 78%, 17%);
+        --bg-toast: linear-gradient(90deg, hsl(212, 95%, 15%) 0%, hsl(227, 17%, 16%) 40%);
+        
+        --clr-success-icon: hsl(161, 89%, 55%);
+    }
+
+    body{
+        height: 100dvh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .toast {
+        width: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 1em;
+        border-radius: .5em;
+        box-shadow: var(--shadow);
+    }
+
+    .icon:not(.close .icon) {
+        width: 2em;
+        height: 2em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: .5em;
+        background: var(--bg-success-icon);
+    }
+
+    .icon:not(.close .icon) svg {
+        stroke: var(--clr-success-icon);
+    }
 </style>
 
 <body>
+    <div class="toast">
+        <span class="icon" data-icon="check"></span>
+        <div class="content">
+            <strong>Success</strong>
+            <p>Toast notification created successfully!</p>
+        </div>
+        <button class="close" aria-label="close">
+            <span class="icon" data-icon="close"></span>
+        </button>
+    </div>
 </body>
 <script type="module" defer>
     import { icons, initializeIcons } from "@assets/Icons/icons.js";
     initializeIcons(document);
 
-    const button = document.querySelector("button");
-    const toast = document.querySelector(".toast");
-    const close = document.querySelector(".close");
-    const progress = document.querySelector(".progress");
-
-    button.addEventListener("click", () => {
-        toast.classList.add("visible");
-        setTimeout(() => {
-            toast.classList.add("hide");
-        }, 5000);
-        setTimeout(() => {
-            toast.classList.remove("visible");
-        }, 5300);
-
-     });
-
-    close.addEventListener("click", () => {
-        toast.classList.add("hide");
-    });
 </script>
 
 </html>

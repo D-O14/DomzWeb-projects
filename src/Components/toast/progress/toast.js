@@ -15,7 +15,6 @@ button.addEventListener("click", () => {
     setTimeout(() => {
         toast.classList.remove("visible");
     }, 5300);
-
 });
 
 close.addEventListener("click", () => {
