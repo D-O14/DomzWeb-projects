@@ -38,7 +38,6 @@ class Toast extends HTMLElement {
 
     renderToast(options) {
         const { status, icon, message } = options;
-        //this.toast = this.notif.cloneNode(true);
         this.closeBtn = this.notif.querySelector(".close");
         this.notif.querySelector(".status").textContent = status;
         this.notif.querySelector(".toast-msg").textContent = message;
@@ -78,6 +77,6 @@ const toastNotif = document.querySelector("toast-notif");
 button.addEventListener("click", () => {
     toastNotif.showToast({
         status: "error",
-        message: "Toast creation failure",
+        message: "Toast creation failed",
     });
 });
