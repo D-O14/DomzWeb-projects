@@ -1,5 +1,6 @@
+import "./notes_app.css";
+
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
-console.log(quickNotes);
 
 const notesContainer = document.getElementById("notesContainer");
 const noteBox = document.querySelector("#noteBox");
