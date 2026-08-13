@@ -35,7 +35,7 @@ p {
     width: 100%;
     margin: 10px;
     padding: 1.25em;
-    flex: 0 0 250px;
+    flex: 0 0 300px;
     text-align: left;
     border-radius: 10px;
     border: 1px solid hsl(0, 0%, 80%);
@@ -72,4 +72,22 @@ p {
     font-size: 1em;
     border: 1px solid;
     color: hsla(0, 0%, 50%, .8);
+}
+
+.welcome-msg{
+    margin: 0;
+    padding: 10px;
+    font-size: 2.5em;
+    border-radius: 5px;
+    color: hsl(0, 0%, 100%);
+    background: hsl(120, 100%, 42%);
+}
+
+.login-prompt{
+    margin: 0;
+    padding: 10px;
+    font-size: 2.5em;
+    border-radius: 5px;
+    color: hsl(0, 0%, 100%);
+    background: hsl(0, 100%, 42%);
 }
