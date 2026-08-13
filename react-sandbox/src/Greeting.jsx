@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import Button from "./Button/Button";
 
 function Greeting({ username = "Guest", isLoggedIn = false }) {
     const welcomeMsg = <h2 className="welcome-msg">Welcome, {username}!</h2>;

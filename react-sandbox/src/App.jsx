@@ -1,13 +1,9 @@
-/*import Header from "./Header";
-import Footer from "./Footer";
-import Content from "./Content";
-import Greeting from "./Greeting";*/
-import List from "./List";
+import Counter from "./Counter";
 
-function App() {
+function App(props) {
   return (
     <>
-      <List />
+      <Counter/>
     </>
   )
 }
