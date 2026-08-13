@@ -27,9 +27,16 @@ button {
     border: 1px solid transparent;
 }
 
-p {
-    margin: 0;
+a{
+    text-decoration: none;
+    color: hsl(0, 0%, 0%);
 }
+
+li{
+    list-style: none;
+}
+
+section{ padding: 60px; }
 
 .card {
     width: 100%;
@@ -65,13 +72,6 @@ p {
     flex-wrap: wrap;
     align-items: start;
     justify-content: baseline;
-}
-
-.student {
-    padding: 10px;
-    font-size: 1em;
-    border: 1px solid;
-    color: hsla(0, 0%, 50%, .8);
 }
 
 .welcome-msg{
@@ -122,4 +122,28 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.header{
+    padding: 2em;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.navbar{
+    max-width: 1250px;
+}
+
+.links{
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }

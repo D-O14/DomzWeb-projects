@@ -1,9 +1,16 @@
-import Counter from "./Counter";
+import Header from "./Header";
+import Content from "./Content";
+
 
 function App(props) {
   return (
     <>
-      <Counter/>
+      <Header />
+      <main>
+        <section>
+          <Content/>
+        </section>
+      </main>
     </>
   )
 }

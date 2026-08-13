@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "./Button/Button";
+import { Plus, Minus, RotateCcw } from "lucide-react";
 
 const decrStyles = { background: "red" };
 const incrStyles = { background: "hsl(120, 80%, 50%)" };
@@ -16,9 +17,9 @@ export default function Counter() {
         <>
             <p className="count">Count is {count}</p>
             <menu className="btn-group">
-                <Button text="Increase Count" func={increment} style={incrStyles}/>
-                <Button text="Reset Count" func={reset} />
-                <Button text="Decrease Count" func={decrement} style={decrStyles} />
+                <Button text={<Plus/>} func={increment} style={incrStyles}/>
+                <Button text={<RotateCcw/>} func={reset} />
+                <Button text={<Minus />} func={decrement} style={decrStyles} />
             </menu>
         </>
     )

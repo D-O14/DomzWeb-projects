@@ -8,7 +8,7 @@ function Card({ name="John Doe", desc="Just an average guy named John Doe" }) {
             <img src={profilePic} alt="Profile Picture" width="200px" height="150px" className="img" />
             <h2 className="heading">{name}</h2>
             <p className="desc">{desc}</p>
-            <Button />
+            <Button text="View Profile"/>
         </article>
     )
 }
