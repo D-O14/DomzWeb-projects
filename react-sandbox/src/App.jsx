@@ -1,16 +1,9 @@
-import Header from "./Header";
-import Input from "./Input";
+import Header from "./Header"
 
-
-function App(props) {
+function App() {
   return (
     <>
       <Header />
-      <main>
-        <section>
-          <Input/>
-        </section>
-      </main>
     </>
   )
 }
