@@ -1,8 +1,9 @@
-//import "./notes_app.css";
-//import { closeDialog } from "@utils/utilities.js";
-import { icons, initializeIcons } from "../../../Assets/Icons/icons.js";
+import "./notes_app.css";
+import { closeDialog } from "@utils/utilities.js";
+import { icons, initializeIcons } from "@assets/Icons/icons.js";
 
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
+console.log(quickNotes);
 const form = document.getElementById("form");
 const notes = document.getElementById("notes");
 const dialog = document.getElementById("dialog");
@@ -15,6 +16,16 @@ const addNoteBtn = document.getElementById("addNoteBtn");
 const emptyState = document.getElementById("emptyState");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
+const layoutBtn = document.querySelector(".layoutBtn");
+layoutBtn.addEventListener("click", () => {
+    const layoutIcon = layoutBtn.querySelector(".icon");
+    if (layoutIcon.dataset.icon === "dashboard") {
+        layoutIcon.dataset.icon = "list";   
+    } else {
+        layoutIcon.dataset.icon = "dashboard";
+    }
+    initializeIcons(layoutBtn);
+});
 
 const noteData = {
     container: notes,
@@ -71,9 +82,11 @@ notes.addEventListener("click", (e) => {
 });
 
 function themeSwitch(themeBtn) {
+    const themeIcon = themeBtn.querySelector(".icon");
     const isDark = document.body.classList.toggle("dark-theme");
     localStorage.setItem("theme", isDark ? "dark-mode" : "light-mode");
-    themeBtn.innerHTML = isDark ? `${ icons.sun }` : `${ icons.moon }`;
+    themeIcon.dataset.icon = isDark ? "sun" : "moon";
+    initializeIcons(themeBtn);
 }
 
 function saveNote(items) {
@@ -90,8 +103,8 @@ function deleteNote(deleteBtn, items) {
     const note = deleteBtn.closest(".note-card");
     const id = note.dataset.id;
     note.remove();
-    quickNotes = items.filter(quickNote => { return quickNote.id !== id });
-    localStorage.setItem("quickNotes", JSON.stringify(items));
+    const noteToDelete = items.filter(quickNote => { return quickNote.id != id });
+    localStorage.setItem("quickNotes", JSON.stringify(noteToDelete));
 };
 
 function editNote(editBtn, items) {
@@ -99,8 +112,8 @@ function editNote(editBtn, items) {
     const noteTitle = note.querySelector(".note-title");
     const noteContent = note.querySelector(".note-content");
     const id = note.dataset.id;
-    noteTitle.setAttribute("contenteditable", "true");
-    noteContent.setAttribute("contenteditable", "true");
+    noteTitle.setAttribute("contenteditable", true);
+    noteContent.setAttribute("contenteditable", true);
     noteTitle.focus();
     noteContent.focus();
     const noteToEdit = items.find(quickNote => { return quickNote.id === id });
@@ -125,10 +138,14 @@ function renderNotes({ container, items, btn, placeholder, template }) {
         btn.classList.remove("focus");
         items.forEach(quickNote => {
             const note = template.content.cloneNode(true);
-            note.querySelector(".note-title").textContent = quickNote.title;
+            const noteCard = note.querySelector("article");
+            const noteTitle = note.querySelector(".note-title");
+            noteTitle.textContent = quickNote.title;
             note.querySelector(".note-content").textContent = quickNote.content;
             note.querySelector(".note-card").dataset.id = quickNote.id;
+            if (quickNote.title === "") { noteTitle.textContent = "Untitled Note" }
             container.append(note);
+            initializeIcons(noteCard);
         });
     }
 }

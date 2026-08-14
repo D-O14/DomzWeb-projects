@@ -1,0 +1,15 @@
+# Undocumented
+- Built Dialog
+- Added Dialog animation
+- Created note card
+- Added note card features
+- Rendered notes
+- Stored in local storage
+- Inputted Note data into dialog
+- Made content editable 
+- Added deletion
+- Added theme switching
+- Added quick note badge
+- Added icons
+- Added empty state animation
+- Modified add note button 

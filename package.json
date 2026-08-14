@@ -6,7 +6,8 @@
 		"cors": "^2.8.5",
 		"firebase": "^12.9.0",
 		"gsap": "^3.13.0",
-		"libphonenumber-js": "^1.13.10"
+		"libphonenumber-js": "^1.13.10",
+		"lucide": "^1.31.0"
 	},
 	"name": "website-development",
 	"version": "1.0.0",
