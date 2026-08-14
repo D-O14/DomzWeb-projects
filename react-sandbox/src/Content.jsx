@@ -10,5 +10,11 @@ const people = [
 ];
 
 export default function Content() {
-    return (<><List items={people} /></>);
+    return (
+        <>
+        <div className="cards">
+            <List items={people} />
+        </div>
+        </>
+    );
 };

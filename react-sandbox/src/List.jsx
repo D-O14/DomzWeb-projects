@@ -7,7 +7,7 @@ export default function List({ items = [] }) {
     });
     return (
         <>
-            <div className="cards">{users}</div>
+            {users}
         </>
     );
 };

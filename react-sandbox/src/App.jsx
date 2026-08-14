@@ -8,7 +8,7 @@ function App(props) {
       <Header />
       <main>
         <section>
-          <Content/>
+          <Content />
         </section>
       </main>
     </>
