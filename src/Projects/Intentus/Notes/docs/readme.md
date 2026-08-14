@@ -14,7 +14,9 @@ The notes section of the Intentus productivity app.
 - Animated Deletion state
 - Theme change transitions
 - Date of creation
+- Extract Dialog Component
 - Use illustration for empty state
+- Add deleted item toast
 
 # Roadmap
 -----------------------------------------------

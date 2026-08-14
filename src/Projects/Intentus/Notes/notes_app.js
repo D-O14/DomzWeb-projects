@@ -3,7 +3,7 @@ import { closeDialog } from "@utils/utilities.js";
 import { icons, initializeIcons } from "@assets/Icons/icons.js";
 
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
-console.log(quickNotes);
+
 const form = document.getElementById("form");
 const notes = document.getElementById("notes");
 const dialog = document.getElementById("dialog");

@@ -1,5 +1,5 @@
 import Header from "./Header";
-import Content from "./Content";
+import Input from "./Input";
 
 
 function App(props) {
@@ -8,7 +8,7 @@ function App(props) {
       <Header />
       <main>
         <section>
-          <Content />
+          <Input/>
         </section>
       </main>
     </>

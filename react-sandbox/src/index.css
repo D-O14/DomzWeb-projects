@@ -116,6 +116,14 @@ section{ padding: 60px; }
     /*box-shadow: 3px 4px 5px hsla(0, 0%, 0%, .1);*/
 }
 
+form{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .navbar{
     max-width: 1250px;
 }
