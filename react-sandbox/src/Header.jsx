@@ -1,17 +1,18 @@
 import Button from "./Button/Button";
 
-export default function Header() {
+export default function Header({ links = [] }) {
+    const data = links.map(link => {
+        return <li key={link.location}>
+            <a href={link.path} className={link.className ? link.className : ""}>
+                {link.location}
+            </a>
+        </li>
+    });
     return (
         <header className="header">
             <h2 className="logo">DomzWeb</h2>
             <nav className="navbar">
-                <ul className="links">
-                    <li className="active"><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Blog</a></li>
-                </ul>
+                <ul className="links">{data}</ul>
             </nav>
             <menu className="buttons">
                 <Button text="Login" />

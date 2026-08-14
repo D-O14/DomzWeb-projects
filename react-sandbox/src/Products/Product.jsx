@@ -1,6 +1,7 @@
-import Button from "../Button/Button";
-import { Heart, Star, ShoppingCart } from "lucide-react";
 import cafeImg from "../assets/cafe_items (1).jpg";
+import { Heart, Star, ShoppingCart } from "lucide-react";
+import Button from "../Button/Button";
+import "./product.css";
 
 export default function ({ category = "food", tag = "Popular", name = "Breakfast", price = 1.00, rating = 5.0,
     desc = "The most important meal of the day" }) {

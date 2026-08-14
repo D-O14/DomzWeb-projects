@@ -7,9 +7,9 @@ const incrStyles = { background: "hsl(120, 80%, 50%)" };
 
 export default function Counter() { 
     const [count, setCount] = useState(0);
-    const increment = () => { setCount(count + 1) };
+    const increment = () => { setCount(prevCount => count + 1) };
     const decrement = () => {
-        setCount(count - 1);
+        setCount(prevCount => count - 1);
         if (count <= 0) { setCount(0) };
     };
     const reset = () => { setCount(0) };

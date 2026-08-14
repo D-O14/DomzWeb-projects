@@ -1,9 +1,17 @@
-import Header from "./Header"
+import Header from "./Header";
+
+const links = [
+  { location: "Home", path: "#", className: "active" },
+  { location: "About", path: "#"},
+  { location: "Services", path: "#" },
+  { location: "Contact", path: "#" },
+  { location: "Blog", path: "#" },
+]
 
 function App() {
   return (
     <>
-      <Header />
+      <Header links={links}/>
     </>
   )
 }
