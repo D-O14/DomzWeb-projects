@@ -54,7 +54,10 @@ layoutBtn.addEventListener("click", () => {
         main.classList.add("grid");
     }  else if (layoutIcon.dataset.icon === "grid") {
         layoutIcon.dataset.icon = "list";
-        main.classList.add("list");
+        main.classList.replace("grid", "list");
+    } else if (layoutIcon.dataset.icon === "list") {
+        layoutIcon.dataset.icon = "dashboard";
+        main.classList.remove("list");
     } else {
         layoutIcon.dataset.icon = "dashboard";
         main.classList.remove("grid");
@@ -110,9 +113,12 @@ function saveNote(items) {
 function deleteNote(deleteBtn, items) {
     const note = deleteBtn.closest(".note-card");
     const id = note.dataset.id;
-    note.remove();
-    const noteToDelete = items.filter(quickNote => { return quickNote.id != id });
-    localStorage.setItem("quickNotes", JSON.stringify(noteToDelete));
+    note.classList.add("deleted");
+    setTimeout(() => {
+        note.remove();
+        const noteToDelete = items.filter(quickNote => { return quickNote.id != id });
+        localStorage.setItem("quickNotes", JSON.stringify(noteToDelete));
+    }, 500);
 };
 
 function editNote(editBtn, items) {

@@ -10,13 +10,13 @@ The notes section of the Intentus productivity app.
 - Floating action button
 
 # Upcoming:
-- Layout Changes
-- Animated Deletion state
-- Theme change transitions
-- Date of creation
-- Extract Dialog Component
-- Use illustration for empty state
-- Add deleted item toast
+- [✔️] Layout Changes
+- [✔️] Animated Deletion state
+- [] Theme change transitions
+- [] Date of creation
+- [] Extract Dialog Component
+- [] Use illustration for empty state
+- [] Add deleted item toast
 
 # Roadmap
 -----------------------------------------------
