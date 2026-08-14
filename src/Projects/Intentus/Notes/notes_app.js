@@ -4,6 +4,7 @@ import { icons, initializeIcons } from "@assets/Icons/icons.js";
 
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
 
+const main = document.querySelector("main");
 const form = document.getElementById("form");
 const notes = document.getElementById("notes");
 const dialog = document.getElementById("dialog");
@@ -17,15 +18,6 @@ const emptyState = document.getElementById("emptyState");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
 const layoutBtn = document.querySelector(".layoutBtn");
-layoutBtn.addEventListener("click", () => {
-    const layoutIcon = layoutBtn.querySelector(".icon");
-    if (layoutIcon.dataset.icon === "dashboard") {
-        layoutIcon.dataset.icon = "list";   
-    } else {
-        layoutIcon.dataset.icon = "dashboard";
-    }
-    initializeIcons(layoutBtn);
-});
 
 const noteData = {
     container: notes,
@@ -54,6 +46,22 @@ addNoteBtn.addEventListener("click", () => {
 });
 
 themeBtn.addEventListener("click", () => { themeSwitch(themeBtn) });
+
+layoutBtn.addEventListener("click", () => {
+    const layoutIcon = layoutBtn.querySelector(".icon");
+    if (layoutIcon.dataset.icon === "dashboard") {
+        layoutIcon.dataset.icon = "grid";
+        main.classList.add("grid");
+    }  else if (layoutIcon.dataset.icon === "grid") {
+        layoutIcon.dataset.icon = "list";
+        main.classList.add("list");
+    } else {
+        layoutIcon.dataset.icon = "dashboard";
+        main.classList.remove("grid");
+    }
+    
+    initializeIcons(layoutBtn);
+});
 
 closeBtn.addEventListener("click", () => {
     form.reset();
