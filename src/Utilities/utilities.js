@@ -58,3 +58,12 @@ export function hideLoader(btn) {
     icon.dataset.icon = "";
     icon.textContent = "";
 }
+
+export function closeDialog(dialog) {
+    dialog.classList.remove("open");
+    dialog.classList.add("closing");
+    setTimeout(() => {
+        dialog.close();
+        dialog.classList.remove("closing");
+    }, 400);
+}
