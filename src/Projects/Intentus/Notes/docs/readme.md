@@ -8,15 +8,15 @@ The notes section of the Intentus productivity app.
 - Editing of notes
 - Theme Switching
 - Floating action button
+- Layout Changes
+- Animated Deletion state
+- Theme change transitions
+- Date of creation
+- Use Illustration for empty state
+- Add deleted item toast
 
 # Upcoming:
-- [✔️] Layout Changes
-- [✔️] Animated Deletion state
-- [] Theme change transitions
-- [] Date of creation
 - [] Extract Dialog Component
-- [] Use illustration for empty state
-- [] Add deleted item toast
 
 # Roadmap
 -----------------------------------------------

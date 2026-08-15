@@ -13,3 +13,10 @@
 - Added icons
 - Added empty state animation
 - Modified add note button 
+
+# 15th July 2026
+- Added date of creation
+- Added Theme switching transitions
+- Added deleted state animation
+- Added deleted item toast
+- Added placeholder illustration for empty state

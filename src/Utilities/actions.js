@@ -1,21 +1,22 @@
-export function copy(text) {
+//import "../Components/toast/toast.js";
+
+export function copy(text, toast) {
     navigator.clipboard.writeText(text);
-    console.log(`${ text } copied to clipboard`);
+    toast.showToast({
+        status: "success",
+        message: "Content copied successfully!",
+    });
 };
 
 export function deleteItem(element) {
     element.classList.add("deleted");
-    setTimeout(() => {
-        element.remove();
-        console.log("deleted");
-    }, 500);
+    element.addEventListener("transitionend", () => { element.remove() });
 }
 
 export function edit(element) {
     element.classList.add("editing");
     element.setAttribute("contenteditable", true);
 };
-
 
 export async function share(data) {
     if (navigator.share) {

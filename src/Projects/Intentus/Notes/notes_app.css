@@ -19,18 +19,19 @@ html {
     --bg-fab: hsl(260, 100%, 50%);
     --brand-clr: hsl(237, 100%, 67%);
     --base-clr: hsl(227, 100%, 76%, .15);
-    --surface-clr: hsl(0, 0%, 100%);
+    --bg-surface: hsl(0, 0%, 100%);
     --txt-clr: hsl(228, 17%, 12%);
     --secondary-txt-clr: hsl(227, 14%, 27%);
     --base-transparent-90: hsla(0, 0%, 97%, 0.9);
     --base-transparent-100: hsl(0, 0%, 97%);
     --txt-on-accent: hsl(0, 0%, 100%);
     --accent: hsl(210, 100%, 50%);
+    --txt-muted: hsl(0, 0%, 60%);
     --shadow:
         0 4px 6px hsla(0, 0%, 0%, 5%),
         0 10px 20px hsla(0, 0%, 0%, 1%),
         0 20px 40px hsla(0, 0%, 0%, 15%);
-    --shadow-fab: 2px 2px 4px hsla(240, 100%, 50%, .75);
+    --shadow-fab: 2px 2px 4px hsla(240, 100%, 80%, .75);
     --shadow-fab-hover: 3px 3px 5px hsla(270, 100%, 50%, .75);
     --clr-plain: hsl(0, 0%, 100%);
     --bg-danger: hsl(0, 80%, 50%);
@@ -38,13 +39,15 @@ html {
     --backdrop: hsla(0, 0%, 8%, .8);
     --bg-btn-focus: hsl(237, 100%, 47%);
     --bg-badge: var(--brand-clr);
+    --brdr-empty: 1px solid hsl(250, 50%, 90%);
     --outline-focus: 2px solid hsl(248, 53%, 58%);
+    --empty-shadow: 1px 1px 1px hsl(250, 50%, 9%);
 }
 
 .dark-theme {
     --brand-clr: hsl(237, 100%, 77%);
     --base-clr: hsl(233, 12%, 13%);
-    --surface-clr: hsl(250, 52%, 6%);
+    --bg-surface: hsl(250, 52%, 6%);
     --txt-clr: hsl(0, 0%, 94%);
     --secondary-txt-clr: hsl(229, 11%, 72%);
     --base-transparent-90: hsla(233, 12%, 13%, 0.9);
@@ -59,6 +62,10 @@ html {
         -97px 11px 44px hsla(224, 71%, 4%, 0.01);
     --bg-danger: hsl(0, 90%, 50%);
     --clr-danger: var(--bg-danger);
+    /*--brdr-empty: 4px solid hsl(250, 50%, 9%);
+    --empty-shadow: 2px 2px 4px hsl(250, 50%, 9%);*/
+    --brdr-empty: none;
+    --empty-shadow: none;
 }
 
 /* Base styles */
@@ -66,7 +73,7 @@ html {
 body {
     position: relative;
     color: var(--txt-clr);
-    background: var(--surface-clr);
+    background: var(--bg-surface);
 }
 
 h1,
@@ -113,7 +120,7 @@ dialog {
     margin: auto;
     border-radius: .5rem;
     box-shadow: var(--shadow);
-    background: var(--surface-clr);
+    background: var(--bg-surface);
 }
 
 form {
@@ -155,6 +162,14 @@ menu {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+::view-transition-old(root) {
+    animation-delay: .5s;
+}
+
+::view-transition-new(root) {
+    animation: wrap .5s ease;
 }
 
 /* Dialog Animation Classes */
@@ -220,7 +235,7 @@ svg {
 }
 
 .themeBtn {
-    background: var(--surface-clr);
+    background: var(--bg-surface);
 }
 
 .themeBtn .icon svg {
@@ -249,6 +264,8 @@ svg {
     animation: hover 1s linear 0s infinite forwards;
 }
 
+/* Dynamic classes */
+
 .grid {
     grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
 }
@@ -260,6 +277,21 @@ svg {
 .deleted {
     opacity: 0;
     transform: scale(0);
+}
+
+.empty{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Some stuff */
+
+.date {
+    position: absolute;
+    top: 36px;
+    right: 40px;
+    color: var(--txt-muted);
 }
 
 .form-label {
@@ -289,19 +321,16 @@ svg {
 
 /* Placeholder State */
 
-.empty-container {
-    display: grid;
-    justify-content: center;
-}
-
 .empty-state {
     display: flex;
-    flex-direction: column;
-    align-items: start;
     padding: 2em;
-    border-radius: .5rem;
     border: none;
     margin: 100px auto;
+    align-items: start;
+    border-radius: .5rem;
+    flex-direction: column;
+    /*border: var(--brdr-empty);
+    box-shadow: var(--empty-shadow);*/
 }
 
 .empty-header {
@@ -312,6 +341,12 @@ svg {
 .empty-text {
     opacity: .5;
     margin-bottom: .75rem;
+}
+
+.empty-img {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 10px;
 }
 
 /* Note badge */
@@ -337,14 +372,11 @@ svg {
     position: relative;
     border-radius: .5rem;
     box-shadow: var(--shadow);
-    background: var(--surface-clr);
-    /*transform-origin: bottom left;*/
+    background: var(--bg-surface);
+    transform-origin: bottom left;
     border: 1px solid var(--border-color);
-}
-
-.note-card:hover {
-    transform: translateY(-10px);
-    border-color: var(--brand-clr);
+    transition: opacity .5s ease,
+        transform .5s ease;
 }
 
 .note-actions {
@@ -408,5 +440,35 @@ svg {
     100% {
         transform: scale(.9);
         box-shadow: var(--shadow-fab);
+    }
+}
+
+@keyframes moveIn {
+    from {
+        translate: 100% 0;
+    }
+
+    to {
+        translate: 0 0;
+    }
+}
+
+@keyframes moveOut {
+    from {
+        translate: 0 0;
+    }
+
+    to {
+        translate: -100% 0;
+    }
+}
+
+@keyframes wrap {
+    from {
+        clip-path: circle(0% at 50% 0%);
+    }
+
+    to {
+        clip-path: circle(50% at 95% 20%);
     }
 }

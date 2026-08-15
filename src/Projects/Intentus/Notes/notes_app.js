@@ -1,6 +1,9 @@
+import "@components/toast/toast.js";
 import "./notes_app.css";
-import { closeDialog } from "@utils/utilities.js";
+import { copy, share } from "@utils/actions.js";
 import { icons, initializeIcons } from "@assets/Icons/icons.js";
+import { closeDialog, getCurrentTime } from "@utils/utilities.js";
+//import { icons, initializeIcons } from "../../../Assets/Icons/icons.js";
 
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
 
@@ -15,6 +18,7 @@ const cancelBtn = document.getElementById("cancelBtn");
 const titleInput = document.getElementById("noteTitle");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const emptyState = document.getElementById("emptyState");
+const toastNotif = document.querySelector("toast-notif");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
 const layoutBtn = document.querySelector(".layoutBtn");
@@ -26,6 +30,12 @@ const noteData = {
     placeholder: emptyState,
     template: noteTemplate
 }
+
+/*const shareData = {
+    title: "Card Title",
+    text: target,
+    url: crypto.randomUUID(),
+};*/
 
 document.addEventListener("DOMContentLoaded", () => {
     if (localStorage.getItem("theme") === "dark-mode") {
@@ -45,7 +55,10 @@ addNoteBtn.addEventListener("click", () => {
     dialog.classList.add("open");
 });
 
-themeBtn.addEventListener("click", () => { themeSwitch(themeBtn) });
+themeBtn.addEventListener("click", () => {
+    if (!document.startViewTransition) { themeSwitch(themeBtn); return; }
+    document.startViewTransition(() => { themeSwitch(themeBtn) });
+});
 
 layoutBtn.addEventListener("click", () => {
     const layoutIcon = layoutBtn.querySelector(".icon");
@@ -62,7 +75,6 @@ layoutBtn.addEventListener("click", () => {
         layoutIcon.dataset.icon = "dashboard";
         main.classList.remove("grid");
     }
-    
     initializeIcons(layoutBtn);
 });
 
@@ -86,10 +98,16 @@ form.addEventListener("submit", (e) => {
 });
 
 notes.addEventListener("click", (e) => {
+    const note = notes.querySelector(".note-card");
+    const content = note.querySelector(".note-content");
     const deleteBtn = e.target.closest(".deleteBtn");
     const editBtn = e.target.closest(".editBtn");
+    const copyBtn = e.target.closest(".copyBtn");
+    const shareBtn = e.target.closest(".shareBtn");
+    if (copyBtn) { copy(content.textContent, toastNotif) };
     if (deleteBtn) { deleteNote(deleteBtn, quickNotes) };
     if (editBtn) { editNote(editBtn, quickNotes) };
+    //if (shareBtn) { editNote(editBtn, quickNotes) };
 });
 
 function themeSwitch(themeBtn) {
@@ -105,6 +123,7 @@ function saveNote(items) {
         id: crypto.randomUUID(),
         title: titleInput.value.trim(),
         content: contentInput.value.trim(),
+        date: getCurrentTime(),
     }
     items.unshift(note);
     localStorage.setItem("quickNotes", JSON.stringify(items));
@@ -114,11 +133,15 @@ function deleteNote(deleteBtn, items) {
     const note = deleteBtn.closest(".note-card");
     const id = note.dataset.id;
     note.classList.add("deleted");
-    setTimeout(() => {
+    note.addEventListener("transitionend", () => {
         note.remove();
-        const noteToDelete = items.filter(quickNote => { return quickNote.id != id });
-        localStorage.setItem("quickNotes", JSON.stringify(noteToDelete));
-    }, 500);
+        const notes = items.filter(quickNote => { return quickNote.id != id });
+        localStorage.setItem("quickNotes", JSON.stringify(notes));
+    });
+    toastNotif.showToast({
+        status: "success",
+        message: "Note deleted successfully!",
+    });
 };
 
 function editNote(editBtn, items) {
@@ -132,7 +155,7 @@ function editNote(editBtn, items) {
     noteContent.focus();
     const noteToEdit = items.find(quickNote => { return quickNote.id === id });
     noteTitle.addEventListener("input", () => {
-        noteToEdit.content = noteTitle.textContent;
+        noteToEdit.title = noteTitle.textContent;
         localStorage.setItem("quickNotes", JSON.stringify(items));
     });
     noteContent.addEventListener("input", () => {
@@ -145,15 +168,19 @@ function renderNotes({ container, items, btn, placeholder, template }) {
     container.innerHTML = "";
     if (items.length === 0) {
         const empty = placeholder.content.cloneNode(true);
+        main.classList.add("empty");
         btn.classList.add("focus");
         container.append(empty);
         return;
     } else {
+        main.classList.remove("empty");
         btn.classList.remove("focus");
         items.forEach(quickNote => {
             const note = template.content.cloneNode(true);
             const noteCard = note.querySelector("article");
             const noteTitle = note.querySelector(".note-title");
+            const date = note.querySelector(".date");
+            //date.textContent = `${ quickNote.date }`;
             noteTitle.textContent = quickNote.title;
             note.querySelector(".note-content").textContent = quickNote.content;
             note.querySelector(".note-card").dataset.id = quickNote.id;

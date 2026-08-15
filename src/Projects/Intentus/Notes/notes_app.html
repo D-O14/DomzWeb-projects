@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="./notes_app.css">-->
     <title>Quick Notes</title>
 </head>
 
@@ -26,11 +27,12 @@
             </button>
         </menu>
     </header>
-
+    <toast-notif></toast-notif>
     <main id="notes" class="notes">
         <template id="noteTemplate">
             <article class="note-card" id="noteCard" data-id="">
                 <span class="quick-note">Quick Note</span>
+                <span class="date"></span>
                 <h3 class="note-title"></h3>
                 <p class="note-content"></p>
                 <menu class="note-actions">
@@ -51,12 +53,11 @@
         </template>
 
         <template id="emptyState">
-            <div class="empty-container">
-                <div class="empty-state">
-                    <span class="quick-note">Quick Note</span>
-                    <h2 class="empty-header">No Notes Yet</h2>
-                    <p class="empty-text">Create your first note to get started</p>
-                </div>
+            <div class="empty-state">
+                <span class="quick-note">Quick Note</span>
+                <img src="../../../Assets/Illustrations/add-notes.svg" alt="" class="empty-img">
+                <h2 class="empty-header">No Notes Yet</h2>
+                <p class="empty-text">Create your first note to get started</p>
             </div>
         </template>
     </main>
@@ -71,15 +72,16 @@
             </div>
 
             <form id="form" novalidate autocomplete="off" autocorrect="off">
-                    <label for="noteTitle" class="form-label">
-                        Title
-                        <input type="text" class="form-input" id="noteTitle" name="note title" autocapitalize="on" 
-                        autofocus placeholder="Enter Note Title..">
-                    </label>
-                    <label for="noteContent" class="form-label">
-                        Content
-                        <textarea id="noteContent" name="note content" class="form-textarea" placeholder="Write your note here..."></textarea>
-                    </label>
+                <label for="noteTitle" class="form-label">
+                    Title
+                    <input type="text" class="form-input" id="noteTitle" name="note title" autocapitalize="on" autofocus
+                        placeholder="Enter Note Title..">
+                </label>
+                <label for="noteContent" class="form-label">
+                    Content
+                    <textarea id="noteContent" name="note content" class="form-textarea"
+                        placeholder="Write your note here..."></textarea>
+                </label>
                 <menu class="dialog-actions">
                     <button type="button" class="cancelBtn" id="cancelBtn">Cancel</button>
                     <button type="submit" class="saveBtn" id="saveBtn">Save Note</button>
@@ -91,4 +93,5 @@
 </body>
 
 <script src="./notes_app.js" type="module" defer></script>
+
 </html>

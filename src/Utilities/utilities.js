@@ -67,3 +67,10 @@ export function closeDialog(dialog) {
         dialog.classList.remove("closing");
     }, 400);
 }
+
+export function getCurrentTime() {
+    let hours = String(new Date().getHours()).padStart(2, "0");
+    let minutes = String(new Date().getMinutes()).padStart(2, "0");
+    let suffix = hours >= 12 ? "PM" : "AM";
+    return `${ hours }:${ minutes }${ suffix }`;
+}

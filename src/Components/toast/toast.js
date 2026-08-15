@@ -10,7 +10,7 @@ const template = createTemplate(
         <p class="toast-msg"></p>
     </div>
     <button class="close" aria-label="close">
-        <span class="icon" data-icon="close"></span>
+        <span class="icon .toast-icon" data-icon="close"></span>
     </button>      
 </div>`
 );
@@ -22,8 +22,8 @@ const statuses = {
     message: { className: "message", icon: icons.message }
 };
 
-const activeToasts = [];
-const button = document.querySelector("button");
+//const activeToasts = [];
+const button = document.querySelector(".show");
 
 class Toast extends HTMLElement {
     constructor() {
@@ -55,11 +55,11 @@ class Toast extends HTMLElement {
             this.notif.classList.remove("visible");
         }, 3000);
         this.renderToast({ ...variant, ...options });
-        activeToasts.push(this.notif);
-        if (activeToasts.length > 4) {
+        //activeToasts.push(this.notif);
+        /*if (activeToasts.length > 4) {
             const oldToast = activeToasts.shift();
             oldToast.remove();
-        };
+        };*/
     }
 
     dismissToast() {
@@ -74,9 +74,11 @@ customElements.define("toast-notif", Toast);
 export default Toast;
 
 const toastNotif = document.querySelector("toast-notif");
-button.addEventListener("click", () => {
-    toastNotif.showToast({
-        status: "error",
-        message: "Toast creation failed",
-    });
-});
+if (button) {
+    button.addEventListener("click", () => {
+        toastNotif.showToast({
+            status: "success",
+            message: "Toast created successfully",
+        });
+    });   
+}
