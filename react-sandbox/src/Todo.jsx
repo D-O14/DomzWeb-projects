@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./Button/Button";
+import Input from "./Input";
 
 export default function Todo() {
     const [tasks, setTasks] = useState(["Eat Breakfast", "Take a shower", "Walk the dog"]);
@@ -45,8 +46,8 @@ export default function Todo() {
             <div className="todo-list">
                 <h1>Todo list</h1>
                 <div>
-                    <input type="text" placeholder="Create your first task" value={newTask}
-                        onChange={(e) => { inputChange(e) }} />
+                    <Input type="text" placeholder="Create your first task" value={newTask}
+                        event={(e) => { inputChange(e) }} className="todo-input"/>
                     <Button className="add-btn" text="Add Task" func={() => { addTask() }} />
                 </div>
                 <ol>

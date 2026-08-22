@@ -1,4 +1,3 @@
-import Card from "./Card";
 import List from "./List";
 
 const people = [

@@ -5,9 +5,5 @@ export default function List({ items = [] }) {
     const users = items.map(user => {
         return <Card key={user.id} name={user.name} desc={user.desc} />
     });
-    return (
-        <>
-            {users}
-        </>
-    );
+    return (<>{users}</>);
 };

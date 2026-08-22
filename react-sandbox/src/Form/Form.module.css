@@ -1,0 +1,54 @@
+input{
+    border: none;
+    flex: 1;
+}
+
+form {
+    width: 400px;
+    display: flex;
+    margin: auto;
+    margin-top: 20px;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+input{
+    outline: none;
+}
+
+span > svg{
+    width: 20px;
+    height: 20px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    width: 400px;
+    height: 40px;
+    padding: .5em 1em;
+    border-radius: .25rem;
+    position: relative;
+    border: 1px solid hsl(0, 0%, 50%);
+}
+
+.input::after{
+    content: "";
+    width: 1px;
+    height: 20px;
+    position: absolute;
+    left: 50px;
+    background: hsla(0, 0%, 50%, .5);
+}
+
+.submitBtn {
+    width: 100%;
+}
