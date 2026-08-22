@@ -2,7 +2,7 @@ import Button from "./Button/Button";
 
 export default function Header({ links = [] }) {
     const data = links.map(link => {
-        return <li key={link.location}>
+        return <li key={link.location} className="link">
             <a href={link.path} className={link.className ? link.className : ""}>
                 {link.location}
             </a>

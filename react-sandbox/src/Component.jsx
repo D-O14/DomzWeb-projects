@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "./Button/Button";
 
-export default function () {
+export default function Component() {
     const [cars, setCars] = useState([]);
     const [carYear, setCarYear] = useState(new Date().getFullYear());
     const [carMake, setCarMake] = useState("");

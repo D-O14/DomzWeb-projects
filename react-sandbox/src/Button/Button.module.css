@@ -1,9 +1,9 @@
-.button{
+button{
     color: hsl(0, 0%, 100%);
     background: hsl(210, 100%, 50%);
 }
 
-.button:hover {
+button:hover {
     scale: .95;
     background: hsl(210, 100%, 40%);
 }

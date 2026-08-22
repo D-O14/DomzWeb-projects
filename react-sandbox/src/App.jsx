@@ -1,5 +1,5 @@
+import Clock from "./Clock";
 import Header from "./Header";
-import Component from "./Component";
 
 const links = [
   { location: "Home", path: "#", className: "active" },
@@ -13,7 +13,7 @@ function App() {
   return (
     <>
       <Header links={links} />
-      <Component/>
+      <Clock />
     </>
   )
 }
