@@ -191,16 +191,18 @@ form{
     color: hsl(0, 0%, 20%);
 }
 
-/*label{
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-}*/
-
 input[type="color"]{
     width: 75px;
     height: 50px;
     padding: 5px;
     border-radius: .65rem;
     border: 3px solid hsl(0, 0%, 80%);
+}
+
+.list{
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

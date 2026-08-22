@@ -1,26 +1,28 @@
-import { useState } from "react"
+import { useState } from "react";
+import Button from "./Button/Button";
 
 export default function () {
-    const [car, setCar] = useState({ year: 2024, make: "Ford", model: "Mustang" });
-    function updateCarYear(e) { setCar(prevCar => ({ ...car, year: e.target.value })) };
-    function updateCarMake(e) { setCar(prevCar => ({ ...car, make: e.target.value })) };
-    function updateCarModel(e) { setCar(prevCar => ({ ...car, model: e.target.value })) };
+    const [foods, setFoods] = useState(["Apple", "Orange", "Banana"]);
+    function addFood() { 
+        const newFood = document.getElementById("foodInput").value;
+        document.getElementById("foodInput").value = "";
+        setFoods(prevFoods => [...foods, newFood]);
+    };
+    function removeFood(index) { 
+        const newFoods = foods.filter((_, i) => i !== index);
+        setFoods(newFoods);
+    };
     return (
         <>
-            <div>
-                <p>Your favourite car is: {car.year} {car.make} {car.model}</p>
-                <label>
-                    Year of Car:
-                    <input type="number" value={car.year} onChange={(e) => { updateCarYear(e) }} />
-                </label>
-                <label>
-                    Make of Car:
-                    <input type="text" value={car.make} onChange={(e) => { updateCarMake(e) }} />
-                </label>
-                <label>
-                    Car Model:
-                    <input type="text" value={car.model} onChange={(e) => { updateCarModel(e) }} />
-                </label>
+            <div className="list">
+                <h2>List of Foods</h2>
+                <ul>
+                    {foods.map((food, index) => {
+                        return <li key={index} onClick={() => { removeFood(index) }}>{food}</li>
+                    })}
+                </ul>
+                <input type="text" id="foodInput" placeholder="Enter food name" />
+                <Button text="Add food" func={() => { addFood() }}/>
             </div>
         </>
     );

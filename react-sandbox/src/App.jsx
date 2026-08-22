@@ -1,4 +1,5 @@
 import Header from "./Header";
+import Component from "./Component";
 
 const links = [
   { location: "Home", path: "#", className: "active" },
@@ -11,7 +12,8 @@ const links = [
 function App() {
   return (
     <>
-      <Header links={links}/>
+      <Header links={links} />
+      <Component/>
     </>
   )
 }
