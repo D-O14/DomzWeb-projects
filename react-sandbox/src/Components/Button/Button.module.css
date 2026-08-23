@@ -1,0 +1,15 @@
+button {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5em 1em;
+    border-radius: .25em;
+    color: hsl(0, 0%, 100%);
+    border: 1px solid transparent;
+    background: hsl(210, 100%, 50%);
+}
+
+button:hover {
+    scale: .95;
+    background: hsl(210, 100%, 40%);
+}

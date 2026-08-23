@@ -1,19 +1,17 @@
-import Header from "./Header";
 import Navbar from "./Navbars/navbar - menu/navbar.jsx";
 
 const links = [
-  { location: "Home", path: "#", className: "active" },
+  { location: "Home", path: "#" },
   { location: "About", path: "#" },
-  { location: "Services", path: "#" },
+  { location: "Projects", path: "#" },
+  { location: "Studio", path: "#" },
   { location: "Contact", path: "#" },
-  { location: "Blog", path: "#" },
 ]
 
 function App() {
   return (
     <>
-      <Header links={links} />
-      <Navbar/>
+      <Navbar links={links} />
     </>
   );
 };

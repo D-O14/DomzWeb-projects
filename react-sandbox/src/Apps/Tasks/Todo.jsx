@@ -1,5 +1,6 @@
+import styles from "./Todo.module.css";
+import Button from "../../Button/Button";
 import { useState } from "react";
-import Button from "./Button/Button";
 import Input from "./Input";
 
 export default function Todo() {
@@ -8,14 +9,14 @@ export default function Todo() {
 
     function inputChange(e) { setNewTask(e.target.value) };
 
-    function addTask(index) {
+    function addTask() {
         if (newTask.trim() !== "") {
-            setTasks(prevTask => [...tasks, newTask]);
-            setNewTask("");   
+            setTasks(_ => [...tasks, newTask]);
+            setNewTask("");
         }
     };
 
-    function deleteTask(index) { 
+    function deleteTask(index) {
         const updatedTasks =
             tasks.filter((_, i) => {
                 return i !== index;
@@ -23,7 +24,7 @@ export default function Todo() {
         setTasks(updatedTasks);
     };
 
-    function moveUp(index) { 
+    function moveUp(index) {
         if (index > 0) {
             const updatedTasks = [...tasks];
             [updatedTasks[index], updatedTasks[index - 1]] =
@@ -43,22 +44,22 @@ export default function Todo() {
 
     return (
         <>
-            <div className="todo-list">
+            <div className={styles.todoList}>
                 <h1>Todo list</h1>
                 <div>
                     <Input type="text" placeholder="Create your first task" value={newTask}
-                        event={(e) => { inputChange(e) }} className="todo-input"/>
-                    <Button className="add-btn" text="Add Task" func={() => { addTask() }} />
+                        event={(e) => { inputChange(e) }} className={styles.todoInput} />
+                    <Button className={styles.addBtn} text="Add Task" func={() => { addTask() }} />
                 </div>
                 <ol>
                     {tasks.map((task, index) => {
-                        return <li key={index} className="task">
-                            <span className="text">{task}</span>
+                        return <li key={index} className={styles.task}>
+                            <span className={styles.text}>{task}</span>
                             <menu>
-                                <Button className="btn delete-btn" text="Delete"
+                                <Button className={`${ styles.btn } ${ styles.deleteBtn }`} text="Delete"
                                     func={() => { deleteTask(index) }} />
-                                <Button className="btn moveUp-btn" text="👆" func={() => { moveUp(index) }} />
-                                <Button className="btn moveDown-btn" text="👇" func={() => { moveDown(index) }} />
+                                <Button className={`${ styles.btn } ${ styles.moveUpBtn }`} text="👆" func={() => { moveUp(index) }} />
+                                <Button className={`${ styles.btn } ${ styles.moveDownBtn }`} text="👇" func={() => { moveDown(index) }} />
                             </menu>
                         </li>
                     })}

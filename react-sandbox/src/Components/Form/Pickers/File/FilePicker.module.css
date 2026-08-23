@@ -1,0 +1,29 @@
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+.heading {
+    font-size: 3rem;
+    margin: 50px;
+}
+
+.filePicker {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.imgPreview {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    margin-bottom: 20px;
+    align-items: center;
+    border-radius: 1.5rem;
+    justify-content: center;
+    border: 5px solid hsl(0, 0%, 80%);
+}

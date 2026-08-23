@@ -8,13 +8,13 @@ export default function () {
     };
     return (
         <>
-            <div className="color-picker">
-                <h1 className="heading">Color Picker</h1>
-                <div className="color-display">
-                <p>Selected Color: {color}</p>
+            <div className={styles.colorPicker}>
+                <h1 className={styles.heading}>Color Picker</h1>
+                <div className={styles.colorDisplay}>
+                    <p>Selected Color: {color}</p>
                 </div>
                 <label htmlFor="colorPicker">Select a Color:</label>
-                <input type="color" id="colorPicker" value={color} onChange={(e) => {colorChange(e)}} />
+                <input type="color" id="colorPicker" value={color} onChange={(e) => { colorChange(e) }} />
             </div>
         </>
     );

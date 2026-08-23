@@ -1,4 +1,4 @@
-import Button from "./Button/Button";
+import Button from "../Button/Button";
 
 export default function Header({ links = [] }) {
     const data = links.map(link => {

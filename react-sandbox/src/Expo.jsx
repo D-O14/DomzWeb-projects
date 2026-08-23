@@ -4,7 +4,7 @@ import Button from "./Button/Button";
 export default function Expo() {
     const [count, setCount] = useState(0);
     const [color, setColor] = useState("green");
-    const [title, setTitle] = useState("react sandbox");
+    const title = useState("react sandbox");
     useEffect(() => { document.title = `${ title } (${ count }) ${ color }` }, [count, color]);
     function addCount() { setCount(prevCount => count + 1) };
     function subtractCount() { setCount(prevCount => count - 1) };
