@@ -1,4 +1,6 @@
-import Navbar from "./Navbars/navbar - menu/navbar.jsx";
+import CompA from "./CompA.jsx";
+//import Clock from "./Components/Clock/Clock.jsx";
+//import Navbar from "./Components/Navbars/navbar - menu/navbar.jsx";
 
 const links = [
   { location: "Home", path: "#" },
@@ -11,7 +13,7 @@ const links = [
 function App() {
   return (
     <>
-      <Navbar links={links} />
+      <CompA />
     </>
   );
 };

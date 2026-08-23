@@ -18,20 +18,7 @@
     justify-content: baseline;
 }
 
-.welcome-msg{
-    margin: 0;
-    padding: 10px;
-    font-size: 2.5em;
-    border-radius: 5px;
-    color: hsl(0, 0%, 100%);
-    background: hsl(120, 100%, 42%);
-}
-
-.login-prompt{
-    margin: 0;
-    padding: 10px;
-    font-size: 2.5em;
-    border-radius: 5px;
-    color: hsl(0, 0%, 100%);
-    background: hsl(0, 100%, 42%);
+.box{
+    border: 3px solid;
+    padding: 25px;
 }
