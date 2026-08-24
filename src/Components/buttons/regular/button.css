@@ -1,0 +1,69 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+body {
+    height: 60dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: hsl(0, 0%, 0%);
+}
+
+span {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    background: hsl(0, 0%, 0%, .75);
+    animation: ripples .6s linear infinite;
+}
+
+button {
+    cursor: pointer;
+    overflow: hidden;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5em 1em;
+    position: relative;
+    border-radius: .25rem;
+    transition: all .3s ease;
+    color: hsl(0, 0%, 100%);
+    background: hsl(210, 100%, 52%);
+    border: 2px solid hsla(210, 100%, 95%, .15);
+    box-shadow:
+        1px 1px 1px hsl(210, 100%, 46%),
+        1px 1px 0px hsl(210, 100%, 45%),
+        -1px -1px 0px hsl(210, 100%, 45%),
+        -1px -1px 0px hsl(210, 100%, 45%);
+}
+
+button.active {
+    transform: scale(.9);
+    color: hsl(0, 0%, 90%);
+    background: hsl(210, 100%, 46%);
+    border: 1px solid hsl(210, 100%, 46%);
+}
+
+
+@keyframes ripples {
+    0% {
+        width: 0%;
+        height: 0%;
+        opacity: .5;
+    }
+
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
