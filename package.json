@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"@phosphor-icons/web": "^2.1.2",
 		"aos": "^2.3.4",
 		"chokidar": "^5.0.0",
 		"cloudinary": "^2.8.0",
