@@ -74,3 +74,26 @@ export function getCurrentTime() {
     let suffix = hours >= 12 ? "PM" : "AM";
     return `${ hours }:${ minutes }${ suffix }`;
 }
+
+export function animatePath(paths) {
+    paths.forEach(path => {
+        if (path) {
+            path.classList.add("draw");
+            const pathLength = path.getTotalLength();
+            const dashArray = path.style.strokeDasharray = pathLength;
+            const dashOffset = path.style.strokeDashoffset = pathLength;
+        };
+    });
+};
+
+export function createRipple(e, btn) {
+    const x = e.clientX - e.target.offsetLeft;
+    const y = e.clientY - e.target.offsetTop;
+    const ripple = document.createElement("span");
+    ripple.style.left = `${ x }px`;
+    ripple.style.top = `${ y }px`;
+    btn.append(ripple);
+    btn.classList.add("active");
+    setTimeout(() => { btn.classList.remove("active") }, 300);
+    setTimeout(() => { ripple.remove() }, 600);
+}
