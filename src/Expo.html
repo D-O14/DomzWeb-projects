@@ -242,17 +242,17 @@
         padding: 2em;
         display: grid;
         grid-gap: 1rem;
-        grid-auto-flow: column;
+        /*grid-auto-flow: column;
         grid-auto-rows: 150px;
-        grid-auto-columns: 300px;
+        grid-auto-columns: 300px;*/
+        grid-template-rows: repeat(2, 200px);
+        grid-template-columns: repeat(4, 200px);
+        grid-template-areas: 
+        "box-1 box-1 box-2 box-3"
+        "box-4 box-4 box-4 box-5";
     }
 
     .item {
-        padding: 2em;
-        font-size: 1.5rem;
-        text-align: center;
-        border-radius: 4px;
-        color: hsl(0, 0%, 100%);
         background: hsl(230, 100%, 40%);
     }
 </style>
@@ -372,18 +372,19 @@
         </button>
     </menu>-->
 <div class="grid">
-    <div class="item">Item-1</div>
-    <div class="item">Item-2</div>
-    <div class="item">Item-3</div>
-    <div class="item">Item-4</div>
-    <div class="item">Item-5</div>
-    <div class="item">Item-6</div>
-    <div class="item">Item-7</div>
-    <div class="item">Item-8</div>
-    <div class="item">Item-9</div>
-    <div class="item">Item-10</div>
-    <div class="item">Item-11</div>
+    <div class="item" style="grid-area: box-1;"></div>
+    <div class="item" style="grid-area: box-2;"></div>
+    <div class="item" style="grid-area: box-3;"></div>
+    <div class="item" style="grid-area: box-4;"></div>
+    <div class="item" style="grid-area: box-5;"></div>
 </div>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide dashboard">
+    <rect class="rect-1" width="7" height="9" x="3" y="3" rx="1" />
+    <rect class="rect-2" width="7" height="5" x="14" y="3" rx="1" />
+    <rect class="rect-3" width="7" height="9" x="14" y="12" rx="1" />
+    <rect class="rect-4" width="7" height="5" x="3" y="16" rx="1" />
+</svg>
 </body>
 
 <script type="text/javascript" defer>
