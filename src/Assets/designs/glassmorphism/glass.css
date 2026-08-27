@@ -1,17 +1,12 @@
-.element {
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    background: hsla(240, 65%, 43%, 0.19);
-    border: 1px solid hsla(240, 65%, 43%, 0.3);
-    box-shadow: 0 4px 30px hsla(0, 0%, 0%, 0.1);
-}
+.glass{
+    --glass-blur: 5px;
+    --glass-bg: hsla(240, 65%, 43%, 0.19);
+    --glass-border: 1px solid hsla(240, 65%, 43%, 0.3);
+    --glass-shadow: 0px 4px 30px hsla(0, 0%, 0%, 0.1);
 
-.element {
-    border-radius: 5px;
-    backdrop-filter: blur(5px);
-    color: hsla(0, 0%, 100%);
-    -webkit-backdrop-filter: blur(5px);
-    background: hsla(210, 100%, 40%, .25);
-    border: 2px solid hsla(250, 50%, 60%, 0.3);
-    box-shadow: -4px -2px 5px hsla(0, 0%, 0%, 0.1);
+    border: var(--glass-border);
+    background: var(--glass-bg);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
 }

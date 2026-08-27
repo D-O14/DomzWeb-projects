@@ -1,0 +1,134 @@
+:root {
+
+    /* Backgrounds */
+
+    --bg-code: hsl(233, 13%, 14%);
+    --bg-plain: hsl(0, 0%, 100%);
+    --bg-dark: hsl(0, 0%, 0%);
+
+    /* Shadows */
+
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+    --shadow-layered:
+        4px 0px 2px hsla(224, 71%, 4%, 0.06),
+        -16px 2px 7px hsla(224, 71%, 4%, 0.05),
+        -35px 4px 16px hsla(224, 71%, 4%, 0.04),
+        -62px 7px 28px hsla(224, 71%, 4%, 0.02),
+        -97px 11px 44px hsla(224, 71%, 4%, 0.01);
+
+    /*
+    ----------------- 
+        Typography
+    ------------------ 
+    */
+
+    /* Fonts */
+
+    --font-style: normal;
+    --font-variant: normal;
+    --font-weight: var(--weight-base);
+    --font-stretch: normal;
+    --font-size: 1rem;
+    --line-height: 1.5;
+    --font-base: var(--font-style) var(--font-variant) var(--font-weight) 
+    var(--font-stretch) var(--font-size) / var(--line-height) var(--default-font);
+    --default-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    /* Font Weights */
+
+    --weight-thin: 100;
+    --weight-xsm: 200;
+    --weight-sm: 300;
+    --weight-base: 400;
+    --weight-bold: 500;
+    --weight-thick: 600;
+    --weight-lg: 700; 
+    --weight-xlg: 800; 
+    --weight-xxlg: 900; 
+
+    /* 
+    ----------------
+        Colors 
+    ----------------
+    */
+
+    --clr-plain: hsl(0, 0%, 100%);
+    --clr-primary: hsl(0, 0%, 0%);
+    --clr-secondary: hsl(0, 0%, 50%);
+    --clr-muted: var(--clr-secondary);
+
+    /* Spacing */
+
+    --spacing-0: 0px;
+    --spacing-1: .25rem;
+    --spacing-2: .5rem;
+    --spacing-3: .75rem;
+    --spacing-4: 1rem;
+    --spacing-5: 1.25rem;
+    --spacing-6: 1.5rem;
+    --spacing-7: 1.75rem;
+    --spacing-8: 2rem;
+    --spacing-9: 2.25rem;
+    --spacing-10: 2.5rem;
+    --spacing-11: 2.75rem;
+    --spacing-12: 3rem;
+    --spacing-13: 3.25rem;
+    --spacing-14: 3.55rem;
+    --spacing-15: 3.75rem;
+    --spacing-16: 4rem;
+    
+    /* Borders */
+
+    --brdr-sm: 1px solid var(--clr-primary);
+    --brdr-md: 2px solid var(--clr-primary);
+    --brdr-lg: 4px solid var(--clr-primary);
+    --brdr-muted: 1px solid var(--clr-muted);
+    --brdr-solid: 1px solid var(--clr-primary);
+    --brdr-transparent: 1px solid transparent;
+
+    /* Border Radii  */
+
+    --radius-xxsm: .25em;
+    --radius-xsm: 5px;
+    --radius-sm: .5em;
+    --radius-md: .75em;
+    --radius-lg: 1em;
+    --radius-xlg: 5em;
+    --radius-xxlg: 50%;
+
+    /* Tranform Origins */
+
+    --origin-top: top;
+    --origin-top-right: top right;
+    --origin-top-left: top left;
+    --origin-bottom: bottom;
+    --origin-bottom-right: bottom right;
+    --origin-bottom-left: bottom left;
+    --origin-left: left;
+    --origin-right: right;
+
+    /* Easings / Timings */
+
+    --ease: ease;
+    --ease-in: ease-in;
+    --ease-out: ease-out;
+    --ease-in-out: ease-in-out;
+
+    /* Transition durations */
+
+    --fast-duration: 300ms;
+    --short-duration: 500ms;
+    --medium-duration: 1s;
+    --long-duration: 3s;
+
+    /* Transitions */
+
+    --trans-1: all var(--fast-duration) var(--ease) allow-discrete;
+    --trans-2: all var(--short-duration) var(--ease-in) allow-discrete;
+    --trans-3: all var(--medium-duration) var(--ease-out) allow-discrete;
+    --trans-4: all var(--long-duration) var(--ease-in-out) allow-discrete;
+}
