@@ -45,3 +45,63 @@
         opacity: 0;
     }
 }
+
+@keyframes ripples {
+    0% {
+        width: 0%;
+        height: 0%;
+        opacity: .5;
+    }
+
+    100% {
+        width: 100px;
+        height: 100px;
+        opacity: 0;
+    }
+}
+
+/* Icon-based animations */
+
+@keyframes download {
+    0% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(4px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes move {
+    to {
+        transform-box: fill-box;
+        transform-origin: bottom left;
+        transform: translateY(-2px) rotate(-20deg);
+    }
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(1turn);
+        transition: transform 1000ms ease-in-out;
+    }
+}
+
+@keyframes moveShackle {
+    to {
+        transform-box: view-box;
+        transform-origin: bottom left;
+        transition: transform 300ms ease;
+        transform: translateY(-2px) rotate(-20deg);
+    }
+}
