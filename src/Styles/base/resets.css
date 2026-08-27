@@ -9,7 +9,7 @@
     padding: var(--spacing-0);
     font-family: var(--default-font);
     -webkit-tap-highlight-color: transparent;
-    transition: all var(--fast-duration) var(--ease) allow-discrete;
+    transition: all var(--duration-fast) var(--ease) allow-discrete;
 }
 
 html{scroll-behavior: smooth;}

@@ -40,15 +40,10 @@
 
     /* Font Weights */
 
-    --weight-thin: 100;
-    --weight-xsm: 200;
-    --weight-sm: 300;
     --weight-base: 400;
-    --weight-bold: 500;
+    --weight-medium: 500;
     --weight-thick: 600;
-    --weight-lg: 700; 
-    --weight-xlg: 800; 
-    --weight-xxlg: 900; 
+    --weight-bold: 700; 
 
     /* 
     ----------------
@@ -56,10 +51,17 @@
     ----------------
     */
 
+    --clr-dark: hsl(0, 0%, 0%);
+    --clr-muted: hsl(0, 0%, 50%);
     --clr-plain: hsl(0, 0%, 100%);
-    --clr-primary: hsl(0, 0%, 0%);
-    --clr-secondary: hsl(0, 0%, 50%);
-    --clr-muted: var(--clr-secondary);
+    --clr-danger: hsl(0, 100%, 50%);
+    --clr-success: hsl(100, 100%, 50%);
+
+    /* Text Colors */
+
+    --txt-dark: var(--clr-dark);
+    --txt-muted: var(--clr-muted);
+    --txt-plain: var(--clr-plain);
 
     /* Spacing */
 
@@ -83,12 +85,20 @@
     
     /* Borders */
 
-    --brdr-sm: 1px solid var(--clr-primary);
-    --brdr-md: 2px solid var(--clr-primary);
-    --brdr-lg: 4px solid var(--clr-primary);
-    --brdr-muted: 1px solid var(--clr-muted);
-    --brdr-solid: 1px solid var(--clr-primary);
-    --brdr-transparent: 1px solid transparent;
+    --brdr-width-thin: 1px;
+    --brdr-width-medium: 2px;
+    --brdr-width-large: 4px;
+
+    --brdr-style-1: solid;
+    --brdr-style-2: dashed;
+    --brdr-style-3: dotted;
+
+    --brdr-sm: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-primary);
+    --brdr-md: var(--brdr-width-medium) var(--brdr-style-1) var(--clr-primary);
+    --brdr-lg: var(--brdr-width-large) var(--brdr-style-1) var(--clr-primary);
+    --brdr-muted: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-muted);
+    --brdr-solid: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-primary);
+    --brdr-transparent: var(--brdr-width-thin) var(--brdr-style-1) transparent;
 
     /* Border Radii  */
 
@@ -110,6 +120,7 @@
     --origin-bottom-left: bottom left;
     --origin-left: left;
     --origin-right: right;
+    --origin-center: center;
 
     /* Easings / Timings */
 
@@ -120,15 +131,15 @@
 
     /* Transition durations */
 
-    --fast-duration: 300ms;
-    --short-duration: 500ms;
-    --medium-duration: 1s;
-    --long-duration: 3s;
+    --duration-fast: 300ms;
+    --duration-normal: 500ms;
+    --duration-slow: 1s;
+    --duration-long: 3s;
 
     /* Transitions */
 
-    --trans-1: all var(--fast-duration) var(--ease) allow-discrete;
-    --trans-2: all var(--short-duration) var(--ease-in) allow-discrete;
-    --trans-3: all var(--medium-duration) var(--ease-out) allow-discrete;
-    --trans-4: all var(--long-duration) var(--ease-in-out) allow-discrete;
+    --trans-1: all var(--duration-fast) var(--ease) allow-discrete;
+    --trans-2: all var(--duration-normal) var(--ease-in) allow-discrete;
+    --trans-3: all var(--duration-slow) var(--ease-out) allow-discrete;
+    --trans-4: all var(--duration-long) var(--ease-in-out) allow-discrete;
 }
