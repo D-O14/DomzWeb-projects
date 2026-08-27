@@ -15,7 +15,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: hsl(0, 0%, 0%);
+    background: hsl(0, 0%, 100%);
 }
 
 span {
@@ -36,28 +36,44 @@ button {
     position: relative;
     border-radius: .25rem;
     transition: all .3s ease;
-    color: hsl(0, 0%, 100%);
     transform-origin: bottom;
-    background: hsl(210, 100%, 52%);
+    /*background: hsl(210, 100%, 52%);
     border: 1px solid hsla(210, 100%, 95%, .15);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background: hsla(213, 100%, 52%, .25);
     box-shadow:
-        1px 1px 1px hsl(210, 100%, 46%),
-        1px 1px 0px hsl(210, 100%, 45%),
-        -1px -1px 0px hsl(210, 100%, 45%),
-        -1px -1px 0px hsl(210, 100%, 45%);
+        2px 4px 30px hsla(0, 0%, 0%, .1),
+        1px 1px 1px hsl(210, 100%, 46%, .1),
+        1px 1px 0px hsl(210, 100%, 45%, .1),
+        -1px -1px 0px hsl(210, 100%, 45%, .1),
+        -1px -1px 0px hsl(210, 100%, 45%, .1);
+    border: 1px solid hsla(213, 73%, 53%, 0.84);*/
+    backdrop-filter: blur(5px);
+    color: hsla(0, 0%, 100%);
+    -webkit-backdrop-filter: blur(5px);
+    background: hsla(210, 100%, 40%, .25);
+    border: 1px solid hsla(210, 50%, 60%, .35);
+    box-shadow:
+        -4px -2px 5px hsla(0, 0%, 0%, .1),
+        2px 4px 30px hsla(0, 0%, 0%, .1),
+        1px 1px 1px hsl(210, 100%, 46%, .1),
+        1px 1px 0px hsl(210, 100%, 45%, .1),
+        -1px -1px 0px hsl(210, 100%, 45%, .1),
+        -1px -1px 0px hsl(210, 100%, 45%, .1);
 }
 
-button:hover{
+button:hover {
     transform: scale(.95);
-    background: hsl(210, 100%, 40%);
-    border: 1px solid hsla(210, 100%, 40%);
+    background: hsl(210, 100%, 40%, .25);
+    border: 1px solid hsla(210, 100%, 40%, .85);
 }
 
 button.active {
     transform: scale(.9);
     color: hsl(0, 0%, 90%);
-    background: hsl(210, 100%, 46%);
-    border: 1px solid hsl(210, 100%, 46%);
+    background: hsl(210, 100%, 46%, .25);
+    border: 1px solid hsl(210, 100%, 46%, .84);
 }
 
 @keyframes ripples {

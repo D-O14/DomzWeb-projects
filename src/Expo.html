@@ -39,13 +39,12 @@
             Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
 
-    /*body {
+    body {
         height: 60dvh;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: hsla(210, 80%, 90%, .5);
-    }*/
+    }
 
     h1 {
         font-weight: 400;
@@ -54,7 +53,7 @@
 
     img {
         width: 100%;
-        height: auto;
+        height: 100%;
         display: block;
         aspect-ratio: 16/9;
         object-fit: cover;
@@ -73,9 +72,13 @@
         padding: .5em 1em;
         position: relative;
         border-radius: .25rem;
-        transition: all .3s ease;
-        color: hsl(0, 0%, 100%);
         transform-origin: bottom;
+        backdrop-filter: blur(5px);
+        color: hsla(0, 0%, 100%);
+        -webkit-backdrop-filter: blur(5px);
+        background: hsla(250, 50%, 60%, 0.2);
+        border: 2px solid hsla(250, 50%, 60%, 0.3);
+        box-shadow: -4px -2px 5px hsla(0, 0%, 0%, 0.1);
     }
 
     menu {
@@ -84,6 +87,7 @@
         justify-content: center;
         gap: 1rem;
     }
+
 </style>
 
 <body>
