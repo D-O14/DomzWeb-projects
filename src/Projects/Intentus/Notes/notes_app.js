@@ -1,8 +1,8 @@
 import "@components/toast/toast.js";
 import "./notes_app.css";
-import { copy, share } from "@utils/actions.js";
+import { getCurrentTime } from "@utils/date.js";
+import { copy, share, closeDialog } from "@utils/actions.js";
 import { icons, initializeIcons } from "@assets/Icons/icons.js";
-import { closeDialog, getCurrentTime } from "@utils/utilities.js";
 //import { icons, initializeIcons } from "../../../Assets/Icons/icons.js";
 
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];

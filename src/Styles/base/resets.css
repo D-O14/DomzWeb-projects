@@ -1,4 +1,5 @@
 @import "./tokens.css";
+@import "./fonts.css";
 
 *::before,
 *::after,
@@ -28,10 +29,8 @@ body{
     }
 }
 
-@font-face {
-    font-family: "Electrolize";
-    src: url("@assets/fonts/Electrolize/Electrolize-Regular.ttf") format("truetype");
-    font-display: swap;
-    font-style: var(--font-style);
-    font-weight: var(--weight-thin) var(--weight-xxlg);
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    } 
 }

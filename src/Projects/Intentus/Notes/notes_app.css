@@ -364,6 +364,7 @@ svg {
 /* Note Card */
 
 .note-card {
+    overflow: hidden;
     padding: 2em;
     gap: .5rem;
     display: flex;

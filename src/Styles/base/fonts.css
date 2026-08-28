@@ -1,0 +1,113 @@
+@import "./tokens.css";
+
+@font-face {
+    font-display: swap;
+    font-family: "Electrolize";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Electrolize/Electrolize-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Noto Serif";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Noto_Serif/NotoSerif-VariableFont_wdth/wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Libertinus Math";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Libertinus_Math/LibertinusMath-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Sanchez";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Sanchez/Sanchez-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Monsterrat";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/static/montserrat-cyrillic-400-normal.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Stardom Complete";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Stardom_Complete/Fonts/WEB/fonts/Stardom-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Asimovian";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Asimovian/Asimovian-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "DM Serif Text";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/DM_Serif_Text/DMSerifText-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Manrope";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Manrope/Manrope-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "MerriWeather";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Merriweather/Merriweather-VariableFont_opsz/wdth/wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Paprika";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Paprika/Paprika-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Poppins";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Poppins/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Playwrite NZ";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Playwrite_NZ_Basic/PlaywriteNZBasic-VariableFont_wght.ttf") format("truetype");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Roboto";
+    font-style: var(--font-style);
+    font-weight: var(--weight-thin) var(--weight-xxlg);
+    src: url("@assets/fonts/Roboto_Flex/RobotoFlex-VariableFont_GRAD/XOPQ/XTRA/YOPQ/YTAS/YTDE/YTFI/YTLC/YTUC/opsz/slnt/wdth/wght.ttf") format("truetype");
+}

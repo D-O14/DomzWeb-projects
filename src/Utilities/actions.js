@@ -83,7 +83,6 @@ export function animateIcon(container) {
     }, { once: true });
 };
 
-
 export function createRipple(e, btn) {
     const x = e.clientX - e.target.offsetLeft;
     const y = e.clientY - e.target.offsetTop;
