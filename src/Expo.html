@@ -9,26 +9,76 @@
     <link rel="preload" as="style" onload="this.rel='stylesheet'" href="/src/Styles/tailwindcss/output.css">
     -->
 </head>
-
+ 
 <style>
     :root {
-        /*--base-clr: hsl(128, 50%, 26%);*/
-        --base-clr: var(--brand-clr);
-        --brand-clr: hsl(20, 50%, 45%);
-        /*--brand-clr: hsl(213, 100%, 50%);*/
-        --base-shade-1: hsl(from var(--base-clr) h s calc(l + 14));
-        --base-shade-2: hsl(from var(--base-clr) h s calc(l + 20));
+        --dark: hsl(210, 100%, 45%, .65);
 
-        /*--brand-shade-2: hsl(from var(--brand-clr) h s calc(l + 10));
-        --brand-shade-3: hsl(from var(--brand-clr) h s calc(l + 15));
-        --brand-shade-4: hsl(from var(--brand-clr) h s calc(l + 20));*/
+        --primary: hsl(0, 80%, 25%);
+        --primary-3: hsl(240, 80%, 50%);
+        --secondary-1: hsl(300, 60%, 25%);
+        --secondary-2: hsl(120, 60%, 25%);
+        --secondary-3: hsl(39, 80%, 25%);
+        --tertiary-1: hsl(300, 80%, 25%);
+        --tertiary-2: hsl(300, 50%, 25%);
+        --tertiary-3: hsl(180, 50%, 25%);
+        --tertiary-4: hsl(120, 50%, 25%);
+        --tertiary-5: hsl(5, 77%, 55%);
+        --tertiary-6: hsl(45, 100%, 50%);
+        --base-clr: var(--shade-8);
+        --brand-clr: var(--tertiary-6);
 
-        --brand-shade-1: hsl(from var(--brand-clr) h s calc(l + 8) / .75);
-        --brand-shade-2: hsl(from var(--brand-clr) h s calc(l + 12) / .5);
-        --brand-shade-3: hsl(from var(--brand-clr) h s calc(l + 16) /.5);
-        --brand-shade-4: hsl(from var(--brand-clr) h s calc(l + 20) /.5);
-        --brand-shade-5: hsl(from var(--brand-clr) h s calc(l + 24) / .25);
-        --brand-shade-6: hsl(from var(--brand-clr) h s calc(l + 28) / .5);
+        /* 
+        ----------------
+            Analogous
+        ----------------
+        */
+
+        --shade-1: blue;
+        --shade-2: teal;
+        --shade-3: green;
+        --shade-4: chartreuse;
+
+        --shade-5: violet;
+        --shade-6: purple;
+        --shade-7: magenta;
+
+        --shade-8: yellow;
+        --shade-9: red;
+        --shade-10: orange;
+        --shade-11: hsl(5, 77%, 55%);
+        --shade-12: hsl(45, 100%, 50%);
+
+        /*
+        --------------
+        Complementary
+        --------------
+        */
+
+        --complement-shade-1: red;
+        --complement-shade-2: green;
+
+        --complement-shade-3: blue;
+        --complement-shade-4: orange;
+
+        --complement-shade-5: violet;
+        --complement-shade-6: hsl(45, 100%, 50%);
+
+        --complement-shade-7: magenta;
+        --complement-shade-8: chartreuse;
+
+        --complement-shade-9: teal;
+        --complement-shade-10: hsl(5, 77%, 55%);
+
+        --complement-shade-11: purple;
+        --complement-shade-12: yellow;
+
+        /*--brand-shade-1: hsl(from var(--brand-clr) h s calc(l + 2) / .5);
+        --brand-shade-2: hsl(from var(--brand-clr) h s calc(l + 4) / .5);
+        --brand-shade-3: hsl(from var(--brand-clr) h s  calc(l + 6) / .5);
+        --brand-shade-4: hsl(from var(--brand-clr) h s  calc(l + 8) / .5);
+        --brand-shade-5: hsl(from var(--brand-clr) h s  calc(l + 10) / .5);
+        --brand-shade-6: hsl(from var(--brand-clr) h s  calc(l + 12) / .5);*/
     }
 
     *,
@@ -43,17 +93,17 @@
         font-family: Georgia, 'Times New Roman', Times, serif;
     }
 
-    /*html{
-        background: url(./Assets/Images/abstract-waves.jpg);
-    }*/
+    html{
+        color-scheme: dark;
+    }
 
     body {
         height: 100dvh;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: var(--dark);
         /*background: hsl(from var(--brand-clr) h s l / .5);*/
-        background: var(--base-clr);
     }
 
     img {
@@ -82,8 +132,9 @@
         color: hsla(0, 0%, 100%);
         -webkit-backdrop-filter: blur(5px);
         /*background: hsla(250, 50%, 60%, 0.2);*/
+        border: 1px solid transparent;
         box-shadow: -4px -2px 5px hsla(0, 0%, 0%, 0.1);
-        border: 1px solid hsla(from var(--brand-clr) h s calc(l + 28) / .3);
+        /*border: 1px solid hsla(from var(--shade-1) h s calc(l + 2) / .5);*/
     }
 
     menu {
@@ -104,7 +155,7 @@
         box-shadow:
             2px 2px 0px hsla(0, 0%, 0%, 0.1),
             -2px -2px 0px hsla(0, 0%, 0%, 0.1);*/
-        background: hsl(from var(--base-clr) h calc(s + 10) calc(l + 10));
+        background: hsl(from var(--shade-1) h calc(s + 10) calc(l + 10));
     }
 
     .boxes {
@@ -112,35 +163,16 @@
         display: flex;
     }
 
-    .btn-0 {
-        background: var(--base-clr);
-        box-shadow:
-            2px 2px 0px hsla(0, 0%, 0%, 0.1),
-            -2px -2px 0px hsla(0, 0%, 0%, 0.1);
+    .box:nth-of-type(1){
+        background: color-mix(in hsl, var(--complement-shade-9) 25%, var(--complement-shade-2) 70%);
     }
 
-    .btn-1 {
-        background: var(--brand-shade-1);
+    .box:nth-of-type(2){
+        background: color-mix(in lch increasing hue, var(--complement-shade-9) 15%, var(--complement-shade-2) 50%);
     }
 
-    .btn-2 {
-        background: var(--brand-shade-2);
-    }
-
-    .btn-3 {
-        background: var(--brand-shade-3);
-    }
-
-    .btn-4 {
-        background: var(--brand-shade-4);
-    }
-
-    .btn-5 {
-        background: var(--brand-shade-5);
-    }
-
-    .btn-6 {
-        background: var(--brand-shade-6);
+    .box:nth-of-type(3){
+        background: color-mix(in oklab, var(--complement-shade-9) 50%, hsl(0, 0%, 100%) 10%);
     }
 </style>
 
@@ -153,14 +185,11 @@
         <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/cafe_10_sikas8.webp" alt="" loading="lazy"
             sizes="{max-width: 768px} 100vw, 50vw" decoding="async">
     </picture>-->
-    <menu class="btns">
-        <button class="button btn-1">Button</button>
-        <button class="button btn-2">Button</button>
-        <button class="button btn-3">Button</button>
-        <button class="button btn-4">Button</button>
-        <button class="button btn-5">Button</button>
-        <button class="button btn-6">Button</button>
-    </menu>
+    <div class="boxes">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
 </body>
 
 <script type="text/javascript" defer>
