@@ -1,0 +1,66 @@
+:root {
+    /* ----------------Analogous---------------- */
+
+    --base-blue: hsl(240, 100%, 50%);
+    --base-teal: hsl(180, 100%, 25%);
+    --base-green: hsl(120, 100%, 25%);
+    --base-chartreuse: hsl(90, 100%, 50%);
+
+    --base-purple: hsl(300, 100%, 25%);
+
+    --base-yellow: hsl(60, 100%, 50%);
+    --base-red: hsl(0, 100%, 50%);
+    --base-orange: hsl(39, 100%, 50%);
+    --base-vermilion: hsl(5, 77%, 55%);
+    --base-amber: hsl(45, 100%, 50%);
+
+    /* --------------Complementary-------------- */
+
+    --blend-red-green: color-mix(in oklab, var(--base-red) 50%, var(--base-green) 50%);
+    --blend-blue-orange: color-mix(in oklab, var(--base-blue) 50%, var(--base-orange) 50%);
+    --blend-violet-amber: color-mix(in oklab, var(--purple-light) 50%, var(--base-amber) 50%);
+    --blend-purple-yellow: color-mix(in oklab, var(--base-purple) 50%, var(--base-yellow) 50%);
+    --blend-teal-vermilion: color-mix(in oklab, var(--base-teal) 50%, var(--base-vermilion) 50%);
+    --blend-magenta-chartreuse: color-mix(in oklab, var(--purple-dark) 50%, var(--base-chartreuse) 50%);
+
+    /* ----------------Variants--------------------- */
+
+    --purple-light: hsl(from var(--base-purple) h 76% 72%);
+    --purple-dark: hsl(from var(--base-purple) h 100% 25%);
+
+    --blue-glass: hsl(from var(--base-blue) h s l / .5);
+
+    /* -----------------Shades---------------------------  */
+
+    --shade-blue-50: hsl(from var(--base-blue) h s calc(l + 45));
+    --shade-blue-100: hsl(from var(--base-blue) h s calc(l + 30));
+    --shade-blue-200: hsl(from var(--base-blue) h s calc(l + 20));
+    --shade-blue-300: hsl(from var(--base-blue) h s calc(l + 15));
+    --shade-blue-400: hsl(from var(--base-blue) h s calc(l + 5));
+    --shade-blue-500: hsl(from var(--base-blue) h s l);
+    --shade-blue-600: hsl(from var(--base-blue) h s calc(l - 15));
+    --shade-blue-700: hsl(from var(--base-blue) h s calc(l - 20));
+    --shade-blue-800: hsl(from var(--base-blue) h s calc(l - 25));
+    --shade-blue-900: hsl(from var(--base-blue) h s calc(l - 30));
+    --shade-blue-950: hsl(from var(--base-blue) h s calc(l - 40));
+
+    --shade-green-50: hsl(from var(--base-green) h s calc(l + 45));
+    --shade-green-100: hsl(from var(--base-green) h s calc(l + 30));
+    --shade-green-200: hsl(from var(--base-green) h s calc(l + 20));
+    --shade-green-300: hsl(from var(--base-green) h s calc(l + 15));
+    --shade-green-400: hsl(from var(--base-green) h s calc(l + 5));
+    --shade-green-500: hsl(from var(--base-green) h s l);
+    --shade-green-600: hsl(from var(--base-green) h s calc(l - 15));
+
+    --shade-red-50: hsl(from var(--base-red) h s calc(l + 45));
+    --shade-red-100: hsl(from var(--base-red) h s calc(l + 30));
+    --shade-red-200: hsl(from var(--base-red) h s calc(l + 20));
+    --shade-red-300: hsl(from var(--base-red) h s calc(l + 15));
+    --shade-red-400: hsl(from var(--base-red) h s calc(l + 5));
+    --shade-red-500: hsl(from var(--base-red) h s l);
+    --shade-red-600: hsl(from var(--base-red) h s calc(l - 15));
+    --shade-red-700: hsl(from var(--base-red) h s calc(l - 20));
+    --shade-red-800: hsl(from var(--base-red) h s calc(l - 25));
+    --shade-red-900: hsl(from var(--base-red) h s calc(l - 30));
+    --shade-red-950: hsl(from var(--base-red) h s calc(l - 40));
+}

@@ -14,64 +14,36 @@
     :root {
         --dark: hsl(210, 100%, 45%, .65);
 
-        --primary: hsl(0, 80%, 25%);
-        --primary-3: hsl(240, 80%, 50%);
-        --secondary-1: hsl(300, 60%, 25%);
-        --secondary-2: hsl(120, 60%, 25%);
-        --secondary-3: hsl(39, 80%, 25%);
-        --tertiary-1: hsl(300, 80%, 25%);
-        --tertiary-2: hsl(300, 50%, 25%);
-        --tertiary-3: hsl(180, 50%, 25%);
-        --tertiary-4: hsl(120, 50%, 25%);
-        --tertiary-5: hsl(5, 77%, 55%);
-        --tertiary-6: hsl(45, 100%, 50%);
-        --base-clr: var(--shade-8);
-        --brand-clr: var(--tertiary-6);
+        --base-red: hsl(0, 100%, 50%);
+        --base-green: hsl(120, 100%, 25%);
 
-        /* 
-        ----------------
-            Analogous
-        ----------------
-        */
+        --base-blue: hsl(240, 100%, 50%);
+        --base-orange: hsl(39, 100%, 50%);
 
-        --shade-1: blue;
-        --shade-2: teal;
-        --shade-3: green;
-        --shade-4: chartreuse;
+        --base-violet: hsl(300, 76%, 72%);
+        --base-amber: hsl(45, 100%, 50%);
 
-        --shade-5: violet;
-        --shade-6: purple;
-        --shade-7: magenta;
+        --base-magenta: hsl(300, 100%, 50%);
+        --base-chartreuse: hsl(90, 100%, 50%);
 
-        --shade-8: yellow;
-        --shade-9: red;
-        --shade-10: orange;
-        --shade-11: hsl(5, 77%, 55%);
-        --shade-12: hsl(45, 100%, 50%);
+        --base-teal: hsl(180, 100%, 25%);
+        --base-vermilion: hsl(5, 77%, 55%);
 
-        /*
-        --------------
-        Complementary
-        --------------
-        */
+        --base-purple: hsl(300, 100%, 25%);
+        --base-yellow: hsl(60, 100%, 50%);
 
-        --complement-shade-1: red;
-        --complement-shade-2: green;
-
-        --complement-shade-3: blue;
-        --complement-shade-4: orange;
-
-        --complement-shade-5: violet;
-        --complement-shade-6: hsl(45, 100%, 50%);
-
-        --complement-shade-7: magenta;
-        --complement-shade-8: chartreuse;
-
-        --complement-shade-9: teal;
-        --complement-shade-10: hsl(5, 77%, 55%);
-
-        --complement-shade-11: purple;
-        --complement-shade-12: yellow;
+        --shade-blue-50: hsl(from var(--base-blue) h s calc(l + 45));
+        --shade-blue-100: hsl(from var(--base-blue) h s calc(l + 30));
+        --shade-blue-200: hsl(from var(--base-blue) h s calc(l + 20));
+        --shade-blue-300: hsl(from var(--base-blue) h s calc(l + 15));
+        --shade-blue-400: hsl(from var(--base-blue) h s calc(l + 5));
+        --shade-blue-500: hsl(from var(--base-blue) h s l);
+        --shade-blue-600: hsl(from var(--base-blue) h s calc(l - 15));
+        --shade-blue-700: hsl(from var(--base-blue) h s calc(l - 20));
+        --shade-blue-800: hsl(from var(--base-blue) h s calc(l - 25));
+        --shade-blue-900: hsl(from var(--base-blue) h s calc(l - 30));
+        --shade-blue-950: hsl(from var(--base-blue) h s calc(l - 40));
+        --base: var(--shade-blue-400);
 
         /*--brand-shade-1: hsl(from var(--brand-clr) h s calc(l + 2) / .5);
         --brand-shade-2: hsl(from var(--brand-clr) h s calc(l + 4) / .5);
@@ -97,8 +69,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        /*background: var(--dark);
-        background: hsl(from var(--brand-clr) h s l / .5);*/
     }
 
     img {
@@ -152,27 +122,21 @@
             -2px -2px 0px hsla(0, 0%, 0%, 0.1);
         background: linear-gradient(270deg, hsl(0, 100%, 50%), hsl(30, 100%, 50%), hsl(210, 100%, 50%), hsl(220, 100%, 45%), hsl(340, 100%, 58%));
         background-size: 300% 300%;
-        transition: all .3s ease;
-        animation: gradientShift 5s linear infinite;
     }
 
-    @keyframes gradientShift {
-        0% {
-            background-position: 0% 50%;
-        }
-
-        50% {
-            background-position: 100% 50%;
-        }
-
-        100% {
-            background: 0% 50%;
-        }
-    }
+    /*@keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background: 0% 50%; }
+    }*/
 
     .boxes {
         gap: 1rem;
         display: flex;
+    }
+
+    .btn {
+        background: var(--base);
     }
 
     /*.linear{
@@ -220,11 +184,7 @@
         <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/cafe_10_sikas8.webp" alt="" loading="lazy"
             sizes="{max-width: 768px} 100vw, 50vw" decoding="async">
     </picture>-->
-    <div class="boxes">
-        <div class="box linear"></div>
-        <div class="box radial"></div>
-        <div class="box conic"></div>
-    </div>
+    <button class="btn">Button</button>
 </body>
 
 <script type="text/javascript" defer>
