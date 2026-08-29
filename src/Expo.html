@@ -9,7 +9,7 @@
     <link rel="preload" as="style" onload="this.rel='stylesheet'" href="/src/Styles/tailwindcss/output.css">
     -->
 </head>
- 
+
 <style>
     :root {
         --dark: hsl(210, 100%, 45%, .65);
@@ -88,13 +88,8 @@
         padding: 0;
         user-select: none;
         box-sizing: border-box;
-        transition: all .5s ease;
         -webkit-tap-highlight-color: transparent;
         font-family: Georgia, 'Times New Roman', Times, serif;
-    }
-
-    html{
-        color-scheme: dark;
     }
 
     body {
@@ -102,8 +97,8 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--dark);
-        /*background: hsl(from var(--brand-clr) h s l / .5);*/
+        /*background: var(--dark);
+        background: hsl(from var(--brand-clr) h s l / .5);*/
     }
 
     img {
@@ -149,18 +144,50 @@
         height: 200px;
         flex: 0 0 300px;
         border-radius: 4px;
-        /*width: min(500px, 80%);
+        width: min(500px, 80%);
         color: hsl(3, 0%, 100%);
         font-size: clamp(12px, 2vw, 1rem);
         box-shadow:
             2px 2px 0px hsla(0, 0%, 0%, 0.1),
-            -2px -2px 0px hsla(0, 0%, 0%, 0.1);*/
-        background: hsl(from var(--shade-1) h calc(s + 10) calc(l + 10));
+            -2px -2px 0px hsla(0, 0%, 0%, 0.1);
+        background: linear-gradient(270deg, hsl(0, 100%, 50%), hsl(30, 100%, 50%), hsl(210, 100%, 50%), hsl(220, 100%, 45%), hsl(340, 100%, 58%));
+        background-size: 300% 300%;
+        transition: all .3s ease;
+        animation: gradientShift 5s linear infinite;
+    }
+
+    @keyframes gradientShift {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        50% {
+            background-position: 100% 50%;
+        }
+
+        100% {
+            background: 0% 50%;
+        }
     }
 
     .boxes {
         gap: 1rem;
         display: flex;
+    }
+
+    /*.linear{
+        background: repeating-linear-gradient(to top right, var(--shade-1) 0px 40px, var(--shade-2) 45px 70px);
+        background: linear-gradient(to bottom right, hsl(0, 100%, 50%), hsla(0, 100%, 50%, .5));
+    }
+
+    .radial{
+        background: repeating-radial-gradient(circle, var(--shade-9) 0%, 10%, var(--shade-10) 10% 20%);
+    }
+
+    .conic{
+        width: 200px;
+        background: conic-gradient(from 45deg at 40% 60%, hsl(0, 100%, 50%), hsl(39, 100%, 50%), hsl(215, 77%, 50%),
+         hsl(30, 100%, 50%), hsl(5, 100%, 50%));
     }
 
     .box:nth-of-type(1){
@@ -173,6 +200,14 @@
 
     .box:nth-of-type(3){
         background: color-mix(in oklab, var(--complement-shade-9) 50%, hsl(0, 0%, 100%) 10%);
+    }*/
+
+    h1 {
+        color: transparent;
+        background: linear-gradient(90deg, hsl(0, 100%, 50%), hsl(5, 100%, 50%), hsl(210, 100%, 50%));
+
+        background-clip: text;
+        -webkit-background-clip: text;
     }
 </style>
 
@@ -186,9 +221,9 @@
             sizes="{max-width: 768px} 100vw, 50vw" decoding="async">
     </picture>-->
     <div class="boxes">
-        <div class="box"></div>
-        <div class="box"></div>
-        <div class="box"></div>
+        <div class="box linear"></div>
+        <div class="box radial"></div>
+        <div class="box conic"></div>
     </div>
 </body>
 
