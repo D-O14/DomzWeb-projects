@@ -1,0 +1,76 @@
+@import "../../../../Styles/base/base.css";
+
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-plain);
+}
+
+.input {
+    width: 500px;
+    display: flex;
+    height: 45px;
+    outline: none;
+    overflow: hidden;
+    background: none;
+    position: relative;
+    align-items: center;
+    gap: var(--spacing-0);
+    justify-content: center;
+    border: var(--brdr-transparent);
+    border-radius: var(--radius-xlg);
+    padding: var(--spacing-2) var(--spacing-4);
+    padding-inline-start: 0px;
+    padding-block-start: 0px;
+    padding-block: 0px;
+    box-shadow: 
+        2px 2px 0px hsla(0, 0%, 0%, .1),
+        -2px -2px 0px hsla(0, 0%, 0%, .1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: hsl(250, 100%, 46%, .05);
+}
+
+#searchInput {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    border: var(--brdr-transparent);
+}
+
+/*.input::after{
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 1px;
+    left: 56px;
+    background: hsl(250, 100%, 76%);
+}*/
+
+.search {
+    width: 12%;
+    height: 100%;
+    padding: .5em 1em;
+    background: hsl(250, 100%, 46%);
+}
+
+.search svg{
+    stroke: var(--clr-plain);
+}
+
+.close-btn {
+    padding: 0;
+    background: none;
+}
+
+.clear {
+    margin-right: 10px;
+}
+
+.shortcut {
+    padding: .5em 1em;
+    border-radius: 5px;
+    background: hsla(0, 0%, 0%, .1);
+}

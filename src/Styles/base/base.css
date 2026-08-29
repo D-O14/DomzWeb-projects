@@ -1,7 +1,13 @@
 @import "./tokens.css";
 @import "./resets.css";
 
+::-webkit-search-cancel-button {
+    appearance: none;
+}
+
 svg {
+    width: 22px;
+    height: 22px;
     display: inline;
     vertical-align: middle;
     transform: translate(0);
@@ -22,12 +28,16 @@ button {
     padding: var(--spacing-2) var(--spacing-4);
 }
 
+/*input{
+    -webkit-text-fill-color: transparent;
+}*/
+
 input:not(input[type="checkbox"]) {
     height: 40px;
     outline: none;
     background: none;
+    border: var(--brdr-muted);
     border-radius: var(--radius-sm);
-    border: var(--brdr-transparent);
     padding: var(--spacing-2) var(--spacing-4);
 }
 
@@ -61,8 +71,10 @@ form {
 }
 
 code {
-    font-size: 15px;
+    font-size: 12px;
+    font-weight: 500;
     line-height: 135%;
     background: var(--bg-code);
+    text-transform: uppercase;
     padding: var(--spacing-1) var(--spacing-2);
 }

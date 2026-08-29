@@ -93,15 +93,16 @@
     --brdr-style-2: dashed;
     --brdr-style-3: dotted;
 
-    --brdr-sm: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-primary);
-    --brdr-md: var(--brdr-width-medium) var(--brdr-style-1) var(--clr-primary);
-    --brdr-lg: var(--brdr-width-large) var(--brdr-style-1) var(--clr-primary);
+    --brdr-sm: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-dark);
+    --brdr-md: var(--brdr-width-medium) var(--brdr-style-1) var(--clr-dark);
+    --brdr-lg: var(--brdr-width-large) var(--brdr-style-1) var(--clr-dark);
     --brdr-muted: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-muted);
-    --brdr-solid: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-primary);
+    --brdr-solid: var(--brdr-width-thin) var(--brdr-style-1) var(--clr-dark);
     --brdr-transparent: var(--brdr-width-thin) var(--brdr-style-1) transparent;
 
     /* Border Radii  */
 
+    --radius-none: 0;
     --radius-xxsm: .25em;
     --radius-xsm: 5px;
     --radius-sm: .5em;
