@@ -10,7 +10,7 @@ const template = createTemplate(
         <p class="toast-msg"></p>
     </div>
     <button class="close" aria-label="close">
-        <span class="icon .toast-icon" data-icon="close"></span>
+        <span class="icon .toast-icon" data-icon="dismiss"></span>
     </button>      
 </div>`
 );

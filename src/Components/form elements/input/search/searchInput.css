@@ -1,12 +1,11 @@
 @import "@styles/base/base.css";
 
-/*body {
+.search-bar {
     height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--bg-plain);
-}*/
+}
 
 .input {
     width: 500px;
@@ -25,7 +24,7 @@
     padding-inline-start: 0px;
     padding-block-start: 0px;
     padding-block: 0px;
-    box-shadow: 
+    box-shadow:
         2px 2px 0px hsla(250, 100%, 50%, .1),
         -2px -2px 0px hsla(250, 100%, 50%, .1);
     backdrop-filter: blur(4px);
@@ -57,7 +56,7 @@
     background: hsl(250, 100%, 46%);
 }
 
-.search svg{
+.search svg {
     stroke: var(--clr-plain);
 }
 

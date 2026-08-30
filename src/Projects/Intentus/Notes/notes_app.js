@@ -1,7 +1,9 @@
 import "@components/toast/toast.js";
 import "./notes_app.css";
+import searchItems from "@utils/input";
 import { getCurrentTime } from "@utils/date.js";
-import { copy, share, closeDialog } from "@utils/actions.js";
+import { copy, share } from "@utils/actions.js";
+import { createRipple, closeDialog } from "@utils/button.js";
 import { icons, initializeIcons } from "@assets/Icons/icons.js";
 import SearchInput from "@components/form elements/input/search/searchInput";
 
@@ -11,7 +13,7 @@ const main = document.querySelector("main");
 const form = document.getElementById("form");
 const notes = document.getElementById("notes");
 const dialog = document.getElementById("dialog");
-const saveBtn = document.getElementById("saveBtn");
+//const saveBtn = document.getElementById("saveBtn");
 const themeBtn = document.getElementById("themeBtn");
 const closeBtn = document.getElementById("closeBtn");
 const cancelBtn = document.getElementById("cancelBtn");
@@ -19,9 +21,11 @@ const titleInput = document.getElementById("noteTitle");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const emptyState = document.getElementById("emptyState");
 const toastNotif = document.querySelector("toast-notif");
+const searchComponent = document.querySelector("search-input");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
 const layoutBtn = document.querySelector(".layoutBtn");
+const buttons = document.querySelectorAll("button");
 
 const noteData = {
     container: notes,
@@ -65,7 +69,7 @@ layoutBtn.addEventListener("click", () => {
     if (layoutIcon.dataset.icon === "dashboard") {
         layoutIcon.dataset.icon = "grid";
         main.classList.add("grid");
-    }  else if (layoutIcon.dataset.icon === "grid") {
+    } else if (layoutIcon.dataset.icon === "grid") {
         layoutIcon.dataset.icon = "list";
         main.classList.replace("grid", "list");
     } else if (layoutIcon.dataset.icon === "list") {
@@ -81,13 +85,46 @@ layoutBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
     form.reset();
     closeDialog(dialog);
-    
+
 });
 
 cancelBtn.addEventListener("click", () => {
     form.reset();
     closeDialog(dialog);
 });
+
+searchComponent.addEventListener("search", (e) => {
+    const component = e.detail.input;
+    const results = searchItems({
+        input: component,
+        items: quickNotes,
+        property: "title",
+    });
+
+    renderNotes({
+        container: notes,
+        items: results,
+        btn: addNoteBtn,
+        placeholder: emptyState,
+        template: noteTemplate
+    });
+
+    /*if (results.length === 0) { 
+        renderNotes({
+            container: notes,
+            items: results,
+            btn: addNoteBtn,
+            placeholder: emptyState,
+            template: noteTemplate
+        });
+    }; */
+});
+
+buttons.forEach(btn => {
+    btn.addEventListener("click", (e) => {
+        createRipple(e, btn);
+    });
+})
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -180,7 +217,10 @@ function renderNotes({ container, items, btn, placeholder, template }) {
             const noteCard = note.querySelector("article");
             const noteTitle = note.querySelector(".note-title");
             const date = note.querySelector(".date");
-            //date.textContent = `${ quickNote.date }`;
+            /*if (note.contains(date)) { date.textContent = `${ quickNote.date }` };
+            else {
+                date.textContent = "";
+            };*/
             noteTitle.textContent = quickNote.title;
             note.querySelector(".note-content").textContent = quickNote.content;
             note.querySelector(".note-card").dataset.id = quickNote.id;

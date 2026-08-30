@@ -3,19 +3,6 @@ import searchItems from "@utils/input";
 import { createStyle, createTemplate } from "@utils/component";
 import { initializeIcons, removeIcon } from "@assets/Icons/icons";
 
-const array = [
-    { num: "one" },
-    { num: "two" },
-    { num: "three" },
-    { num: "four" },
-    { num: "five" },
-    { num: "six" },
-    { num: "seven" },
-    { num: "eight" },
-    { num: "nine" },
-    { num: "ten" }
-];
-
 const template = createTemplate(
     `<label for="searchInput">
     <div class="input">
@@ -29,12 +16,13 @@ const template = createTemplate(
 </label>`
 );
 
- export default class SearchInput extends HTMLElement {
+export default class SearchInput extends HTMLElement {
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
         const style = createStyle("./searchInput.css", import.meta.url);
         const inputComponent = template.content.cloneNode(true);
+        this.input = inputComponent.querySelector(".input");
         this.searchInput = inputComponent.querySelector("input");
         this.inputLabel = inputComponent.querySelector("label");
         this.closeBtn = inputComponent.querySelector(".close-btn");
@@ -43,23 +31,23 @@ const template = createTemplate(
         shadow.append(style, this.inputLabel);
 
         this.searchInput.addEventListener("input", () => {
+            this.dispatchEvent(
+                new CustomEvent("search", {
+                    detail: { input: this.searchInput },
+                    bubbles: true
+                })
+            )
             if (!this.icon) return;
             this.icon.dataset.icon = "dismiss";
             initializeIcons(this.closeBtn);
             if (this.searchInput.value.toLowerCase().trim() === "") { removeIcon(this.icon) };
-            searchItems({
-                input: this.searchInput,
-                items: array,
-                property: "num",
-                renderFunction: render
-            });
         });
 
-        this.searchInput.addEventListener("blur", () => { removeIcon(this.icon) });
+        this.input.addEventListener("blur", () => { removeIcon(this.icon) });
 
         this.closeBtn.addEventListener("click", () => {
-            this.searchInput.value.toLowerCase().trim() = "";
-            removeIcon(icon);
+            this.searchInput.value = "";
+            removeIcon(this.icon);
         });
 
         document.addEventListener("keydown", (e) => {
