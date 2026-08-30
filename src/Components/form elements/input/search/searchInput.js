@@ -1,34 +1,79 @@
 import "./searchInput.css";
-import { initializeIcons } from "@assets/Icons/icons.js";
-import { removeIcon } from "@utils/icons.js";
+import searchItems from "@utils/input";
+import { createStyle, createTemplate } from "@utils/component";
+import { initializeIcons, removeIcon } from "@assets/Icons/icons";
 
-const input = document.querySelector(".input");
-const searchInput = input.querySelector("input");
-const inputLabel = document.querySelector("label");
-const closeBtn = input.querySelector(".close-btn");
-const icon = closeBtn.querySelector(".icon");
+const array = [
+    { num: "one" },
+    { num: "two" },
+    { num: "three" },
+    { num: "four" },
+    { num: "five" },
+    { num: "six" },
+    { num: "seven" },
+    { num: "eight" },
+    { num: "nine" },
+    { num: "ten" }
+];
 
-searchInput.addEventListener("input", () => { 
-    if (searchInput.value === "") { removeIcon(icon) };
-    const icon = closeBtn.querySelector(".icon");
-    icon.dataset.icon = "dismiss";
-    initializeIcons(closeBtn);
-    //searchItems;
+const template = createTemplate(
+    `<label for="searchInput">
+    <div class="input">
+        <span class="icon search" data-icon="search"></span>
+        <input id="searchInput" type="search" autocomplete="off" placeholder="Find anything you want..">
+        <button class="close-btn" aria-label="clear search button">
+            <span class="icon clear" data-icon=""></span>
+        </button>
+        <code class="shortcut">ctrl + /</code>
+    </div>
+</label>`
+);
 
-});
+ export default class SearchInput extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        const style = createStyle("./searchInput.css", import.meta.url);
+        const inputComponent = template.content.cloneNode(true);
+        this.searchInput = inputComponent.querySelector("input");
+        this.inputLabel = inputComponent.querySelector("label");
+        this.closeBtn = inputComponent.querySelector(".close-btn");
+        this.icon = this.closeBtn.querySelector(".icon");
+        initializeIcons(this.inputLabel);
+        shadow.append(style, this.inputLabel);
 
-function searchItems(items, property, renderFunction) {
-    const value = searchInput.value;
-    const searched = items.filter(item => { 
-        return item.property.matches(value);
+        this.searchInput.addEventListener("input", () => {
+            if (!this.icon) return;
+            this.icon.dataset.icon = "dismiss";
+            initializeIcons(this.closeBtn);
+            if (this.searchInput.value.toLowerCase().trim() === "") { removeIcon(this.icon) };
+            searchItems({
+                input: this.searchInput,
+                items: array,
+                property: "num",
+                renderFunction: render
+            });
+        });
+
+        this.searchInput.addEventListener("blur", () => { removeIcon(this.icon) });
+
+        this.closeBtn.addEventListener("click", () => {
+            this.searchInput.value.toLowerCase().trim() = "";
+            removeIcon(icon);
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === "/") {
+                this.searchInput.focus();
+            }
+        });
+    }
+};
+
+customElements.define("search-input", SearchInput);
+
+function render(items) {
+    items.forEach(item => {
+        console.log(item);
     });
 }
-
-searchInput.addEventListener("blur", () => { removeIcon(icon) });
-
-closeBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    removeIcon(icon);
-});
-
-initializeIcons(inputLabel);

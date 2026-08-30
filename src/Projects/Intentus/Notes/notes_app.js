@@ -3,6 +3,7 @@ import "./notes_app.css";
 import { getCurrentTime } from "@utils/date.js";
 import { copy, share, closeDialog } from "@utils/actions.js";
 import { icons, initializeIcons } from "@assets/Icons/icons.js";
+import SearchInput from "@components/form elements/input/search/searchInput";
 
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
 

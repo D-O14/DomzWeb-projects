@@ -1,4 +1,5 @@
 export const icons = {
+    noteSearch: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-book-search-icon lucide-book-search"><path d="M11 22H5.5a1 1 0 0 1 0-5h4.501"/><path d="m21 22-1.879-1.878"/><path d="M3 19.5v-15A2.5 2.5 0 0 1 5.5 2H18a1 1 0 0 1 1 1v8"/><circle cx="17" cy="18" r="3"/></svg>`,
     dashboard: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="lucide dashboard">
@@ -338,3 +339,21 @@ export function initializeIcons(root) {
         }
     });
 };
+
+export function animateIcon(container) {
+    const animation = container.dataset.iconAnimation;
+    const icon = container.querySelector("svg");
+    if (!icon || animation) return;
+    const className = `icon-${ animation }`;
+    //icon.classList.remove(className);
+    void icon.offsetWidth;
+    icon.classList.add(className);
+    icon.addEventListener("animationend", () => {
+        icon.classList.remove(className);
+    }, { once: true });
+};
+
+export function removeIcon(icon) {
+    icon.dataset.icon = "";
+    icon.textContent = "";
+}
