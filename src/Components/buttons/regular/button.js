@@ -5,12 +5,23 @@ import { createStyle, createTemplate } from "@utils/component";
 
 const template = createTemplate(
     `
-    <button part="button" class="glass">
+    <button part="button">
+        <slot name="icon"></slot>
         <slot name="text"></slot>
     </button>
     `
 );
+
 const buttonComponent = template.content.cloneNode(true);
+
+function createEvent(button, eventName) {
+    button.dispatchEvent(new CustomEvent(eventName, {
+        detail: { button: button },
+        bubbles: true,
+        composed: true
+    }));
+}
+
 
 export default class MyButton extends HTMLElement {
     constructor() {
@@ -21,12 +32,15 @@ export default class MyButton extends HTMLElement {
         shadow.append(style, buttonComponent);
         this.button.addEventListener("click", (e) => {
             createRipple(e, this.button);
-            this.dispatchEvent(new CustomEvent("onClick", {
-                detail: { button: this.button },
-                bubbles: true
-            }));
+            createEvent(this, "onClick");
         });
+        this.button.addEventListener("mouseover", () => { createEvent(this, "onHover") });
+        this.button.addEventListener("mouseout", () => { createEvent(this, "hoverOut") });
+    }
 
+    connectedCallback() {
+        const className = this.getAttribute("class");
+        this.button.classList.add(className);
     }
 };
 

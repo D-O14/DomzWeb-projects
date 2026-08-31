@@ -11,87 +11,50 @@
         Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-body {
-    display: grid;
-    width: 100%;
-    height: 100%;
-    place-items: center;
-    background: hsla(210, 80%, 90%, .5);
-}
-
 h1 {
     font-weight: 400;
+    font-size: 20px;
+}
+
+p {
     font-size: 16px;
 }
 
-span {
-    position: relative;
-    z-index: 1;
-    height: 40px;
-    width: 40px;
-    display: block;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: hsl(0, 0%, 100%);
-    box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.1);
-}
-
-span::after {
-    position: absolute;
-    bottom: 0;
-    content: "";
-    width: 0%;
-    height: 0%;
+my-button.reveal-btn::part(button) {
     border-radius: 5rem;
-    background: hsl(0, 100%, 50%);
+    background: hsl(250, 100%, 50%);
+    border: 1px solid hsla(250, 100%, 50%, .15);
 }
 
-button.active {
-    transform: scale(.9);
-    color: hsl(0, 0%, 90%);
-    background: hsl(210, 100%, 46%);
-    border: 2px solid hsl(210, 100%, 46%);
+.tooltip.revealed {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
 }
 
-svg {
-    position: relative;
-    z-index: 1;
+.icon svg {
     width: 20px;
     height: 20px;
-    line-height: 50px;
 }
 
-.wrapper {
-    margin-top: 100px;
-    display: inline-flex;
-}
-
-.icon {
-    margin: 0 10px;
-    cursor: pointer;
+.tooltip-view {
+    height: 100dvh;
     display: flex;
-    z-index: 1;
-    position: relative;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
 }
 
 .tooltip {
-    position: absolute;
+    position: relative;
     top: -30px;
+    left: -30px;
     opacity: 0;
-    font-size: 20px;
-    border-radius: 25px;
+    border-radius: 8px;
     transform: scale(0);
-    padding: .25em .75em;
+    padding: .5em 1em;
     pointer-events: none;
     transform-origin: bottom;
-    backdrop-filter: blur(4px);
-    background: hsla(0, 0%, 100%, .05);
-    box-shadow: 0 10px 10px hsla(0, 0%, 0%, 0.1);
+    box-shadow: 0 10px 10px hsla(0, 0%, 0%, .15);
     transition: all 500ms cubic-bezier(.68, -.55, .265, 1.55);
 }
 
@@ -102,104 +65,6 @@ svg {
     height: 15px;
     bottom: -8px;
     left: 50%;
-    background: hsla(0, 0%, 100%, .05);
+    background: hsl(0, 0%, 100%);
     transform: translateX(-50%) rotate(45deg);
-    transition: all 500ms cubic-bezier(.68, -.55, .265, 1.55);
-}
-
-.icon:hover .tooltip {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1) translateY(-20px);
-}
-
-.icon:hover span::after {
-    width: 100%;
-    height: 100%;
-}
-
-.facebook:hover .tooltip,
-.facebook:hover .tooltip::before {
-    background: hsla(211, 100%, 52%);
-}
-
-.facebook span::after {
-    background: hsl(211, 100%, 56%);
-}
-
-.facebook:hover .tooltip {
-    color: hsl(0, 0%, 100%);
-}
-
-.facebook:hover svg {
-    fill: hsl(0, 0%, 100%);
-}
-
-.twitter:hover .tooltip,
-.twitter:hover .tooltip::before {
-    background: hsl(211, 100%, 2%);
-}
-
-.twitter span::after {
-    background: hsl(211, 100%, 2%);
-}
-
-.twitter:hover .tooltip {
-    color: hsl(0, 0%, 100%);
-}
-
-.twitter:hover svg {
-    stroke: hsl(0, 0%, 100%);
-}
-
-.insta:hover .tooltip,
-.insta:hover .tooltip::before {
-    background: hsl(340, 75%, 54%);
-}
-
-.insta span::after {
-    background: hsl(340, 75%, 54%);
-}
-
-.insta:hover .tooltip {
-    color: hsl(0, 0%, 100%);
-}
-
-.insta:hover svg {
-    fill: hsl(0, 0%, 100%);
-}
-
-.github:hover .tooltip,
-.github:hover .tooltip::before {
-    background: hsl(211, 100%, 12%);
-}
-
-.github span::after {
-    background: hsl(211, 100%, 12%);
-}
-
-.github:hover .tooltip {
-    color: hsl(0, 0%, 100%);
-}
-
-.github:hover svg {
-    fill: hsl(0, 0%, 100%);
-}
-
-.youtube:hover .tooltip,
-.youtube:hover .tooltip::before {
-    background: hsl(1, 100%, 52%);
-}
-
-.youtube span::after {
-    background: hsl(1, 100%, 52%);
-}
-
-.youtube:hover .tooltip {
-    color: hsl(0, 0%, 100%);
-}
-
-.youtube:hover svg {
-    fill: hsl(0, 0%, 100%);
-    stroke: hsl(0, 100%, 50%);
 }
