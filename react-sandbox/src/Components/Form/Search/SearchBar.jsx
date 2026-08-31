@@ -2,7 +2,7 @@ import { Search, CircleXIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import styles from "./SearchBar.module.css";
 
-export default function SearchBar({ items = [], icon = <Search />, property, placeholder }) {
+export default function SearchBar({ items = [], icon = <Search />, property, placeholder="Search..." }) {
     useEffect(() => {
         function focusInput(e) {
             if ((e.ctrlKey || e.metaKey) && e.key === "/") {

@@ -12,37 +12,7 @@
 
 <style>
     :root {
-        --dark: hsl(210, 100%, 45%, .65);
 
-        --base-red: hsl(0, 100%, 50%);
-        --base-green: hsl(120, 100%, 25%);
-
-        --base-blue: hsl(240, 100%, 50%);
-        --base-orange: hsl(39, 100%, 50%);
-
-        --base-violet: hsl(300, 76%, 72%);
-        --base-amber: hsl(45, 100%, 50%);
-
-        --base-magenta: hsl(300, 100%, 50%);
-        --base-chartreuse: hsl(90, 100%, 50%);
-
-        --base-teal: hsl(180, 100%, 25%);
-        --base-vermilion: hsl(5, 77%, 55%);
-
-        --base-purple: hsl(300, 100%, 25%);
-        --base-yellow: hsl(60, 100%, 50%);
-
-        --shade-blue-50: hsl(from var(--base-blue) h s calc(l + 45));
-        --shade-blue-100: hsl(from var(--base-blue) h s calc(l + 30));
-        --shade-blue-200: hsl(from var(--base-blue) h s calc(l + 20));
-        --shade-blue-300: hsl(from var(--base-blue) h s calc(l + 15));
-        --shade-blue-400: hsl(from var(--base-blue) h s calc(l + 5));
-        --shade-blue-500: hsl(from var(--base-blue) h s l);
-        --shade-blue-600: hsl(from var(--base-blue) h s calc(l - 15));
-        --shade-blue-700: hsl(from var(--base-blue) h s calc(l - 20));
-        --shade-blue-800: hsl(from var(--base-blue) h s calc(l - 25));
-        --shade-blue-900: hsl(from var(--base-blue) h s calc(l - 30));
-        --shade-blue-950: hsl(from var(--base-blue) h s calc(l - 40));
         --base: var(--shade-blue-400);
 
         /*--brand-shade-1: hsl(from var(--brand-clr) h s calc(l + 2) / .5);
@@ -173,6 +143,32 @@
         background-clip: text;
         -webkit-background-clip: text;
     }
+
+    profile-card::part(view-btn){
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        cursor: pointer;
+        overflow: hidden;
+        font-size: 1rem;
+        font-weight: 600;
+        padding: .5em 1em;
+        position: relative;
+        border-radius: .25rem;
+        transform-origin: bottom;
+        backdrop-filter: blur(5px);
+        color: hsla(0, 0%, 100%);
+        -webkit-backdrop-filter: blur(5px);
+        background: hsla(210, 100%, 56%);
+        border: 1px solid transparent;
+        transition: all .3s ease-in-out;
+        box-shadow: -4px -2px 5px hsla(0, 0%, 0%, 0.1);
+    }
+
+    profile-card::part(view-btn):hover{
+        background: hsl(210, 100%, 46%);
+    }
 </style>
 
 <body>
@@ -184,11 +180,68 @@
         <img src="https://res.cloudinary.com/dyyvwfgqr/image/upload/cafe_10_sikas8.webp" alt="" loading="lazy"
             sizes="{max-width: 768px} 100vw, 50vw" decoding="async">
     </picture>-->
-    <button class="btn">Button</button>
+    <profile-card data-img="">
+        <label slot="name">DomzWeb</label>
+        <div slot="desc">
+            <p>Web Developer from Nigeria. Also has a component library.</p>
+        </div>
+        <span slot="text">View Profile</span>
+    </profile-card>
 </body>
 
 <script type="text/javascript" defer>
+    class ProfileCard extends HTMLElement {
+        static css = `
+            :host {
+                width: 200px;
+                display: block;
+                padding: 16px;
+                text-align: center;
+                font-size: 14px;
+                font-family: 'Inter', sans-serif;
+            }
 
+            .image {
+                width: 100%;
+                border-radius: 50%;
+                margin-bottom: 16px;
+            }
+
+            .name {
+                font-size: 24px;
+                font-weight: bold;
+            }
+
+            .divider {
+                margin: 16px 0;
+                border-top: 1px solid #eeeeee;
+            }
+    `
+
+        constructor() {
+            super();
+            this.attachShadow({ mode: "open" });
+        }
+
+        connectedCallback() {
+            const imgSrc = this.dataset.img || "https://placehold.net/400x600.png";
+            this.shadowRoot.innerHTML = `
+            <style>${ ProfileCard.css }</style>
+            <img class="image" src="${ imgSrc }" alt="abstract image" />
+            <div class="name">
+                <slot name="name"></slot>   
+            </div>
+            <hr class="divider"/>
+            <slot name="desc"></slot>
+            <menu>    
+                <button part="view-btn">
+                    <slot name="text"><slot/>    
+                </button>
+            </menu>
+        `;
+        }
+    }
+    customElements.define("profile-card", ProfileCard);
 </script>
 <!--<script src="https://unpkg.com/cloudinary-core/cloudinary-core-shrinkwrap.min.js" defer></script>-->
 

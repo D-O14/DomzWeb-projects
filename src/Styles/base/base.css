@@ -16,14 +16,16 @@ svg {
 button {
     display: flex;
     cursor: pointer;
+    overflow: hidden;
     position: relative;
     gap: var(--spacing-2);
     align-items: center;
     justify-content: center;
+    transform-origin: bottom;
     touch-action: manipulation;
     font-size: var(--font-size);
     font-weight: var(--weight-thick);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-xxsm);
     border: var(--brdr-transparent);
     padding: var(--spacing-2) var(--spacing-4);
 }

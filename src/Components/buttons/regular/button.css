@@ -1,91 +1,57 @@
-*,
-*::before,
-*::after {
-    margin: 0;
-    padding: 0;
-    user-select: none;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-        Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+@import "@styles/base/base.css";
+@import "@assets/designs/glassmorphism/glass.css";
+@import "@assets/designs/animations/animations.css";
+
+:root{
+    --hovered-scale: .95;
+    --hovered-bg: hsl(210, 100%, 35%, .25);
+    --hovered-brdr: 1px solid hsla(210, 100%, 40%, .85);
+
+    --active-scale: .9;
+    --active-bg: hsl(210, 100%, 46%, .25);
+    --active-brdr: 1px solid hsl(210, 100%, 46%, .84);
+
 }
 
-body {
-    height: 60dvh;
+button {
+    color: var(--clr-plain);
+    border: var(--glass-border);
+    background: var(--glass-bg);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+button:hover {
+    transform: scale(var(--hovered-scale));
+    background: var(--hovered-bg);
+    border: var(--hovered-brdr);
+}
+
+button.active {
+    transform: scale(var(--active-scale));
+    background: var(--active-bg);
+    border: var(--active-brdr);
+}
+
+.button-view {
+    height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: hsl(0, 0%, 100%);
+    background: url(../../../Assets/Images/abstract-waves.jpg);
 }
 
-span {
+.text {
+    font-size: var(--font-size);
+    font-weight: var(--weight-thick);
+}
+
+.ripple {
     position: absolute;
     border-radius: 50%;
     pointer-events: none;
     transform: translate(-50%, -50%);
     background: hsl(0, 0%, 0%, .75);
     animation: ripples .6s linear infinite;
-}
-
-button {
-    cursor: pointer;
-    overflow: hidden;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: .5em 1em;
-    position: relative;
-    border-radius: .25rem;
-    transition: all .3s ease;
-    transform-origin: bottom;
-    /*background: hsl(210, 100%, 52%);
-    border: 1px solid hsla(210, 100%, 95%, .15);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    background: hsla(213, 100%, 52%, .25);
-    box-shadow:
-        2px 4px 30px hsla(0, 0%, 0%, .1),
-        1px 1px 1px hsl(210, 100%, 46%, .1),
-        1px 1px 0px hsl(210, 100%, 45%, .1),
-        -1px -1px 0px hsl(210, 100%, 45%, .1),
-        -1px -1px 0px hsl(210, 100%, 45%, .1);
-    border: 1px solid hsla(213, 73%, 53%, 0.84);*/
-    backdrop-filter: blur(5px);
-    color: hsla(0, 0%, 100%);
-    -webkit-backdrop-filter: blur(5px);
-    background: hsla(210, 100%, 40%, .25);
-    border: 1px solid hsla(210, 50%, 60%, .35);
-    box-shadow:
-        -4px -2px 5px hsla(0, 0%, 0%, .1),
-        2px 4px 30px hsla(0, 0%, 0%, .1),
-        1px 1px 1px hsl(210, 100%, 46%, .1),
-        1px 1px 0px hsl(210, 100%, 45%, .1),
-        -1px -1px 0px hsl(210, 100%, 45%, .1),
-        -1px -1px 0px hsl(210, 100%, 45%, .1);
-}
-
-button:hover {
-    transform: scale(.95);
-    background: hsl(210, 100%, 40%, .25);
-    border: 1px solid hsla(210, 100%, 40%, .85);
-}
-
-button.active {
-    transform: scale(.9);
-    color: hsl(0, 0%, 90%);
-    background: hsl(210, 100%, 46%, .25);
-    border: 1px solid hsl(210, 100%, 46%, .84);
-}
-
-@keyframes ripples {
-    0% {
-        width: 0%;
-        height: 0%;
-        opacity: .5;
-    }
-
-    100% {
-        width: 100px;
-        height: 100px;
-        opacity: 0;
-    }
 }

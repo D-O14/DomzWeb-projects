@@ -11,7 +11,7 @@ const template = createTemplate(
         <button class="close-btn" aria-label="clear search button">
             <span class="icon clear" data-icon=""></span>
         </button>
-        <code class="shortcut">ctrl + /</code>
+        <kbd class="shortcut">ctrl + /</kbd>
     </div>
 </label>`
 );

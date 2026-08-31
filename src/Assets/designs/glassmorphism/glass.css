@@ -1,9 +1,13 @@
-.glass{
-    --glass-blur: 5px;
-    --glass-bg: hsla(240, 65%, 43%, 0.19);
-    --glass-border: 1px solid hsla(240, 65%, 43%, 0.3);
-    --glass-shadow: 0px 4px 30px hsla(0, 0%, 0%, 0.1);
+@import "../shadows/shadows.css";
 
+:root {
+    --glass-blur: 5px;
+    --glass-shadow: var(--shadow-glass);
+    --glass-bg: hsla(210, 100%, 40%, .25);
+    --glass-border: 1px solid hsla(210, 50%, 60%, .35);
+}
+
+.glass {
     border: var(--glass-border);
     background: var(--glass-bg);
     box-shadow: var(--glass-shadow);

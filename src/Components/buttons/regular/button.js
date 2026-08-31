@@ -1,14 +1,34 @@
 import "./button.css";
+import { createIcons, icons } from "lucide";
+import { createRipple } from "@utils/button";
+import { createStyle, createTemplate } from "@utils/component";
 
-const button = document.querySelector("button");
-button.addEventListener("click", (e) => {
-    const x = e.clientX - e.target.offsetLeft;
-    const y = e.clientY - e.target.offsetTop;
-    const ripple = document.createElement("span");
-    ripple.style.left = `${ x }px`;
-    ripple.style.top = `${ y }px`;
-    button.append(ripple);
-    button.classList.add("active");
-    setTimeout(() => { button.classList.remove("active") }, 300);
-    setTimeout(() => { ripple.remove() }, 600);
-});
+const template = createTemplate(
+    `
+    <button part="button" class="glass">
+        <slot name="text"></slot>
+    </button>
+    `
+);
+const buttonComponent = template.content.cloneNode(true);
+
+export default class MyButton extends HTMLElement {
+    constructor() {
+        super();
+        const shadow = this.attachShadow({ mode: "open" });
+        const style = createStyle("./button.css", import.meta.url);
+        this.button = buttonComponent.querySelector("button");
+        shadow.append(style, buttonComponent);
+        this.button.addEventListener("click", (e) => {
+            createRipple(e, this.button);
+            this.dispatchEvent(new CustomEvent("onClick", {
+                detail: { button: this.button },
+                bubbles: true
+            }));
+        });
+
+    }
+};
+
+createIcons({ icons });
+customElements.define("my-button", MyButton);

@@ -8,7 +8,14 @@
 </head>
 
 <body>
-    <button>Button</button>
+    <menu class="button-view">
+        <my-button>
+            <span slot="text" class="text" data-icon="delete">
+                Delete
+                <i data-lucide="trash2"></i>
+            </span>
+        </my-button>
+    </menu>
 </body>
 
 <script type="module" src="./button.js" defer></script>
