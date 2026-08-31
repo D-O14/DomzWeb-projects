@@ -70,7 +70,8 @@ form {
     flex-direction: column;
 }
 
-code {
+code,
+kbd {
     font-size: 12px;
     font-weight: 500;
     line-height: 135%;

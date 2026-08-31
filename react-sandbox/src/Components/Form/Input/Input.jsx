@@ -6,7 +6,7 @@ export default function Input({ type = "text", placeholder = "Enter some text", 
         <>
             <label htmlFor={id} className="input-label">
                 <div className={styles.input}>
-                    <span>{icon}</span>
+                    <span className="icon">{icon}</span>
                     <input type={type} id={id} placeholder={placeholder} className={className}
                         onChange={event} value={value} />
                 </div>

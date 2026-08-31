@@ -1,0 +1,122 @@
+*::before,
+*::after,
+*{
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
+    Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+::-webkit-search-cancel-button {
+    appearance: none;
+}
+
+svg {
+    width: 22px;
+    height: 22px;
+    display: inline;
+    vertical-align: middle;
+    transform: translate(0);
+}
+
+button {
+    gap: .5em;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5em 1em;
+    border-radius: .5em;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    border: 1px solid transparent;
+}
+
+input {
+    height: 40px;
+    outline: none;
+    background: none;
+    border-radius: .5em;
+    padding: .5em 1em;
+}
+
+kbd {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 135%;
+    padding: .25rem .5rem;
+    text-transform: uppercase;
+    background: hsl(233, 13%, 14%);
+}
+
+.input {
+    width: 500px;
+    display: flex;
+    height: 45px;
+    gap: 0;
+    outline: none;
+    overflow: hidden;
+    background: none;
+    position: relative;
+    align-items: center;
+    padding: .5em 1em;
+    padding-block: 0px;
+    border-radius: 5em;
+    padding-inline-start: 0px;
+    padding-block-start: 0px;
+    justify-content: center;
+    border: 1px solid transparent;
+    box-shadow:
+        2px 2px 0px hsla(250, 100%, 50%, .1),
+        -2px -2px 0px hsla(250, 100%, 50%, .1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background: hsl(250, 100%, 46%, .05);
+}
+
+#searchInput {
+    flex: 1;
+    width: 100%;
+    position: relative;
+    caret-color: hsl(250, 100%, 46%);
+    border: 1px solid transparent;
+}
+
+.searchBar{
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search {
+    width: 12%;
+    height: 100%;
+    padding: .5em 1em;
+    background: hsl(250, 100%, 46%);
+}
+
+.search svg {
+    stroke: hsl(0, 0%, 100%);
+}
+
+.closeBtn {
+    padding: 0;
+    background: none;
+    margin-right: 10px;
+}
+
+.clear {
+    margin-right: 10px;
+}
+
+.shortcut {
+    padding: .5em 1em;
+    border-radius: 5px;
+    background: hsla(0, 0%, 0%, .1);
+}
