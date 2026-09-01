@@ -40,23 +40,14 @@
     border: var(--brdr-transparent);
 }
 
-/*.input::after{
-    position: absolute;
-    content: "";
-    height: 100%;
-    width: 1px;
-    left: 56px;
-    background: hsl(250, 100%, 76%);
-}*/
-
-.search {
+.search-icon {
     width: 12%;
     height: 100%;
     padding: .5em 1em;
     background: hsl(250, 100%, 46%);
 }
 
-.search svg {
+.search-icon svg {
     stroke: var(--clr-plain);
 }
 

@@ -48,12 +48,13 @@ my-button.reveal-btn::part(button) {
     position: relative;
     top: -30px;
     left: -30px;
-    opacity: 0;
+    opacity: 1;
     border-radius: 8px;
-    transform: scale(0);
+    transform: scale(1);
     padding: .5em 1em;
     pointer-events: none;
     transform-origin: bottom;
+    background: hsl(0, 0%, 100%);
     box-shadow: 0 10px 10px hsla(0, 0%, 0%, .15);
     transition: all 500ms cubic-bezier(.68, -.55, .265, 1.55);
 }

@@ -18,11 +18,46 @@
     justify-content: baseline;
 }
 
-.box{
+.box {
     border: 3px solid;
     padding: 25px;
 }
 
-ol{
+.icon {
+    width: 20px;
+    height: 20px;
+    stroke: hsl(0, 0%, 50%);
+}
+
+/*.tooltip {
+    position: relative;
+    top: 30px;
+    left: -30px;
+    opacity: 1;
+    max-width: max(100px, 300px);
+    width: fit-content;
+    border-radius: 8px;
+    transform: scale(1);
+    padding: 1em 2em;
+    text-align: left;
+    pointer-events: none;
+    transform-origin: bottom;
+    background: hsl(0, 0%, 100%);
+    box-shadow: 0 10px 10px hsla(0, 0%, 0%, .15);
+    transition: all 500ms cubic-bezier(.68, -.55, .265, 1.55);
+}
+
+.tooltip::before {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 15px;
+    bottom: -8px;
+    left: 50%;
+    background: hsl(0, 0%, 100%);
+    transform: translateX(-50%) rotate(45deg);
+}*/
+
+ol {
     padding: 2em;
 }

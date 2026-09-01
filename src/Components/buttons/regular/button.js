@@ -6,8 +6,9 @@ import { createStyle, createTemplate } from "@utils/component";
 const template = createTemplate(
     `
     <button part="button">
-        <slot name="icon"></slot>
-        <slot name="text"></slot>
+        <slot name="text">
+            
+        </slot>
     </button>
     `
 );
@@ -21,7 +22,6 @@ function createEvent(button, eventName) {
         composed: true
     }));
 }
-
 
 export default class MyButton extends HTMLElement {
     constructor() {
@@ -39,8 +39,12 @@ export default class MyButton extends HTMLElement {
     }
 
     connectedCallback() {
-        const className = this.getAttribute("class");
+        const className = this.getAttribute("class") ?? "button";
+        const identification = this.getAttribute("id") ?? "button";
+        const ariaLabel = this.getAttribute("aria-label") ?? "";
         this.button.classList.add(className);
+        this.button.setAttribute("id", identification);
+        this.button.setAttribute("aria-label", ariaLabel);
     }
 };
 

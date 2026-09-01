@@ -11,15 +11,17 @@
     <meta property="og:title" content="Quick Notes">
     <meta property="og:description" content="A notes-taking appplication built to help you keep track of your activities, 
     store information, reminders, and optimize productivity.">
-    <meta property="og:image" content="http://localhost:5173/DomzWeb-projects/src/Projects/Intentus/Notes/quickNotes.jpg">
+    <meta property="og:image"
+        content="http://localhost:5173/DomzWeb-projects/src/Projects/Intentus/Notes/quickNotes.jpg">
     <meta property="og:url" content="http://localhost:5173/DomzWeb-projects/src/Projects/Intentus/Notes/notes_app.html">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Quick Notes" />
     <meta name="twitter:description" content="A notes-taking application built to help you keep track of your activities, 
     store information, reminders, and optimize productivity." />
-    <meta name="twitter:image" content="http://localhost:5173/DomzWeb-projects/src/Projects/Intentus/Notes/quickNotes.jpg" />
-    <link rel="canonical" href="http://localhost:5173/DomzWeb-projects/src/Projects/Intentus/Notes/notes_app.html">        
+    <meta name="twitter:image"
+        content="http://localhost:5173/DomzWeb-projects/src/Projects/Intentus/Notes/quickNotes.jpg" />
+    <link rel="canonical" href="http://localhost:5173/DomzWeb-projects/src/Projects/Intentus/Notes/notes_app.html">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Quick Notes">
@@ -40,13 +42,14 @@
 
     <header>
         <h1>Quick Notes</h1>
-        <search-input></search-input>
+        <search-input class="note-search" placeholder="Search through your notes...">
+            <span slot="icon" class="icon search-icon">
+                <i data-lucide="bookSearch"></i>
+            </span>
+        </search-input>
         <menu class="header-menu">
             <button class="layoutBtn" aria-label="Layout Change Button">
                 <span class="icon" data-icon="dashboard"></span>
-            </button>
-            <button class="addNoteBtn" id="addNoteBtn" aria-label="Add note button">
-                <span class="icon" data-icon="pen"></span>
             </button>
             <button id="themeBtn" class="themeBtn" aria-label="Theme switch button">
                 <span class="icon" data-icon="moon"></span>
@@ -87,6 +90,17 @@
             </div>
         </template>
     </main>
+
+    <tool-tip>
+        <p slot="info">Create Note</p>
+    </tool-tip>
+    <my-button class="addNoteBtn" id="addNoteBtn" aria-label="Create Note">
+        <span slot="text" class="icon text" data-icon="pen">
+        </span>
+    </my-button>
+    <!--<button class="addNoteBtn" id="addNoteBtn" aria-label="Create Note">
+        <span class="icon" data-icon="pen"></span>
+    </button>-->
 
     <dialog id="dialog">
         <div class="dialog-content">

@@ -16,6 +16,7 @@ html {
 }
 
 :root {
+    --bg-header: hsl(0, 0%, 98%, .05);
     --bg-fab: hsl(260, 100%, 50%);
     --brand-clr: hsl(237, 100%, 67%);
     --base-clr: hsl(227, 100%, 76%, .15);
@@ -40,11 +41,13 @@ html {
     --bg-btn-focus: hsl(237, 100%, 47%);
     --bg-badge: var(--brand-clr);
     --brdr-empty: 1px solid hsl(250, 50%, 90%);
+    --brdr-header: 1px solid hsl(250, 50%, 90%);
     --outline-focus: 2px solid hsl(248, 53%, 58%);
     --empty-shadow: 1px 1px 1px hsl(250, 50%, 9%);
 }
 
 .dark-theme {
+    --bg-header: hsl(0, 0%, 98%, .05);
     --brand-clr: hsl(237, 100%, 77%);
     --base-clr: hsl(233, 12%, 13%);
     --bg-surface: hsl(250, 52%, 6%);
@@ -62,16 +65,14 @@ html {
         -97px 11px 44px hsla(224, 71%, 4%, 0.01);
     --bg-danger: hsl(0, 90%, 50%);
     --clr-danger: var(--bg-danger);
-    /*--brdr-empty: 4px solid hsl(250, 50%, 9%);
-    --empty-shadow: 2px 2px 4px hsl(250, 50%, 9%);*/
     --brdr-empty: none;
     --empty-shadow: none;
+    --brdr-header: 1px solid hsl(0, 0%, 19%);
 }
 
 /* Base styles */
 
 body {
-    position: relative;
     color: var(--txt-clr);
     background: var(--bg-surface);
 }
@@ -100,10 +101,18 @@ button {
 }
 
 header {
+    top: 0;
+    z-index: 1;
+    height: 60px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     padding: 2em;
+    position: sticky;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    justify-content: space-between;
+    background: var(--bg-header);
+    -webkit-backdrop-filter: blur(5px);
+    border-bottom: var(--brdr-header);
 }
 
 main {
@@ -213,8 +222,7 @@ svg {
     background: none;
 }
 
-.addNoteBtn {
-    z-index: 1;
+my-button.addNoteBtn::part(button) {
     border-radius: 5em;
     position: fixed;
     bottom: 45px;
@@ -225,8 +233,9 @@ svg {
     box-shadow: var(--shadow-fab);
 }
 
-.addNoteBtn:hover {
+my-button.addNoteBtn:hover::part(button) {
     scale: 1.15;
+    background: var(--bg-fab);
     box-shadow: var(--shadow-fab-hover);
 }
 
@@ -235,7 +244,7 @@ svg {
 }
 
 .themeBtn {
-    background: var(--bg-surface);
+    background: none;
 }
 
 .themeBtn .icon svg {
@@ -283,6 +292,12 @@ svg {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.revealed {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1);
 }
 
 /* Some stuff */

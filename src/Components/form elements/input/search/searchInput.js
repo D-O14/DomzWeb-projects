@@ -1,13 +1,14 @@
 import "./searchInput.css";
-import searchItems from "@utils/input";
 import { createStyle, createTemplate } from "@utils/component";
 import { initializeIcons, removeIcon } from "@assets/Icons/icons";
 
 const template = createTemplate(
     `<label for="searchInput">
-    <div class="input">
-        <span class="icon search" data-icon="search"></span>
-        <input id="searchInput" type="search" autocomplete="off" placeholder="Find anything you want..">
+    <div class="input" part="container">
+        <slot name="icon">
+            <span class="icon search-icon" data-icon="search"></span>
+        </slot>
+        <input part="input" id="searchInput" type="search" autocomplete="off">
         <button class="close-btn" aria-label="clear search button">
             <span class="icon clear" data-icon=""></span>
         </button>
@@ -22,10 +23,11 @@ export default class SearchInput extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
         const style = createStyle("./searchInput.css", import.meta.url);
         const inputComponent = template.content.cloneNode(true);
-        this.input = inputComponent.querySelector(".input");
+        //this.searchIcon = inputComponent.querySelector("slot[name='icon']");
+        this.closeBtn = inputComponent.querySelector(".close-btn");
         this.searchInput = inputComponent.querySelector("input");
         this.inputLabel = inputComponent.querySelector("label");
-        this.closeBtn = inputComponent.querySelector(".close-btn");
+        this.input = inputComponent.querySelector(".input");
         this.icon = this.closeBtn.querySelector(".icon");
         initializeIcons(this.inputLabel);
         shadow.append(style, this.inputLabel);
@@ -50,18 +52,26 @@ export default class SearchInput extends HTMLElement {
             removeIcon(this.icon);
         });
 
-        document.addEventListener("keydown", (e) => {
-            if (e.ctrlKey && e.key === "/") {
+        this.shadowRoot.addEventListener("keydown", (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === "/") {
                 this.searchInput.focus();
             }
         });
     }
+
+    connectedCallback() { 
+        const className = this.getAttribute("class");
+        //const searchIcon = this.querySelector("span[slot='icon']");
+        const placeholder = this.getAttribute("placeholder") ?? "Find anything you want...";
+        this.searchInput.placeholder = placeholder;
+        /*if (!searchIcon) {
+            this.searchIcon.dataset.icon = "search";
+            this.searchIcon.className = "icon search-icon"
+        }*/
+        this.input.classList.add(className);
+        initializeIcons(this.shadowRoot);
+    };
 };
 
+initializeIcons(document);
 customElements.define("search-input", SearchInput);
-
-function render(items) {
-    items.forEach(item => {
-        console.log(item);
-    });
-}

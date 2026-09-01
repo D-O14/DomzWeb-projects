@@ -13,7 +13,7 @@
 
 }
 
-button {
+my-button::part(button) {
     color: var(--clr-plain);
     border: var(--glass-border);
     background: var(--glass-bg);
@@ -22,13 +22,13 @@ button {
     -webkit-backdrop-filter: blur(var(--glass-blur));
 }
 
-button:hover {
+my-button:hover::part(button) {
     transform: scale(var(--hovered-scale));
     background: var(--hovered-bg);
     border: var(--hovered-brdr);
 }
 
-button.active {
+my-button.active::part(button) {
     transform: scale(var(--active-scale));
     background: var(--active-bg);
     border: var(--active-brdr);

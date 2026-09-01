@@ -13,6 +13,7 @@ An account creation form is a simple form designed to allow users fill in their 
 # To-do
 - [] Default handle to username if null
 - [] Add error icons
+- [] Use change event for formatting
 
 # Ideas
 - none

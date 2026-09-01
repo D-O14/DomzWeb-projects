@@ -1,18 +1,18 @@
 //import "./loaderBtn.css";
 import "../regular/button";
 import { showLoader } from "@utils/actions";
-//import { icons } from "@assets/Icons/icons.js";
+/*import { icons } from "@assets/Icons/icons.js";
 
 const button = document.querySelector("my-button");
 button.addEventListener("onClick", (e) => { showLoader(e.detail.button) });
 
-//import { createStyle, createTemplate } from "@tilities/component.js";
+import { createStyle, createTemplate } from "@tilities/component.js";
 
-//const template = createTemplate(`<button>${ icons.bounce }</button>`);
-///const loader = template.content.cloneNode(true);
-//const button = loader.querySelector("button");
+const template = createTemplate(`<button>${ icons.bounce }</button>`);
+const loader = template.content.cloneNode(true);
+const button = loader.querySelector("button");
 
-/*class LoaderBtn extends HTMLElement{
+class LoaderBtn extends HTMLElement{
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });

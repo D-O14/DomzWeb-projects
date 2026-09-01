@@ -1,11 +1,14 @@
 import "@components/toast/toast.js";
 import "./notes_app.css";
+import "@components/tooltip/tooltip";
 import searchItems from "@utils/input";
+import "@components/buttons/regular/button";
+import { createIcons, icons } from "lucide";
 import { getCurrentTime } from "@utils/date.js";
 import { copy, share } from "@utils/actions.js";
 import { createRipple, closeDialog } from "@utils/button.js";
-import { icons, initializeIcons } from "@assets/Icons/icons.js";
-import SearchInput from "@components/form elements/input/search/searchInput";
+import { initializeIcons } from "@assets/Icons/icons.js";
+import "@components/form elements/input/search/searchInput";
 
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
 
@@ -13,19 +16,22 @@ const main = document.querySelector("main");
 const form = document.getElementById("form");
 const notes = document.getElementById("notes");
 const dialog = document.getElementById("dialog");
-//const saveBtn = document.getElementById("saveBtn");
 const themeBtn = document.getElementById("themeBtn");
+//const saveBtn = document.getElementById("saveBtn");
 const closeBtn = document.getElementById("closeBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const titleInput = document.getElementById("noteTitle");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const emptyState = document.getElementById("emptyState");
 const toastNotif = document.querySelector("toast-notif");
+const tooltip = document.querySelector("tool-tip");
+//const tooltip = tooltipComponent.querySelector(".tooltip");
 const searchComponent = document.querySelector("search-input");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
 const layoutBtn = document.querySelector(".layoutBtn");
-const buttons = document.querySelectorAll("button");
+//const buttons = document.querySelectorAll("button");
+
 
 const noteData = {
     container: notes,
@@ -42,9 +48,10 @@ const noteData = {
 };*/
 
 document.addEventListener("DOMContentLoaded", () => {
+    const themeIcon = themeBtn.querySelector(".icon");
     if (localStorage.getItem("theme") === "dark-mode") {
         document.body.classList.add("dark-theme");
-        themeBtn.innerHTML = `${ icons.sun }`;
+        themeIcon.dataset.icon = "sun";
     };
 
     dialog.addEventListener("click", function (e) {
@@ -54,9 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-addNoteBtn.addEventListener("click", () => {
+addNoteBtn.addEventListener("onClick", () => {
     dialog.showModal();
     dialog.classList.add("open");
+});
+
+addNoteBtn.addEventListener("onHover", () => {
+    tooltip.addEventListener("reveal", (e) => {
+        const component = e.detail.tooltip;
+        component.classList.add("revealed");
+    })
+    //tooltip.classList.toggle("revealed");
 });
 
 themeBtn.addEventListener("click", () => {
@@ -120,11 +135,11 @@ searchComponent.addEventListener("search", (e) => {
     }; */
 });
 
-buttons.forEach(btn => {
+/*buttons.forEach(btn => {
     btn.addEventListener("click", (e) => {
         createRipple(e, btn);
     });
-})
+})*/
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -232,4 +247,5 @@ function renderNotes({ container, items, btn, placeholder, template }) {
 }
 
 renderNotes(noteData);
+createIcons({ icons });
 initializeIcons(document);

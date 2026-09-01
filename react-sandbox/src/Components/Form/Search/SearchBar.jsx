@@ -35,22 +35,17 @@ export default function SearchBar({ items = [], icon = <Search />, property, pla
 
     return (
         <>
-            <label htmlFor="searchInput">
-                <div className={styles.input}>
-                    <span className={styles.search}>{icon}</span>
-                    <input type="search" id="searchInput" placeholder={placeholder} onChange={(e) => { setQuery(e.target.value) }}
-                        value={query} autoComplete="off" />
-                    <button className={styles.closeBtn} aria-label="clear search button">
-                        <span className="icon"><CircleXIcon /></span>
-                    </button>
-                    <kbd className={styles.shortcut}>ctrl + /</kbd>
-                </div>
-            </label>
-            <ol>
-                {results.map((item, index) => {
-                    return <li key={index}>{item[property]}</li>
-                })}
-            </ol>
+                <label htmlFor="searchInput">
+                    <div className={styles.input}>
+                        <span className={styles.searchIcon}>{icon}</span>
+                        <input type="search" id="searchInput" placeholder={placeholder} onChange={(e) => { setQuery(e.target.value) }}
+                            value={query} autoComplete="off" />
+                        <button className={styles.closeBtn} aria-label="clear search button">
+                            <span className="icon"><CircleXIcon /></span>
+                        </button>
+                        <kbd className={styles.shortcut}>ctrl + /</kbd>
+                    </div>
+                </label>
         </>
     );
 };
