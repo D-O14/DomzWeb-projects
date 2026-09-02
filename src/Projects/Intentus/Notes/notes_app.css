@@ -15,6 +15,15 @@ html {
     scroll-behavior: smooth;
 }
 
+img {
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+
 :root {
     --bg-header: hsl(0, 0%, 98%, .05);
     --bg-fab: hsl(260, 100%, 50%);
@@ -110,7 +119,7 @@ header {
     align-items: center;
     backdrop-filter: blur(5px);
     justify-content: space-between;
-    background: var(--bg-header);
+    /*background: var(--bg-header);*/
     -webkit-backdrop-filter: blur(5px);
     border-bottom: var(--brdr-header);
 }
@@ -119,6 +128,7 @@ main {
     gap: 1.5rem;
     display: grid;
     padding: 2.5em;
+    grid-template-rows: repeat(250px, 1fr);
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
@@ -222,21 +232,36 @@ svg {
     background: none;
 }
 
-my-button.addNoteBtn::part(button) {
+.addNoteBtn {
     border-radius: 5em;
     position: fixed;
     bottom: 45px;
     right: 45px;
     padding: .75em;
     color: var(--txt-on-accent);
-    background: var(--bg-fab);
-    box-shadow: var(--shadow-fab);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background: hsl(from var(--bg-fab) 240 100% 55% / .75);
+    border: 1px solid hsl(240, 100%, 50%, .25);
+    box-shadow:
+        2px 2px 2px hsl(227, 100%, 57%, .5),
+        2px 2px 2px hsl(237, 100%, 67%, .5),
+        2px 2px 2px hsl(247, 100%, 87%, .5),
+        2px 2px 2px hsl(257, 100%, 67%, .5),
+        2px 2px 2px hsl(250, 100%, 50%, .75);
+    /*box-shadow: var(--shadow-fab);
+    background: hsl(260, 100%, 50%, .45);*/
 }
 
-my-button.addNoteBtn:hover::part(button) {
+.addNoteBtn:hover {
     scale: 1.15;
-    background: var(--bg-fab);
-    box-shadow: var(--shadow-fab-hover);
+    /*background: var(--bg-fab);*/
+    box-shadow:
+        2px 2px 2px hsl(240, 100%, 57%, .5),
+        2px 2px 2px hsl(245, 100%, 67%, .55),
+        2px 2px 2px hsl(250, 100%, 57%, .65),
+        2px 2px 2px hsl(245, 100%, 67%, .75),
+        2px 2px 2px hsl(240, 100%, 50%, .75);
 }
 
 .addNoteBtn:hover svg {
@@ -288,7 +313,7 @@ my-button.addNoteBtn:hover::part(button) {
     transform: scale(0);
 }
 
-.empty{
+.empty {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -301,13 +326,6 @@ my-button.addNoteBtn:hover::part(button) {
 }
 
 /* Some stuff */
-
-.date {
-    position: absolute;
-    top: 36px;
-    right: 40px;
-    color: var(--txt-muted);
-}
 
 .form-label {
     font-weight: 600;
@@ -384,21 +402,34 @@ my-button.addNoteBtn:hover::part(button) {
     gap: .5rem;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     position: relative;
     border-radius: .5rem;
+    padding-bottom: 1.25em;
     box-shadow: var(--shadow);
-    background: var(--bg-surface);
+    background: hsl(0, 0%, 100%, .05);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     transform-origin: bottom left;
     border: 1px solid var(--border-color);
     transition: opacity .5s ease,
         transform .5s ease;
+    border: 1px solid hsl(0, 0%, 100%, .25);
+}
+
+.note-date {
+    position: absolute;
+    top: 36px;
+    right: 40px;
+    color: var(--txt-muted);
 }
 
 .note-actions {
+    flex: 1;
+    width: 100%;
+    gap: .5rem;
     padding: .5em;
-    gap: .25rem;
-    width: fit-content;
+    margin-top: 20px;
+    border-top: 1px solid hsl(0, 0%, 83%);
 }
 
 .note-actions svg {
@@ -414,6 +445,7 @@ my-button.addNoteBtn:hover::part(button) {
 
 .note-content {
     height: 100%;
+    margin-bottom: 20px;
 }
 
 /* Animations */

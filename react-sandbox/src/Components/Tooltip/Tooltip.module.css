@@ -8,32 +8,32 @@ p {
     font-size: 16px;
 }
 
-.tooltip.revealed {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale(1);
-}
-
-.view{
+.view {
     height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
+}
+
+.tooltip.revealed {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateY(-20px);
 }
 
 .tooltip {
     position: relative;
-    top: 30px;
-    left: -30px;
-    opacity: 1;
-    max-width: max(100px, 300px);
+    top: -10px;
+    opacity: 0;
     width: fit-content;
     border-radius: 8px;
-    transform: scale(1);
+    transform: scale(0);
     padding: .5em 1em;
     text-align: left;
     pointer-events: none;
     transform-origin: bottom;
+    max-width: max(100px, 300px);
     background: hsl(0, 0%, 100%);
     box-shadow: 0 10px 10px hsla(0, 0%, 0%, .15);
     transition: all 500ms cubic-bezier(.68, -.55, .265, 1.55);
@@ -48,4 +48,13 @@ p {
     left: 50%;
     background: hsl(0, 0%, 100%);
     transform: translateX(-50%) rotate(45deg);
+}
+
+.showBtn{
+    border-radius: 5rem;
+    background: hsl(250, 100%, 50%);
+}
+
+.showBtn:hover{
+    background: hsl(250, 100%, 40%);
 }

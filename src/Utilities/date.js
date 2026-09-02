@@ -25,20 +25,67 @@ export function validateDate(input, rules) {
     }
 }
 
-export function getCurrentTime() {
-    const hours = String(new Date().getHours()).padStart(2, "0");
-    const minutes = String(new Date().getMinutes()).padStart(2, "0");
-    const suffix = hours >= 12 ? "PM" : "AM";
-    return `${ hours }:${ minutes }${ suffix }`;
+function isSameDay(date1, date2) {
+    const first = new Date(date1);
+    const second = new Date(date2);
+    return (
+        first.getFullYear() === second.getFullYear() &&
+        first.getMonth() === second.getMonth() &&
+        first.getDate() === second.getDate()
+    );
 }
 
-export function formatTime() {
-    const hours = time.getHours();
-    const minutes = time.getMinutes();
-    const seconds = time.getSeconds();
-    const meridiem = hours >= 12 ? "PM" : "AM";
+function isYesterday(date1, date2) {
+    const target = new Date(date1);
+    const now = new Date(date2);
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1)
+    yesterday.setDate(yesterday.getDate() - 1);
+    return isSameDay(target, yesterday);
+}
+
+export function relativeTime(targetDate) {
+    const rtf = new Intl.RelativeTimeFormat("en", { numeric: 'auto' });
+
+    const now = new Date();
+    const target = new Date(targetDate);
+    const elapsed = Date.now() - target.getTime();
+
+    const seconds = elapsed / 1000;
+    const minutes = seconds / 60;
+    const hours = minutes / 60;
+    const days = hours / 24;
+    const weeks = days / 7;
+
+    if (seconds < 10) { return "Just Now" };
+    if (seconds < 60) { return `${ Math.floor(seconds) }s ago` };
+    if (minutes < 60) { return `${ Math.floor(minutes) }min ago` };
+    if (isSameDay(targetDate, now)) { return `${ formatTime(targetDate) } Today` };
+    if (isYesterday(targetDate, now)) { return `${ formatTime(targetDate) } Yesterday` };
+    if (days < 7) { return `${ Math.floor(days) } d ago` };
+    if (weeks < 4) { return `${ Math.floor(weeks) } wks ago` };
+
+    return formatDate(targetDate);
+}
+
+export function formatTime(date) {
+    const dateObj = new Date(date);
+    const hours = String(dateObj.getHours()).padStart(2, "0");
+    const minutes = String(dateObj.getMinutes()).padStart(2, "0");
+    const meridiem = dateObj.getHours() >= 12 ? "PM" : "AM";
     //hours = hours % 12 || 12;
-    return `${ padZero(hours) }:${ padZero(minutes) }:${ padZero(seconds) } ${ meridiem }`;
+    return `${ hours }:${ minutes } ${ meridiem }`;
 };
 
-export function padZero(num) { return (num < 10 ? "0" : "") + num };
+const date = new Date("2026-09-02T13:48:00");
+formatTime(date);
+
+export function formatDate(date) {
+    const dateObj = new Date(date);
+    return dateObj.toLocaleDateString('en-US', {
+        weekday: "short",
+        month: 'short',
+        day: '2-digit',
+        year: 'long'
+    });
+}

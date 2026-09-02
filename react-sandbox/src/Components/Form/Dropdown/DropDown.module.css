@@ -5,12 +5,12 @@
 
 ::-webkit-scrollbar-track {
     border-radius: 8px;
-    background: hsl(0, 0%, 90%);
+    background: hsl(210, 100%, 50%);
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 8px;
-    background: hsl(0, 0%, 80%);
+    background: hsl(210, 100%, 50%);
     border: 2px solid hsl(0, 0%, 90%);
 }
 
@@ -86,7 +86,7 @@ li:hover svg {
     background: hsla(0, 0%, 95%, .05);
     border: 1px solid hsl(0, 0%, 80%, .5);
     box-shadow: 0 10px 10px hsla(0, 0%, 0%, .15);
-    scrollbar-color: hsl(0, 0%, 80%) hsl(0, 0%, 95%);
+    scrollbar-color: hsl(210, 100%, 50%) hsl(210, 100%, 90%);
 }
 
 .select.drop {

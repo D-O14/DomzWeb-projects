@@ -3,8 +3,10 @@ button {
     font-size: 1rem;
     font-weight: 600;
     padding: .5em 1em;
+    position: relative;
     border-radius: .25em;
     color: hsl(0, 0%, 100%);
+    touch-action: manipulation;
     border: 1px solid transparent;
     background: hsl(210, 100%, 50%);
 }

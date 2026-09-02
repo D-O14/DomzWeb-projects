@@ -1,12 +1,10 @@
 import "@components/toast/toast.js";
 import "./notes_app.css";
-import "@components/tooltip/tooltip";
 import searchItems from "@utils/input";
-import "@components/buttons/regular/button";
 import { createIcons, icons } from "lucide";
-import { getCurrentTime } from "@utils/date.js";
+import { relativeTime } from "@utils/date.js";
 import { copy, share } from "@utils/actions.js";
-import { createRipple, closeDialog } from "@utils/button.js";
+import { closeDialog } from "@utils/button.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
 import "@components/form elements/input/search/searchInput";
 
@@ -24,8 +22,6 @@ const titleInput = document.getElementById("noteTitle");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const emptyState = document.getElementById("emptyState");
 const toastNotif = document.querySelector("toast-notif");
-const tooltip = document.querySelector("tool-tip");
-//const tooltip = tooltipComponent.querySelector(".tooltip");
 const searchComponent = document.querySelector("search-input");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
@@ -61,17 +57,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-addNoteBtn.addEventListener("onClick", () => {
+addNoteBtn.addEventListener("click", () => {
     dialog.showModal();
     dialog.classList.add("open");
-});
-
-addNoteBtn.addEventListener("onHover", () => {
-    tooltip.addEventListener("reveal", (e) => {
-        const component = e.detail.tooltip;
-        component.classList.add("revealed");
-    })
-    //tooltip.classList.toggle("revealed");
 });
 
 themeBtn.addEventListener("click", () => {
@@ -135,12 +123,6 @@ searchComponent.addEventListener("search", (e) => {
     }; */
 });
 
-/*buttons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-        createRipple(e, btn);
-    });
-})*/
-
 form.addEventListener("submit", (e) => {
     e.preventDefault();
     saveNote(quickNotes);
@@ -170,12 +152,18 @@ function themeSwitch(themeBtn) {
     initializeIcons(themeBtn);
 }
 
+function updateDate() {
+    document.querySelectorAll("[data-created-at]").forEach(date => {
+        date.textContent = relativeTime(date.dataset.createdAt)
+    });
+}
+
 function saveNote(items) {
     const note = {
         id: crypto.randomUUID(),
         title: titleInput.value.trim(),
         content: contentInput.value.trim(),
-        date: getCurrentTime(),
+        createdAt: new Date().toISOString()
     }
     items.unshift(note);
     localStorage.setItem("quickNotes", JSON.stringify(items));
@@ -231,21 +219,26 @@ function renderNotes({ container, items, btn, placeholder, template }) {
             const note = template.content.cloneNode(true);
             const noteCard = note.querySelector("article");
             const noteTitle = note.querySelector(".note-title");
-            const date = note.querySelector(".date");
-            /*if (note.contains(date)) { date.textContent = `${ quickNote.date }` };
-            else {
-                date.textContent = "";
-            };*/
+            const noteDate = note.querySelector(".note-date");
+            if (quickNote.createdAt) {
+                noteDate.dataset.createdAt = quickNote.createdAt;
+                noteDate.textContent = relativeTime(quickNote.createdAt);
+            };
             noteTitle.textContent = quickNote.title;
             note.querySelector(".note-content").textContent = quickNote.content;
             note.querySelector(".note-card").dataset.id = quickNote.id;
-            if (quickNote.title === "") { noteTitle.textContent = "Untitled Note" }
+            if (quickNote.title === "") {
+                quickNote.title = "Untitled Note";
+                noteTitle.textContent = "Untitled Note";
+            }
             container.append(note);
             initializeIcons(noteCard);
         });
     }
 }
 
+updateDate();
 renderNotes(noteData);
 createIcons({ icons });
 initializeIcons(document);
+setInterval(() => { updateDate() }, 1000);

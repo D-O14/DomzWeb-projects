@@ -61,7 +61,7 @@
         <template id="noteTemplate">
             <article class="note-card" id="noteCard" data-id="">
                 <span class="quick-note">Quick Note</span>
-                <span class="date"></span>
+                <time class="note-date" data-created-at=""></time>
                 <h3 class="note-title"></h3>
                 <p class="note-content"></p>
                 <menu class="note-actions">
@@ -90,17 +90,9 @@
             </div>
         </template>
     </main>
-
-    <tool-tip>
-        <p slot="info">Create Note</p>
-    </tool-tip>
-    <my-button class="addNoteBtn" id="addNoteBtn" aria-label="Create Note">
-        <span slot="text" class="icon text" data-icon="pen">
-        </span>
-    </my-button>
-    <!--<button class="addNoteBtn" id="addNoteBtn" aria-label="Create Note">
+    <button class="addNoteBtn" id="addNoteBtn" aria-label="Create Note">
         <span class="icon" data-icon="pen"></span>
-    </button>-->
+    </button>
 
     <dialog id="dialog">
         <div class="dialog-content">

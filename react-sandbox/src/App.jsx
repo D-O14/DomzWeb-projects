@@ -1,8 +1,8 @@
 //import { ScanBox } from "lucide-react";
+//import DropDown from "./Components/Form/Dropdown/DropDown";
 //import SearchBar from "./Components/Form/Search/SearchBar";
-//import Tooltip from "./Components/Tooltip/Tooltip";
+import Clock from "./Components/Clock/Clock";
 import { MemoryStick, Volleyball, MonitorPlay, Ambulance, Palette, School, Gamepad, LifeBuoy } from "lucide-react";
-import DropDown from "./Components/Form/Dropdown/DropDown";
 
 const links = [
   { location: "Home", path: "#" },
@@ -26,7 +26,6 @@ const hobbies = [
 function App() {
   return (
     <>
-      <DropDown ltr={false} selectText="What are your hobbies?" items={hobbies} property="hobby" />
     </>
   );
 };
