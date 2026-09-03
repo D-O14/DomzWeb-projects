@@ -8,7 +8,7 @@
 }
 
 .input {
-    width: 500px;
+    width: min(500px, 450px);
     display: flex;
     height: 45px;
     outline: none;

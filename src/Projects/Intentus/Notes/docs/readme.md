@@ -17,30 +17,40 @@ The notes section of the Intentus productivity app.
 
 # Upcoming:
 - [] Extract Dialog Component
+- [✔️] Add tooltip component
+- [✔️] Add Relative date of creation
+- [] Add checkbox to delete
+- [] Add date sorting
+- [] Add delete all
+- [] undo delete toast
+- [] Save layout changes
+- [] Add filters
+- [] Add note pinning capabilities
+
 
 # Roadmap
 -----------------------------------------------
 **Version-1/Initial Launch**:
-- Editing & Deleting: Click on edit button to make title and content editable
+- [✔️] Editing & Deleting: Click on edit button to make title and content editable
 ```html
 <h1 contenteditable="true">Note Title</h1>
 <p contenteditable="true">Note Content...</p>
 ``` 
 - Edited tag (possibly).
-- Use `localstorage` to save settings.
-- Relative Date of Creation.
-- Modal to create note
+- [✔️] Use `localstorage` to save settings.
+- [✔️] Relative Date of Creation.
+- [✔️] Modal to create note
 
 **Version-2**:
 - Date Sorting (replaces `Relative Date of Creation`).
 - Checkbox to delete.
 - Delete all feature.
-- Layout Changes: Allow users to decide to use grid or list view for their notes
+- [✔️] Layout Changes: Allow users to decide to use grid or list view for their notes
 
 **Version-3**:
 - Sidebar.
 - Filters.
-- Searchable content.
+- [✔️] Searchable content.
 - Full page editing: Contains amount of characters.
 - Pinned Notes
 

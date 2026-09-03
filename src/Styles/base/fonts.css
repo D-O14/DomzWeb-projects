@@ -1,3 +1,10 @@
+:root{
+    --font-electrolize: "Electrolize";
+    --font-notoSerif: "Noto Serif";
+    --font-libertinus: "Libertinus Math";
+    --font-sanchez: "Sanchez";
+}
+
 @font-face {
     font-display: swap;
     font-family: "Electrolize";

@@ -15,19 +15,18 @@ const form = document.getElementById("form");
 const notes = document.getElementById("notes");
 const dialog = document.getElementById("dialog");
 const themeBtn = document.getElementById("themeBtn");
-//const saveBtn = document.getElementById("saveBtn");
+const layoutBtn = document.querySelector(".layoutBtn");
 const closeBtn = document.getElementById("closeBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const titleInput = document.getElementById("noteTitle");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const emptyState = document.getElementById("emptyState");
 const toastNotif = document.querySelector("toast-notif");
-const searchComponent = document.querySelector("search-input");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
-const layoutBtn = document.querySelector(".layoutBtn");
-//const buttons = document.querySelectorAll("button");
-
+const searchComponent = document.querySelector("search-input");
+const toolbarTemplate = document.querySelector(".toolbar-template");
+const selectionToolbar = toolbarTemplate.content.cloneNode(true);
 
 const noteData = {
     container: notes,
@@ -144,6 +143,20 @@ notes.addEventListener("click", (e) => {
     //if (shareBtn) { editNote(editBtn, quickNotes) };
 });
 
+notes.addEventListener("pointerdown", (e) => {
+    const checkbox = e.target.closest(".checkbox");
+    const customCheckbox = notes.querySelectorAll(".custom-check");
+    if (checkbox && customCheckbox) {
+        customCheckbox.forEach(cb => { select(cb, checkbox) });
+    };
+});
+
+function select(customCheckbox, checkbox) {
+    setTimeout(() => {
+        customCheckbox.classList.add("checked");
+        checkbox.checked = true;
+    }, 2000)};
+
 function themeSwitch(themeBtn) {
     const themeIcon = themeBtn.querySelector(".icon");
     const isDark = document.body.classList.toggle("dark-theme");
@@ -156,6 +169,17 @@ function updateDate() {
     document.querySelectorAll("[data-created-at]").forEach(date => {
         date.textContent = relativeTime(date.dataset.createdAt)
     });
+}
+
+function renderToolBar() {
+    const selectionToolbar = toolbarTemplate.content.cloneNode(true);
+    const toolbarView = selectionToolbar.querySelector(".toolbar-view");
+    selectionToolbar.querySelector(".select-all").textContent = `Select All (${ quickNotes.length })`;
+    /*selectionToolbar.querySelector(".toolbar-close").addEventListener("click", () => {
+        toolbarView.classList.add("hide");
+        setTimeout(() => { toolbarView.remove()}, 1000);
+    });*/
+    document.body.prepend(selectionToolbar);
 }
 
 function saveNote(items) {
@@ -220,17 +244,24 @@ function renderNotes({ container, items, btn, placeholder, template }) {
             const noteCard = note.querySelector("article");
             const noteTitle = note.querySelector(".note-title");
             const noteDate = note.querySelector(".note-date");
+            const checkbox = note.querySelector(".checkbox");
+            const customCheckbox = note.querySelector(".custom-check");
             if (quickNote.createdAt) {
                 noteDate.dataset.createdAt = quickNote.createdAt;
                 noteDate.textContent = relativeTime(quickNote.createdAt);
-            };
-            noteTitle.textContent = quickNote.title;
-            note.querySelector(".note-content").textContent = quickNote.content;
-            note.querySelector(".note-card").dataset.id = quickNote.id;
-            if (quickNote.title === "") {
+            } if (quickNote.title === "") {
                 quickNote.title = "Untitled Note";
                 noteTitle.textContent = "Untitled Note";
-            }
+            } else { noteTitle.textContent = quickNote.title };
+            note.querySelector(".note-content").textContent = quickNote.content;
+            /*noteCard.addEventListener("pointerdown", () => {
+                setTimeout(() => {
+                    customCheckbox.classList.add("checked");
+                    checkbox.checked = true;
+                }, 2000);
+            });*/
+            noteCard.dataset.id = quickNote.id;
+            checkbox.id = quickNote.id;
             container.append(note);
             initializeIcons(noteCard);
         });
@@ -238,6 +269,7 @@ function renderNotes({ container, items, btn, placeholder, template }) {
 }
 
 updateDate();
+renderToolBar();
 renderNotes(noteData);
 createIcons({ icons });
 initializeIcons(document);

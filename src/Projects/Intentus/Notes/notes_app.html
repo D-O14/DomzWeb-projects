@@ -39,27 +39,61 @@
 </head>
 
 <body>
-
     <header>
         <h1>Quick Notes</h1>
-        <search-input class="note-search" placeholder="Search through your notes...">
-            <span slot="icon" class="icon search-icon">
-                <i data-lucide="bookSearch"></i>
-            </span>
-        </search-input>
-        <menu class="header-menu">
-            <button class="layoutBtn" aria-label="Layout Change Button">
-                <span class="icon" data-icon="dashboard"></span>
-            </button>
-            <button id="themeBtn" class="themeBtn" aria-label="Theme switch button">
-                <span class="icon" data-icon="moon"></span>
-            </button>
-        </menu>
+        <div class="header-content">
+            <search-input class="note-search" placeholder="Search through your notes...">
+                <span slot="icon" class="icon search-icon">
+                    <i data-lucide="bookSearch"></i>
+                </span>
+            </search-input>
+            <menu class="header-menu">
+                <button class="layoutBtn" aria-label="Layout Change Button">
+                    <span class="icon" data-icon="dashboard"></span>
+                </button>
+                <button id="themeBtn" class="themeBtn" aria-label="Theme switch button">
+                    <span class="icon" data-icon="moon"></span>
+                </button>
+                <button id="filterBtn" class="filterBtn" aria-label="Filter button">
+                    <span class="icon" data-icon="filter"></span>
+                </button>
+            </menu>
+        </div>
     </header>
     <toast-notif></toast-notif>
     <main id="notes" class="notes">
+        <template class="toolbar-template">
+            <div class="toolbar-view">
+                <div class="selection-toolbar">
+                    <button class="toolbar-close" aria-label="close">
+                        <span class="icon" data-icon="close"></span>
+                    </button>
+                    <p>Notes Selected <span class="selected-count">2</span></p>
+                    <p class="select-all"></p>
+                    <menu>
+                        <button class="select-btn">
+                            <span class="icon" data-icon="upload"></span>
+                            Export
+                        </button>
+                        <button class="select-btn">
+                            <span class="icon" data-icon="share"></span>
+                            Share
+                        </button>
+                        <button class="select-btn delete">
+                            <span class="icon" data-icon="delete"></span>
+                            Delete
+                        </button>
+                    </menu>
+                </div>
+            </div>
+        </template>
+
         <template id="noteTemplate">
             <article class="note-card" id="noteCard" data-id="">
+                <label class="check">
+                    <input type="checkbox" class="checkbox" id="" aria-label="Select note">
+                    <span class="custom-check"></span>
+                </label>
                 <span class="quick-note">Quick Note</span>
                 <time class="note-date" data-created-at=""></time>
                 <h3 class="note-title"></h3>
@@ -90,9 +124,15 @@
             </div>
         </template>
     </main>
-    <button class="addNoteBtn" id="addNoteBtn" aria-label="Create Note">
-        <span class="icon" data-icon="pen"></span>
-    </button>
+
+    <div class="view">
+        <div class="tooltip">
+            <p class="content">Create Note</p>
+        </div>
+        <button class="addNoteBtn" id="addNoteBtn" aria-label="Create Note">
+            <span class="icon" data-icon="pen"></span>
+        </button>
+    </div>
 
     <dialog id="dialog">
         <div class="dialog-content">
