@@ -41,7 +41,6 @@
 <body>
     <header>
         <h1>Quick Notes</h1>
-        <div class="header-content">
             <search-input class="note-search" placeholder="Search through your notes...">
                 <span slot="icon" class="icon search-icon">
                     <i data-lucide="bookSearch"></i>
@@ -58,36 +57,10 @@
                     <span class="icon" data-icon="filter"></span>
                 </button>
             </menu>
-        </div>
+        
     </header>
     <toast-notif></toast-notif>
     <main id="notes" class="notes">
-        <template class="toolbar-template">
-            <div class="toolbar-view">
-                <div class="selection-toolbar">
-                    <button class="toolbar-close" aria-label="close">
-                        <span class="icon" data-icon="close"></span>
-                    </button>
-                    <p>Notes Selected <span class="selected-count">2</span></p>
-                    <p class="select-all"></p>
-                    <menu>
-                        <button class="select-btn">
-                            <span class="icon" data-icon="upload"></span>
-                            Export
-                        </button>
-                        <button class="select-btn">
-                            <span class="icon" data-icon="share"></span>
-                            Share
-                        </button>
-                        <button class="select-btn delete">
-                            <span class="icon" data-icon="delete"></span>
-                            Delete
-                        </button>
-                    </menu>
-                </div>
-            </div>
-        </template>
-
         <template id="noteTemplate">
             <article class="note-card" id="noteCard" data-id="">
                 <label class="check">
@@ -124,6 +97,28 @@
             </div>
         </template>
     </main>
+
+    <div class="toolbar-view">
+        <div class="selection-toolbar">
+            <p>Notes Selected <span class="selected-count"></span></p>
+            <p class="select-all"></p>
+            <menu class="toolbar-menu">
+                <button class="select-btn" aria-label="Export">
+                    <span class="icon" data-icon="upload"></span>
+                </button>
+                <button class="select-btn" aria-label="Share">
+                    <span class="icon" data-icon="share"></span>
+                </button>
+                <button class="select-btn delete">
+                    <span class="icon" data-icon="delete"></span>
+                    Delete
+                </button>
+            </menu>
+            <button class="toolbar-close" aria-label="close">
+                <span class="icon" data-icon="close"></span>
+            </button>
+        </div>
+    </div>
 
     <div class="view">
         <div class="tooltip">

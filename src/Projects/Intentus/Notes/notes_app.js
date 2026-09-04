@@ -8,6 +8,9 @@ import { closeDialog } from "@utils/button.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
 import "@components/form elements/input/search/searchInput";
 
+let pressTimer;
+let selectionMode = false;
+let selectedNotes = new Set();
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
 
 const main = document.querySelector("main");
@@ -25,8 +28,6 @@ const toastNotif = document.querySelector("toast-notif");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
 const searchComponent = document.querySelector("search-input");
-const toolbarTemplate = document.querySelector(".toolbar-template");
-const selectionToolbar = toolbarTemplate.content.cloneNode(true);
 
 const noteData = {
     container: notes,
@@ -144,18 +145,36 @@ notes.addEventListener("click", (e) => {
 });
 
 notes.addEventListener("pointerdown", (e) => {
-    const checkbox = e.target.closest(".checkbox");
-    const customCheckbox = notes.querySelectorAll(".custom-check");
-    if (checkbox && customCheckbox) {
-        customCheckbox.forEach(cb => { select(cb, checkbox) });
-    };
+    if (e.button !== 0) return;
+    const card = e.target.closest(".note-card");
+    const checkbox = card.querySelector(".checkbox");
+    const customCheckbox = card.querySelector(".custom-check");
+    const noteId = card.dataset.id;
+    if (!card) return;
+    pressTimer = setTimeout(() => {
+        customCheckbox.classList.add("checked");
+        customCheckbox.addEventListener("transitionend", () => {
+            checkbox.checked = true;
+        }, { once: true });
+        enterSelectMode(noteId);
+    }, 2000);
 });
 
-function select(customCheckbox, checkbox) {
-    setTimeout(() => {
-        customCheckbox.classList.add("checked");
-        checkbox.checked = true;
-    }, 2000)};
+notes.addEventListener("pointerup", () => { cancelPress() });
+notes.addEventListener("pointercancel", () => { cancelPress() });
+
+notes.addEventListener("change", (e) => {
+    if (!e.target.matches(".checkbox")) return;
+    const checkbox = e.target;
+    const card = checkbox.closest(".note-card");
+    const noteId = card.dataset.id;
+    if (checkbox.checked) {
+        selectedNotes.add(noteId)
+    } else {
+        selectedNotes.delete(noteId);
+    };
+    renderToolBar();
+});
 
 function themeSwitch(themeBtn) {
     const themeIcon = themeBtn.querySelector(".icon");
@@ -172,14 +191,47 @@ function updateDate() {
 }
 
 function renderToolBar() {
-    const selectionToolbar = toolbarTemplate.content.cloneNode(true);
-    const toolbarView = selectionToolbar.querySelector(".toolbar-view");
-    selectionToolbar.querySelector(".select-all").textContent = `Select All (${ quickNotes.length })`;
-    /*selectionToolbar.querySelector(".toolbar-close").addEventListener("click", () => {
-        toolbarView.classList.add("hide");
-        setTimeout(() => { toolbarView.remove()}, 1000);
-    });*/
-    document.body.prepend(selectionToolbar);
+    const toolbarView = document.querySelector(".toolbar-view");
+    const selectAllBtn = toolbarView.querySelector(".select-all");
+    const selectedCount = toolbarView.querySelector(".selected-count");
+    const closeBtn = toolbarView.querySelector(".toolbar-close");
+    toolbarView.classList.toggle("visible", enterSelectMode);
+    selectedCount.textContent = `${ selectedNotes.size }`;
+    selectAllBtn.textContent =
+        selectedNotes.size === quickNotes.length
+            ? `Deselect All (${ selectedNotes.size })`
+            : `Select All (${ quickNotes.length })`;
+    if (selectedNotes.size === quickNotes.length) {
+        selectAllBtn.addEventListener("click", () => { deselectAll() });
+    } else {
+        selectAllBtn.addEventListener("click", () => { selectAll() });
+    }
+    closeBtn.addEventListener("click", () => { selectionMode = false });
+    initializeIcons(toolbarView);
+}
+
+function selectAll() {
+    quickNotes.forEach(note => { selectedNotes.add(note.id) });
+    renderNotes(noteData);
+    renderToolBar();
+}
+
+function deselectAll() {
+    selectedNotes.clear();
+    renderNotes(noteData);
+    renderToolBar();
+}
+
+function cancelPress() {
+    clearTimeout(pressTimer);
+    pressTimer = null;
+};
+
+function enterSelectMode(noteId) {
+    selectionMode = true;
+    selectedNotes.add(noteId);
+    renderNotes(noteData);
+    renderToolBar();
 }
 
 function saveNote(items) {
@@ -254,14 +306,15 @@ function renderNotes({ container, items, btn, placeholder, template }) {
                 noteTitle.textContent = "Untitled Note";
             } else { noteTitle.textContent = quickNote.title };
             note.querySelector(".note-content").textContent = quickNote.content;
-            /*noteCard.addEventListener("pointerdown", () => {
-                setTimeout(() => {
-                    customCheckbox.classList.add("checked");
-                    checkbox.checked = true;
-                }, 2000);
-            });*/
             noteCard.dataset.id = quickNote.id;
             checkbox.id = quickNote.id;
+            if (selectionMode) {
+                customCheckbox.classList.add("checked");
+            } else {
+                customCheckbox.classList.remove("checked");
+                checkbox.checked = false;
+            };
+            if (selectedNotes.has(quickNote.id)) { checkbox.checked = true };
             container.append(note);
             initializeIcons(noteCard);
         });
@@ -269,7 +322,6 @@ function renderNotes({ container, items, btn, placeholder, template }) {
 }
 
 updateDate();
-renderToolBar();
 renderNotes(noteData);
 createIcons({ icons });
 initializeIcons(document);
