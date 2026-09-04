@@ -584,6 +584,39 @@ svg {
     opacity: 1;
 }
 
+
+.filter-row,
+.sort-row {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+.use {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.filter-chip,
+.sort-chip {
+    background: none;
+    border-radius: 5rem;
+    box-shadow:
+        2px 2px 3px hsl(0, 0%, 90%),
+        -2px -2px 3px hsl(0, 0%, 90%),
+        2px 2px 3px hsl(0, 0%, 90%);
+}
+
+.row {
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    border: none;
+    color: hsl(0, 0%, 100%);
+    background: hsl(230, 100%, 67%);
+}
 .toolbar-menu {
     gap: 1.5rem;
 }

@@ -31,10 +31,36 @@ cancelBtn.addEventListener("click", () => {
     dialog.close();
 });*/
 
-const button = document.querySelector("button");
-button.addEventListener("pointerdown", () => {
-    setTimeout(() => {
-        document.body.style.background = "red";
-    }, 2000);
-});
+const sortRow = document.querySelector(".sort-row");
+const filterRow = document.querySelector(".filter-row");
+const filterBtn = document.querySelector(".filter-btn");
+const sortBtn = document.querySelector(".sort-btn");
+filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
+sortBtn.addEventListener("click", () => { toggleClass(sortRow) });
+
+const filterChips = document.querySelectorAll(".filter-chip");
+const sortChips = document.querySelectorAll(".sort-chip");
+
+function applyState(chips) { 
+    chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            chips.forEach(chip => {
+                const activeIcon = chip.querySelector(".icon");
+                chip.classList.remove("active");
+                activeIcon.dataset.icon = "";
+                activeIcon.textContent = "";
+                initializeIcons(chip);
+            });
+            chip.classList.add("active");
+            const activeIcon = chip.querySelector(".icon");
+            activeIcon.dataset.icon = "tick";
+            initializeIcons(chip);
+        });
+    });  
+};
+
+function toggleClass(item) { item.classList.toggle("visible") };
+
+applyState(filterChips);
+applyState(sortChips);
 initializeIcons(document);

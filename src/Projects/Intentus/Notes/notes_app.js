@@ -29,7 +29,38 @@ const toastNotif = document.querySelector("toast-notif");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
 const searchComponent = document.querySelector("search-input");
+const sortRow = document.querySelector(".sort-row");
+const filterRow = document.querySelector(".filter-row");
+const filterBtn = document.querySelector(".filterBtn");
+const sortBtn = document.querySelector(".sortBtn");
+filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
+sortBtn.addEventListener("click", () => { toggleClass(sortRow) });
 
+const filterChips = document.querySelectorAll(".filter-chip");
+const sortChips = document.querySelectorAll(".sort-chip");
+
+function applyState(chips) {
+    chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            chips.forEach(chip => {
+                const activeIcon = chip.querySelector(".icon");
+                chip.classList.remove("active");
+                activeIcon.dataset.icon = "";
+                activeIcon.textContent = "";
+                initializeIcons(chip);
+            });
+            chip.classList.add("active");
+            const activeIcon = chip.querySelector(".icon");
+            activeIcon.dataset.icon = "tick";
+            initializeIcons(chip);
+        });
+    });
+};
+
+function toggleClass(item) { item.classList.toggle("use") };
+
+applyState(filterChips);
+applyState(sortChips);
 const noteData = {
     container: notes,
     items: quickNotes,
@@ -154,7 +185,7 @@ notes.addEventListener("pointerdown", (e) => {
             checkbox.checked = true;
         }, { once: true });
         enterSelectMode(noteId);
-    }, 2000);
+    }, 600);
 });
 
 notes.addEventListener("pointerup", () => { cancelPress() });
@@ -255,7 +286,9 @@ function saveNote(items) {
         id: crypto.randomUUID(),
         title: titleInput.value.trim(),
         content: contentInput.value.trim(),
-        createdAt: new Date().toISOString()
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        tags: [],
     }
     items.unshift(note);
     localStorage.setItem("quickNotes", JSON.stringify(items));
@@ -279,7 +312,7 @@ function deleteNote() {
     });
 }
 
-function undoDelete() { 
+function undoDelete() {
     quickNotes.push(...deletedNotes);
     localStorage.setItem("quickNotes", JSON.stringify(quickNotes));
     deletedNotes = [];
@@ -296,6 +329,7 @@ function editNote(editBtn, items) {
     noteTitle.focus();
     noteContent.focus();
     const noteToEdit = items.find(quickNote => { return quickNote.id === id });
+    //const updatedDate = items.map(item => { item.updatedAt = new Date().toISOString() });    
     noteTitle.addEventListener("input", () => {
         noteToEdit.title = noteTitle.textContent;
         localStorage.setItem("quickNotes", JSON.stringify(items));
@@ -305,6 +339,7 @@ function editNote(editBtn, items) {
         localStorage.setItem("quickNotes", JSON.stringify(items));
     });
 }
+
 
 function renderNotes({ container, items, btn, placeholder, template }) {
     container.innerHTML = "";
@@ -324,10 +359,9 @@ function renderNotes({ container, items, btn, placeholder, template }) {
             const noteDate = note.querySelector(".note-date");
             const checkbox = note.querySelector(".checkbox");
             const customCheckbox = note.querySelector(".custom-check");
-            if (quickNote.createdAt) {
-                noteDate.dataset.createdAt = quickNote.createdAt;
-                noteDate.textContent = relativeTime(quickNote.createdAt);
-            } if (quickNote.title === "") {
+            noteDate.dataset.createdAt = quickNote.createdAt;
+            noteDate.textContent = relativeTime(quickNote.updatedAt);
+            if (quickNote.title === "") {
                 quickNote.title = "Untitled Note";
                 noteTitle.textContent = "Untitled Note";
             } else { noteTitle.textContent = quickNote.title };

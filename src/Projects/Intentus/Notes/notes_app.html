@@ -56,9 +56,57 @@
                 <button id="filterBtn" class="filterBtn" aria-label="Filter button">
                     <span class="icon" data-icon="filter"></span>
                 </button>
+                <button id="sortBtn" class="sortBtn" aria-label="Sort button">
+                    <span class="icon" data-icon="sort"></span>
+                </button>
             </menu>
-        
     </header>
+    <div class="row">
+        <menu class="filter-row">
+            <button class="filter-chip default">
+                All
+                <span class="icon" data-icon="tick"></span>
+            </button>
+            <button class="filter-chip">
+                Today
+                <span class="icon" data-icon=""></span>
+            </button>
+            <button class="filter-chip">
+                Yesterday
+                <span class="icon" data-icon=""></span>
+            </button>
+            <button class="filter-chip">
+                This week
+                <span class="icon" data-icon=""></span>
+            </button>
+            <button class="filter-chip">
+                Older
+                <span class="icon" data-icon=""></span>
+            </button>
+        </menu>
+        <menu class="sort-row">
+            <button class="sort-chip active">
+                Recently Updated
+                <span class="icon" data-icon="tick"></span>
+            </button>
+            <button class="sort-chip">
+                Newest First
+                <span class="icon" data-icon=""></span>
+            </button>
+            <button class="sort-chip">
+                Oldest First
+                <span class="icon" data-icon=""></span>
+            </button>
+            <button class="sort-chip">
+                Title A-Z
+                <span class="icon" data-icon=""></span>
+            </button>
+            <button class="sort-chip">
+                Title Z-A
+                <span class="icon" data-icon=""></span>
+            </button>
+        </menu>
+    </div>
     <toast-notif></toast-notif>
     <main id="notes" class="notes">
         <template id="noteTemplate">

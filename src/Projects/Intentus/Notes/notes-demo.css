@@ -26,7 +26,7 @@
         0 20px 40px hsla(0, 0%, 0%, 15%);
 }
 
-body{
+body {
     height: 100dvh;
     display: flex;
     align-items: center;
@@ -185,12 +185,45 @@ button {
 menu {
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: 1rem;
 }
 
-svg{
+svg {
     width: 16px;
     height: 16px;
     vertical-align: middle;
     transform: translate(0);
+}
+
+.filter-row,
+.sort-row {
+    opacity: 0;
+    transform: translateY(-50px);
+}
+
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.filter-chip,
+.sort-chip {
+    background: none;
+    border-radius: 5rem;
+    box-shadow:
+        2px 2px 3px hsl(0, 0%, 90%),
+        -2px -2px 3px hsl(0, 0%, 90%),
+        2px 2px 3px hsl(0, 0%, 90%);
+}
+
+.row{
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.active {
+    border: none;
+    color: hsl(0, 0%, 100%);
+    background: hsl(230, 100%, 67%);
 }
