@@ -9,6 +9,7 @@ import { initializeIcons } from "@assets/Icons/icons.js";
 import "@components/form elements/input/search/searchInput";
 
 let pressTimer;
+let deletedNotes = [];
 let selectionMode = false;
 let selectedNotes = new Set();
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
@@ -134,14 +135,10 @@ form.addEventListener("submit", (e) => {
 notes.addEventListener("click", (e) => {
     const note = notes.querySelector(".note-card");
     const content = note.querySelector(".note-content");
-    const deleteBtn = e.target.closest(".deleteBtn");
     const editBtn = e.target.closest(".editBtn");
     const copyBtn = e.target.closest(".copyBtn");
-    const shareBtn = e.target.closest(".shareBtn");
     if (copyBtn) { copy(content.textContent, toastNotif) };
-    if (deleteBtn) { deleteNote(deleteBtn, quickNotes) };
     if (editBtn) { editNote(editBtn, quickNotes) };
-    //if (shareBtn) { editNote(editBtn, quickNotes) };
 });
 
 notes.addEventListener("pointerdown", (e) => {
@@ -195,7 +192,12 @@ function renderToolBar() {
     const selectAllBtn = toolbarView.querySelector(".select-all");
     const selectedCount = toolbarView.querySelector(".selected-count");
     const closeBtn = toolbarView.querySelector(".toolbar-close");
-    toolbarView.classList.toggle("visible", enterSelectMode);
+    const deleteBtn = toolbarView.querySelector(".delete");
+    if (selectionMode) {
+        toolbarView.classList.add("visible");
+    } else {
+        toolbarView.classList.remove("visible");
+    };
     selectedCount.textContent = `${ selectedNotes.size }`;
     selectAllBtn.textContent =
         selectedNotes.size === quickNotes.length
@@ -205,8 +207,9 @@ function renderToolBar() {
         selectAllBtn.addEventListener("click", () => { deselectAll() });
     } else {
         selectAllBtn.addEventListener("click", () => { selectAll() });
-    }
-    closeBtn.addEventListener("click", () => { selectionMode = false });
+    };
+    deleteBtn.addEventListener("click", () => { deleteNote() });
+    closeBtn.addEventListener("click", () => { exitSelectMode() });
     initializeIcons(toolbarView);
 }
 
@@ -234,6 +237,19 @@ function enterSelectMode(noteId) {
     renderToolBar();
 }
 
+function exitSelectMode() {
+    selectionMode = false;
+    selectedNotes.clear();
+    renderNotes({
+        container: notes,
+        items: quickNotes,
+        btn: addNoteBtn,
+        placeholder: emptyState,
+        template: noteTemplate
+    });
+    renderToolBar();
+}
+
 function saveNote(items) {
     const note = {
         id: crypto.randomUUID(),
@@ -245,19 +261,29 @@ function saveNote(items) {
     localStorage.setItem("quickNotes", JSON.stringify(items));
 };
 
-function deleteNote(deleteBtn, items) {
-    const note = deleteBtn.closest(".note-card");
-    const id = note.dataset.id;
-    note.classList.add("deleted");
-    note.addEventListener("transitionend", () => {
-        note.remove();
-        const notes = items.filter(quickNote => { return quickNote.id != id });
-        localStorage.setItem("quickNotes", JSON.stringify(notes));
+function deleteNote() {
+    selectedNotes.forEach(noteId => {
+        const note = notes.querySelector(`[data-id="${ noteId }"]`);
+        note.classList.add("deleted");
+        note.addEventListener("transitionend", () => {
+            note.remove();
+            deletedNotes = quickNotes.filter(note => { selectedNotes.has(note.id) });
+            quickNotes = quickNotes.filter(note => { !selectedNotes.has(note.id) });
+            localStorage.setItem("quickNotes", JSON.stringify(quickNotes));
+            exitSelectMode();
+            toastNotif.showToast({
+                status: "success",
+                message: "Note deleted successfully!",
+            });
+        });
     });
-    toastNotif.showToast({
-        status: "success",
-        message: "Note deleted successfully!",
-    });
+}
+
+function undoDelete() { 
+    quickNotes.push(...deletedNotes);
+    localStorage.setItem("quickNotes", JSON.stringify(quickNotes));
+    deletedNotes = [];
+    renderNotes(noteData);
 };
 
 function editNote(editBtn, items) {
