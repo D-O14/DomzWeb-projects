@@ -41,6 +41,7 @@
 <body>
     <header>
         <h1>Quick Notes</h1>
+        <div class="header-content">
             <search-input class="note-search" placeholder="Search through your notes...">
                 <span slot="icon" class="icon search-icon">
                     <i data-lucide="bookSearch"></i>
@@ -60,35 +61,20 @@
                     <span class="icon" data-icon="sort"></span>
                 </button>
             </menu>
-        
+        </div>
     </header>
     <toast-notif></toast-notif>
-    <div class="row">
-        <!--<menu class="filter-row">
-            <button class="filter-chip use">
-                All
-                <span class="icon" data-icon="tick"></span>
-            </button>
-            <button class="filter-chip">
-                Today
-                <span class="icon" data-icon=""></span>
-            </button>
-            <button class="filter-chip">
-                Yesterday
-                <span class="icon" data-icon=""></span>
-            </button>
-            <button class="filter-chip">
-                This week
-                <span class="icon" data-icon=""></span>
-            </button>
-            <button class="filter-chip">
-                Older
-                <span class="icon" data-icon=""></span>
-            </button>
-        </menu>-->
-        <menu class="sort-row">
+    <div class="rows">
+        <menu class="filter-row row">
+            <template id="filterTemplate">
+                <button class="chip">
+                
+                </button>
+            </template>
+        </menu>
+        <menu class="sort-row row">
             <template id="sortTemplate">
-                <button class="sort-chip">
+                <button class="chip">
         
                 </button>
             </template>

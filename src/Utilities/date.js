@@ -60,6 +60,7 @@ export function relativeTime(targetDate) {
     if (seconds < 10) { return "Just Now" };
     if (seconds < 60) { return `${ Math.floor(seconds) }s ago` };
     if (minutes < 60) { return `${ Math.floor(minutes) }min ago` };
+    if (hours > 1 && hours < 2) { return `${ Math.floor(hours) }hr ago` };
     if (hours < 24) { return `${ Math.floor(hours) }hrs ago` };
     if (isSameDay(targetDate, now)) { return `${ formatTime(targetDate) } Today` };
     if (isYesterday(targetDate, now)) { return `${ formatTime(targetDate) } Yesterday` };

@@ -7,13 +7,18 @@ import { copy, share } from "@utils/actions.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
 import "@components/form elements/input/search/searchInput";
 import { closeDialog, defaultFunc, createRipple } from "@utils/button.js";
-import { sortA_Z, sortZ_A, sortNewest, sortOldest, applyState } from "@utils/utilities.js";
+import {
+    sortUpdated, sortA_Z, sortZ_A, sortNewest, sortOldest, applyState, filterCreatedToday,
+    filterCreatedYesterday, filterCreatedOlder
+} from "@utils/utilities.js";
 
 let pressTimer;
 let deletedNotes = [];
 let selectionMode = false;
 let selectedNotes = new Set();
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
+
+const viewedNotes = [...quickNotes];
 
 const main = document.querySelector("main");
 const form = document.getElementById("form");
@@ -33,51 +38,10 @@ const searchTemplate = document.getElementById("noResults");
 const searchComponent = document.querySelector("search-input");
 const sortRow = document.querySelector(".sort-row");
 const sortTemplate = document.getElementById("sortTemplate");
+const filterTemplate = document.getElementById("filterTemplate");
 const filterRow = document.querySelector(".filter-row");
 const filterBtn = document.getElementById("filterBtn");
 const sortBtn = document.getElementById("sortBtn");
-//filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
-filterBtn.addEventListener("click", () => { toggleClass(sortRow) });
-
-const sortChips = [
-    { label: "Recently Updated", func: () => { defaultFunc() }, className: "use" },
-    { label: "Newest First", func: () => { sortNewest(quickNotes, "updatedAt") } },
-    { label: "Oldest First", func: () => { sortOldest(quickNotes, "updatedAt") } },
-    { label: "Title A-Z", func: () => { sortA_Z(quickNotes, "title") } },
-    { label: "Title Z-A", func: () => { sortZ_A(quickNotes, "title") } },
-];
-
-function renderChips(chips) {
-    chips.forEach(chip => {
-        const sortClone = sortTemplate.content.cloneNode(true);
-        const sortBtn = sortClone.querySelector("button");
-        if (chip.className) {
-            sortBtn.innerHTML =
-                `${ chip.label }
-        <span class="icon" data-icon="tick"></span>`;
-            sortBtn.classList.add(chip.className)
-        } else {
-            sortBtn.innerHTML =
-                `${ chip.label }
-        <span class="icon" data-icon=""></span>`;
-        }
-        sortBtn.addEventListener("click", () => {
-            chip.func();
-            const activeBtn = sortRow.querySelector(".use");
-            const activeIcon = activeBtn.querySelector(".icon");
-            const sortIcon = sortBtn.querySelector(".icon");
-            applyState(activeIcon, true, "");
-            applyState(sortIcon, false, "tick");
-            activeBtn.classList.remove("use");
-            sortBtn.classList.add("use");
-            initializeIcons(sortBtn);
-        });
-        initializeIcons(sortRow);
-        sortRow.append(sortClone);
-    });
-}
-
-//function toggleClass(item) { item.classList.toggle("reveal") };
 
 const noteData = {
     container: notes,
@@ -86,6 +50,77 @@ const noteData = {
     placeholder: emptyState,
     template: noteTemplate
 }
+
+const sortChips = [
+    { label: "Recently Updated", func: () => { sortUpdated(viewedNotes, "updatedAt") }, className: "use" },
+    { label: "Newest First", func: () => { sortNewest(viewedNotes, "createdAt") } },
+    { label: "Oldest First", func: () => { sortOldest(viewedNotes, "createdAt") } },
+    { label: "Title A-Z", func: () => { sortA_Z(viewedNotes, "title") } },
+    { label: "Title Z-A", func: () => { sortZ_A(viewedNotes, "title") } },
+];
+
+const filterChips = [
+    { label: "All", func: () => { renderNotes(noteData) }, className: "use" },
+    { label: "Today", func: () => { filterCreatedToday(viewedNotes, today) } },
+    { label: "Yesterday", func: () => { filterCreatedYesterday(viewedNotes, yesterday) } },
+    { label: "This Week", func: () => { filterThisWeek(viewedNotes) } },
+    { label: "Older", func: () => { filterCreatedOlder(viewedNotes, today) } },
+];
+
+const now = new Date().toISOString().slice(0, 10);
+const today = now;
+const yesterday = new Date();
+yesterday.setDate(yesterday.getDate() - 1);
+//filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
+sortBtn.addEventListener("click", () => { toggleClass(sortRow) });
+
+function isThisWeek(date) {
+    const target = new Date(date);
+    const now = new Date();
+    const startOfWeek = new Date(now);
+    startOfWeek.setDate(now.getDate() - now.getDay());
+    startOfWeek.setHours(0, 0, 0, 0);
+    const nextWeek = new Date(startOfWeek);
+    nextWeek.setDate(startOfWeek.getDate() + 7);
+    return (target >= startOfWeek && target < nextWeek);
+}
+
+function filterThisWeek(items) {
+    const createdThisWeek = items.filter(item => { return isThisWeek(item.createdAt) });
+    console.log(createdThisWeek);
+}
+
+function renderChips(chips, template, row) {
+    chips.forEach(chip => {
+        const clone = template.content.cloneNode(true);
+        const btn = clone.querySelector("button");
+        if (chip.className) {
+            btn.innerHTML =
+                `${ chip.label }
+        <span class="icon" data-icon="tick"></span>`;
+            btn.classList.add(chip.className)
+        } else {
+            btn.innerHTML =
+                `${ chip.label }
+        <span class="icon" data-icon=""></span>`;
+        }
+        btn.addEventListener("click", () => {
+            chip.func();
+            const activeBtn = row.querySelector(".use");
+            const activeIcon = activeBtn.querySelector(".icon");
+            const icon = btn.querySelector(".icon");
+            applyState(activeIcon, true, "");
+            applyState(icon, false, "tick");
+            activeBtn.classList.remove("use");
+            btn.classList.add("use");
+            initializeIcons(btn);
+        });
+        initializeIcons(row);
+        row.append(clone);
+    });
+}
+
+function toggleClass(item) { item.classList.toggle("reveal") };
 
 /*const shareData = {
     title: "Card Title",
@@ -401,6 +436,7 @@ function renderNotes({ container, items, btn, placeholder, template }) {
 updateDate();
 renderNotes(noteData);
 createIcons({ icons });
-renderChips(sortChips);
+renderChips(sortChips, sortTemplate, sortRow);
+//renderChips(filterChips, filterTemplate, filterRow);
 initializeIcons(document);
 setInterval(() => { updateDate() }, 1000);
