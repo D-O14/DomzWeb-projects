@@ -19,3 +19,5 @@ export function closeDialog(dialog) {
         dialog.classList.remove("closing");
     }, 400);
 }
+
+export function defaultFunc() { console.log("Clicked!") };

@@ -197,8 +197,8 @@ svg {
 
 .filter-row,
 .sort-row {
-    opacity: 0;
-    transform: translateY(-50px);
+    opacity: 1;
+    transform: translateY(0px);
 }
 
 .visible {
@@ -222,8 +222,7 @@ svg {
     flex-direction: column;
 }
 
-.active {
-    border: none;
+.use {
     color: hsl(0, 0%, 100%);
     background: hsl(230, 100%, 67%);
 }

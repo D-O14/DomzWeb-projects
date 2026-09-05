@@ -4,9 +4,10 @@ import searchItems from "@utils/input";
 import { createIcons, icons } from "lucide";
 import { relativeTime } from "@utils/date.js";
 import { copy, share } from "@utils/actions.js";
-import { closeDialog } from "@utils/button.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
 import "@components/form elements/input/search/searchInput";
+import { closeDialog, defaultFunc, createRipple } from "@utils/button.js";
+import { sortA_Z, sortZ_A, sortNewest, sortOldest, applyState } from "@utils/utilities.js";
 
 let pressTimer;
 let deletedNotes = [];
@@ -28,39 +29,56 @@ const emptyState = document.getElementById("emptyState");
 const toastNotif = document.querySelector("toast-notif");
 const contentInput = document.getElementById("noteContent");
 const noteTemplate = document.getElementById("noteTemplate");
+const searchTemplate = document.getElementById("noResults");
 const searchComponent = document.querySelector("search-input");
 const sortRow = document.querySelector(".sort-row");
+const sortTemplate = document.getElementById("sortTemplate");
 const filterRow = document.querySelector(".filter-row");
-const filterBtn = document.querySelector(".filterBtn");
-const sortBtn = document.querySelector(".sortBtn");
-filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
-sortBtn.addEventListener("click", () => { toggleClass(sortRow) });
+const filterBtn = document.getElementById("filterBtn");
+const sortBtn = document.getElementById("sortBtn");
+//filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
+filterBtn.addEventListener("click", () => { toggleClass(sortRow) });
 
-const filterChips = document.querySelectorAll(".filter-chip");
-const sortChips = document.querySelectorAll(".sort-chip");
+const sortChips = [
+    { label: "Recently Updated", func: () => { defaultFunc() }, className: "use" },
+    { label: "Newest First", func: () => { sortNewest(quickNotes, "updatedAt") } },
+    { label: "Oldest First", func: () => { sortOldest(quickNotes, "updatedAt") } },
+    { label: "Title A-Z", func: () => { sortA_Z(quickNotes, "title") } },
+    { label: "Title Z-A", func: () => { sortZ_A(quickNotes, "title") } },
+];
 
-function applyState(chips) {
+function renderChips(chips) {
     chips.forEach(chip => {
-        chip.addEventListener("click", () => {
-            chips.forEach(chip => {
-                const activeIcon = chip.querySelector(".icon");
-                chip.classList.remove("active");
-                activeIcon.dataset.icon = "";
-                activeIcon.textContent = "";
-                initializeIcons(chip);
-            });
-            chip.classList.add("active");
-            const activeIcon = chip.querySelector(".icon");
-            activeIcon.dataset.icon = "tick";
-            initializeIcons(chip);
+        const sortClone = sortTemplate.content.cloneNode(true);
+        const sortBtn = sortClone.querySelector("button");
+        if (chip.className) {
+            sortBtn.innerHTML =
+                `${ chip.label }
+        <span class="icon" data-icon="tick"></span>`;
+            sortBtn.classList.add(chip.className)
+        } else {
+            sortBtn.innerHTML =
+                `${ chip.label }
+        <span class="icon" data-icon=""></span>`;
+        }
+        sortBtn.addEventListener("click", () => {
+            chip.func();
+            const activeBtn = sortRow.querySelector(".use");
+            const activeIcon = activeBtn.querySelector(".icon");
+            const sortIcon = sortBtn.querySelector(".icon");
+            applyState(activeIcon, true, "");
+            applyState(sortIcon, false, "tick");
+            activeBtn.classList.remove("use");
+            sortBtn.classList.add("use");
+            initializeIcons(sortBtn);
         });
+        initializeIcons(sortRow);
+        sortRow.append(sortClone);
     });
-};
+}
 
-function toggleClass(item) { item.classList.toggle("use") };
+//function toggleClass(item) { item.classList.toggle("reveal") };
 
-applyState(filterChips);
-applyState(sortChips);
 const noteData = {
     container: notes,
     items: quickNotes,
@@ -149,10 +167,10 @@ searchComponent.addEventListener("search", (e) => {
             container: notes,
             items: results,
             btn: addNoteBtn,
-            placeholder: emptyState,
+            placeholder: searchTemplate,
             template: noteTemplate
         });
-    }; */
+    };*/
 });
 
 form.addEventListener("submit", (e) => {
@@ -340,7 +358,6 @@ function editNote(editBtn, items) {
     });
 }
 
-
 function renderNotes({ container, items, btn, placeholder, template }) {
     container.innerHTML = "";
     if (items.length === 0) {
@@ -384,5 +401,6 @@ function renderNotes({ container, items, btn, placeholder, template }) {
 updateDate();
 renderNotes(noteData);
 createIcons({ icons });
+renderChips(sortChips);
 initializeIcons(document);
 setInterval(() => { updateDate() }, 1000);

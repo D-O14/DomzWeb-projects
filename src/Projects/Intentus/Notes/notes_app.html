@@ -53,17 +53,19 @@
                 <button id="themeBtn" class="themeBtn" aria-label="Theme switch button">
                     <span class="icon" data-icon="moon"></span>
                 </button>
-                <button id="filterBtn" class="filterBtn" aria-label="Filter button">
+                <!--<button id="filterBtn" class="filterBtn" aria-label="Filter button">
                     <span class="icon" data-icon="filter"></span>
-                </button>
+                </button>-->
                 <button id="sortBtn" class="sortBtn" aria-label="Sort button">
                     <span class="icon" data-icon="sort"></span>
                 </button>
             </menu>
+        
     </header>
+    <toast-notif></toast-notif>
     <div class="row">
-        <menu class="filter-row">
-            <button class="filter-chip default">
+        <!--<menu class="filter-row">
+            <button class="filter-chip use">
                 All
                 <span class="icon" data-icon="tick"></span>
             </button>
@@ -83,31 +85,15 @@
                 Older
                 <span class="icon" data-icon=""></span>
             </button>
-        </menu>
+        </menu>-->
         <menu class="sort-row">
-            <button class="sort-chip active">
-                Recently Updated
-                <span class="icon" data-icon="tick"></span>
-            </button>
-            <button class="sort-chip">
-                Newest First
-                <span class="icon" data-icon=""></span>
-            </button>
-            <button class="sort-chip">
-                Oldest First
-                <span class="icon" data-icon=""></span>
-            </button>
-            <button class="sort-chip">
-                Title A-Z
-                <span class="icon" data-icon=""></span>
-            </button>
-            <button class="sort-chip">
-                Title Z-A
-                <span class="icon" data-icon=""></span>
-            </button>
+            <template id="sortTemplate">
+                <button class="sort-chip">
+        
+                </button>
+            </template>
         </menu>
     </div>
-    <toast-notif></toast-notif>
     <main id="notes" class="notes">
         <template id="noteTemplate">
             <article class="note-card" id="noteCard" data-id="">
@@ -136,6 +122,23 @@
                 <img src="../../../Assets/Illustrations/add-notes.svg" alt="" class="empty-img">
                 <h2 class="empty-header">No Notes Yet</h2>
                 <p class="empty-text">Create your first note to get started</p>
+            </div>
+        </template>
+        <template id="noResults">
+            <div class="no-results">
+                <img src="../../../Assets/Illustrations/note-search.svg" alt="" class="results-img">
+                <h2 class="results-header">No Notes Found...</h2>
+                <p class="results-msg">
+                    Try putting in another query instead
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide search">
+                            <path d="m21 21-4.34-4.34" />
+                            <circle cx="11" cy="11" r="8" />
+                        </svg>
+                    </span>
+                </p>
             </div>
         </template>
     </main>

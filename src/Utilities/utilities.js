@@ -43,3 +43,28 @@ export function format(input, formatRules) {
         input.value = formatter.input(input.value);
     }
 };
+
+export function applyState(icon, needsValue, value) {
+    icon.dataset.icon = value;
+    if (needsValue) { icon.textContent = value };
+};
+
+export function sortA_Z(data, property) {
+    const A_Z = data.sort((a, b) => { return a[property].localeCompare(b[property]) });
+    console.log(A_Z);
+};
+
+export function sortZ_A(data, property) {
+    const Z_A = data.sort((a, b) => { return b[property].localeCompare(a[property]) });
+    console.log(Z_A);
+};
+
+export function sortNewest(data, property) {
+    const newest = data.sort((a, b) => { return a[property] - b[property] });
+    console.log(newest);
+};
+
+export function sortOldest(data, property) {
+    const oldest = data.sort((a, b) => { return b[property] - a[property] });
+    console.log(oldest);
+};
