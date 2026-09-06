@@ -6,10 +6,10 @@ import { relativeTime } from "@utils/date.js";
 import { copy, share } from "@utils/actions.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
 import "@components/form elements/input/search/searchInput";
-import { closeDialog, defaultFunc, createRipple } from "@utils/button.js";
+import { closeDialog, createRipple } from "@utils/button.js";
 import {
     sortUpdated, sortA_Z, sortZ_A, sortNewest, sortOldest, applyState, filterCreatedToday,
-    filterCreatedYesterday, filterCreatedOlder
+    filterCreatedYesterday, filterCreatedOlder, filterThisWeek
 } from "@utils/utilities.js";
 
 let pressTimer;
@@ -17,6 +17,10 @@ let deletedNotes = [];
 let selectionMode = false;
 let selectedNotes = new Set();
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
+const now = new Date().toISOString().slice(0, 10);
+const today = now;
+const yesterday = new Date();
+yesterday.setDate(yesterday.getDate() - 1);
 
 const viewedNotes = [...quickNotes];
 
@@ -52,43 +56,22 @@ const noteData = {
 }
 
 const sortChips = [
-    { label: "Recently Updated", func: () => { sortUpdated(viewedNotes, "updatedAt") }, className: "use" },
-    { label: "Newest First", func: () => { sortNewest(viewedNotes, "createdAt") } },
-    { label: "Oldest First", func: () => { sortOldest(viewedNotes, "createdAt") } },
-    { label: "Title A-Z", func: () => { sortA_Z(viewedNotes, "title") } },
-    { label: "Title Z-A", func: () => { sortZ_A(viewedNotes, "title") } },
+    { label: "Recently Updated", func: () => { sortUpdated(viewedNotes, "updatedAt", renderNotes, noteData) }, className: "use" },
+    { label: "Newest First", func: () => { sortNewest(viewedNotes, "createdAt", renderNotes, noteData) } },
+    { label: "Oldest First", func: () => { sortOldest(viewedNotes, "createdAt", renderNotes, noteData) } },
+    { label: "Title A-Z", func: () => { sortA_Z(viewedNotes, "title", renderNotes, noteData) } },
+    { label: "Title Z-A", func: () => { sortZ_A(viewedNotes, "title", renderNotes, noteData) } },
 ];
 
 const filterChips = [
     { label: "All", func: () => { renderNotes(noteData) }, className: "use" },
-    { label: "Today", func: () => { filterCreatedToday(viewedNotes, today) } },
-    { label: "Yesterday", func: () => { filterCreatedYesterday(viewedNotes, yesterday) } },
-    { label: "This Week", func: () => { filterThisWeek(viewedNotes) } },
-    { label: "Older", func: () => { filterCreatedOlder(viewedNotes, today) } },
+    { label: "Today", func: () => { filterCreatedToday(viewedNotes, today, renderNotes, noteData) } },
+    { label: "Yesterday", func: () => { filterCreatedYesterday(viewedNotes, yesterday, renderNotes, noteData) } },
+    { label: "This Week", func: () => { filterThisWeek(viewedNotes, renderNotes, noteData) } },
+    { label: "Older", func: () => { filterCreatedOlder(viewedNotes, today, renderNotes, noteData) } },
 ];
-
-const now = new Date().toISOString().slice(0, 10);
-const today = now;
-const yesterday = new Date();
-yesterday.setDate(yesterday.getDate() - 1);
-//filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
+filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
 sortBtn.addEventListener("click", () => { toggleClass(sortRow) });
-
-function isThisWeek(date) {
-    const target = new Date(date);
-    const now = new Date();
-    const startOfWeek = new Date(now);
-    startOfWeek.setDate(now.getDate() - now.getDay());
-    startOfWeek.setHours(0, 0, 0, 0);
-    const nextWeek = new Date(startOfWeek);
-    nextWeek.setDate(startOfWeek.getDate() + 7);
-    return (target >= startOfWeek && target < nextWeek);
-}
-
-function filterThisWeek(items) {
-    const createdThisWeek = items.filter(item => { return isThisWeek(item.createdAt) });
-    console.log(createdThisWeek);
-}
 
 function renderChips(chips, template, row) {
     chips.forEach(chip => {
@@ -437,6 +420,6 @@ updateDate();
 renderNotes(noteData);
 createIcons({ icons });
 renderChips(sortChips, sortTemplate, sortRow);
-//renderChips(filterChips, filterTemplate, filterRow);
+renderChips(filterChips, filterTemplate, filterRow);
 initializeIcons(document);
 setInterval(() => { updateDate() }, 1000);
