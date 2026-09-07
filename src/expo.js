@@ -1,7 +1,6 @@
 import "./expo.css";
 import { gsap } from "gsap";
-import { rotate, slideIn, scaleOut } from "@utils/animation"
-import { root } from "postcss";
+import { scaleBounce } from "@utils/animation";
 
 //import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -35,7 +34,6 @@ gsap.to(".box", {
     }
 });*/
 
-const button = document.querySelector("button");
 /*const timeline = gsap.timeline({ defaults: { duration: 1 } });
 
 timeline
@@ -46,4 +44,40 @@ timeline
     .to(".footer", { y: `0` }, 2.25)
     .fromTo(".button", { scale: 0, opacity: 0, rotate: 720 }, { scale: 1, rotate: 0, opacity: 1 }, 2.5);*/
 
-button.addEventListener("click", () => { scaleOut(button) });
+const box = document.querySelector(".box");
+const button = document.querySelector("button");
+
+button.addEventListener("click", () => { scaleBounce(box) });
+
+/*const keyframes = [
+    {
+        transform: "translateX(0)",
+        offset: 0
+    },
+    {
+        transform: "translateX(500px)",
+        borderRadius: "5rem",
+        offset: 0.5,
+    },
+    {
+        transform: "translateX(-300px)",
+        borderRadius: "2rem",
+        offset: 0.75
+    },
+    {
+        transform: "translateX(0)",
+        offset: 1
+     },
+];
+
+const effect = new KeyframeEffect(box,
+    keyframes,
+    {
+        delay: 100,
+        duration: 6000,
+        easing: "ease-in-out",
+    }
+);
+
+const animation = new Animation(effect, document.timeline);
+setInterval(() => { animation.play() }, 7000);*/
