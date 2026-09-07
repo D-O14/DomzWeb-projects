@@ -18,7 +18,6 @@ html {
     scroll-behavior: smooth;
 }
 
-
 :root {
     --bg-header: hsl(0, 0%, 98%, .05);
     --bg-fab: hsl(260, 100%, 50%);
@@ -181,13 +180,13 @@ input:not([type="checkbox"]):focus {
     outline: var(--outline-focus);
 }
 
-input[type="checkbox"] {
-    position: absolute;
+/*input[type="checkbox"] {
     opacity: 0;
+    position: absolute;
     cursor: pointer;
     width: 1.25rem;
     height: 1.25rem;
-}
+}*/
 
 menu {
     gap: var(--spacing-4);
@@ -538,7 +537,7 @@ svg {
     transform: scale(var(--scale-base)) translateY(-20px);
 }
 
-.selection-toolbar {
+/*.selection-toolbar {
     gap: 2em;
     width: 550px;
     padding: 1.25em;
@@ -568,7 +567,7 @@ svg {
     align-items: center;
     justify-content: center;
     transform-origin: bottom;
-}
+}*/
 
 .visible {
     transform: scale(1);
@@ -578,16 +577,16 @@ svg {
 .filter-row,
 .sort-row {
     opacity: 0;
+    pointer-events: none;
     transform: translateY(-50px);
 }
 
 .reveal {
     opacity: 1;
+    pointer-events: auto;
     transform: translateY(0px);
 }
 
-/*.filter-chip,
-.sort-chip,*/
 .chip {
     background: none;
     border-radius: 5rem;
@@ -642,7 +641,7 @@ svg {
     stroke: hsl(0, 100%, 50%);
 }
 
-.selected-count {
+/*.selected-count {
     font-size: 10px;
     font-weight: 600;
     padding: .5em 1em;
@@ -653,12 +652,12 @@ svg {
 .select-all {
     cursor: pointer;
     border-bottom: 1px dotted;
-    /*color: hsl(237, 100%, 47%);*/
+    color: hsl(237, 100%, 47%);
 }
 
 .select-all:hover {
     border-bottom: 1px solid;
-}
+}*/
 
 .toolbar-close {
     margin-top: 5px;
@@ -682,6 +681,85 @@ svg {
 .checked {
     opacity: 1;
     transform: translateX(0);
+}
+
+.selection-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.toolbar-header,
+.toolbar-nav {
+    /*background: hsla(250, 100%, 50%, 0.72);
+    background: hsl(230, 100%, 50%);
+    background: hsl(230, 100%, 50%, .25);*/
+    backdrop-filter: blur(4px) saturate(120%);
+    -webkit-backdrop-filter: blur(4px) saturate(120%);
+}
+
+.toolbar-header {
+    width: 100%;
+    gap: 1.5rem;
+    display: flex;
+    padding: 2em;
+    top: 0;
+    z-index: 1;
+    align-items: center;
+    position: absolute;
+    padding-block: .5em;
+    /*background: hsla(250, 100%, 50%, 0.25);
+    border-bottom: 2px solid hsla(250 100% 80% / .35);*/
+}
+
+.backBtn {
+    border-radius: 5rem;
+    padding: .5em .5em;
+    color: hsl(0, 0%, 100%);
+    background: hsl(230, 100%, 57%);
+    border: 2px solid hsl(250, 100%, 58%);
+}
+
+.select-label {
+    padding: 1em 1em;
+    border-radius: 5rem;
+    background: hsl(237, 100%, 50%);
+    /*box-shadow:
+        -4px -1px 2px hsla(250, 100%, 50%, 0.08),
+        -18px -3px 6px hsla(250, 100%, 50%, 0.08),
+        -39px -6px 14px hsla(250, 100%, 50%, 0.08),
+        -70px -11px 24px hsla(250, 100%, 50%, 0.08);*/
+    border: 2px solid hsl(250, 100%, 50%);
+}
+
+.selected-count {
+    flex: 1;
+}
+
+.toolbar-nav {
+    width: 100%;
+    padding: 2em;
+    position: absolute;
+    width: 300px;
+    bottom: 80px;
+    border-radius: 5em;
+    padding-block: .5em;
+    align-items: center;
+    justify-content: center;
+    background: hsl(230, 100%, 50%);
+    border: 2px solid hsl(250, 100%, 58%);
+}
+
+.toolbar-nav button {
+    background: none;
+    color: hsl(0, 0%, 88%);
+}
+
+.toolbar-nav .text {
+    width: 0%;
+    height: 0%;
+    display: none;
 }
 
 /* Animations */
@@ -825,10 +903,11 @@ svg {
 }
 
 @media(max-width: 500px) {
-    header{
+    header {
         height: 80px;
     }
-    main{
+
+    main {
         margin-top: var(--spacing-5);
     }
 
@@ -836,11 +915,11 @@ svg {
         width: 400px;
     }
 
-    .rows{
+    .rows {
         left: 30px;
     }
 
-    .chip{
+    .chip {
         padding: .5em .75em;
     }
 }

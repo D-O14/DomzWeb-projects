@@ -1,5 +1,8 @@
 import "./expo.css";
 import { gsap } from "gsap";
+import { rotate, slideIn, scaleOut } from "@utils/animation"
+import { root } from "postcss";
+
 //import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 /*gsap.to(".box", {
@@ -31,3 +34,16 @@ gsap.to(".box", {
         scrub: true
     }
 });*/
+
+const button = document.querySelector("button");
+/*const timeline = gsap.timeline({ defaults: { duration: 1 } });
+
+timeline
+    .from(".header", { y: `-100%`, ease: "bounce" })
+    .from(".link", { y: `-100%`, opacity: 0, stagger: .5 })
+    .from(".right", { x: `-100vw` }, 1.5)
+    .from(".left", { x: `-100%` }, "<.25")
+    .to(".footer", { y: `0` }, 2.25)
+    .fromTo(".button", { scale: 0, opacity: 0, rotate: 720 }, { scale: 1, rotate: 0, opacity: 1 }, 2.5);*/
+
+button.addEventListener("click", () => { scaleOut(button) });

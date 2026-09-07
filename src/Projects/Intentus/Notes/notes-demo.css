@@ -1,5 +1,6 @@
 /*@import "@styles/base/resets.css";
 @import "@styles/base/base.css";*/
+@import "@styles/base/fonts.css";
 
 *,
 *::before,
@@ -9,9 +10,9 @@
     user-select: none;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    font-family: "Electrolize", system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    transition: .5s ease;
+    transition: all .5s ease;
 }
 
 :root {
@@ -33,6 +34,15 @@ body {
     /*display: flex;
     align-items: center;
     justify-content: center;*/
+    background: hsl(0, 0%, 0%);
+}
+
+input[type="checkbox"] {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    width: 1.25rem;
+    height: 1.25rem;
 }
 
 /*.card{
@@ -167,11 +177,16 @@ form {
     gap: 1rem;
 }*/
 
-label {
+/*.select {
     padding: .75em 1em;
     border-radius: 5rem;
-    background: hsl(237, 100%, 57%);
-}
+    background: hsl(237, 100%, 50%);
+    box-shadow: -4px -1px 2px rgba(43, 0, 255, 0.08),
+        -18px -3px 6px rgba(43, 0, 255, 0.08),
+        -39px -6px 14px rgba(43, 0, 255, 0.08),
+        -70px -11px 24px rgba(43, 0, 255, 0.08);
+    border: 2px solid hsl(250, 100%, 50%);
+}*/
 
 button {
     cursor: pointer;
@@ -187,7 +202,7 @@ button {
 menu {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: .75rem;
 }
 
 svg {
@@ -195,41 +210,92 @@ svg {
     transform: translate(0);
 }
 
+.selection-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .toolbar-header {
-    width: 100%;
+    width: 800px;
     gap: 1.5rem;
     display: flex;
     padding: 2em;
+    position: absolute;
+    bottom: 120px;
+    border-radius: 5rem;
     align-items: center;
-    border-radius: .5rem;
-    background: hsl(257, 100%, 76%, .2);
+    backdrop-filter: blur(18px) saturate(120%);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+    background: hsla(250, 100%, 50%, 0.25);
+    border-bottom: 2px solid hsla(250 100% 80% / .35);
+    box-shadow: 
+    -2px -2px 0px hsla(250 100% 80% / .35),
+    -1px -1px 0px hsla(250 100% 80% / .35),
+    1px 1px 0px hsla(250 100% 80% / .35),
+    1px 1px 0px hsla(250 100% 80% / .35);
 }
 
 .backBtn {
+    left: -50px;
+    position: absolute;
     border-radius: 5rem;
-    padding: .5em .5em;
+    padding: .25em .25em;
     color: hsl(0, 0%, 100%);
     background: hsl(230, 100%, 57%);
+    border: 2px solid hsl(250, 100%, 58%);
 }
 
 .selected-count {
     flex: 1;
-}
-
-.toolbar-nav {
-    width: 100%;
-    padding: 2em;
-    position: absolute;
-    bottom: 0;
-    padding-top: .5em;
-    padding-bottom: .75em;
-    justify-content: center;
-    background: hsl(230, 100%, 57%);
+    color: hsl(0, 0%, 100%);
 }
 
 .toolbar-nav button {
+    padding: 0;
     background: none;
     color: hsl(0, 0%, 88%);
+}
+
+
+.text {
+    color: hsl(250, 100%, 50%);
+}
+
+.delete-btn .del-text {
+    color: hsl(0, 100%, 50%);
+}
+
+.checkbox:checked+.custom-check {
+    background: hsl(250, 100%, 50%);
+    border-color: hsl(250, 100%, 50%, .5);
+}
+
+.icon svg{
+    stroke: hsl(250, 100%, 50%);
+}
+
+.custom-check::after {
+    opacity: 0;
+    content: "\2713";
+    font-size: .8rem;
+    color: hsl(0, 0%, 100%);
+}
+
+.checkbox:checked+.custom-check::after {
+    opacity: 1;
+}
+
+.custom-check {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    border-radius: .25rem;
+    margin-bottom: .5;
+    border: 1px solid hsl(250, 100%, 50%);
 }
 
 @media(min-width: 680px) {
@@ -242,29 +308,34 @@ svg {
 }
 
 @media(min-width: 860px) {
-    .selection-toolbar {
+    /*.selection-toolbar {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
+    }*/
+
+    .toolbar-nav button:hover .text {
+        width: 100%;
+        height: 100%;
+        opacity: 1;
     }
 
     .toolbar-header {
-        padding-top: .5em;
-        padding-bottom: 1em;
+        padding-block: .75em .75em;
     }
 
-    .toolbar-nav {
+    /*.toolbar-nav {
         width: 400px;
         bottom: 80px;
         border-radius: 5em;
         padding-block: .5em;
-    }
+    }*/
 
     .toolbar-nav .text {
-        width: 0%;
-        height: 0%;
-        display: none;
+        width: 0;
+        height: 0;
+        opacity: 0;
     }
 
     .toolbar-nav svg {
@@ -283,9 +354,10 @@ svg {
         padding-bottom: .25em;
     }
 
-    .toolbar-nav svg {
-        width: 25px;
-        height: 25px;
+    .toolbar-nav .text {
+        width: 0;
+        height: 0;
+        opacity: 0;
     }
 }
 
@@ -300,9 +372,9 @@ svg {
     }
 
     .toolbar-nav button .text {
-        width: 0%;
-        height: 0%;
-        display: none;
+        width: 0;
+        height: 0;
+        opacity: 0;
     }
 
     .toolbar-nav svg {
@@ -313,13 +385,12 @@ svg {
 
 @media(max-width: 395px) {
     .selected-count {
-        font-size: 20px;
+        font-size: 16px;
         text-wrap: nowrap;
     }
 
-    .backBtn,
-    label {
-        padding: .5em .75em;
+    .backBtn {
+        padding: .25em .25em;
     }
 
     .backBtn svg {
@@ -329,12 +400,7 @@ svg {
 }
 
 @media(max-width: 335px) {
-    .selected-count{
-        font-size: 16px;
-    }
-    .toolbar-nav {
-        gap: 0;
-        bottom: 0px;
-        padding-block: .5em;
+    .backBtn {
+        padding: .25em .25em;
     }
 }

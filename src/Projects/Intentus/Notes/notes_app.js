@@ -70,8 +70,15 @@ const filterChips = [
     { label: "This Week", func: () => { filterThisWeek(viewedNotes, renderNotes, noteData) } },
     { label: "Older", func: () => { filterCreatedOlder(viewedNotes, today, renderNotes, noteData) } },
 ];
-filterBtn.addEventListener("click", () => { toggleClass(filterRow) });
-sortBtn.addEventListener("click", () => { toggleClass(sortRow) });
+
+filterBtn.addEventListener("click", () => {
+    //renderChips(filterChips, filterTemplate, filterRow);
+    toggleClass(filterRow);
+});
+sortBtn.addEventListener("click", () => {
+    //renderChips(sortChips, sortTemplate, sortRow);
+    toggleClass(sortRow);
+});
 
 function renderChips(chips, template, row) {
     chips.forEach(chip => {
@@ -201,6 +208,7 @@ form.addEventListener("submit", (e) => {
 
 notes.addEventListener("click", (e) => {
     const note = notes.querySelector(".note-card");
+    if (!note) return;
     const content = note.querySelector(".note-content");
     const editBtn = e.target.closest(".editBtn");
     const copyBtn = e.target.closest(".copyBtn");
@@ -211,10 +219,11 @@ notes.addEventListener("click", (e) => {
 notes.addEventListener("pointerdown", (e) => {
     if (e.button !== 0) return;
     const card = e.target.closest(".note-card");
+    if (!card) return;
     const checkbox = card.querySelector(".checkbox");
     const customCheckbox = card.querySelector(".custom-check");
     const noteId = card.dataset.id;
-    if (!card) return;
+
     pressTimer = setTimeout(() => {
         customCheckbox.classList.add("checked");
         customCheckbox.addEventListener("transitionend", () => {
@@ -357,6 +366,7 @@ function undoDelete() {
 
 function editNote(editBtn, items) {
     const note = editBtn.closest(".note-card");
+    //const noteDate = note.querySelector(".note-date");
     const noteTitle = note.querySelector(".note-title");
     const noteContent = note.querySelector(".note-content");
     const id = note.dataset.id;
@@ -409,7 +419,7 @@ function renderNotes({ container, items, btn, placeholder, template }) {
                 customCheckbox.classList.remove("checked");
                 checkbox.checked = false;
             };
-            if (selectedNotes.has(quickNote.id)) { checkbox.checked = true };
+            selectedNotes.has(quickNote.id) ?  checkbox.checked = true : "";
             container.append(note);
             initializeIcons(noteCard);
         });
@@ -419,7 +429,7 @@ function renderNotes({ container, items, btn, placeholder, template }) {
 updateDate();
 renderNotes(noteData);
 createIcons({ icons });
-renderChips(sortChips, sortTemplate, sortRow);
 renderChips(filterChips, filterTemplate, filterRow);
+renderChips(sortChips, sortTemplate, sortRow);
 initializeIcons(document);
 setInterval(() => { updateDate() }, 1000);

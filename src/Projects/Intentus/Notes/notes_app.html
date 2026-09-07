@@ -64,6 +64,51 @@
         </div>
     </header>
     <toast-notif></toast-notif>
+    <div class="selection-toolbar">
+        <div class="toolbar-header">
+            <button class="backBtn" aria-label="Back" id="exitSelectionBtn">
+                <span>
+                    <i data-lucide="chevronLeft" width="30" height="30"></i>
+                </span>
+            </button>
+            <h2 class="selected-count">9 Notes Selected</h2>
+            <label class="select-label" for="selectAll">
+                <input class="select" type="checkbox" id="selectAll">
+            </label>
+        </div>
+        <menu class="toolbar-nav">
+            <button>
+                <span>
+                    <i data-lucide="pin" width="30" height="30"></i>
+                </span>
+                <span class="text">Pin</span>
+            </button>
+            <button>
+                <span>
+                    <i data-lucide="lockKeyhole" width="30" height="30"></i>
+                </span>
+                <span class="text">Lock</span>
+            </button>
+            <button>
+                <span>
+                    <i data-lucide="folderSymlink" width="30" height="30"></i>
+                </span>
+                <span class="text">Move</span>
+            </button>
+            <button>
+                <span>
+                    <i data-lucide="share" width="30" height="30"></i>
+                </span>
+                <span class="text">Share</span>
+            </button>
+            <button>
+                <span>
+                    <i data-lucide="trash2" width="30" height="30"></i>
+                </span>
+                <span class="text">Delete</span>
+            </button>
+        </menu>
+    </div>
     <div class="rows">
         <menu class="filter-row row">
             <template id="filterTemplate">
@@ -129,7 +174,7 @@
         </template>
     </main>
 
-    <div class="toolbar-view">
+    <!--<div class="toolbar-view">
         <div class="selection-toolbar">
             <p>Notes Selected <span class="selected-count"></span></p>
             <p class="select-all"></p>
@@ -149,7 +194,7 @@
                 <span class="icon" data-icon="close"></span>
             </button>
         </div>
-    </div>
+    </div>-->
 
     <div class="view">
         <div class="tooltip">

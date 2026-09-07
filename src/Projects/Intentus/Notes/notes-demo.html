@@ -41,48 +41,89 @@
     <div class="selection-toolbar">
         <div class="toolbar-header">
             <button class="backBtn" aria-label="Back" id="exitSelectionBtn">
-                <span class="icon">
-                    <i data-lucide="chevronLeft" width="30" height="30"></i>
+                <span>
+                    <i data-lucide="x" width="25" height="25"></i>
                 </span>
             </button>
             <h2 class="selected-count">9 Notes Selected</h2>
-            <label for="selectAll">
-                <input type="checkbox" id="selectAll">
+            <menu class="toolbar-nav">
+                <button>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#2b00ff" viewBox="0 0 256 256">
+                            <path
+                                d="M229.66,98.34,172.39,155.8c11.46,22.93-1.72,45.86-10.11,57a8,8,0,0,1-12,.83L42.34,105.76A8,8,0,0,1,43,93.85c29.65-23.92,57.4-10,57.4-10l57.27-57.46a8,8,0,0,1,11.31,0L229.66,87A8,8,0,0,1,229.66,98.34Z"
+                                opacity="0.2"></path>
+                            <path
+                                d="M235.32,81.37,174.63,20.69a16,16,0,0,0-22.63,0L98.37,74.49c-10.66-3.34-35-7.37-60.4,13.14a16,16,0,0,0-1.29,23.78L85,159.71,42.34,202.34a8,8,0,0,0,11.32,11.32L96.29,171l48.29,48.29A16,16,0,0,0,155.9,224c.38,0,.75,0,1.13,0a15.93,15.93,0,0,0,11.64-6.33c19.64-26.1,17.75-47.32,13.19-60L235.33,104A16,16,0,0,0,235.32,81.37ZM224,92.69h0l-57.27,57.46a8,8,0,0,0-1.49,9.22c9.46,18.93-1.8,38.59-9.34,48.62L48,100.08c12.08-9.74,23.64-12.31,32.48-12.31A40.13,40.13,0,0,1,96.81,91a8,8,0,0,0,9.25-1.51L163.32,32,224,92.68Z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="text">Pin</span>
+                </button>
+                <button>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#2b00ff" viewBox="0 0 256 256">
+                        <path
+                            d="M208,88H48a8,8,0,0,0-8,8V208a8,8,0,0,0,8,8H208a8,8,0,0,0,8-8V96A8,8,0,0,0,208,88Zm-80,72a20,20,0,1,1,20-20A20,20,0,0,1,128,160Z"
+                            opacity="0.2"></path>
+                        <path
+                            d="M208,80H176V56a48,48,0,0,0-96,0V80H48A16,16,0,0,0,32,96V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V96A16,16,0,0,0,208,80ZM96,56a32,32,0,0,1,64,0V80H96ZM208,208H48V96H208V208Zm-80-96a28,28,0,0,0-8,54.83V184a8,8,0,0,0,16,0V166.83A28,28,0,0,0,128,112Zm0,40a12,12,0,1,1,12-12A12,12,0,0,1,128,152Z">
+                        </path>
+                    </svg>
+                    </span>
+                    <span class="text">Lock</span>
+                </button>
+                <!--<button aria-label="Filter button">
+                    <span class="icon" data-icon="filter"></span>
+                    <span class="text">Filter</span>
+                </button>
+                <button aria-label="Sort button">
+                    <span class="icon" data-icon="sort"></span>
+                    <span class="text">Sort</span>
+                </button>
+                <button>
+                    <span class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#2b00ff" viewBox="0 0 256 256">
+                            <path
+                                d="M224,88V200.89a7.11,7.11,0,0,1-7.11,7.11H40a8,8,0,0,1-8-8V64a8,8,0,0,1,8-8H93.33a8,8,0,0,1,4.8,1.6L128,80h88A8,8,0,0,1,224,88Z"
+                                opacity="0.2"></path>
+                            <path
+                                d="M216,72H130.67L102.93,51.2a16.12,16.12,0,0,0-9.6-3.2H40A16,16,0,0,0,24,64V200a16,16,0,0,0,16,16H216.89A15.13,15.13,0,0,0,232,200.89V88A16,16,0,0,0,216,72Zm0,128H40V64H93.33L123.2,86.4A8,8,0,0,0,128,88h88Zm-56-56a8,8,0,0,1-8,8H136v16a8,8,0,0,1-16,0V152H104a8,8,0,0,1,0-16h16V120a8,8,0,0,1,16,0v16h16A8,8,0,0,1,160,144Z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="text">Move</span>
+                </button>-->
+                <button>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#2b00ff" viewBox="0 0 256 256">
+                            <path d="M208,200a32,32,0,1,1-32-32A32,32,0,0,1,208,200ZM176,88a32,32,0,1,0-32-32A32,32,0,0,0,176,88Z"
+                                opacity="0.2"></path>
+                            <path
+                                d="M176,160a39.89,39.89,0,0,0-28.62,12.09l-46.1-29.63a39.8,39.8,0,0,0,0-28.92l46.1-29.63a40,40,0,1,0-8.66-13.45l-46.1,29.63a40,40,0,1,0,0,55.82l46.1,29.63A40,40,0,1,0,176,160Zm0-128a24,24,0,1,1-24,24A24,24,0,0,1,176,32ZM64,152a24,24,0,1,1,24-24A24,24,0,0,1,64,152Zm112,72a24,24,0,1,1,24-24A24,24,0,0,1,176,224Z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="text">Share</span>
+                </button>
+            
+                <button class="delete-btn">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#ff0000" viewBox="0 0 256 256">
+                            <path d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56Z" opacity="0.2"></path>
+                            <path
+                                d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="del-text">Delete</span>
+                </button>
+            </menu>
+            <label class="select check" for="selectAll">
+                <input type="checkbox" class="checkbox" id="selectAll" aria-label="Select note">
+                <span class="custom-check"></span>
             </label>
         </div>
-        <menu class="toolbar-nav">
-            <button>
-                <span class="icon">
-                    <i data-lucide="pin" width="30" height="30"></i>
-                </span>
-                <span class="text">Pin</span>
-            </button>
-            <button>
-                <span class="icon">
-                    <i data-lucide="lockKeyhole" width="30" height="30"></i>
-                </span>
-                <span class="text">Lock</span>
-            </button>
-            <button>
-                <span class="icon">
-                    <i data-lucide="folderSymlink" width="30" height="30"></i>
-                </span>
-                <span class="text">Move</span>
-            </button>
-            <button>
-                <span class="icon">
-                    <i data-lucide="share" width="30" height="30"></i>
-                </span>
-                <span class="text">Share</span>
-            </button>
-
-            <button>
-                <span class="icon">
-                    <i data-lucide="trash2" width="30" height="30"></i>
-                </span>
-                <span class="text">Delete</span>
-            </button>
-        </menu>
     </div>
 </body>
 
