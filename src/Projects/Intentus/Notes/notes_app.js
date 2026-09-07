@@ -12,40 +12,46 @@ import {
     filterCreatedYesterday, filterCreatedOlder, filterThisWeek
 } from "@utils/utilities.js";
 
+// 10 Imports statements, 22 Imports, 20 In use, 17 Functions, 15 In use, 16 Personal Functions, 1 object, 2 Web Components, 1 CSS
+
+// 5 Arrays, 1 Set, 2 Objects, 1 function-created object, 3 raw Variables
+
 let pressTimer;
 let deletedNotes = [];
 let selectionMode = false;
 let selectedNotes = new Set();
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
+
+const viewedNotes = [...quickNotes];
+
+// 25 Constants, 24 in use, 6 Buttons, 5 Templates, 2 Web Components, 2 inputs
+
 const now = new Date().toISOString().slice(0, 10);
 const today = now;
 const yesterday = new Date();
 yesterday.setDate(yesterday.getDate() - 1);
-
-const viewedNotes = [...quickNotes];
-
 const main = document.querySelector("main");
 const form = document.getElementById("form");
 const notes = document.getElementById("notes");
 const dialog = document.getElementById("dialog");
+const sortRow = document.querySelector(".sort-row");
 const themeBtn = document.getElementById("themeBtn");
-const layoutBtn = document.querySelector(".layoutBtn");
 const closeBtn = document.getElementById("closeBtn");
+const layoutBtn = document.querySelector(".layoutBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 const titleInput = document.getElementById("noteTitle");
 const addNoteBtn = document.getElementById("addNoteBtn");
 const emptyState = document.getElementById("emptyState");
 const toastNotif = document.querySelector("toast-notif");
-const contentInput = document.getElementById("noteContent");
-const noteTemplate = document.getElementById("noteTemplate");
-const searchTemplate = document.getElementById("noResults");
-const searchComponent = document.querySelector("search-input");
-const sortRow = document.querySelector(".sort-row");
-const sortTemplate = document.getElementById("sortTemplate");
-const filterTemplate = document.getElementById("filterTemplate");
 const filterRow = document.querySelector(".filter-row");
 const filterBtn = document.getElementById("filterBtn");
 const sortBtn = document.getElementById("sortBtn");
+const resultsTemplate = document.getElementById("noResults");
+const sortTemplate = document.getElementById("sortTemplate");
+const contentInput = document.getElementById("noteContent");
+const noteTemplate = document.getElementById("noteTemplate");
+const searchComponent = document.querySelector("search-input");
+const filterTemplate = document.getElementById("filterTemplate");
 
 const noteData = {
     container: notes,
@@ -71,52 +77,7 @@ const filterChips = [
     { label: "Older", func: () => { filterCreatedOlder(viewedNotes, today, renderNotes, noteData) } },
 ];
 
-filterBtn.addEventListener("click", () => {
-    //renderChips(filterChips, filterTemplate, filterRow);
-    toggleClass(filterRow);
-});
-sortBtn.addEventListener("click", () => {
-    //renderChips(sortChips, sortTemplate, sortRow);
-    toggleClass(sortRow);
-});
-
-function renderChips(chips, template, row) {
-    chips.forEach(chip => {
-        const clone = template.content.cloneNode(true);
-        const btn = clone.querySelector("button");
-        if (chip.className) {
-            btn.innerHTML =
-                `${ chip.label }
-        <span class="icon" data-icon="tick"></span>`;
-            btn.classList.add(chip.className)
-        } else {
-            btn.innerHTML =
-                `${ chip.label }
-        <span class="icon" data-icon=""></span>`;
-        }
-        btn.addEventListener("click", () => {
-            chip.func();
-            const activeBtn = row.querySelector(".use");
-            const activeIcon = activeBtn.querySelector(".icon");
-            const icon = btn.querySelector(".icon");
-            applyState(activeIcon, true, "");
-            applyState(icon, false, "tick");
-            activeBtn.classList.remove("use");
-            btn.classList.add("use");
-            initializeIcons(btn);
-        });
-        initializeIcons(row);
-        row.append(clone);
-    });
-}
-
-function toggleClass(item) { item.classList.toggle("reveal") };
-
-/*const shareData = {
-    title: "Card Title",
-    text: target,
-    url: crypto.randomUUID(),
-};*/
+// 15 Event Listeners, 1 Custom, 1 documenr, 5 same element
 
 document.addEventListener("DOMContentLoaded", () => {
     const themeIcon = themeBtn.querySelector(".icon");
@@ -169,6 +130,15 @@ closeBtn.addEventListener("click", () => {
 cancelBtn.addEventListener("click", () => {
     form.reset();
     closeDialog(dialog);
+});
+
+filterBtn.addEventListener("click", () => {
+    //renderChips(filterChips, filterTemplate, filterRow);
+    toggleClass(filterRow);
+});
+sortBtn.addEventListener("click", () => {
+    //renderChips(sortChips, sortTemplate, sortRow);
+    toggleClass(sortRow);
 });
 
 searchComponent.addEventListener("search", (e) => {
@@ -249,6 +219,8 @@ notes.addEventListener("change", (e) => {
     renderToolBar();
 });
 
+// 16 functions, 14 in use, 17 imported, 16 Personal, 15 In use, Total in use: 31 functions (sub-functions not included)
+
 function themeSwitch(themeBtn) {
     const themeIcon = themeBtn.querySelector(".icon");
     const isDark = document.body.classList.toggle("dark-theme");
@@ -257,10 +229,97 @@ function themeSwitch(themeBtn) {
     initializeIcons(themeBtn);
 }
 
+function renderNotes({ container, items, btn, placeholder, template }) {
+    container.innerHTML = "";
+    if (items.length === 0) {
+        const empty = placeholder.content.cloneNode(true);
+        main.classList.add("empty");
+        btn.classList.add("focus");
+        container.append(empty);
+        return;
+    } else {
+        main.classList.remove("empty");
+        btn.classList.remove("focus");
+        items.forEach(quickNote => {
+            const note = template.content.cloneNode(true);
+            const noteCard = note.querySelector("article");
+            const noteTitle = note.querySelector(".note-title");
+            const noteDate = note.querySelector(".note-date");
+            const checkbox = note.querySelector(".checkbox");
+            const customCheckbox = note.querySelector(".custom-check");
+            noteDate.dataset.createdAt = quickNote.createdAt;
+            noteDate.textContent = relativeTime(quickNote.updatedAt);
+            if (quickNote.title === "") {
+                quickNote.title = "Untitled Note";
+                noteTitle.textContent = "Untitled Note";
+            } else { noteTitle.textContent = quickNote.title };
+            note.querySelector(".note-content").textContent = quickNote.content;
+            noteCard.dataset.id = quickNote.id;
+            checkbox.id = quickNote.id;
+            if (selectionMode) {
+                customCheckbox.classList.add("checked");
+            } else {
+                customCheckbox.classList.remove("checked");
+                checkbox.checked = false;
+            };
+            selectedNotes.has(quickNote.id) ? checkbox.checked = true : "";
+            container.append(note);
+            initializeIcons(noteCard);
+        });
+    }
+}
+
+function saveNote(items) {
+    const note = {
+        id: crypto.randomUUID(),
+        title: titleInput.value.trim(),
+        content: contentInput.value.trim(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        tags: [],
+    }
+    items.unshift(note);
+    localStorage.setItem("quickNotes", JSON.stringify(items));
+};
+
 function updateDate() {
     document.querySelectorAll("[data-created-at]").forEach(date => {
         date.textContent = relativeTime(date.dataset.createdAt)
     });
+}
+
+function editNote(editBtn, items) {
+    const note = editBtn.closest(".note-card");
+    //const noteDate = note.querySelector(".note-date");
+    const noteTitle = note.querySelector(".note-title");
+    const noteContent = note.querySelector(".note-content");
+    const id = note.dataset.id;
+    noteTitle.setAttribute("contenteditable", true);
+    noteContent.setAttribute("contenteditable", true);
+    noteTitle.focus();
+    noteContent.focus();
+    const noteToEdit = items.find(quickNote => { return quickNote.id === id });
+    //const updatedDate = items.map(item => { item.updatedAt = new Date().toISOString() });    
+    noteTitle.addEventListener("input", () => {
+        noteToEdit.title = noteTitle.textContent;
+        localStorage.setItem("quickNotes", JSON.stringify(items));
+    });
+    noteContent.addEventListener("input", () => {
+        noteToEdit.content = noteContent.textContent;
+        localStorage.setItem("quickNotes", JSON.stringify(items));
+    });
+}
+
+function cancelPress() {
+    clearTimeout(pressTimer);
+    pressTimer = null;
+};
+
+function enterSelectMode(noteId) {
+    selectionMode = true;
+    selectedNotes.add(noteId);
+    renderNotes(noteData);
+    renderToolBar();
 }
 
 function renderToolBar() {
@@ -301,18 +360,6 @@ function deselectAll() {
     renderToolBar();
 }
 
-function cancelPress() {
-    clearTimeout(pressTimer);
-    pressTimer = null;
-};
-
-function enterSelectMode(noteId) {
-    selectionMode = true;
-    selectedNotes.add(noteId);
-    renderNotes(noteData);
-    renderToolBar();
-}
-
 function exitSelectMode() {
     selectionMode = false;
     selectedNotes.clear();
@@ -326,18 +373,16 @@ function exitSelectMode() {
     renderToolBar();
 }
 
-function saveNote(items) {
-    const note = {
-        id: crypto.randomUUID(),
-        title: titleInput.value.trim(),
-        content: contentInput.value.trim(),
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-        tags: [],
-    }
-    items.unshift(note);
-    localStorage.setItem("quickNotes", JSON.stringify(items));
-};
+function shareNote() {
+    quickNotes.forEach(note => {
+        const shareData = {
+            title: note.title,
+            text: note.content,
+            url: note.id,
+        };
+    });
+    console.log(shareData);
+}
 
 function deleteNote() {
     selectedNotes.forEach(noteId => {
@@ -357,79 +402,50 @@ function deleteNote() {
     });
 }
 
-function undoDelete() {
-    quickNotes.push(...deletedNotes);
-    localStorage.setItem("quickNotes", JSON.stringify(quickNotes));
-    deletedNotes = [];
-    renderNotes(noteData);
+function undoDelete(items, obj, data) {
+    items.push(...obj);
+    localStorage.setItem("quickNotes", JSON.stringify(items));
+    obj = [];
+    renderNotes(data);
 };
 
-function editNote(editBtn, items) {
-    const note = editBtn.closest(".note-card");
-    //const noteDate = note.querySelector(".note-date");
-    const noteTitle = note.querySelector(".note-title");
-    const noteContent = note.querySelector(".note-content");
-    const id = note.dataset.id;
-    noteTitle.setAttribute("contenteditable", true);
-    noteContent.setAttribute("contenteditable", true);
-    noteTitle.focus();
-    noteContent.focus();
-    const noteToEdit = items.find(quickNote => { return quickNote.id === id });
-    //const updatedDate = items.map(item => { item.updatedAt = new Date().toISOString() });    
-    noteTitle.addEventListener("input", () => {
-        noteToEdit.title = noteTitle.textContent;
-        localStorage.setItem("quickNotes", JSON.stringify(items));
-    });
-    noteContent.addEventListener("input", () => {
-        noteToEdit.content = noteContent.textContent;
-        localStorage.setItem("quickNotes", JSON.stringify(items));
-    });
-}
+function toggleClass(item) { item.classList.toggle("reveal") };
 
-function renderNotes({ container, items, btn, placeholder, template }) {
-    container.innerHTML = "";
-    if (items.length === 0) {
-        const empty = placeholder.content.cloneNode(true);
-        main.classList.add("empty");
-        btn.classList.add("focus");
-        container.append(empty);
-        return;
-    } else {
-        main.classList.remove("empty");
-        btn.classList.remove("focus");
-        items.forEach(quickNote => {
-            const note = template.content.cloneNode(true);
-            const noteCard = note.querySelector("article");
-            const noteTitle = note.querySelector(".note-title");
-            const noteDate = note.querySelector(".note-date");
-            const checkbox = note.querySelector(".checkbox");
-            const customCheckbox = note.querySelector(".custom-check");
-            noteDate.dataset.createdAt = quickNote.createdAt;
-            noteDate.textContent = relativeTime(quickNote.updatedAt);
-            if (quickNote.title === "") {
-                quickNote.title = "Untitled Note";
-                noteTitle.textContent = "Untitled Note";
-            } else { noteTitle.textContent = quickNote.title };
-            note.querySelector(".note-content").textContent = quickNote.content;
-            noteCard.dataset.id = quickNote.id;
-            checkbox.id = quickNote.id;
-            if (selectionMode) {
-                customCheckbox.classList.add("checked");
-            } else {
-                customCheckbox.classList.remove("checked");
-                checkbox.checked = false;
-            };
-            selectedNotes.has(quickNote.id) ?  checkbox.checked = true : "";
-            container.append(note);
-            initializeIcons(noteCard);
+function renderChips(chips, template, row) {
+    chips.forEach(chip => {
+        const clone = template.content.cloneNode(true);
+        const btn = clone.querySelector("button");
+        if (chip.className) {
+            btn.innerHTML =
+                `${ chip.label }
+        <span class="icon" data-icon="tick"></span>`;
+            btn.classList.add(chip.className)
+        } else {
+            btn.innerHTML =
+                `${ chip.label }
+        <span class="icon" data-icon=""></span>`;
+        }
+        btn.addEventListener("click", () => {
+            chip.func();
+            const activeBtn = row.querySelector(".use");
+            const activeIcon = activeBtn.querySelector(".icon");
+            const icon = btn.querySelector(".icon");
+            applyState(activeIcon, true, "");
+            applyState(icon, false, "tick");
+            activeBtn.classList.remove("use");
+            btn.classList.add("use");
+            initializeIcons(btn);
         });
-    }
+        initializeIcons(row);
+        row.append(clone);
+    });
 }
 
 updateDate();
 renderNotes(noteData);
 createIcons({ icons });
-renderChips(filterChips, filterTemplate, filterRow);
+//undoDelete(quickNotes, deletedNotes, noteData);
 renderChips(sortChips, sortTemplate, sortRow);
+renderChips(filterChips, filterTemplate, filterRow);
 initializeIcons(document);
 setInterval(() => { updateDate() }, 1000);
