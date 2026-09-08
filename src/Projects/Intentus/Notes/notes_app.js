@@ -17,12 +17,14 @@ import {
 // 5 Arrays, 1 Set, 2 Objects, 1 function-created object, 3 raw Variables
 
 let pressTimer;
+/*let currentFilter = "all";
+let currentSort = "recently updated";*/
 let deletedNotes = [];
 let selectionMode = false;
 let selectedNotes = new Set();
 let quickNotes = JSON.parse(localStorage.getItem("quickNotes")) || [];
 
-const viewedNotes = [...quickNotes];
+const notesInView = [...quickNotes];
 
 // 25 Constants, 24 in use, 6 Buttons, 5 Templates, 2 Web Components, 2 inputs
 
@@ -62,19 +64,27 @@ const noteData = {
 }
 
 const sortChips = [
-    { label: "Recently Updated", func: () => { sortUpdated(viewedNotes, "updatedAt", renderNotes, noteData) }, className: "use" },
-    { label: "Newest First", func: () => { sortNewest(viewedNotes, "createdAt", renderNotes, noteData) } },
-    { label: "Oldest First", func: () => { sortOldest(viewedNotes, "createdAt", renderNotes, noteData) } },
-    { label: "Title A-Z", func: () => { sortA_Z(viewedNotes, "title", renderNotes, noteData) } },
-    { label: "Title Z-A", func: () => { sortZ_A(viewedNotes, "title", renderNotes, noteData) } },
+    { label: "Recently Updated", func: () => { sortUpdated(notesInView, "updatedAt", renderNotes, noteData) }, className: "use" },
+    { label: "Newest First", func: () => { sortNewest(notesInView, "createdAt", renderNotes, noteData) } },
+    { label: "Oldest First", func: () => { sortOldest(notesInView, "createdAt", renderNotes, noteData) } },
+    { label: "Title A-Z", func: () => { sortA_Z(notesInView, "title", renderNotes, noteData) } },
+    { label: "Title Z-A", func: () => { sortZ_A(notesInView, "title", renderNotes, noteData) } },
 ];
 
-const filterChips = [
+/*const filterChips = [
     { label: "All", func: () => { renderNotes(noteData) }, className: "use" },
-    { label: "Today", func: () => { filterCreatedToday(viewedNotes, today, renderNotes, noteData) } },
-    { label: "Yesterday", func: () => { filterCreatedYesterday(viewedNotes, yesterday, renderNotes, noteData) } },
-    { label: "This Week", func: () => { filterThisWeek(viewedNotes, renderNotes, noteData) } },
-    { label: "Older", func: () => { filterCreatedOlder(viewedNotes, today, renderNotes, noteData) } },
+    { label: "Today", func: () => { filterCreatedToday(notesInView, today, renderNotes, noteData) } },
+    { label: "Yesterday", func: () => { filterCreatedYesterday(notesInView, yesterday, renderNotes, noteData) } },
+    { label: "This Week", func: () => { filterThisWeek(notesInView, renderNotes, noteData) } },
+    { label: "Older", func: () => { filterCreatedOlder(notesInView, today, renderNotes, noteData) } },
+];*/
+
+const filterChips = [
+    { label: "All", value: `${this.label}`.toLowerCase() },
+    { label: "Today", value: `${ this.label }`.toLowerCase() },
+    { label: "Yesterday", value: `${ this.label }`.toLowerCase() },
+    { label: "This Week", value: `${ this.label }`.toLowerCase().replaceAll(" ", "") },
+    { label: "Older", value: `${ this.label }`.toLowerCase() },
 ];
 
 // 15 Event Listeners, 1 Custom, 1 documenr, 5 same element
@@ -132,6 +142,18 @@ cancelBtn.addEventListener("click", () => {
     closeDialog(dialog);
 });
 
+/*filterRow.addEventListener("click", event => {
+    const btn = event.target.closest("button[data-value]");
+    if (!btn) return;
+    selectFilter(btn.dataset.value);
+});
+
+sortRow.addEventListener("click", event => {
+    const btn = event.target.closest("button[data-value]");
+    if (!btn) return;
+    selectSort(btn.dataset.value);
+});*/
+
 filterBtn.addEventListener("click", () => {
     //renderChips(filterChips, filterTemplate, filterRow);
     toggleClass(filterRow);
@@ -141,37 +163,12 @@ sortBtn.addEventListener("click", () => {
     toggleClass(sortRow);
 });
 
-searchComponent.addEventListener("search", (e) => {
-    const component = e.detail.input;
-    const results = searchItems({
-        input: component,
-        items: quickNotes,
-        property: "title",
-    });
-
-    renderNotes({
-        container: notes,
-        items: results,
-        btn: addNoteBtn,
-        placeholder: emptyState,
-        template: noteTemplate
-    });
-
-    /*if (results.length === 0) { 
-        renderNotes({
-            container: notes,
-            items: results,
-            btn: addNoteBtn,
-            placeholder: searchTemplate,
-            template: noteTemplate
-        });
-    };*/
-});
+searchComponent.addEventListener("search", (e) => { applySearch(e, notesInView, noteData, resultsTemplate) });
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    saveNote(quickNotes);
     form.reset();
+    saveNote(quickNotes);
     closeDialog(dialog);
     renderNotes(noteData);
 });
@@ -229,6 +226,22 @@ function themeSwitch(themeBtn) {
     initializeIcons(themeBtn);
 }
 
+function createCard(note, quickNote) {
+    const noteCard = note.querySelector("article");
+    const noteDate = note.querySelector(".note-date");
+    const noteSelect = note.querySelector(".checkbox");
+    const noteTitle = note.querySelector(".note-title");
+    const noteContent = note.querySelector(".note-content");
+    noteCard.dataset.id = quickNote.id;
+    noteSelect.id = noteCard.dataset.id;
+    noteContent.textContent = quickNote.content;
+    noteDate.dataset.createdAt = quickNote.createdAt;
+    noteDate.textContent = relativeTime(quickNote.updatedAt);
+    quickNote.title ? noteTitle.textContent = quickNote.title : noteTitle.textContent = "Untitled Note";
+    initializeIcons(noteCard);
+    return noteCard;
+}
+
 function renderNotes({ container, items, btn, placeholder, template }) {
     container.innerHTML = "";
     if (items.length === 0) {
@@ -242,31 +255,23 @@ function renderNotes({ container, items, btn, placeholder, template }) {
         btn.classList.remove("focus");
         items.forEach(quickNote => {
             const note = template.content.cloneNode(true);
-            const noteCard = note.querySelector("article");
-            const noteTitle = note.querySelector(".note-title");
-            const noteDate = note.querySelector(".note-date");
-            const checkbox = note.querySelector(".checkbox");
-            const customCheckbox = note.querySelector(".custom-check");
-            noteDate.dataset.createdAt = quickNote.createdAt;
-            noteDate.textContent = relativeTime(quickNote.updatedAt);
-            if (quickNote.title === "") {
-                quickNote.title = "Untitled Note";
-                noteTitle.textContent = "Untitled Note";
-            } else { noteTitle.textContent = quickNote.title };
-            note.querySelector(".note-content").textContent = quickNote.content;
-            noteCard.dataset.id = quickNote.id;
-            checkbox.id = quickNote.id;
-            if (selectionMode) {
-                customCheckbox.classList.add("checked");
-            } else {
-                customCheckbox.classList.remove("checked");
-                checkbox.checked = false;
-            };
-            selectedNotes.has(quickNote.id) ? checkbox.checked = true : "";
+            createCard(note, quickNote);
+            selectUI(note, quickNote, selectionMode);
             container.append(note);
-            initializeIcons(noteCard);
         });
     }
+}
+
+function applySearch(e, items, obj, template) {
+    const component = e.detail.input;
+    const results = searchItems({
+        input: component,
+        items: items,
+        property: "title",
+    });
+
+    results.length === 0 ? renderNotes({ ...obj, placeholder: template }) :
+        renderNotes({ ...obj, items: results });
 }
 
 function saveNote(items) {
@@ -320,6 +325,14 @@ function enterSelectMode(noteId) {
     selectedNotes.add(noteId);
     renderNotes(noteData);
     renderToolBar();
+}
+
+function selectUI(note, quickNote, mode) {
+    const noteSelect = note.querySelector(".checkbox");
+    const noteCheck = note.querySelector(".custom-check");
+    noteSelect.checked = false;
+    mode ? noteSelect.classList.add("checked") : noteCheck.classList.remove("checked");
+    selectedNotes.has(quickNote.id) ? noteSelect.checked = true : "";
 }
 
 function renderToolBar() {
@@ -410,6 +423,43 @@ function undoDelete(items, obj, data) {
 };
 
 function toggleClass(item) { item.classList.toggle("reveal") };
+
+/*function applyFilter(filter) {
+    currentFilter = filter;
+    renderNotes(noteData);
+}
+
+function applySort(sort) {
+    currentSort = sort;
+    renderNotes(noteData);
+}
+
+function selectFilter(value) {
+    currentFilter = value;
+    renderFilterChips();
+    renderNotes({ ...noteData, items: notesInView });
+}
+
+function renderChips(chips, template, row, activeValue) {
+    row.replaceChildren();
+    chips.forEach(chip => {
+        const clone = document.importNode(template.content, true);
+        const btn = clone.querySelector("button");
+        const icon = clone.querySelector(".icon");
+        btn.textContent = chip.label;
+        btn.dataset.value = chip.value;
+        const isActive = chip.value === activeValue;
+        btn.classList.toggle("use", isActive);
+        isActive ? icon.dataset.icon = "tick" : "";
+
+        if (chip.value === activeValue) {
+            btn.classList.add("use");
+            icon.dataset.icon = "tick";
+        }
+        row.append(clone);
+    });
+    initializeIcons(row);
+}*/
 
 function renderChips(chips, template, row) {
     chips.forEach(chip => {

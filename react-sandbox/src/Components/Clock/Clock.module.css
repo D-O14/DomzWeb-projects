@@ -1,12 +1,64 @@
-.clockContainer{
-    width: 100vw;
-    padding-block: 10px;
+.clockView {
+    padding: 2em;
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.clock{
-    font-size: 6rem;
-    font-weight: bold;
-    text-align: center;
+.clock {
+    width: 250px;
+    height: 150px;
+    position: relative;
+    border-radius: .75rem;
+    color: hsl(0, 0%, 100%);
+    /*border: 2px solid hsl(0, 0%, 5%);
+    box-shadow: 
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        -1px -1px 0px hsl(0, 0%, 10%),
+        -1px -1px 0px hsl(0, 0%, 10%);
+    background: linear-gradient(145deg, hsl(0, 0%, 5%), hsl(0, 0%, 10%));*/
+}
+
+.location,
+.offset,
+.time,
+.timeOfDay {
+    position: absolute;
+}
+
+.time {
+    left: 20px;
+    bottom: 10px;
+    font-size: 2rem;
     font-family: monospace;
-    text-shadow: 3px 3px 5px hsla(0, 05, 0%, .75);
+}
+
+.meridiem {
+    font-size: 12px;
+}
+
+.timeOfDay {
+    bottom: 20px;
+    right: 20px;
+}
+
+.location,
+.offset {
+    font-size: 16px;
+    color: hsl(0, 0%, 100%);
+}
+
+.location {
+    top: 10px;
+    gap: .25em;
+    left: 20px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.offset {
+    top: 10px;
+    right: 20px;
 }

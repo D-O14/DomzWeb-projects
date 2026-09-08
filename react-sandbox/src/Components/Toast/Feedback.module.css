@@ -1,0 +1,87 @@
+.view {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast {
+    gap: 1em;
+    padding: 1em;
+    display: flex;
+    position: relative;
+    align-items: center;
+    border-radius: .75em;
+    width: min(400px, 475px);
+    color: hsl(0, 0%, 95%);
+    justify-content: center;
+    flex-direction: column;
+    background: hsl(0, 0%, 0%);
+}
+
+.content{
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.icon{
+    padding: .5em .75em;
+    border-radius: 5rem;
+    background: hsl(0, 0%, 15%);
+    border: 1px solid hsl(0, 0%, 25%);
+}
+
+.closeBtn{
+    padding: 0;
+    background: none;
+}
+
+.closeBtn svg{
+    width: 18px;
+    height: 18px;
+    stroke: hsl(0, 0%, 50%);
+}
+
+.toastMsg{
+    font-size: 18px;
+    font-weight: 500;
+    color: hsl(0, 0%, 90%);
+}
+
+.menu{
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondaryBtn {
+    background: none;
+    border-radius: .5em;
+    color: hsl(0, 0%, 70%);
+    border: 2px solid hsl(0, 0%, 15%);
+}
+
+.secondaryBtn:hover {
+    color: hsl(0, 0%, 0%);
+    background: hsl(0, 0%, 100%);
+}
+
+.primaryBtn {
+    border-radius: .5em;
+    color: hsl(0, 0%, 90%);
+    background: hsl(0, 0%, 20%);
+    box-shadow:
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%);
+    border: 2px solid hsl(0, 0%, 25%);
+}
+
+.primaryBtn:hover {
+    color: hsl(0, 0%, 0%);
+    background: hsl(0, 0%, 100%);
+}

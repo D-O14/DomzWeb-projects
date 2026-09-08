@@ -1,4 +1,4 @@
-.welcomeMsg {
+/*.welcomeMsg {
     margin: 0;
     padding: 10px;
     font-size: 2.5em;
@@ -14,4 +14,122 @@
     border-radius: 5px;
     color: hsl(0, 0%, 100%);
     background: hsl(0, 100%, 42%);
+}*/
+
+.view {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast {
+    gap: 1.25em;
+    padding: 1em;
+    display: flex;
+    position: relative;
+    align-items: start;
+    border-radius: .75em;
+    justify-content: start;
+    width: min(600px, 475px);
+    color: hsl(0, 0%, 100%);
+    box-shadow:
+        -1px -1px 0px hsl(0, 0%, 10%),
+        -1px -1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%);
+    border: 2px solid hsl(0, 0%, 20%);
+    background: linear-gradient(145deg, hsl(0, 0%, 0%), hsl(0, 0%, 15%));
+}
+
+.toastContent {
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    flex-direction: column;
+}
+
+.message {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: hsl(0, 0%, 90%);
+}
+
+.content {
+    width: 38ch;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: hsl(0, 0%, 60%);
+}
+
+.menu {
+    gap: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.icon {
+    padding: .5em .75em;
+    border-radius: .25em;
+    color: hsl(0, 0%, 80%);
+    background: hsl(0, 0%, 20%);
+    box-shadow:
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%);
+    border: 2px solid hsl(0, 0%, 25%);
+}
+
+.icon:hover svg{
+    transform: translateX(5px) translateY(-5px);
+}
+
+.secondaryBtn {
+    background: none;
+    border-radius: .5em;
+    color: hsl(0, 0%, 70%);
+    border: 2px solid hsl(0, 0%, 15%);
+}
+
+.secondaryBtn:hover {
+    color: hsl(0, 0%, 0%);
+    background: hsl(0, 0%, 100%);
+}
+
+.primaryBtn {
+    border-radius: .5em;
+    color: hsl(0, 0%, 90%);
+    background: hsl(0, 0%, 20%);
+    box-shadow:
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%);
+    border: 2px solid hsl(0, 0%, 25%);
+}
+
+.primaryBtn:hover {
+    color: hsl(0, 0%, 0%);
+    background: hsl(0, 0%, 100%);
+}
+
+.closeBtn {
+    top: 15px;
+    right: 15px;
+    padding: 0;
+    background: none;
+    position: absolute;
+    color: hsl(0, 0%, 50%);
+}
+
+.closeBtn:hover {
+    background: none;
+}
+
+.closeBtn:hover svg {
+    stroke: hsl(0, 0%, 80%);
+    transform: rotate(180deg);
+    transition: all 500ms ease-in-out;
 }
