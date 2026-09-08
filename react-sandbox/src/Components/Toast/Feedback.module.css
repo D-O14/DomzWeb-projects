@@ -17,40 +17,45 @@
     justify-content: center;
     flex-direction: column;
     background: hsl(0, 0%, 0%);
+    box-shadow:
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%);
 }
 
-.content{
+.content {
     gap: 1rem;
     display: flex;
     align-items: center;
     justify-content: start;
 }
 
-.icon{
+.icon {
     padding: .5em .75em;
     border-radius: 5rem;
     background: hsl(0, 0%, 15%);
     border: 1px solid hsl(0, 0%, 25%);
 }
 
-.closeBtn{
+.closeBtn {
     padding: 0;
     background: none;
 }
 
-.closeBtn svg{
+.closeBtn svg {
     width: 18px;
     height: 18px;
     stroke: hsl(0, 0%, 50%);
 }
 
-.toastMsg{
+.toastMsg {
     font-size: 18px;
     font-weight: 500;
     color: hsl(0, 0%, 90%);
 }
 
-.menu{
+.menu {
     gap: 1rem;
     display: flex;
     align-items: center;
@@ -84,4 +89,14 @@
 .primaryBtn:hover {
     color: hsl(0, 0%, 0%);
     background: hsl(0, 0%, 100%);
+}
+
+.closeBtn:hover {
+    background: none;
+}
+
+.closeBtn:hover svg {
+    stroke: hsl(0, 0%, 80%);
+    transform: rotate(180deg);
+    transition: all 500ms ease-in-out;
 }

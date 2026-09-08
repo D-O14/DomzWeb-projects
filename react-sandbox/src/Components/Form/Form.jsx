@@ -1,15 +1,7 @@
-//import Input from "./Input";
 import { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./Form.module.css";
 import { Lock, Mail, Phone, User } from "lucide-react";
-
-/*<Input type="text" id="nameInput" value={name} placeholder="Your name"
-    event={(e) => { updateName(e) }} icon={<User />} />
-<Input type="email" id="emailInput" value={email} placeholder="Your e-mail"
-    event={(e) => { updateEmail(e) }} icon={<Mail />} />
-<Input type="tel" id="telInput" value={phoneNumber} placeholder="Your phone number"
-    event={(e) => { updateNumber(e) }} icon={<Phone />} />*/
 
 export default function Form() {
     const [users, setUsers] = useState([]);
@@ -30,6 +22,7 @@ export default function Form() {
         setEmail("");
         setPassword("");
         setPhoneNumber("");
+
     };
     return (
         <>

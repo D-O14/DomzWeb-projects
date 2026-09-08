@@ -2,7 +2,7 @@
 //import DropDown from "./Components/Form/Dropdown/DropDown";
 //import SearchBar from "./Components/Form/Search/SearchBar";
 import Clock from "./Components/Clock/Clock";
-import { MemoryStick, Volleyball, MonitorPlay, Ambulance, Palette, School, Gamepad, LifeBuoy, Rocket } from "lucide-react";
+import { MemoryStick, Volleyball, MonitorPlay, Ambulance, Palette, School, Gamepad, LifeBuoy, Rocket, CheckCircle } from "lucide-react";
 //import Toast from "./Components/Toast/Toast";
 import Feedback from "./Components/Toast/Feedback";
 
@@ -31,8 +31,8 @@ function App() {
       <Feedback
         interact={false}
         dismissable={true}
-        content="A new update is available | v4.2"
-        icon={<Rocket size={16} />} />
+        content="You've successfully logged in!"
+        icon={<CheckCircle size={20} />} />
     </>
   );
 };
