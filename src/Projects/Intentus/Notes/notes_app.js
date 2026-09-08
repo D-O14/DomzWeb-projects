@@ -17,8 +17,6 @@ import {
 // 5 Arrays, 1 Set, 2 Objects, 1 function-created object, 3 raw Variables
 
 let pressTimer;
-/*let currentFilter = "all";
-let currentSort = "recently updated";*/
 let deletedNotes = [];
 let selectionMode = false;
 let selectedNotes = new Set();
@@ -424,43 +422,6 @@ function undoDelete(items, obj, data) {
 
 function toggleClass(item) { item.classList.toggle("reveal") };
 
-/*function applyFilter(filter) {
-    currentFilter = filter;
-    renderNotes(noteData);
-}
-
-function applySort(sort) {
-    currentSort = sort;
-    renderNotes(noteData);
-}
-
-function selectFilter(value) {
-    currentFilter = value;
-    renderFilterChips();
-    renderNotes({ ...noteData, items: notesInView });
-}
-
-function renderChips(chips, template, row, activeValue) {
-    row.replaceChildren();
-    chips.forEach(chip => {
-        const clone = document.importNode(template.content, true);
-        const btn = clone.querySelector("button");
-        const icon = clone.querySelector(".icon");
-        btn.textContent = chip.label;
-        btn.dataset.value = chip.value;
-        const isActive = chip.value === activeValue;
-        btn.classList.toggle("use", isActive);
-        isActive ? icon.dataset.icon = "tick" : "";
-
-        if (chip.value === activeValue) {
-            btn.classList.add("use");
-            icon.dataset.icon = "tick";
-        }
-        row.append(clone);
-    });
-    initializeIcons(row);
-}*/
-
 function renderChips(chips, template, row) {
     chips.forEach(chip => {
         const clone = template.content.cloneNode(true);
@@ -486,9 +447,9 @@ function renderChips(chips, template, row) {
             btn.classList.add("use");
             initializeIcons(btn);
         });
-        initializeIcons(row);
         row.append(clone);
     });
+    initializeIcons(row);
 }
 
 updateDate();

@@ -15,7 +15,7 @@ The notes section of the Intentus productivity app.
 9. Theme change transitions
 10. Date of creation
 11. Use Illustration for empty state
-12. Add deleted item toast
+12. Deleted item toast
 
 # Upcoming:
 1. [] Extract Dialog Component
