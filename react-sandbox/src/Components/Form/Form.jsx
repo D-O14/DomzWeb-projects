@@ -1,7 +1,22 @@
 import { useState } from "react";
 import Button from "../Button/Button";
 import styles from "./Form.module.css";
-import { Lock, Mail, Phone, User } from "lucide-react";
+import Input from "./Input/Input";
+import Feedback from "../Toast/Feedback";
+import { createContext } from "react";
+import { CheckCircle, Lock, Mail, Phone, User } from "lucide-react";
+import Card from "../Products/Card";
+
+/*<Feedback
+    type="message"
+    interact={false}
+    dismissable={true}
+    icon={<CheckCircle />}
+    content="Form Submitted Successfully"
+    className={!revealed ? `${ styles.toast }` : `${ styles.toast } ${ styles.revealed }`}
+/>*/
+
+export const UserContext = createContext();
 
 export default function Form() {
     const [users, setUsers] = useState([]);
@@ -9,19 +24,23 @@ export default function Form() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+    const [revealed, setRevealed] = useState(false);
 
     function updateName(e) { setName(e.target.value); };
     function updateEmail(e) { setEmail(e.target.value) };
     function updatePassword(e) { setPassword(e.target.value) };
     function updatePhoneNumber(e) { setPhoneNumber(e.target.value) };
+    function reveal() { !revealed ? setRevealed(true) : setRevealed(false) };
+
     function addUser(e) {
         e.preventDefault();
-        const newUser = { user_name: name, user_email: email, pass: password, tel: phoneNumber };
+        const newUser = { userName: name, userEmail: email, pass: password, tel: phoneNumber };
         setUsers(prevUsers => [...users, newUser]);
         setName("");
         setEmail("");
         setPassword("");
         setPhoneNumber("");
+        reveal();
 
     };
     return (
@@ -29,44 +48,23 @@ export default function Form() {
             <div className="form">
                 <form noValidate onSubmit={(e) => { addUser(e) }} autoComplete="off" autoCapitalize="on"
                     autoCorrect="on">
-                    <label htmlFor="nameInput">
-                        <div className={styles.input}>
-                            <span>{<User />}</span>
-                            <input type="text" id="nameInput" placeholder="Your name"
-                                value={name} onChange={(e) => { updateName(e) }} />
-                        </div>
-                    </label>
-                    <label htmlFor="emailInput">
-                        <div className={styles.input}>
-                            <span>{<Mail />}</span>
-                            <input type="email" id="emailInput" placeholder="Your e-mail"
-                                autoComplete="username" value={email} onChange={(e) => { updateEmail(e) }} />
-                        </div>
-                    </label>
-                    <label htmlFor="passwordInput">
-                        <div className={styles.input}>
-                            <span>{<Lock />}</span>
-                            <input type="password" id="passwordInput" placeholder="Your password"
-                                autoComplete="new-password" value={password} onChange={(e) => { updatePassword(e) }} />
-                        </div>
-                    </label>
-                    <label htmlFor="telInput">
-                        <div className={styles.input}>
-                            <span>{<Phone />}</span>
-                            <input type="tel" id="telInput" placeholder="Your phone number"
-                                autoComplete="new-password" value={phoneNumber} onChange={(e) => { updatePhoneNumber(e) }} />
-                        </div>
-                    </label>
+                    <Input type="text" id="nameInput" icon={<User />} placeholder="Your name" value={name}
+                        event={(e) => { updateName(e) }} />
+                    <Input type="email" id="emailInput" icon={<Mail />} placeholder="Your e-mail" value={email}
+                        event={(e) => { updateEmail(e) }} />
+                    <Input type="password" id="passwordInput" icon={<Lock />} placeholder="Your password" value={password}
+                        event={(e) => { updatePassword(e) }} />
+                    <Input type="tel" id="telInput" icon={<Phone />} placeholder="Your phone number" value={phoneNumber}
+                        event={(e) => { updatePhoneNumber(e) }} />
                     <menu>
                         <Button text="Submit" func={(e) => { addUser(e) }} className={styles.submitBtn} />
                     </menu>
                 </form>
             </div>
-            <ul>
-                {users.map((user, index) => {
-                    return <li key={index}>{user.user_name}</li>
-                })}
-            </ul>
+
+            <UserContext.Provider value={name}>
+                <Card name={name} />
+            </UserContext.Provider>
         </>
     );
 }

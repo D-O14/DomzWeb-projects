@@ -49,6 +49,111 @@ span > svg{
     background: hsla(0, 0%, 50%, .5);
 }
 
+.toast {
+    gap: 1em;
+    opacity: 0;
+    padding: 1em;
+    display: flex;
+    position: relative;
+    align-items: center;
+    transform: scale(0);
+    border-radius: .75em;
+    width: min(400px, 475px);
+    color: hsl(0, 0%, 95%);
+    justify-content: center;
+    flex-direction: column;
+    background: hsl(0, 0%, 0%);
+    transform-origin: bottom right;
+    box-shadow:
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%),
+        1px 1px 0px hsl(0, 0%, 10%);
+}
+
+.content {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.icon {
+    padding: .5em .75em;
+    border-radius: 5rem;
+    background: hsl(0, 0%, 15%);
+    border: 1px solid hsl(0, 0%, 25%);
+}
+
 .submitBtn {
     width: 100%;
+}
+
+.closeBtn {
+    padding: 0;
+    background: none;
+}
+
+.closeBtn svg {
+    width: 18px;
+    height: 18px;
+    stroke: hsl(0, 0%, 50%);
+}
+
+.toastMsg {
+    font-size: 18px;
+    font-weight: 500;
+    color: hsl(0, 0%, 90%);
+}
+
+.menu {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.secondaryBtn {
+    background: none;
+    border-radius: .5em;
+    color: hsl(0, 0%, 70%);
+    border: 2px solid hsl(0, 0%, 15%);
+}
+
+.secondaryBtn:hover {
+    color: hsl(0, 0%, 0%);
+    background: hsl(0, 0%, 100%);
+}
+
+.primaryBtn {
+    border-radius: .5em;
+    color: hsl(0, 0%, 90%);
+    background: hsl(0, 0%, 20%);
+    box-shadow:
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%),
+        2px 2px 0px hsl(0, 0%, 10%);
+    border: 2px solid hsl(0, 0%, 25%);
+}
+
+.primaryBtn:hover {
+    color: hsl(0, 0%, 0%);
+    background: hsl(0, 0%, 100%);
+}
+
+.closeBtn:hover {
+    background: none;
+}
+
+.closeBtn:hover svg {
+    stroke: hsl(0, 0%, 80%);
+    transform: rotate(180deg);
+    transition: all 500ms ease-in-out;
+}
+
+.revealed {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateY(-20px);
 }

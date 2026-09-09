@@ -1,22 +1,27 @@
 .view {
+    gap: 1rem;
     height: 100dvh;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .toast {
     gap: 1em;
+    opacity: 0;
     padding: 1em;
     display: flex;
     position: relative;
     align-items: center;
+    transform: scale(0);
     border-radius: .75em;
     width: min(400px, 475px);
     color: hsl(0, 0%, 95%);
     justify-content: center;
     flex-direction: column;
     background: hsl(0, 0%, 0%);
+    transform-origin: bottom right;
     box-shadow:
         1px 1px 0px hsl(0, 0%, 10%),
         1px 1px 0px hsl(0, 0%, 10%),
@@ -99,4 +104,10 @@
     stroke: hsl(0, 0%, 80%);
     transform: rotate(180deg);
     transition: all 500ms ease-in-out;
+}
+
+.revealed {
+    opacity: 1;
+    pointer-events: auto;
+    transform: scale(1) translateY(-20px);
 }

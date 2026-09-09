@@ -1,6 +1,6 @@
 import styles from "../Form.module.css";
 
-export default function Input({ type = "text", placeholder = "Enter some text", id = "",
+export default function Input({ type = "text", placeholder = "Enter some text", id = "input",
     className, value = "", event, icon }) {
     return (
         <>

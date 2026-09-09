@@ -1,8 +1,10 @@
 //import { ScanBox } from "lucide-react";
 //import DropDown from "./Components/Form/Dropdown/DropDown";
 //import SearchBar from "./Components/Form/Search/SearchBar";
-import Clock from "./Components/Clock/Clock";
-import { MemoryStick, Volleyball, MonitorPlay, Ambulance, Palette, School, Gamepad, LifeBuoy, Rocket, CheckCircle } from "lucide-react";
+//import Clock from "./Components/Clock/Clock";
+import { useState } from "react";
+import Form from "./Components/Form/Form";
+import { MemoryStick, Volleyball, MonitorPlay, Ambulance, Palette, School, Gamepad, LifeBuoy, Rocket, CheckCircle, User } from "lucide-react";
 //import Toast from "./Components/Toast/Toast";
 import Feedback from "./Components/Toast/Feedback";
 
@@ -26,13 +28,11 @@ const hobbies = [
 ];
 
 function App() {
+  /*const [revealed, setRevealed] = useState(false);
+  function reveal() { !revealed ? setRevealed(true) : setRevealed(false) };*/
   return (
     <>
-      <Feedback
-        interact={false}
-        dismissable={true}
-        content="You've successfully logged in!"
-        icon={<CheckCircle size={20} />} />
+      <Form/>
     </>
   );
 };
