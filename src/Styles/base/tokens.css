@@ -213,6 +213,7 @@
 
     /* Dimensions */
 
+    --no-dimension: 0;
     --base-dimension: 16px;
 
     --viewport-width: 100dvw;

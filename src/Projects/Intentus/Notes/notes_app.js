@@ -69,20 +69,12 @@ const sortChips = [
     { label: "Title Z-A", func: () => { sortZ_A(notesInView, "title", renderNotes, noteData) } },
 ];
 
-/*const filterChips = [
+const filterChips = [
     { label: "All", func: () => { renderNotes(noteData) }, className: "use" },
     { label: "Today", func: () => { filterCreatedToday(notesInView, today, renderNotes, noteData) } },
     { label: "Yesterday", func: () => { filterCreatedYesterday(notesInView, yesterday, renderNotes, noteData) } },
     { label: "This Week", func: () => { filterThisWeek(notesInView, renderNotes, noteData) } },
     { label: "Older", func: () => { filterCreatedOlder(notesInView, today, renderNotes, noteData) } },
-];*/
-
-const filterChips = [
-    { label: "All", value: `${this.label}`.toLowerCase() },
-    { label: "Today", value: `${ this.label }`.toLowerCase() },
-    { label: "Yesterday", value: `${ this.label }`.toLowerCase() },
-    { label: "This Week", value: `${ this.label }`.toLowerCase().replaceAll(" ", "") },
-    { label: "Older", value: `${ this.label }`.toLowerCase() },
 ];
 
 // 15 Event Listeners, 1 Custom, 1 documenr, 5 same element
@@ -326,37 +318,45 @@ function enterSelectMode(noteId) {
 }
 
 function selectUI(note, quickNote, mode) {
-    const noteSelect = note.querySelector(".checkbox");
-    const noteCheck = note.querySelector(".custom-check");
-    noteSelect.checked = false;
-    mode ? noteSelect.classList.add("checked") : noteCheck.classList.remove("checked");
+    const noteCheck = note.querySelector(".checkbox");
+    const noteSelect = note.querySelector(".custom-check");
+    if (mode) {
+        noteSelect.classList.add("checked");
+        noteSelect.checked = true;
+    } else {
+        noteCheck.classList.remove("checked");
+        noteSelect.checked = false;
+    }
     selectedNotes.has(quickNote.id) ? noteSelect.checked = true : "";
 }
 
 function renderToolBar() {
-    const toolbarView = document.querySelector(".toolbar-view");
-    const selectAllBtn = toolbarView.querySelector(".select-all");
-    const selectedCount = toolbarView.querySelector(".selected-count");
-    const closeBtn = toolbarView.querySelector(".toolbar-close");
-    const deleteBtn = toolbarView.querySelector(".delete");
-    if (selectionMode) {
-        toolbarView.classList.add("visible");
+    const selectionToolbar = document.querySelector(".toolbar-body");
+    const selectBox = selectionToolbar.querySelector(".select-box");
+    const checkBox = selectionToolbar.querySelector(".check");
+    const closeBtn = selectionToolbar.querySelector(".backBtn");
+    const deleteBtn = selectionToolbar.querySelector(".delete-btn");
+    const selectedCount = selectionToolbar.querySelector(".selected-count");
+    const size = selectedNotes.size; 
+    selectionMode ? selectionToolbar.classList.add("visible") :
+        selectionToolbar.classList.remove("visible");
+    switch (size) {
+        case 0: selectedCount.textContent = "No notes selected";
+            break;
+        case 1: selectedCount.textContent = `${ size } Note Selected`;
+            break;
+        default: selectedCount.textContent = `${ size } Notes Selected`
+
+    }
+    if (size === quickNotes.length) {
+        checkBox.checked = true;
+        selectBox.addEventListener("click", () => { deselectAll() });
     } else {
-        toolbarView.classList.remove("visible");
-    };
-    selectedCount.textContent = `${ selectedNotes.size }`;
-    selectAllBtn.textContent =
-        selectedNotes.size === quickNotes.length
-            ? `Deselect All (${ selectedNotes.size })`
-            : `Select All (${ quickNotes.length })`;
-    if (selectedNotes.size === quickNotes.length) {
-        selectAllBtn.addEventListener("click", () => { deselectAll() });
-    } else {
-        selectAllBtn.addEventListener("click", () => { selectAll() });
+        selectBox.addEventListener("click", () => { selectAll() });
     };
     deleteBtn.addEventListener("click", () => { deleteNote() });
     closeBtn.addEventListener("click", () => { exitSelectMode() });
-    initializeIcons(toolbarView);
+    initializeIcons(selectionToolbar);
 }
 
 function selectAll() {

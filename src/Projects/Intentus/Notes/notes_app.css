@@ -26,8 +26,10 @@ html {
     --bg-fab: hsl(250, 100%, 50%);
     --bg-note: hsl(0, 0%, 100%, .05);
     --bg-checked: hsl(250, 100%, 50%);
+    --bg-back-btn: hsl(230, 100%, 57%);
     --bg-fab-hover: hsl(237, 100%, 47%);
     --bg-chip-active: hsl(230, 100%, 67%);
+    --bg-toolbar: hsl(240, 100%, 50%);
 
     --accent: var(--brand-clr);
 
@@ -43,9 +45,11 @@ html {
 
     --brdr-chip: var(--none);
     --brdr-note: hsl(0, 0%, 100%, .25);
-    --brdr-checked-clr: hsl(250, 100%, 50%, .5);
     --brdr-check: 1px solid hsl(250, 100%, 50%);
+    --brdr-checked-clr: hsl(250, 100%, 50%, .5);
+    --brdr-back-btn: 2px solid hsl(250, 100%, 58%);
     --brdr-fab: 1px solid hsl(240, 100%, 50%, .25);
+    --brdr-toolbar: 2px solid hsla(250 100% 80% / .35);
 
     --shadow:
         0 4px 6px hsla(0, 0%, 0%, 5%),
@@ -58,6 +62,11 @@ html {
         2px 2px 0px hsl(250, 100%, 50%),
         2px 2px 0px hsl(250, 100%, 50%),
         2px 2px 0px hsl(250, 100%, 50%);
+    --shadow-toolbar:
+        -2px -2px 0px hsla(230 100% 50% / .35),
+        -2px -2px 0px hsla(230 100% 50% / .35),
+        2px 2px 0px hsla(230 100% 50% / .35),
+        2px 2px 0px hsla(230 100% 50% / .35);
     --shadow-chip:
         2px 2px 3px hsl(0, 0%, 90%),
         -2px -2px 3px hsl(0, 0%, 90%),
@@ -68,10 +77,14 @@ html {
 }
 
 .dark-theme {
-    --bg-badge: hsl(255, 100%, 50%);
+    --bg-badge: var(--accent);
     --bg-surface: hsl(250, 52%, 6%);
+    --bg-back-btn: hsl(230, 100%, 57%);
     --bg-chip: hsl(250, 100%, 50%, .25);
     --bg-chip-active: hsl(250, 100%, 50%);
+    --bg-toolbar: hsla(250, 100%, 50%, 0.25);
+
+    --accent: hsl(250, 100%, 50%);
 
     --base-clr: hsl(233, 12%, 13%);
     --brand-clr: hsl(237, 100%, 77%);
@@ -83,6 +96,7 @@ html {
 
     --brdr-chip: 1px solid hsl(255, 100%, 50%);
     --brdr-fab: 2px solid hsla(250 100% 80% / .35);
+    --brdr-toolbar: 2px solid hsla(250 100% 80% / .35);
 
     --shadow:
         4px 0px 2px hsla(224, 71%, 4%, 0.06),
@@ -95,6 +109,11 @@ html {
         -2px -2px 3px hsl(0, 0%, 5%),
         2px 2px 3px hsl(0, 0%, 5%);
     --shadow-fab: 2px 2px 2px hsl(250, 100%, 50%);
+    --shadow-toolbar:
+        -2px -2px 0px hsla(250 100% 80% / .35),
+        -1px -1px 0px hsla(250 100% 80% / .35),
+        1px 1px 0px hsla(250 100% 80% / .35),
+        1px 1px 0px hsla(250 100% 80% / .35);
     --shadow-fab-hover:
         2px 2px 0px hsl(250, 100%, 50%),
         2px 2px 0px hsl(250, 100%, 50%),
@@ -102,8 +121,9 @@ html {
         2px 2px 0px hsl(250, 100%, 50%),
         2px 2px 0px hsl(250, 100%, 50%);
     --shadow-tooltip: 0 10px 10px hsla(0, 0%, 0%, .15);
-        
-        --backdrop: hsla(0, 0%, 8%, .8);
+
+
+    --backdrop: hsla(0, 0%, 8%, .8);
 }
 
 /* Base styles */
@@ -259,9 +279,18 @@ menu {
     stroke: var(--brand-clr);
 }
 
+.addNoteBtn svg {
+    stroke: var(--clr-plain);
+}
+
 .addNoteBtn:hover svg {
     fill: var(--clr-plain);
     stroke: var(--clr-plain);
+}
+
+.toolbar-nav svg {
+    width: 25px;
+    height: 25px;
 }
 
 /* Buttons */
@@ -315,6 +344,21 @@ menu {
 
 .deleteBtn {
     color: var(--clr-danger);
+}
+
+.toolbar-nav button {
+    background: var(--none);
+    padding: var(--spacing-0);
+}
+
+.backBtn {
+    left: -50px;
+    color: var(--clr-plain);
+    position: var(--absolute);
+    border: var(--brdr-back-btn);
+    background: var(--bg-back-btn);
+    border-radius: var(--radius-xlg);
+    padding: var(--spacing-1) var(--spacing-1);
 }
 
 /* Dialog Styling */
@@ -425,19 +469,22 @@ menu {
 
 /* Checkbox styles */
 
-.checkbox:checked+.custom-check {
+.checkbox:checked+.custom-check,
+.check:checked+.select-box {
     background: var(--bg-checked);
     border-color: var(--brdr-checked-clr);
 }
 
-.custom-check::after {
+.custom-check::after,
+.select-box::after {
     content: "\2713";
     font-size: .8rem;
     color: var(--clr-plain);
     opacity: var(--opacity-none);
 }
 
-.checkbox:checked+.custom-check::after {
+.checkbox:checked+.custom-check::after,
+.check:checked+.select-box::after {
     opacity: var(--opacity-base);
 }
 
@@ -501,7 +548,79 @@ menu {
     transform: scale(var(--scale-base)) translateY(-20px);
 }
 
-/* Views */
+/* Selection Toolbar */
+
+.selection-toolbar {
+    display: var(--flex-display);
+    align-items: var(--flex-center);
+    justify-content: var(--flex-center);
+}
+
+.toolbar-body {
+    width: 800px;
+    bottom: 120px;
+    opacity: var(--opacity-none);
+    transform: scale(var(--scale-0));
+    gap: var(--spacing-6);
+    padding: var(--spacing-8);
+    position: var(--absolute);
+    display: var(--flex-display);
+    background: var(--bg-toolbar);
+    align-items: var(--flex-center);
+    border-radius: var(--radius-xlg);
+    box-shadow: var(--shadow-toolbar);
+    border-bottom: var(--brdr-toolbar);
+    justify-content: var(--flex-between);
+    backdrop-filter: blur(18px) saturate(120%);
+    padding-block: var(--spacing-3) var(--spacing-3);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+}
+
+.selected-count {
+    flex: 1;
+    font-size: 25px;
+    color: var(--clr-plain);
+}
+
+.toolbar-nav {
+    margin-right: 20px;
+}
+
+.select-box {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+    top: 25px;
+    position: var(--absolute);
+    border: var(--brdr-check);
+    opacity: var(--opacity-base);
+    display: var(--grid-display);
+    place-items: var(--flex-center);
+    border-radius: var(--radius-sm);
+    margin-bottom: var(--spacing-2);
+}
+
+.text {
+    color: var(--accent);
+}
+
+.delete-btn .del-text {
+    color: var(--clr-danger);
+}
+
+.toolbar-nav button:hover .text {
+    width: var(--dimension-100);
+    height: var(--dimension-100);
+    opacity: var(--opacity-base);
+}
+
+.toolbar-nav .text {
+    width: var(--no-dimension);
+    height: var(--no-dimension);
+    opacity: var(--opacity-none);
+}
+
+/*  Views */
 
 .rows {
     z-index: 1;
@@ -544,7 +663,7 @@ search-input.note-search::part(container) {
 }
 
 .checked {
-    opacity: 1;
+    opacity: var(--opacity-base);
     transform: translateX(0);
 }
 
@@ -585,8 +704,8 @@ search-input.note-search::part(container) {
 }
 
 .visible {
-    transform: scale(1);
-    opacity: 1;
+    opacity: var(--opacity-base);
+    transform: scale(var(--scale-base));
 }
 
 /* Animations */

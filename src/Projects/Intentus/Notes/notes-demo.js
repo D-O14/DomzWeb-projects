@@ -32,5 +32,6 @@ cancelBtn.addEventListener("click", () => {
     dialog.close();
 });*/
 
+
 createIcons({ icons });
 initializeIcons(document);
