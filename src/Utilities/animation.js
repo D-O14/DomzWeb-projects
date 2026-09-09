@@ -1,5 +1,23 @@
 import { gsap } from "gsap";
 
+export function slideIn(elem) {
+    return elem.animate(
+        [
+            { transform: "translateY(-100%) scale(0)", opacity: 0, offset: 0 },
+            { transform: "translateY(2.5rem) scale(1)", opacity: 1, offset: 1 },
+       ]
+   )
+}
+
+export function slideOut(elem) {
+    return elem.animate(
+        [
+            { transform: "translateY(2.5rem) scale(1)", opacity: 1, offset: 0 },
+            { transform: "translateY(-100%) scale(0)", opacity: 0, offset: 1 },
+       ]
+   )
+}
+
 export function scaleIn(elem) {
     return elem.animate(
         [
@@ -85,15 +103,16 @@ export function rotate(elem) {
     });
 }
 
-export function slideIn(elem) {
-    gsap.fromTo(elem, {
-        y: `-100%`,
-        opacity: 0
-    }, {
-        y: `50%`,
-        opacity: 1,
-        ease: "bounce"
-    });
+export function slideInY(elem) {
+    gsap.fromTo(elem,
+    { y: `-100%`, opacity: 0 },
+    { y: 0, opacity: 1, stagger: .5, duration: .5, ease: "bounce" });
+}
+
+export function slideInX(elem) {
+    gsap.fromTo(elem,
+    { x: `-100%`, opacity: 0 },
+    { x: 0, opacity: 1, delay: .25, duration: 1.5 });
 }
 
 export function scaleOut(elem) {

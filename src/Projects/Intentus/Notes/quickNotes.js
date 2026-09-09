@@ -1,5 +1,5 @@
+import "./quickNotes.css";
 import "@components/toast/toast.js";
-import "./notes_app.css";
 import searchItems from "@utils/input";
 import { createIcons, icons } from "lucide";
 import { relativeTime } from "@utils/date.js";
@@ -11,12 +11,14 @@ import {
     sortUpdated, sortA_Z, sortZ_A, sortNewest, sortOldest, applyState, filterCreatedToday,
     filterCreatedYesterday, filterCreatedOlder, filterThisWeek
 } from "@utils/utilities.js";
+import { slideInY, slideInX } from "../../../Utilities/animation";
 
 // 10 Imports statements, 22 Imports, 20 In use, 17 Functions, 15 In use, 16 Personal Functions, 1 object, 2 Web Components, 1 CSS
 
 // 5 Arrays, 1 Set, 2 Objects, 1 function-created object, 3 raw Variables
 
 let pressTimer;
+let activeRow = null;
 let deletedNotes = [];
 let selectionMode = false;
 let selectedNotes = new Set();
@@ -132,26 +134,9 @@ cancelBtn.addEventListener("click", () => {
     closeDialog(dialog);
 });
 
-/*filterRow.addEventListener("click", event => {
-    const btn = event.target.closest("button[data-value]");
-    if (!btn) return;
-    selectFilter(btn.dataset.value);
-});
+filterBtn.addEventListener("click", () => { activeRow === "filter" ? toggleClass(filterRow) : setActiveRow("filter") });
 
-sortRow.addEventListener("click", event => {
-    const btn = event.target.closest("button[data-value]");
-    if (!btn) return;
-    selectSort(btn.dataset.value);
-});*/
-
-filterBtn.addEventListener("click", () => {
-    //renderChips(filterChips, filterTemplate, filterRow);
-    toggleClass(filterRow);
-});
-sortBtn.addEventListener("click", () => {
-    //renderChips(sortChips, sortTemplate, sortRow);
-    toggleClass(sortRow);
-});
+sortBtn.addEventListener("click", () => { activeRow === "sort" ? toggleClass(sortRow) : setActiveRow("sort") });
 
 searchComponent.addEventListener("search", (e) => { applySearch(e, notesInView, noteData, resultsTemplate) });
 
@@ -177,15 +162,9 @@ notes.addEventListener("pointerdown", (e) => {
     if (e.button !== 0) return;
     const card = e.target.closest(".note-card");
     if (!card) return;
-    const checkbox = card.querySelector(".checkbox");
-    const customCheckbox = card.querySelector(".custom-check");
     const noteId = card.dataset.id;
 
     pressTimer = setTimeout(() => {
-        customCheckbox.classList.add("checked");
-        customCheckbox.addEventListener("transitionend", () => {
-            checkbox.checked = true;
-        }, { once: true });
         enterSelectMode(noteId);
     }, 600);
 });
@@ -322,22 +301,22 @@ function selectUI(note, quickNote, mode) {
     const noteSelect = note.querySelector(".custom-check");
     if (mode) {
         noteSelect.classList.add("checked");
-        noteSelect.checked = true;
+        noteSelect.addEventListener("transsitionend", () => { noteCheck.checked = true });
     } else {
-        noteCheck.classList.remove("checked");
-        noteSelect.checked = false;
+        noteSelect.classList.remove("checked");
+        noteCheck.checked = false;
     }
-    selectedNotes.has(quickNote.id) ? noteSelect.checked = true : "";
+    selectedNotes.has(quickNote.id) ? noteCheck.checked = true : "";
 }
 
 function renderToolBar() {
     const selectionToolbar = document.querySelector(".toolbar-body");
-    const selectBox = selectionToolbar.querySelector(".select-box");
     const checkBox = selectionToolbar.querySelector(".check");
     const closeBtn = selectionToolbar.querySelector(".backBtn");
     const deleteBtn = selectionToolbar.querySelector(".delete-btn");
     const selectedCount = selectionToolbar.querySelector(".selected-count");
-    const size = selectedNotes.size; 
+    const size = selectedNotes.size;
+    console.log(checkBox);
     selectionMode ? selectionToolbar.classList.add("visible") :
         selectionToolbar.classList.remove("visible");
     switch (size) {
@@ -346,13 +325,19 @@ function renderToolBar() {
         case 1: selectedCount.textContent = `${ size } Note Selected`;
             break;
         default: selectedCount.textContent = `${ size } Notes Selected`
-
     }
     if (size === quickNotes.length) {
         checkBox.checked = true;
-        selectBox.addEventListener("click", () => { deselectAll() });
+        checkBox.addEventListener("click", () => {
+            deselectAll();
+            checkBox.checked = false;
+        });
     } else {
-        selectBox.addEventListener("click", () => { selectAll() });
+        checkBox.checked = false;
+        checkBox.addEventListener("click", () => {
+            selectAll();
+            checkBox.checked = true;
+        });
     };
     deleteBtn.addEventListener("click", () => { deleteNote() });
     closeBtn.addEventListener("click", () => { exitSelectMode() });
@@ -420,31 +405,27 @@ function undoDelete(items, obj, data) {
     renderNotes(data);
 };
 
-function toggleClass(item) { item.classList.toggle("reveal") };
+function toggleClass(item, dependency) { item.classList.toggle("reveal", dependency) };
 
 function renderChips(chips, template, row) {
+    row.replaceChildren();
     chips.forEach(chip => {
-        const clone = template.content.cloneNode(true);
+        const clone = document.importNode(template.content, true);
         const btn = clone.querySelector("button");
-        if (chip.className) {
-            btn.innerHTML =
-                `${ chip.label }
-        <span class="icon" data-icon="tick"></span>`;
-            btn.classList.add(chip.className)
-        } else {
-            btn.innerHTML =
-                `${ chip.label }
-        <span class="icon" data-icon=""></span>`;
-        }
+        const icon = clone.querySelector(".icon");
+        btn.innerHTML = `
+            ${ chip.label }
+            <span class="icon" data-icon="${ chip.className ? "tick" : "" }"></span>`;
+        chip.className ? btn.classList.add(chip.className) : "";
         btn.addEventListener("click", () => {
             chip.func();
             const activeBtn = row.querySelector(".use");
-            const activeIcon = activeBtn.querySelector(".icon");
-            const icon = btn.querySelector(".icon");
-            applyState(activeIcon, true, "");
-            applyState(icon, false, "tick");
-            activeBtn.classList.remove("use");
+            if (activeBtn && activeBtn !== btn) {
+                activeBtn.classList.remove("use");
+                activeBtn.querySelector(".icon").dataset.icon = "";
+            }
             btn.classList.add("use");
+            icon.dataset.icon = "tick";
             initializeIcons(btn);
         });
         row.append(clone);
@@ -452,9 +433,22 @@ function renderChips(chips, template, row) {
     initializeIcons(row);
 }
 
+function displayRows() {
+    toggleClass(filterRow, activeRow === "filter");
+    toggleClass(sortRow, activeRow === "sort");
+}
+
+function setActiveRow(row) {
+    activeRow = row;
+    displayRows();
+};
+
+
 updateDate();
+slideInX(".title");
 renderNotes(noteData);
 createIcons({ icons });
+slideInY(".header-btn");
 //undoDelete(quickNotes, deletedNotes, noteData);
 renderChips(sortChips, sortTemplate, sortRow);
 renderChips(filterChips, filterTemplate, filterRow);

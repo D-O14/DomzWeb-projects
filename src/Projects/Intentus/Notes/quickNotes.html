@@ -40,7 +40,7 @@
 
 <body>
     <header>
-        <h1>Quick Notes</h1>
+        <h1 class="title">Quick Notes</h1>
         <div class="header-content">
             <search-input class="note-search" placeholder="Search through your notes...">
                 <span slot="icon" class="icon search-icon">
@@ -48,22 +48,24 @@
                 </span>
             </search-input>
             <menu class="header-menu">
-                <button class="layoutBtn" aria-label="Layout Change Button">
+                <button id="layoutBtn" class="header-btn layoutBtn" aria-label="Layout Change Button">
                     <span class="icon" data-icon="dashboard"></span>
                 </button>
-                <button id="themeBtn" class="themeBtn" aria-label="Theme switch button">
+                <button id="themeBtn" class="header-btn themeBtn" aria-label="Theme switch button">
                     <span class="icon" data-icon="moon"></span>
                 </button>
-                <button id="filterBtn" class="filterBtn" data-trigger="filter" aria-label="Filter button">
+                <button id="filterBtn" class="header-btn filterBtn" data-trigger="filter" aria-label="Filter button">
                     <span class="icon" data-icon="filter"></span>
                 </button>
-                <button id="sortBtn" class="sortBtn" data-trigger="sort" aria-label="Sort button">
+                <button id="sortBtn" class="header-btn sortBtn" data-trigger="sort" aria-label="Sort button">
                     <span class="icon" data-icon="sort"></span>
                 </button>
             </menu>
         </div>
     </header>
+
     <toast-notif></toast-notif>
+
     <div class="selection-toolbar">
         <div class="toolbar-body">
             <button class="backBtn" aria-label="Back" id="exitSelectionBtn">
@@ -130,6 +132,7 @@
             </menu>
         </div>
     </div>
+
     <div class="rows">
         <menu class="filter-row row">
             <template id="filterTemplate">
@@ -146,6 +149,7 @@
             </template>
         </menu>
     </div>
+
     <main id="notes" class="notes">
         <template id="noteTemplate">
             <article class="note-card" id="noteCard" data-id="">
@@ -228,5 +232,5 @@
 
 </body>
 
-<script src="./notes_app.js" type="module" defer></script>
+<script src="./quickNotes.js" type="module" defer></script>
 </html>

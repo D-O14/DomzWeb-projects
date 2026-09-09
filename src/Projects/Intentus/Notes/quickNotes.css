@@ -590,7 +590,7 @@ menu {
     width: 1.25rem;
     height: 1.25rem;
     cursor: pointer;
-    top: 25px;
+    top: 20px;
     position: var(--absolute);
     border: var(--brdr-check);
     opacity: var(--opacity-base);
@@ -623,18 +623,17 @@ menu {
 /*  Views */
 
 .rows {
-    z-index: 1;
     top: 80px;
+    z-index: 1;
     left: 500px;
-    margin-top: 30px;
+    margin-top: 50px;
     gap: var(--spacing-4);
     position: var(--absolute);
-    display: var(--flex-display);
-    flex-direction: var(--flex-column);
+    display: var(--grid-display);
 }
 
-.filter-row,
-.sort-row {
+.row {
+    grid-area: 1/1;
     pointer-events: var(--none);
     opacity: var(--opacity-none);
     transform: translateY(-50px);
