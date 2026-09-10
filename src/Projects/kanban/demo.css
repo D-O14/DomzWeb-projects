@@ -1,0 +1,56 @@
+@import "@styles/base/base.css";
+
+:root {
+    --bg-kanban: hsl(168, 100%, 29%);
+    --bg-dropzone: hsla(0, 0%, 0%, 0.25);
+    --bg-kanban-btn: hsla(0, 0%, 0%, 0.1);
+}
+
+.kanban {
+    width: 750px;
+    padding: var(--spacing-7);
+    display: var(--flex-display);
+    background: var(--bg-kanban);
+    border-radius: var(--radius-xsm);
+}
+
+.kanban-column {
+    flex: 1;
+}
+
+.kanban-column:not(:last-child) {
+    margin-right: var(--spacing-7);
+}
+
+.kanban-title {
+    font-size: 30px;
+    color: var(--clr-plain);
+    margin-bottom: var(--spacing-5);
+}
+
+.kanban-input {
+    cursor: pointer;
+    background: var(--bg-plain);
+    border-radius: var(--radius-xsm);
+    padding: var(--spacing-3) var(--spacing-4);
+}
+
+.kanban-dropzone {
+    height: 10px;
+    transition: background .15s, height .15s;
+}
+
+.kanban-dropzone.active {
+    height: 20px;
+    background: var(--bg-dropzone);
+}
+
+.kanban-btn {
+    cursor: pointer;
+    color: var(--bg-plain);
+    border: var(--brdr-none);
+    width: var(--dimension-100);
+    border-radius: var(--radius-xsm);
+    background: var(--bg-kanban-btn);
+    padding: var(--spacing-3) var(--spacing-0);
+}

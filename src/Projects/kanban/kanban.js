@@ -2,7 +2,8 @@ import "./kanban.css";
 
 class KanbanAPI {
     static getItems(columnId) {
-        const column = read().find(column => column.id === columnId);
+        const data = read();
+        const column = data.find(column => column.id === columnId);
         if (!column) return [];
         return column.items;
     };
@@ -23,6 +24,10 @@ class KanbanAPI {
             for (const column of data) {
                 const item = column.items.find(item => item.id === itemId);
                 if (item) { return [item, column] };
+                console.log(item);
+                console.log(currentColumn);
+                console.log(column);
+                console.log(item);
             };
         })();
         if (!item) { throw new Error("Item Not Found!") };
@@ -195,15 +200,9 @@ class DropZone {
 }
 
 function read() {
-    const kanbanData = localStorage.getItem("kanban-data");
-    if (!kanbanData) {
-        return [
-            { id: 1, items: [] },
-            { id: 2, items: [] },
-            { id: 3, items: [] }
-        ];
-    };
-    return JSON.parse(kanbanData);
+    const kanbanData = JSON.parse(localStorage.getItem("kanban-data")) ||
+    [ { id: 1, items: [] }, { id: 2, items: [] }, { id: 3, items: [] } ];
+    return kanbanData;
 }
 
 function save(data) { localStorage.setItem("kanban-data", JSON.stringify(data)) };
