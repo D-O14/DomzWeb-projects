@@ -2,7 +2,9 @@ import { Search, CircleXIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import styles from "./SearchBar.module.css";
 
-export default function SearchBar({ items = [], icon = <Search />, property, placeholder="Search..." }) {
+//const [query, setQuery] = useState("");
+export default function SearchBar({ className = `${styles.input}`, event, items = [], icon = <Search />, property,
+    placeholder = "Search..." }) {
     useEffect(() => {
         function focusInput(e) {
             if ((e.ctrlKey || e.metaKey) && e.key === "/") {
@@ -28,24 +30,20 @@ export default function SearchBar({ items = [], icon = <Search />, property, pla
             });
         };
     });
-    const [query, setQuery] = useState("");
-    const results = items.filter(item => {
-        return item[property].toLowerCase().includes(query.toLowerCase().trim());
-    });
-
+    
     return (
         <>
-                <label htmlFor="searchInput">
-                    <div className={styles.input}>
-                        <span className={styles.searchIcon}>{icon}</span>
-                        <input type="search" id="searchInput" placeholder={placeholder} onChange={(e) => { setQuery(e.target.value) }}
-                            value={query} autoComplete="off" />
-                        <button className={styles.closeBtn} aria-label="clear search button">
-                            <span className="icon"><CircleXIcon /></span>
-                        </button>
-                        <kbd className={styles.shortcut}>ctrl + /</kbd>
-                    </div>
-                </label>
+            <label htmlFor="searchInput">
+                <div className={className}>
+                    <span className={styles.searchIcon}>{icon}</span>
+                    <input type="search" id="searchInput" placeholder={placeholder} onChange={(e) => {event(e)}}
+                     autoComplete="off" />
+                    <button className={styles.closeBtn} aria-label="clear search button">
+                        <span className="icon"><CircleXIcon /></span>
+                    </button>
+                    <kbd className={styles.shortcut}>ctrl + /</kbd>
+                </div>
+            </label>
         </>
     );
 };

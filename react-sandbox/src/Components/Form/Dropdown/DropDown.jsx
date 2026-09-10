@@ -1,12 +1,27 @@
 import { useEffect, useState } from "react";
 import styles from "./DropDown.module.css";
 import { ChevronDown } from "lucide-react"
+import SearchBar from "../Search/SearchBar";
 
-export default function DropDown({ ltr = true, options = [], property, selectText="Choose one" }) {
+export default function DropDown({ ltr = true, options = [], property, selectText="Choose one", searchable }) {
     const [text, setText] = useState(selectText);
     const [active, setActive] = useState(false);
     function dropDown() { !active ? setActive(true) : setActive(false) };
     function select(e) { setText(e.target.textContent) };
+    function renderOptions(options) {
+        const selectData = options.map((option, index) => {
+            return <li key={index} value={option[property] || option} onClick={(e) => { select(e) }}>
+                {option[property] || option} {option.icon ? option.icon : ""}
+            </li>
+        });
+        return selectData;
+    }
+    function searchItems(e) {
+        const results = options.filter(option => {
+           return option[property].toLowerCase().includes(e.target.value.toLowerCase().trim());
+        });
+        renderOptions(results);
+    };
     return (
         <>
             <div className={styles.view}>
@@ -17,11 +32,8 @@ export default function DropDown({ ltr = true, options = [], property, selectTex
                         <ChevronDown className={styles.chevron} />
                     </label>
                     <ul className={!active ? styles.select : `${ styles.select } ${ styles.drop }`}>
-                        {options.map((option, index) => {
-                            return <li key={index} value={option[property] || option} onClick={(e) => { select(e) }}>
-                                {option[property] || option} {option.icon ? option.icon : ""}
-                            </li>
-                        })}
+                        {searchable ? <SearchBar items={options} property={property} event={(e) => { searchItems(e) }} /> : ""}
+                        {renderOptions(options)}
                     </ul>
                 </div>
             </div>
