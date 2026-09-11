@@ -24,10 +24,6 @@ class KanbanAPI {
             for (const column of data) {
                 const item = column.items.find(item => item.id === itemId);
                 if (item) { return [item, column] };
-                console.log(item);
-                console.log(currentColumn);
-                console.log(column);
-                console.log(item);
             };
         })();
         if (!item) { throw new Error("Item Not Found!") };

@@ -1,6 +1,7 @@
 import "./expo.css";
 import { gsap } from "gsap";
 import { scaleBounce } from "@utils/animation";
+import { TicketSlash } from "lucide";
 
 //import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -44,12 +45,12 @@ timeline
     .to(".footer", { y: `0` }, 2.25)
     .fromTo(".button", { scale: 0, opacity: 0, rotate: 720 }, { scale: 1, rotate: 0, opacity: 1 }, 2.5);*/
 
-const box = document.querySelector(".box");
+/*const box = document.querySelector(".box");
 const button = document.querySelector("button");
 
 button.addEventListener("click", () => { scaleBounce(box) });
 
-/*const keyframes = [
+const keyframes = [
     {
         transform: "translateX(0)",
         offset: 0
@@ -81,3 +82,7 @@ const effect = new KeyframeEffect(box,
 
 const animation = new Animation(effect, document.timeline);
 setInterval(() => { animation.play() }, 7000);*/
+
+let fruits = ["apple", "orange", "banana", "coconut"];
+for (let fruit of fruits) { console.log(fruit) };
+fruits.forEach(fruit => { console.log(fruit) });

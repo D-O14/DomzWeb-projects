@@ -6,6 +6,16 @@
     <title>Kanban Board demo</title>
 </head>
 <body>
-    
+    <template class="kanban-template">
+        <div class="kanban-column">
+            <div class="kanban-title"></div>
+            <div class="kanban-items">
+                <div class="kanban-item" draggable="true">
+                    <div class="kanban-input" contenteditable></div>
+                </div>
+            </div>
+            <button class="kanban-btn" type="button">+ Add</button>
+        </div>
+    </template>
 </body>
 </html>
