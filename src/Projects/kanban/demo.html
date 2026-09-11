@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kanban Board demo</title>
 </head>
+
 <body>
-    <template class="kanban-template">
-        <div class="kanban-column">
-            <div class="kanban-title"></div>
-            <div class="kanban-items">
-                <div class="kanban-item" draggable="true">
-                    <div class="kanban-input" contenteditable></div>
-                </div>
+    <div class="kanban">
+        <template class="column-template">
+            <div class="kanban-column">
+                <div class="kanban-title"></div>
+                <div class="kanban-items"></div>
+                <button class="kanban-btn" type="button">+ Add</button>
             </div>
-            <button class="kanban-btn" type="button">+ Add</button>
-        </div>
-    </template>
+        </template>
+        <template class="item-template">
+            <div class="kanban-item" draggable="true">
+                <div class="kanban-input" contenteditable></div>
+            </div>
+        </template>
+    </div>
 </body>
+<script type="module" src="./demo.js" defer></script>
+
 </html>
