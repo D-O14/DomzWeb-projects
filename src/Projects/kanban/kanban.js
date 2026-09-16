@@ -1,206 +1,130 @@
 import "./kanban.css";
 
-class KanbanAPI {
-    static getItems(columnId) {
-        const data = read();
-        const column = data.find(column => column.id === columnId);
-        if (!column) return [];
-        return column.items;
-    };
+const kanbanData = JSON.parse(localStorage.getItem("kanban-data")) ||
+    [{ id: 1, title: "Not Started", items: [] }, { id: 2, title: "In Progress", items: [] }, { id: 3, title: "Completed", items: [] }];
 
-    static insertItem(columnId, content) {
-        const data = read();
-        const column = data.find(column => column.id === columnId);
-        const item = { id: Math.floor(Math.random() * 100000), content: content };
-        if (!column) { throw new Error("Column does not exist!") };
-        column.items.push(item);
-        save(data);
-        return item;
-    };
+const kanban = document.querySelector(".kanban");
+const itemTemplate = document.querySelector(".item-template");
+const columnTemplate = document.querySelector(".column-template");
+const dropzoneTemplate = document.querySelector(".dropzone-template");
 
-    static updateItem(itemId, newProps) {
-        const data = read();
-        const [item, currentColumn] = (() => {
-            for (const column of data) {
-                const item = column.items.find(item => item.id === itemId);
-                if (item) { return [item, column] };
-            };
-        })();
-        if (!item) { throw new Error("Item Not Found!") };
-        item.content = newProps.content === undefined ? item.content : newProps.content;
-        if (newProps.columnId !== undefined && newProps.position !== undefined) {
-            const target = data.find(column => column.id === newProps.columnId);
-            if (!target) { throw new Error("Target Column not found!") };
-            currentColumn.items.splice(currentColumn.items.indexOf(item), 1);
-            target.items.splice(newProps.position, 0, item);
-        };
-        save(data);
-    };
+function addItem(columnId, content) {
+    const column = kanbanData.find(column => column.id === columnId);
+    if (!column) { throw new Error("Column does not exist!") };
+    const item = { id: crypto.randomUUID(), content: content };
+    column.items.push(item);
+    save(kanbanData);
+    return item;
+};
 
-    static deleteItem(itemId) {
-        const data = read();
-        for (const column of data) {
+function updateItem(itemId, newProps) {
+    const [item, currentColumn] = (() => {
+        for (const column of kanbanData) {
             const item = column.items.find(item => item.id === itemId);
-            if (item) { column.items.splice(column.items.indexOf(item), 1) };
+            if (item) { return [item, column] };
         };
-        save(data);
-    }
-};
-
-class Kanban {
-    constructor(root) {
-        this.root = root;
-        Kanban.columns().forEach(column => {
-            const columnView = new Column(column.id, column.title);
-            this.root.appendChild(columnView.elements.root);
-        });
+    })();
+    if (!item) { throw new Error("Item Not Found!") };
+    item.content = newProps.content === undefined ? item.content : newProps.content;
+    if (newProps.columnId !== undefined && newProps.position !== undefined) {
+        const target = kanbanData.find(column => column.id === newProps.columnId);
+        if (!target) { throw new Error("Target Column not found!") }
+        currentColumn.items.splice(currentColumn.items.indexOf(item), 1);
+        target.items.splice(newProps.position, 0, item);
     };
-
-    static columns() {
-        return [
-            { id: 1, title: "Not Started" },
-            { id: 2, title: "In Progress" },
-            { id: 3, title: "Completed" },
-        ]
-    }
-};
-
-class Column {
-    constructor(id, title) {
-        const drop = DropZone.createDropZone();
-
-        this.elements = {};
-        this.elements.root = Column.createRoot();
-        this.elements.title = this.elements.root.querySelector(".kanban-title");
-        this.elements.items = this.elements.root.querySelector(".kanban-items");
-        this.elements.addItem = this.elements.root.querySelector(".kanban-btn");
-
-        this.elements.root.dataset.id = id;
-        this.elements.title.textContent = title;
-        this.elements.items.appendChild(drop);
-
-        this.elements.addItem.addEventListener("click", () => { 
-            const newItem = KanbanAPI.insertItem(id, "");
-            this.renderItem(newItem);
-        });
-
-        KanbanAPI.getItems(id).forEach(item => { this.renderItem(item) });
-    };
-
-    static createRoot() {
-        const range = document.createRange();
-        range.selectNode(document.body);
-        return range.createContextualFragment(
-            `<div class="kanban-column">
-                <div class="kanban-title"></div>
-                <div class="kanban-items"></div>
-                <button class="kanban-btn" type="button">+ Add</button>
-            </div>`
-        ).children[0];
-    };
-
-    renderItem(data) { 
-        const item = new Item(data.id, data.content);
-        this.elements.items.appendChild(item.elements.root);
-    };
-};
-
-class Item { 
-    constructor(id, content) {
-        const drop = DropZone.createDropZone();
-
-        this.elements = {};
-        this.elements.root = Item.createRoot();
-        this.elements.input = this.elements.root.querySelector(".kanban-input");
-
-        this.elements.root.dataset.id = id;
-        this.elements.input.textContent = content;
-        this.content = content;
-        this.elements.root.appendChild(drop);
-
-        this.elements.input.addEventListener("blur", () => { onBlur() });
-        this.elements.root.addEventListener("dblclick", () => { 
-            const check = confirm("Are you sure you want to delete this item?");
-            if (check) {
-                KanbanAPI.deleteItem(id);
-                this.elements.input.removeEventListener("blur", () => { onBlur() });
-                this.elements.root.parentElement.removeChild(this.elements.root);
-            };
-        });
-        this.elements.root.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text/plain", id) });
-        this.elements.input.addEventListener("drop", (e) => { e.preventDefault() });
-
-        const onBlur = () => { 
-            const newContent = this.elements.input.textContent.trim();
-            if (newContent === this.content) return;
-            this.content = newContent;
-            KanbanAPI.updateItem(id, { content: this.content });
-        };
-
-    };
-
-    static createRoot() {
-        const range = document.createRange();
-        range.selectNode(document.body);
-        return range.createContextualFragment(
-            `<div class="kanban-item" draggable="true">
-                <div class="kanban-input" contenteditable></div>
-            </div>`
-        ).children[0];
-    }
-};
-
-class DropZone {
-    static createDropZone() {
-        const range = document.createRange();
-        range.selectNode(document.body);
-        const dropZone = range.createContextualFragment(
-            `<div class="kanban-dropzone"></div>`
-        ).children[0];
-
-        dropZone.addEventListener("dragover", (e) => { 
-            e.preventDefault();
-            dropZone.classList.add("active");
-        });
-
-        dropZone.addEventListener("dragleave", () => {
-            dropZone.classList.remove("active");
-        });
-
-        dropZone.addEventListener("drop", (e) => {
-            e.preventDefault();
-            dropZone.classList.remove("active");
-
-            const columnElem = dropZone.closest(".kanban-column");
-            const columnId = Number(columnElem.dataset.id);
-            const dropInColumns = Array.from(columnElem.querySelectorAll(".kanban-dropzone"));
-            const droppedIndex = dropInColumns.indexOf(dropZone);
-            const itemId = Number(e.dataTransfer.getData("text/plain"));
-            const dropped = document.querySelector(`[data-id="${ itemId }"]`);
-            const insertAfter = dropZone.parentElement.classList.contains("kanban-item") ?
-                dropZone.parentElement : dropZone;
-            if (dropped.contains(dropZone)) return;
-            insertAfter.after(dropped);
-            KanbanAPI.updateItem(itemId, {
-                columnId, 
-                position: droppedIndex
-            })
-
-            console.log(dropInColumns);
-            console.log(droppedIndex);
-            console.log(dropped);
-        })
-
-        return dropZone;
-    }
+    save(kanbanData);
 }
 
-function read() {
-    const kanbanData = JSON.parse(localStorage.getItem("kanban-data")) ||
-    [ { id: 1, items: [] }, { id: 2, items: [] }, { id: 3, items: [] } ];
-    return kanbanData;
+function deleteItem(itemId) {
+    for (const column of kanbanData) {
+        const item = column.items.find(item => item.id === itemId);
+        if (item) { column.items.splice(column.items.indexOf(item), 1); break };
+    }
+    save(kanbanData);
+}
+
+function renderItem(itemData, columnElement) {
+    const clone = itemTemplate.content.cloneNode(true);
+    const item = clone.querySelector(".kanban-item");
+    const input = clone.querySelector(".kanban-input");
+    const dropzone = renderDropzone();
+    const id = itemData.id;
+
+    item.dataset.id = id;
+    item.appendChild(dropzone);
+    input.textContent = itemData.content;
+
+    item.addEventListener("dblclick", () => {
+        const check = confirm("Are you sure you want to delete this item?");
+        if (check) { deleteItem(id); item.remove() };
+    });
+
+    item.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text/plain", id) });
+
+    input.addEventListener("blur", () => {
+        const newContent = input.textContent.trim();
+        if (newContent === itemData.content) return;
+        itemData.content = newContent;
+        updateItem(id, { content: newContent });
+    });
+
+    input.addEventListener("drop", (e) => { e.preventDefault() });
+
+    columnElement.append(item);
+}
+
+function renderColumn(columnData) {
+    const clone = columnTemplate.content.cloneNode(true);
+    const column = clone.querySelector(".kanban-column");
+    const title = clone.querySelector(".kanban-title");
+    const items = clone.querySelector(".kanban-items");
+    const button = clone.querySelector(".kanban-btn");
+    const dropzone = renderDropzone();
+
+    items.appendChild(dropzone);
+    column.dataset.id = columnData.id;
+    title.textContent = columnData.title;
+
+    columnData.items.forEach(item => { renderItem(item, items) });
+    button.addEventListener("click", () => {
+        const newItem = addItem(columnData.id, "");
+        renderItem(newItem, items);
+    });
+    return column;
+}
+
+function renderDropzone() {
+    const clone = dropzoneTemplate.content.cloneNode(true);
+    const dropzone = clone.querySelector(".kanban-dropzone");
+    dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("active") });
+    dropzone.addEventListener("dragleave", () => { dropzone.classList.remove("active") });
+    dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        dropzone.classList.remove("active");
+        const column = dropzone.closest(".kanban-column");
+        const columnId = Number(column.dataset.id);
+        const itemId = e.dataTransfer.getData("text/plain");
+        const dropInColumns = column.querySelectorAll(".kanban-dropzone");
+        const droppedIndex = [...dropInColumns].indexOf(dropzone);
+        const dropped = document.querySelector(`[data-id="${ itemId }"]`);
+        const insertAfter = dropzone.parentElement.classList.contains("kanban-item") ?
+            dropzone.parentElement : dropzone;
+        if (dropped.contains(dropzone)) return;
+        insertAfter.after(dropped);
+
+        updateItem(itemId, { columnId: columnId, position: droppedIndex });
+    });
+    return dropzone;
+}
+
+function renderKanban(data) {
+    kanban.replaceChildren();
+    data.forEach(columnData => {
+        const column = renderColumn(columnData);
+        kanban.append(column);
+    });
 }
 
 function save(data) { localStorage.setItem("kanban-data", JSON.stringify(data)) };
 
-new Kanban(document.querySelector(".kanban"));
+renderKanban(kanbanData);

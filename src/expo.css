@@ -6,7 +6,8 @@
     user-select: none;
     box-sizing: border-box;
     -webkit-tap-highlight-color: transparent;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 :root {
@@ -18,6 +19,13 @@
     --brand-shade-4: hsl(from var(--brand-clr) h s  calc(l + 8) / .5);
     --brand-shade-5: hsl(from var(--brand-clr) h s  calc(l + 10) / .5);
     --brand-shade-6: hsl(from var(--brand-clr) h s  calc(l + 12) / .5);*/
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 img {
@@ -109,14 +117,13 @@ h1 {
     color: hsl(0, 0%, 100%);
 }
 
-.box{
+/*.box {
     width: 80px;
     height: 80px;
     border-radius: .5rem;
     transform-origin: top left;
-    /*transform: translateY(-40px) scale(0);*/
     background: linear-gradient(45deg, hsl(100, 100%, 50%), hsl(0, 0%, 100%, .85));
-}
+}*/
 
 .view {
     gap: 1rem;
@@ -127,12 +134,12 @@ h1 {
     justify-content: center;
 }
 
-.header{
+.header {
     height: 15dvh;
     background: hsl(0, 100%, 50%);
 }
 
-.links{
+.links {
     padding-top: 2rem;
     font-size: 40px;
     display: flex;
@@ -141,23 +148,53 @@ h1 {
     justify-content: space-around;
 }
 
-.content{
+.content {
     display: flex;
     flex-grow: 1;
     justify-content: space-between;
 }
 
-.sidebar{
+.sidebar {
     width: 15dvh;
     background: hsl(120, 100%, 25%);
 }
 
-.button{
+.button {
     align-self: center;
 }
 
-.footer{
+.footer {
     height: 15dvh;
     transform: translateY(100%);
     background: hsl(240, 100%, 50%);
 }
+
+.over {
+    opacity: .5;
+}
+
+.dropzone {
+    gap: 1rem;
+    width: 500px;
+    height: 300px;
+    position: relative;
+    /*display: grid;
+    align-content: center;
+    justify-content: center;
+    grid-template-rows: 80px 80px;*/
+    border: 8px dashed hsl(0, 0%, 0%);
+    grid-template-columns: repeat(2, 80px);
+}
+
+.draggable {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border-radius: .25rem;
+    background: hsl(0, 0%, 0%);
+}
+
+.box-1{background: blue;}
+.box-2{background: red;}
+.box-3{background: orange;}
+.box-4{background: yellow;}
