@@ -1,17 +1,3 @@
-@import "./tokens.css";
 @import "./base.css";
-@import "./resets.css";
-
-*,
-*::before,
-*::after {
-    user-select: none;
-    box-sizing: border-box;
-    padding: var(--no-spacing);
-    margin: var(--no-spacing);
-    transition: var(--trans-1);
-    font-family: var(--default-font);
-    -webkit-tap-highlight-color: transparent;
-}
 
 body{ font: var(--font-base); }

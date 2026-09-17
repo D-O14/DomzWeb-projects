@@ -1,4 +1,3 @@
-//import "../Components/toast/toast.js";
 import { initializeIcons } from "../Assets/Icons/icons";
 
 export function copy(text, toast) {

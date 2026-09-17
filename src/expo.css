@@ -26,6 +26,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: hsl(0, 0%, 0%);
 }
 
 img {
@@ -54,8 +55,8 @@ button {
     -webkit-backdrop-filter: blur(5px);
     /*background: hsla(250, 50%, 60%, 0.2);*/
     border: 1px solid transparent;
-    box-shadow: -4px -2px 5px hsla(0, 0%, 0%, 0.1);
-    /*border: 1px solid hsla(from var(--shade-1) h s calc(l + 2) / .5);*/
+    /*box-shadow: -4px -2px 5px hsla(0, 0%, 0%, 0.1);
+    border: 1px solid hsla(from var(--shade-1) h s calc(l + 2) / .5);*/
 }
 
 menu {
@@ -80,13 +81,7 @@ menu {
     background-size: 300% 300%;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background: 0% 50%; }
-}*/
-
-/*.linear{
+.linear{
     background: repeating-linear-gradient(to top right, var(--shade-1) 0px 40px, var(--shade-2) 45px 70px);
     background: linear-gradient(to bottom right, hsl(0, 100%, 50%), hsla(0, 100%, 50%, .5));
 }
@@ -117,13 +112,12 @@ h1 {
     color: hsl(0, 0%, 100%);
 }
 
-/*.box {
+.box {
     width: 80px;
     height: 80px;
     border-radius: .5rem;
-    transform-origin: top left;
     background: linear-gradient(45deg, hsl(100, 100%, 50%), hsl(0, 0%, 100%, .85));
-}*/
+}
 
 .view {
     gap: 1rem;
@@ -135,6 +129,7 @@ h1 {
 }
 
 .header {
+    width: 100%;
     height: 15dvh;
     background: hsl(0, 100%, 50%);
 }
@@ -146,6 +141,13 @@ h1 {
     height: 100%;
     color: hsl(0, 0%, 100%);
     justify-content: space-around;
+}
+
+.boxes{
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .content {

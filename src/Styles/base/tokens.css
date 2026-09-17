@@ -159,6 +159,9 @@
 
     --none: none;
     --auto: auto;
+    --normal: normal;
+    --inherit: inherit;
+    --initial: initial;
 
     /* Positions */
 
@@ -240,6 +243,11 @@
     --scroll-overflow: scroll;
     --visible-overflow: visible;
 
+    /* Visibility */
+
+    --hidden: hidden;
+    --visible: visible;
+
     /* Axis */
 
     /* Degrees */
@@ -258,11 +266,11 @@
 
     --end: end;
     --start: start;
-    --flex-end: flex-end;
-    --flex-center: center;
-    --flex-start: flex-start;
-    --flex-baseline: baseline;
-    --flex-around: space-around;
-    --flex-evenly: space-evenly;
-    --flex-between: space-between;
+    --align-end: flex-end;
+    --align-center: center;
+    --align-start: flex-start;
+    --align-baseline: baseline;
+    --align-around: space-around;
+    --align-evenly: space-evenly;
+    --align-between: space-between;
 }

@@ -4,8 +4,8 @@
 *::before,
 *::after,
 * {
-    user-select: none;
     box-sizing: border-box;
+    user-select: var(--none);
     margin: var(--spacing-0);
     padding: var(--spacing-0);
     font-family: var(--default-font);
@@ -31,6 +31,6 @@ body{
 
 @media (prefers-reduced-motion: no-preference) {
     @view-transition {
-        navigation: auto;
+        navigation: var(--auto);
     } 
 }

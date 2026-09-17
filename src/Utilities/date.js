@@ -2,9 +2,7 @@ import { validateInput, showError, clearError } from "./validation.js";
 
 export function initializeDate(input, rules) {
     const dateRules = rules[input.name] ?? {};
-    if (dateRules?.date?.future === false) {
-        input.max = new Date().toISOString().split("T")[0];
-    }
+    if (dateRules?.date?.future === false) { input.max = new Date().toISOString().split("T")[0] };
 }
 
 export function validateDate(input, rules) {
@@ -23,25 +21,6 @@ export function validateDate(input, rules) {
         clearError(input);
         return true;
     }
-}
-
-function isSameDay(date1, date2) {
-    const first = new Date(date1);
-    const second = new Date(date2);
-    return (
-        first.getFullYear() === second.getFullYear() &&
-        first.getMonth() === second.getMonth() &&
-        first.getDate() === second.getDate()
-    );
-}
-
-function isYesterday(date1, date2) {
-    const target = new Date(date1);
-    const now = new Date(date2);
-    const yesterday = new Date(now);
-    yesterday.setDate(now.getDate() - 1)
-    yesterday.setDate(yesterday.getDate() - 1);
-    return isSameDay(target, yesterday);
 }
 
 export function relativeTime(targetDate) {
@@ -79,9 +58,6 @@ export function formatTime(date) {
     return `${ hours }:${ minutes } ${ meridiem }`;
 };
 
-const date = new Date("2026-09-02T13:48:00");
-formatTime(date);
-
 export function formatDate(date) {
     const dateObj = new Date(date);
     return dateObj.toLocaleDateString('en-US', {
@@ -90,4 +66,25 @@ export function formatDate(date) {
         day: '2-digit',
         year: 'long'
     });
+}
+
+/* Helpers */
+
+function isSameDay(date1, date2) {
+    const first = new Date(date1);
+    const second = new Date(date2);
+    return (
+        first.getFullYear() === second.getFullYear() &&
+        first.getMonth() === second.getMonth() &&
+        first.getDate() === second.getDate()
+    );
+}
+
+function isYesterday(date1, date2) {
+    const target = new Date(date1);
+    const now = new Date(date2);
+    const yesterday = new Date(now);
+    yesterday.setDate(now.getDate() - 1)
+    yesterday.setDate(yesterday.getDate() - 1);
+    return isSameDay(target, yesterday);
 }

@@ -1,8 +1,64 @@
-@import "./tokens.css";
 @import "./resets.css";
+@import "@assets/designs/animations/animations.css";
 
-::-webkit-search-cancel-button {
-    appearance: none;
+html,
+:host {
+    tab-size: 4;
+    -o-tab-size: 4;
+    -moz-tab-size: 4;
+    -webkit-text-size-adjust: 100%;
+    font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+body {
+    text-wrap: balance;
+    line-height: 1.05em;
+    letter-spacing: .05em;
+    font-kerning: var(--normal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-optical-sizing: var(--auto);
+}
+
+img,
+audio,
+video{
+    display: var(--block-display);
+}
+
+img{
+    object-fit: cover;
+    aspect-ratio: 16/9;
+    height: var(--auto);
+    width: var(--dimension-100);
+}
+
+nav {
+    padding: var(--spacing-6) var(--spacing-8);
+
+    & ul {
+        gap: var(--spacing-3);
+        display: var(--flex-display);
+    }
+
+    & menu {
+        margin-left: var(--spacing-6);
+    }
+}
+
+a {
+    color: var(--inherit);
+    text-decoration: var(--none);
+}
+
+li {
+    list-style: var(--none);
+}
+
+menu {
+    gap: var(--spacing-4);
+    display: var(--flex-display);
 }
 
 svg {
@@ -14,30 +70,45 @@ svg {
 }
 
 button {
-    display: flex;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
     gap: var(--spacing-2);
-    align-items: center;
-    justify-content: center;
-    transform-origin: bottom;
+    position: var(--relative);
+    font-family: var(--inherit);
     touch-action: manipulation;
     font-size: var(--font-size);
+    display: var(--flex-display);
+    border: var(--brdr-transparent);
+    align-items: var(--align-center);
+    overflow: var(--hidden-overflow);
     font-weight: var(--weight-thick);
     border-radius: var(--radius-xxsm);
-    border: var(--brdr-transparent);
+    justify-content: var(--align-center);
+    transform-origin: var(--origin-bottom);
     padding: var(--spacing-2) var(--spacing-4);
 }
 
-/*input{
-    -webkit-text-fill-color: transparent;
-}*/
+button:hover {
+    filter: brightness(.75);
+    transform: scale(1.15) translateY(-5px);
+}
+
+button,
+select,
+[role="button"] {cursor: pointer;}
+
+input{-webkit-text-fill-color: transparent;}
+
+input::placeholder,
+textarea::placeholder,
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+    opacity: var(--opacity-base);
+    color: hsl(218, 11%, 65%);
+}
 
 input:not(input[type="checkbox"]) {
     height: 40px;
-    outline: none;
-    background: none;
+    outline: var(--none);
+    background: var(--none);
     border: var(--brdr-muted);
     border-radius: var(--radius-sm);
     padding: var(--spacing-2) var(--spacing-4);
@@ -45,39 +116,66 @@ input:not(input[type="checkbox"]) {
 
 input:not(input[type="checkbox"]),
 textarea {
-    width: 100%;
-    flex: 0 0 auto;
+    flex: 0 0 var(--auto);
+    width: var(--dimension-100);
 }
 
 textarea {
     height: 100px;
-    resize: none;
-    outline: none;
+    resize: var(--none);
+    outline: var(--none);
     border-radius: var(--radius-sm);
     padding: var(--spacing-3) var(--spacing-4);
 }
 
 button,
 input,
-textarea,
-select {
-    font: inherit;
+optgroup,
+select,
+textarea {
+    font: var(--inherit);
+    color: var(--inherit);
+    font-family: var(--inherit);
+    line-height: var(--inherit);
+    font-feature-settings: var(--inherit);
+    font-variation-settings: var(--inherit);
 }
 
 form {
-    width: 100%;
-    height: 100%;
-    display: flex;
     gap: var(--spacing-5);
-    flex-direction: column;
+    width: var(--dimension-100);
+    height: var(--dimension-100);
+    display: var(--flex-display);
+    flex-direction: var(--flex-column);
 }
 
 code,
 kbd {
     font-size: 12px;
-    font-weight: 500;
     line-height: 135%;
     background: var(--bg-code);
     text-transform: uppercase;
+    font-weight: var(--weight-medium);
     padding: var(--spacing-1) var(--spacing-2);
+}
+
+code,
+kbd,
+samp,
+pre {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+table {
+    text-indent: 0;
+    border-collapse: collapse;
+    border-color: var(--inherit);
+}
+
+::-webkit-search-cancel-button {
+    appearance: var(--none);
+}
+
+:disabled {
+    cursor: not-allowed;
 }

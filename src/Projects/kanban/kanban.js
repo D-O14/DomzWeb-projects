@@ -1,4 +1,5 @@
 import "./kanban.css";
+import { save } from "../../Utilities/database";
 
 const kanbanData = JSON.parse(localStorage.getItem("kanban-data")) ||
     [{ id: 1, title: "Not Started", items: [] }, { id: 2, title: "In Progress", items: [] }, { id: 3, title: "Completed", items: [] }];
@@ -13,7 +14,7 @@ function addItem(columnId, content) {
     if (!column) { throw new Error("Column does not exist!") };
     const item = { id: crypto.randomUUID(), content: content };
     column.items.push(item);
-    save(kanbanData);
+    save("kanban-data", kanbanData);
     return item;
 };
 
@@ -32,7 +33,7 @@ function updateItem(itemId, newProps) {
         currentColumn.items.splice(currentColumn.items.indexOf(item), 1);
         target.items.splice(newProps.position, 0, item);
     };
-    save(kanbanData);
+    save("kanban-data", kanbanData);
 }
 
 function deleteItem(itemId) {
@@ -40,7 +41,7 @@ function deleteItem(itemId) {
         const item = column.items.find(item => item.id === itemId);
         if (item) { column.items.splice(column.items.indexOf(item), 1); break };
     }
-    save(kanbanData);
+    save("kanban-data", kanbanData);
 }
 
 function renderItem(itemData, columnElement) {
@@ -124,7 +125,5 @@ function renderKanban(data) {
         kanban.append(column);
     });
 }
-
-function save(data) { localStorage.setItem("kanban-data", JSON.stringify(data)) };
 
 renderKanban(kanbanData);

@@ -1,8 +1,18 @@
 :root{
     --font-electrolize: "Electrolize";
     --font-notoSerif: "Noto Serif";
-    --font-libertinus: "Libertinus Math";
+    --font-libertinus: "Libertinus";
     --font-sanchez: "Sanchez";
+    --font-monsterrat: "Monsterrat";
+    --font-stardom: "Stardom";
+    --font-asimovian: "Asimovian";
+    --font-seriftxt: "Serif Txt";
+    --font-manrope: "Manrope";
+    --font-merriweather: "MerriWeather";
+    --font-paprika: "Paprika";
+    --font-poppins: "Poppins";
+    --font-playwrite: "Playwrite";
+    --font-roboto: "Roboto";
 }
 
 @font-face {
@@ -23,7 +33,7 @@
 
 @font-face {
     font-display: swap;
-    font-family: "Libertinus Math";
+    font-family: "Libertinus";
     font-style: var(--font-style);
     font-weight: var(--weight-thin) var(--weight-xxlg);
     src: url("@assets/fonts/Libertinus_Math/LibertinusMath-Regular.ttf") format("truetype");
@@ -47,7 +57,7 @@
 
 @font-face {
     font-display: swap;
-    font-family: "Stardom Complete";
+    font-family: "Stardom";
     font-style: var(--font-style);
     font-weight: var(--weight-thin) var(--weight-xxlg);
     src: url("@assets/fonts/Stardom_Complete/Fonts/WEB/fonts/Stardom-Regular.ttf") format("truetype");
@@ -63,7 +73,7 @@
 
 @font-face {
     font-display: swap;
-    font-family: "DM Serif Text";
+    font-family: "Serif Txt";
     font-style: var(--font-style);
     font-weight: var(--weight-thin) var(--weight-xxlg);
     src: url("@assets/fonts/DM_Serif_Text/DMSerifText-Regular.ttf") format("truetype");
@@ -103,7 +113,7 @@
 
 @font-face {
     font-display: swap;
-    font-family: "Playwrite NZ";
+    font-family: "Playwrite";
     font-style: var(--font-style);
     font-weight: var(--weight-thin) var(--weight-xxlg);
     src: url("@assets/fonts/Playwrite_NZ_Basic/PlaywriteNZBasic-VariableFont_wght.ttf") format("truetype");

@@ -22,7 +22,7 @@
     }
 }
 
-@keyframes scale-easeOutBounce {
+@keyframes scaleBounce {
     0% {
         transform: scale(1);
     }
@@ -65,7 +65,7 @@
 
 }
 
-@keyframes position-easeOutBounce {
+@keyframes positionBounce {
     0% {
         transform: translateX(0%);
     }

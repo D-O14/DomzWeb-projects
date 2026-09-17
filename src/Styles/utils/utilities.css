@@ -1,36 +1,9 @@
-@import "../base/tokens.css";
-@import "../base/resets.css";
 @import "../base/base.css";
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    transition: var(trans-1);
-    padding: var(--no-spacing);
-    margin: var(--no-spacing);
-    font-family: var(--default-font);
-    -webkit-tap-highlight-color: transparent;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-kerning: normal;
-    text-rendering: optimizeLegibility;
-    font-optical-sizing: auto;
-    text-wrap: balance;
-    font-weight: var(--fw-base);
-    font-size: var(--step-0);
-    line-height: 1.05em;
-    letter-spacing: .05em;
-}
+/* Utility Variables */
 
 :root {
-    --light: hsl(0, 0%, 100%);
+    /*--light: hsl(0, 0%, 100%);
     --bg-dark: hsl(0, 0%, 0%);
     --bg-primary: hsl(210, 87%, 50%);
     --bg-secondary: hsl(210, 10%, 40%);
@@ -60,12 +33,6 @@ body {
     --radius-7: 20px;
     --radius-8: 24px;
 
-    --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
-    --step-1: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
-    --step-2: clamp(1.5rem, 1.3rem + 1.2vw, 2rem);
-    --step-3: clamp(2rem, 1.6rem + 2vw, 2.75rem);
-    --step-4: clamp(2.5rem, 2rem + 3vw, 3.5rem);
-
     --fw-thin: 100;
     --fw-lighter: 200;
     --fw-light: 300;
@@ -76,7 +43,13 @@ body {
     --fw-heavy: 800;
     --fw-lg: 900;
 
-    --border-base: none;
+    --border-base: none;*/
+
+    --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+    --step-1: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);
+    --step-2: clamp(1.5rem, 1.3rem + 1.2vw, 2rem);
+    --step-3: clamp(2rem, 1.6rem + 2vw, 2.75rem);
+    --step-4: clamp(2.5rem, 2rem + 3vw, 3.5rem);
 
     --box-width: 25vmax;
     --box-height: 25vmin;
@@ -85,67 +58,508 @@ body {
 
 }
 
-button {
-    font-family: inherit;
-    border: var(--border-base);
-    background: none;
-    padding: var(--padding-xsm);
-    cursor: pointer;
+/* Flex Properties */
+
+.grow {
+    flex: 1;
 }
 
-button:not(menu > button):hover {
-    filter: brightness(.75);
-    transform: scale(1.15) translateY(-5px);
+.shrink {
+    flex: 0;
 }
 
-a {
-    text-decoration: none;
-    color: var(--txt-color);
+/* Visibilty */
+
+.hidden {
+    visibility: var(--hidden);
 }
 
-li {
-    list-style: none;
+.visible {
+    visibility: var(--visible);
 }
 
-menu {
-    display: flex;
-    gap: .5rem;
+/* Overflow Visibility */
+
+.overflow {
+    overflow: var(--visible-overflow);
 }
 
-nav {
-    padding: 1.5rem 2rem;
-
-    & ul {
-        display: flex;
-        gap: .75rem;
-    }
-
-    & menu {
-        margin-left: 1.5rem;
-    }
+.no-overflow {
+    overflow: var(--hidden-overflow);
 }
 
-.btn,
-.btn-prime {
-    border-radius: var(--radius-1);
+.scroll-overflow {
+    overflow: var(--scroll-overflow);
+}
+
+.auto-overflow {
+    overflow: var(--auto-overflow);
+}
+
+/* Positions */
+
+.p-relative {
+    position: var(--relative);
+}
+
+.p-absolute {
+    position: var(--absolute);
+}
+
+.p-sticky {
+    position: var(--sticky);
+}
+
+.p-fixed {
+    position: var(--fixed);
+}
+
+/* Displays */
+
+.d-block {
+    display: var(--block-display);
+}
+
+.d-flex {
+    display: var(--flex-display);
+}
+
+.d-grid {
+    display: var(--grid-display);
+}
+
+.d-inline {
+    display: var(--inline-display);
+}
+
+.d-inline-block {
+    display: var(--inline-block-display);
+}
+
+/* Resize Capabilities */
+
+.resize {
+    resize: both;
+}
+
+.resizeY {
+    resize: vertical;
+}
+
+.resizeX {
+    resize: horizontal;
+}
+
+.no-resize {
+    resize: var(--none);
+}
+
+/* Borders */
+
+.bordered-sm {
+    border: var(--brdr-sm);
+}
+
+.bordered-md {
+    border: var(--brdr-md);
+}
+
+.bordered-lg {
+    border: var(--brdr-lg);
+}
+
+.border-muted {
+    border: var(--brdr-muted);
+}
+
+.border-transparent {
+    border: var(--brdr-transparent);
+}
+
+/* Font Weights */
+
+.fw-100 {
+    font-weight: 100;
+}
+
+.fw-200 {
+    font-weight: 200;
+}
+
+.fw-300 {
+    font-weight: 300;
+}
+
+.fw-400 {
+    font-weight: var(--weight-base);
+}
+
+.fw-500 {
+    font-weight: var(--weight-medium);
+}
+
+.fw-600 {
+    font-weight: var(--weight-thick);
+}
+
+.fw-700 {
+    font-weight: var(--weight-bold);
+}
+
+.fw-800 {
+    font-weight: 800;
+}
+
+.fw-900 {
+    font-weight: 900;
+}
+
+/* Border Radius */
+
+.round-sm {
+    border-radius: var(--radius-sm);
+}
+
+.round-md {
+    border-radius: var(--radius-md);
+}
+
+.round-lg {
+    border-radius: var(--radius-lg);
+}
+
+.no-round {
+    border-radius: var(--radius-none);
+}
+
+.all-round {
+    border-radius: var(--radius-xlg);
+}
+
+/* Transform-origins */
+
+.top {
+    transform-origin: var(--origin-top);
+}
+
+.btm {
+    transform-origin: var(--origin-bottom);
+}
+
+.lft {
+    transform-origin: var(--origin-left);
+}
+
+.rght {
+    transform-origin: var(--origin-right);
+}
+
+.top-lft {
+    transform-origin: var(--origin-top-left);
+}
+
+.top-rght {
+    transform-origin: var(--origin-top-right);
+}
+
+.btm-rght {
+    transform-origin: var(--origin-bottom-right);
+}
+
+.btm-left {
+    transform-origin: var(--origin-bottom-left);
+}
+
+/* Padding and Margins */
+
+.pd-0,
+.pdr-0,
+.pdl-0,
+.pdb-0,
+.pdt-0 {
+    padding: var(--spacing-0);
+}
+
+/*.mgr-0,
+.mgl-0,
+.mgb-0,
+.mgt-0,
+.mg-0{margin: var(--spacing-0);}
+
+.mgr-1,
+.mgl-1,
+.mgb-1,
+.mgt-1,
+.mg-1{margin: var(--spacing-1);}
+
+.mgr-2,
+.mgl-2,
+.mgb-2,
+.mgt-2,
+.mg-2{margin: var(--spacing-2)}*/
+
+.pd-1,
+.pdr-1,
+.pdl-1,
+.pdb-1,
+.pdt-1 {
+    padding: var(--spacing-1);
+}
+
+.pd-2,
+.pdr-2,
+.pdl-2,
+.pdb-2,
+.pdt-2 {
+    padding: var(--spacing-2);
+}
+
+.pd-3,
+.pdr-3,
+.pdl-3,
+.pdb-3,
+.pdt-3,
+.mgr-3,
+.mgl-3,
+.mgb-3,
+.mgt-3,
+.mg-3 {
+    padding: var(--spacing-3);
+}
+
+.pd-4,
+.pdr-4,
+.pdl-4,
+.pdb-4,
+.pdt-4,
+.mgr-4,
+.mgl-4,
+.mgb-4,
+.mgt-4,
+.mg-4 {
+    padding: var(--spacing-4);
+}
+
+.pd-5,
+.pdr-5,
+.pdl-5,
+.pdb-5,
+.pdt-5,
+.mgr-5,
+.mgl-5,
+.mgb-5,
+.mgt-5,
+.mg-5 {
+    padding: var(--spacing-5);
+}
+
+.pd-6,
+.pdr-6,
+.pdl-6,
+.pdb-6,
+.pdt-6,
+.mgr-6,
+.mgl-6,
+.mgb-6,
+.mgt-6,
+.mg-6 {
+    padding: var(--spacing-6);
+}
+
+.pd-7,
+.pdr-07,
+.pdl-07,
+.pdb-07,
+.pdt-07,
+.mgr-07,
+.mgl-07,
+.mgb-07,
+.mgt-07,
+.mg-7 {
+    padding: var(--spacing-7);
+}
+
+.pd-8,
+.pdr-8,
+.pdl-8,
+.pdb-8,
+.pdt-8,
+.mgr-8,
+.mgl-8,
+.mgb-8,
+.mgt-8,
+.mg-8 {
+    padding: var(--spacing-8);
+}
+
+.pd-9,
+.pdr-9,
+.pdl-9,
+.pdb-9,
+.pdt-9,
+.mgr-9,
+.mgl-9,
+.mgb-9,
+.mgt-9,
+.mg-9 {
+    padding: var(--spacing-9);
+}
+
+.pd-10,
+.pdr-10,
+.pdl-10,
+.pdb-10,
+.pdt-10,
+.mgr-10,
+.mgl-10,
+.mgb-10,
+.mgt-10,
+.mg-10 {
+    padding: var(--spacing-10);
+}
+
+.pd-11,
+.pdr-11,
+.pdl-11,
+.pdb-11,
+.pdt-11,
+.mgr-11,
+.mgl-11,
+.mgb-11,
+.mgt-11,
+.mg-11 {
+    padding: var(--spacing-11);
+}
+
+.pd-12,
+.pdr-12,
+.pdl-12,
+.pdb-12,
+.pdt-12,
+.mgr-12,
+.mgl-12,
+.mgb-12,
+.mgt-12,
+.mg-12 {
+    padding: var(--spacing-12);
+}
+
+.pd-13,
+.pdr-13,
+.pdl-13,
+.pdb-13,
+.pdt-13,
+.mgr-13,
+.mgl-13,
+.mgb-13,
+.mgt-13,
+.mg-13 {
+    padding: var(--spacing-13);
+}
+
+.pd-14,
+.pdr-14,
+.pdl-14,
+.pdb-14,
+.pdt-14,
+.mgr-14,
+.mgl-14,
+.mgb-14,
+.mgt-14,
+.mg-14 {
+    padding: var(--spacing-14);
+}
+
+.pd-15,
+.pdr-15,
+.pdl-15,
+.pdb-15,
+.pdt-15,
+.mgr-15,
+.mgl-15,
+.mgb-15,
+.mgt-15,
+.mg-15 {
+    padding: var(--spacing-15);
+}
+
+.pd-16,
+.pdr-16,
+.pdl-16,
+.pdb-16,
+.pdt-16,
+.mgr-16,
+.mgl-16,
+.mgb-16,
+.mgt-16,
+.mg-16 {
+    padding: var(--spacing-16);
+}
+
+/* Text Transforms*/
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+.capitalize {
+    text-transform: capitalize;
+}
+
+.italic {
+    text-transform: italic;
+}
+
+/* Font Families */
+
+.electrolize {
+    font-family: var(--font-electrolize);
+}
+
+.noto {
+    font-family: var(--font-notoSerif);
+}
+
+.libertinus {
+    font-family: var(--font-libertinus);
+}
+
+.sanchez {
+    font-family: var(--font-sanchez);
+}
+
+.monsterrat {
+    font-family: var(--font-monsterrat);
+}
+
+/* Animations */
+
+.animate\:scaleBounce {
+    animation: scaleBounce 1s ease-in-out;
+}
+
+/*.btn-prime {
     color: var(--txt-muted);
-    font-weight: var(--fw-base);
-    box-shadow: var(--shadow-base);
+    font-weight: var(--weight-thick);
+    border-radius: var(--radius-sm);
 }
 
-.btn-primary {
-    background: var(--bg-primary);
-    color: var(--txt-white);
+.btn-primary,
+.btn-danger,
+.btn-secondary {
+    color: var(--txt-plain);
 }
 
-.btn-danger {
-    background: var(--bg-danger);
-    color: var(--txt-white);
-}
+.btn-primary {background: var(--bg-primary);}
+
+.btn-danger {background: var(--bg-danger);}
 
 .btn-secondary {
     background: var(--bg-secondary);
-    color: var(--txt-white);
 
     &:hover {
         filter: brightness(1.25);
@@ -153,28 +567,24 @@ nav {
 }
 
 .box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: var(--box-width);
     height: var(--box-height);
+    border: var(--brdr-none);
     box-shadow: var(--shadow-1);
-    border: var(--border-base);
-    border-radius: var(--radius-3);
+    display: var(--flex-display);
+    border-radius: var(--radius-sm);
+    align-items: var(--align-center);
+    justify-content: var(--align-center);
 }
 
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--container-bg-light);
+    border: var(--brdr-none);
+    display: var(--flex-display);
     width: var(--container-width);
     height: var(--container-height);
+    align-items: var(--align-center);
     box-shadow: var(--shadow-1);
-    border: var(--border-base);
-    border-radius: var(--radius-3);
-
-    &::after {
-        content: "This is a container";
-    }
-}
+    border-radius: var(--radius-sm);
+    justify-content: var(--align-center);
+    background: var(--container-bg-light);
+}*/

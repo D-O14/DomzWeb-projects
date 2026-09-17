@@ -54,42 +54,31 @@ export function filterCreatedToday(items, variable, render, object) {
         return item.createdAt.slice(0, 10) === variable;
     });
     render({ ...object, items: createdToday });
-}
+};
 
 export function filterCreatedYesterday(items, variable, render, object) {
     const createdYesterday = items.filter(item => {
         return item.createdAt.slice(0, 10) === variable.toISOString().slice(0, 10);
     });
     render({ ...object, items: createdYesterday });
-}
+};
 
 export function filterCreatedOlder(items, variable, render, object) {
     const createdOlder = items.filter(item => {
         return item.createdAt.slice(0, 10) > variable;
     });
     render({ ...object, items: createdOlder });
-}
-
-export function isThisWeek(date) {
-    const target = new Date(date);
-    const now = new Date();
-    const startOfWeek = new Date(now);
-    startOfWeek.setDate(now.getDate() - now.getDay());
-    startOfWeek.setHours(0, 0, 0, 0);
-    const nextWeek = new Date(startOfWeek);
-    nextWeek.setDate(startOfWeek.getDate() + 7);
-    return (target >= startOfWeek && target < nextWeek);
-}
+};
 
 export function filterThisWeek(items, render, object) {
     const createdThisWeek = items.filter(item => { return isThisWeek(item.createdAt) });
     render({ ...object, items: createdThisWeek });
-}
+};
 
 export function sortUpdated(data, property, render, object) {
     const newlyUpdated = data.sort((a, b) => { return new Date(b[property] - new Date(a[property])) });
     render({ ...object, items: newlyUpdated });
-}
+};
 
 export function sortA_Z(data, property, render, object) {
     const A_Z = data.sort((a, b) => { return a[property].localeCompare(b[property]) });
@@ -109,4 +98,36 @@ export function sortNewest(data, property, render, object) {
 export function sortOldest(data, property, render, object) {
     const oldest = data.sort((a, b) => { return new Date(a[property]) - new Date(b[property]) });
     render({ ...object, items: oldest });
+};
+
+export function enableDrag(root) {
+    const dragItems = root.querySelectorAll("[draggable='true']");
+    dragItems.forEach(draggable => {
+        draggable.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text/plain", draggable.id) });
+        draggable.addEventListener("dragover", (e) => { e.preventDefault() });
+        draggable.addEventListener("dragleave", (e) => { e.preventDefault() });
+    });
+};
+
+export function enableDrop(dropzone) {
+    dropzone.addEventListener("dragover", (e) => { e.preventDefault() });
+    dropzone.addEventListener("drop", (e) => {
+        e.preventDefault();
+        const droppedId = e.dataTransfer.getData("text/plain");
+        const dropped = document.getElementById(droppedId);
+        dropzone.appendChild(dropped);
+    });
+};
+
+/* Helpers */
+
+function isThisWeek(date) {
+    const target = new Date(date);
+    const now = new Date();
+    const startOfWeek = new Date(now);
+    startOfWeek.setDate(now.getDate() - now.getDay());
+    startOfWeek.setHours(0, 0, 0, 0);
+    const nextWeek = new Date(startOfWeek);
+    nextWeek.setDate(startOfWeek.getDate() + 7);
+    return (target >= startOfWeek && target < nextWeek);
 };
