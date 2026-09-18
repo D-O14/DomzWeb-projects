@@ -8,18 +8,12 @@
     user-select: var(--none);
     margin: var(--spacing-0);
     padding: var(--spacing-0);
-    font-family: var(--default-font);
     -webkit-tap-highlight-color: transparent;
     transition: all var(--duration-fast) var(--ease) allow-discrete;
 }
 
-html{scroll-behavior: smooth;}
-
-body{
-    font: var(--font-base);
-}
-
 @media (prefers-reduced-motion: reduce) {
+
     *::before,
     *::after,
     * {
@@ -32,5 +26,5 @@ body{
 @media (prefers-reduced-motion: no-preference) {
     @view-transition {
         navigation: var(--auto);
-    } 
+    }
 }

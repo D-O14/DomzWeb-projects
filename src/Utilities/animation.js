@@ -1,22 +1,9 @@
 import { gsap } from "gsap";
 
-const animations = [];
-const webAnimations = {
-    slideIn: slideIn,
-    slideOut: slideOut,
-    scaleIn: scaleIn,
-    scaleBounce: scaleBounce,
-    bounce: bounce,
-    scaleRotate: scaleRotate,
-    ripples: ripples
-};
-const GSAPAnimations = {
-    rotate: rotate,
-    slideInY: slideInY,
-    slideInX: slideInX,
-    stagger: stagger
-};
-animations.push(webAnimations, GSAPAnimations);
+export const animations = [
+    { bounce, ripples, scaleIn, slideIn, slideOut, scaleRotate, scaleBounce }, // WAAPI
+    { rotate, slideInY, slideInX, stagger } // GSAP
+];
 
 export function slideIn(elem) {
     return elem.animate(
@@ -227,11 +214,6 @@ export function stagger(elem) {
         { x: `-100%`, opacity: 0, stagger: .5, delay: .25, duration: 1.25 }
     );
 }
-
-/*function animation(root) {
-    const animated = root.querySelectorAll("[animation]");
-    animated.forEach(animated => { animated });
-}*/
 
 /*const timeline = gsap.timeline({ defaults: { duration: 1 } });
 timeline

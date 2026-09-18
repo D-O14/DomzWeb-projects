@@ -542,6 +542,18 @@
     animation: scaleBounce 1s ease-in-out;
 }
 
+.animate\:scaleIn {
+    animation: scaleIn 1s ease-in-out;
+}
+
+.animate\:scaleOut {
+    animation: scaleOut 1s ease-in-out;
+}
+
+.animate\:slideIn {
+    animation: slideIn 1s ease-in-out;
+}
+
 /*.btn-prime {
     color: var(--txt-muted);
     font-weight: var(--weight-thick);

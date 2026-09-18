@@ -1,33 +1,36 @@
 @import "./resets.css";
 @import "@assets/designs/animations/animations.css";
 
+html {
+    scroll-behavior: smooth;
+}
+
 html,
 :host {
     tab-size: 4;
-    -o-tab-size: 4;
-    -moz-tab-size: 4;
+    text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 body {
+    font: var(--font-base);
+    font-family: var(--default-font);
     text-wrap: balance;
     line-height: 1.05em;
     letter-spacing: .05em;
     font-kerning: var(--normal);
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-optical-sizing: var(--auto);
 }
 
 img,
 audio,
-video{
+video {
     display: var(--block-display);
 }
 
-img{
+img {
     object-fit: cover;
     aspect-ratio: 16/9;
     height: var(--auto);
@@ -72,7 +75,6 @@ svg {
 button {
     gap: var(--spacing-2);
     position: var(--relative);
-    font-family: var(--inherit);
     touch-action: manipulation;
     font-size: var(--font-size);
     display: var(--flex-display);
@@ -86,16 +88,20 @@ button {
     padding: var(--spacing-2) var(--spacing-4);
 }
 
-button:hover {
+/*button:hover {
     filter: brightness(.75);
     transform: scale(1.15) translateY(-5px);
-}
+}*/
 
 button,
 select,
-[role="button"] {cursor: pointer;}
+[role="button"] {
+    cursor: pointer;
+}
 
-input{-webkit-text-fill-color: transparent;}
+/*input {
+    -webkit-text-fill-color: transparent;
+}*/
 
 input::placeholder,
 textarea::placeholder,
@@ -135,8 +141,6 @@ select,
 textarea {
     font: var(--inherit);
     color: var(--inherit);
-    font-family: var(--inherit);
-    line-height: var(--inherit);
     font-feature-settings: var(--inherit);
     font-variation-settings: var(--inherit);
 }

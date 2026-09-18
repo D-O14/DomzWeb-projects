@@ -8,10 +8,10 @@ import { initializeIcons } from "@assets/Icons/icons.js";
 import "@components/form elements/input/search/searchInput";
 import { closeDialog, createRipple } from "@utils/button.js";
 import {
-    sortUpdated, sortA_Z, sortZ_A, sortNewest, sortOldest, applyState, filterCreatedToday,
+    sortUpdated, sortA_Z, sortZ_A, sortNewest, sortOldest, filterCreatedToday,
     filterCreatedYesterday, filterCreatedOlder, filterThisWeek
 } from "@utils/utilities.js";
-import { slideInY, slideInX } from "../../../Utilities/animation";
+//import { slideInY, slideInX } from "@utils/animation";
 
 // 10 Imports statements, 22 Imports, 20 In use, 17 Functions, 15 In use, 16 Personal Functions, 1 object, 2 Web Components, 1 CSS
 
@@ -445,10 +445,10 @@ function setActiveRow(row) {
 
 
 updateDate();
-slideInX(".title");
+//slideInX(".title");
 renderNotes(noteData);
 createIcons({ icons });
-slideInY(".header-btn");
+//slideInY(".header-btn");
 //undoDelete(quickNotes, deletedNotes, noteData);
 renderChips(sortChips, sortTemplate, sortRow);
 renderChips(filterChips, filterTemplate, filterRow);

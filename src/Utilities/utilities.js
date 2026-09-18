@@ -44,10 +44,7 @@ export function format(input, formatRules) {
     }
 };
 
-export function applyState(icon, needsValue, value) {
-    icon.dataset.icon = value;
-    if (needsValue) { icon.textContent = value };
-};
+/* Filter Functions */
 
 export function filterCreatedToday(items, variable, render, object) {
     const createdToday = items.filter(item => {
@@ -75,6 +72,8 @@ export function filterThisWeek(items, render, object) {
     render({ ...object, items: createdThisWeek });
 };
 
+/* Sort Functions */
+
 export function sortUpdated(data, property, render, object) {
     const newlyUpdated = data.sort((a, b) => { return new Date(b[property] - new Date(a[property])) });
     render({ ...object, items: newlyUpdated });
@@ -98,25 +97,6 @@ export function sortNewest(data, property, render, object) {
 export function sortOldest(data, property, render, object) {
     const oldest = data.sort((a, b) => { return new Date(a[property]) - new Date(b[property]) });
     render({ ...object, items: oldest });
-};
-
-export function enableDrag(root) {
-    const dragItems = root.querySelectorAll("[draggable='true']");
-    dragItems.forEach(draggable => {
-        draggable.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text/plain", draggable.id) });
-        draggable.addEventListener("dragover", (e) => { e.preventDefault() });
-        draggable.addEventListener("dragleave", (e) => { e.preventDefault() });
-    });
-};
-
-export function enableDrop(dropzone) {
-    dropzone.addEventListener("dragover", (e) => { e.preventDefault() });
-    dropzone.addEventListener("drop", (e) => {
-        e.preventDefault();
-        const droppedId = e.dataTransfer.getData("text/plain");
-        const dropped = document.getElementById(droppedId);
-        dropzone.appendChild(dropped);
-    });
 };
 
 /* Helpers */

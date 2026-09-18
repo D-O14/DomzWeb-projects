@@ -1,5 +1,5 @@
 import "./kanban.css";
-import { save } from "../../Utilities/database";
+import { save } from "@utils/database";
 
 const kanbanData = JSON.parse(localStorage.getItem("kanban-data")) ||
     [{ id: 1, title: "Not Started", items: [] }, { id: 2, title: "In Progress", items: [] }, { id: 3, title: "Completed", items: [] }];
