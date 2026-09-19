@@ -23,14 +23,14 @@ export function switchPositon(e) {
     const dragged = getDraggedElement(e);
     const target = e.currentTarget;
     if (dragged === target) return;
-    const targetLeft = target.style.left;
-    const targetTop = target.style.top;
-    const draggedLeft = dragged.style.left;
-    const draggedTop = dragged.style.top;
-    target.style.left = draggedLeft;
-    target.style.top = draggedTop;
-    dragged.style.left = targetLeft;
-    dragged.style.top = targetTop;
+    const targetPositions = { left: target.style.left, top: target.style.top };
+    const draggedPositions = { left: dragged.style.left, top: dragged.style.top };
+    target.style.left = draggedPositions.left;
+    target.style.top = draggedPositions.top;
+    dragged.style.left = targetPositions.left;
+    dragged.style.top = targetPositions.top;
+    savePosition(dragged, draggedPositions);
+    savePosition(target, targetPositions);
 };
 
 export function changeOnDrop(e) {
@@ -38,14 +38,14 @@ export function changeOnDrop(e) {
     const dropzone = e.currentTarget;
     const dropped = getDraggedElement(e);
     const rect = dropzone.getBoundingClientRect();
-    const axis = {
-        xAxis: e.clientX - rect.left,
-        yAxis: e.clientY - rect.top
+    const positions = {
+        left: e.clientX - rect.left,
+        top: e.clientY - rect.top
     };
-    dropped.style.left = `${ axis.xAxis }px`;
-    dropped.style.top = `${ axis.yAxis }px`;
+    dropped.style.left = `${ positions.left }px`;
+    dropped.style.top = `${ positions.top }px`;
     dropzone.appendChild(dropped);
-    savePosition(dropped, axis);
+    savePosition(dropped, positions);
 };
 
 /* Helpers */
@@ -55,12 +55,13 @@ function getDraggedElement(e) {
     return document.getElementById(id);
 };
 
-function savePosition(draggable, axis) {
+function savePosition(draggable, positions) {
+    if (draggable.dataset.persistPosition !== "true") return;
     const position = dragItems.find(dragItem => dragItem.id === draggable.id);
     if (position) {
-        position.top = axis.yAxis;
-        position.left = axis.xAxis;
-    } else { dragItems.push({ id: draggable.id, top: axis.yAxis, left: axis.xAxis }) };
+        position.top = positions.top;
+        position.left = positions.left;
+    } else { dragItems.push({ id: draggable.id, top: positions.top, left: positions.left }) };
     save("draggableItems", dragItems);
 };
 
@@ -71,4 +72,10 @@ function getPositions(items) {
         draggable.style.left = `${ dragItem.left }px`;
         draggable.style.top = `${ dragItem.top }px`;
     });
+}
+
+function removePosition(id) {
+    const items = read("draggableItems");
+    const persistent = items.filter(item => item.id !== id);
+    save("draggableItems", persistent);
 }
