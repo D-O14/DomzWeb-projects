@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My CRUD App Table</title>
-    <link rel="preload" as="style" onload="this.rel='stylesheet'" href="./crud_table.css">
+    <title>Table Of Users</title>
 </head>
 
 <body>
@@ -21,13 +21,87 @@
                         <th>Gender</th>
                         <th>Options</th>
                     </thead>
-                    <tbody class="body" id="body">
-                
+                    <tbody class="table-body" id="tableBody">
+                        <template class="row-template">
+                            <tr class="row">
+                                <td class="user-id"></td>
+                                <td class="user-name"></td>
+                                <td><a href="" class="user-email"></a></td>
+                                <td class="user-dateOfBirth"></td>
+                                <td class="user-age"></td>
+                                <td class="user-gender"></td>
+                                <td>
+                                    <menu class="actions">
+                                        <button class="action edit-btn" data-id="" aria-label="edit button">
+                                            <span class="icon" data-icon="pen"></span>
+                                        </button>
+                                        <button class="action del-btn" data-id="" aria-label="delete button">
+                                            <span class="icon" data-icon="delete"></span>
+                                        </button>
+                                    </menu>
+                                </td>
+                            </tr>
+                        </template>
+                        <template class="empty-template">
+                            <tr>
+                                <td class="placeholder" colspan="7">
+                                    <strong class="placeholder-msg">No Users Yet</strong>
+                                </td>
+                            </tr>
+                        </template>
                     </tbody>
-                    </table>
+                </table>
             </div>
         </section>
-    </main>    
+    </main>
+
+    <dialog id="confirmDialog" class="confirm-dialog">
+        <div class="modal">
+            <h1>Confirm deletion</h1>
+            <div class="message">
+                <p class="message-content">Deletion is permanent! Would you like to proceed?</p>
+            </div>
+            <menu>
+                <button class="cancel-operation-btn">Cancel</button>
+                <button class="confirm-operation-btn">Confirm</button>
+            </menu>
+        </div>
+    </dialog>
+
+    <dialog id="editDialog" class="edit-dialog">
+        <form id="editForm" autocomplete="off">
+            <label for="nameInput">
+                Name:
+                <input type="text" id="nameInput" placeholder="John Doe" name="name">
+            </label>
+            <label for="emailInput">
+                E-mail:
+                <input type="email" id="emailInput" placeholder="your_email@gmail.com" name="email">
+            </label>
+            <label for="dateInput">
+                Date of Birth:
+                <input type="date" id="dateInput" name="dob">
+            </label>
+            <label>
+                Gender
+                <div class="gender">
+                    <label class="male" for="male">
+                        <input type="radio" name="gender" id="male" value="Male">
+                        Male
+                    </label>
+
+                    <label class="female" for="female">
+                        <input type="radio" name="gender" id="female" value="Female">
+                        Female
+                    </label>
+                </div>
+            </label>
+            <menu class="editMenu">
+                <button id="cancelEditBtn" type="button">Cancel</button>
+                <button id="editBtn" class="editBtn">Submit</button>
+            </menu>
+        </form>
+    </dialog>
 </body>
 
 <script src="./crud_table.js" type="module" defer></script>

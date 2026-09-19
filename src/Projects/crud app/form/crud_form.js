@@ -12,16 +12,6 @@ const female = document.getElementById("female");
 const genderGroup = document.querySelector(".gender");
 const span = document.querySelector("span");
 
-const title = document.title;
-
-document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "hidden") {
-        document.title = "Oi! You aren't finished here!"
-    } else if (document.visibilityState === "visible") {
-        document.title = title;
-    }
-});
-
 const namePattern = /^[A-Za-z\s]+$/;
 const agePattern = /^(?:1[0-1][0-9]|120|[1-9]?[0-9])$/;
 const passwordPattern = /^(?=.*[A-Za-z])(?=.*[_@#$%^&*!]).{6,12}$/;
@@ -86,7 +76,7 @@ if (form) {
             }, 4000)
 
             setTimeout(() => {
-                window.location.href = "/src/crud_table.html"
+                window.location.href = "./database/crud_table.js"
             }, 4500)
         }
     });

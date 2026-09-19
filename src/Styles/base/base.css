@@ -1,5 +1,5 @@
 @import "./resets.css";
-@import "@assets/designs/animations/animations.css";
+/*@import "@assets/designs/animations/animations.css";*/
 
 html {
     scroll-behavior: smooth;
@@ -14,7 +14,6 @@ html,
 }
 
 body {
-    font: var(--font-base);
     font-family: var(--default-font);
     text-wrap: balance;
     line-height: 1.05em;
@@ -126,6 +125,11 @@ textarea {
     width: var(--dimension-100);
 }
 
+input[type="checkbox"] {
+    cursor: pointer;
+    accent-color: hsl(221, 96%, 52%);
+}
+
 textarea {
     height: 100px;
     resize: var(--none);
@@ -173,7 +177,12 @@ pre {
 table {
     text-indent: 0;
     border-collapse: collapse;
+    background: var(--bg-plain);
     border-color: var(--inherit);
+    border-radius: var(--radius-md);
+    max-width: var(--dimension-100);
+    overflow: var(--hidden-overflow);
+
 }
 
 ::-webkit-search-cancel-button {

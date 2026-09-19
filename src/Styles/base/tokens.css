@@ -2,6 +2,7 @@
 
     /* Backgrounds */
 
+    --bg-danger: hsl(0, 100%, 50%);
     --bg-code: hsl(233, 13%, 14%);
     --bg-plain: hsl(0, 0%, 100%);
     --bg-dark: hsl(0, 0%, 0%);

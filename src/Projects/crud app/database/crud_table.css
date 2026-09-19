@@ -1,189 +1,146 @@
-*::before,
-*::after,
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: system-ui;
-    transition: .3s ease;
-}
+@import "@styles/base/base.css";
+@import "@assets/designs/animations/animations.css";
 
 :root {
     --shadow:
         0 4px 6px hsla(0, 0%, 0%, 5%),
         0 10px 20px hsla(0, 0%, 0%, 1%),
         0 20px 40px hsla(0, 0%, 0%, 15%);
-}
 
-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    --bg-tr-even: hsl(0, 0%, 99%);
+    --bg-surface: hsl(210, 40%, 96%);
+    --bg-edit-btn: hsl(204, 94%, 94%);
+    /*--bg-btn-hover: hsl(0, 0%, 8%, .8);*/
+    --bg-thead: hsl(from var(--bg-surface) s calc(l + 2));
+    --bg-tr-hover: hsl(from var(--bg-surface) calc(s - 20) calc(l + 2));
 
-button {
-    border: 2px solid transparent;
-    border-radius: 1.25rem;
-    font-size: 1rem;
-    font-weight: 600;
-    padding: .5em 1em;
-    cursor: pointer;
-    color: hsl(0, 0%, 90%);
-    background: hsl(0, 0%, 8%);
-}
+    --accent: hsl(221, 96%, 52%);
+    --dark-accent: hsla(0, 0%, 8%, .8);
+    --muted-accent: hsl(220, 9%, 46%);
 
-button:hover {
-    background: hsl(0, 0%, 8%, .8);
-}
+    --clr-id: var(--muted-accent);
+    --clr-th: var(--muted-accent);
+    --clr-anchor: hsl(220, 80%, 50%);
+    --clr-edit-btn: hsl(201, 96%, 32%);
 
-a {
-    text-decoration: none;
-    color: hsl(220, 80%, 50%);
-    font-weight: 500;
-}
-
-table {
-    max-width: 100%;
-    border-collapse: collapse;
-    border-radius: .75rem;
-    background: hsl(0, 0%, 100%);
-    overflow: hidden;
-}
-
-thead {
-    background: hsl(210, 40%, 98%);
-}
-
-th {
-    text-align: center;
-    padding: .9em;
-    font-size: .9em;
-    color: hsl(220, 9%, 46%);
-    text-transform: uppercase;
-    letter-spacing: .05em;
-    font-weight: 500;
-}
-
-td:not(.badge, .placeholder) {
-    padding: .9em;
-    border-top: 1px solid hsl(220, 13%, 91%);
-    font-size: .9em;
-}
-
-tr:hover {
-    background: hsl(210, 20%, 98%);
-}
-
-tr:nth-of-type(even) {
-    background: hsl(0, 0%, 99%);
-}
-
-.actions {
-    display: flex;
-    gap: .5rem;
-}
-
-.btn {
-    border: none;
-    padding: .5em 1em;
-    border-radius: .5em;
-    font-weight: 500;
-}
-
-.btn.edit {
-    background: hsl(204, 94%, 94%);
-    color: hsl(201, 96%, 32%);
-}
-
-.btn.delete {
-    background: hsl(0, 93%, 94%);
-    color: hsl(0, 74%, 42%);
-}
-
-.lucide {
-    width: 1.25em;
-    height: 1.25em;
-}
-
-.id {
-    color: hsl(220, 9%, 46%);
-    max-width: 120px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-input[type="checkbox"] {
-    accent-color: hsl(221, 96%, 52%);
-    cursor: pointer;
-}
-
-.table-container {
-    padding: 1.25em;
-    background: hsl(210, 40%, 96%);
-    border-radius: .75em;
+    --brdr-td-top: var(--brdr-width-thin) var(--brdr-style-1) hsl(220, 13%, 91%);
 }
 
 :modal {
-    border: none;
-    padding: 2em 2em 2em;
-    margin: auto;
+    margin: var(--auto);
+    border: var(--brdr-none);
     box-shadow: var(--shadow);
-    border-radius: .5rem;
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-8) var(--spacing-8) var(--spacing-8);
 }
 
 :modal[open] {
-    animation: slideIn .3s ease-out forwards;
-}
-
-@keyframes slideIn {
-    0% {
-        transform: translateY(-100%);
-    }
-
-    100% {
-        transform: translateY(0);
-    }
+    animation: slideIn var(--duration-fast) var(--ease-out) forwards;
 }
 
 ::backdrop {
-    background: hsla(0, 0%, 8%, .8);
-    -webkit-backdrop-filter: blur(2px);
     backdrop-filter: blur(2px);
+    background: var(--dark-accent);
+    -webkit-backdrop-filter: blur(2px);
+}
+
+section {
+    display: var(--flex-display);
+    height: var(--viewport-height);
+    align-items: var(--align-center);
+    justify-content: var(--align-center);
+}
+
+a {
+    color: var(--clr-anchor);
+    text-decoration: var(--none);
+    font-weight: var(--weight-medium);
+}
+
+thead {
+    background: var(--bg-thead);
+}
+
+th {
+    padding: .9em;
+    font-size: .9em;
+    color: var(--clr-th);
+    text-transform: uppercase;
+    text-align: var(--align-center);
+    font-weight: var(--weight-medium);
+}
+
+td:not(.placeholder) {
+    padding: .9em;
+    font-size: .9em;
+    border-top: var(--brdr-td-top);
+}
+
+tr:hover {
+    background: var(--bg-tr-hover);
+}
+
+tr:nth-of-type(even) {
+    background: var(--bg-tr-even);
+}
+
+.action {
+    border-radius: var(--radius-sm);
+}
+
+.edit-btn {
+    color: var(--clr-edit-btn);
+    background: var(--bg-edit-btn);
+}
+
+.del-btn {
+    color: var(--clr-danger);
+    background: hsl(from var(--bg-danger) h calc(s - 7 ) calc(l + 44));
+}
+
+.user-id {
+    max-width: 120px;
+    white-space: nowrap;
+    color: var(--clr-id);
+    text-overflow: ellipsis;
+    overflow: var(--hidden-overflow);
+}
+
+.table-container {
+    padding: var(--spacing-5);
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
 }
 
 .modal {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: .5rem;
+    gap: var(--spacing-2);
+    align-items: var(--start);
+    display: var(--flex-display);
+    flex-direction: var(--flex-column);
 }
 
 .message {
-    padding-bottom: 1em;
+    padding-bottom: var(--spacing-4);
 }
 
 .message-content {
-    color: hsl(0, 0%, 50%);
-    letter-spacing: .5px;
-    line-height: 1.5;
+    color: var(--muted);
 }
 
-.close {
+.confirm-operation-btn {
     border-radius: 1.25rem;
-    background: hsl(0, 75%, 50%);
     color: hsl(0, 0%, 90%);
-    transition: .3s ease;
+    transition: var(--duration-fast) var(--ease);
+    background: hsl(from var(--bg-surface) calc(s - 25) l);
 }
 
-.close:hover {
+.confirm-operation-btn:hover {
     background: hsl(0, 75%, 45%);
     outline: 2px solid hsl(0, 75%, 50%);
     outline-offset: 2px;
 }
 
-.exit {
+.cancel-operation-btn {
     border-radius: 1.25rem;
     transition: .3s ease;
 }

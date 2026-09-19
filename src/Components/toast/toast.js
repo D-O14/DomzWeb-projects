@@ -3,16 +3,16 @@ import { createTemplate, createStyle } from "@utils/component.js";
 import { icons, initializeIcons } from "@assets/Icons/icons.js";
 
 const template = createTemplate(
-    `<div class="toast">
-    <span class="icon"></span>
-    <div class="content">
-        <strong class="status"></strong>
-        <p class="toast-msg"></p>
-    </div>
-    <button class="close" aria-label="close">
-        <span class="icon .toast-icon" data-icon="dismiss"></span>
-    </button>      
-</div>`
+    `<div class="toast" role="alert">
+        <span class="icon"></span>
+        <div class="content">
+            <strong class="status"></strong>
+            <p class="toast-msg"></p>
+        </div>
+        <button class="close" aria-label="close">
+            <span class="icon .toast-icon" data-icon="dismiss"></span>
+        </button>      
+    </div>`
 );
 
 const statuses = {
