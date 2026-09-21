@@ -1,6 +1,8 @@
 @import "@styles/base/base.css";
 @import "@assets/designs/animations/animations.css";
 
+/* Variables */
+
 :root {
     --shadow:
         0 4px 6px hsla(0, 0%, 0%, 5%),
@@ -11,8 +13,8 @@
     --bg-surface: hsl(210, 40%, 96%);
     --bg-edit-btn: hsl(204, 94%, 94%);
     /*--bg-btn-hover: hsl(0, 0%, 8%, .8);*/
-    --bg-thead: hsl(from var(--bg-surface) s calc(l + 2));
-    --bg-tr-hover: hsl(from var(--bg-surface) calc(s - 20) calc(l + 2));
+    --bg-thead: hsl(from var(--bg-surface) h s calc(l + 2));
+    --bg-tr-hover: hsl(from var(--bg-surface) h calc(s - 20) calc(l + 2));
 
     --accent: hsl(221, 96%, 52%);
     --dark-accent: hsla(0, 0%, 8%, .8);
@@ -22,17 +24,16 @@
     --clr-th: var(--muted-accent);
     --clr-anchor: hsl(220, 80%, 50%);
     --clr-edit-btn: hsl(201, 96%, 32%);
+    --clr-placeholdeer-msg: hsl(204, 94%, 24%);
 
+    --brdr-input: 1px solid hsl(0, 0%, 80%);
     --brdr-td-top: var(--brdr-width-thin) var(--brdr-style-1) hsl(220, 13%, 91%);
+
+    --outline-input-hover: 2px solid hsl(0, 0%, 5%);
+    --outline-input-error: 1px solid hsl(0, 80%, 50%);
 }
 
-:modal {
-    margin: var(--auto);
-    border: var(--brdr-none);
-    box-shadow: var(--shadow);
-    border-radius: var(--radius-sm);
-    padding: var(--spacing-8) var(--spacing-8) var(--spacing-8);
-}
+/* Modal Styles */
 
 :modal[open] {
     animation: slideIn var(--duration-fast) var(--ease-out) forwards;
@@ -44,6 +45,8 @@
     -webkit-backdrop-filter: blur(2px);
 }
 
+/* Defaults */
+
 section {
     display: var(--flex-display);
     height: var(--viewport-height);
@@ -51,11 +54,19 @@ section {
     justify-content: var(--align-center);
 }
 
+h1 {
+    font-size: 1.5rem;
+    letter-spacing: .5px;
+    font-weight: var(--weight-bold);
+}
+
 a {
     color: var(--clr-anchor);
     text-decoration: var(--none);
     font-weight: var(--weight-medium);
 }
+
+/* Table Default Styles */
 
 thead {
     background: var(--bg-thead);
@@ -84,18 +95,78 @@ tr:nth-of-type(even) {
     background: var(--bg-tr-even);
 }
 
+menu {
+    gap: var(--spacing-2);
+    display: var(--flex-display);
+    justify-content: var(--align-end);
+}
+
+form {
+    width: 425px;
+    gap: var(--spacing-4);
+    display: var(--grid-display);
+    max-width: var(--dimension-100);
+    grid-template-columns: repeat(1, auto);
+}
+
+label {
+    gap: var(--spacing-2);
+    align-items: var(--start);
+    display: var(--flex-display);
+    flex-direction: var(--flex-column);
+}
+
+strong {
+    font-size: 1.25rem;
+}
+
+/* Inputs */
+
+input:not(input[type="checkbox"], input[type="radio"]) {
+    height: 40px;
+    outline: var(--none);
+    border: var(--brdr-input);
+    width: var(--dimension-100);
+    border-radius: var(--radius-xsm);
+    padding: var(--spacing-2) var(--spacing-4);
+}
+
+input:not(input[type="checkbox"], input[type="radio"]):focus,
+input:not(input[type="checkbox"], input[type="radio"]):hover {
+    scale: 1.02;
+    outline-offset: 1px;
+    outline: var(--outline-input-hover);
+}
+
+input[type="radio"] {
+    accent-color: hsl(from var(--accent) calc(h - 1) calc(s - 16) calc(l - 2))
+}
+
+input:not(input[type="radio"]).error:focus,
+input:not(input[type="radio"]).error:hover {
+    outline: var(--outline-input-error);
+}
+
+input.error {
+    outline: var(--outline-input-error);
+}
+
+.error-text {
+    font-size: .85rem;
+    font-weight: var(--weight-base);
+    color: hsl(from var(--bg-danger) h calc(s - 20) l);
+}
+
 .action {
     border-radius: var(--radius-sm);
 }
 
-.edit-btn {
-    color: var(--clr-edit-btn);
-    background: var(--bg-edit-btn);
-}
+/* Table Styles */
 
-.del-btn {
-    color: var(--clr-danger);
-    background: hsl(from var(--bg-danger) h calc(s - 7 ) calc(l + 44));
+.table-container {
+    padding: var(--spacing-5);
+    background: var(--bg-surface);
+    border-radius: var(--radius-md);
 }
 
 .user-id {
@@ -106,18 +177,80 @@ tr:nth-of-type(even) {
     overflow: var(--hidden-overflow);
 }
 
-.table-container {
-    padding: var(--spacing-5);
-    background: var(--bg-surface);
-    border-radius: var(--radius-md);
+/* Buttons */
+
+.edit-btn {
+    color: var(--clr-edit-btn);
+    background: var(--bg-edit-btn);
+}
+
+.del-btn {
+    color: var(--clr-danger);
+    background: hsl(from var(--bg-danger) h calc(s - 7) calc(l + 44));
+}
+
+.confirm-operation-btn {
+    border-radius: 1.25rem;
+    transition: var(--duration-fast) var(--ease);
+    color: hsl(from var(--bg-plain) s calc(l - 10));
+    background: hsl(from var(--bg-surface) calc(s - 25) l);
+}
+
+.confirm-operation-btn:hover {
+    outline-offset: 2px;
+    outline: 2px solid hsl(from var(--bg-danger) calc(s - 25) l);
+    background: hsl(from var(--bg-danger) calc(s - 25) calc(l - 5));
+}
+
+.cancel-operation-btn {
+    border-radius: 1.25rem;
+    transition: var(--duration-fast) var(--ease);
+}
+
+.cancel-operation-btn:hover {
+    outline-offset: 2px;
+    outline: 2px solid hsl(from var(--bg-plain) s calc(l - 10));
+}
+
+.cancelEditBtn {
+    color: var(--clr-dark);
+    background: var(--none);
+}
+
+.cancelEditBtn:hover {
+    background: var(--dark-accent);
+}
+
+/* Dialog Styles */
+
+.dialog {
+    margin: var(--auto);
+    gap: var(--spacing-2);
+    border: var(--brdr-none);
+    box-shadow: var(--shadow);
+    align-items: var(--start);
+    display: var(--flex-display);
+    border-radius: var(--radius-sm);
+    flex-direction: var(--flex-column);
+    padding: var(--spacing-8) var(--spacing-8) var(--spacing-8);
 }
 
 .modal {
     gap: var(--spacing-2);
-    align-items: var(--start);
-    display: var(--flex-display);
-    flex-direction: var(--flex-column);
+    border: var(--brdr-none);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-8) var(--spacing-8) var(--spacing-8);
 }
+
+.edit-dialog {
+    border: var(--none);
+    margin: var(--auto);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-12) var(--spacing-12) var(--spacing-12);
+}
+
+/* Confirm Dialog Content */
 
 .message {
     padding-bottom: var(--spacing-4);
@@ -127,84 +260,14 @@ tr:nth-of-type(even) {
     color: var(--muted);
 }
 
-.confirm-operation-btn {
-    border-radius: 1.25rem;
-    color: hsl(0, 0%, 90%);
-    transition: var(--duration-fast) var(--ease);
-    background: hsl(from var(--bg-surface) calc(s - 25) l);
+/* Edit Dialog Content */
+
+.edit-menu {
+    justify-content: var(--align-start);
 }
 
-.confirm-operation-btn:hover {
-    background: hsl(0, 75%, 45%);
-    outline: 2px solid hsl(0, 75%, 50%);
-    outline-offset: 2px;
-}
-
-.cancel-operation-btn {
-    border-radius: 1.25rem;
-    transition: .3s ease;
-}
-
-.exit:hover {
-    outline: 2px solid hsl(0, 0%, 90%);
-    outline-offset: 2px;
-}
-
-menu {
-    display: flex;
-    gap: .5rem;
-    justify-content: flex-end;
-}
-
-h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: .5px;
-}
-
-form {
-    display: grid;
-    grid-template-columns: repeat(1, auto);
-    max-width: 100%;
-    width: 425px;
-    gap: 1rem;
-}
-
-input:not(input[type="checkbox"], input[type="radio"]) {
-    border: 1px solid hsl(0, 0%, 80%);
-    border-radius: .25rem;
-    padding: .5rem 1rem;
-    width: 100%;
-    height: 40px;
-    outline: none;
-}
-
-input:not(input[type="checkbox"], input[type="radio"]):focus,
-input:not(input[type="checkbox"], input[type="radio"]):hover {
-    scale: 1.02;
-    outline: 2px solid hsl(0, 0%, 5%);
-    outline-offset: 1px;
-}
-
-input[type="radio"] {
-    accent-color: hsl(220, 80%, 50%);
-}
-
-label:not(.male, .female) {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: .5rem;
-}
-
-.editModal {
-    border: none;
-    border-radius: .5rem;
-    margin: auto;
-    padding: 3em 3em 3em;
-}
-
-.toast {
+/* Toast Content */
+/*.toast {
     display: flex;
     align-items: center;
     gap: .75rem;
@@ -223,32 +286,8 @@ label:not(.male, .female) {
     transform: translateY(-100%) scale(0);
 }
 
-@keyframes popOver {
-    from {
-        transform: translateY(-100%) scale(0);
-    }
-
-    to {
-        transform: translateY(1.25rem) scale(1)
-    }
-}
-
 .toast.close {
     animation: popOut .3s ease forwards;
-}
-
-@keyframes popOut {
-    0% {
-        transform: translateY(0) scale(1);
-    }
-
-    100% {
-        transform: translateY(-100%) scale(0);
-    }
-}
-
-.icon-check {
-    color: hsl(100, 100%, 20%);
 }
 
 .toast-content {
@@ -258,65 +297,19 @@ label:not(.male, .female) {
     gap: .5rem;
 }
 
-strong {
-    font-size: 1.25rem;
-}
+.icon-check {
+    color: hsl(100, 100%, 20%);
+}*/
 
-.gender {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-    border: 1px solid hsl(0, 0%, 50%);
-    border-radius: .25rem;
-    padding: .5em 1em;
-    height: 40px;
-    width: 100%;
-}
-
-input:not(input[type="radio"]).error:focus,
-input:not(input[type="radio"]).error:hover {
-    outline: 1px solid hsl(0, 80%, 50%);
-}
-
-input.error {
-    outline: 1px solid hsl(0, 80%, 50%);
-}
-
-.textError {
-    font-size: .85rem;
-    font-weight: 400;
-    color: hsl(0, 80%, 50%);
-}
+/* Empty State */
 
 .placeholder {
-    text-align: center;
-    padding: 1em;
-    background: hsl(210, 40%, 98%);
+    padding: var(--spacing-4);
+    text-align: var(--align-center);
+    background: hsl(from var(--bg-surface) h s calc(l + 2));
 }
 
 .placeholder-msg {
-    color: hsl(204, 94%, 24%);
     font-size: 25px;
-}
-
-.cancelEdit {
-    background: none;
-    border: 1px solid hsl(0, 0%, 50%);
-    color: hsl(0, 0%, 5%);
-}
-
-.cancelEdit:hover {
-    background: hsl(0, 0%, 0%, .5);
-}
-
-.editMenu {
-    justify-content: flex-start;
-}
-
-.failure {
-    outline: 2px solid hsl(0, 80%, 50%);
-    outline-offset: 2px;
-    color: hsl(0, 100%, 20%);
-    background: hsl(0, 80%, 65%);
+    color: var(--clr-placeholdeer-msg);
 }

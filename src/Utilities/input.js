@@ -1,4 +1,4 @@
-export default function searchItems({ input, items, property }) {
+export function searchItems({ input, items, property }) {
     const value = input.value.toLowerCase().trim();
     const searched = items.filter(item => {
         const field = item[property];
@@ -6,3 +6,15 @@ export default function searchItems({ input, items, property }) {
     });
     return searched;
 }
+
+export function toggleField(toggle, input) {
+    toggle.addEventListener("click", () => {
+        if (input.type === "password") {
+            input.type = "text";
+            toggle.dataset.icon = "eyeOff";
+        } else {
+            input.type = "password";
+            toggle.dataset.icon = "eyeOff";
+        };
+    });
+};

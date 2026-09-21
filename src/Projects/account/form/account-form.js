@@ -1,12 +1,11 @@
 import "./account-form.css";
-import { validateDate, initializeDate } from "@utils/date.js"
-import { icons, initializeIcons } from "@assets/Icons/icons.js";
-import { charCount, format, showLoader, hideLoader } from "@utils/utilities.js";
-import { validateInput, validators, getFields, showError, clearError } from "@utils/validation.js";
+import { initializeIcons } from "@assets/Icons/icons";
+import { validateInput, validators } from "@utils/validation";
+import { charCount, format, showLoader, hideLoader } from "@utils/utilities";
+
+let passwordSuggested = false;
 
 const indexedB = indexedDB;
-let title = document.title;
-let passwordSuggested = false;
 const req = indexedB.open("Users", 1);
 const form = document.querySelector("form");
 const inputs = document.querySelectorAll("input");
@@ -111,9 +110,8 @@ const charSets = {
     symbols: "@$%_&?-!",
 }
 
-req.onsuccess = () => {
-    const db = req.result;
-}
+req.onsuccess = () => { const db = req.result };
+
 req.onerror = (e) => {
     console.log(e);
     console.error("An error has occurred within the database!");

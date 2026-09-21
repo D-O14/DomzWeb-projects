@@ -13,6 +13,7 @@ export const validators = {
     birthday: validateDate,
     graduation: validateDate,
     password: validatePassword,
+    confirmedPassword: validatePassword,
 }
 
 export function validateInput(input, ruleset) {
