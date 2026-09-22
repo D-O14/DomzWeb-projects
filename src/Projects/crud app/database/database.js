@@ -1,4 +1,4 @@
-import "./crud_table.css";
+import "./database.css";
 import { closeDialog } from "@utils/button";
 import { read, save } from "@utils/database";
 import { initializeIcons } from "@assets/Icons/icons";
@@ -41,26 +41,6 @@ dobInput.addEventListener("input", () => { validateDOB(dobInput) })
 
 editForm.addEventListener("submit", (e) => { updateRow(users, e) });
 
-/*showToast("Success!", "User updated successfully");
-setTimeout(() => { toast.classList.add("close") }, 3000)
-setTimeout(() => { toast.remove() }, 4000);
-function showToast(status, message) {
-    toast.className = "toast";
-    toast.classList.add(status);
-    toast.setAttribute("role", "alert")
-    toast.innerHTML =
-    `
-        <div class="toast-content">
-            <strong>
-                ${ status }
-            </strong>
-            <p>${ message }</p>
-        </div>
-    `
-    document.body.prepend(toast);
-    return toast;
-};*/
-
 function renderRows(data) {
     tableBody.replaceChildren();
     if (data.length === 0) {
@@ -70,14 +50,13 @@ function renderRows(data) {
         data.forEach(user => {
             const row = rowTemplate.content.cloneNode(true);
             const userEmail = row.querySelector(".user-email");
-            row.querySelector(".user-id").textContent = user.id;
-            row.querySelector(".user-age").textContent = user.age;
-            row.querySelector(".user-name").textContent = user.name;
-            row.querySelector(".user-gender").textContent = user.gender;
-            row.querySelector(".user-dateOfBirth").textContent = user.dateOfBirth;
-            row.querySelectorAll(".action").forEach(action => { action.dataset.id = user.id });
-            userEmail.href = `mailto:${ user.email }`;
-            userEmail.textContent = user.email;
+            row.querySelector(".user-id").textContent = user.userId;
+            row.querySelector(".user-age").textContent = user.userAge;
+            row.querySelector(".user-name").textContent = user.userName;
+            row.querySelector(".user-dateOfBirth").textContent = user.userDateOfBirth;
+            row.querySelectorAll(".action").forEach(action => { action.dataset.id = user.userId });
+            userEmail.href = `mailto:${ user.userEmail }`;
+            userEmail.textContent = user.userEmail;
             initializeIcons(row);
             tableBody.append(row);
         })
@@ -88,19 +67,17 @@ function removeRow(button, data) {
     const row = button.closest("tr");
     row.remove();
     closeDialog(confirmDialog);
-    const userToDelete = data.find(user => { return user.id === button.dataset.id });
-    const newData = data.filter(user => user.id !== userToDelete.id);
+    const userToDelete = data.find(user => { return user.userId === button.dataset.id });
+    const newData = data.filter(user => user.id !== userToDelete.userId);
     save("users", newData);
 };
 
 function editRow(button, id) {
     button.addEventListener("click", () => {
-        const user = users.find(user => { return user.id === id });
-        const genderInput = document.querySelector(`input[name="gender"][value="${ user.gender }"]`);
-        nameInput.value = user.name;
-        emailInput.value = user.email;
-        dobInput.value = user.dateOfBirth;
-        genderInput.checked = true;
+        const user = users.find(user => { return user.userId === id });
+        nameInput.value = user.userName;
+        emailInput.value = user.userEmail;
+        dobInput.value = user.userDateOfBirth;
         editDialog.showModal();
     });
 };
@@ -108,13 +85,10 @@ function editRow(button, id) {
 function updateRow(data, e) {
     e.preventDefault();
     const user = data.find(user => user.id === selectedUserId);
-    const selectedGender = document.querySelector('input[name="gender"]:checked')?.value;
-
-    user.name = nameInput.value;
-    user.gender = selectedGender;
-    user.email = emailInput.value;
-    user.dateOfBirth = dobInput.value;
-    user.age = calcAge(dobInput.value);
+    user.userName = nameInput.value;
+    user.userEmail = emailInput.value;
+    user.userDateOfBirth = dobInput.value;
+    user.userAge = calcAge(dobInput.value);
 
     save("users", data);
     renderRows(data);

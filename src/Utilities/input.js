@@ -1,3 +1,5 @@
+import { initializeIcons } from "@assets/Icons/icons";
+    
 export function searchItems({ input, items, property }) {
     const value = input.value.toLowerCase().trim();
     const searched = items.filter(item => {
@@ -8,13 +10,16 @@ export function searchItems({ input, items, property }) {
 }
 
 export function toggleField(toggle, input) {
+    const toggleIcon = toggle.querySelector(".icon");
     toggle.addEventListener("click", () => {
         if (input.type === "password") {
-            input.type = "text";
-            toggle.dataset.icon = "eyeOff";
+            input.type = "text"; 
+            toggleIcon.dataset.icon = "eyeOff";
+            initializeIcons(toggle);
         } else {
             input.type = "password";
-            toggle.dataset.icon = "eyeOff";
+            toggleIcon.dataset.icon = "eyeOn";
+            initializeIcons(toggle);
         };
     });
 };

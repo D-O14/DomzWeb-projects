@@ -1,21 +1,21 @@
-import "./crud_form.css";
+import "./form.css";
 import { toggleField } from "@utils/input";
 import { read, save } from "@utils/database";
+import { validators } from "@utils/validation";
 import { initializeIcons } from "@assets/Icons/icons";
-import { validators, showError, clearError } from "@utils/validation";
 
 let valid = false;
 
 const users = read("users");
 const form = document.querySelector("form");
 const inputs = form.querySelectorAll("input");
+const submitBtn = document.getElementById("submit");
 const dobInput = document.getElementById("dobInput");
 const nameInput = document.getElementById("nameInput");
 const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
-const confirmPassInput = document.getElementById("confirmPasswordInput");
-const submitBtn = document.getElementById("submit");
 const passToggle = document.getElementById("passToggle");
+const passwordInput = document.getElementById("passwordInput");
+const confirmPassInput = document.getElementById("confirmPassInput");
 const confirmPassToggle = document.getElementById("confirmPassToggle");
 
 function validateForm(inputs) {
@@ -38,13 +38,12 @@ function load(button) {
 
 function createUser(formData) {
     return {
-        id: crypto.randomUUID(),
+        userId: crypto.randomUUID(),
         userName: formData.get("name"),
         userEmail: formData.get("email"),
         userPassword: formData.get("password"),
-        userDateOfBirth: formData.get("dateOfBirth"),
-        /*userAge: calcAge(dobInput.value),
-        userGender: getGender()*/
+        userDateOfBirth: formData.get("dob"),
+        userAge: calcAge(userDateOfBirth)
     };
 };
 

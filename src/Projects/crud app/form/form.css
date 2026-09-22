@@ -1,0 +1,176 @@
+@import "@styles/base/base.css";
+
+*::before,
+*::after,
+* {
+    box-sizing: border-box;
+    user-select: var(--none);
+    margin: var(--spacing-0);
+    padding: var(--spacing-0);
+    font-family: var(--default-font);
+    -webkit-tap-highlight-color: transparent;
+    transition: all var(--duration-fast) var(--ease) allow-discrete;
+}
+
+:root {
+    --shadow:
+        0 4px 6px hsla(0, 0%, 0%, 5%),
+        0 10px 20px hsla(0, 0%, 0%, 1%),
+        0 20px 40px hsla(0, 0%, 0%, 15%);
+
+    --bg-btn: hsl(210, 80%, 5%);
+    --bg-checkbox: hsl(220, 80%, 50%);
+    --bg-btn-hover: hsla(220, 20%, 18%, .8);
+
+    --brdr-input: 1px solid hsl(0, 0%, 80%);
+
+    --checkbox-outline-focus: 1px solid hsl(0, 0%, 0%);
+    --input-outline-focus: 1px solid hsl(220, 80%, 5%);
+    --input-error-focus: 1px solid hsl(from var(--bg-danger) h calc(s - 20) l);
+}
+
+section {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+}
+
+svg {
+    opacity: .4;
+    width: 1.25rem;
+    height: 1.25rem;
+    vertical-align: middle;
+}
+
+form {
+    width: 450px;
+    height: 600px;
+    margin: var(--auto);
+    gap: var(--spacing-5);
+    box-shadow: var(--shadow);
+    position: var(--relative);
+    display: var(--flex-display);
+    border-radius: var(--radius-sm);
+    max-width: var(--dimension-100);
+    flex-direction: var(--flex-column);
+    padding: var(--spacing-12) var(--spacing-12) var(--spacing-12);
+
+}
+
+label {
+    gap: var(--spacing-2);
+    position: var(--relative);
+    display: var(--flex-display);
+    flex-direction: var(--flex-column);
+}
+
+button[type="button"] {
+    top: 50%;
+    right: 10px;
+    background: var(--none);
+    vertical-align: middle;
+    border: var(--brdr-none);
+    position: var(--absolute);
+    transform: translateY(-50%);
+}
+
+button:not(button[type="button"]) {
+    color: var(--clr-plain);
+    background: var(--bg-btn);
+    border-radius: var(--radius-sm);
+    transition: var(--duration-fast) var(--ease);
+}
+
+button:not(button[type="button"]):hover {
+    background: var(--bg-btn-hover);
+}
+
+input:not(input[type="radio"], input[type="checkbox"], input[type="range"]) {
+    flex: 1;
+    border-radius: 0;
+    outline: var(--none);
+    border: var(--brdr-none);
+    width: var(--dimension-100);
+}
+
+.label {
+    gap: var(--spacing-2);
+    display: var(--flex-display);
+    align-items: var(--align-center);
+}
+
+.input:focus,
+.input:hover {
+    scale: 1.02;
+    outline-offset: 1px;
+    outline: var(--input-outline-focus);
+}
+
+.input.error:focus,
+.input.error:hover {
+    outline: var(--input-error-focus);
+}
+
+.input.error {
+    outline: var(--input-error-focus);
+}
+
+.input {
+    height: 2.5rem;
+    outline: var(--none);
+    gap: var(--spacing-2);
+    position: var(--relative);
+    border: var(--brdr-input);
+    width: var(--dimension-100);
+    display: var(--flex-display);
+    align-items: var(--align-center);
+    border-radius: var(--radius-xsm);
+    padding: var(--spacing-1) var(--spacing-2);
+    transition: var(--duration-fast) var(--ease);
+}
+
+.error-text {
+    font-size: .85rem;
+    font-weight: var(--weight-base);
+    color: hsl(from var(--bg-danger) h calc(s - 20) l);
+}
+
+.submit-btn {
+    flex: 1;
+    position: var(--relative);
+    width: var(--dimension-100);
+    font-weight: var(--weight-medium);
+}
+
+.loading .btn {
+    visibility: var(--hidden);
+    opacity: var(--opacity-none);
+}
+
+.loading::after {
+    content: "";
+    position: var(--absolute);
+    width: var(--base-dimension);
+    height: var(--base-dimension);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border-radius: 1.25rem;
+    border-top-color: var(--clr-plain);
+    animation: spin 1s linear infinite;
+    border: 4px var(--brdr-style-1) transparent;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0turn);
+        opacity: .5;
+    }
+
+    100% {
+        transform: rotate(1turn);
+        opacity: .5;
+    }
+}

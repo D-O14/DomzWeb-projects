@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Creation Form</title>
+</head>
+
+<body>
+    <main>
+        <section>
+            <form spellcheck="true" autocomplete="off">
+                <label for="nameInput">
+                    <div class="label">
+                        <span class="icon" data-icon="user"></span>
+                        Name:
+                    </div>
+                    <div class="input">
+                        <input type="text" id="nameInput" placeholder="John Doe" required name="name" autofocus
+                            enterkeyhint="next">
+                    </div>
+                    <p class="error-text" aria-live="polite"></p>
+                </label>
+
+                <label for="emailInput">
+                    <div class="label">
+                        <span class="icon" data-icon="mail"></span>
+                        E-mail:
+                    </div>
+                    <div class="input">
+                        <input type="email" placeholder="Your_email@gmail.com" enterkeyhint="next" required
+                            id="emailInput" name="email" inputmode="email" autocomplete="username">
+                    </div>
+                    <p class="error-text" aria-live="polite"></p>
+                </label>
+
+                <label for="dobInput">
+                    <div class="label">
+                        <span class="icon" data-icon="calendar"></span>
+                        Date of Birth:
+                    </div>
+                    <div class="input">
+                        <input type="date" placeholder="Your_email@gmail.com" enterkeyhint="next" required id="dobInput"
+                            name="dob">
+                    </div>
+                    <p class="error-text" aria-live="polite"></p>
+                </label>
+
+                <label for="passwordInput">
+                    <div class="label">
+                        <span class="icon" data-icon="lock"></span>
+                        Password:
+                    </div>
+                    <div class="input">
+                        <input type="password" placeholder="P@$sw0rd" enterkeyhint="next" required id="passwordInput"
+                            minlength="6" maxlength="12" name="password" autocomplete="new-password">
+                        <button type="button" id="passToggle" aria-label="Show password toggle">
+                            <span class="icon" data-icon="eyeOn"></span>
+                        </button>
+                    </div>
+                    <p class="error-text" aria-live="polite"></p>
+                </label>
+
+                <label for="confirmPassInput">
+                    <div class="label">
+                        <span class="icon" data-icon="lock"></span>
+                        Confirm Password:
+                    </div>
+                    <div class="input">
+                        <input type="password" id="confirmPassInput" placeholder="[Password]" required
+                            name="confirmedPassword" minlength="6" maxlength="12" enterkeyhint="done" 
+                            autocomplete="new-password">
+                        <button type="button" id="confirmPassToggle" aria-label="Show password toggle">
+                            <span class="icon" data-icon="eyeOn"></span>
+                        </button>
+                    </div>
+                    <p class="error-text" aria-live="polite"></p>
+                </label>
+
+                <menu>
+                    <button type="submit" class="submit-btn" id="submit">
+                        <span class="btn">Submit</span>
+                    </button>
+                </menu>
+            </form>
+        </section>
+    </main>
+
+</body>
+
+<script src="./form.js" type="module" defer></script>
+
+</html>

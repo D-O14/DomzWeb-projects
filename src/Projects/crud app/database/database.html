@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Of Users</title>
+    <title>User Database</title>
 </head>
 
 <body>
@@ -18,7 +18,6 @@
                         <th>Email</th>
                         <th>Date Of birth</th>
                         <th>Age</th>
-                        <th>Gender</th>
                         <th>Options</th>
                     </thead>
                     <tbody class="table-body" id="tableBody">
@@ -29,7 +28,6 @@
                                 <td><a href="" class="user-email"></a></td>
                                 <td class="user-dateOfBirth"></td>
                                 <td class="user-age"></td>
-                                <td class="user-gender"></td>
                                 <td>
                                     <menu class="actions">
                                         <button class="action edit-btn" data-id="" aria-label="edit button">
@@ -55,7 +53,7 @@
         </section>
     </main>
 
-    <dialog id="confirmDialog" class="dialog confirm-dialog">
+    <!--<dialog id="confirmDialog" class="dialog confirm-dialog">
         <div class="modal">
             <h1>Confirm deletion</h1>
             <div class="message">
@@ -82,27 +80,13 @@
                 Date of Birth:
                 <input type="date" id="dateInput" name="dob">
             </label>
-            <label>
-                Gender
-                <div class="gender">
-                    <label class="male" for="male">
-                        <input type="radio" name="gender" id="male" value="Male">
-                        Male
-                    </label>
-
-                    <label class="female" for="female">
-                        <input type="radio" name="gender" id="female" value="Female">
-                        Female
-                    </label>
-                </div>
-            </label>
             <menu class="edit-menu">
                 <button id="cancelEditBtn" type="button">Cancel</button>
                 <button id="editBtn" class="edit-btn">Submit</button>
             </menu>
         </form>
-    </dialog>
+    </dialog>-->
 </body>
 
-<script src="./crud_table.js" type="module" defer></script>
+<script src="./database.js" type="module" defer></script>
 </html>
