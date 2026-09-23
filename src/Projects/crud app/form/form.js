@@ -6,7 +6,7 @@ import { initializeIcons } from "@assets/Icons/icons";
 
 let valid = false;
 
-const users = read("users");
+const users = read("users", []);
 const form = document.querySelector("form");
 const inputs = form.querySelectorAll("input");
 const submitBtn = document.getElementById("submit");

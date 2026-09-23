@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <div class="kanban">
+    <!--<div class="kanban">
         <template class="column-template">
             <div class="kanban-column">
                 <div class="kanban-title"></div>
@@ -24,9 +24,36 @@
         <template class="dropzone-template">
             <div class="kanban-dropzone"></div>
         </template>
+    </div>-->
+    <div class="columns">
+        <div class="column">
+            <div class="title">
+                <h3>To Do</h3>
+                <button aria-label="add task button">
+                    <span class="icon" data-icon="plus"></span>
+                </button>
+            </div>
+            <div class="tasks"></div>
+        </div>
+        <div class="column">
+            <div class="title">
+                <h3>In Progress</h3>
+                <button aria-label="add task button">
+                    <span class="icon" data-icon="plus"></span>
+                </button>
+            </div>
+            <div class="tasks"></div>
+        </div>
+        <div class="column">
+            <div class="title">
+                <h3>Not Started</h3>
+                <button aria-label="add task button">
+                    <span class="icon" data-icon="plus"></span>
+                </button>
+            </div>
+            <div class="tasks"></div>
+        </div>
     </div>
-
 </body>
 <script type="module" src="./demo.js" defer></script>
-
 </html>

@@ -6,7 +6,7 @@
     --bg-kanban-btn: hsla(0, 0%, 0%, 0.1);
 }
 
-.kanban {
+/*.kanban {
     width: 750px;
     padding: var(--spacing-7);
     display: var(--flex-display);
@@ -53,4 +53,4 @@
     border-radius: var(--radius-xsm);
     background: var(--bg-kanban-btn);
     padding: var(--spacing-3) var(--spacing-0);
-}
+}*/

@@ -3,7 +3,7 @@ import { closeDialog } from "@utils/button";
 import { read, save } from "@utils/database";
 import { initializeIcons } from "@assets/Icons/icons";
 
-let users = read("users");
+let users = read("users", []);
 let currentDelBtn = null;
 
 //const toast = document.querySelector("toast-notif");

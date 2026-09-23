@@ -1,6 +1,9 @@
 import "./demo.css";
+import { initializeIcons } from "@assets/Icons/icons";
 
-const kanbanData = [
+initializeIcons(document);
+
+/*const kanbanData = [
     { id: 1, title: "Not Started", items: [] },
     { id: 2, title: "In Progress", items: [] },
     { id: 3, title: "Completed", items: [] }
@@ -125,4 +128,4 @@ function renderKanban(data) {
     });
 }
 
-renderKanban(kanbanData);
+renderKanban(kanbanData);*/
