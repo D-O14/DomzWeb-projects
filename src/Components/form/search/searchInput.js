@@ -6,13 +6,13 @@ const template = createTemplate(
     `<label for="searchInput">
     <div class="input" part="container">
         <slot name="icon">
-            <span class="icon search-icon" data-icon="search"></span>
+            <span class="icon search-icon" part="icon" data-icon="search"></span>
         </slot>
         <input part="input" id="searchInput" type="search" autocomplete="off">
         <button class="close-btn" aria-label="clear search button">
             <span class="icon clear" data-icon=""></span>
         </button>
-        <kbd class="shortcut">ctrl + /</kbd>
+        <kbd class="shortcut" part="shortcut">ctrl + /</kbd>
     </div>
 </label>`
 );
@@ -23,7 +23,6 @@ export default class SearchInput extends HTMLElement {
         const shadow = this.attachShadow({ mode: "open" });
         const style = createStyle("./searchInput.css", import.meta.url);
         const inputComponent = template.content.cloneNode(true);
-        //this.searchIcon = inputComponent.querySelector("slot[name='icon']");
         this.closeBtn = inputComponent.querySelector(".close-btn");
         this.searchInput = inputComponent.querySelector("input");
         this.inputLabel = inputComponent.querySelector("label");
@@ -61,13 +60,8 @@ export default class SearchInput extends HTMLElement {
 
     connectedCallback() { 
         const className = this.getAttribute("class");
-        //const searchIcon = this.querySelector("span[slot='icon']");
         const placeholder = this.getAttribute("placeholder") ?? "Find anything you want...";
         this.searchInput.placeholder = placeholder;
-        /*if (!searchIcon) {
-            this.searchIcon.dataset.icon = "search";
-            this.searchIcon.className = "icon search-icon"
-        }*/
         this.input.classList.add(className);
         initializeIcons(this.shadowRoot);
     };

@@ -1,6 +1,6 @@
 import "./confirm-dialog.css";
+import { icons } from "@assets/Icons/icons.js";
 import { createTemplate, createStyle } from "@utils/component.js";
-import { icons, initializeIcons } from "@assets/Icons/icons.js";
 
 const template = createTemplate(
     `<dialog aria-labelledby="alert-title" aria-describedby="alert-desc">

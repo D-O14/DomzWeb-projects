@@ -1,59 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Database Demo</title>
 </head>
+
 <body>
     <div class="table-container">
+        <div class="table-head">
+            <h1 class="table-header">
+                Users
+                <span class="user-count"></span>
+            </h1>
+            <search-input placeholder="Search through your users...">
+                <span slot="icon" class="icon searchbar-icon">
+                    <i data-lucide="search"></i>
+                </span>
+            </search-input>
+        </div>
         <table>
             <thead>
-                <th>Email<span class="icon" data-icon="mail"></span></th>
-                <th>Name<span class="icon" data-icon="account"></span></th>
-                <th>Id</th>
-                <th>Status</th>
-                <th>CreatedAt<span class="icon" data-icon="calendar"></span></th>
+                <th>
+                    <check-box></check-box>
+                </th>
+                <th>
+                    <div class="content">
+                        <span class="icon" data-icon="userEncrypt"></span>
+                        <span class="text">User Id</span>
+                    </div>
+                </th>
+                <th>
+                    <div class="content">
+                        <span class="icon" data-icon="account"></span>
+                        <span class="text">Name</span>
+                        <span class="icon sort-icon" data-icon="sort"></span>
+                    </div>
+                </th>
+                <th>
+                    <div class="content">
+                        <span class="icon" data-icon="mail"></span>
+                        <span class="text">Email</span>
+                        <span class="icon sort-icon" data-icon="sort"></span>
+                    </div>
+                </th>
+                <th>
+                    <div class="content">
+                        <span class="icon" data-icon="alert"></span>
+                        <span class="text">Status</span>
+                        <span class="icon sort-icon" data-icon="sort"></span>
+                    </div>
+                </th>
+                <th>
+                    <div class="content">
+                        <span class="icon" data-icon="calendar"></span>
+                        <span class="text">Created At</span>
+                        <span class="icon sort-icon" data-icon="sort"></span>
+                    </div>
+                </th>
             </thead>
             <tbody>
-                <tr>
-                    <td class="user-email">domz@gmail.com</td>
-                    <td class="user-name">Greg Rog</td>
-                    <td class="user-id"></td>
-                    <td class="user-status">Active</td>
-                    <td class="user-createdAt"></td>
-                </tr>
-                <tr>
-                    <td class="user-email">domz@gmail.com</td>
-                    <td class="user-name">Greg Rog</td>
-                    <td class="user-id"></td>
-                    <td class="user-status">Active</td>
-                    <td class="user-createdAt"></td>
-                </tr>
-                <tr>
-                    <td class="user-email">domz@gmail.com</td>
-                    <td class="user-name">Greg Rog</td>
-                    <td class="user-id"></td>
-                    <td class="user-status">Active</td>
-                    <td class="user-createdAt"></td>
-                </tr>
-                <tr>
-                    <td class="user-email">domz@gmail.com</td>
-                    <td class="user-name">Greg Rog</td>
-                    <td class="user-id"></td>
-                    <td class="user-status">Active</td>
-                    <td class="user-createdAt"></td>
-                </tr>
-                <tr>
-                    <td class="user-email">domz@gmail.com</td>
-                    <td class="user-name">Greg Rog</td>
-                    <td class="user-id"></td>
-                    <td class="user-status">Active</td>
-                    <td class="user-createdAt"></td>
-                </tr>
+                <template>
+                    <tr>
+                        <td class="user-select">
+                            <check-box></check-box>
+                        </td>
+                        <td class="user-id"></td>
+                        <td class="user-name"></td>
+                        <td class="user-email">
+                            <a href="mailto:" class="mailto"></a>
+                        </td>
+                        <td class="user-status">
+                            <span class="indicator"></span>
+                            <span class="status"></span>
+                        </td>
+                        <td class="user-createdAt"></td>
+                    </tr>
+                </template>
             </tbody>
         </table>
     </div>
 </body>
+
 <script type="module" src="./demo.js" defer></script>
+<script type="module" src="../../../Components/form/checkbox/checkbox.js"></script>
+<script type="module" src="../../../Components/form/search/searchInput.js"></script>
 </html>

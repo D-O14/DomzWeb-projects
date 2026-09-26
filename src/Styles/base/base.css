@@ -64,8 +64,8 @@ menu {
 }
 
 svg {
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     display: inline;
     vertical-align: middle;
     transform: translate(0);
@@ -179,7 +179,7 @@ table {
     border-collapse: collapse;
     background: var(--bg-plain);
     border-color: var(--inherit);
-    border-radius: var(--radius-md);
+    /*border-radius: var(--radius-md);*/
     max-width: var(--dimension-100);
     overflow: var(--hidden-overflow);
 
