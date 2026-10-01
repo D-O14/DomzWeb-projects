@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Database Demo</title>
+    <link rel="stylesheet" href="./demo.css">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
                 <span class="user-count"></span>
             </h1>
             <search-input placeholder="Search through your users...">
-                <span slot="icon" class="icon searchbar-icon">
+                <span slot="icon" class="icon search-icon">
                     <i data-lucide="search"></i>
                 </span>
             </search-input>
@@ -25,49 +26,25 @@
                 <th>
                     <check-box></check-box>
                 </th>
-                <th>
-                    <div class="content">
-                        <span class="icon" data-icon="userEncrypt"></span>
-                        <span class="text">User Id</span>
-                    </div>
-                </th>
-                <th>
-                    <div class="content">
-                        <span class="icon" data-icon="account"></span>
-                        <span class="text">Name</span>
-                        <span class="icon sort-icon" data-icon="sort"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="content">
-                        <span class="icon" data-icon="mail"></span>
-                        <span class="text">Email</span>
-                        <span class="icon sort-icon" data-icon="sort"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="content">
-                        <span class="icon" data-icon="alert"></span>
-                        <span class="text">Status</span>
-                        <span class="icon sort-icon" data-icon="sort"></span>
-                    </div>
-                </th>
-                <th>
-                    <div class="content">
-                        <span class="icon" data-icon="calendar"></span>
-                        <span class="text">Created At</span>
-                        <span class="icon sort-icon" data-icon="sort"></span>
-                    </div>
-                </th>
+                <template class="header-template">
+                    <th>
+                        <div class="content">
+
+                        </div>
+                    </th>
+                </template>
             </thead>
             <tbody>
-                <template>
+                <template class="row-template">
                     <tr>
                         <td class="user-select">
                             <check-box></check-box>
                         </td>
                         <td class="user-id"></td>
-                        <td class="user-name"></td>
+                        <td class="user-name">
+                            <span class="icon" data-icon="user"></span>
+                            <span class="name"></span>
+                        </td>
                         <td class="user-email">
                             <a href="mailto:" class="mailto"></a>
                         </td>
@@ -84,6 +61,7 @@
 </body>
 
 <script type="module" src="./demo.js" defer></script>
-<script type="module" src="../../../Components/form/checkbox/checkbox.js"></script>
-<script type="module" src="../../../Components/form/search/searchInput.js"></script>
+<script type="module" src="../../../Components/form/checkbox/checkbox.js" defer></script>
+<script type="module" src="../../../Components/form/search/searchInput.js" defer></script>
+
 </html>

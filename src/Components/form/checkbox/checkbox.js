@@ -1,4 +1,3 @@
-import "./checkbox.css";
 import { createTemplate, createStyle } from "@utils/component.js";
 
 const template = createTemplate(

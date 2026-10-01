@@ -64,7 +64,7 @@ export function formatDate(date) {
         weekday: "short",
         month: 'short',
         day: '2-digit',
-        year: 'long'
+        year: 'numeric'
     });
 }
 

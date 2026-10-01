@@ -1,13 +1,13 @@
 import "./tooltip.css";
 //import "../buttons/regular/button";
-import { Bubbles, createIcons, icons } from "lucide";
+import { createIcons, icons } from "lucide";
 import { createStyle, createTemplate } from "@utils/component";
 
 const myButton = document.querySelector("my-button");
 const template = createTemplate(
     `
     <div part="tooltip" class="tooltip">
-        <slot name="info"></slot>
+        <slot name="content"></slot>
     </div>
     `
 );
