@@ -3,11 +3,11 @@ import { createTemplate, createStyle } from "@utils/component";
 
 const tableData = {
     headers: [
-        { label: "component", sortable: false },
-        { name: "User Id", sortable: false, icon: "userEncrypt", label: "text" },
-        { name: "Name", sortable: true, icon: "account", label: "text" },
-        { name: "Email", sortable: false, icon: "mail", label: "text" },
-        { name: "Created", sortable: true, icon: "calendar", label: "text" },
+        { type: "component", sortable: false },
+        { name: "User Id", sortable: false, icon: "userEncrypt" },
+        { name: "Name", sortable: true, icon: "account" },
+        { name: "Email", sortable: false, icon: "mail" },
+        { name: "Created", sortable: true, icon: "calendar" },
     ],
     users: [
         { userName: "Greg Rog", userId: crypto.randomUUID(), userEmail: "grog@gmail.com", createdAt: new Date().toISOString() },
@@ -75,61 +75,89 @@ const views = {
     },
 
     headerView(content, header) {
-        content.innerHTML =
-        `<span class="icon" data-icon="${ header.icon }"></span>
-        <span class="text">${ header.name }</span>`
-        initializeIcons(content);
-    },
-
-    componentView(content) { content.innerHTML = `<check-box></check-box>` }
+        if (header?.type === "component") {
+            content.innerHTML = `<check-box></check-box>`
+        } else {
+            content.innerHTML =
+            `<span class="icon" data-icon="${ header.icon }"></span>
+            <span class="text">${ header.name }</span>`
+            initializeIcons(content);
+        }
+    }
 };
 
 const dataTable = document.querySelector("data-table");
 
-export default class Table extends HTMLElement {
+export default class DataTable extends HTMLElement {
     constructor() {
         super();
+
+        this._data = [];
+        this._headers = [];
+        this._rowConfig = null;
+        
         const shadow = this.attachShadow({ mode: "open" });
         const style = createStyle("./table.css", import.meta.url);
         this.table = tableTemplate.content.cloneNode(true).querySelector(".table-container");
+        this.tbody = this.table.querySelector("tbody");
+        this.thead = this.table.querySelector("thead");
         shadow.append(style, this.table);
         initializeIcons(shadow);
     };
 
-    connectedCallback() { 
-        const tableName = this.getAttribute("tablename");
-        this.table.querySelector(".table-name").textContent = tableName;
+    connectedCallback() {
+        this.render();
+        this.table.querySelector(".table-name").textContent = this.getAttribute("tablename") || "";
     };
 
-    renderTable(data, headers) {
-        const tbody = this.table.querySelector("tbody");
-        const thead = this.table.querySelector("thead");
-        this.table.querySelector(".data-count").textContent = data.length;
-        this.renderHeader(headers, thead);
-        this.renderRow(data, tbody, configureRow);
+    set config(value) {
+        this._rowConfig = value;
+        this.renderRow();
     };
 
-    renderHeader(data, thead) {
-        data.forEach(header => {
+    set data(value) {
+        this._data = value;
+        this.renderCount();
+        this.renderRow();
+    };
+
+    set headers(value) {
+        this._headers = value;
+        this.renderHeader();
+    };
+
+    get data() { return this._data };
+    get headers() { return this._headers };
+    get config() { return this._rowConfig };
+
+    render() {
+        this.renderHeader();
+        this.renderCount();
+        this.renderRow();
+    };
+
+    renderCount() { this.table.querySelector(".data-count").textContent = this.data.length };
+
+    renderHeader() {
+        this.headers.forEach(header => {
             const th = headerTemplate.content.cloneNode(true);
             const tableHead = th.querySelector("th");
             const content = tableHead.querySelector(".content");
             header.sortable ? views.sortableView(content, header) : views.headerView(content, header);
-            header.label === "component" && !header.sortable ? views.componentView(content) : "";
-            thead.append(tableHead);
+            this.thead.append(tableHead);
         });
     };
 
-    renderRow(data, tbody, config) {
-        data.forEach(row => {
+    renderRow() {
+        this.data.forEach(row => {
             const tableRow = rowTemplate.content.cloneNode(true);
-            config(tableRow, row);
-            tbody.append(tableRow);
+            this.rowConfig(tableRow, row);
+            this.tbody.append(tableRow);
         });
     };
 };
 
-function configureRow(tableRow, row) {
+dataTable.rowConfig = (tableRow, row) => {
     tableRow.querySelector(".name").textContent = row.userName;
     tableRow.querySelector(".user-id").textContent = row.userId;
     tableRow.querySelector(".mailto").textContent = row.userEmail;
@@ -137,12 +165,13 @@ function configureRow(tableRow, row) {
     tableRow.querySelector(".user-createdAt").textContent = formatDate(new Date(row.createdAt));
 }
 
+dataTable.data = tableData.users;
+dataTable.headers = tableData.headers;
+customElements.define("data-table", DataTable);
+
 function formatDate(date) {
     const day = date.toLocaleDateString("en-US", { day: "numeric" });
     const year = date.toLocaleDateString("en-US", { year: "numeric" });
     const month = date.toLocaleDateString("en-US", { month: "2-digit" });
     return `${ month }/${ day }/${ year }`;
 };
-
-customElements.define("data-table", Table);
-dataTable.renderTable(tableData.users, tableData.headers);
