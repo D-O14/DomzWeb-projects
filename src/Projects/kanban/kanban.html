@@ -4,46 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--<meta name="description" content=".">
+    <meta name="description" content="A productivity application that provides an interface for switching editable tasks between columns representing not started, 
+        in progress, and completed states, by dragging and dropping.">
     <meta name="theme-color" content="#">
     <meta property="og:title" content="Kanban Board">
-    <meta property="og:description" content=".">
+    <meta property="og:description" content="A productivity application that provides an interface for switching editable tasks between columns representing not started, 
+    in progress, and completed states, by dragging and dropping.">
     <meta property="og:image" content="">
     <meta property="og:url" content="http://localhost:5173/DomzWeb-projects/src/Projects/kanban/kanban.html">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="" />
     <meta name="twitter:title" content="Kanban Board" />
-    <meta name="twitter:description" content="." />
-    <meta name="twitter:image" content="" />-->
+    <meta name="twitter:description" content="A productivity application that provides an interface for switching editable tasks between columns representing not started, 
+    in progress, and completed states, by dragging and dropping." />
+    <meta name="twitter:image" content="" />
     <link rel="canonical" href="http://localhost:5173/DomzWeb-projects/src/Projects/kanban/kanban.html">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="apple-mobile-web-app-title" content="Kanban Board">
-    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
     <title>Kanban Board</title>
 </head>
 
 <body>
     <main>
-        <div class="kanban">
-            <template class="column-template">
-                <div class="kanban-column">
-                    <div class="kanban-title"></div>
-                    <div class="kanban-items"></div>
-                    <button class="kanban-btn" type="button">+ Add</button>
-                </div>
-            </template>
-            <template class="item-template">
-                <div class="kanban-item" draggable="true">
-                    <div class="kanban-input" contenteditable></div>
-                </div>
+        <div class="kanban-board">
+            <h1>
+                Your Tasks
+                <i data-lucide="circleCheckBig"></i>
+            </h1>
+            <div class="columns">
+                <template class="column-template">
+                    <div class="column">
+                        <div class="column-header">
+                            <div class="column-info">
+                                <h3 class="column-title"></h3>
+                                <span class="task-count"></span>
+                            </div>
+                            <button class="add-task-btn" type="button">
+                                <span class="icon add-icon" data-icon="circlePlus"></span>
+                            </button>
+                        </div>
+                        <div class="tasks"></div>
+                    </div>
+                </template>
+            </div>
+            <template class="task-template">
+                <article class="task" draggable="true">
+                    <time class="created-at">
+                        <span class="date"></span>
+                        <span class="icon alarm-icon" data-icon="alarm"></span>
+                    </time>
+                    <p class="task-content"></p>
+                    <div class="task-input" contenteditable></div>
+                    <hr />
+                    <menu class="actions">
+                        <button aria-label="edit task" class="edit-task-btn">
+                            <span class="icon edit-icon" data-icon="squarePen"></span>
+                        </button>
+                        <button aria-label="delete task" class="delete-task-btn">
+                            <span class="icon delete-icon" data-icon="delete"></span>
+                        </button>
+                    </menu>
+                </article>
             </template>
             <template class="dropzone-template">
-                <div class="kanban-dropzone"></div>
-                </template>
+                <div class="dropzone"></div>
+            </template>
         </div>
+
     </main>
 </body>
+
 <script type="module" src="./kanban.js" defer></script>
 
 </html>

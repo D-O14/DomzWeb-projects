@@ -23,14 +23,48 @@
         <div class="box"></div>
         <div class="box"></div>
         <div class="box"></div>
-    </div>-->
+    </div>
     <div class="dropzone" style="border-color: hsl(5, 73%, 53%);">
         <div class="draggable box-1" draggable="true" data-persist-position="true" id="box-1"></div>
         <div class="draggable box-2" draggable="true" data-persist-position="true" id="box-2"></div>
         <div class="draggable box-3" draggable="true" data-persist-position="true" id="box-3"></div>
         <div class="draggable box-4" draggable="true" data-persist-position="true" id="box-4"></div>
     </div>
-    <div class="dropzone" style="border-color: hsl(215, 73%, 53%);"></div> 
+    <div class="dropzone" style="border-color: hsl(215, 73%, 53%);"></div>-->
+    <div class="container">
+        <h1>Task List</h1>
+        <div class="container columns">
+            <template class="column-template">
+                <div class="column">
+                    <div class="column-header">
+                        <div class="column-info">
+                            <h3 class="column-title"></h3>
+                            <span class="task-count"></span>
+                        </div>
+                        <button aria-label="add task button" class="add-task-btn">
+                            <span class="icon" data-icon="plus"></span>
+                        </button>
+                    </div>
+                    <div class="tasks"></div>
+                </div>
+            </template>
+
+            <template class="task-template">
+                <article class="task" draggable="true">
+                    <p class="task-content"></p>
+                    <menu>
+                        <button aria-label="edit">
+                            <span class="icon edit-icon" data-icon="pen"></span>
+                        </button>
+                        <button aria-label="delete">
+                            <span class="icon delete-icon" data-icon="delete"></span>
+                        </button>
+                    </menu>
+                </article>
+            </template>
+
+        </div>
+    </div>
 </body>
 
 <script type="module" src="./expo.js" defer></script>

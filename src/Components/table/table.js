@@ -55,7 +55,6 @@ const rowTemplate = createTemplate(
         </td>
         <td class="user-id"></td>
         <td class="user-name">
-            <span class="icon" data-icon="user"></span>
             <span class="name"></span>
         </td>
         <td class="user-email">

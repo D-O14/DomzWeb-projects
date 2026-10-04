@@ -1,4 +1,17 @@
-@import "@styles/base/base.css";
+/*@import "@styles/base/base.css";*/
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    user-select: none;
+    box-sizing: border-box;
+    transition: all 300ms ease-in-out;
+    -webkit-tap-highlight-color: transparent;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
 
 :root {
     --bg-kanban: hsl(168, 100%, 29%);
@@ -6,51 +19,206 @@
     --bg-kanban-btn: hsla(0, 0%, 0%, 0.1);
 }
 
-.kanban {
-    width: 750px;
-    padding: var(--spacing-7);
-    display: var(--flex-display);
-    background: var(--bg-kanban);
-    border-radius: var(--radius-xsm);
+body {
+    display: grid;
+    min-height: 100dvh;
+    grid-template-rows: auto 1fr;
+    background: hsl(220, 100%, 8%);
 }
 
-.kanban-column {
-    flex: 1;
+svg {
+    display: inline;
+    vertical-align: middle;
+    transform: translate(0);
 }
 
-.kanban-column:not(:last-child) {
-    margin-right: var(--spacing-7);
-}
-
-.kanban-title {
+h1 {
+    margin: 1em 0;
     font-size: 30px;
-    color: var(--clr-plain);
-    margin-bottom: var(--spacing-5);
+    font-weight: 400;
 }
 
-.kanban-input {
+button {
+    gap: .5rem;
+    display: flex;
     cursor: pointer;
+    overflow: hidden;
+    position: relative;
+    background: none;
+    align-items: center;
+    border-radius: .25rem;
+    justify-content: center;
+    padding-bottom: .5em 1em;
+    border: 1px solid transparent;
+}
+
+button:is(.active, :hover) {
+    opacity: 1;
+}
+
+menu {
+    width: 100%;
+    display: flex;
+    padding: .15em .5em;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+hr {
+    border-top: 1px solid hsl(0, 0%, 80%);
+}
+
+.kanban-board {
+    margin: 0 auto;
+    width: max(700px, 80%);
+}
+
+.columns {
+    gap: 1.5em;
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    padding: 2em;
+    display: grid;
+    min-height: 60dvh;
+    border-radius: .5rem;
+    grid-template-rows: auto 1fr;
+    background: hsl(220, 100%, 15%);
+    border: 1px solid hsl(230, 100%, 20%);
+}
+
+.column-header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    /*border-bottom: 1px solid hsl(0, 0%, 80%);*/
+}
+
+.column-title {
+    font-weight: 400;
+    text-wrap: nowrap;
+    color: hsl(0, 0%, 100%);
+}
+
+.column-info {
+    gap: .5em;
+    display: flex;
+    align-items: center;
+}
+
+.task-count {
+    font-size: 12px;
+    padding: .25em .5em;
+    border-radius: 5rem;
+    background: hsl(220, 100%, 80%);
+}
+
+.tasks {
+    gap: .5em;
+    display: grid;
+    align-content: start;
+}
+
+.task,
+.task-input {
+    padding: 2em;
+    overflow: hidden;
+    position: relative;
+    border-radius: .5em;
+    background: hsl(0, 0%, 100%);
+    box-shadow: 0px 2px 4px hsl(0, 0%, 0%, .1);
+}
+
+.task {
+    gap: 1em;
+    display: flex;
+    padding-bottom: 0;
+    position: relative;
+    flex-direction: column;
+}
+
+.task-input {
+    outline: none;
+    padding: .25em;
+    box-shadow: none;
     background: var(--bg-plain);
     border-radius: var(--radius-xsm);
     padding: var(--spacing-3) var(--spacing-4);
 }
 
-.kanban-dropzone {
+.dropzone {
     height: 10px;
     transition: background .15s, height .15s;
 }
 
-.kanban-dropzone.active {
+.dropzone.active {
     height: 20px;
     background: var(--bg-dropzone);
 }
 
-.kanban-btn {
+.add-task-btn {
+    opacity: .5;
     cursor: pointer;
-    color: var(--bg-plain);
+    padding-block: 0;
+    background: none;
+    padding-inline: .5em;
     border: var(--brdr-none);
     width: var(--dimension-100);
-    border-radius: var(--radius-xsm);
-    background: var(--bg-kanban-btn);
-    padding: var(--spacing-3) var(--spacing-0);
+}
+
+.delete-task-btn,
+.edit-task-btn {
+    background: none;
+    padding-inline: .5em;
+}
+
+.edit-task-btn {
+    opacity: .5;
+}
+
+.edit-icon svg,
+.delete-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+.add-icon svg,
+.alarm-icon svg:hover {
+    stroke: hsl(225, 100%, 50%);
+}
+
+.alarm-icon svg {
+    stroke: hsl(210, 100%, 50%);
+}
+
+.delete-icon svg {
+    stroke: hsl(10, 100%, 50%);
+}
+
+.created-at {
+    top: 10px;
+    right: 20px;
+    gap: .45em;
+    overflow: hidden;
+    cursor: pointer;
+    text-wrap: nowrap;
+    position: absolute;
+    align-items: center;
+    display: inline-flex;
+    color: hsl(0, 0%, 60%);
+}
+
+.date {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100px);
+}
+
+.date.display {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
 }

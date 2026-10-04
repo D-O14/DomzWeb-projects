@@ -192,3 +192,7 @@ table {
 :disabled {
     cursor: not-allowed;
 }
+
+:autofill{
+    background: none;
+}

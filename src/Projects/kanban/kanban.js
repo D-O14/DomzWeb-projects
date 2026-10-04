@@ -1,132 +1,186 @@
 import "./kanban.css";
+import { createIcons, icons } from "lucide";
 import { save, read } from "@utils/database";
+import { formatDate, formatTime } from "@utils/date";
+import { initializeIcons } from "@assets/Icons/icons";
+import { enableDrag, enableDrop, changeOnDrop, switchPositon } from "@utils/dragDrop";
 
-const kanbanData = read("kanban-data", [
-    { id: 1, title: "Not Started", items: [] },
-    { id: 2, title: "In Progress", items: [] },
-    { id: 3, title: "Completed", items: [] }
+let displayed;
+let dataCount;
+let dateFormat;
+let timeFormat;
+
+const kanbanTasks = read("kanban-tasks", [
+    { id: 1, title: "To Do", tasks: [], dataColumn: "toDoColumn" },
+    { id: 2, title: "In Progress", tasks: [], dataColumn: "progressColumn" },
+    { id: 3, title: "Completed", tasks: [], dataColumn: "completedColumn" }
 ]);
 
-const kanban = document.querySelector(".kanban");
-const itemTemplate = document.querySelector(".item-template");
+const kanbanBoard = document.querySelector(".kanban-board");
+const columns = kanbanBoard.querySelector(".columns");
+const taskTemplate = document.querySelector(".task-template");
 const columnTemplate = document.querySelector(".column-template");
 const dropzoneTemplate = document.querySelector(".dropzone-template");
 
-function addItem(columnId, content) {
-    const column = kanbanData.find(column => column.id === columnId);
-    if (!column) { throw new Error("Column does not exist!") };
-    const item = { id: crypto.randomUUID(), content: content };
-    column.items.push(item);
-    save("kanban-data", kanbanData);
-    return item;
+/*function updateTaskCount(column) { 
+    const tasks = column.querySelector(".tasks").children;
+    const taskCount = column.querySelector(".task=count");
+    taskCount.textContent = tasks.length;
 };
 
-function updateItem(itemId, newProps) {
-    const [item, currentColumn] = (() => {
-        for (const column of kanbanData) {
-            const item = column.items.find(item => item.id === itemId);
-            if (item) { return [item, column] };
+function observeChanges(columns) { 
+    for (const column of columns){
+        const observer = new MutationObserver(() => { updateTaskCount(column)});
+        observer.observe(column.querySelector(".tasks"), { childList: true });
+    };
+};*/
+
+function createTask(columnId, content) {
+    const column = kanbanTasks.find(column => column.id === columnId);
+    if (!column) { throw new Error("Column does not exist!") };
+    const task = { id: crypto.randomUUID(), content: content, column: column.dataColumn, createdAt: new Date().toISOString() };
+    column.tasks.push(task);
+    save("kanban-tasks", kanbanTasks);
+    return task;
+};
+
+function updateTask(taskId, newProps) {
+    const [task, currentColumn] = (() => {
+        for (const column of kanbanTasks) {
+            const task = column.tasks.find(task => task.id === taskId);
+            if (task) { return [task, column] };
         };
     })();
-    if (!item) { throw new Error("Item Not Found!") };
-    item.content = newProps.content === undefined ? item.content : newProps.content;
+    if (!task) { throw new Error("Task Not Found!") };
+    task.content = newProps.content === undefined ? task.content : newProps.content;
     if (newProps.columnId !== undefined && newProps.position !== undefined) {
-        const target = kanbanData.find(column => column.id === newProps.columnId);
+        const target = kanbanTasks.find(column => column.id === newProps.columnId);
         if (!target) { throw new Error("Target Column not found!") }
-        currentColumn.items.splice(currentColumn.items.indexOf(item), 1);
-        target.items.splice(newProps.position, 0, item);
+        currentColumn.tasks.splice(currentColumn.tasks.indexOf(task), 1);
+        target.tasks.splice(newProps.position, 0, task);
+        task.column = target.dataColumn;
     };
-    save("kanban-data", kanbanData);
-}
+    save("kanban-tasks", kanbanTasks);
+};
 
-function deleteItem(itemId) {
-    for (const column of kanbanData) {
-        const item = column.items.find(item => item.id === itemId);
-        if (item) { column.items.splice(column.items.indexOf(item), 1); break };
-    }
-    save("kanban-data", kanbanData);
-}
+function deleteTask(taskId) {
+    for (const column of kanbanTasks) {
+        dataCount = column.tasks.length;
+        const task = column.tasks.find(task => task.id === taskId);
+        if (task) { column.tasks.splice(column.tasks.indexOf(task), 1); break };
+        dataCount--;
+        console.log(column);
+        console.log(`data count of ${ column.dataColumn } is: ${ dataCount }`);
+    };
+    save("kanban-tasks", kanbanTasks);
+};
 
-function renderItem(itemData, columnElement) {
-    const clone = itemTemplate.content.cloneNode(true);
-    const item = clone.querySelector(".kanban-item");
-    const input = clone.querySelector(".kanban-input");
+function renderTask(taskData, columnElement) {
+    const clone = taskTemplate.content.cloneNode(true);
+    const createdAt = clone.querySelector(".created-at");
+    const input = clone.querySelector(".task-input");
+    dateFormat = formatDate(taskData.createdAt);
+    timeFormat = formatTime(taskData.createdAt);
+    const task = clone.querySelector(".task");
+    const date = clone.querySelector(".date");
     const dropzone = renderDropzone();
-    const id = itemData.id;
+    const id = taskData.id;
 
-    item.dataset.id = id;
-    item.appendChild(dropzone);
-    input.textContent = itemData.content;
+    task.dataset.id = id;
+    task.appendChild(dropzone);
+    input.textContent = taskData.content;
+    date.textContent = dateFormat;
 
-    item.addEventListener("dblclick", () => {
-        const check = confirm("Are you sure you want to delete this item?");
-        if (check) { deleteItem(id); item.remove() };
+    createdAt.addEventListener("click", (e) => { 
+        const alarmIcon = createdAt.querySelector(".alarm-icon svg");
+        displayed = date.classList.contains("display");
+        if (e.target === alarmIcon && !displayed) { 
+            date.classList.add("display");
+        } else if(e.target === alarmIcon && displayed) {
+            date.classList.remove("display");
+        };
     });
-
-    item.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text/plain", id) });
-
+    date.addEventListener("click", () => {
+        date.textContent === dateFormat ? date.textContent = timeFormat :
+            date.textContent = dateFormat;
+    });
+    task.addEventListener("click", (e) => {
+        const deleteBtn = task.children[4].querySelector(".delete-task-btn .icon svg");
+        if (e.target === deleteBtn) {
+            const check = confirm("Are you sure you want to delete this task?");
+            if (check) { deleteTask(id); task.remove() };  
+        };
+    });
+    task.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text/plain", id) });
     input.addEventListener("blur", () => {
         const newContent = input.textContent.trim();
-        if (newContent === itemData.content) return;
-        itemData.content = newContent;
-        updateItem(id, { content: newContent });
+        if (newContent === taskData.content) return;
+        taskData.content = newContent;
+        updateTask(id, { content: newContent });
     });
-
     input.addEventListener("drop", (e) => { e.preventDefault() });
 
-    columnElement.append(item);
-}
+    columnElement.append(task);
+};
 
 function renderColumn(columnData) {
+    dataCount = columnData.tasks.length;
     const clone = columnTemplate.content.cloneNode(true);
-    const column = clone.querySelector(".kanban-column");
-    const title = clone.querySelector(".kanban-title");
-    const items = clone.querySelector(".kanban-items");
-    const button = clone.querySelector(".kanban-btn");
-    const dropzone = renderDropzone();
+    const column = clone.querySelector(".column");
+    const tasks = clone.querySelector(".tasks");
+    const taskCount = clone.querySelector(".task-count");
+    const addTaskBtn = clone.querySelector(".add-task-btn");
+    const columnTitle = clone.querySelector(".column-title");
+    /*const dropzone = renderDropzone();
+    tasks.appendChild(dropzone);*/
 
-    items.appendChild(dropzone);
     column.dataset.id = columnData.id;
-    title.textContent = columnData.title;
+    columnTitle.textContent = columnData.title;
+    column.dataset.column = columnData.dataColumn;
+    taskCount.textContent = dataCount;
 
-    columnData.items.forEach(item => { renderItem(item, items) });
-    button.addEventListener("click", () => {
-        const newItem = addItem(columnData.id, "");
-        renderItem(newItem, items);
+    columnData.tasks.forEach(task => { renderTask(task, tasks) });
+    addTaskBtn.addEventListener("click", () => {
+        const newTask = createTask(columnData.id, "");
+        renderTask(newTask, tasks);
+        dataCount++;
+        console.log(`data count of ${ columnData.dataColumn } is: ${ dataCount }`);
     });
     return column;
-}
+};
 
 function renderDropzone() {
     const clone = dropzoneTemplate.content.cloneNode(true);
-    const dropzone = clone.querySelector(".kanban-dropzone");
+    const dropzone = clone.querySelector(".dropzone");
     dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("active") });
     dropzone.addEventListener("dragleave", () => { dropzone.classList.remove("active") });
     dropzone.addEventListener("drop", (e) => {
         e.preventDefault();
         dropzone.classList.remove("active");
-        const column = dropzone.closest(".kanban-column");
+        const column = dropzone.closest(".column");
         const columnId = Number(column.dataset.id);
-        const itemId = e.dataTransfer.getData("text/plain");
-        const dropInColumns = column.querySelectorAll(".kanban-dropzone");
+        const taskId = e.dataTransfer.getData("text/plain");
+        const dropInColumns = column.querySelectorAll(".dropzone");
         const droppedIndex = [...dropInColumns].indexOf(dropzone);
-        const dropped = document.querySelector(`[data-id="${ itemId }"]`);
-        const insertAfter = dropzone.parentElement.classList.contains("kanban-item") ?
+        const dropped = document.querySelector(`[data-id="${ taskId }"]`);
+        const insertAfter = dropzone.parentElement.classList.contains("task-input") ?
             dropzone.parentElement : dropzone;
         if (dropped.contains(dropzone)) return;
         insertAfter.after(dropped);
-
-        updateItem(itemId, { columnId: columnId, position: droppedIndex });
+        updateTask(taskId, { columnId: columnId, position: droppedIndex, column: column.dataset.column });
     });
     return dropzone;
-}
+};
 
 function renderKanban(data) {
-    kanban.replaceChildren();
+    columns.replaceChildren();
     data.forEach(columnData => {
         const column = renderColumn(columnData);
-        kanban.append(column);
+        columns.append(column);
     });
-}
+    createIcons({ icons });
+    //observeChanges(columns);
+    initializeIcons(kanbanBoard);
+};
 
-renderKanban(kanbanData);
+renderKanban(kanbanTasks);
