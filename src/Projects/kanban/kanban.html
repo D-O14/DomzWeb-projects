@@ -7,26 +7,26 @@
     <meta name="description" content="A productivity application that provides an interface for switching editable tasks between columns representing not started, 
         in progress, and completed states, by dragging and dropping.">
     <meta name="theme-color" content="#">
-    <meta property="og:title" content="Kanban Board">
+    <meta property="og:title" content="Task Flow - Kanban Board">
     <meta property="og:description" content="A productivity application that provides an interface for switching editable tasks between columns representing not started, 
     in progress, and completed states, by dragging and dropping.">
     <meta property="og:image" content="">
     <meta property="og:url" content="http://localhost:5173/DomzWeb-projects/src/Projects/kanban/kanban.html">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="" />
-    <meta name="twitter:title" content="Kanban Board" />
+    <meta name="twitter:title" content="Task Flow - Kanban Board" />
     <meta name="twitter:description" content="A productivity application that provides an interface for switching editable tasks between columns representing not started, 
     in progress, and completed states, by dragging and dropping." />
     <meta name="twitter:image" content="" />
     <link rel="canonical" href="http://localhost:5173/DomzWeb-projects/src/Projects/kanban/kanban.html">
-    <title>Kanban Board</title>
+    <title>Task Flow - Kanban Board</title>
 </head>
 
 <body>
     <main>
         <div class="kanban-board">
             <h1>
-                Your Tasks
+                Task<span class="app-name">Flow</span>
                 <i data-lucide="circleCheckBig"></i>
             </h1>
             <div class="columns">
@@ -34,7 +34,10 @@
                     <div class="column">
                         <div class="column-header">
                             <div class="column-info">
-                                <h3 class="column-title"></h3>
+                                <span class="dot"></span>
+                                <h3 class="column-title">
+                                    <span class="title"></span>
+                                </h3>
                                 <span class="task-count"></span>
                             </div>
                             <button class="add-task-btn" type="button">
@@ -53,25 +56,25 @@
                     </time>
                     <p class="task-content"></p>
                     <div class="task-input" contenteditable></div>
-                    <hr />
                     <menu class="actions">
-                        <button aria-label="edit task" class="edit-task-btn">
-                            <span class="icon edit-icon" data-icon="squarePen"></span>
+                        <!--<button aria-label="edit task" class="edit-task-btn">
+                            <span class="icon edit-icon" data-icon="pen"></span>
                         </button>
                         <button aria-label="delete task" class="delete-task-btn">
                             <span class="icon delete-icon" data-icon="delete"></span>
-                        </button>
+                        </button>-->
                     </menu>
                 </article>
             </template>
             <template class="dropzone-template">
                 <div class="dropzone"></div>
             </template>
+            <template class="empty-template">
+                <h4>No Tasks yet</h4>
+            </template>
         </div>
-
     </main>
 </body>
 
 <script type="module" src="./kanban.js" defer></script>
-
 </html>

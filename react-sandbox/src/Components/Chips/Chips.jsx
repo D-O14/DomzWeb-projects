@@ -1,6 +1,6 @@
 import { Check, Ticket } from "lucide-react"
 
-export default function data({ data=[], className="row" }) {
+export default function data({ data=[{}], className="row" }) {
     return (
         <>
             <menu className={className}>

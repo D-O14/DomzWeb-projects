@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "./DropDown.module.css";
 import { ChevronDown } from "lucide-react"
 import SearchBar from "../Search/SearchBar";
 
-export default function DropDown({ ltr = true, options = [], property, selectText="Choose one", searchable }) {
+export default function Dropdown({ ltr = true, options = [], property, selectText="Choose one", searchable }) {
     const [text, setText] = useState(selectText);
     const [active, setActive] = useState(false);
     function dropDown() { !active ? setActive(true) : setActive(false) };
@@ -15,7 +15,7 @@ export default function DropDown({ ltr = true, options = [], property, selectTex
             </li>
         });
         return selectData;
-    }
+    };
     function searchItems(e) {
         const results = options.filter(option => {
            return option[property].toLowerCase().includes(e.target.value.toLowerCase().trim());

@@ -16,9 +16,10 @@ const kanbanTasks = read("kanban-tasks", [
     { id: 3, title: "Completed", tasks: [], dataColumn: "completedColumn" }
 ]);
 
+const columnContainer = document.querySelector(".columns");
 const kanbanBoard = document.querySelector(".kanban-board");
-const columns = kanbanBoard.querySelector(".columns");
 const taskTemplate = document.querySelector(".task-template");
+const emptyTemplate = document.querySelector(".empty-template");
 const columnTemplate = document.querySelector(".column-template");
 const dropzoneTemplate = document.querySelector(".dropzone-template");
 
@@ -38,7 +39,14 @@ function observeChanges(columns) {
 function createTask(columnId, content) {
     const column = kanbanTasks.find(column => column.id === columnId);
     if (!column) { throw new Error("Column does not exist!") };
-    const task = { id: crypto.randomUUID(), content: content, column: column.dataColumn, createdAt: new Date().toISOString() };
+    const task = {
+        id: crypto.randomUUID(),
+        content: content,
+        column: column.dataColumn,
+        createdAt: new Date().toISOString(),
+        priority: "",
+        tags: [],
+    };
     column.tasks.push(task);
     save("kanban-tasks", kanbanTasks);
     return task;
@@ -130,7 +138,7 @@ function renderColumn(columnData) {
     const tasks = clone.querySelector(".tasks");
     const taskCount = clone.querySelector(".task-count");
     const addTaskBtn = clone.querySelector(".add-task-btn");
-    const columnTitle = clone.querySelector(".column-title");
+    const columnTitle = clone.querySelector(".title");
     /*const dropzone = renderDropzone();
     tasks.appendChild(dropzone);*/
 
@@ -173,13 +181,12 @@ function renderDropzone() {
 };
 
 function renderKanban(data) {
-    columns.replaceChildren();
+    columnContainer.replaceChildren();
     data.forEach(columnData => {
         const column = renderColumn(columnData);
-        columns.append(column);
+        columnContainer.append(column);
     });
     createIcons({ icons });
-    //observeChanges(columns);
     initializeIcons(kanbanBoard);
 };
 

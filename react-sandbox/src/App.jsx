@@ -1,5 +1,5 @@
 //import { ScanBox } from "lucide-react";
-import DropDown from "./Components/Form/Dropdown/DropDown";
+import Dropdown from "./components/Form/Dropdown/Dropdown";
 //import SearchBar from "./Components/Form/Search/SearchBar";
 import Clock from "./Components/Clock/Clock";
 import { useState } from "react";
@@ -49,9 +49,9 @@ const filterChips = [
 function App() {
   return (
     <>
-      <div className="rows">
-        <Chips data={sortChips} />
-        <Chips data={filterChips} />
+      <div className="row">
+        <Chips data={filterChips}/>
+        <Chips data={sortChips}/>
       </div>
     </>
   );

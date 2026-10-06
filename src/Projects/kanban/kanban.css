@@ -14,16 +14,31 @@
 }
 
 :root {
-    --bg-kanban: hsl(168, 100%, 29%);
-    --bg-dropzone: hsla(0, 0%, 0%, 0.25);
-    --bg-kanban-btn: hsla(0, 0%, 0%, 0.1);
+    --bg-main: hsl(222, 36%, 9%); 
+    --bg-card: hsl(226, 33%, 20%);
+    --bg-column: hsl(225, 35%, 16%);
+    --bg-card-hover: hsl(227, 32%, 24%);
+    --bg-column-dark: hsl(224, 33%, 13%);
+
+    --accent-red: hsl(0, 100%, 71%);
+    --accent-blue: hsl(207, 91%, 64%);
+    --accent-green: hsl(130, 57%, 56%);
+    --accent-orange: hsl(29, 100%, 58%);
+    --accent-purple: hsl(247, 87%, 73%);
+
+    --txt-primary: hsl(222, 42%, 95%);
+    --txt-secondary: hsl(225, 25%, 68%);
+
+    --shadow: 0 8px 24px hsla(225, 100%, 10%, .35);
+
+    --brdr-column: 1px solid hsl(225, 30%, 26%);
+
+    /*--bg-dropzone: hsla(0, 0%, 0%, 0.25);*/
 }
 
 body {
-    display: grid;
-    min-height: 100dvh;
-    grid-template-rows: auto 1fr;
-    background: hsl(220, 100%, 8%);
+    height: 60dvh;
+    background: var(--bg-main);
 }
 
 svg {
@@ -36,6 +51,7 @@ h1 {
     margin: 1em 0;
     font-size: 30px;
     font-weight: 400;
+    color: hsl(0, 0%, 100%);
 }
 
 button {
@@ -52,9 +68,9 @@ button {
     border: 1px solid transparent;
 }
 
-button:is(.active, :hover) {
+/*button:is(.active, :hover) {
     opacity: 1;
-}
+}*/
 
 menu {
     width: 100%;
@@ -64,13 +80,19 @@ menu {
     justify-content: flex-end;
 }
 
-hr {
+/*hr {
     border-top: 1px solid hsl(0, 0%, 80%);
+}*/
+
+.app-name{
+    font-weight: 600;
+    font-style: italic;
+    color: hsl(252, 100%, 50%);
 }
 
 .kanban-board {
     margin: 0 auto;
-    width: max(700px, 80%);
+    width: min(1500px, 90%);
 }
 
 .columns {
@@ -79,25 +101,56 @@ hr {
 }
 
 .column {
+    gap: 1em;
     flex: 1;
-    padding: 2em;
-    display: grid;
-    min-height: 60dvh;
+    display: flex;
+    flex-direction: column;
+   /*display: grid;*/
+    min-height: 550px;
     border-radius: .5rem;
-    grid-template-rows: auto 1fr;
-    background: hsl(220, 100%, 15%);
-    border: 1px solid hsl(230, 100%, 20%);
+    /*grid-template-rows: auto 1fr;*/
+}
+
+.column-header,
+.tasks{
+    border-radius: .5rem;
+    border: var(--brdr-column);
+    background: var(--bg-column-dark);
+}
+
+/*.tasks{
+    background: none;
+    border: none;
+}*/
+
+.dot{
+    width: 8px;
+    height: 8px;
+    border-radius: 5em;
+}
+
+[data-column="toDoColumn"] .dot{
+    background: var(--accent-blue);
+}
+
+[data-column="progressColumn"] .dot{
+    background: var(--accent-orange);
+}
+
+[data-column="completedColumn"] .dot{
+    background: var(--accent-green);
 }
 
 .column-header {
     display: flex;
-    position: relative;
     align-items: center;
+    padding: 16px 18px;
     justify-content: space-between;
-    /*border-bottom: 1px solid hsl(0, 0%, 80%);*/
+    border-bottom: var(--brdr-column);
+    /*border-bottom: 1px solid hsl(227, 100%, 70%, .25);*/
 }
 
-.column-title {
+.title {
     font-weight: 400;
     text-wrap: nowrap;
     color: hsl(0, 0%, 100%);
@@ -113,38 +166,110 @@ hr {
     font-size: 12px;
     padding: .25em .5em;
     border-radius: 5rem;
-    background: hsl(220, 100%, 80%);
+    color: hsl(0, 0%, 100%);
+    background: hsl(220, 100%, 50%, .25);
 }
 
 .tasks {
     gap: .5em;
+    height: 100%;
     display: grid;
+    padding: 2em;
     align-content: start;
 }
 
 .task,
 .task-input {
-    padding: 2em;
     overflow: hidden;
     position: relative;
-    border-radius: .5em;
-    background: hsl(0, 0%, 100%);
+    border-radius: 8px;
     box-shadow: 0px 2px 4px hsl(0, 0%, 0%, .1);
 }
 
 .task {
     gap: 1em;
+    padding: 14px;
     display: flex;
     padding-bottom: 0;
-    position: relative;
+    cursor: grab;
     flex-direction: column;
+    border: var(--brdr-column);
+    background: var(--bg-card);
+    border-left: 4px solid var(--accent-purple);
+}
+
+.task-title{
+    font-size: 14.5px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    padding-right: 20px;
+    word-break: break-word;
+}
+
+.task-desc{
+    font-size: 12.5px;
+    margin-bottom: 10px;
+    word-break: break-word;
+    color: var(--txt-secondary);
+}
+
+.task-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.priority-badge{
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 5em;
+    letter-spacing: .4px;
+    text-transform: uppercase;
+}
+
+.low{
+    background: hsla(207, 91%, 64%, 0.15);
+    color: var(--accent-blue);
+}
+
+.medium{
+    background: hsla(29, 100%, 58%, 0.15);
+    color: var(--accent-orange);
+}
+
+.high{
+    background: hsla(0, 100%, 71%, 0.15);
+    color: var(--accent-red);
+}
+
+.task:hover{
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    background: var(--bg-card-hover);
+}
+
+.dragging{
+    cursor: move;
+    opacity: .4;
+}
+
+.priority-low{
+    border-left-color: var(--accent-blue);
+}
+
+.priority-medium{
+    border-left-color: var(--accent-orange);
+}
+
+.priority-high{
+    border-left-color: var(--accent-red);
 }
 
 .task-input {
     outline: none;
     padding: .25em;
     box-shadow: none;
-    background: var(--bg-plain);
     border-radius: var(--radius-xsm);
     padding: var(--spacing-3) var(--spacing-4);
 }
@@ -160,7 +285,6 @@ hr {
 }
 
 .add-task-btn {
-    opacity: .5;
     cursor: pointer;
     padding-block: 0;
     background: none;
@@ -185,13 +309,17 @@ hr {
     height: 20px;
 }
 
-.add-icon svg,
-.alarm-icon svg:hover {
+.edit-icon svg{
+    stroke: var(--accent-purple);
+}
+
+.add-icon svg {
     stroke: hsl(225, 100%, 50%);
 }
 
 .alarm-icon svg {
-    stroke: hsl(210, 100%, 50%);
+    stroke: var(--accent-purple);
+    /*stroke: hsl(210, 100%, 50%);*/
 }
 
 .delete-icon svg {
@@ -208,7 +336,7 @@ hr {
     position: absolute;
     align-items: center;
     display: inline-flex;
-    color: hsl(0, 0%, 60%);
+    color: var(--txt-secondary);
 }
 
 .date {
@@ -221,4 +349,18 @@ hr {
     opacity: 1;
     pointer-events: all;
     transform: translateX(0);
+}
+
+.drag-over{
+    border-radius: 10px;
+    border: 2px solid var(--accent-purple);
+    background: hsla(247, 87%, 73%, 0.08);
+}
+
+.empty-state{
+    font-size: 13px;
+    text-align: center;
+    padding: 30px 10px;
+    color: var(--txt-secondary);
+    border: 1px dashed hsl(0, 0%, 60%);
 }
