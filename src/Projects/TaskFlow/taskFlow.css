@@ -285,7 +285,6 @@ menu {
 }
 
 .add-task-btn {
-    cursor: pointer;
     padding-block: 0;
     background: none;
     padding-inline: .5em;

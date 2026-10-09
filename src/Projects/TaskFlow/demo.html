@@ -4,11 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kanban Board demo</title>
+    <title>Task Flow demo</title>
 </head>
 
 <body>
-    
+    <template class="task-template">
+        <article class="task" draggable="true">
+            <div class="task-header">
+                <time class="created-at">
+                    <span class="date"></span>
+                    <span class="icon alarm-icon" data-icon="alarm"></span>
+                </time>
+                <span class="priority-badge"></span>
+            </div>
+            <div class="task-body">
+                <div class="task-input" contenteditable>
+                    <h4 class="task-title"></h4>
+                    <p class="task-content"></p>
+                </div>
+            </div>
+            <hr />  
+            <div class="task-footer">
+                <menu>
+                    <button aria-label="delete task" class="delete-task-btn">
+                        <span class="icon delete-icon" data-icon="delete"></span>
+                    </button>
+                </menu>
+                <div class="tags">
+
+                </div>
+            </div>
+        </article>
+    </template>
+
+    <template class="tag-template">
+        <span class="tag"></span>
+    </template>
+
 </body>
 <script type="module" src="./demo.js" defer></script>
+
 </html>

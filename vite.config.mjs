@@ -27,9 +27,7 @@ function getEntries(directories) {
 const pages = {
     main: path.resolve(__dirname, "./index.html"),
     ...getEntries([
-        "src/Apps",
         "src/Projects",
-        "src/Websites",
     ])
 };
 
@@ -42,13 +40,11 @@ export default defineConfig({
     resolve: {
         alias: {
             "@": path.resolve(__dirname, "./src"),
-            "@apps": path.resolve(__dirname, "./src/Apps"),
             "@assets": path.resolve(__dirname, "./src/Assets"),
             "@components": path.resolve(__dirname, "./src/Components"),
             "@projects": path.resolve(__dirname, "./src/Projects"),
             "@styles": path.resolve(__dirname, "./src/Styles"),
             "@utils": path.resolve(__dirname, "./src/Utilities"),
-            "@websites": path.resolve(__dirname, "./src/Websites"),
         }
     }
 });
