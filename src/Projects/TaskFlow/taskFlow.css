@@ -1,5 +1,3 @@
-/*@import "@styles/base/base.css";*/
-
 *,
 *::before,
 *::after {
@@ -14,7 +12,7 @@
 }
 
 :root {
-    --bg-main: hsl(222, 36%, 9%); 
+    --bg-main: hsl(222, 36%, 9%);
     --bg-card: hsl(226, 33%, 20%);
     --bg-column: hsl(225, 35%, 16%);
     --bg-card-hover: hsl(227, 32%, 24%);
@@ -29,11 +27,9 @@
     --txt-primary: hsl(222, 42%, 95%);
     --txt-secondary: hsl(225, 25%, 68%);
 
-    --shadow: 0 8px 24px hsla(225, 100%, 10%, .35);
-
     --brdr-column: 1px solid hsl(225, 30%, 26%);
 
-    /*--bg-dropzone: hsla(0, 0%, 0%, 0.25);*/
+    --shadow: 0 8px 24px hsla(225, 100%, 10%, .35);
 }
 
 body {
@@ -68,23 +64,34 @@ button {
     border: 1px solid transparent;
 }
 
-/*button:is(.active, :hover) {
-    opacity: 1;
-}*/
-
 menu {
     width: 100%;
     display: flex;
-    padding: .15em .5em;
+    padding-top: 0;
+    padding-inline: .5em;
+    padding-bottom: .75em;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
 
-/*hr {
-    border-top: 1px solid hsl(0, 0%, 80%);
-}*/
+hr {
+    border-radius: 5em;
+    border: 1px solid hsl(from var(--accent-purple) h s l / .45);
+}
 
-.app-name{
+[data-column="toDoColumn"] .dot {
+    background: var(--accent-blue);
+}
+
+[data-column="progressColumn"] .dot {
+    background: var(--accent-orange);
+}
+
+[data-column="completedColumn"] .dot {
+    background: var(--accent-green);
+}
+
+.app-name {
     font-weight: 600;
     font-style: italic;
     color: hsl(252, 100%, 50%);
@@ -105,40 +112,31 @@ menu {
     flex: 1;
     display: flex;
     flex-direction: column;
-   /*display: grid;*/
+    /*display: grid;*/
     min-height: 550px;
     border-radius: .5rem;
     /*grid-template-rows: auto 1fr;*/
 }
 
-.column-header,
-.tasks{
-    border-radius: .5rem;
-    border: var(--brdr-column);
-    background: var(--bg-column-dark);
-}
-
-/*.tasks{
-    background: none;
-    border: none;
-}*/
-
-.dot{
+.column .dot {
     width: 8px;
     height: 8px;
     border-radius: 5em;
 }
 
-[data-column="toDoColumn"] .dot{
-    background: var(--accent-blue);
+.column .task-count {
+    font-size: 12px;
+    padding: .25em .5em;
+    border-radius: 5rem;
+    color: hsl(0, 0%, 100%);
+    background: hsl(220, 100%, 50%, .25);
 }
 
-[data-column="progressColumn"] .dot{
-    background: var(--accent-orange);
-}
-
-[data-column="completedColumn"] .dot{
-    background: var(--accent-green);
+.column-header,
+.tasks {
+    border-radius: .5rem;
+    border: var(--brdr-column);
+    background: var(--bg-column-dark);
 }
 
 .column-header {
@@ -147,10 +145,9 @@ menu {
     padding: 16px 18px;
     justify-content: space-between;
     border-bottom: var(--brdr-column);
-    /*border-bottom: 1px solid hsl(227, 100%, 70%, .25);*/
 }
 
-.title {
+.column-title .title {
     font-weight: 400;
     text-wrap: nowrap;
     color: hsl(0, 0%, 100%);
@@ -160,14 +157,6 @@ menu {
     gap: .5em;
     display: flex;
     align-items: center;
-}
-
-.task-count {
-    font-size: 12px;
-    padding: .25em .5em;
-    border-radius: 5rem;
-    color: hsl(0, 0%, 100%);
-    background: hsl(220, 100%, 50%, .25);
 }
 
 .tasks {
@@ -198,74 +187,6 @@ menu {
     border-left: 4px solid var(--accent-purple);
 }
 
-.task-title{
-    font-size: 14.5px;
-    font-weight: 600;
-    margin-bottom: 6px;
-    padding-right: 20px;
-    word-break: break-word;
-}
-
-.task-desc{
-    font-size: 12.5px;
-    margin-bottom: 10px;
-    word-break: break-word;
-    color: var(--txt-secondary);
-}
-
-.task-footer{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.priority-badge{
-    font-size: 10.5px;
-    font-weight: 700;
-    padding: 3px 9px;
-    border-radius: 5em;
-    letter-spacing: .4px;
-    text-transform: uppercase;
-}
-
-.low{
-    background: hsla(207, 91%, 64%, 0.15);
-    color: var(--accent-blue);
-}
-
-.medium{
-    background: hsla(29, 100%, 58%, 0.15);
-    color: var(--accent-orange);
-}
-
-.high{
-    background: hsla(0, 100%, 71%, 0.15);
-    color: var(--accent-red);
-}
-
-.task:hover{
-    box-shadow: var(--shadow);
-    transform: translateY(-2px);
-    background: var(--bg-card-hover);
-}
-
-.dragging{
-    cursor: move;
-    opacity: .4;
-}
-
-.priority-low{
-    border-left-color: var(--accent-blue);
-}
-
-.priority-medium{
-    border-left-color: var(--accent-orange);
-}
-
-.priority-high{
-    border-left-color: var(--accent-red);
-}
-
 .task-input {
     outline: none;
     padding: .25em;
@@ -274,14 +195,117 @@ menu {
     padding: var(--spacing-3) var(--spacing-4);
 }
 
-.dropzone {
-    height: 10px;
-    transition: background .15s, height .15s;
+.task:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    background: var(--bg-card-hover);
 }
 
-.dropzone.active {
-    height: 20px;
-    background: var(--bg-dropzone);
+.task-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-header .created-at {
+    top: 10px;
+    right: 20px;
+    gap: .45em;
+    font-size: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    text-wrap: nowrap;
+    position: absolute;
+    align-items: center;
+    display: inline-flex;
+    color: var(--txt-secondary);
+}
+
+.task-header .date {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100px);
+}
+
+.task-header .date.display {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
+}
+
+.task-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    word-break: break-word;
+    color: var(--txt-primary);
+}
+
+.task-content {
+    margin-bottom: 10px;
+    word-break: break-word;
+    color: var(--txt-secondary);
+}
+
+.task-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.task-footer .tags {
+    gap: .5em;
+    display: flex;
+    padding-top: 0;
+    align-items: center;
+    padding-inline: .5em;
+    padding-bottom: .75em;
+    justify-content: flex-end;
+}
+
+.task-footer .tags .tag {
+    text-wrap: nowrap;
+    color: var(--accent-purple);
+    background: hsl(from var(--accent-purple) h s l / .25);
+    border: 1px solid hsl(from var(--accent-purple) h s l / .5);
+}
+
+.priority-badge,
+.tag {
+    font-size: 10.5px;
+    font-weight: 700;
+    padding: 4px 8px;
+    margin-bottom: 0;
+    border-radius: 5em;
+    letter-spacing: .4px;
+    max-width: fit-content;
+    text-transform: uppercase;
+}
+
+.priority-low {
+    border-left-color: var(--accent-blue);
+}
+
+.priority-medium {
+    border-left-color: var(--accent-orange);
+}
+
+.priority-high {
+    border-left-color: var(--accent-red);
+}
+
+.low {
+    background: hsla(207, 91%, 64%, 0.15);
+    color: var(--accent-blue);
+}
+
+.medium {
+    background: hsla(29, 100%, 58%, 0.15);
+    color: var(--accent-orange);
+}
+
+.high {
+    background: hsla(0, 100%, 71%, 0.15);
+    color: var(--accent-red);
 }
 
 .add-task-btn {
@@ -292,74 +316,34 @@ menu {
     width: var(--dimension-100);
 }
 
-.delete-task-btn,
-.edit-task-btn {
+.delete-task-btn {
     background: none;
     padding-inline: .5em;
-}
-
-.edit-task-btn {
-    opacity: .5;
-}
-
-.edit-icon svg,
-.delete-icon svg {
-    width: 20px;
-    height: 20px;
-}
-
-.edit-icon svg{
-    stroke: var(--accent-purple);
 }
 
 .add-icon svg {
     stroke: hsl(225, 100%, 50%);
 }
 
-.alarm-icon svg {
+.date-icon svg {
+    width: 20px;
+    height: 20px;
     stroke: var(--accent-purple);
-    /*stroke: hsl(210, 100%, 50%);*/
 }
 
 .delete-icon svg {
-    stroke: hsl(10, 100%, 50%);
+    width: 20px;
+    height: 20px;
+    stroke: var(--accent-purple);
 }
 
-.created-at {
-    top: 10px;
-    right: 20px;
-    gap: .45em;
-    overflow: hidden;
-    cursor: pointer;
-    text-wrap: nowrap;
-    position: absolute;
-    align-items: center;
-    display: inline-flex;
-    color: var(--txt-secondary);
+.dragging {
+    cursor: move;
+    opacity: .4;
 }
 
-.date {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100px);
-}
-
-.date.display {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateX(0);
-}
-
-.drag-over{
+.drag-over {
     border-radius: 10px;
     border: 2px solid var(--accent-purple);
     background: hsla(247, 87%, 73%, 0.08);
-}
-
-.empty-state{
-    font-size: 13px;
-    text-align: center;
-    padding: 30px 10px;
-    color: var(--txt-secondary);
-    border: 1px dashed hsl(0, 0%, 60%);
 }

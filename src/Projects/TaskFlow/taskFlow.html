@@ -50,31 +50,43 @@
             </div>
             <template class="task-template">
                 <article class="task" draggable="true">
-                    <time class="created-at">
-                        <span class="date"></span>
-                        <span class="icon alarm-icon" data-icon="alarm"></span>
-                    </time>
-                    <p class="task-content"></p>
-                    <div class="task-input" contenteditable></div>
-                    <menu class="actions">
-                        <!--<button aria-label="edit task" class="edit-task-btn">
-                            <span class="icon edit-icon" data-icon="pen"></span>
-                        </button>
-                        <button aria-label="delete task" class="delete-task-btn">
-                            <span class="icon delete-icon" data-icon="delete"></span>
-                        </button>-->
-                    </menu>
+                    <div class="task-header">
+                        <time class="created-at">
+                            <span class="date"></span>
+                            <span class="icon date-icon" data-icon="calendar"></span>
+                        </time>
+                        <span class="priority-badge"></span>
+                    </div>
+                    <div class="task-body">
+                        <div class="task-input" contenteditable>
+                            <h4 class="task-title"></h4>
+                            <p class="task-content"></p>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="task-footer">
+                        <menu>
+                            <button aria-label="delete task" class="delete-task-btn">
+                                <span class="icon delete-icon" data-icon="delete"></span>
+                            </button>
+                        </menu>
+                        <div class="tags">
+
+                        </div>
+                    </div>
                 </article>
             </template>
-            <template class="dropzone-template">
+
+            <template class="tag-template">
+                <span class="tag"></span>
+            </template>
+            <!--<template class="dropzone-template">
                 <div class="dropzone"></div>
-            </template>
-            <template class="empty-template">
-                <h4>No Tasks yet</h4>
-            </template>
+            </template>-->
         </div>
     </main>
 </body>
 
 <script type="module" src="./taskFlow.js" defer></script>
+
 </html>

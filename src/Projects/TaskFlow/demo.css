@@ -27,9 +27,9 @@
     --txt-primary: hsl(222, 42%, 95%);
     --txt-secondary: hsl(225, 25%, 68%);
 
-    --shadow: 0 8px 24px hsla(225, 100%, 10%, .35);
-
     --brdr-column: 1px solid hsl(225, 30%, 26%);
+
+    --shadow: 0 8px 24px hsla(225, 100%, 10%, .35);
 }
 
 body {
@@ -83,22 +83,13 @@ hr {
     border: 1px solid hsl(from var(--accent-purple) h s l / .45);
 }
 
-.tags {
-    gap: .5em;
-    display: flex;
-    padding-top: 0;
-    align-items: center;
-    padding-inline: .5em;
-    padding-bottom: .75em;
-    justify-content: flex-end;
-}
-
-.task,
+/*.task,
 .task-input {
     max-width: 450px;
     overflow: hidden;
     position: relative;
     border-radius: 8px;
+    caret-color: var(--accent-purple);
     box-shadow: 0px 2px 4px hsl(0, 0%, 0%, .1);
 }
 
@@ -114,10 +105,50 @@ hr {
     border-left: 4px solid var(--accent-purple);
 }
 
-.task-header{
+.task-input {
+    outline: none;
+    padding: .25em;
+    box-shadow: none;
+    border-radius: var(--radius-xsm);
+    padding: var(--spacing-3) var(--spacing-4);
+}
+
+.task:hover {
+    box-shadow: var(--shadow);
+    transform: translateY(-2px);
+    background: var(--bg-card-hover);
+}
+
+.task-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.task-header .created-at {
+    top: 10px;
+    right: 20px;
+    gap: .45em;
+    font-size: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    text-wrap: nowrap;
+    position: absolute;
+    align-items: center;
+    display: inline-flex;
+    color: var(--txt-secondary);
+}
+
+.task-header .date {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100px);
+}
+
+.date.display {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(0);
 }
 
 .task-title {
@@ -139,6 +170,23 @@ hr {
     justify-content: space-between;
 }
 
+.tags {
+    gap: .5em;
+    display: flex;
+    padding-top: 0;
+    align-items: center;
+    padding-inline: .5em;
+    padding-bottom: .75em;
+    justify-content: flex-end;
+}
+
+.tag {
+    text-wrap: nowrap;
+    color: var(--accent-purple);
+    background: hsl(from var(--accent-purple) h s l / .25);
+    border: 1px solid hsl(from var(--accent-purple) h s l / .5);
+}
+
 .priority-badge,
 .tag {
     font-size: 10.5px;
@@ -151,11 +199,16 @@ hr {
     text-transform: uppercase;
 }
 
-.tag {
-    text-wrap: nowrap;
-    color: var(--accent-purple);
-    background: hsl(from var(--accent-purple) h s l / .25);
-    border: 1px solid hsl(from var(--accent-purple) h s l / .5);
+.priority-low {
+    border-left-color: var(--accent-blue);
+}
+
+.priority-medium {
+    border-left-color: var(--accent-orange);
+}
+
+.priority-high {
+    border-left-color: var(--accent-red);
 }
 
 .low {
@@ -173,85 +226,23 @@ hr {
     color: var(--accent-red);
 }
 
-.task:hover {
-    box-shadow: var(--shadow);
-    transform: translateY(-2px);
-    background: var(--bg-card-hover);
-}
-
-.priority-low {
-    border-left-color: var(--accent-blue);
-}
-
-.priority-medium {
-    border-left-color: var(--accent-orange);
-}
-
-.priority-high {
-    border-left-color: var(--accent-red);
-}
-
-.task-input {
-    outline: none;
-    padding: .25em;
-    box-shadow: none;
-    border-radius: var(--radius-xsm);
-    padding: var(--spacing-3) var(--spacing-4);
-}
-
-.delete-task-btn,
-.edit-task-btn {
+.delete-task-btn {
     background: none;
     padding-inline: .5em;
-}
-
-.edit-task-btn {
-    opacity: .5;
-}
-
-.edit-icon svg,
-.delete-icon svg {
-    width: 20px;
-    height: 20px;
-}
-
-.edit-icon svg {
-    stroke: var(--accent-purple);
 }
 
 .add-icon svg {
     stroke: hsl(225, 100%, 50%);
 }
 
-.alarm-icon svg {
+.date-icon svg {
+    width: 20px;
+    height: 20px;
     stroke: var(--accent-purple);
 }
 
 .delete-icon svg {
+    width: 20px;
+    height: 20px;
     stroke: var(--accent-purple);
-}
-
-.created-at {
-    top: 10px;
-    right: 20px;
-    gap: .45em;
-    overflow: hidden;
-    cursor: pointer;
-    text-wrap: nowrap;
-    position: absolute;
-    align-items: center;
-    display: inline-flex;
-    color: var(--txt-secondary);
-}
-
-.date {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100px);
-}
-
-.date.display {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateX(0);
-}
+}*/

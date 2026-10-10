@@ -10,6 +10,16 @@ let dataCount;
 let dateFormat;
 let timeFormat;
 
+let isEmpty;
+
+const state = {
+    view: "edited",
+    truncated: "",
+    displayed: "",
+    dateFormat: "",
+    timeFormat: "",
+};
+
 const kanbanTasks = read("kanban-tasks", [
     { id: 1, title: "To Do", tasks: [], dataColumn: "toDoColumn" },
     { id: 2, title: "In Progress", tasks: [], dataColumn: "progressColumn" },
@@ -19,34 +29,17 @@ const kanbanTasks = read("kanban-tasks", [
 const columnContainer = document.querySelector(".columns");
 const kanbanBoard = document.querySelector(".kanban-board");
 const taskTemplate = document.querySelector(".task-template");
-const emptyTemplate = document.querySelector(".empty-template");
 const columnTemplate = document.querySelector(".column-template");
-const dropzoneTemplate = document.querySelector(".dropzone-template");
-
-/*function updateTaskCount(column) { 
-    const tasks = column.querySelector(".tasks").children;
-    const taskCount = column.querySelector(".task=count");
-    taskCount.textContent = tasks.length;
-};
-
-function observeChanges(columns) { 
-    for (const column of columns){
-        const observer = new MutationObserver(() => { updateTaskCount(column)});
-        observer.observe(column.querySelector(".tasks"), { childList: true });
-    };
-};*/
+//const dropzoneTemplate = document.querySelector(".dropzone-template");
 
 function createTask(columnId, content) {
     const column = kanbanTasks.find(column => column.id === columnId);
     if (!column) { throw new Error("Column does not exist!") };
     const task = {
-        id: crypto.randomUUID(),
-        content: content,
-        column: column.dataColumn,
-        createdAt: new Date().toISOString(),
-        priority: "",
-        tags: [],
-    };
+        id: crypto.randomUUID(), title: "", content: content,
+        column: column.dataColumn, createdAt: new Date().toISOString(),
+        priority: "", tags: [], dueDate: null, dueTime: null,
+    }
     column.tasks.push(task);
     save("kanban-tasks", kanbanTasks);
     return task;
@@ -91,20 +84,20 @@ function renderTask(taskData, columnElement) {
     timeFormat = formatTime(taskData.createdAt);
     const task = clone.querySelector(".task");
     const date = clone.querySelector(".date");
-    const dropzone = renderDropzone();
+    /*const dropzone = renderDropzone();
+    task.appendChild(dropzone);*/
     const id = taskData.id;
 
     task.dataset.id = id;
-    task.appendChild(dropzone);
     input.textContent = taskData.content;
     date.textContent = dateFormat;
 
-    createdAt.addEventListener("click", (e) => { 
+    createdAt.addEventListener("click", (e) => {
         const alarmIcon = createdAt.querySelector(".alarm-icon svg");
         displayed = date.classList.contains("display");
-        if (e.target === alarmIcon && !displayed) { 
+        if (e.target === alarmIcon && !displayed) {
             date.classList.add("display");
-        } else if(e.target === alarmIcon && displayed) {
+        } else if (e.target === alarmIcon && displayed) {
             date.classList.remove("display");
         };
     });
@@ -116,7 +109,7 @@ function renderTask(taskData, columnElement) {
         const deleteBtn = task.children[4].querySelector(".delete-task-btn .icon svg");
         if (e.target === deleteBtn) {
             const check = confirm("Are you sure you want to delete this task?");
-            if (check) { deleteTask(id); task.remove() };  
+            if (check) { deleteTask(id); task.remove() };
         };
     });
     task.addEventListener("dragstart", (e) => { e.dataTransfer.setData("text/plain", id) });
@@ -157,7 +150,7 @@ function renderColumn(columnData) {
     return column;
 };
 
-function renderDropzone() {
+/*function renderDropzone() {
     const clone = dropzoneTemplate.content.cloneNode(true);
     const dropzone = clone.querySelector(".dropzone");
     dropzone.addEventListener("dragover", (e) => { e.preventDefault(); dropzone.classList.add("active") });
@@ -178,7 +171,7 @@ function renderDropzone() {
         updateTask(taskId, { columnId: columnId, position: droppedIndex, column: column.dataset.column });
     });
     return dropzone;
-};
+};*/
 
 function renderKanban(data) {
     columnContainer.replaceChildren();
@@ -189,5 +182,86 @@ function renderKanban(data) {
     createIcons({ icons });
     initializeIcons(kanbanBoard);
 };
+
+/*function renderTask(tasks, column) {
+    column.replaceChildren();
+    tasks.forEach(taskData => { initCard(taskData, column) });
+};
+
+function initCard(taskData, column) {
+    state.dateFormat = formatDate(taskData.createdAt);
+    state.timeFormat = formatTime(taskData.createdAt);
+
+    const id = taskData.id;
+    const taskClone = taskTemplate.content.cloneNode(true);
+    const task = taskClone.querySelector(".task");
+    const menu = task.querySelector("menu");
+    const tags = task.querySelector(".tags");
+    const date = task.querySelector(".date");
+    const input = task.querySelector(".task-input");
+    const taskTitle = task.querySelector(".task-title");
+    const createdAt = task.querySelector(".created-at");
+    const priority = task.querySelector(".priority-badge");
+    const taskContent = task.querySelector(".task-content");
+
+    task.dataset.id = id;
+    taskData.content ? taskContent.textContent = taskData.content : taskContent.textContent = "";
+    taskData.title ? taskTitle.textContent = taskData.title : taskTitle.textContent = "Untitled Task";
+
+    if (state.view === "edited") { onUpdate() };
+
+    task.addEventListener("click", (e) => {
+        const deleteBtn = menu.querySelector(".delete-task-btn");
+        const createdAtIcon = createdAt.querySelector(".date-icon svg");
+        if (e.target === deleteBtn) { deleteTask(taskData.id); task.remove() };
+        if (e.target === createdAt || e.target === createdAtIcon) { toggleDueDate() };
+    });
+
+    input.addEventListener("blur", () => {
+        if (taskData.content === "" && taskData.title === "Untitled Task") { deleteTask(id); task.remove() };
+    });
+
+    function onUpdate() {
+        isEmpty = taskData.priority === "";
+
+        if (isEmpty) {
+            priority.classList.add("no-priority");
+        } else {
+            priority.textContent = taskData.priority;
+            priority.classList.add(`${ taskData.priority }`);
+            task.classList.add(`priority-${ taskData.priority }`);
+        };
+
+        createTag(taskData.tags, tags);
+    };
+
+    function toggleDueDate() {
+        state.displayed = date.classList.contains("display");
+        !state.displayed ? date.classList.add("display") : date.classList.remove("display");
+        if (taskData.createdAt === null) {
+            date.textContent = "No Due Date";
+        } else {
+            date.textContent = state.dateFormat ? date.textContent = state.timeFormat :
+                date.textContent = state.dateFormat;
+        };
+    };
+
+    column.append(task);
+};
+
+function createTag(tags, parent) {
+    isEmpty = tags.length === 0;
+    if (isEmpty) {
+        parent.classList.add("no-tags");
+    } else {
+        tags.forEach(tag => {
+            parent.classList.remove("no-tags");
+            const tagClone = tagTemplate.content.cloneNode(true);
+            const tagDisplay = tagClone.querySelector(".tag");
+            tagDisplay.textContent = tag;
+            parent.append(tagDisplay);
+        });
+    }
+};*/
 
 renderKanban(kanbanTasks);
