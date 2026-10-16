@@ -1,7 +1,6 @@
 import { validateDate } from "./date.js";
 import { wordCounter } from "./utilities.js";
 import { isValidPhoneNumber } from 'libphonenumber-js';
-import { initializeIcons } from "../Assets/Icons/icons.js";
 
 export const validators = {
     dob: validateDate,

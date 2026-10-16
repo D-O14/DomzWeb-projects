@@ -1,9 +1,10 @@
 import "./taskFlow.css";
+//import { adopt, find, setClass, query } from "../../expo";
 import { createIcons, icons } from "lucide";
 import { save, read } from "@utils/database";
 import { formatDate, formatTime } from "@utils/date";
 import { initializeIcons } from "@assets/Icons/icons";
-import { enableDrag, enableDrop, changeOnDrop, switchPositon } from "@utils/dragDrop";
+//import { enableDrag, enableDrop, changeOnDrop, switchPositon } from "@utils/dragDrop";
 
 let displayed;
 let dataCount;
@@ -33,6 +34,7 @@ const columnTemplate = document.querySelector(".column-template");
 //const dropzoneTemplate = document.querySelector(".dropzone-template");
 
 function createTask(columnId, content) {
+    //const column = find(kanbanTasks, "id", columnId);
     const column = kanbanTasks.find(column => column.id === columnId);
     if (!column) { throw new Error("Column does not exist!") };
     const task = {
@@ -96,8 +98,10 @@ function renderTask(taskData, columnElement) {
         const alarmIcon = createdAt.querySelector(".alarm-icon svg");
         displayed = date.classList.contains("display");
         if (e.target === alarmIcon && !displayed) {
+            //setClass(date, "display");
             date.classList.add("display");
         } else if (e.target === alarmIcon && displayed) {
+            //setClass(date, "display", true);
             date.classList.remove("display");
         };
     });
@@ -122,11 +126,17 @@ function renderTask(taskData, columnElement) {
     input.addEventListener("drop", (e) => { e.preventDefault() });
 
     columnElement.append(task);
+    //adopt(columnElement, task);
 };
 
 function renderColumn(columnData) {
     dataCount = columnData.tasks.length;
     const clone = columnTemplate.content.cloneNode(true);
+    /*const column = query(clone, ".column");
+    const tasks = query(clone, ".tasks");
+    const taskCount = query(clone, ".task-count");
+    const addTaskBtn = query(clone, ".add-task-btn");
+    const columnTitle = query(clone, ".title");*/
     const column = clone.querySelector(".column");
     const tasks = clone.querySelector(".tasks");
     const taskCount = clone.querySelector(".task-count");

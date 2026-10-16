@@ -21,7 +21,7 @@ function createEvent(button, eventName) {
         bubbles: true,
         composed: true
     }));
-}
+};
 
 export default class MyButton extends HTMLElement {
     constructor() {

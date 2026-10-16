@@ -1,4 +1,5 @@
 import { initializeIcons } from "../Assets/Icons/icons";
+import { query, setClass } from "../expo";
 
 export function copy(text, toast) {
     navigator.clipboard.writeText(text);
@@ -9,12 +10,12 @@ export function copy(text, toast) {
 };
 
 export function deleteItem(element) {
-    element.classList.add("deleted");
+    setClass(element, "deleted");
     element.addEventListener("transitionend", () => { element.remove() });
 }
 
 export function edit(element) {
-    element.classList.add("editing");
+    setClass(element, "editing");
     element.setAttribute("contenteditable", true);
 };
 
@@ -36,15 +37,15 @@ export async function share(data) {
 }
 
 export function showLoader(btn) {
-    const icon = btn.querySelector(".icon");
-    btn.classList.add("loading");
+    const icon = query(btn, ".icon");
+    setClass(btn, "loading");
     icon.dataset.icon = "bounce";
     initializeIcons(btn);
 }
 
 export function hideLoader(btn) {
     const icon = btn.querySelector(".icon");
-    btn.classList.remove("loading");
+    setClass(btn, "loading", true);
     icon.dataset.icon = "";
     icon.textContent = "";
 }
@@ -52,7 +53,7 @@ export function hideLoader(btn) {
 export function drawPaths(paths) {
     paths.forEach(path => {
         if (path) {
-            path.classList.add("draw");
+            setClass(path, "draw");
             const pathLength = path.getTotalLength();
             const dashArray = path.style.strokeDasharray = pathLength;
             const dashOffset = path.style.strokeDashoffset = pathLength;

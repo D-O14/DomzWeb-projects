@@ -1,22 +1,25 @@
+import { setClass, setStyle, adopt, create } from "../expo";
+
 export function createRipple(e, btn) {
     const x = e.clientX - e.target.offsetLeft;
     const y = e.clientY - e.target.offsetTop;
-    const ripple = document.createElement("span");
-    ripple.classList.add("ripple");
-    ripple.style.left = `${ x }px`;
-    ripple.style.top = `${ y }px`;
-    btn.append(ripple);
-    btn.classList.add("active");
-    setTimeout(() => { btn.classList.remove("active") }, 300);
+    const ripple = create("span");
+    setClass(ripple, "ripple");
+    setStyle(ripple, "left", `${ x }px`);
+    setStyle(ripple, "top", `${ y }px`);
+    adopt(btn, ripple);
+    setClass(btn, "active");
+    setTimeout(() => { setClass(btn, "active", true) }, 300);
     setTimeout(() => { ripple.remove() }, 600);
 }
 
 export function closeDialog(dialog) {
-    dialog.classList.remove("open");
-    dialog.classList.add("closing");
+    setClass(dialog, "open", true);
+    setClass(dialog, "closing");
+
     setTimeout(() => {
         dialog.close();
-        dialog.classList.remove("closing");
+        setClass(dialog, "closing", true);
     }, 400);
 }
 
