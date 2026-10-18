@@ -1,5 +1,204 @@
 @layer reset, base, primitives, components, utilities;
 
+@utility nav {
+  /* Navbar Elements Styling */
+  display: flex;
+  gap: 1em;
+}
+
+@utility menu {
+  width: 100%;
+  display: flex;
+  color: var(--txt-primary);
+}
+
+@utility link {
+  opacity: 0.5;
+  padding: 1em 1.5em;
+
+  .dropdown:hover & {
+    background: transparent;
+  }
+
+  /* Link styles */
+  width: 100%;
+  padding: 1.25em 1.5em;
+  animation: drop 3s ease forwards;
+
+  &:hover {
+    opacity: 0.75;
+    background: hsl(0, 0%, 8%);
+  }
+}
+
+@utility nav-toggle {
+  display: none;
+  width: 1.8em;
+  height: 1.8em;
+  cursor: pointer;
+  position: relative;
+}
+
+@utility icon {
+  /* Icon Styling */
+  width: 1.5rem;
+  height: 1.5rem;
+  vertical-align: middle;
+}
+
+@utility bar-icon {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 0;
+  bottom: 0;
+
+  .show-icon & {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+}
+
+@utility close-icon {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  top: 0;
+  bottom: 0;
+  opacity: 0;
+
+  .show-icon & {
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+}
+
+@utility show-icon {
+  & .bar-icon {
+    opacity: 0;
+    transform: rotate(360deg);
+  }
+
+  & .close-icon {
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+}
+
+@utility logo {
+  &:hover .planet-icon {
+    scale: 1.05;
+    fill: currentColor;
+    animation: rotate 2s ease-in-out forwards;
+  }
+
+  /* Logo & Brand Name Styles */
+  animation: slide 2s ease;
+
+  &:hover .brandName {
+    transform: translateX(8px);
+  }
+}
+
+@utility planet-icon {
+  .logo:hover & {
+    scale: 1.05;
+    fill: currentColor;
+    animation: rotate 2s ease-in-out forwards;
+  }
+}
+
+@utility sign-up-btn {
+  /* Buttons */
+  background: none;
+  border: var(--brdr-btn);
+  color: var(--txt-primary);
+  opacity: 0;
+  animation-delay: 1.25s;
+}
+
+@utility btn {
+  animation: dropIn 4s ease forwards;
+
+  &:hover {
+    scale: 0.95;
+  }
+}
+
+@utility login-btn {
+  opacity: 0;
+  animation-delay: 1s;
+
+  &:hover {
+    background: hsl(0, 0%, 75%);
+  }
+}
+
+@utility sign-up {
+  &:hover {
+    background: hsl(0, 0%, 10%);
+  }
+}
+
+@utility dropdown {
+  /* Dropdown Styling */
+  position: relative;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 0.25rem;
+
+  &:hover .link {
+    background: transparent;
+  }
+
+  &:hover .dropdown-menu {
+    max-height: 1000px;
+  }
+}
+
+@utility dropdown-menu {
+  z-index: 1;
+  max-height: 0;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  background: hsl(from var(--bg-surface) h s calc(l + 8));
+
+  .dropdown:hover & {
+    max-height: 1000px;
+  }
+}
+
+@utility dropdown-link {
+  gap: 0.5em;
+  display: flex;
+  padding: 1.25em;
+  align-items: center;
+  color: var(--txt-primary);
+
+  &:hover {
+    background: var(--bg-surface);
+  }
+}
+
+@utility brandName {
+  .logo:hover & {
+    transform: translateX(8px);
+  }
+  position: relative;
+}
+
+@utility show-nav {
+  right: 0;
+  opacity: 1;
+  pointer-events: all;
+}
+
+@utility active {
+  opacity: 1;
+  background: hsl(0, 0%, 10%);
+  transform: translateY(-5px);
+}
+
 @layer reset {
 
     *,
@@ -85,188 +284,6 @@
     a,
     button {
         cursor: pointer;
-    }
-}
-
-@layer components {
-
-    /* Navbar Elements Styling */
-
-    .nav {
-        display: flex;
-        gap: 1em;
-    }
-
-    .menu {
-        width: 100%;
-        display: flex;
-        color: var(--txt-primary);
-    }
-
-    .link {
-        opacity: .5;
-        padding: 1em 1.5em;
-    }
-
-    .nav-toggle {
-        display: none;
-        width: 1.8em;
-        height: 1.8em;
-        cursor: pointer;
-        position: relative;
-    }
-
-    /* Icon Styling */
-
-    .icon {
-        width: 1.5rem;
-        height: 1.5rem;
-        vertical-align: middle;
-    }
-
-    .bar-icon,
-    .close-icon {
-        position: absolute;
-        width: fit-content;
-        height: fit-content;
-        top: 0;
-        bottom: 0;
-    }
-
-    .close-icon {
-        opacity: 0;
-    }
-
-    .show-icon .bar-icon {
-        opacity: 0;
-        transform: rotate(360deg);
-    }
-
-    .show-icon .close-icon {
-        opacity: 1;
-        transform: rotate(180deg);
-    }
-
-    .logo:hover .planet-icon {
-        scale: 1.05;
-        fill: currentColor;
-        animation: rotate 2s ease-in-out forwards;
-    }
-
-    /* Buttons */
-
-    .sign-up-btn {
-        background: none;
-        border: var(--brdr-btn);
-        color: var(--txt-primary);
-    }
-
-    .btn {
-        animation: dropIn 4s ease forwards;
-    }
-
-    .login-btn {
-        opacity: 0;
-        animation-delay: 1s;
-    }
-
-    .sign-up-btn {
-        opacity: 0;
-        animation-delay: 1.25s;
-    }
-
-    .btn:hover {
-        scale: .95;
-    }
-
-    .login-btn:hover {
-        background: hsl(0, 0%, 75%);
-    }
-
-    .sign-up:hover {
-        background: hsl(0, 0%, 10%);
-    }
-
-    /* Dropdown Styling */
-
-    .dropdown {
-        position: relative;
-        cursor: pointer;
-        font-weight: 500;
-        border-radius: .25rem;
-    }
-
-    .dropdown:hover .link {
-        background: transparent;
-    }
-
-    .dropdown-menu {
-        z-index: 1;
-        max-height: 0;
-        overflow: hidden;
-        border-radius: .25rem;
-        background: hsl(from var(--bg-surface) h s calc(l + 8));
-    }
-
-    .dropdown:hover .dropdown-menu {
-        max-height: 1000px;
-    }
-
-    .dropdown-link {
-        gap: .5em;
-        display: flex;
-        padding: 1.25em;
-        align-items: center;
-        color: var(--txt-primary);
-    }
-
-    .dropdown-link:hover {
-        background: var(--bg-surface);
-    }
-
-    /* Link styles */
-
-    .link {
-        width: 100%;
-        padding: 1.25em 1.5em;
-        animation: drop 3s ease forwards;
-    }
-
-
-    .link:hover {
-        opacity: .75;
-        background: hsl(0, 0%, 8%);
-    }
-
-    /* Logo & Brand Name Styles */
-
-    .logo {
-        animation: slide 2s ease;
-    }
-
-
-    .logo:hover .brandName {
-        transform: translateX(8px);
-    }
-
-    .brandName {
-        position: relative;
-    }
-
-}
-
-@layer utilities {
-
-    .show-nav {
-        right: 0;
-        opacity: 1;
-        pointer-events: all;
-    }
-
-    .active {
-        opacity: 1;
-        background: hsl(0, 0%, 10%);
-        transform: translateY(-5px);
     }
 }
 
