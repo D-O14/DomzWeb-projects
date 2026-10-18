@@ -1,3 +1,4 @@
 @import "./base.css";
+@config "../../../tailwind.config.js";
 
 body{ font: var(--font-base); }
