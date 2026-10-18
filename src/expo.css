@@ -12,6 +12,17 @@
 }
 
 :root {
+    --bg: hsl(0, 0%, 5%);
+    --txt: hsl(0, 0%, 95%);
+    --bg-dark: hsl(0, 0%, 0%);
+    --bg-light: hsl(0, 0%, 10%);
+    --txt-muted: hsl(0, 0%, 70%);
+    --border-color: hsl(0, 0%, 30%);
+    --border-highlight: hsl(0, 0%, 60%);
+    --border-card: 1px solid var(--border-color);
+    --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+    --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+
     --base: var(--shade-blue-400);
 
     /*--brand-shade-1: hsl(from var(--brand-clr) h s calc(l + 2) / .5);
@@ -20,6 +31,20 @@
     --brand-shade-4: hsl(from var(--brand-clr) h s  calc(l + 8) / .5);
     --brand-shade-5: hsl(from var(--brand-clr) h s  calc(l + 10) / .5);
     --brand-shade-6: hsl(from var(--brand-clr) h s  calc(l + 12) / .5);*/
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --txt: hsl(0, 0%, 5%);
+        --bg: hsl(0, 0%, 95%);
+        --bg-dark: hsl(0, 0%, 90%);
+        --txt-muted: hsl(0, 0%, 30%);
+        --bg-light: hsl(0, 0%, 100%);
+        --border: 1px solid hsl(0, 0%, 30%);
+        --border-highlight: 1px solid hsl(0, 0%, 100%);
+        --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
+        --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
+    }
 }
 
 body {
@@ -58,17 +83,17 @@ button {
     -webkit-backdrop-filter: blur(5px);
 }
 
-button:is(.active, :hover){
+button:is(.active, :hover) {
     opacity: 1;
 }
 
-h1{
+h1 {
     margin: .5em 0;
     font-size: 30px;
     font-weight: 400;
 }
 
-h3{
+h3 {
     font-weight: 400;
 }
 
@@ -78,23 +103,23 @@ menu {
     justify-content: flex-end;
 }
 
-.container{
+.container {
     width: max(700px, 90%);
     margin: 0 auto;
 }
 
-.columns{
+.columns {
     display: flex;
     gap: 1.5em;
 }
 
-.column{
+.column {
     flex: 1;
     display: grid;
     grid-template-rows: auto 1fr;
 }
 
-.column-header{
+.column-header {
     display: flex;
     align-items: center;
     position: relative;
@@ -102,29 +127,29 @@ menu {
     border-bottom: 1px solid hsl(0, 0%, 80%);
 }
 
-.column-title{
+.column-title {
     text-transform: uppercase;
 }
 
-.column-header button{
+.column-header button {
     padding-block: 0;
     padding-inline: .5em;
 }
 
-.column-info{
+.column-info {
     gap: .5em;
     display: flex;
     align-items: center;
 }
 
-.task-count{
+.task-count {
     font-size: 12px;
     padding: .25em .5em;
     border-radius: 5rem;
     background: hsl(220, 100%, 80%);
 }
 
-.tasks{
+.tasks {
     gap: .5em;
     display: grid;
     min-height: 100%;
@@ -132,7 +157,7 @@ menu {
 }
 
 .task,
-.task-input{
+.task-input {
     padding: .875em;
     min-height: 100%;
     position: relative;
@@ -141,43 +166,45 @@ menu {
     box-shadow: 0px 2px 4px hsl(0, 0%, 0%, .1);
 }
 
-.task{
+.task {
     cursor: move;
 }
 
-.task-input{
+.task-input {
     cursor: pointer;
     outline: none;
     overflow-wrap: anywhere;
 }
 
-.dragging{
+.dragging {
     cursor: default;
     box-shadow: none;
     background: hsl(220, 100%, 80%)
 }
 
-.dragging *{visibility: hidden;}
+.dragging * {
+    visibility: hidden;
+}
 
-.task:not(.dragging):hover{
+.task:not(.dragging):hover {
     opacity: .5;
 }
 
-.task button{
+.task button {
     padding-inline: .5em;
 }
 
-.task hr{
+.task hr {
     border-top: 1px solid hsl(0, 0%, 80%);
 }
 
 .edit-icon svg,
-.delete-icon svg{
+.delete-icon svg {
     width: 18px;
     height: 18px;
 }
 
-.file-icon svg{
+.file-icon svg {
     opacity: .5;
     width: 20px;
     height: 20px;
@@ -241,7 +268,18 @@ menu {
     background: hsl(0, 0%, 0%);
 }
 
-.box-1{background: blue;}
-.box-2{background: red;}
-.box-3{background: orange;}
-.box-4{background: yellow;}
+.box-1 {
+    background: blue;
+}
+
+.box-2 {
+    background: red;
+}
+
+.box-3 {
+    background: orange;
+}
+
+.box-4 {
+    background: yellow;
+}

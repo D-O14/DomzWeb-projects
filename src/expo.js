@@ -41,8 +41,8 @@ export function createEvent(element, eventName, exposed) {
     }));
 };
 
-export function renderApp(app) {
-    query(document, "#app").innerHTML = app;
+export function renderApp(...components) {
+    adopt(query(document, "#app"), ...components);
 };
 
 export function find(collection, property, match) {
@@ -92,7 +92,15 @@ export function clear(input) {
     input.value = "";
 };
 
+export function parseHTML(markup) { 
+    const template = create("template");
+    template.innerHTML = markup.trim();
+    return template.content.firstElementChild;
+};
+
 function Button() {
+    let button; 
+
     const config = {
         id: "btn",
         type: "button",
@@ -101,17 +109,31 @@ function Button() {
     };
 
     const lifecycles = {
-        onRender: () => {
-            return `<button onclick="${ events.onPress }" onmouseover="${ events.onHover }" class="${ config.className }" 
+        render: () => {
+            button = parseHTML(`<button class="${ config.className }" 
             id="${ config.id }" type="${ config.type }">
                 ${ config.text }
-            </button>`;
-        },
+            </button>`);
 
-        /*onUpdate: (button) => {
             button.addEventListener("click", events.onPress);
             button.addEventListener("mouseover", events.onHover);
-        }*/
+
+            return button;
+        },
+
+        update: (button) => {
+            button.id = this.id;
+            button.type = this.type;
+            button.textContent = this.text;
+            button.className = this.className;
+        },
+
+        destroy: () => {
+            button.removeEventListener("click", events.onPress);
+            button.removeEventListener("mouseover", events.onHover);
+            button.remove();
+            button = null;
+        }
     };
 
     const events = {
@@ -119,8 +141,7 @@ function Button() {
         onHover: () => { console.log("This button was hovered over") },
     };
 
-    const button = lifecycles.onRender();
-    return button;
+   return lifecycles.render();
 };
 
 const newBtn = {

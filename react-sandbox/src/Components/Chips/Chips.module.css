@@ -1,0 +1,39 @@
+:root {
+    --bg-chip: var(--bg-plain);
+    --bg-chip-active: hsl(230, 100%, 67%);
+
+    --clr-chip: hsl(0, 0%, 0%);
+    --clr-chip-active: var(--clr-plain);
+
+    --shadow-chip:
+        2px 2px 3px hsl(0, 0%, 90%),
+        -2px -2px 3px hsl(0, 0%, 90%),
+        2px 2px 3px hsl(0, 0%, 90%);
+}
+
+button {
+    gap: .5em;
+    display: flex;
+    font-size: 16px;
+    overflow: hidden;
+    font-weight: 600;
+    padding: .5em 1em;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    touch-action: manipulation;
+    border: 1px solid transparent;
+}
+
+.row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chip {
+    border-radius: 5em;
+    color: var(--clr-chip);
+    background: var(--bg-chip);
+    box-shadow: var(--shadow-chip);
+}

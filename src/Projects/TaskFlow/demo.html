@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <!--<template class="task-template">
+    <template class="task-template">
         <article class="task" draggable="true">
             <div class="task-header">
                 <time class="created-at">
@@ -39,49 +39,88 @@
 
     <template class="tag-template">
         <span class="tag"></span>
-    </template>-->
-    <div class="task-edit-panel">
-        <div class="panel-header">
-            <span class="icon" data-icon="close"></span>
-        </div>
-        <h3 class="task-title">Dashboard Project</h3>
-        <div class="task-info">
-            <label>
-                <span class="icon history-icon" data-icon="history"></span>
-                Created At
-                <p>September 20, 2026 10:35AM</p>
-            </label>
-            <label>
-                <span class="icon loading-icon" data-icon="loading"></span>
-                Status
-                <p class="status">
-                    <span class="dot"></span>
-                    <span class="status-text">In Progress</span>
-                </p>
-            </label>
-            <label>
-                <span class="icon priority-icon" data-icon="priority"></span>
-                <span class="priority-badge low">Low</span>
-            </label>
-            <label>
-                <span class="icon calendar-icon" data-icon="calendar"></span>
-                Due Date
-                <p>October 20, 2026 14:00PM</p>
-            </label>
-            <label>
-                <span class="icon tag-icon" data-icon="tag"></span>
-                Tags
-                <span class="tag">Task</span>
-                <span class="tag">Wireframe</span>
-                <span class="tag">Dashboard</span>
-            </label>
-        </div>
-        <div class="task-desc">
-            <h3>Project Description</h3>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus accusamus alias
-            inventore dignissimos exercitationem tempora recusandae itaque cumque quis sunt.</p>
-        </div>
-    </div>
+    </template>
+    <template class="panel-template">
+        <aside class="task-edit-panel">
+            <div class="panel-header">
+                <button aria-label="Close Details Panel">
+                    <span class="icon close-panel-icon" data-icon="close"></span>
+                </button>
+            </div>
+            <div class="panel-body">
+                <h3 class="task-details-title"></h3>
+                <div class="task-metadata">
+                    <label class="metadata-row">
+                        <span class="metadata-label">
+                            <span class="icon history-icon" data-icon="history"></span>
+                            Created At
+                        </span>
+                        <p class="created-date metadata-value"></p>
+                    </label>
+                    <label class="metadata-row">
+                        <span class="metadata-label">
+                            <span class="icon loading-icon" data-icon="loading"></span>
+                            Status
+                        </span>
+                        <p class="metadata-value status">
+                            <span class="dot"></span>
+                            <span class="status-text"></span>
+                        </p>
+                    </label>
+                    <label class="metadata-row">
+                        <span class="metadata-label">
+                            <span class="icon priority-icon" data-icon="priority"></span>
+                            Priority
+                        </span>
+                        <span class="metadata-value priority-badge"></span>
+                    </label>
+                    <label class="metadata-row">
+                        <span class="metadata-label">
+                            <span class="icon calendar-icon" data-icon="calendar"></span>
+                            Due Date
+                        </span>
+                        <p class="due-date metadata-value"></p>
+                    </label>
+                    <label class="metadata-row">
+                        <span class="metadata-label">
+                            <span class="icon tag-icon" data-icon="tag"></span>
+                            Tags
+                        </span>
+                        <p class="tags metadata-value"></p>
+                        <button class="add-tag-btn">
+                            <span class="icon" data-icon="plus"></span>
+                        </button>
+                    </label>
+                </div>
+                <div class="project-desc">
+                    <h3>Project Description</h3>
+                    <p class="task-desc"></p>
+                </div>
+            </div>
+            <form class="edit-form">
+                <h3 class="form-header">Edit Task Details</h3>
+                <label for="dueDatePicker" class="input-label">
+                    <div class="label">
+                        <span class="icon" data-icon="calendar"></span>
+                        Due Date
+                    </div>
+                    <input type="date" class="date-picker" id="dueDatePicker">
+                </label>
+                <label for="priorityDropDown" class="input-label">
+                    <div class="label">
+                        <span class="icon" data-icon="priority"></span>
+                        Priority
+                    </div>
+                    <select id="priorityDropDown" class="priority-select">
+                        <option value="Choose Priority">Choose Priority</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </label>
+            </form>
+        </aside>
+    </template>
 </body>
 <script type="module" src="./demo.js" defer></script>
 

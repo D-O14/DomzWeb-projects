@@ -1,5 +1,5 @@
 import "./demo.css";
-//import { formatDate, formatTime } from "@utils/date";
+import { formatDate, formatTime } from "@utils/date";
 import { initializeIcons } from "@assets/Icons/icons";
 
 let isEmpty;
@@ -12,13 +12,56 @@ const state = {
     timeFormat: "",
 };
 
-/*const tasks = [
+const panelTemplate = document.querySelector(".panel-template");
+
+const panelInfo =
+{
+    title: "Design Homepage Wireframe", createdAt: new Date().toISOString(),
+    status: "In Progress", priority: "low", dueDate: "Oct 20th, 2026",
+    dueTime: new Date().toISOString(), tags: ["task", "wireframe", "dashboard"],
+    content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus accusamus alias
+        inventore dignissimos exercitationem tempora recusandae itaque cumque quis sunt.`
+};
+
+function TaskPanel(taskData) {
+    const panel = panelTemplate.content.cloneNode(true);
+    const priority = panel.querySelector(".priority-badge");
+    panel.querySelector(".task-desc").textContent = taskData.content;
+    panel.querySelector(".status-text").textContent = taskData.status;
+    panel.querySelector(".task-details-title").textContent = taskData.title;
+    panel.querySelector(".created-date").textContent = `${ formatDate(taskData.createdAt) }`;
+    panel.querySelector(".due-date").textContent = `${ taskData.dueDate } ${ formatTime(taskData.dueTime) }`;
+    panel.querySelector(".date-picker").value = taskData.dueDate;
+    
+    priority.textContent = taskData.priority;
+    priority.classList.add(taskData.priority);
+
+    createTag(taskData.tags, panel.querySelector(".tags"));
+    document.body.append(panel.querySelector("aside"));
+};
+
+function createTag(tags, parent) {
+    isEmpty = tags.length === 0;
+    if (isEmpty) {
+        parent.classList.add("no-tags");
+    } else {
+        tags.forEach(tag => {
+            parent.classList.remove("no-tags");
+            const tagClone = tagTemplate.content.cloneNode(true);
+            const tagDisplay = tagClone.querySelector(".tag");
+            tagDisplay.textContent = tag;
+            parent.append(tagDisplay);
+        });
+    }
+};
+
+const tasks = [
     {
         id: crypto.randomUUID(), title: "Dashboard Project", content: "Refine Dashboard UI, add draggable API widget and analytics chart.",
-        createdAt: new Date().toISOString(), priority: "low",
-        tags: ["work", "web dev"], dueDate: null, dueTime: null,
+        createdAt: new Date().toISOString(), priority: "low", status: "In Progress",
+        tags: ["work", "web dev", "dashboard"], dueDate: "2026-10-18", dueTime: null,
     },
-    {
+    /*{
         id: crypto.randomUUID(), title: "Reading", content: "Read for tomorrow's subject tests: maths, civic, english etcetera.",
         createdAt: new Date().toISOString(), priority: "medium",
         tags: ["school", "reading"], dueDate: null, dueTime: null,
@@ -27,7 +70,7 @@ const state = {
         id: crypto.randomUUID(), title: "Piano Practice", content: "Score the song to be sang during choir ministration on Sunday.",
         createdAt: new Date().toISOString(), priority: "high",
         tags: ["church", "activity"], dueDate: null, dueTime: null,
-    },
+    },*/
 ];
 
 const tagTemplate = document.querySelector(".tag-template");
@@ -61,6 +104,8 @@ function initCard(taskData, column) {
     if (state.view === "edited") { onUpdate() };
 
     task.addEventListener("click", (e) => {
+        TaskPanel(taskData);
+        initializeIcons(document);
         const deleteBtn = menu.querySelector(".delete-task-btn");
         const createdAtIcon = createdAt.querySelector(".date-icon svg");
         if (e.target === deleteBtn) { deleteTask(taskData.id); task.remove() };
@@ -99,20 +144,5 @@ function initCard(taskData, column) {
     column.append(task);
 };
 
-function createTag(tags, parent) {
-    isEmpty = tags.length === 0;
-    if (isEmpty) {
-        parent.classList.add("no-tags");
-    } else {
-        tags.forEach(tag => {
-            parent.classList.remove("no-tags");
-            const tagClone = tagTemplate.content.cloneNode(true);
-            const tagDisplay = tagClone.querySelector(".tag");
-            tagDisplay.textContent = tag;
-            parent.append(tagDisplay);
-        });
-    }
-};
-
-renderTask(tasks, document.body);*/
+renderTask(tasks, document.body);
 initializeIcons(document);
