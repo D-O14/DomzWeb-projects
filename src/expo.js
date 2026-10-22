@@ -1,6 +1,7 @@
 import { Asterisk } from "lucide";
 import "./expo.css";
-import { initializeIcons } from "@assets/Icons/icons"
+import { initializeIcons } from "@assets/Icons/icons";
+import { renderApp } from "./Utilities/utilities";
 /*import { enableDrag, enableDrop, changeOnDrop, switchPositon } from "@utils/dragDrop";
 const draggables = document.querySelectorAll(".draggable");
 const dropzones = document.querySelectorAll(".dropzone");
@@ -32,71 +33,6 @@ enableDrag(document);*/
     button.addEventListener("click", config.events.onPress);
     return button;
 };*/
-
-export function createEvent(element, eventName, exposed) {
-    element.dispatchEvent(new CustomEvent(eventName, {
-        detail: { exposed: exposed },
-        bubbles: true,
-        composed: true
-    }));
-};
-
-export function renderApp(...components) {
-    adopt(query(document, "#app"), ...components);
-};
-
-export function find(collection, property, match) {
-    const found = collection.find(data => data[property] === match);
-    return found;
-};
-
-export function struct(structure) {
-    const element = structure;
-    return element;
-};
-
-export function setStyle(element, property, value) {
-    element.style[property] = value;
-};
-
-export function create(element) {
-    const DOMElement = document.createElement(element);
-    return DOMElement;
-};
-
-export function adopt(root = document.body, element) {
-    root.append(element);
-};
-
-export function setClass(element, className, contains = false) {
-    switch (contains) {
-        case true: element.classList.remove(className); break;
-        case false: element.classList.add(className); break;
-    };
-};
-
-export function query(root = document, selector) {
-    const element = root.querySelector(selector);
-    return element;
-};
-
-export function when(condition, operation, fallback) {
-    if (condition) {
-        operation?.();
-    } else {
-        fallback?.();
-    };
-};
-
-export function clear(input) {
-    input.value = "";
-};
-
-export function parseHTML(markup) { 
-    const template = create("template");
-    template.innerHTML = markup.trim();
-    return template.content.firstElementChild;
-};
 
 function Button() {
     let button; 

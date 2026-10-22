@@ -1,0 +1,437 @@
+@layer reset, base, primitives, components, utilities;
+
+@layer reset {
+
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        box-sizing: border-box;
+        transition: all 300ms ease-in-out;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+            Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+}
+
+@layer base {
+
+    :host {
+        --shadow:
+            0 4px 6px hsla(0, 0%, 0%, 5%),
+            0 10px 20px hsla(0, 0%, 0%, 1%),
+            0 20px 40px hsla(0, 0%, 0%, 15%);
+
+        --bg-surface: hsl(0, 0%, 0%);
+        --bg-primary: hsl(0, 0%, 100%);
+
+        --txt-primary: var(--bg-primary);
+        --txt-secondary: hsl(0, 0%, 50%);
+
+        --brdr-btn: 1px solid var(--txt-secondary);
+    }
+}
+
+@layer primitives {
+
+    header {
+        top: 0;
+        left: 0;
+        width: 100%;
+        position: fixed;
+        background: var(--bg-surface);
+    }
+
+    nav {
+        height: 60px;
+        display: flex;
+        padding: 1em 2em;
+        max-width: 1500px;
+        position: relative;
+        align-items: center;
+        color: var(--txt-primary);
+        justify-content: space-between;
+    }
+
+    menu,
+    [name="menu"] {
+        gap: 1em;
+        display: flex;
+        align-items: center;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    button {
+        font-size: 1rem;
+        font-weight: 600;
+        text-wrap: nowrap;
+        padding: .5em 1em;
+        border-radius: 5em;
+        touch-action: manipulation;
+        border: 1px solid transparent;
+    }
+
+    a {
+        gap: .5em;
+        color: inherit;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    a,
+    button {
+        cursor: pointer;
+    }
+}
+
+@layer components {
+
+    /* Navbar Elements Styling */
+
+    .nav {
+        display: flex;
+        gap: 1em;
+    }
+
+    .menu {
+        width: 100%;
+        display: flex;
+        color: var(--txt-primary);
+    }
+
+    .nav-toggle {
+        display: none;
+        width: 1.8em;
+        height: 1.8em;
+        cursor: pointer;
+        position: relative;
+    }
+
+    /* Icon Styling */
+
+    .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        vertical-align: middle;
+    }
+
+    .bar-icon,
+    .close-icon {
+        position: absolute;
+        width: fit-content;
+        height: fit-content;
+        top: 0;
+        bottom: 0;
+    }
+
+    .arrow-icon {
+        left: -20px;
+        opacity: 0;
+        visibility: hidden;
+        position: absolute;
+    }
+
+    .close-icon {
+        opacity: 0;
+    }
+
+    .show-icon .bar-icon {
+        opacity: 0;
+        transform: rotate(360deg);
+    }
+
+    .show-icon .close-icon {
+        opacity: 1;
+        transform: rotate(180deg);
+    }
+
+    .logo:hover .planet-icon {
+        scale: 1.05;
+        fill: currentColor;
+        animation: rotate 2s ease-in-out forwards;
+    }
+
+    /* Buttons */
+
+    .btn {
+        animation: dropIn 4s ease forwards;
+    }
+
+    .btn:hover {
+        scale: .95;
+    }
+
+    .sign-up-btn {
+        opacity: 0;
+        background: none;
+        border: var(--brdr-btn);
+        color: var(--txt-primary);
+        animation-delay: 1.25s;
+    }
+
+    .login-btn {
+        opacity: 0;
+        animation-delay: 1s;
+    }
+
+    .login-btn:hover {
+        background: hsl(0, 0%, 75%);
+    }
+
+    .sign-up-btn:hover {
+        background: hsl(0, 0%, 10%);
+    }
+
+    /* Dropdown Styling */
+
+    .dropdown {
+        position: relative;
+        cursor: pointer;
+        font-weight: 500;
+        border-radius: .25rem;
+    }
+
+    .dropdown:hover .menu-item {
+        background: transparent;
+    }
+
+    .dropdown-menu {
+        z-index: 1;
+        max-height: 0;
+        overflow: hidden;
+        border-radius: .25rem;
+        background: hsl(from var(--bg-surface) h s calc(l + 8));
+    }
+
+    .dropdown:hover .dropdown-menu {
+        max-height: 1000px;
+    }
+
+    .dropdown-link {
+        gap: .5em;
+        display: flex;
+        padding: 1.25em;
+        align-items: center;
+        color: var(--txt-primary);
+    }
+
+    .dropdown-link:hover {
+        background: var(--bg-surface);
+    }
+
+    /* Link styles */
+
+    .menu-item {
+        gap: .5em;
+        opacity: .5;
+        padding: 1em 1.5em;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+    }
+
+    .menu-item .anchor {
+        position: relative;
+    }
+
+    .menu-item .anchor::before {
+        left: 0;
+        width: 0;
+        height: 2px;
+        content: "";
+        bottom: -6px;
+        position: absolute;
+        border-radius: .5em;
+        background: var(--bg-primary);
+    }
+
+    .menu-item:hover {
+        opacity: 1;
+        transform: translateX(20px);
+    }
+
+    .menu-item:hover .anchor::before {
+        width: 100%;
+    }
+
+    .menu-item:hover .arrow-icon {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-2px) scale(1.05);
+    }
+
+    /* Logo & Brand Name Styles */
+
+    .logo {
+        animation: slide 2s ease;
+    }
+
+    .logo:hover .brandName {
+        transform: translateX(8px);
+    }
+
+    .brandName {
+        position: relative;
+    }
+
+    @media screen and (max-width: 1110px) {
+
+        ::-webkit-scrollbar {
+            width: 7px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: hsl(0, 0%, 20%);
+            border-radius: 5rem;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: hsl(0, 0%, 10%);
+            border-radius: 5rem;
+        }
+
+        menu {
+            width: 100%;
+            align-items: baseline;
+            flex-direction: column;
+            padding: .5em 1em;
+        }
+
+        .nav {
+            gap: 4em;
+            right: -100%;
+            top: 3.5rem;
+            width: 50%;
+            opacity: 1;
+            height: 100%;
+            overflow: auto;
+            position: fixed;
+            padding-block: 4em;
+            pointer-events: none;
+            flex-direction: column;
+            background: var(--bg-surface);
+        }
+
+        .menu {
+            gap: 1em;
+            flex-direction: column;
+        }
+
+        .nav-toggle {
+            display: block;
+        }
+
+        .btn {
+            width: 100%;
+        }
+
+        .dropdown:hover {
+            background: hsl(0, 0%, 8%);
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        .nav {
+            left: 0;
+            top: -100%;
+            width: 100%;
+            border-top: 2px solid hsl(0, 0%, 25%, .5);
+        }
+
+        .nav.show-nav {
+            top: 3.75rem;
+        }
+
+        .dropdown-menu {
+            margin-inline: 1em 1.5em;
+            align-items: stretch;
+        }
+    }
+
+    @media screen and (min-width: 1118px) {
+        .dropdown-menu {
+            left: 0;
+            top: 6rem;
+            opacity: 0;
+            width: 200px;
+            overflow: initial;
+            position: absolute;
+            max-height: initial;
+            align-items: stretch;
+        }
+
+        .dropdown-link {
+            padding-inline: 1em 3.5em;
+            letter-spacing: .5px;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            top: 5.5rem;
+            pointer-events: initial;
+        }
+    }
+}
+
+@layer utilities {
+
+    .show-nav {
+        right: 0;
+        opacity: 1;
+        pointer-events: all;
+    }
+
+    .active {
+        opacity: 1;
+        background: var(--bg-surface);
+        transform: translateY(-5px);
+    }
+}
+
+/* Animations */
+
+@keyframes rotate {
+    to {
+        transform: translateY(-5px) translateX(-5px) rotate(180deg);
+    }
+}
+
+@keyframes slide {
+    from {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes drop {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-150%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

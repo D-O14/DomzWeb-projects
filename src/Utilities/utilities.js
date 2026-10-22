@@ -15,15 +15,15 @@ export function wordCounter(text) {
 export function format(input, formatRules) {
     const rules = formatRules[input.name] ?? {};
     if (rules.trim) {
-        input.value = input.value.trim();   
-    } 
+        input.value = input.value.trim();
+    }
     if (rules.capitalize) {
-        input.value = input.value.replace(/\b\w/g, char => char.toUpperCase());   
+        input.value = input.value.replace(/\b\w/g, char => char.toUpperCase());
     }
     if (rules.capitalizeFirst) {
-        input.value = input.value.replace(/\b\w/, char => char.toUpperCase());   
+        input.value = input.value.replace(/\b\w/, char => char.toUpperCase());
     }
-    if (rules.lowercase) { 
+    if (rules.lowercase) {
         input.value = input.value.trim().toLowerCase();
     }
     if (rules.noSpace) {
@@ -97,6 +97,71 @@ export function sortNewest(data, property, render, object) {
 export function sortOldest(data, property, render, object) {
     const oldest = data.sort((a, b) => { return new Date(a[property]) - new Date(b[property]) });
     render({ ...object, items: oldest });
+};
+
+export function createEvent(element, eventName, exposed) {
+    element.dispatchEvent(new CustomEvent(eventName, {
+        detail: { exposed: exposed },
+        bubbles: true,
+        composed: true
+    }));
+};
+
+export function renderApp(...components) {
+    adopt(query(document, "#app"), ...components);
+};
+
+export function find(collection, property, match) {
+    const found = collection.find(data => data[property] === match);
+    return found;
+};
+
+export function struct(structure) {
+    const element = structure;
+    return element;
+};
+
+export function setStyle(element, property, value) {
+    element.style[property] = value;
+};
+
+export function create(element) {
+    const DOMElement = document.createElement(element);
+    return DOMElement;
+};
+
+export function adopt(root = document.body, element) {
+    root.append(element);
+};
+
+export function setClass(element, className, contains = false) {
+    switch (contains) {
+        case true: element.classList.remove(className); break;
+        case false: element.classList.add(className); break;
+    };
+};
+
+export function query(root = document, selector) {
+    const element = root.querySelector(selector);
+    return element;
+};
+
+export function when(condition, operation, fallback) {
+    if (condition) {
+        operation?.();
+    } else {
+        fallback?.();
+    };
+};
+
+export function clear(input) {
+    input.value = "";
+};
+
+export function parseHTML(markup) {
+    const template = create("template");
+    template.innerHTML = markup.trim();
+    return template.content.firstElementChild;
 };
 
 /* Helpers */

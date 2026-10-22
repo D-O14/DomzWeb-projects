@@ -141,7 +141,7 @@ export function rotate(elem) {
     });
 }
 
-export function slideInY(elem, ease) {
+export function slideInY(elem, ease="power1.in") {
     gsap.from(elem,
         { y: `-100%`, opacity: 0, ease: ease, stagger: .5, delay: .25, duration: 1 }
     );
@@ -173,6 +173,12 @@ export function scaleOut(elem) {
         opacity: 0,
     });
 }
+
+export function dropIn(elem) { 
+    gsap.to(elem,
+        { opacity: 1, y: 0, ease: "power1", duration: 1.2 }
+    );
+};
 
 export function dropDown(elem) {
     gsap.fromTo(elem,

@@ -156,7 +156,7 @@ export default class DataTable extends HTMLElement {
     };
 };
 
-dataTable.rowConfig = (tableRow, row) => {
+dataTable_.rowConfig = (tableRow, row) => {
     tableRow.querySelector(".name").textContent = row.userName;
     tableRow.querySelector(".user-id").textContent = row.userId;
     tableRow.querySelector(".mailto").textContent = row.userEmail;
@@ -164,8 +164,8 @@ dataTable.rowConfig = (tableRow, row) => {
     tableRow.querySelector(".user-createdAt").textContent = formatDate(new Date(row.createdAt));
 }
 
-dataTable.data = tableData.users;
-dataTable.headers = tableData.headers;
+dataTable_.data = tableData.users;
+dataTable_.headers = tableData.headers;
 customElements.define("data-table", DataTable);
 
 function formatDate(date) {
