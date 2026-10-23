@@ -243,7 +243,7 @@ function applySearch(e, items, obj, template) {
         renderNotes({ ...obj, items: results });
 }
 
-function saveNote(items) {
+function saveNote(items=[]) {
     const note = {
         id: crypto.randomUUID(),
         title: titleInput.value.trim(),
@@ -251,7 +251,7 @@ function saveNote(items) {
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
         tags: [],
-    }
+    };
     items.unshift(note);
     localStorage.setItem("quickNotes", JSON.stringify(items));
 };

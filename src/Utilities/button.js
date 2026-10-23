@@ -1,4 +1,4 @@
-import { setClass, setStyle, adopt, create } from "../expo";
+import { setClass, setStyle, adopt, create } from "./utilities";
 
 export function createRipple(e, btn) {
     const x = e.clientX - e.target.offsetLeft;

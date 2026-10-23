@@ -3,14 +3,14 @@
 @tailwind components;
 @tailwind utilities;*/
 
-@utility lucide {
+.lucide {
   @scope (main) {
     vertical-align: middle;
     margin-right: 0.25rem;
   }
 }
 
-@utility primary-btn {
+.primary-btn {
   @scope (main) {
     padding: 0.65em 1em;
     border: none;
@@ -39,7 +39,7 @@
   }
 }
 
-@utility secondary-btn {
+.secondary-btn {
   @scope (main) {
     padding: 0.75em 1em;
     background: none;
@@ -54,7 +54,7 @@
   }
 }
 
-@utility formBtn {
+.formBtn {
   @scope (body) {
     background: var(--bg-dark);
     border: none;
@@ -73,7 +73,7 @@
   }
 }
 
-@utility form-title {
+.form-title {
   @scope (body) {
     display: flex;
     align-items: center;
@@ -88,7 +88,7 @@
   }
 }
 
-@utility close {
+.close {
   @scope (body) {
     background: none;
     color: var(--bg-dark);
@@ -106,7 +106,7 @@
   }
 }
 
-@utility icon {
+.icon {
   @scope (body) {
     position: absolute;
     left: 14px;
@@ -114,7 +114,7 @@
   }
 }
 
-@utility label {
+.label {
   @scope (body) {
     position: relative;
     font-size: 16px;
@@ -252,7 +252,7 @@
   }
 }
 
-@utility placeholder {
+.placeholder {
   @scope (body) {
     .label input:valid + & {
       top: 20px;
@@ -306,7 +306,7 @@
   }
 }
 
-@utility checks {
+.checks {
   @scope (body) {
     display: flex;
     flex-direction: column;
@@ -341,7 +341,7 @@
   }
 }
 
-@utility check {
+.check {
   @scope (body) {
     width: 15px;
     height: 15px;
@@ -394,7 +394,7 @@
   }
 }
 
-@utility copyright {
+.copyright {
   @scope (body) {
     margin-top: 2rem;
     text-align: center;
@@ -403,38 +403,38 @@
   }
 }
 
-@utility terms-link {
+.terms-link {
   @scope (body) {
     text-decoration: none;
     color: hsl(210, 87%, 50%);
   }
 }
 
-@utility news-link {
+.news-link {
   @scope (body) {
     text-decoration: none;
     color: hsl(210, 87%, 50%);
   }
 }
 
-@utility copyright-link {
+.copyright-link {
   @scope (body) {
     text-decoration: none;
     color: hsl(210, 87%, 50%);
   }
 }
 
-@utility text-muted {
+.text-muted {
   color: var(--txt-muted);
 }
 
-@utility truncate {
+.truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-@utility line-clamp {
+.line-clamp {
   display: -webkit-box;
   line-clamp: 2;
   -webkit-line-clamp: 2;
@@ -442,7 +442,7 @@
   overflow: hidden;
 }
 
-@utility nav-con {
+.nav-con {
   width: min(100% - 2rem, 1200px);
   margin-inline: auto;
 }
@@ -1014,7 +1014,6 @@
 			position: relative;
 			z-index: 1;
 			background: var(--shade-4);
-			overflow: visible;
 		}
 
 		.cards {
@@ -1109,7 +1108,7 @@
 		& img {
 			object-fit: cover;
 			display: block;
-			transform: rotate(25deg);
+			transform: rotate(-25deg) rotateY(180deg);
 		}
 	}
 

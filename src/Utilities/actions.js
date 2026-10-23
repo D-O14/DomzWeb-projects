@@ -1,5 +1,5 @@
 import { initializeIcons } from "../Assets/Icons/icons";
-import { query, setClass } from "../expo";
+import { query, setClass } from "./utilities";
 
 export function copy(text, toast) {
     navigator.clipboard.writeText(text);

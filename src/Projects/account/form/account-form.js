@@ -1,7 +1,8 @@
 import "./account-form.css";
 import { initializeIcons } from "@assets/Icons/icons";
 import { validateInput, validators } from "@utils/validation";
-import { charCount, format, showLoader, hideLoader } from "@utils/utilities";
+import { charCount, format } from "@utils/utilities";
+import { showLoader, hideLoader } from "@utils/actions"
 
 let passwordSuggested = false;
 
