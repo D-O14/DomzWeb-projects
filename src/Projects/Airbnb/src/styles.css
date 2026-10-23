@@ -1,0 +1,41 @@
+:root{--ink:#1c1a17;--paper:#f5efe6;--sand:#e7dccb;--clay:#a8482a;--pine:#1d2b24;--max:1120px;
+--serif:"Iowan Old Style","Palatino Linotype",Georgia,serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:16px/1.6 var(--sans);color:var(--ink);background:var(--paper)}
+img{max-width:100%;display:block}a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.12;margin:0 0 .5em}
+h1{font-size:clamp(2rem,6vw,3.6rem)}h2{font-size:clamp(1.5rem,4vw,2.3rem)}h3{font-size:1.1rem;margin:.6rem 0 .1rem}
+.wrap{max-width:var(--max);margin:0 auto;padding:2.5rem 1.25rem}
+.sr{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;padding:.5rem;z-index:9}
+:focus-visible{outline:3px solid var(--clay);outline-offset:3px}.dark :focus-visible{outline-color:#e9b08f}
+.muted{color:#5d564c}.small{font-size:.85rem}.dark .muted{color:#b9c4bb}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;color:var(--clay);margin:0 0 .75rem}.dark .eyebrow{color:#e9b08f}
+.lead{font-size:1.15rem;max-width:34rem}.row{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.4rem;border:1.5px solid currentColor;
+background:none;color:inherit;font:600 1rem var(--sans);text-decoration:none;cursor:pointer}
+.btn.solid{background:var(--clay);border-color:var(--clay);color:#fff}.btn[disabled]{opacity:.55;cursor:not-allowed}
+.hdr{border-bottom:1px solid var(--sand)}.bar{max-width:var(--max);margin:auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:.6rem 1.25rem}
+.brand{font:700 1.25rem var(--serif);text-decoration:none}
+#nav{display:none;flex-direction:column;width:100%;padding:.5rem 0}.open #nav{display:flex}
+#nav a{padding:.7rem 0;text-decoration:none}#nav a[aria-current]{color:var(--clay);font-weight:700}
+@media(min-width:760px){#nav{display:flex;flex-direction:row;width:auto;gap:1.75rem}#navBtn{display:none}}
+.dark{background:var(--pine);color:var(--paper)}#app{min-height:70vh}
+.m{position:relative;overflow:hidden;background:var(--sand)}
+.m img,.m .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ph{display:grid;place-items:center;text-align:center;font-size:.85rem;color:#6b6254;
+background:repeating-linear-gradient(135deg,var(--sand),var(--sand) 12px,#efe5d5 12px,#efe5d5 24px)}
+.grid{display:grid;gap:1.5rem 1rem;grid-template-columns:repeat(2,1fr)}@media(min-width:900px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{text-decoration:none}.card p{margin:0}.price{font-weight:600}.big{font-size:1.4rem}
+.tools{display:grid;gap:1rem;margin:1.5rem 0}
+input[type=search]{min-height:48px;padding:0 .9rem;font:inherit;border:1.5px solid var(--ink);background:#fff;width:100%;max-width:26rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}.chips button{min-height:44px;padding:0 1rem;border:1.5px solid var(--ink);background:none;font:inherit;cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.note{background:var(--sand);padding:.6rem .9rem;font-size:.9rem}.empty{grid-column:1/-1;padding:2rem 0}
+.pd{display:grid;gap:2rem;margin-top:1rem}@media(min-width:800px){.pd{grid-template-columns:1.1fr 1fr}}
+.thumbs{display:flex;gap:.5rem;margin-top:.5rem;flex-wrap:wrap}.thumbs button{width:72px;padding:0;border:2px solid transparent;background:none;cursor:pointer}
+dl{display:grid;grid-template-columns:auto 1fr;gap:.3rem 1.2rem}dt{font-weight:600}dd{margin:0}
+.split{display:grid;gap:2rem;align-items:center}@media(min-width:800px){.split{grid-template-columns:1fr 1fr}}
+.gal{display:grid;gap:.75rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:2rem 0}
+.facts,.amen{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
+#ftr{background:var(--pine);color:var(--paper)}#ftr nav{display:flex;flex-wrap:wrap;gap:1.25rem;margin:1rem 0}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
