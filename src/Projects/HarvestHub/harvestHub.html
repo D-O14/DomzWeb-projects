@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HarvestHub | Agricultural supermarket, Benin City</title>
+  <meta name="description"
+    content="Livestock, poultry, frozen foods, produce and staples. Retail and bulk supply from HarvestHub." />
+  <meta property="og:title" content="HarvestHub" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=Young+Serif&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="./harvestHub.css" />
+</head>
+
+<body>
+  <header class="app-header">
+    <nav class="header-nav">
+      <div class="row">
+        <a href="#/" class="logo">
+          <span class="icon plant-icon" data-icon="harvestHub"></span>
+          HarvestHub
+        </a>
+        <ul class="navbar">
+          <li><a href="#/" class="nav-item active">Home</a></li>
+          <li><a href="#/shop" class="nav-item">Shop</a></li>
+          <li><a href="#/wholesale" class="nav-item">Wholesale</a></li>
+          <li><a href="#/delivery" class="nav-item">Delivery</a></li>
+          <li><a href="#/about" class="nav-item">About</a></li>
+          <li><a href="#/contact" class="nav-item">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <label for="searchbar" class="search-field">
+          <span class="icon plant-icon" data-icon="harvestHub"></span>
+          <input type="search" name="searched_item" placeholder="Search the market..." class="searchbar" id="searchbar">
+        </label>
+        <menu class="nav-menu">
+          <button class="open-cart-btn" aria-label="Open Cart">
+            <span class="icon cart-icon" data-icon="shoppingCart"></span>
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
+        </menu>
+      </div>
+      <div class="nav-toggle" id="nav-toggle" part="toggle">
+        <span class="icon bar-icon" data-icon="menubar"></span>
+        <span class="icon close-icon" data-icon="close"></span>
+      </div>
+    </nav>
+  </header>
+
+  <main class="app" id="app">
+    
+  </main>
+
+  <div class="scrim" id="scrim" data-action="close"></div>
+  <aside class="drawer" id="drawer" aria-label="Cart">
+    <div class="drawer-top">
+      <h2>Your cart</h2>
+      <button data-action="close" aria-label="Close your cart">
+        <span class="icon close-icon" data-icon="close"></span>
+      </button>
+    </div>
+    <div class="drawer-body" id="dBody"></div>
+    <div class="drawer-bot" id="dFoot"></div>
+  </aside>
+
+  <footer class="footer">
+    <div class="wrapper footer-grid">
+      <div>
+        <div class="mark mark--l">HarvestHub</div>
+        <p id="footAddr"></p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <div id="footCategorys"></div>
+      </div>
+      <div>
+        <h4>Help</h4><a href="#/delivery">Delivery and collection</a><a href="#/wholesale">Bulk supply</a><a
+          href="#/about">Policies</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <div id="footContact"></div>
+      </div>
+    </div>
+  </footer>
+
+  <a class="whatsApp whatsapp-btn" id="wa" target="_blank" rel="noopener">WhatsApp</a>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+
+<script src="./harvestHub.js" type="module" defer></script>
+
+</html>

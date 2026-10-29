@@ -1,0 +1,188 @@
+@import "@styles/base/fonts.css";
+
+:root {
+    --forest: hsl(160, 45%, 14%);
+    --botanic: hsl(101, 20%, 47%);
+    --oat: hsl(42, 49%, 91%);
+    --paper: hsl(43, 100%, 99%);
+    --ink: hsl(100, 5%, 12%);
+    --terra: hsl(17, 64%, 47%);
+    --line: hsl(41, 32%, 80%);
+    --radius: 8px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 300ms ease-in-out;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+        'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--oat);
+}
+
+a{
+    color: var(--forest);
+    text-decoration: none;
+}
+
+.product-img,
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+button {
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: .5em 1em;
+}
+
+button:hover {
+    scale: .95;
+}
+
+.product-card {
+    display: flex;
+    padding: 0.5em;
+    max-width: 300px;
+    border-radius: .5em;
+    align-items: center;
+    position: relative;
+    justify-content: start;
+    flex-direction: column;
+    background: var(--paper);
+    border: 1px solid var(--paper);
+    /*background: hsl(44, 43%, 85%);*/
+}
+
+.product-img {
+    display: grid;
+    place-items: center;
+    font-size: 3.6rem;
+    position: relative;
+    border-radius: .15em;
+    background: hsl(44, 43%, 85%);
+}
+
+.product-specs {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.product-price {
+    font-weight: 600;
+}
+
+.product-desc {
+    opacity: .75;
+    line-clamp: 2;
+    max-width: 30ch;
+    text-align: start;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    margin-bottom: 1.5em;
+    text-overflow: ellipsis;
+}
+
+.product-category {
+    top: -5px;
+    left: -20px;
+    z-index: 1;
+    color: var(--oat);
+    font-size: 12px;
+    font-weight: 600;
+    padding: .5em 1em;
+    position: absolute;
+    border-radius: 5em;
+    max-width: fit-content;
+    text-transform: capitalize;
+    background: var(--forest);
+}
+
+.card-content {
+    width: 100%;
+    padding: 1em;
+    /*border-radius: .5em;
+    background: var(--paper);*/
+}
+
+.cart-btn {
+    gap: .5em;
+    display: flex;
+    color: var(--oat);
+    align-items: center;
+    background: var(--forest);
+    border-top-left-radius: .5em;
+    border-top-right-radius: .15em;
+    border-bottom-left-radius: .15em;
+    border-bottom-right-radius: .75em;
+}
+
+.card-actions {
+    gap: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.wishlist-btn {
+    top: 10px;
+    right: 10px;
+    background: none;
+    position: absolute;
+}
+
+.heart-icon {
+    padding: .25em;
+    display: inline-flex;
+    align-items: center;
+    border-radius: 5em;
+    background: var(--paper);
+}
+
+.heart-icon svg,
+.cart-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.details-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.details-btn {
+    gap: .25em;
+    display: inline-flex;
+    align-items: center;
+    padding: .45em .75em;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .15em;
+    border: 1px solid var(--forest);
+    border-bottom-left-radius: .15em;
+    border-bottom-right-radius: .75em;
+}
+
+.details-btn:hover {
+    color: var(--oat);
+    background: var(--forest);
+    border-color: var(--botanic);
+}
+
+.details-btn:hover .details-icon {
+    transform: translateX(5px);
+}

@@ -10,16 +10,10 @@ links.forEach(link => {
 
 const navMenu = document.getElementById("nav-menu");
 const navToggle = document.getElementById("nav-toggle");
-const navClose = document.getElementById("nav-close");
 
 navToggle.addEventListener("click", () => {
     navMenu.classList.toggle("show-menu");
     navToggle.classList.toggle("show-icon");
 });
-
-/*navClose.addEventListener("click", () => {
-    navMenu.classList.remove("show-menu")
-})*/
-
 
 initializeIcons(document);

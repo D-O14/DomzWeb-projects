@@ -2,7 +2,7 @@ import styles from "./Toast.module.css";
 import Button from "../Button/Button";
 import { Clock, X } from "lucide-react";
 
-export default function Toast({ dismissable, message, content, icon, interact }) {
+export default function Toast({ dismissable=true, message, content, icon, interact=false }) {
     
 
     function displayMenu() {

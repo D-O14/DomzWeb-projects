@@ -1,5 +1,4 @@
 import "./navbar.css";
-import "@styles/tailwindcss/output.css";
 import { query } from "@utils/utilities";
 import { initializeIcons } from "@assets/Icons/icons";
 import { createStyle, createTemplate } from "@utils/component";
@@ -8,20 +7,21 @@ const navTemplate = createTemplate(
     `<header part="header"> 
     <nav part="nav">
         <a href="" class="logo" part="logo">
-            <span class="icon planet-icon" data-icon=""></span>
-            <span class="brandName"></span>
+            <span class="icon nav-icon" data-icon="" part="navicon"></span>
+            <span class="brandName" part="brandName"></span>
         </a>
-        <div class="nav" id="nav">
+        <div class="nav" id="nav" part="nav-container">
             <ul class="menu">
                 <slot name="dropdown" class="dropdown">
                 
                 </slot>
             </ul>
-            <slot name="menu"></slot>
+            <slot name="navMenu"></slot>
+            <slot name="searchbar"></slot>
         </div>
 
-        <div class="nav-toggle" id="nav-toggle">
-            <span class="icon bar-icon" data-icon="menu"></span>
+        <div class="nav-toggle" id="nav-toggle" part="toggle">
+            <span class="icon bar-icon" data-icon="menubar"></span>
             <span class="icon close-icon" data-icon="close"></span>
         </div>
     </nav>
@@ -31,7 +31,7 @@ const linkTemplate = createTemplate(
     `<li>
     <a href="#" class="menu-item" part="navlink">
         <span class="icon arrow-icon" part="linkicon" data-icon="goArrow"></span>
-        <span class="anchor">Catalogue</span>
+        <span class="anchor" part="anchor"></span>
     </a>
 </li>`
 );
@@ -42,6 +42,7 @@ const navData = {
         { anchor: "About", path: "#" },
         { anchor: "Services", path: "#" },
         { anchor: "Products", path: "#" },
+        { anchor: "Catalogue", path: "#" },
     ],
 };
 
@@ -62,7 +63,7 @@ export class NavBar extends HTMLElement {
         this.linkMenu = query(this.nav, ".menu");
         this.toggle = query(this.nav, ".nav-toggle");
         this.brandName = query(this.nav, ".brandName");
-        this.navIcon = query(this.nav, ".planet-icon");
+        this.navIcon = query(this.nav, ".nav-icon");
         this.navMenu = query(this.nav, "[name='menu']");
         this.dropdown = query(this.nav, "[name='dropdown']");
         this.dropDownMenu = query(this.nav, ".dropdown-menu");
@@ -118,6 +119,6 @@ export class NavBar extends HTMLElement {
 };
 
 const navBar = query(document, "nav-bar");
-navBar.navData = navData;
+navBar._navData = navData;
 
 customElements.define("nav-bar", NavBar);

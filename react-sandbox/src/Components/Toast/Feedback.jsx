@@ -3,7 +3,7 @@ import styles from "./Feedback.module.css";
 import Button from "../Button/Button";
 import { X } from "lucide-react";
 
-export default function Feedback({ className, icon, content, dismissable, interact, /*username = "Guest", isLoggedIn = false*/ }) {
+export default function Feedback({ className="toast", icon, content, dismissable=true, interact=false }) {
     /*const welcomeMsg = <h2 className={styles.welcomeMsg}>Welcome, {username}!</h2>;
         const loginPrompt = <h2 className={styles.loginPrompt}>Please log in to continue to app!</h2>;*/
 

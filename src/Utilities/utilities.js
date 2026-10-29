@@ -164,6 +164,8 @@ export function parseHTML(markup) {
     return template.content.firstElementChild;
 };
 
+export function $(id) { document.getElementById(id) };
+
 /* Helpers */
 
 function isThisWeek(date) {

@@ -5,9 +5,7 @@ import { initializeIcons, removeIcon } from "@assets/Icons/icons";
 const template = createTemplate(
     `<label for="searchInput">
     <div class="input" part="container">
-        <slot name="icon">
-            <span class="icon search-icon" part="icon" data-icon="search"></span>
-        </slot>
+        <span class="icon search-icon" part="icon" data-icon=""></span>
         <input part="input" id="searchInput" type="search" autocomplete="off">
         <button class="close-btn" aria-label="clear search button">
             <span class="icon clear" data-icon=""></span>
@@ -28,6 +26,7 @@ export default class SearchInput extends HTMLElement {
         this.inputLabel = inputComponent.querySelector("label");
         this.input = inputComponent.querySelector(".input");
         this.icon = this.closeBtn.querySelector(".icon");
+        this.searchIcon = inputComponent.querySelector(".search-icon");
         initializeIcons(this.inputLabel);
         shadow.append(style, this.inputLabel);
 
@@ -58,9 +57,11 @@ export default class SearchInput extends HTMLElement {
         });
     }
 
-    connectedCallback() { 
+    connectedCallback() {
         const className = this.getAttribute("class");
         const placeholder = this.getAttribute("placeholder") ?? "Find anything you want...";
+        const icon = this.getAttribute("searchicon") ?? "search";
+        this.searchIcon.dataset.icon = icon;
         this.searchInput.placeholder = placeholder;
         this.input.classList.add(className);
         initializeIcons(this.shadowRoot);
