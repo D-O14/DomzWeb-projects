@@ -1,4 +1,3 @@
-import { Asterisk } from "lucide";
 import "./expo.css";
 import { initializeIcons } from "@assets/Icons/icons";
 import { renderApp } from "./Utilities/utilities";
@@ -123,4 +122,5 @@ const newBtn = {
 };
 
 //const button = newBtn.render(create("button"));
-renderApp(Button());
+//renderApp(Button());
+initializeIcons(document)

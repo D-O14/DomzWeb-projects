@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edinburgh Royale Apartment | Apartments for Short Stays</title>
+  <meta name="description" content="Edinburgh Royale Apartment offers a selection of apartments for short stays. Browse each apartment, then book on Airbnb or enquire on WhatsApp.">
+  <meta name="theme-color" content="#14261f">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/edinburgh.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <script type="module" src="./js/edinburgh.js"></script>
+</head>
+<body data-page="home">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <!-- Rendered by js/modules/layout.js from js/config.js -->
+  <header class="site-header" data-site-header></header>
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__media">
+        <!-- EDIT HERE: Replace assets/images/hero.jpg with a real photograph (recommended 1920 x 1280). -->
+        <img src="assets/images/hero.jpg" alt="" width="1920" height="1280"
+             fetchpriority="high" decoding="async" data-fallback="hero">
+      </div>
+      <div class="container hero__content">
+        <p class="eyebrow eyebrow--light">Apartments for short stays</p>
+        <!-- EDIT HERE: Draft headline. -->
+        <h1 id="hero-title" class="hero__title">A refined place to stay, made simple.</h1>
+        <p class="hero__lead">
+          Browse our apartments, see what each one offers, then book on Airbnb
+          or ask us a question on WhatsApp.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href="apartments.html">Explore apartments</a>
+          <!-- JS upgrades this link to a WhatsApp link when a valid number is configured. -->
+          <a class="btn btn--outline-light" href="contact.html" data-whatsapp-general>Enquire on WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED APARTMENTS -->
+    <section class="section" id="featured" aria-labelledby="featured-title" data-featured-section>
+      <div class="container">
+        <header class="section-head">
+          <div>
+            <p class="eyebrow">Featured apartments</p>
+            <h2 id="featured-title" class="section-title">Start with these</h2>
+          </div>
+          <a class="link-arrow" href="apartments.html">View all apartments</a>
+        </header>
+        <div class="apartment-grid" data-featured-grid></div>
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY -->
+    <section class="section section--tint" aria-labelledby="philosophy-title">
+      <div class="container split">
+        <div class="split__intro">
+          <p class="eyebrow">Our approach</p>
+          <!-- EDIT HERE: Draft copy. Replace with the business's own words. -->
+          <h2 id="philosophy-title" class="section-title">Comfort, clarity and care.</h2>
+          <p class="lead">
+            A short stay should feel effortless from the first look at a listing
+            to the moment you arrive.
+          </p>
+        </div>
+        <ul class="principles">
+          <li class="principle">
+            <h3 class="principle__title">Comfort first</h3>
+            <p>Each apartment is presented so you can judge the space and its amenities before you decide.</p>
+          </li>
+          <li class="principle">
+            <h3 class="principle__title">Clear information</h3>
+            <p>Details shown on this site come from the business. Anything not listed is available on request.</p>
+          </li>
+          <li class="principle">
+            <h3 class="principle__title">Personal attention</h3>
+            <p>Questions about a specific apartment can go straight to us on WhatsApp.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- AMENITY HIGHLIGHTS (built from apartment data; hidden when no amenities exist) -->
+    <section class="section" aria-labelledby="amenities-title" data-amenities-section hidden>
+      <div class="container">
+        <header class="section-head section-head--stacked">
+          <p class="eyebrow">Across our apartments</p>
+          <h2 id="amenities-title" class="section-title">What you can look forward to</h2>
+        </header>
+        <ul class="amenity-highlights" data-amenity-list></ul>
+      </div>
+    </section>
+
+    <!-- HOW BOOKING WORKS -->
+    <section class="section section--dark" aria-labelledby="how-title">
+      <div class="container">
+        <header class="section-head section-head--stacked">
+          <p class="eyebrow eyebrow--light">How it works</p>
+          <h2 id="how-title" class="section-title section-title--light">Three simple steps</h2>
+        </header>
+        <ol class="steps">
+          <li class="step">
+            <span class="step__number" aria-hidden="true">1</span>
+            <h3 class="step__title">Explore</h3>
+            <p>Browse the apartments and open any listing for photographs, amenities and details.</p>
+          </li>
+          <li class="step">
+            <span class="step__number" aria-hidden="true">2</span>
+            <h3 class="step__title">Book on Airbnb</h3>
+            <p>Each apartment links to its own Airbnb listing. Availability, pricing and payment are handled on Airbnb.</p>
+          </li>
+          <li class="step">
+            <span class="step__number" aria-hidden="true">3</span>
+            <h3 class="step__title">Or ask us first</h3>
+            <p>Prefer to talk it through? Open WhatsApp with a message already prepared for your chosen apartment.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WHATSAPP CTA -->
+    <section class="section cta" aria-labelledby="cta-title">
+      <div class="container cta__inner">
+        <div>
+          <h2 id="cta-title" class="section-title">Have a question about a stay?</h2>
+          <p class="lead">Message us on WhatsApp. You review the message and press send yourself.</p>
+        </div>
+        <a class="btn btn--primary" href="contact.html" data-whatsapp-general>Go to WhatsApp</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Rendered by js/modules/layout.js from js/config.js -->
+  <footer class="site-footer" data-site-footer></footer>
+
+  <noscript>
+    <p class="noscript-note">JavaScript is required to display apartments and contact options on this website.</p>
+  </noscript>
+</body>
+</html>

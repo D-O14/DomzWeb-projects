@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Title and description are updated by js/modules/apartment-details.js once the apartment is found. -->
+  <title>Apartment | Edinburgh Royale Apartment</title>
+  <meta name="description" content="Apartment details, photographs and amenities from Edinburgh Royale Apartment.">
+  <meta name="theme-color" content="#14261f">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/edinburgh.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <script type="module" src="./js/edinburgh.js"></script>
+</head>
+<body data-page="apartment">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" data-site-header></header>
+
+  <!--
+    URL pattern: apartment.html?slug=apartment-slug
+    The slug is read from the address bar and matched against js/data/apartments.js,
+    so every apartment has its own shareable URL that survives a refresh.
+  -->
+  <main id="main" data-apartment-detail>
+    <div class="container detail-status" role="status">
+      <p>Loading apartment details…</p>
+    </div>
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <noscript>
+    <p class="noscript-note">JavaScript is required to display apartments and contact options on this website.</p>
+  </noscript>
+</body>
+</html>

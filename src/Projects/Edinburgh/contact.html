@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Edinburgh Royale Apartment</title>
+  <meta name="description" content="Contact Edinburgh Royale Apartment by WhatsApp, telephone or email to ask about our apartments.">
+  <meta name="theme-color" content="#14261f">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/edinburgh.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <script type="module" src="./js/edinburgh.js"></script>
+</head>
+<body data-page="contact">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" data-site-header></header>
+
+  <main id="main">
+
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container">
+        <p class="eyebrow">Contact</p>
+        <h1 id="page-title" class="page-hero__title">Get in touch with Edinburgh Royale Apartment</h1>
+        <p class="page-hero__lead">
+          Ask about an apartment, availability or booking requirements. We will
+          reply using the channel you choose.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--flush-top" aria-label="Contact options">
+      <div class="container">
+
+        <!-- Rendered by js/modules/contact.js from js/config.js. Only configured channels appear. -->
+        <ul class="contact-grid" data-contact-methods></ul>
+
+        <!-- Shown only when no contact details have been configured yet. -->
+        <div class="empty-state" data-contact-fallback hidden>
+          <h2 class="empty-state__title">Contact details are being added</h2>
+          <p>Please check back soon, or browse our apartments in the meantime.</p>
+          <a class="btn btn--primary" href="apartments.html">View apartments</a>
+        </div>
+
+        <section class="contact-extra" data-contact-extra hidden aria-labelledby="locations-title">
+          <h2 id="locations-title" class="contact-extra__title">Where to find us</h2>
+          <div data-contact-address></div>
+        </section>
+
+        <p class="note">
+          Messages are never sent automatically. WhatsApp opens with a message
+          prepared for you, and you choose whether to send it.
+        </p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <noscript>
+    <p class="noscript-note">JavaScript is required to display apartments and contact options on this website.</p>
+  </noscript>
+</body>
+</html>

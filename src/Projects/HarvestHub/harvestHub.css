@@ -4,7 +4,7 @@
 @layer base {
   :root {
     --forest: hsl(160, 45%, 14%);
-    --botanic: hsl(101, 20%, 47%);
+    --botanic: rgb(111, 144, 96);
     --oat: hsl(42, 49%, 91%);
     --paper: hsl(43, 100%, 99%);
     --ink: hsl(100, 5%, 12%);
@@ -100,6 +100,12 @@
 
   button:hover {
     scale: .95;
+  }
+
+  svg {
+    display: inline;
+    vertical-align: middle;
+    transform: translate(0);
   }
 
   :focus-visible {
@@ -370,7 +376,7 @@
   height: 16px;
 }
 
-.wa-icon svg{
+.wa-icon svg {
   width: 20px;
   height: 20px;
   fill: var(--paper);
@@ -404,15 +410,14 @@
   width: min(550px, 100vw);
   transform-origin: center;
   animation: float 6s ease-in-out infinite;
-  filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.15));
-}
 
-.hero-img img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  aspect-ratio: 16/9;
+  & img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      aspect-ratio: 16/9;
+    }
 }
 
 .hero-container {
@@ -440,64 +445,87 @@
   margin-top: 22px;
 }
 
-/* Price Board */
-
-.price-board {
-  color: var(--ink);
-  padding: 20px 22px;
-  background: var(--paper);
-  border-radius: var(--radius);
-}
-
-.price-board-title {
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-}
-
-.price-board a {
-  gap: 12px;
-  display: flex;
-  padding: 9px 0;
-  justify-content: space-between;
-  border-bottom: 1px dashed var(--brdr-clr);
-}
-
-.price-board small {
-  display: block;
-  color: hsl(53, 4%, 40%);
-}
-
-/*.price-board-note {
-  font-size: .78rem;
-  margin: 10px 0 0;
-  color: hsl(53, 4%, 40%);
-}*/
-
 /* Categories */
 
-.index {
-  display: grid;
-  column-gap: 40px;
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.index a {
+.categories {
+  gap: 2em;
   display: flex;
-  padding: 14px 0;
-  font-weight: 500;
-  font-size: 1.05rem;
-  justify-content: space-between;
-  border-bottom: 1px solid var(--brdr-clr);
+  padding-block: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
-.index a:hover {
-  color: var(--terra);
-  padding-left: 6px;
+.category-img {
+  height: 150px;
+  width: 150px;
+  display: grid;
+  place-items: center;
+  border-radius: 5em;
+  background: hsl(101, 50%, 67%);
 }
 
-.index span {
-  font-weight: 400;
-  color: hsl(51, 6%, 45%);
+.category-display-img {
+  width: 100px;
+  height: 100px;
+}
+
+.category:hover {
+  & .category-img {
+    transform: translateY(-5px);
+  }
+
+  & .category-name {
+    color: var(--terra);
+  }
+}
+
+.category {
+  gap: 1em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.categories-fab {
+  color: var(--oat);
+  background: none;
+  border-radius: 5em;
+  padding: .65em .75em;
+  border: 1px solid transparent;
+  background: hsl(17, 54%, 47%);
+}
+
+.categories-fab:hover{
+  scale: 1;
+
+  & .arrow-icon svg{
+    transform: translateX(5px);
+  }
+}
+
+.livestock {
+  background: hsl(101, 50%, 67%);
+}
+
+.poultry{
+  background: hsl(20, 50%, 77%);
+}
+
+.frozen {
+  background: hsl(20, 50%, 57%);
+}
+
+.fruits {
+  background: hsl(42, 49%, 81%);
+}
+
+.t_r {
+  background: hsl(34, 42%, 33%);
+}
+
+.fresh {
+  background: hsl(7, 54%, 47%);
 }
 
 /* Product grid */
@@ -591,6 +619,13 @@
 
 .card-actions .btn {
   flex: 1;
+}
+
+.step-img img{
+  width: 250px;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 /* Unknown */

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apartments | Edinburgh Royale Apartment</title>
+  <meta name="description" content="Browse the apartments offered by Edinburgh Royale Apartment. View photographs and details, then book on Airbnb or enquire on WhatsApp.">
+  <meta name="theme-color" content="#14261f">
+  <link rel="icon" type="image/svg+xml" href="assets/logo/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/edinburgh.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <script type="module" src="./js/edinburgh.js" defer></script>
+</head>
+<body data-page="apartments">
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" data-site-header></header>
+
+  <main id="main">
+    <section class="page-hero" aria-labelledby="page-title">
+      <div class="container">
+        <p class="eyebrow">Our apartments</p>
+        <h1 id="page-title" class="page-hero__title">Find the right apartment for your stay</h1>
+        <p class="page-hero__lead">
+          Open any apartment for its full details and photographs. Booking takes
+          place on Airbnb, or you can ask us a question on WhatsApp first.
+        </p>
+      </div>
+    </section>
+
+    <section class="section section--flush-top" aria-label="Apartment listings">
+      <div class="container">
+
+        <!-- Rendered by js/modules/filters.js. Only shown when the data supports at least one useful filter. -->
+        <div class="filters" data-filters role="group" aria-label="Filter and sort apartments" hidden></div>
+
+        <p class="results-count" data-results-count role="status" aria-live="polite"></p>
+
+        <div class="apartment-grid" data-apartment-grid></div>
+
+        <div class="empty-state" data-empty-state hidden>
+          <h2 class="empty-state__title">No apartments match your filters</h2>
+          <p>Try a different combination, or clear the filters to see every apartment.</p>
+          <button type="button" class="btn btn--primary" data-reset-filters>Clear filters</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" data-site-footer></footer>
+
+  <noscript>
+    <p class="noscript-note">JavaScript is required to display apartments and contact options on this website.</p>
+  </noscript>
+</body>
+</html>

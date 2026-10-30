@@ -21,14 +21,14 @@ const config = {
 /* ---------- DATA ---------- */
 
 const categories = [
-  { id: "livestock", name: "Livestock" },
-  { id: "poultry", name: "Poultry" },
-  { id: "frozen", name: "Frozen Foods" },
-  { id: "produce", name: "Fresh Produce" },
   { id: "grains", name: "Grains and Staples" },
-  { id: "tubers", name: "Tubers and Roots" },
-  { id: "fruits", name: "Fruits" },
   { id: "bulk", name: "Bulk and Wholesale Supply" },
+  { id: "fruits", name: "Fruits", img: "../../Assets/Images/3d-fruits.png", featured: true, className: "fruits" },
+  { id: "poultry", name: "Poultry", img: "../../Assets/Images/3d-chicken.png", featured: true, className: "poultry" },
+  { id: "livestock", name: "Livestock", img: "../../Assets/Images/3d-goat.png", featured: true, className: "livestock" },
+  { id: "frozen", name: "Frozen Foods", img: "../../Assets/Images/3d-frozen-meat.png", featured: true, className: "frozen" },
+  { id: "produce", name: "Fresh Produce", img: "../../Assets/Images/3d-produce-box.png", featured: true, className: "fresh" },
+  { id: "tubers", name: "Tubers and Roots", img: "../../Assets/Images/3d-tubers_roots.png", featured: true, className: "t_r" },
 ];
 
 // status: in | out | order (sourced or prepared after ordering)
@@ -213,7 +213,7 @@ function productCard(product) {
             <p class="product-desc">${ product.desc }</p>
             <menu class="card-actions">
                 <button class="cart-btn" data-action="add" aria-label="Add to Cart" data-product-id="${ product.id }">
-                    <span class="icon cart-icon" data-icon="shoppingCart"></span>
+                    <span class="icon cart-icon" data-icon="cartPlus"></span>
                 </button>
                 <a class="details-btn" href="#/product/${ product.id }">
                     View Details
@@ -241,35 +241,27 @@ function home() {
           <a class="btn btn-secondary" href="#/wholesale">Bulk supply for business</a>
         </menu>
       </div>
-
       <figure class="hero-img">
         <img src="../../Assets/Images/3d-fruit-basket.png" alt="">
       </figure>
-
-      <!--<div class="price-board">
-        <h3 class="price-board-title">On the price board</h3>
-          ${ products.filter((p) => p.featured).slice(0, 6).map((p) =>
-            `<a href="#/product/${ p.id }">
-                <span>
-                  ${ p.name }
-                  <small>per ${ p.unit }</small>
-                </span>
-                <b>${ naira(p.price) }</b>
-              </a>`).join("")}
-      </div>-->
-
     </div>
   </section>
 
   <section class="section wrapper">
-    <h2>Browse by section</h2>
-    <div class="index">
-    ${ categories.map((c) =>
-      `<a href = "#/shop?category=${ c.id }" > ${ c.name }
-        <span>${ count(c.id) } items</span>
-      </a>`).join("") }
-    </div>
-  </section>
+        <h2>Browse by Category</h2>
+        <div class="categories">
+        ${ categories.filter(category => category.featured).map((category) => `
+          <div class="category">
+              <a href="#/shop?category=${ category.id }" class="category-img ${ category.className }"> 
+                  <img class="category-display-img" src="${ category.img }" alt="">
+              </a>
+              <span class="category-name">${ category.name }</span>
+          </div>`).join("")}
+          <button class="categories-fab" aria-label="slide to see more categories">
+              <span class="icon arrow-icon" data-icon="arrowRight"></span>
+          </button>
+        </div>
+    </section>
 
   <section class="section wrapper">
     <h2>Featured this week</h2>
@@ -278,7 +270,34 @@ function home() {
     </div>
   </section>
 
-  <section class="paths">
+  <section class="section wrapper">
+    <h2>How ordering works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>Choose</h3>
+        <p>Add products and quantities to your cart.</p>
+        <figure class="step-img">
+          <img src="../../Assets/Images/add-to-cart.svg" alt="">
+        </figure>
+      </div>
+      <div class="step">
+        <h3>Send your order</h3>
+        <p>Share it on WhatsApp or by email. This submits a request only.</p>
+        <figure class="step-img">
+          <img src="../../Assets/Images/email-capture.svg" alt="">
+        </figure>
+      </div>
+      <div class="step">
+        <h3>We confirm</h3>
+        <p>HarvestHub confirms stock, final price, payment and delivery or collection with you.</p>
+        <figure class="step-img">
+          <img src="../../Assets/Images/confirmed.svg" alt="">
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!--<section class="paths">
     <div class="path path-home">
       <h2>For your household</h2>
       <p>Order by the animal, bird, kilogram, basket or bunch. Each product shows exactly how it is sold.</p>
@@ -289,22 +308,7 @@ function home() {
       <p>Ask for larger quantities and a quotation. Quantity prices are set product by product.</p>
       <a class="btn" href="#/wholesale">Request bulk supply</a>
     </div>
-  </section>
-
-  <section class="section wrapper">
-    <h2>How ordering works</h2>
-    <div class="steps">
-      <div>
-        <h3>Choose</h3>Add products and quantities to your cart.
-      </div>
-      <div>
-        <h3>Send your order</h3>Share it on WhatsApp or by email. This submits a request only.
-      </div>
-      <div>
-        <h3>We confirm</h3>HarvestHub confirms stock, final price, payment and delivery or collection with you.
-      </div>
-    </div>
-  </section>`;
+  </section>-->`;
 }
 
 function shop(params) {
@@ -603,7 +607,6 @@ document.addEventListener("click", (e) => {
 window.addEventListener("hashchange", render);
 
 function init() {
-  //$("bar").textContent = config.announcement;
   $("wa").href = waLink("Hello HarvestHub, I would like to place an order.");
   //$("names").innerHTML = products.map((p) => `<option value="${p.name}">`).join("");
   $("footAddr").textContent = config.address;

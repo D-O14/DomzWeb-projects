@@ -38,12 +38,12 @@ const products = [
         props: [{ quantity: 50, price: 3700 }], desc: "Sample rice. Larger quantities have a lower per-kilogram price.", note: ""
     },
     { id: crypto.randomUUID(), name: "Beans", category: "grains", img: "🫘", status: "in", price: 3500, unit: "kg", minimum: 1, desc: "Sample beans sold by the kilogram.", note: "" },
-    { id: crypto.randomUUID(), name: "Maize", category: "grains", img: "🌽", status: "in", price: 1800, unit: "kg", minimum: 5, desc: "Sample maize.", note: "Minimumimum order 5 kg." } ,
+    { id: crypto.randomUUID(), name: "Maize", category: "grains", img: "🌽", status: "in", price: 1800, unit: "kg", minimum: 5, desc: "Sample maize.", note: "Minimumimum order 5 kg." },
     { id: crypto.randomUUID(), name: "Garri", category: "grains", img: "🥣", status: "in", price: 2000, unit: "kg", minimum: 1, desc: "Sample garri sold by the kilogram.", note: "" },
     { id: crypto.randomUUID(), name: "Yam", category: "tubers", img: "🍠", status: "in", featured: true, price: 4500, unit: "tuber", minimum: 1, desc: "Sample yam sold per tuber.", note: "Tuber sizes vary." },
-    { id:crypto.randomUUID(), name: "Cassava", category: "tubers", img: "🥔", status: "in", price: 1500, unit: "kg", minimum: 2, desc: "Sample cassava.", note: "Minimumimum order 2 kg." },
-    { id:crypto.randomUUID(), name: "Plantain", category: "fruits", img: "🍌", status: "in", price: 3000, unit: "bunch", minimum: 1, desc: "Sample plantain sold per bunch.", note: "Bunch sizes vary." },
-    { id:crypto.randomUUID(), name: "Rice, Bulk Sack", category: "bulk", img: "🌾", status: "in", price: 190000, unit: "sack", minimum: 1, desc: "Sample bulk sack for businesses.", note: "Sack weight confirmed by the business." },
+    { id: crypto.randomUUID(), name: "Cassava", category: "tubers", img: "🥔", status: "in", price: 1500, unit: "kg", minimum: 2, desc: "Sample cassava.", note: "Minimumimum order 2 kg." },
+    { id: crypto.randomUUID(), name: "Plantain", category: "fruits", img: "🍌", status: "in", price: 3000, unit: "bunch", minimum: 1, desc: "Sample plantain sold per bunch.", note: "Bunch sizes vary." },
+    { id: crypto.randomUUID(), name: "Rice, Bulk Sack", category: "bulk", img: "🌾", status: "in", price: 190000, unit: "sack", minimum: 1, desc: "Sample bulk sack for businesses.", note: "Sack weight confirmed by the business." },
 ];
 
 
@@ -62,9 +62,9 @@ function media(p) {
 function productCard(product) {
     return `<article class="product-card">
             <div class="card-header">
-                <span class="product-category">${product.category}</span>
+                <span class="product-category">${ product.category }</span>
                 <a class="product-img" href="#/product/${ product.id }">
-                    ${media(product)}
+                    ${ media(product) }
                 </a>
                 <button class="wishlist-btn" aria-label="Add to wishlist">
                     <span class="icon heart-icon" data-icon="heart"></span>
@@ -75,11 +75,11 @@ function productCard(product) {
                     <h3 class="product-name">
                         <a href="#/product/${ product.id }">${ product.name }</a>
                     </h3>
-                    <span class="product-price">${naira(product.price)}</span>
+                    <span class="product-price">${ naira(product.price) }</span>
                 </div>
-                <p class="product-desc">${product.desc}</p>
+                <p class="product-desc">${ product.desc }</p>
                 <menu class="card-actions">
-                    <button class="cart-btn" data-action="add" aria-label="Add to Cart" data-product-id="${product.id}">
+                    <button class="cart-btn" data-action="add" aria-label="Add to Cart" data-product-id="${ product.id }">
                         <span class="icon cart-icon" data-icon="shoppingCart"></span>
                     </button>
                     <a class="details-btn" href="#/product/${ product.id }">
@@ -88,10 +88,10 @@ function productCard(product) {
                     </a>
                 </menu>
             </div>
-        </article>`;
+        </article>`
 }
 
-function renderApp() {  
+function renderApp() {
     const featured = products.filter((product) => product.featured);
     return featured.map((product) => productCard(product)).join("");
 };

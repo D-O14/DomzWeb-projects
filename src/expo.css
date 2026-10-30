@@ -7,8 +7,8 @@
     box-sizing: border-box;
     transition: all 300ms ease-in-out;
     -webkit-tap-highlight-color: transparent;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-        Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont,
+        'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 :root {
@@ -24,6 +24,14 @@
     --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
 
     --base: var(--shade-blue-400);
+
+    --forest: hsl(160, 45%, 14%);
+    --botanic: hsl(101, 20%, 47%);
+    --oat: hsl(42, 49%, 91%);
+    --paper: hsl(43, 100%, 99%);
+    --ink: hsl(100, 5%, 12%);
+    --terra: hsl(17, 64%, 47%);
+    --line: hsl(41, 32%, 80%);
 
     /*--brand-shade-1: hsl(from var(--brand-clr) h s calc(l + 2) / .5);
     --brand-shade-2: hsl(from var(--brand-clr) h s calc(l + 4) / .5);
@@ -41,29 +49,22 @@
         --txt-muted: hsl(0, 0%, 30%);
         --bg-light: hsl(0, 0%, 100%);
         --border: 1px solid hsl(0, 0%, 30%);
+        --color-bronze-text: hsl(34, 42%, 33%);
         --border-highlight: 1px solid hsl(0, 0%, 100%);
         --gradient: linear-gradient(0deg, var(--bg) 95%, var(--bg-light));
         --gradient-hover: linear-gradient(0deg, var(--bg), var(--bg-light));
     }
 }
 
-body {
-    display: grid;
-    min-height: 100dvh;
-    grid-template-rows: auto 1fr;
-    background: hsl(220, 100%, 90%, .5);
-}
-
 img {
     width: 100%;
     height: 100%;
     display: block;
-    aspect-ratio: 16/9;
     object-fit: cover;
-    border-radius: inherit;
+    aspect-ratio: 16/9;
 }
 
-button {
+/*button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,13 +76,12 @@ button {
     padding: .5em 1em;
     position: relative;
     background: none;
-    opacity: .5;
     border-radius: .25rem;
     transform-origin: bottom;
     backdrop-filter: blur(5px);
     border: 1px solid transparent;
     -webkit-backdrop-filter: blur(5px);
-}
+}*/
 
 button:is(.active, :hover) {
     opacity: 1;
@@ -101,113 +101,6 @@ menu {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-}
-
-.container {
-    width: max(700px, 90%);
-    margin: 0 auto;
-}
-
-.columns {
-    display: flex;
-    gap: 1.5em;
-}
-
-.column {
-    flex: 1;
-    display: grid;
-    grid-template-rows: auto 1fr;
-}
-
-.column-header {
-    display: flex;
-    align-items: center;
-    position: relative;
-    justify-content: space-between;
-    border-bottom: 1px solid hsl(0, 0%, 80%);
-}
-
-.column-title {
-    text-transform: uppercase;
-}
-
-.column-header button {
-    padding-block: 0;
-    padding-inline: .5em;
-}
-
-.column-info {
-    gap: .5em;
-    display: flex;
-    align-items: center;
-}
-
-.task-count {
-    font-size: 12px;
-    padding: .25em .5em;
-    border-radius: 5rem;
-    background: hsl(220, 100%, 80%);
-}
-
-.tasks {
-    gap: .5em;
-    display: grid;
-    min-height: 100%;
-    align-content: start;
-}
-
-.task,
-.task-input {
-    padding: .875em;
-    min-height: 100%;
-    position: relative;
-    border-radius: .25em;
-    background: hsl(0, 0%, 100%);
-    box-shadow: 0px 2px 4px hsl(0, 0%, 0%, .1);
-}
-
-.task {
-    cursor: move;
-}
-
-.task-input {
-    cursor: pointer;
-    outline: none;
-    overflow-wrap: anywhere;
-}
-
-.dragging {
-    cursor: default;
-    box-shadow: none;
-    background: hsl(220, 100%, 80%)
-}
-
-.dragging * {
-    visibility: hidden;
-}
-
-.task:not(.dragging):hover {
-    opacity: .5;
-}
-
-.task button {
-    padding-inline: .5em;
-}
-
-.task hr {
-    border-top: 1px solid hsl(0, 0%, 80%);
-}
-
-.edit-icon svg,
-.delete-icon svg {
-    width: 18px;
-    height: 18px;
-}
-
-.file-icon svg {
-    opacity: .5;
-    width: 20px;
-    height: 20px;
 }
 
 /*.box {
@@ -240,46 +133,13 @@ menu {
      hsl(30, 100%, 50%), hsl(5, 100%, 50%));
 }*/
 
-.box {
-    width: 80px;
-    height: 80px;
-    border-radius: .5rem;
-    background: linear-gradient(45deg, hsl(100, 100%, 50%), hsl(0, 0%, 100%, .85));
+svg {
+    display: inline;
+    vertical-align: middle;
+    transform: translate(0);
 }
 
-.over {
-    opacity: .5;
-}
-
-.dropzone {
-    gap: 1rem;
-    width: 500px;
-    height: 300px;
-    position: relative;
-    border: 8px dashed hsl(0, 0%, 0%);
-    grid-template-columns: repeat(2, 80px);
-}
-
-.draggable {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    border-radius: .25rem;
-    background: hsl(0, 0%, 0%);
-}
-
-.box-1 {
-    background: blue;
-}
-
-.box-2 {
-    background: red;
-}
-
-.box-3 {
-    background: orange;
-}
-
-.box-4 {
-    background: yellow;
+.img{
+    width: 100px;
+    height: 100px;
 }
