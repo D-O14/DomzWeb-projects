@@ -28,12 +28,11 @@ body {
     background: var(--oat);
 }
 
-a{
+a {
     color: var(--forest);
     text-decoration: none;
 }
 
-.product-img,
 img {
     width: 100%;
     height: auto;
@@ -49,140 +48,82 @@ button {
     padding: .5em 1em;
 }
 
-button:hover {
-    scale: .95;
-}
-
-.product-card {
-    display: flex;
-    padding: 0.5em;
-    max-width: 300px;
-    border-radius: .5em;
-    align-items: center;
-    position: relative;
-    justify-content: start;
-    flex-direction: column;
-    background: var(--paper);
-    border: 1px solid var(--paper);
-    /*background: hsl(44, 43%, 85%);*/
-}
-
-.product-img {
-    display: grid;
-    place-items: center;
-    font-size: 3.6rem;
-    position: relative;
-    border-radius: .15em;
-    background: hsl(44, 43%, 85%);
-}
-
-.product-specs {
-    display: flex;
-    margin-bottom: 15px;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.product-price {
-    font-weight: 600;
-}
-
-.product-desc {
-    opacity: .75;
-    line-clamp: 2;
-    max-width: 30ch;
-    text-align: start;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    margin-bottom: 1.5em;
-    text-overflow: ellipsis;
-}
-
-.product-category {
-    top: -5px;
-    left: -20px;
-    z-index: 1;
-    color: var(--oat);
-    font-size: 12px;
-    font-weight: 600;
-    padding: .5em 1em;
-    position: absolute;
-    border-radius: 5em;
-    max-width: fit-content;
-    text-transform: capitalize;
-    background: var(--forest);
-}
-
-.card-content {
-    width: 100%;
-    padding: 1em;
-    /*border-radius: .5em;
-    background: var(--paper);*/
-}
-
-.cart-btn {
-    gap: .5em;
-    display: flex;
-    color: var(--oat);
-    align-items: center;
-    background: var(--forest);
-    border-top-left-radius: .5em;
-    border-top-right-radius: .15em;
-    border-bottom-left-radius: .15em;
-    border-bottom-right-radius: .75em;
-}
-
-.card-actions {
-    gap: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
-
-.wishlist-btn {
-    top: 10px;
-    right: 10px;
-    background: none;
-    position: absolute;
-}
-
-.heart-icon {
-    padding: .25em;
-    display: inline-flex;
-    align-items: center;
-    border-radius: 5em;
-    background: var(--paper);
-}
-
-.heart-icon svg,
-.cart-icon svg {
+.chevron-icon svg {
     width: 18px;
     height: 18px;
 }
 
-.details-icon svg {
-    width: 16px;
-    height: 16px;
+.sort-box {
+    gap: 1em;
+    display: flex;
+    max-width: 300px;
+    align-items: start;
+    flex-direction: column;
 }
 
-.details-btn {
-    gap: .25em;
-    display: inline-flex;
-    align-items: center;
-    padding: .45em .75em;
-    border-top-left-radius: .5em;
-    border-top-right-radius: .15em;
-    border: 1px solid var(--forest);
-    border-bottom-left-radius: .15em;
-    border-bottom-right-radius: .75em;
-}
-
-.details-btn:hover {
+.picker {
+    display: flex;
     color: var(--oat);
-    background: var(--forest);
-    border-color: var(--botanic);
+    padding: .5em 1em;
+    align-items: center;
+    border-radius: .5em;
+    background: var(--botanic);
+    justify-content: space-between;
 }
 
-.details-btn:hover .details-icon {
-    transform: translateX(5px);
+.sort-options {
+    opacity: 0;
+    overflow-y: auto;
+    max-height: 280px;
+    color: var(--oat);
+    transform: scale(0);
+    border-radius: .5em;
+    background: var(--botanic);
+    transform-origin: top right;
+    box-shadow: 1px 1px 2px hsl(101, 20%, 47%);
+}
+
+.picker,
+.sort-options {
+    width: 100%;
+}
+
+.picker,
+.sort-option {
+    cursor: pointer;
+}
+
+.sort-option {
+    width: 100%;
+    list-style: none;
+    padding: .75em 1em;
+}
+
+.sort-option:hover {
+    background: var(--forest);
+}
+
+.sort-box::-webkit-scrollbar {
+    width: 0px;
+}
+
+.sort-box::-webkit-scrollbar-track {
+    border-radius: .15em;
+    background: none;
+}
+
+.sort-box::-webkit-scrollbar-thumb {
+    border-radius: .15em;
+    background: none;
+}
+
+.sort-box.open {
+    & .chevron-icon svg{
+        transform: rotate(-180deg);
+    }
+
+    & .sort-options {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

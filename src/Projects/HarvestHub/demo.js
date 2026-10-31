@@ -1,5 +1,4 @@
 import "./demo.css";
-import { query } from "@utils/utilities";
 import { initializeIcons } from "@assets/Icons/icons";
 
 const products = [
@@ -46,55 +45,24 @@ const products = [
     { id: crypto.randomUUID(), name: "Rice, Bulk Sack", category: "bulk", img: "🌾", status: "in", price: 190000, unit: "sack", minimum: 1, desc: "Sample bulk sack for businesses.", note: "Sack weight confirmed by the business." },
 ];
 
+const categories = [
+    { id: "grains", name: "Grains and Staples" },
+    { id: "bulk", name: "Bulk and Wholesale Supply" },
+    { id: "fruits", name: "Fruits", img: "../../Assets/Images/3d-fruits.png", featured: true, className: "fruits" },
+    { id: "poultry", name: "Poultry", img: "../../Assets/Images/3d-chicken.png", featured: true, className: "poultry" },
+    { id: "livestock", name: "Livestock", img: "../../Assets/Images/3d-goat.png", featured: true, className: "livestock" },
+    { id: "frozen", name: "Frozen Foods", img: "../../Assets/Images/3d-frozen-meat.png", featured: true, className: "frozen" },
+    { id: "produce", name: "Fresh Produce", img: "../../Assets/Images/3d-produce-box.png", featured: true, className: "fresh" },
+    { id: "tubers", name: "Tubers and Roots", img: "../../Assets/Images/3d-tubers_roots.png", featured: true, className: "t_r" },
+];
 
-const naira = (num) => "₦" + num.toLocaleString("en-NG");
 
-function stock(p) {
-    const map = { in: ["in", "Available"], out: ["out", "Currently unavailable"], order: ["order", "Made to order"] };
-    return `<span class="st st--${ map[p.status][0] }">${ map[p.status][1] }</span>`;
-}
-
-function media(p) {
-    return p.image ? `<img src="${ p.image }" alt="${ p.name }" loading="lazy" />` :
-        `<span role="img" class="img" aria-label="${ p.name }">${ p.img }</span>`;
-}
-
-function productCard(product) {
-    return `<article class="product-card">
-            <div class="card-header">
-                <span class="product-category">${ product.category }</span>
-                <a class="product-img" href="#/product/${ product.id }">
-                    ${ media(product) }
-                </a>
-                <button class="wishlist-btn" aria-label="Add to wishlist">
-                    <span class="icon heart-icon" data-icon="heart"></span>
-                </button>
-            </div>
-            <div class="card-content">
-                <div class="product-specs">
-                    <h3 class="product-name">
-                        <a href="#/product/${ product.id }">${ product.name }</a>
-                    </h3>
-                    <span class="product-price">${ naira(product.price) }</span>
-                </div>
-                <p class="product-desc">${ product.desc }</p>
-                <menu class="card-actions">
-                    <button class="cart-btn" data-action="add" aria-label="Add to Cart" data-product-id="${ product.id }">
-                        <span class="icon cart-icon" data-icon="shoppingCart"></span>
-                    </button>
-                    <a class="details-btn" href="#/product/${ product.id }">
-                        View Details
-                        <span class="icon details-icon" data-icon="attachment"></span>
-                    </a>
-                </menu>
-            </div>
-        </article>`
-}
-
-function renderApp() {
-    const featured = products.filter((product) => product.featured);
-    return featured.map((product) => productCard(product)).join("");
+const order = {
+  featured: (a, b) => Number(!!b.featured) - Number(!!a.featured),
+  low: (a, b) => a.price - b.price,
+  high: (a, b) => b.price - a.price,
+  name: (a, b) => a.name.localeCompare(b.name),
 };
 
-//query(document, "#app").innerHTML = renderApp();
+function query(selector) { return document.querySelector(selector) };
 initializeIcons(document);
