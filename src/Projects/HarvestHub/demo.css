@@ -48,82 +48,32 @@ button {
     padding: .5em 1em;
 }
 
-.chevron-icon svg {
-    width: 18px;
-    height: 18px;
-}
-
-.sort-box {
+.search-field {
     gap: 1em;
+    width: 400px;
+    height: 40px;
     display: flex;
-    max-width: 300px;
-    align-items: start;
-    flex-direction: column;
-}
-
-.picker {
-    display: flex;
-    color: var(--oat);
+    overflow: hidden;
+    position: relative;
     padding: .5em 1em;
     align-items: center;
-    border-radius: .5em;
-    background: var(--botanic);
-    justify-content: space-between;
+    border-radius: .5rem;
+    padding-block: 0;
+    padding-inline: .05em;
+    background: hsl(from var(--paper) h calc(s - 50) calc(l - 30) / .25);
 }
 
-.sort-options {
-    opacity: 0;
-    overflow-y: auto;
-    max-height: 280px;
+.search-field .plant-icon {
     color: var(--oat);
-    transform: scale(0);
-    border-radius: .5em;
+    padding: .25em .75em;
     background: var(--botanic);
-    transform-origin: top right;
-    box-shadow: 1px 1px 2px hsl(101, 20%, 47%);
 }
 
-.picker,
-.sort-options {
+.searchbar {
+    flex-grow: 1;
     width: 100%;
-}
-
-.picker,
-.sort-option {
-    cursor: pointer;
-}
-
-.sort-option {
-    width: 100%;
-    list-style: none;
-    padding: .75em 1em;
-}
-
-.sort-option:hover {
-    background: var(--forest);
-}
-
-.sort-box::-webkit-scrollbar {
-    width: 0px;
-}
-
-.sort-box::-webkit-scrollbar-track {
-    border-radius: .15em;
+    border: none;
+    outline: none;
     background: none;
-}
-
-.sort-box::-webkit-scrollbar-thumb {
-    border-radius: .15em;
-    background: none;
-}
-
-.sort-box.open {
-    & .chevron-icon svg{
-        transform: rotate(-180deg);
-    }
-
-    & .sort-options {
-        opacity: 1;
-        transform: scale(1);
-    }
+    caret-color: var(--botanic);
 }

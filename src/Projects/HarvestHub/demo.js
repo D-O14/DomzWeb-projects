@@ -56,13 +56,62 @@ const categories = [
     { id: "tubers", name: "Tubers and Roots", img: "../../Assets/Images/3d-tubers_roots.png", featured: true, className: "t_r" },
 ];
 
-
 const order = {
-  featured: (a, b) => Number(!!b.featured) - Number(!!a.featured),
-  low: (a, b) => a.price - b.price,
-  high: (a, b) => b.price - a.price,
-  name: (a, b) => a.name.localeCompare(b.name),
+    featured: (a, b) => Number(!!b.featured) - Number(!!a.featured),
+    low: (a, b) => a.price - b.price,
+    high: (a, b) => b.price - a.price,
+    name: (a, b) => a.name.localeCompare(b.name),
 };
 
+function create(element) { return document.createElement(element) };
 function query(selector) { return document.querySelector(selector) };
+
+function parseHTML(markup) {
+    const template = create("template");
+    template.innerHTML = markup.trim();
+    return template.content.firstElementChild;
+};
+
+function input({ ...input }) {
+    const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ? input.labelClass : "" }">
+          ${ input.label ? input.label : "" }
+          <span class="icon ${ input.iconClass ? input.iconClass : "" }" data-icon="${ input?.icon }"></span>
+          <input ${ input.value ? input.value : "" } type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
+          ${ input.name ? `name="${ input.name }"` : "" } class="${ input?.className }"  ${ input.required ? "required" : "" } >
+          ${ input?.required ? `<p class="error" id="error-${ input?.id }" aria-live="polite"></p>` : "" }
+      </label>`);
+
+    if (input.events) {
+        const events = input?.events;
+        field.addEventListener("blur", (event) => { events?.blurred(event) });
+        field.addEventListener("focus", (event) => { events?.focused(event) });
+        field.addEventListener("input", (event) => { events?.update(event) });
+        field.addEventListener("keydown", (event) => { events?.keydown(event) });
+    };
+    return field;
+  };
+
+function searchFilter() {
+    const wrapper = parseHTML(`<div class="search-filter">
+    <div class="filter">
+        <button class="filter-btn" data-action="filter" aria-label="activate filter menu">
+            <span class="icon filter-icon" data-icon="filter"></span>
+        </button>
+    </div>
+    </div>`);
+    wrapper.prepend(input({
+        id: "searchbar",
+        type: "search",
+        icon: "search",
+        className: "searchbar",
+        iconClass: "plant-icon",
+        labelClass: "search-field",
+        placeholder: "Search The Market...",
+    }));
+
+    return wrapper;
+};
+
+//query("main").innerHTML = `<section class="shop-controls"></section>`;
+query("main").append(searchFilter());
 initializeIcons(document);

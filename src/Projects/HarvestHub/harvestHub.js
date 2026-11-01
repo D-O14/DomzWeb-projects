@@ -43,46 +43,49 @@ const categories = [
 
 const products = [
   {
-    id: "goat", name: "Live Goat", category: "livestock", emoji: "🐐", status: "order", featured: true, price: 85000, unit: "animal", min: 1,
+    id: "goat", name: "Live Goat", category: "livestock", emoji: "🐐", featured: true, price: 85000, min: 1,
     desc: "Sample listing. Size and weight vary by animal and are confirmed before dispatch.",
     note: "Sourced after you order. Collection or delivery is arranged with you."
   },
   {
-    id: "broiler", name: "Live Broiler Chicken", category: "poultry", emoji: "🐓", status: "in", featured: true, price: 8500, unit: "bird", min: 1,
-    tiers: [{ quantity: 50, price: 8000 }], desc: "Sample listing for live broilers. Size and weight may vary by animal.", note: "Weight varies by bird."
+    id: "broiler", name: "Live Broiler Chicken", category: "poultry", emoji: "🐓", featured: true, price: 8500, min: 1,
+    max: 50, desc: "Sample listing for live broilers. Size and weight may vary by animal.", note: "Weight varies by bird."
   },
   {
-    id: "local-chicken", name: "Live Local Chicken", category: "poultry", emoji: "🐔", status: "in", price: 12000, unit: "bird", min: 1,
+    id: "local-chicken", name: "Live Local Chicken", category: "poultry", emoji: "🐔", price: 12000, min: 1,
     desc: "Sample listing for live local birds.", note: "Weight varies by bird."
   },
   {
-    id: "frozen-whole", name: "Frozen Whole Chicken", category: "frozen", emoji: "🍗", status: "in", price: 6500, unit: "kg", min: 1,
+    id: "frozen-whole", name: "Frozen Whole Chicken", category: "frozen", emoji: "🍗", price: 6500, min: 1,
     desc: "Sample frozen whole chicken, sold by weight.", note: "Final weight depends on the pack. Handling details are supplied by the business."
   },
   {
-    id: "frozen-portions", name: "Frozen Chicken Portions", category: "frozen", emoji: "🍖", status: "out", price: 6000, unit: "kg", min: 1,
+    id: "frozen-portions", name: "Frozen Chicken Portions", category: "frozen", emoji: "🍖", price: 6000, min: 1,
     desc: "Sample portions.", note: "Shown as unavailable in this demo."
   },
   {
-    id: "tomatoes", name: "Tomatoes", category: "produce", emoji: "🍅", status: "in", featured: true, price: 35000, unit: "basket", min: 1,
+    id: "tomatoes", name: "Tomatoes", category: "produce", emoji: "🍅", featured: true, price: 35000, min: 1,
     desc: "Sample freshly harvested tomatoes sold in bunches per basket.", note: "Basket sizes vary. Seasonal supply."
   },
-  { id: "pepper", name: "Pepper", category: "produce", emoji: "🌶️", status: "in", price: 3000, unit: "kg", min: 1, desc: "Sample pepper sold by the kilogram.", note: "Seasonal supply." },
   {
-    id: "onions", name: "Onions", category: "produce", emoji: "🧅", status: "in", price: 2200, unit: "kg", min: 1,
-    tiers: [{ quantity: 25, price: 2000 }], desc: "Sample onions sold by the kilogram.", note: ""
+    id: "pepper", name: "Pepper", category: "produce", emoji: "🌶️", price: 3000, min: 1, desc: "Sample pepper sold by the kilogram.",
+    note: "Seasonal supply."
   },
   {
-    id: "rice", name: "Rice", category: "grains", emoji: "🍚", status: "in", price: 4000, unit: "kg", min: 1,
-    tiers: [{ quantity: 50, price: 3700 }], desc: "Sample rice. Larger quantities have a lower per-kilogram price.", note: ""
+    id: "onions", name: "Onions", category: "produce", emoji: "🧅", price: 2200, min: 1,
+    max: 25, desc: "Sample onions sold by the kilogram.", note: ""
   },
-  { id: "beans", name: "Beans", category: "grains", emoji: "🫘", status: "in", price: 3500, unit: "kg", min: 1, desc: "Sample beans sold by the kilogram.", note: "" },
-  { id: "maize", name: "Maize", category: "grains", emoji: "🌽", status: "in", price: 1800, unit: "kg", min: 5, desc: "Sample maize.", note: "Minimum order 5 kg." },
-  { id: "garri", name: "Garri", category: "grains", emoji: "🥣", status: "in", price: 2000, unit: "kg", min: 1, desc: "Sample garri sold by the kilogram.", note: "" },
-  { id: "yam", name: "Yam", category: "tubers", emoji: "🍠", status: "in", price: 4500, unit: "tuber", min: 1, desc: "Sample yam sold per tuber.", note: "Tuber sizes vary." },
-  { id: "cassava", name: "Cassava", category: "tubers", emoji: "🥔", status: "in", price: 1500, unit: "kg", min: 2, desc: "Sample cassava.", note: "Minimum order 2 kg." },
-  { id: "plantain", name: "Plantain", category: "fruits", emoji: "🍌", status: "in", price: 3000, unit: "bunch", min: 1, desc: "Sample plantain sold per bunch.", note: "Bunch sizes vary." },
-  { id: "bulk-rice", name: "Rice, Bulk Sack", category: "bulk", emoji: "🌾", status: "in", price: 190000, unit: "sack", min: 1, desc: "Sample bulk sack for businesses.", note: "Sack weight confirmed by the business." },
+  {
+    id: "rice", name: "Rice", category: "grains", emoji: "🍚", price: 4000, unit: "kg", min: 1,
+    max: 50, desc: "Sample rice. Larger quantities have a lower per-kilogram price.", note: ""
+  },
+  { id: "beans", name: "Beans", category: "grains", emoji: "🫘", price: 3500, min: 1, desc: "Sample beans sold by the kilogram.", note: "" },
+  { id: "maize", name: "Maize", category: "grains", emoji: "🌽", price: 1800, min: 5, desc: "Sample maize.", note: "Minimum order 5 kg." },
+  { id: "garri", name: "Garri", category: "grains", emoji: "🥣", price: 2000, min: 1, desc: "Sample garri sold by the kilogram.", note: "" },
+  { id: "yam", name: "Yam", category: "tubers", emoji: "🍠", price: 4500, min: 1, desc: "Sample yam sold per tuber.", note: "Tuber sizes vary." },
+  { id: "cassava", name: "Cassava", category: "tubers", emoji: "🥔", price: 1500, min: 2, desc: "Sample cassava.", note: "Minimum order 2 kg." },
+  { id: "plantain", name: "Plantain", category: "fruits", emoji: "🍌", price: 3000, min: 1, desc: "Sample plantain sold per bunch.", note: "Bunch sizes vary." },
+  { id: "bulk-rice", name: "Rice, Bulk Sack", category: "bulk", emoji: "🌾", price: 190000, min: 1, desc: "Sample bulk sack for businesses.", note: "Sack weight confirmed by the business." },
 ];
 
 const steps = [
@@ -108,10 +111,10 @@ const actions = {
 };
 
 const order = [
-  { label: "Price: High to Low", sortBy: (a, b) => b.price - a.price }, // Sorting from highest to lowest,
-  { label: "Price: Low to High", sortBy: (a, b) => a.price - b.price }, // Sorting from lowest to highest,
-  { label: "Name: A-Z", sortBy: (a, b) => a.name.localeCompare(b.name) }, // Sorting by Alphabetical order,
-  { label: "Featured", sortBy: (a, b) => Number(!!b.featured) - Number(!!a.featured) } // Sorting by featured products only
+  { id: "high", label: "Price: High to Low", sortBy: (a, b) => b.price - a.price }, // Sorting from highest to lowest,
+  { id: "low", label: "Price: Low to High", sortBy: (a, b) => a.price - b.price }, // Sorting from lowest to highest,
+  { id: "name", label: "Name: A-Z", sortBy: (a, b) => a.name.localeCompare(b.name) }, // Sorting by Alphabetical order,
+  { id: "featured", label: "Featured", sortBy: (a, b) => Number(!!b.featured) - Number(!!a.featured) } // Sorting by featured products only
 ];
 
 const cart_key = "harvesthub-v2-cart";
@@ -142,6 +145,7 @@ document.addEventListener("click", (e) => {
 // Helper Function Expressions
 
 const filled = (v) => v.length > 0;
+const v = (id) => $(id).value.trim();
 const pq = () => parseInt($("pq").textContent, 10);
 const phoneOk = (v) => /^[0-9+\s-]{10,16}$/.test(v);
 const naira = (num) => "₦" + num.toLocaleString("en-NG");
@@ -158,29 +162,35 @@ const app = $("app");
 function save(store, data) { localStorage.setItem(store, JSON.stringify(data)) };
 function read(store, placeholder = []) { return JSON.parse(localStorage.getItem(store)) || placeholder };
 
-// Functions to get a reference to HTML elements
+// Functions to get a reference to HTML elements, and perform DOM operations
 
+function create(element) { return document.createElement(element) };
 function query(selector) { return document.querySelector(selector) };
 function $(id) { return document.getElementById(id) };
+function parseHTML(markup) {
+  const template = create("template");
+  template.innerHTML = markup.trim();
+  return template.content.firstElementChild;
+};
 
 // Helpers
 
 function stock(p) {
   const map = { in: ["in", "Available"], out: ["out", "Currently unavailable"], order: ["order", "Made to order"] };
   return `<span class="st st--${ map[p.status][0] }">${ map[p.status][1] }</span>`;
-}
+};
 
 function media(p) {
   return p.image ? `<img src="${ p.image }" alt="${ p.name }" loading="lazy" />` :
     `<span role="img" aria-label="${ p.name }">${ p.emoji }</span>`;
-}
+};
 
 // Best matching quantity tier, or the base price.
 
 function unitPrice(p, quantity) {
   const tier = (p.tiers || []).filter((t) => quantity >= t.quantity).sort((a, b) => b.quantity - a.quantity)[0];
   return tier ? tier.price : p.price;
-}
+};
 
 function lines() {
   return cart.map((c) => {
@@ -189,7 +199,7 @@ function lines() {
     const price = unitPrice(product, c.quantity);
     return { p, qty: c.quantity, price, total: price * c.quantity };
   }).filter(Boolean);
-}
+};
 
 // Functions that allow cart operations
 
@@ -204,7 +214,7 @@ function addToCart(id, quantity) {
   save(cart_key, cart);
   drawCart();
   toast("Added to cart");
-}
+};
 
 function removeFromCart(id) {
   cart = cart.filter((c) => c.id !== id);
@@ -291,44 +301,80 @@ function toast(msg) {
   timer = setTimeout(() => toast.classList.remove("notify"), 2300);
 };
 
-function searchFilter(params) {
-  return `<div class="search-filter">
-      <label for="searchbar" class="search-field">
-          <span class="icon plant-icon" data-icon="search"></span>
-          <input type="search" value="${ params.get("q") || "" }" placeholder="Search the market..." class="searchbar" id="searchbar">
-      </label>
+function input({ ...input }) {
+  const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ? input.labelClass : "" }">
+        ${ input.label ? input.label : "" }
+        <span class="icon ${ input.iconClass ? input.iconClass : "" }" data-icon="${ input?.icon }"></span>
+        <input ${ input.value ? input.value : "" } type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
+        ${ input.name ? `name="${ input.name }"` : "" } class="${ input?.className }"  ${ input.required ? "required" : "" } >
+        ${ input?.required ? `<p class="error" id="error-${ input?.id }" aria-live="polite"></p>` : "" }
+    </label>`);
+
+  if (input.events) {
+    const events = input?.events;
+    field.addEventListener("blur", (event) => { events?.blurred(event) });
+    field.addEventListener("focus", (event) => { events?.focused(event) });
+    field.addEventListener("input", (event) => { events?.update(event) });
+    field.addEventListener("keydown", (event) => { events?.keydown(event) });
+  };
+
+  return field;
+};
+
+function searchControl(params) {
+  const selectedCategory = params.get("category");
+  const wrapper = parseHTML(`<div class="search-filter">
       <div class="filter">
           <button class="filter-btn" data-action="filter" aria-label="activate filter menu">
               <span class="icon filter-icon" data-icon="filter"></span>
           </button>
-          ${ filterMenu(categories) }
+          ${ filterMenu(categories, selectedCategory) }
       </div>
-  </div>`
+  </div>`);
+  wrapper.prepend(input({
+    id: "searchbar",
+    type: "search",
+    icon: "search",
+    className: "searchbar",
+    iconClass: "plant-icon",
+    labelClass: "search-field",
+    value: params.get("q") || "",
+    placeholder: "Search The Market...",
+  }));
+
+  return wrapper;
 };
 
-function filterMenu(options) {
+function filterMenu(options, selectedId) {
   return `
   <menu class="filter-box">
     <ul class="filter-options">
       ${ options.map(option => {
+        const isSelected = option.id === selectedId;
     return `
       <li class="filter-option">
-          ${ option.name }
+          <button class="filter-btn ${option.id === selectedId ? "is-selected" : ""}" data-value="${option.id }" 
+          aria-pressed="${ isSelected }">${ option.name }</button>
         </li>`}).join("") }
     </ul>
   </menu>`
 };
 
-function sortMenu(options) {
+function sortMenu(options, selectedSortId) {
   return `<menu class="sort-box">
-        <label for="" class="picker">
-            <span class="selected-opt" id="selected">Sort By:</span>
+        <label for="sortOpts" class="picker">
+            <span class="selected-opt" id="selected">
+              ${options.find(option => option.id === selectedSortId)?.label || "Sort By:"}
+            </span>
             <span class="icon chevron-icon" data-icon="arrowDown"></span>
         </label>
-        <ul class="sort-options">
+        <ul class="sort-options" id="sortOpts">
         ${ options.map(option => {
-    return `<li class="sort-option">
+          return `<li class="sort-option">
+              <button class="sort-btn" type="button" data-sort="${option.id }"
+              aria-pressed="${ option.id === selectedSortId}">
                 ${ option.label }
+              </button>
             </li>`}).join("") }
         </ul>
     </menu>`
@@ -391,11 +437,11 @@ function drawCart() {
     : "";
 };
 
-function field(id, label, type = "text", cls = "") {
-  return `<div class="fld ${ cls }">
+function field({ id, label, type = "text", className = "" }) {
+  return `<div class="field ${ className }">
     <label for="${ id }">${ label }</label>
     <input id="${ id }" type="${ type }" />
-    <span class="err" id="e-${ id }"></span>
+    <span class="error" id="error-${ id }"></span>
   </div>`;
 };
 
@@ -485,34 +531,38 @@ function home() {
             <img src="${ step.illustr }" alt="">
           </figure>
         </div>`
-    }).join("")}
+  }).join("") }
     </div>
   </section>`
 };
 
 function shop(params) {
-  //const categorys = categories.map((c) => `<option value="${ c.id }" ${ params.get("category") === c.id ? "selected" : "" }>${ c.name }</option>`).join("");
-
   app.innerHTML = `
     <section class="section wrapper">
-      <h1>Shop</h1>
-      <div class="bar2">
-        ${ searchFilter(params) }
+      <h1>
+        Shop
+        <span class="icon store-icon" data-icon="store"></span>
+      </h1>
+      <div class="shop-controls">
         ${ sortMenu(order) }
-        <!--<input id="priceFilter" type="number" min="0" placeholder="Max price (₦)" aria-label="Maximum price" />
-        <label>
-          <input id="filterIn" type="checkbox" />
-          Available only
+        <label class="price-filter">
+          <span class="icon naira-icon">₦</span>
+          <input id="priceFilter" class="price-filter-input" type="number" min="0" placeholder="Max price (₦)" aria-label="Maximum price" />
         </label>
-        <input id="fQ" type="search" placeholder="Search" value="${ params.get("q") || "" }" aria-label="Search" />-->
       </div>
       <div class="product-grid" id="results"></div>
     </section>`;
 
-  drawResults();
+  app.querySelector(".shop-controls").prepend(searchControl(params));
   query(".searchbar").addEventListener("input", drawResults);
-  query(".picker").addEventListener("click", () => { query(".sort-box").classList.toggle("open") });
+  query(".picker").addEventListener("click", () => {
+    const sortBox = query(".sort-box");
+    const sortOpts = query(".sort-options");
+    sortBox.classList.toggle("open");
+    sortOpts.style.height = sortOpts.scrollHeight + "px";
+  });
   query(".filter-btn").addEventListener("click", () => { query(".filter-box").classList.toggle("open") });
+  drawResults();
 };
 
 function checkout() {
@@ -587,7 +637,7 @@ function pdp(id) {
 
 function drawResults() {
   const query = $("searchbar").value.trim().toLowerCase();
-  //const maxPrice = parseFloat($("priceFilter").value);
+  const maxPrice = parseFloat($("priceFilter").value);
   //const category = $("fCategory").value;
   //const onlyIn = $("filterIn").checked;
   const sort = $("selected").textContent;
@@ -595,8 +645,7 @@ function drawResults() {
   const list = products.filter((product) => {
     if (query && !(product.name + " " + product.desc).toLowerCase().includes(query)) return false;
     //if (category && p.category !== category) return false;
-    //if (!isNaN(maxPrice) && product.price > maxPrice) return false;
-    //if (onlyIn && product.status === "out") return false;
+    if (!isNaN(maxPrice) && product.price > maxPrice) return false;
     return true;
   });
 
@@ -609,14 +658,14 @@ function info(title) {
 
 /* ---------- Routing and Events ---------- */
 
-function route() {
+function router() {
   const [path, query] = (location.hash.slice(1) || "/").split("?");
   const parts = path.split("/").filter(Boolean);
   return { page: parts[0] || "home", id: parts[1], params: new URLSearchParams(query || "") };
 };
 
 function renderApp() {
-  const { page, id, params } = route();
+  const { page, id, params } = router();
   const pages = { home, product: () => pdp(id), checkout, /*wholesale, delivery*/ about: () => info("About HarvestHub") };
 
   page === "shop" ? shop(params) : app.innerHTML = (pages[page] || home)();
@@ -675,7 +724,6 @@ function sendEnquiry() {
   ]);
   if (!ok) return toast("Please fix the highlighted fields.");
 
-  const v = (id) => $(id).value.trim();
   const text = ["HARVESTHUB BULK ENQUIRY", "", `Business: ${ v("wb") }`, `Contact: ${ v("wc") }`, `Phone: ${ v("wp") }`, `Locategoryion: ${ v("wl") }`, `Needed by: ${ v("wd") || "Not stated" }`, "", `Request: ${ v("wn") }`].join("\n");
   window.open(waLink(text), "_blank", "noopener");
   toast("WhatsApp opened. Press send there to submit your enquiry.");

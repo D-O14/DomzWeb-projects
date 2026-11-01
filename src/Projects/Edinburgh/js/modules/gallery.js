@@ -32,8 +32,8 @@ export function renderGallery(apartment) {
   const thumbs = total > 1
     ? `<div class="gallery__thumbs">${images.map((image, index) => `
         <button type="button" class="gallery__thumb" data-gallery-thumb="${index}"
-                aria-label="Show photo ${index + 1} of ${total}: ${escapeHtml(image.alt)}"
-                aria-current="${index === 0 ? 'true' : 'false'}">
+              aria-label="Show photo ${index + 1} of ${total}: ${escapeHtml(image.alt)}"
+              aria-current="${index === 0 ? 'true' : 'false'}">
           <img src="${escapeHtml(image.src)}" alt="" width="208" height="156" loading="lazy" decoding="async" data-fallback="apartment">
         </button>`).join('')}</div>`
     : '';

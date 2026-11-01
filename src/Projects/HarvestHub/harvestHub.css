@@ -33,6 +33,7 @@
   *::after {
     margin: 0;
     padding: 0;
+    user-select: none;
     box-sizing: border-box;
     transition: all 300ms ease-in-out;
     -webkit-tap-highlight-color: transparent;
@@ -42,6 +43,44 @@
 }
 
 @layer primitives {
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: .15em;
+    background: none;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: .15em;
+    background: none;
+  }
+
+  [data-category="livestock"] {
+    background: hsl(101, 50%, 67%);
+  }
+
+  [data-category="poultry"] {
+    background: hsl(20, 50%, 77%);
+  }
+
+  [data-category="frozen"] {
+    background: hsl(20, 50%, 57%);
+  }
+
+  [data-category="fruits"] {
+    background: hsl(42, 49%, 81%);
+  }
+
+  [data-category="produce"] {
+    background: hsl(7, 54%, 47%);
+  }
+
+  [data-category="tubers_roots"] {
+    background: hsl(34, 42%, 33%);
+  }
 
   html {
     scroll-behavior: smooth;
@@ -74,6 +113,15 @@
     list-style: none;
   }
 
+  li:hover .nav-item::before,
+  li.active .nav-item::before {
+    width: 100%;
+  }
+
+  li.active {
+    color: var(--terra);
+  }
+
   a {
     gap: 1em;
     color: inherit;
@@ -81,6 +129,10 @@
     align-items: center;
     justify-content: center;
     text-decoration: none;
+  }
+
+  input,textarea{
+    outline: none;
   }
 
   button,
@@ -182,15 +234,6 @@
   background: var(--terra);
 }
 
-li:hover .nav-item::before,
-li.active .nav-item::before {
-  width: 100%;
-}
-
-li.active {
-  color: var(--terra);
-}
-
 /* Nav Container Styles */
 
 .row {
@@ -235,19 +278,21 @@ li.active {
   position: relative;
 }
 
+/* Filter Styles */
+
 .filter-box {
   right: 0;
   opacity: 0;
   z-index: 1;
   width: 280px;
-  max-height: 280px;
+  height: 280px;
   overflow-y: auto;
   color: var(--oat);
-  border-radius: .25em;
-  transform: scale(0);
   position: absolute;
-  transform-origin: top right;
+  transform: scale(0);
+  border-radius: .25em;
   background: var(--botanic);
+  transform-origin: top right;
   box-shadow: 1px 1px 2px hsl(101, 20%, 47%);
 }
 
@@ -261,20 +306,6 @@ li.active {
   background: var(--forest);
 }
 
-.filter-box::-webkit-scrollbar {
-  width: 0px;
-}
-
-.filter-box::-webkit-scrollbar-track {
-  border-radius: .15em;
-  background: none;
-}
-
-.filter-box::-webkit-scrollbar-thumb {
-  border-radius: .15em;
-  background: none;
-}
-
 .filter-btn {
   top: 0;
   right: 0;
@@ -285,23 +316,12 @@ li.active {
   color: var(--botanic);
 }
 
-.open {
+.filter-box.open {
   opacity: 1;
   transform: scale(1);
 }
 
-.chevron-icon svg {
-  width: 18px;
-  height: 18px;
-}
-
-.sort-box {
-  gap: 1em;
-  display: flex;
-  max-width: 300px;
-  align-items: start;
-  flex-direction: column;
-}
+/* Sorting Styles */
 
 .picker {
   display: flex;
@@ -313,10 +333,18 @@ li.active {
   justify-content: space-between;
 }
 
+.sort-box {
+  gap: 1em;
+  display: flex;
+  max-width: 300px;
+  align-items: start;
+  flex-direction: column;
+}
+
 .sort-options {
   opacity: 0;
+  height: 0px;
   overflow-y: auto;
-  max-height: 280px;
   color: var(--oat);
   transform: scale(0);
   border-radius: .5em;
@@ -343,20 +371,6 @@ li.active {
 
 .sort-option:hover {
   background: var(--forest);
-}
-
-.sort-box::-webkit-scrollbar {
-  width: 0px;
-}
-
-.sort-box::-webkit-scrollbar-track {
-  border-radius: .15em;
-  background: none;
-}
-
-.sort-box::-webkit-scrollbar-thumb {
-  border-radius: .15em;
-  background: none;
 }
 
 .sort-box.open {
@@ -402,7 +416,6 @@ li.active {
   border-radius: 5em;
   background: transparent;
   border: 1px solid hsl(159, 100%, 95%, .5);
-  /*background: hsl(from var(--oat) h s calc(l - 10));*/
 }
 
 .btn-secondary:hover {
@@ -470,6 +483,11 @@ li.active {
 
 /* Icons */
 
+.chevron-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
 .cart-icon svg {
   width: 1.25rem;
   height: 1.25rem;
@@ -532,6 +550,12 @@ li.active {
 .clover-icon svg {
   width: 18px;
   height: 18px;
+}
+
+.naira-icon {
+  color: var(--oat);
+  padding: .5em 1em;
+  background: var(--botanic);
 }
 
 /* Sections and Wrappers */
@@ -661,30 +685,6 @@ li.active {
   background: hsl(17, 54%, 47%);
 }
 
-.livestock {
-  background: hsl(101, 50%, 67%);
-}
-
-.poultry {
-  background: hsl(20, 50%, 77%);
-}
-
-.frozen {
-  background: hsl(20, 50%, 57%);
-}
-
-.fruits {
-  background: hsl(42, 49%, 81%);
-}
-
-.t_r {
-  background: hsl(34, 42%, 33%);
-}
-
-.fresh {
-  background: hsl(7, 54%, 47%);
-}
-
 /* Product grid */
 
 .products {
@@ -698,7 +698,6 @@ li.active {
 .product-grid {
   gap: 40px;
   display: grid;
-  margin-top: 40px;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
@@ -787,30 +786,7 @@ li.active {
   flex: 1;
 }
 
-.step-img img {
-  width: 250px;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-/* Unknown */
-
-.st {
-  font-size: .8rem;
-}
-
-.st--in {
-  color: hsl(141, 45%, 34%);
-}
-
-.st--out {
-  color: hsl(6, 61%, 44%);
-}
-
-.st--order {
-  color: hsl(39, 50%, 36%);
-}
+/* Steps */
 
 .steps {
   gap: 28px;
@@ -823,55 +799,83 @@ li.active {
   padding-top: 12px;
 }
 
-/* shop toolbar, forms */
-.bar2 {
+.step-img img {
+  width: 250px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* shop toolbar and forms */
+
+.shop-controls {
+  gap: 1em;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
   margin-bottom: 22px;
 }
 
-.bar2 input,
-.bar2 select,
-.fld input,
-.fld select,
-.fld textarea {
-  padding: 10px 12px;
-  border: 1px solid var(--brdr-clr);
-  border-radius: var(--radius);
-  background: var(--paper);
+/* Price Filter */
+
+.price-filter {
+  gap: 1em;
+  width: 200px;
+  height: 40px;
+  display: flex;
+  overflow: hidden;
+  padding-block: 0;
+  position: relative;
+  padding: .5em 1em;
+  align-items: center;
+  border-radius: .5rem;
+  padding-inline: .05em;
+  justify-content: space-between;
+  background: hsl(from var(--paper) h calc(s - 50) calc(l - 30) / .25);
+
 }
 
-.bar2 label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.price-filter-input {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: none;
 }
+
+/*.shop-controls input,
+.shop-controls select,
+.field input,
+.field select,
+.field textarea {
+  padding: 10px 12px;
+  background: var(--paper);
+  border-radius: var(--radius);
+  border: 1px solid var(--brdr-clr);
+}
+
+.field {
+  gap: 4px;
+  display: flex;
+  margin-bottom: 14px;
+  flex-direction: column;
+}
+
+.field label {
+  font-weight: 500;
+}
+
+.field .error {
+  color: #b3392b;
+  font-size: .85rem;
+}
+
+.field .bad {
+  border-color: hsl(6, 61%, 44%);
+}*/
 
 .empty {
   text-align: center;
   padding: 44px 10px;
   color: #6b6a62;
-}
-
-.fld {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: 14px;
-}
-
-.fld label {
-  font-weight: 500;
-}
-
-.fld .err {
-  color: #b3392b;
-  font-size: .85rem;
-}
-
-.fld .bad {
-  border-color: #b3392b;
 }
 
 .two {
@@ -1215,11 +1219,11 @@ li.active {
     flex: 1;
   }
 
-  .products{
+  .products {
     padding-inline: 60px;
   }
 
-  .product-grid{
+  .product-grid {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 
