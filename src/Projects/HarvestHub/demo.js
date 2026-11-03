@@ -56,12 +56,16 @@ const categories = [
     { id: "tubers", name: "Tubers and Roots", img: "../../Assets/Images/3d-tubers_roots.png", featured: true, className: "t_r" },
 ];
 
-const order = {
-    featured: (a, b) => Number(!!b.featured) - Number(!!a.featured),
-    low: (a, b) => a.price - b.price,
-    high: (a, b) => b.price - a.price,
-    name: (a, b) => a.name.localeCompare(b.name),
-};
+/*const field = query("input[type='search']");
+
+field.addEventListener("input", () => {
+    const items = [...products];
+    const query = field.value.toLowerCase().trim();
+    const searched = items.filter(item => {
+        return item.name.toLowerCase().includes(query);
+    });
+    searched.length === 0 ? console.log("no results") : renderProducts(searched);
+});*/
 
 function create(element) { return document.createElement(element) };
 function query(selector) { return document.querySelector(selector) };
@@ -73,23 +77,28 @@ function parseHTML(markup) {
 };
 
 function input({ ...input }) {
-    const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ? input.labelClass : "" }">
-          ${ input.label ? input.label : "" }
+    const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ?? "" }">
+          ${ input.label ?? "" }
           <span class="icon ${ input.iconClass ? input.iconClass : "" }" data-icon="${ input?.icon }"></span>
-          <input ${ input.value ? input.value : "" } type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
+          <input ${ input.value ? `value="${ input.value }"` : "" } type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
           ${ input.name ? `name="${ input.name }"` : "" } class="${ input?.className }"  ${ input.required ? "required" : "" } >
           ${ input?.required ? `<p class="error" id="error-${ input?.id }" aria-live="polite"></p>` : "" }
       </label>`);
 
-    if (input.events) {
+    const inputElement = field.querySelector("input");
+
+    /*if (input.events) {
         const events = input?.events;
-        field.addEventListener("blur", (event) => { events?.blurred(event) });
-        field.addEventListener("focus", (event) => { events?.focused(event) });
-        field.addEventListener("input", (event) => { events?.update(event) });
-        field.addEventListener("keydown", (event) => { events?.keydown(event) });
-    };
+        inputElement.addEventListener("blur", (event) => {
+            if (events.blurred(event)) { events?.blurred(event) }
+        });
+        inputElement.addEventListener("focus", (event) => { events?.focused(event) });
+        inputElement.addEventListener("input", (event) => { events?.update(event) });
+        inputElement.addEventListener("keydown", (event) => { events?.keydown(event) });
+    };*/
+
     return field;
-  };
+};
 
 function searchFilter() {
     const wrapper = parseHTML(`<div class="search-filter">
@@ -107,11 +116,64 @@ function searchFilter() {
         iconClass: "plant-icon",
         labelClass: "search-field",
         placeholder: "Search The Market...",
+        events: {
+            update: () => {
+                const searched = searchItems({
+                    input: wrapper.querySelector("input[type='search']"),
+                    items: [...products],
+                    property: "name",
+                })
+                searched.length === 0 ? console.log("no results") : renderProducts(searched);
+            }
+        },
     }));
 
     return wrapper;
 };
 
-//query("main").innerHTML = `<section class="shop-controls"></section>`;
-query("main").append(searchFilter());
+function renderProducts(products) {
+    if (products.length === 0) {
+        throw new Error("No Products Found!");
+    } else {
+        products.forEach(product => { console.log(product.name) });
+    };
+};
+
+function searchItems({ input, items, property }) {
+    const query = input.value.toLowerCase().trim();
+    const searched = items.filter(item => {
+        const field = item[property];
+        return typeof field && field.includes(query);
+    });
+    return searched;
+};
+
+function wholesale() {
+    const wsPage = parseHTML(`<section class="section wrapper">
+        <h1>Bulk supply for businesses</h1>
+        <p>For restaurants, caterers, retailers and hotels. Tell us what you need and we will reply with a quotation. Quantity prices are agreed product by product.</p>
+        <form id="wsForm" class="box" novalidate>
+            <div class="two">
+                <div class="field full">
+                    <label for="wn">Products and quantities</label>
+                    <textarea id="wn" rows="4" placeholder="Example: 200 kg rice, 40 broilers"></textarea>
+                    <span class="error" id="e-wn"></span>
+                </div>
+            </div>
+            <button type="button" class="btn wa-btn" data-action="send-ws">Send enquiry on WhatsApp</button>
+            <!--<p class="note">Opening WhatsApp does not send the message until you press send. A quotation is not an order.</p>-->
+        </form>
+    </section>`);
+    wsPage.querySelector(".two").prepend(
+        input({ id: "wb", label: "Business name", placeholder: "What's your business name?", icon: "store" }),
+        //input({ id: "wc", label: "Your Contact Info" }),
+        input({ id: "wp", label: "Phone number", type: "tel", placeholder: "What do we use to contact you?", icon: "phone" }),
+        input({ id: "wl", label: "Delivery location", placeholder: "Where do we deliver to?", icon: "location" }),
+        input({ id: "wd", label: "Needed by (date)", type: "date", placeholder: "When do you need your order?", icon: "calendar" })
+    );
+
+    return wsPage;
+};
+
+query("main").append(wholesale());
 initializeIcons(document);

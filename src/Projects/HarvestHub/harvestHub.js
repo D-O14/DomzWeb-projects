@@ -26,11 +26,12 @@ const navdata = {
     { anchor: "Wholesale", path: "#/wholesale" },
     { anchor: "Delivery", path: "#/delivery" },
     { anchor: "About", path: "#/about" },
-    { anchor: "Contact us", path: "#/contact" },
+    //{ anchor: "Contact us", path: "#/contact" },
   ]
 };
 
 const categories = [
+  { id: "all", name: "All Sections" },
   { id: "grains", name: "Grains and Staples" },
   { id: "bulk", name: "Bulk and Wholesale Supply" },
   { id: "fruits", name: "Fruits", img: "../../Assets/Images/3d-fruits.png", featured: true, className: "fruits" },
@@ -99,7 +100,7 @@ const actions = {
   close: () => panel(false),
   menu: () => $("nav").classList.toggle("on"),
   add: (el) => addToCart(el.dataset.id, product(el.dataset.id).min),
-  "add-pdp": (el) => addToCart(el.dataset.id, pq()),
+  "add-product-page": (el) => addToCart(el.dataset.id, pq()),
   buy: (el) => { addToCart(el.dataset.id, pq()); location.hash = "#/checkout"; },
   pq: (el) => { const min = parseInt($("pq").dataset.min, 10); $("pq").textContent = Math.max(min, pq() + parseInt(el.dataset.d, 10)); },
   inc: (el) => setQty(el.dataset.id, 1),
@@ -125,8 +126,11 @@ const cart_key = "harvesthub-v2-cart";
 /* ---------- State & Variables ---------- */
 
 let cart = read(cart_key, []);
+let selectedCategory = "all";
+let selectedSort = "featured";
 let timer;
 let isOpen;
+let empty;
 
 // Events
 
@@ -174,6 +178,23 @@ function parseHTML(markup) {
 };
 
 // Helpers
+
+function displayCount(count, items) { 
+  switch (items.length) {
+    case 0: count.textContent = "No Results Found";
+      break;
+    case 1: count.textContent = `${ items.length } item`;
+      break;
+    default: count.textContent = `${ items.length } Items`;
+  };
+};
+
+function addEvent(element, count) { 
+  app.querySelector(element).addEventListener("input", () => {
+    const matches = updateShop();
+    displayCount(count, matches);
+  });
+};
 
 function stock(p) {
   const map = { in: ["in", "Available"], out: ["out", "Currently unavailable"], order: ["order", "Made to order"] };
@@ -275,9 +296,9 @@ function navbar(navdata) {
       </ul>
     </div>
     <div class="row">
-      <label for="searchbar" class="search-field">
+      <label for="searchbar" class="search-field" id="searchField">
         <span class="icon plant-icon" data-icon="${ navdata.logo }"></span>
-        <input type="search" name="searched_item" placeholder="Search the market..." class="searchbar" id="searchbar">
+        <input type="search" name="searched_item" placeholder="Search the market..." class="searchbar">
       </label>
       <menu class="nav-menu">
         <button class="open-cart-btn" data-action="cart" aria-label="Open Cart">
@@ -305,27 +326,27 @@ function input({ ...input }) {
   const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ? input.labelClass : "" }">
         ${ input.label ? input.label : "" }
         <span class="icon ${ input.iconClass ? input.iconClass : "" }" data-icon="${ input?.icon }"></span>
-        <input ${ input.value ? input.value : "" } type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
+        <input value="${ input.value ?? "" }" type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
         ${ input.name ? `name="${ input.name }"` : "" } class="${ input?.className }"  ${ input.required ? "required" : "" } >
         ${ input?.required ? `<p class="error" id="error-${ input?.id }" aria-live="polite"></p>` : "" }
     </label>`);
 
+
+  const inputElement = field.querySelector("input");
+
   if (input.events) {
     const events = input?.events;
-    field.addEventListener("blur", (event) => { events?.blurred(event) });
-    field.addEventListener("focus", (event) => { events?.focused(event) });
-    field.addEventListener("input", (event) => { events?.update(event) });
-    field.addEventListener("keydown", (event) => { events?.keydown(event) });
+    inputElement.addEventListener("input", () => { events?.update() });
   };
 
   return field;
 };
 
 function searchControl(params) {
-  const selectedCategory = params.get("category");
+  selectedCategory = params.get("category");
   const wrapper = parseHTML(`<div class="search-filter">
       <div class="filter">
-          <button class="filter-btn" data-action="filter" aria-label="activate filter menu">
+          <button class="toggle-filter-btn" data-action="filter" aria-label="activate filter menu">
               <span class="icon filter-icon" data-icon="filter"></span>
           </button>
           ${ filterMenu(categories, selectedCategory) }
@@ -340,7 +361,17 @@ function searchControl(params) {
     labelClass: "search-field",
     value: params.get("q") || "",
     placeholder: "Search The Market...",
+    //events: { update: updateShop },
   }));
+
+  wrapper.querySelector(".filter-box").addEventListener("click", event => {
+    const button = event.target.closest("[data-value]");
+    if (!button) return;
+    selectedCategory = button.dataset.value;
+    console.log(selectedCategory);
+    console.log(button.ariaPressed);
+    updateShop();
+  });
 
   return wrapper;
 };
@@ -350,11 +381,12 @@ function filterMenu(options, selectedId) {
   <menu class="filter-box">
     <ul class="filter-options">
       ${ options.map(option => {
-        const isSelected = option.id === selectedId;
+    const isSelected = option.id === selectedId;
     return `
-      <li class="filter-option">
-          <button class="filter-btn ${option.id === selectedId ? "is-selected" : ""}" data-value="${option.id }" 
+      <li class="filter-option ${ isSelected ? "is-selected" : "" }">
+          <button class="filter-btn" data-value="${ option.id }" 
           aria-pressed="${ isSelected }">${ option.name }</button>
+          <span class="icon check-icon" data-icon="${isSelected ? "check" : ""}"></span>
         </li>`}).join("") }
     </ul>
   </menu>`
@@ -362,27 +394,28 @@ function filterMenu(options, selectedId) {
 
 function sortMenu(options, selectedSortId) {
   return `<menu class="sort-box">
-        <label for="sortOpts" class="picker">
+        <button type="button" class="picker">
             <span class="selected-opt" id="selected">
-              ${options.find(option => option.id === selectedSortId)?.label || "Sort By:"}
+              ${ options.find(option => option.id === selectedSortId)?.label || "Sort By:" }
             </span>
             <span class="icon chevron-icon" data-icon="arrowDown"></span>
-        </label>
+        </button>
         <ul class="sort-options" id="sortOpts">
         ${ options.map(option => {
-          return `<li class="sort-option">
-              <button class="sort-btn" type="button" data-sort="${option.id }"
-              aria-pressed="${ option.id === selectedSortId}">
+          const isSelected = option.id === selectedSortId;
+    return `<li class="sort-option">
+              <button class="sort-btn" type="button" data-sort="${ option.id }"
+              aria-pressed="${ isSelected }">
                 ${ option.label }
               </button>
             </li>`}).join("") }
         </ul>
-    </menu>`
+    </menu>`;
 };
 
 function productCard(product) {
   return `
-  <article class="product-card">
+  <article class="product-card" data-product-id="${ product.id }">
         <div class="card-header">
             <span class="product-category">${ product.category }</span>
             <a class="product-img" href="#/product/${ product.id }">
@@ -401,7 +434,7 @@ function productCard(product) {
             </div>
             <p class="product-desc">${ product.desc }</p>
             <menu class="card-actions">
-                <button class="cart-btn" data-action="add" aria-label="Add to Cart" data-product-id="${ product.id }">
+                <button class="cart-btn" data-action="add" aria-label="Add to Cart">
                     <span class="icon cart-icon" data-icon="cartPlus"></span>
                 </button>
                 <a class="details-btn" href="#/product/${ product.id }">
@@ -437,7 +470,7 @@ function drawCart() {
     : "";
 };
 
-function field({ id, label, type = "text", className = "" }) {
+function field(id, label, type = "text", className = "") {
   return `<div class="field ${ className }">
     <label for="${ id }">${ label }</label>
     <input id="${ id }" type="${ type }" />
@@ -507,7 +540,8 @@ function home() {
       </p>
     </div>
     <div class="product-grid">
-      ${ products.filter((p) => p.featured).map((p) => productCard(p)).join("") }
+      ${ products.filter((product) => product.featured)
+      .map((product) => productCard(product)).join("") }
     </div>
   </section>
 
@@ -523,7 +557,7 @@ function home() {
     </div>
     <div class="steps">
       ${ steps.map(step => {
-    return `
+        return `
         <div class="step">
           <h3>${ step.step }</h3>
           <p>${ step.howTo }</p>
@@ -531,12 +565,14 @@ function home() {
             <img src="${ step.illustr }" alt="">
           </figure>
         </div>`
-  }).join("") }
+      }).join("") }
     </div>
   </section>`
 };
 
 function shop(params) {
+  //selectedCategory = params.get("category");
+  selectedSort = params.get("sort") || "featured";
   app.innerHTML = `
     <section class="section wrapper">
       <h1>
@@ -544,25 +580,106 @@ function shop(params) {
         <span class="icon store-icon" data-icon="store"></span>
       </h1>
       <div class="shop-controls">
-        ${ sortMenu(order) }
+        ${ sortMenu(order, selectedSort) }
         <label class="price-filter">
           <span class="icon naira-icon">₦</span>
           <input id="priceFilter" class="price-filter-input" type="number" min="0" placeholder="Max price (₦)" aria-label="Maximum price" />
         </label>
       </div>
-      <div class="product-grid" id="results"></div>
+      <span class="results-count">${products.length} Items</span>
+      <div class="product-grid results" id="results">
+      ${ renderProducts(products) }
+      </div>
     </section>`;
 
+  $("searchField").classList.add("hidden");
+  const resCount = app.querySelector(".results-count");
   app.querySelector(".shop-controls").prepend(searchControl(params));
-  query(".searchbar").addEventListener("input", drawResults);
-  query(".picker").addEventListener("click", () => {
+  app.querySelector(".sort-options").addEventListener("click", (e) => {
+    const button = e.target.closest("[data-sort]");
+    if (!button) return;
+    selectedSort = button.dataset.sort;
+    updateShop();
+  });
+  app.querySelector(".picker").addEventListener("click", () => {
     const sortBox = query(".sort-box");
     const sortOpts = query(".sort-options");
     sortBox.classList.toggle("open");
     sortOpts.style.height = sortOpts.scrollHeight + "px";
   });
-  query(".filter-btn").addEventListener("click", () => { query(".filter-box").classList.toggle("open") });
-  drawResults();
+  app.querySelector(".toggle-filter-btn").addEventListener("click", () => { query(".filter-box").classList.toggle("open") });
+  addEvent(".price-filter-input", resCount);
+  addEvent(".searchbar", resCount);
+  updateShop();
+};
+
+function wholesale() {
+  return `
+    <section class="section wrapper">
+      <h1>Bulk supply for businesses</h1>
+      <p>For restaurants, caterers, retailers and hotels. Tell us what you need and we will reply with a quotation. Quantity prices are agreed product by product.</p>
+      <form id="wsForm" class="box" novalidate>
+        <div class="two">
+          ${ field("wb", "Business name") }
+          ${ field("wc", "Contact person") }
+          ${ field("wp", "Phone number", "tel") }
+          ${ field("wl", "Delivery location") }
+          ${ field("wd", "Needed by (date)", "date") }
+          <div class="field full"><label for="wn">Products and quantities</label><textarea id="wn" rows="4" placeholder="Example: 200 kg rice, 40 broilers"></textarea><span class="error" id="e-wn"></span></div>
+        </div>
+        <button type="button" class="btn wa-btn" data-action="send-ws">Send enquiry on WhatsApp</button>
+        <!--<p class="note">Opening WhatsApp does not send the message until you press send. A quotation is not an order.</p>-->
+      </form>
+    </section>`;
+}
+
+function delivery() {
+  return `
+    <section class="section wrapper">
+      <h1>Delivery and collection</h1>
+      <p>Delivery areas and fees are set by the business and shown at checkout.</p>
+      ${ config.zones.map((zone) =>
+        `<div class="ln">
+          <span>${ zone.name }<br />
+            <small>Minimum order ${ naira(zone.minOrder) }. ${ zone.window }.</small>
+          </span>
+          <b>${ naira(zone.fee) }</b>
+        </div>`).join("") }
+      <!--<div class="p">
+        Livestock and frozen goods may need special arrangements, which are explained on each product. Outside these areas, send a WhatsApp enquiry for a quotation.
+      </div>-->
+    </section>`;
+}
+
+function productPage(id) {
+  const p = product(id);
+  if (!p) return `<section class="section wrapper empty"><h1>Product not found</h1><a class="btn" href="#/shop">Back to shop</a></section>`;
+
+  const related = products.filter((x) => x.category === p.category && x.id !== p.id).slice(0, 4);
+  const tiers = p.tiers ? `<ul class="tiers">${ p.tiers.map((t) => `<li>${ t.quantity }+ ${ p.unit }: ${ naira(t.price) } per ${ p.unit }</li>`).join("") }</ul>` : "";
+  const ask = waLink(`Hello HarvestHub, I have a question about: ${ p.name }`);
+
+  return `
+    <section class="section wrapper">
+      <div class="product-page">
+        <div class="product-page-img">${ media(p) }</div>
+        <div>
+          <h1>${ p.name }</h1>
+          <div class="price">${ naira(p.price) } <small>per ${ p.unit }</small></div>
+          ${ tiers }${ stock(p) }
+          <p>${ p.desc }</p>
+          <p>Minimum order: ${ p.min } ${ p.unit }</p>
+          <div class="quantity"><button data-action="pq" data-d="-1" aria-label="Decrease">−</button><span id="pq" data-min="${ p.min }">${ p.min }</span><button data-action="pq" data-d="1" aria-label="Increase">+</button></div>
+          <div class="row">
+            <button class="btn btn-main" data-action="add-product-page" data-id="${ p.id }" ${ p.status === "out" ? "disabled" : "" }>Add to cart</button>
+            <button class="btn" data-action="buy" data-id="${ p.id }" ${ p.status === "out" ? "disabled" : "" }>Buy now</button>
+            <a class="btn wa-btn" href="${ ask }" target="_blank" rel="noopener">Ask on WhatsApp</a>
+          </div>
+          ${ p.note ? `<div class="note">${ p.note }</div>` : "" }
+        </div>
+      </div>
+    </section>
+    ${ related.length ? `<section class="section wrapper"><h2>More in this section</h2><div class="grid">${ related.map(card).join("") }</div></section>` : "" }`;
 };
 
 function checkout() {
@@ -604,56 +721,31 @@ function checkout() {
     </section>`;
 };
 
-function pdp(id) {
-  const p = product(id);
-  if (!p) return `<section class="section wrapper empty"><h1>Product not found</h1><a class="btn" href="#/shop">Back to shop</a></section>`;
-
-  const related = products.filter((x) => x.category === p.category && x.id !== p.id).slice(0, 4);
-  const tiers = p.tiers ? `<ul class="tiers">${ p.tiers.map((t) => `<li>${ t.quantity }+ ${ p.unit }: ${ naira(t.price) } per ${ p.unit }</li>`).join("") }</ul>` : "";
-  const ask = waLink(`Hello HarvestHub, I have a question about: ${ p.name }`);
-
-  return `
-    <section class="section wrapper">
-      <div class="pdp">
-        <div class="pdp__img">${ media(p) }</div>
-        <div>
-          <h1>${ p.name }</h1>
-          <div class="price">${ naira(p.price) } <small>per ${ p.unit }</small></div>
-          ${ tiers }${ stock(p) }
-          <p>${ p.desc }</p>
-          <p>Minimum order: ${ p.min } ${ p.unit }</p>
-          <div class="quantity"><button data-action="pq" data-d="-1" aria-label="Decrease">−</button><span id="pq" data-min="${ p.min }">${ p.min }</span><button data-action="pq" data-d="1" aria-label="Increase">+</button></div>
-          <div class="row">
-            <button class="btn btn--forest" data-action="add-pdp" data-id="${ p.id }" ${ p.status === "out" ? "disabled" : "" }>Add to cart</button>
-            <button class="btn" data-action="buy" data-id="${ p.id }" ${ p.status === "out" ? "disabled" : "" }>Buy now</button>
-            <a class="btn btn--wa" href="${ ask }" target="_blank" rel="noopener">Ask on WhatsApp</a>
-          </div>
-          ${ p.note ? `<div class="note">${ p.note }</div>` : "" }
-        </div>
-      </div>
-    </section>
-    ${ related.length ? `<section class="section wrapper"><h2>More in this section</h2><div class="grid">${ related.map(card).join("") }</div></section>` : "" }`;
-};
-
-function drawResults() {
-  const query = $("searchbar").value.trim().toLowerCase();
-  const maxPrice = parseFloat($("priceFilter").value);
-  //const category = $("fCategory").value;
-  //const onlyIn = $("filterIn").checked;
-  const sort = $("selected").textContent;
-
-  const list = products.filter((product) => {
-    if (query && !(product.name + " " + product.desc).toLowerCase().includes(query)) return false;
-    //if (category && p.category !== category) return false;
-    if (!isNaN(maxPrice) && product.price > maxPrice) return false;
-    return true;
-  });
-
-  $("results").innerHTML = list.sort(order[sort]).map(productCard).join("") || `<div class="empty">Nothing matches. Try clearing a filter.</div>`;
-};
-
 function info(title) {
-  return `<section class="sec wrapper"><h1>${ title }</h1><p>Replace with the business's own text: who HarvestHub is, privacy, terms, and the returns, refunds and cancellation policy.</p><p>${ config.phone }<br />${ config.email }<br />${ config.address }</p></section>`;
+  return `
+  <section class="section wrapper">
+    <h1>${ title }</h1>
+    <p>Replace with the business's own text: who HarvestHub is, privacy, terms, and the returns, refunds and cancellation policy.</p>
+    <p>${ config.phone }<br />${ config.email }<br />${ config.address }</p>
+  </section>`;
+};
+
+/* --------- Rendering Functions ----------- */
+
+function renderApp() {
+  const { page, id, params } = router();
+  const pages = { home, product: () => productPage(id), checkout, wholesale, delivery, about: () => info("About HarvestHub") };
+
+  page === "shop" ? shop(params) : app.innerHTML = (pages[page] || home)();
+
+  //$("nav").classList.remove("on");
+  window.scrollTo(0, 0);
+};
+
+function renderProducts(products) {
+  return products.map((product) => {
+    return productCard(product);
+  }).join("");
 };
 
 /* ---------- Routing and Events ---------- */
@@ -664,14 +756,43 @@ function router() {
   return { page: parts[0] || "home", id: parts[1], params: new URLSearchParams(query || "") };
 };
 
-function renderApp() {
-  const { page, id, params } = router();
-  const pages = { home, product: () => pdp(id), checkout, /*wholesale, delivery*/ about: () => info("About HarvestHub") };
+function updateShop() {
+  const category = selectedCategory === "all" ? "" : selectedCategory;
+  const query = app.querySelector(".searchbar").value.trim().toLowerCase();
+  const maxPrice = parseFloat($("priceFilter").value);
+  const selectedSortOption = order.find(option => option.id === selectedSort);
+  const sortBy = selectedSortOption?.sortBy
+    || order.find(option => option.id === "featured").sortBy;
 
-  page === "shop" ? shop(params) : app.innerHTML = (pages[page] || home)();
+  const matches = products.filter((product) => {
+    if (query && !(product.name).toLowerCase().includes(query)) { return false };
+    if (category && product.category !== category) { return false };
+    if (!isNaN(maxPrice) && product.price > maxPrice) { return false };
+    return true;
+  });
 
-  //$("nav").classList.remove("on");
-  window.scrollTo(0, 0);
+  const matchingIds = new Set(matches.map(product => String(product.id)));
+  const results = $("results");
+  results.querySelectorAll(".product-card").forEach(card => {
+    !matchingIds.has(card.dataset.productId) ? card.classList.add("hidden") :
+      card.classList.remove("hidden");
+  });
+
+  matches.sort(sortBy).forEach(product => {
+    const card = results.querySelector(`[data-product-id="${ product.id }"]`);
+    if (card) { results.append(card) };
+  });
+
+  empty = matches.length === 0;
+
+  if (empty) {
+    console.log("No Matches");
+    /*const noRes = parseHTML(`<div class="empty">Nothing matches. Try clearing a filter.</div>`);
+    results.append(noRes);*/
+  } else {
+    console.log(matches);
+  };
+  return matches;
 };
 
 function check(rules) {
@@ -739,5 +860,6 @@ function init() {
   renderApp();
   initializeIcons(document);
 };
+
 
 init();

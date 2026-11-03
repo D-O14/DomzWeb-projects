@@ -58,6 +58,16 @@
     background: none;
   }
 
+  ::-webkit-search-cancel-button {
+    display: none;
+  }
+
+  ::-webkit-outer-spin-button,
+  ::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
   [data-category="livestock"] {
     background: hsl(101, 50%, 67%);
   }
@@ -131,7 +141,8 @@
     text-decoration: none;
   }
 
-  input,textarea{
+  input,
+  textarea {
     outline: none;
   }
 
@@ -299,6 +310,11 @@
 .filter-option {
   width: 100%;
   list-style: none;
+}
+
+.filter-btn {
+  color: var(--oat);
+  background: none;
   padding: .75em 1em;
 }
 
@@ -306,7 +322,12 @@
   background: var(--forest);
 }
 
-.filter-btn {
+.filter-box.open {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.toggle-filter-btn {
   top: 0;
   right: 0;
   cursor: pointer;
@@ -314,11 +335,6 @@
   padding: .5em .5em;
   position: absolute;
   color: var(--botanic);
-}
-
-.filter-box.open {
-  opacity: 1;
-  transform: scale(1);
 }
 
 /* Sorting Styles */
@@ -366,6 +382,11 @@
 .sort-option {
   width: 100%;
   list-style: none;
+}
+
+.sort-btn{
+  background: none;
+  color: var(--oat);
   padding: .75em 1em;
 }
 
@@ -448,7 +469,7 @@
   border-bottom-right-radius: .75em;
 }
 
-.whatsapp-btn {
+.wa-btn {
   background: var(--bg-wa-btn);
 }
 
@@ -567,6 +588,7 @@
 
 .section {
   padding: 52px 0;
+  position: relative;
 }
 
 .section h2 {
@@ -806,7 +828,20 @@
   object-fit: cover;
 }
 
-/* shop toolbar and forms */
+/* Shop Page */
+
+.results {
+  margin-top: 40px;
+}
+
+.results-count {
+  top: 140px;
+  font-size: 16px;
+  color: var(--terra);
+  position: absolute;
+}
+
+/* Shop toolbar */
 
 .shop-controls {
   gap: 1em;
@@ -841,8 +876,8 @@
   background: none;
 }
 
-/*.shop-controls input,
-.shop-controls select,
+/* Forms */
+
 .field input,
 .field select,
 .field textarea {
@@ -870,48 +905,19 @@
 
 .field .bad {
   border-color: hsl(6, 61%, 44%);
-}*/
-
-.empty {
-  text-align: center;
-  padding: 44px 10px;
-  color: #6b6a62;
 }
 
-.two {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 14px;
-}
+/* Product page and checkout */
 
-.two .full {
-  grid-column: 1 / -1;
-}
-
-.note {
-  margin: 14px 0;
-  padding: 10px 14px;
-  border-radius: 6px;
-  font-size: .88rem;
-  background: hsl(43, 83%, 91%);
-  border-left: 4px solid var(--terra);
-}
-
-/* Product page, checkout */
-
-.pdp,
-.co {
+.product-page,
+.checkout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 36px;
   align-items: start;
 }
 
-.co {
-  grid-template-columns: 1.2fr .8fr;
-}
-
-.pdp__img {
+.product-page-img {
   display: grid;
   place-items: center;
   min-height: 300px;
@@ -920,15 +926,13 @@
   border-radius: var(--radius);
 }
 
-.pdp__img img {
+.product-page-img img {
   width: 100%;
   border-radius: var(--radius);
 }
 
-.tiers {
-  font-size: .9rem;
-  margin: 8px 0;
-  padding-left: 18px;
+.checkout {
+  grid-template-columns: 1.2fr .8fr;
 }
 
 .qty {
@@ -952,6 +956,12 @@
   min-width: 34px;
   text-align: center;
   font-weight: 600;
+}
+
+.tiers {
+  font-size: .9rem;
+  margin: 8px 0;
+  padding-left: 18px;
 }
 
 .row {
@@ -1099,7 +1109,7 @@
   margin-top: 26px;
 }
 
-.whatsApp {
+.wa {
   position: fixed;
   right: 16px;
   bottom: 16px;
@@ -1130,12 +1140,63 @@
   transform: translate(-50%, 0);
 }
 
+/* Dynamically added classes  */
+
+.hidden {
+  display: none;
+}
+
+.empty {
+  text-align: center;
+  padding: 44px 10px;
+  color: #6b6a62;
+}
+
+.is-selected {
+  background: var(--forest);
+}
+
+.two {
+  display: grid;
+  column-gap: 14px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.two .full {
+  grid-column: 1 / -1;
+}
+
+
+/* Animations */
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-25px);
+  }
+}
+
 /* Media Queries */
 
 @media (prefers-reduced-motion: reduce) {
+
+  *::before,
+  *::after,
   * {
-    transition: none !important;
-    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
   }
 }
 
@@ -1227,23 +1288,11 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 
-  .co,
-  .pdp,
+  .checkout,
+  .product-page,
   .two,
   .steps,
   .hero-container {
     grid-template-columns: 1fr;
-  }
-}
-
-@keyframes float {
-
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-
-  50% {
-    transform: translateY(-25px);
   }
 }
