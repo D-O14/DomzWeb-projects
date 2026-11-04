@@ -219,7 +219,7 @@ svg {
     gap: 1em;
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: center;
     border-radius: .5rem;
     background: var(--terra);
 }

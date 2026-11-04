@@ -1,8 +1,6 @@
 import { initializeIcons } from "@assets/Icons/icons";
 
-/* HarvestHub v2 (front-end stage, demo data)
-   Prices are whole naira. The backend stage will move products,
-   zones and settings into the database and recalculate totals on the server. */
+/* HarvestHub v1 (front-end stage, demo data) */
 
 /* ---------- Data ---------- */
 
@@ -117,20 +115,23 @@ const steps = [
 ];
 
 const actions = {
-  cart: () => panel(true),
+  openCart: () => panel(true),
   close: () => panel(false),
   menu: () => $("nav").classList.toggle("on"),
   addItem: (element) => {
     const p = product(element.dataset.productId);
     if (!p) toast("Product Not Found!");
-    addToCart(element.dataset.productId, p.minQty)
+    addToCart(element.dataset.productId, p.minQty);
   },
-  "add-product-page": (element) => addToCart(element.dataset.productId, pq()),
+  "add-product-page": (element) => { addToCart(element.dataset.productId, pq()) },
   buy: (element) => { addToCart(element.dataset.id, pq()); location.hash = "#/checkout"; },
-  pq: (element) => { const min = parseInt($("pq").dataset.min, 10); $("pq").textContent = Math.max(min, pq() + parseInt(element.dataset.d, 10)); },
-  increase: (element) => setQty(element.dataset.id, 1),
-  decrease: (element) => setQty(element.dataset.id, -1),
-  removeItem: (element) => removeFromCart(element.dataset.id),
+  pq: (element) => {
+    const min = parseInt($("pq").dataset.min, 10);
+    $("pq").textContent = Math.max(min, pq() + parseInt(element.dataset.id, 10));
+  },
+  increase: (element) => { setQty(element.dataset.id, 1) },
+  decrease: (element) => { setQty(element.dataset.id, -1) },
+  removeItem: (element) => { removeFromCart(element.dataset.productId) },
   "send-wa": () => sendOrder("wa"),
   "send-mail": () => sendOrder("mail"),
   "send-ws": sendEnquiry,
@@ -162,8 +163,11 @@ let empty;
 window.addEventListener("hashchange", renderApp);
 
 document.addEventListener("click", (e) => {
-  const elem = e.target.closest("[data-action]");
-  if (elem && actions[elem.dataset.action]) actions[elem.dataset.action](elem);
+  const element = e.target.closest("[data-action]");
+  if (element && actions[element.dataset.action]) actions[element.dataset.action](element);
+  console.log(element);
+  console.log(element.dataset.action);
+  console.log(actions[element.dataset.action]);
 });
 
 /*$("searchbar").addEventListener("submit", (e) => {
@@ -255,25 +259,28 @@ function addToCart(id, quantity) {
   entry ? entry.quantity = next : cart.push({ id, quantity: next })
   save(cart_key, cart);
   drawCart();
-  toast("Added to cart");
+  toast("Added to cart!");
+  initializeIcons(document);
 };
 
 function removeFromCart(id) {
   cart = cart.filter((c) => c.id !== id);
   save(cart_key, cart);
   drawCart();
-  if (route().page === "checkout") render();
+  if (router().page === "checkout") { renderApp() };
+  toast("Removed from cart!");
+  initializeIcons(document);
 };
 
 function setQty(id, delta) {
-  const entry = cart.find((cart) => cart.id === id);
+  const entry = cart.find((c) => c.id === id);
   if (!entry) return;
   const next = entry.quantity + delta;
-  if (next < product(id).min) cart = cart.filter((c) => c.id !== id);
-  else entry.quantity = next;
+  if (next < product(id).minQty) { cart = cart.filter((c) => c.id !== id) }
+  else { entry.quantity = next };
   save(cart_key, cart);
   drawCart();
-  if (router().page === "checkout") renderApp();
+  if (router().page === "checkout") { renderApp() };
 };
 
 /* ---------- Order Messages ---------- */
@@ -322,9 +329,9 @@ function navbar(navdata) {
         <input type="search" name="searched_item" placeholder="Search the market..." class="searchbar">
       </label>
       <menu class="nav-menu">
-        <button class="open-cart-btn" data-action="cart" aria-label="Open Cart">
+        <button class="open-cart-btn" data-action="openCart" aria-label="Open Cart">
           <span class="icon cart-icon" data-icon="shoppingCart"></span>
-          <span class="cart-count" id="cartCount">0</span>
+          <span class="cart-count" id="cartCount"></span>
         </button>
       </menu>
     </div>
@@ -333,6 +340,42 @@ function navbar(navdata) {
       <span class="icon close-icon" data-icon="close"></span>
     </div>
   </nav>`
+};
+
+function footer() { 
+  return `
+  <div class="wrapper footer-grid">
+  <div>
+    <div class="mark mark-l">HarvestHub</div>
+    <p id="footAddr">${config.address}</p>
+  </div>
+  <div>
+    <h4>Shop</h4>
+    <div id="footCategorys">
+      ${categories.slice(0, 6).map((c) => {
+        return `<a href="#/shop?category=${ c.id }">
+          ${ c.name }
+        </a>`}).join("") }
+    </div>
+  </div>
+  <div>
+    <h4>Help</h4>
+    <a href="#/delivery">Delivery and collection</a><a href="#/wholesale">Bulk supply</a>
+    <a href="#/about">Policies</a>
+  </div>
+  <div>
+    <h4>Contact</h4>
+    <div id="footContact">
+      <a href="${ waLink("Hello HarvestHub") }" target="_blank" rel="noopener">
+        WhatsApp
+      </a>
+      <a href="mailto:${ config.email }">
+        ${ config.email }
+      </a>
+      <span>${ config.phone }</span>
+    </div>
+  </div>
+</div>`
 };
 
 function toast(msg) {
@@ -473,7 +516,7 @@ function panel(on) {
 };
 
 function cartItem(line) {
-  const item = parseHTML(`<article class="cart-item">
+  return `<article class="cart-item">
 <div class="item-header">
     <a class="item-display" href="#/product/${ line.p.id }">
       ${ media(line.p) }
@@ -494,23 +537,20 @@ function cartItem(line) {
     </div>
     <menu class="item-actions">
         <div class="q-counter">
-            <button class="q-count-btn" data-id="-1" data-action="decrease" aria-label="decrease quantity">
+            <button class="q-count-btn" data-id="-1" data-action="pq" aria-label="decrease quantity">
                 <span class="icon minus-icon" data-icon="minus"></span>
             </button>
-            <span class="q-count">${ line.qty }</span>
-            <button class="q-count-btn" data-id="1" data-action="increase" aria-label="increase quantity">
+            <span id="pq" data-min="${ line.p.minQty }" class="q-count">${ line.qty }</span>
+            <button class="q-count-btn" data-id="1" data-action="pq" aria-label="increase quantity">
                 <span class="icon plus-icon" data-icon="plus"></span>
             </button>
         </div>
-        <button class="remove-item-btn" data-action="removeItem" aria-label="remove item from cart">
+        <button class="remove-item-btn" data-product-id="${line.p.id}" data-action="removeItem" aria-label="remove item from cart">
             <span class="icon delete-icon" data-icon="delete"></span>
         </button>
     </menu>
 </div>
-</article>`);
-  
-  initializeIcons(item);
-  return item;
+</article>`;
 };
 
 function appCart() {
@@ -525,23 +565,18 @@ function appCart() {
         </button>
     </div>
     <div class="cart-content" id="cartContent"></div>
-    <div class="cart-footer" id="cartFooter">
-        <menu class="cart-actions">
-            <button class="co-btn">Checkout (${ naira(subtotal()) })</button>
-        </menu>
-    </div>`
+    <div class="cart-footer" id="cartFooter"></div>`
 };
 
 function drawCart() {
   const ls = lines();
-  const cartContent = $("cartContent");
   const count = ls.reduce((n, line) => n + line.qty, 0);
 
   $("cartCount").textContent = count;
   $("inCartCount").textContent = count;
 
-  cartContent.innerHTML = ls.length
-    ? ls.map((line) => { return cartItem(line) }) :
+  $("cartContent").innerHTML = ls.length
+    ? ls.map((line) => { return cartItem(line) }).join("") :
     parseHTML(`<div class="empty-cart">
         <figure class="empty-img">
           <img src="../../Assets/Illustrations/empty-cart.svg" alt="Empty Cart">
@@ -550,22 +585,19 @@ function drawCart() {
       </div>
     `);
 
-  /*$("cartFooter").innerHTML = ls.length
-    ? `
-      <menu class="cart-actions">
-        <button class="co-btn">Checkout (${ naira(subtotal()) })</button>
-      </menu>
-    `
-    : "";*/
+  $("cartFooter").innerHTML = ls.length ? `
+  <menu class="cart-actions">
+    <a href="#/checkout" class="co-btn">Checkout (${ naira(subtotal()) })</a>
+</menu>`: ""
 }
 
 function counter(product) {
   return `<menu class="counter">
-    <button data-action="pq" class="count-btn" data-id="-1" aria-label="Decrease quantity of ${product.name}">
+    <button data-action="pq" class="count-btn" data-id="-1" aria-label="Decrease quantity of ${ product.name }">
       <span class="icon minus-icon" data-icon="minus"></span>
     </button>
     <span id="pq" class="count" data-min="${ product.minQty }">${ product.minQty }</span>
-    <button data-action="pq" class="count-btn" data-id="1" aria-label="Increase quantity of ${product.name}">
+    <button data-action="pq" class="count-btn" data-id="1" aria-label="Increase quantity of ${ product.name }">
     <span class="icon plus-icon" data-icon="plus"></span>
     </button>
   </menu>`
@@ -762,7 +794,7 @@ function delivery() {
 
 function checkout() {
   const ls = lines();
-  if (!ls.length) return`
+  if (!ls.length) return `
   <section class="section wrapper empty">
     <h1>Your cart is empty</h1>
     <a class="btn" href="#/shop">Browse products</a>
@@ -835,7 +867,7 @@ function checkout() {
     input({ id: "email", icon: "mail", placeholder: "Your e-mail address (optional)", type: "email", labelClass: "input-field" })
   );
   coFields.querySelector(".textarea").before(
-    input({ id: "address", icon: "location", iconClass: "location-icon",placeholder: "Where do we deliver to?", labelClass: "input-field" })
+    input({ id: "address", icon: "location", iconClass: "location-icon", placeholder: "Where do we deliver to?", labelClass: "input-field" })
   );
 
   return coPage;
@@ -889,7 +921,7 @@ function productPage(id) {
         </div>
           <menu class="pdp-actions">
             <button class="btn btn-main" data-action="buy" data-id="${ p.id }">Buy now</button>
-            <button class="btn add-to-cart-btn" data-action="add-product-page" data-id="${ p.id }" >
+            <button class="btn add-to-cart-btn" data-action="add-product-page" data-product-id="${ p.id }" >
             Add to cart
             <span class="icon cart-icon" data-icon="cartPlus"></span>
             </button>
@@ -1051,12 +1083,10 @@ function sendEnquiry() {
 };
 
 function init() {
-  query(".app-header").innerHTML = navbar(navdata);
   query(".cart").innerHTML = appCart();
-  $("wa").href = waLink("Hello HarvestHub, I would like to place an order.");
-  $("footAddr").textContent = config.address;
-  $("footCategorys").innerHTML = categories.slice(0, 6).map((c) => `<a href="#/shop?category=${ c.id }">${ c.name }</a>`).join("");
-  $("footContact").innerHTML = `<a href="${ waLink("Hello HarvestHub") }" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${ config.email }">${ config.email }</a><span>${ config.phone }</span>`;
+  query(".footer").innerHTML = footer();
+  query(".app-header").innerHTML = navbar(navdata);
+  query(".wa-fab").href = waLink("Hello HarvestHub, I would like to place an order.");
   drawCart();
   renderApp();
 };
