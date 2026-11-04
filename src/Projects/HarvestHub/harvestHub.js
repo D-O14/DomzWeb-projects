@@ -34,59 +34,80 @@ const categories = [
   { id: "all", name: "All Sections" },
   { id: "grains", name: "Grains and Staples" },
   { id: "bulk", name: "Bulk and Wholesale Supply" },
-  { id: "fruits", name: "Fruits", img: "../../Assets/Images/3d-fruits.png", featured: true, className: "fruits" },
-  { id: "poultry", name: "Poultry", img: "../../Assets/Images/3d-chicken.png", featured: true, className: "poultry" },
-  { id: "livestock", name: "Livestock", img: "../../Assets/Images/3d-goat.png", featured: true, className: "livestock" },
-  { id: "frozen", name: "Frozen Foods", img: "../../Assets/Images/3d-frozen-meat.png", featured: true, className: "frozen" },
-  { id: "produce", name: "Fresh Produce", img: "../../Assets/Images/3d-produce-box.png", featured: true, className: "fresh" },
-  { id: "tubers", name: "Tubers and Roots", img: "../../Assets/Images/3d-tubers_roots.png", featured: true, className: "t_r" },
+  { id: "fruits", name: "Fruits", img: "../../Assets/Images/3d-fruits.png", featured: true, dataset: "fruits" },
+  { id: "poultry", name: "Poultry", img: "../../Assets/Images/3d-chicken.png", featured: true, dataset: "poultry" },
+  { id: "livestock", name: "Livestock", img: "../../Assets/Images/3d-goat.png", featured: true, dataset: "livestock" },
+  { id: "frozen", name: "Frozen Foods", img: "../../Assets/Images/3d-frozen-meat.png", featured: true, dataset: "frozen" },
+  { id: "produce", name: "Fresh Produce", img: "../../Assets/Images/3d-produce-box.png", featured: true, dataset: "produce" },
+  { id: "tubers", name: "Tubers and Roots", img: "../../Assets/Images/3d-tubers_roots.png", featured: true, dataset: "tubers_roots" },
 ];
 
 const products = [
   {
-    id: "goat", name: "Live Goat", category: "livestock", emoji: "🐐", featured: true, price: 85000, min: 1,
-    desc: "Sample listing. Size and weight vary by animal and are confirmed before dispatch.",
+    id: "goat", name: "Live Goat", category: "livestock", emoji: "🐐", featured: true, price: 85000, unit: "animal", minQty: 1,
+    description: "Sample listing. Size and weight vary by animal and are confirmed before dispatch.",
     note: "Sourced after you order. Collection or delivery is arranged with you."
   },
   {
-    id: "broiler", name: "Live Broiler Chicken", category: "poultry", emoji: "🐓", featured: true, price: 8500, min: 1,
-    max: 50, desc: "Sample listing for live broilers. Size and weight may vary by animal.", note: "Weight varies by bird."
+    id: "broiler", name: "Live Broiler Chicken", category: "poultry", emoji: "🐓", featured: true, price: 8500, unit: "bird", minQty: 1,
+    tiers: [{ quantity: 50, price: 8000 }], description: "Sample listing for live broilers.", note: "Weight varies by bird."
   },
   {
-    id: "local-chicken", name: "Live Local Chicken", category: "poultry", emoji: "🐔", price: 12000, min: 1,
-    desc: "Sample listing for live local birds.", note: "Weight varies by bird."
+    id: "local-chicken", name: "Live Local Chicken", category: "poultry", emoji: "🐔", price: 12000, unit: "bird", minQty: 1,
+    description: "Sample listing for live local birds.", note: "Weight varies by bird."
   },
   {
-    id: "frozen-whole", name: "Frozen Whole Chicken", category: "frozen", emoji: "🍗", price: 6500, min: 1,
-    desc: "Sample frozen whole chicken, sold by weight.", note: "Final weight depends on the pack. Handling details are supplied by the business."
+    id: "frozen-whole", name: "Frozen Whole Chicken", category: "frozen", emoji: "🍗", featured: true, price: 6500, unit: "kg", minQty: 1,
+    description: "Sample frozen whole chicken, sold by weight.", note: "Final weight depends on the pack. Handling details are supplied by the business."
   },
   {
-    id: "frozen-portions", name: "Frozen Chicken Portions", category: "frozen", emoji: "🍖", price: 6000, min: 1,
-    desc: "Sample portions.", note: "Shown as unavailable in this demo."
+    id: "frozen-portions", name: "Frozen Chicken Portions", category: "frozen", emoji: "🍖", status: "out", price: 6000, unit: "kg", minQty: 1,
+    description: "Sample portions.", note: "Shown as unavailable in this demo."
   },
   {
-    id: "tomatoes", name: "Tomatoes", category: "produce", emoji: "🍅", featured: true, price: 35000, min: 1,
-    desc: "Sample freshly harvested tomatoes sold in bunches per basket.", note: "Basket sizes vary. Seasonal supply."
+    id: "tomatoes", name: "Tomatoes", category: "produce", emoji: "🍅", featured: true, price: 35000, unit: "basket", minQty: 1,
+    description: "Sample tomatoes sold by the basket.", note: "Basket sizes vary. Seasonal supply."
   },
   {
-    id: "pepper", name: "Pepper", category: "produce", emoji: "🌶️", price: 3000, min: 1, desc: "Sample pepper sold by the kilogram.",
-    note: "Seasonal supply."
+    id: "pepper", name: "Pepper", category: "produce", emoji: "🌶️", price: 3000, unit: "kg", minQty: 1,
+    description: "Sample pepper sold by the kilogram.", note: "Seasonal supply."
   },
   {
-    id: "onions", name: "Onions", category: "produce", emoji: "🧅", price: 2200, min: 1,
-    max: 25, desc: "Sample onions sold by the kilogram.", note: ""
+    id: "onions", name: "Onions", category: "produce", emoji: "🧅", price: 2200, unit: "kg", minQty: 1,
+    tiers: [{ quantity: 25, price: 2000 }], description: "Sample onions sold by the kilogram.", note: ""
   },
   {
-    id: "rice", name: "Rice", category: "grains", emoji: "🍚", price: 4000, unit: "kg", min: 1,
-    max: 50, desc: "Sample rice. Larger quantities have a lower per-kilogram price.", note: ""
+    id: "rice", name: "Rice Bowl", category: "grains", emoji: "🍚", featured: true, price: 4000, unit: "kg", minQty: 1,
+    tiers: [{ quantity: 50, price: 3700 }], description: "Sample rice. Larger quantities have a lower per-kilogram price.", note: ""
   },
-  { id: "beans", name: "Beans", category: "grains", emoji: "🫘", price: 3500, min: 1, desc: "Sample beans sold by the kilogram.", note: "" },
-  { id: "maize", name: "Maize", category: "grains", emoji: "🌽", price: 1800, min: 5, desc: "Sample maize.", note: "Minimum order 5 kg." },
-  { id: "garri", name: "Garri", category: "grains", emoji: "🥣", price: 2000, min: 1, desc: "Sample garri sold by the kilogram.", note: "" },
-  { id: "yam", name: "Yam", category: "tubers", emoji: "🍠", price: 4500, min: 1, desc: "Sample yam sold per tuber.", note: "Tuber sizes vary." },
-  { id: "cassava", name: "Cassava", category: "tubers", emoji: "🥔", price: 1500, min: 2, desc: "Sample cassava.", note: "Minimum order 2 kg." },
-  { id: "plantain", name: "Plantain", category: "fruits", emoji: "🍌", price: 3000, min: 1, desc: "Sample plantain sold per bunch.", note: "Bunch sizes vary." },
-  { id: "bulk-rice", name: "Rice, Bulk Sack", category: "bulk", emoji: "🌾", price: 190000, min: 1, desc: "Sample bulk sack for businesses.", note: "Sack weight confirmed by the business." },
+  {
+    id: "beans", name: "Beans", category: "grains", emoji: "🫘", price: 3500, unit: "kg", minQty: 1,
+    description: "Sample beans sold by the kilogram.", note: ""
+  },
+  {
+    id: "maize", name: "Maize", category: "grains", emoji: "🌽", price: 1800, unit: "kg", minQty: 5,
+    description: "Sample maize.", note: "MinQtyimum order 5 kg."
+  },
+  {
+    id: "garri", name: "Garri", category: "grains", emoji: "🥣", price: 2000, unit: "kg", minQty: 1,
+    description: "Sample garri sold by the kilogram.", note: ""
+  },
+  {
+    id: "yam,", name: "Yam", category: "tubers", emoji: "🍠", featured: true, price: 4500, unit: "tuber", minQty: 1,
+    description: "Sample yam sold per tuber.", note: "Tuber sizes vary."
+  },
+  {
+    id: "cassava", name: "Cassava", category: "tubers", emoji: "🥔", price: 1500, unit: "kg", minQty: 2,
+    description: "Sample cassava.", note: "MinQtyimum order 2 kg."
+  },
+  {
+    id: "plantain", name: "Plantain", category: "fruits", emoji: "🍌", price: 3000, unit: "bunch", minQty: 1,
+    description: "Sample plantain sold per bunch.", note: "Bunch sizes vary."
+  },
+  {
+    id: "bulk-rice", name: "Rice, Bulk Sack", category: "bulk", emoji: "🌾", price: 190000, unit: "sack", minQty: 1,
+    description: "Sample bulk sack for businesses.", note: "Sack weight confirmed by the business."
+  },
 ];
 
 const steps = [
@@ -99,13 +120,17 @@ const actions = {
   cart: () => panel(true),
   close: () => panel(false),
   menu: () => $("nav").classList.toggle("on"),
-  add: (el) => addToCart(el.dataset.id, product(el.dataset.id).min),
-  "add-product-page": (el) => addToCart(el.dataset.id, pq()),
-  buy: (el) => { addToCart(el.dataset.id, pq()); location.hash = "#/checkout"; },
-  pq: (el) => { const min = parseInt($("pq").dataset.min, 10); $("pq").textContent = Math.max(min, pq() + parseInt(el.dataset.d, 10)); },
-  inc: (el) => setQty(el.dataset.id, 1),
-  dec: (el) => setQty(el.dataset.id, -1),
-  del: (el) => removeFromCart(el.dataset.id),
+  addItem: (element) => {
+    const p = product(element.dataset.productId);
+    if (!p) toast("Product Not Found!");
+    addToCart(element.dataset.productId, p.minQty)
+  },
+  "add-product-page": (element) => addToCart(element.dataset.productId, pq()),
+  buy: (element) => { addToCart(element.dataset.id, pq()); location.hash = "#/checkout"; },
+  pq: (element) => { const min = parseInt($("pq").dataset.min, 10); $("pq").textContent = Math.max(min, pq() + parseInt(element.dataset.d, 10)); },
+  increase: (element) => setQty(element.dataset.id, 1),
+  decrease: (element) => setQty(element.dataset.id, -1),
+  removeItem: (element) => removeFromCart(element.dataset.id),
   "send-wa": () => sendOrder("wa"),
   "send-mail": () => sendOrder("mail"),
   "send-ws": sendEnquiry,
@@ -118,7 +143,7 @@ const order = [
   { id: "featured", label: "Featured", sortBy: (a, b) => Number(!!b.featured) - Number(!!a.featured) } // Sorting by featured products only
 ];
 
-const cart_key = "harvesthub-v2-cart";
+const cart_key = "your-harvesthub-cart";
 
 // status: in | out | order (sourced or prepared after ordering)
 // tiers: quantity-based prices, set per product. image: path or URL (emoji shows if empty)
@@ -179,7 +204,7 @@ function parseHTML(markup) {
 
 // Helpers
 
-function displayCount(count, items) { 
+function displayCount(count, items) {
   switch (items.length) {
     case 0: count.textContent = "No Results Found";
       break;
@@ -189,48 +214,44 @@ function displayCount(count, items) {
   };
 };
 
-function addEvent(element, count) { 
+function addEvent(element, count) {
   app.querySelector(element).addEventListener("input", () => {
     const matches = updateShop();
     displayCount(count, matches);
   });
 };
 
-function stock(p) {
-  const map = { in: ["in", "Available"], out: ["out", "Currently unavailable"], order: ["order", "Made to order"] };
-  return `<span class="st st--${ map[p.status][0] }">${ map[p.status][1] }</span>`;
-};
-
-function media(p) {
-  return p.image ? `<img src="${ p.image }" alt="${ p.name }" loading="lazy" />` :
-    `<span role="img" aria-label="${ p.name }">${ p.emoji }</span>`;
+function media(product) {
+  return product.image ? `<img src="${ product.img }" alt="${ product.name }" loading="lazy" />` :
+    `<span role="img" aria-label="${ product.name }">${ product.emoji }</span>`;
 };
 
 // Best matching quantity tier, or the base price.
 
-function unitPrice(p, quantity) {
-  const tier = (p.tiers || []).filter((t) => quantity >= t.quantity).sort((a, b) => b.quantity - a.quantity)[0];
-  return tier ? tier.price : p.price;
+function unitPrice(product, quantity) {
+  const tiers = (product.tiers || [])
+    .filter((tier) => quantity >= tier.quantity)
+    .sort((a, b) => b.quantity - a.quantity)[0];
+
+  return tiers ? tiers.price : product.price;
 };
 
 function lines() {
-  return cart.map((c) => {
-    const p = product(c.id);
-    if (!p) return null;
-    const price = unitPrice(product, c.quantity);
-    return { p, qty: c.quantity, price, total: price * c.quantity };
+  return cart.map((cart) => {
+    const p = product(cart.id);
+    if (!p) null;
+    const price = unitPrice(p, cart.quantity);
+    return { p, qty: cart.quantity, price, total: price * cart.quantity };
   }).filter(Boolean);
 };
 
 // Functions that allow cart operations
 
 function addToCart(id, quantity) {
-  const product = product(id);
+  const p = product(id);
   const entry = cart.find((cart) => cart.id === id);
   const next = (entry ? entry.quantity : 0) + quantity;
-  if (next < product.min) {
-    return toast(`Minimum order for ${ product.name } is ${ product.min } ${ product.unit }.`);
-  };
+  if (next < p.minQty) { return toast(`Minimum order for ${ p.name } is ${ p.minQty } ${ p.unit }.`) };
   entry ? entry.quantity = next : cart.push({ id, quantity: next })
   save(cart_key, cart);
   drawCart();
@@ -245,23 +266,23 @@ function removeFromCart(id) {
 };
 
 function setQty(id, delta) {
-  const entry = cart.find((c) => c.id === id);
+  const entry = cart.find((cart) => cart.id === id);
   if (!entry) return;
   const next = entry.quantity + delta;
   if (next < product(id).min) cart = cart.filter((c) => c.id !== id);
   else entry.quantity = next;
   save(cart_key, cart);
   drawCart();
-  if (route().page === "checkout") render();
+  if (router().page === "checkout") renderApp();
 };
 
 /* ---------- Order Messages ---------- */
 
-function feeFor(fulfilment, zoneId) {
+/*function feeFor(fulfilment, zoneId) {
   if (fulfilment === "Collection") return 0;
-  const zone = config.zones.find((z) => z.id === zoneId);
+  const zone = config.zones.find((zone) => zone.id === zoneId);
   return zone ? zone.fee : null;
-}
+};*/
 
 function orderText(c, fee) {
   const rows = lines().map((l) => `- ${ l.p.name }: ${ l.quantity } ${ l.p.unit } @ ${ naira(l.price) } = ${ naira(l.total) }`);
@@ -275,7 +296,7 @@ function orderText(c, fee) {
     "Final prices, stock and delivery are confirmed by HarvestHub.", "",
     `Notes: ${ c.notes || "None" }`,
   ].join("\n");
-}
+};
 
 /* ---------- Component Functions ---------- */
 
@@ -323,11 +344,11 @@ function toast(msg) {
 };
 
 function input({ ...input }) {
-  const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ? input.labelClass : "" }">
+  const field = parseHTML(`<label for="${ input.id }" ${ input.labelClass ? `class="${ input.labelClass }"` : "" }>
         ${ input.label ? input.label : "" }
         <span class="icon ${ input.iconClass ? input.iconClass : "" }" data-icon="${ input?.icon }"></span>
-        <input value="${ input.value ?? "" }" type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
-        ${ input.name ? `name="${ input.name }"` : "" } class="${ input?.className }"  ${ input.required ? "required" : "" } >
+        <input value="${ input.value ?? "" }" type="${ input.type ?? "text" }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
+        ${ input.name ? `name="${ input.name }"` : "" } class="${ input.className ?? "input" }"  ${ input.required ? "required" : "" } >
         ${ input?.required ? `<p class="error" id="error-${ input?.id }" aria-live="polite"></p>` : "" }
     </label>`);
 
@@ -386,7 +407,7 @@ function filterMenu(options, selectedId) {
       <li class="filter-option ${ isSelected ? "is-selected" : "" }">
           <button class="filter-btn" data-value="${ option.id }" 
           aria-pressed="${ isSelected }">${ option.name }</button>
-          <span class="icon check-icon" data-icon="${isSelected ? "check" : ""}"></span>
+          <span class="icon check-icon" data-icon="${ isSelected ? "check" : "" }"></span>
         </li>`}).join("") }
     </ul>
   </menu>`
@@ -402,7 +423,7 @@ function sortMenu(options, selectedSortId) {
         </button>
         <ul class="sort-options" id="sortOpts">
         ${ options.map(option => {
-          const isSelected = option.id === selectedSortId;
+    const isSelected = option.id === selectedSortId;
     return `<li class="sort-option">
               <button class="sort-btn" type="button" data-sort="${ option.id }"
               aria-pressed="${ isSelected }">
@@ -432,9 +453,9 @@ function productCard(product) {
                 </h3>
                 <span class="product-price">${ naira(product.price) }</span>
             </div>
-            <p class="product-desc">${ product.desc }</p>
+            <p class="product-desc">${ product.description }</p>
             <menu class="card-actions">
-                <button class="cart-btn" data-action="add" aria-label="Add to Cart">
+                <button class="cart-btn" data-product-id="${ product.id }" data-action="addItem" aria-label="Add to Cart">
                     <span class="icon cart-icon" data-icon="cartPlus"></span>
                 </button>
                 <a class="details-btn" href="#/product/${ product.id }">
@@ -447,35 +468,107 @@ function productCard(product) {
 };
 
 function panel(on) {
-  $("drawer").classList.toggle("on", on);
+  $("cart").classList.toggle("on", on);
   $("scrim").classList.toggle("on", on);
+};
+
+function cartItem(line) {
+  const item = parseHTML(`<article class="cart-item">
+<div class="item-header">
+    <a class="item-display" href="#/product/${ line.p.id }">
+      ${ media(line.p) }
+    </a>
+    <span class="item-category">${ line.p.category }</span>
+</div>
+<div class="item-body">
+    <div class="item-specs">
+        <h3 class="item-name">
+        ${ line.p.name }
+        <small class="item-unit">
+            per ${ line.p.unit } (${ naira(line.price) })
+        </small>
+        </h3>
+        <span class="item-price">
+            ${ naira(line.price) }
+        </span>
+    </div>
+    <menu class="item-actions">
+        <div class="q-counter">
+            <button class="q-count-btn" data-id="-1" data-action="decrease" aria-label="decrease quantity">
+                <span class="icon minus-icon" data-icon="minus"></span>
+            </button>
+            <span class="q-count">${ line.qty }</span>
+            <button class="q-count-btn" data-id="1" data-action="increase" aria-label="increase quantity">
+                <span class="icon plus-icon" data-icon="plus"></span>
+            </button>
+        </div>
+        <button class="remove-item-btn" data-action="removeItem" aria-label="remove item from cart">
+            <span class="icon delete-icon" data-icon="delete"></span>
+        </button>
+    </menu>
+</div>
+</article>`);
+  
+  initializeIcons(item);
+  return item;
+};
+
+function appCart() {
+  return `
+    <div class="cart-header">
+        <h2>
+            Your Cart
+            <span id="inCartCount" class="in-cart-count"></span>
+        </h2>
+        <button data-action="close" aria-label="Close your cart">
+            <span class="icon close-icon" data-icon="close"></span>
+        </button>
+    </div>
+    <div class="cart-content" id="cartContent"></div>
+    <div class="cart-footer" id="cartFooter">
+        <menu class="cart-actions">
+            <button class="co-btn">Checkout (${ naira(subtotal()) })</button>
+        </menu>
+    </div>`
 };
 
 function drawCart() {
   const ls = lines();
-  //$("cartCount").textContent = ls.reduce((n, l) => n + l.quantity, 0);
+  const cartContent = $("cartContent");
+  const count = ls.reduce((n, line) => n + line.qty, 0);
 
-  $("dBody").innerHTML = ls.length
-    ? ls.map((l) => `
-        <div class="item">
-          <strong>${ l.p.name }</strong><span>${ naira(l.total) }</span>
-          <small>${ naira(l.price) } per ${ l.p.unit }</small><span></span>
-          <div class="quantity"><button data-action="dec" data-id="${ l.p.id }" aria-label="Decrease">−</button><span>${ l.quantity }</span><button data-action="inc" data-id="${ l.p.id }" aria-label="Increase">+</button></div>
-          <button class="lnk" data-action="del" data-id="${ l.p.id }">Remove</button>
-        </div>`).join("")
-    : `<div class="empty">Your cart is empty.</div>`;
+  $("cartCount").textContent = count;
+  $("inCartCount").textContent = count;
 
-  $("dFoot").innerHTML = ls.length
-    ? `<div class="ln ln--t"><span>Subtotal</span><span>${ naira(subtotal()) }</span></div><p><small>Delivery is added at checkout.</small></p><a class="btn btn--forest" style="display:block;text-align:center" href="#/checkout" data-action="close">Checkout</a>`
-    : "";
-};
+  cartContent.innerHTML = ls.length
+    ? ls.map((line) => { return cartItem(line) }) :
+    parseHTML(`<div class="empty-cart">
+        <figure class="empty-img">
+          <img src="../../Assets/Illustrations/empty-cart.svg" alt="Empty Cart">
+        </figure>
+        <p>Your cart is empty.</p>
+      </div>
+    `);
 
-function field(id, label, type = "text", className = "") {
-  return `<div class="field ${ className }">
-    <label for="${ id }">${ label }</label>
-    <input id="${ id }" type="${ type }" />
-    <span class="error" id="error-${ id }"></span>
-  </div>`;
+  /*$("cartFooter").innerHTML = ls.length
+    ? `
+      <menu class="cart-actions">
+        <button class="co-btn">Checkout (${ naira(subtotal()) })</button>
+      </menu>
+    `
+    : "";*/
+}
+
+function counter(product) {
+  return `<menu class="counter">
+    <button data-action="pq" class="count-btn" data-id="-1" aria-label="Decrease quantity of ${product.name}">
+      <span class="icon minus-icon" data-icon="minus"></span>
+    </button>
+    <span id="pq" class="count" data-min="${ product.minQty }">${ product.minQty }</span>
+    <button data-action="pq" class="count-btn" data-id="1" aria-label="Increase quantity of ${product.name}">
+    <span class="icon plus-icon" data-icon="plus"></span>
+    </button>
+  </menu>`
 };
 
 /* ---------- Pages ---------- */
@@ -518,7 +611,7 @@ function home() {
     <div class="categories">
     ${ categories.filter(category => category.featured).map((category) => `
       <div class="category">
-          <a href="#/shop?category=${ category.id }" class="category-img ${ category.className }"> 
+          <a href="#/shop?category=${ category.id }" class="category-img" data-category="${ category.dataset }"> 
               <img class="category-display-img" src="${ category.img }" alt="">
           </a>
           <span class="category-name">${ category.name }</span>
@@ -586,7 +679,7 @@ function shop(params) {
           <input id="priceFilter" class="price-filter-input" type="number" min="0" placeholder="Max price (₦)" aria-label="Maximum price" />
         </label>
       </div>
-      <span class="results-count">${products.length} Items</span>
+      <span class="results-count">${ products.length } Items</span>
       <div class="product-grid results" id="results">
       ${ renderProducts(products) }
       </div>
@@ -614,24 +707,40 @@ function shop(params) {
 };
 
 function wholesale() {
-  return `
-    <section class="section wrapper">
+  const wsPage = parseHTML(`<section class="section wrapper">
       <h1>Bulk supply for businesses</h1>
-      <p>For restaurants, caterers, retailers and hotels. Tell us what you need and we will reply with a quotation. Quantity prices are agreed product by product.</p>
-      <form id="wsForm" class="box" novalidate>
-        <div class="two">
-          ${ field("wb", "Business name") }
-          ${ field("wc", "Contact person") }
-          ${ field("wp", "Phone number", "tel") }
-          ${ field("wl", "Delivery location") }
-          ${ field("wd", "Needed by (date)", "date") }
-          <div class="field full"><label for="wn">Products and quantities</label><textarea id="wn" rows="4" placeholder="Example: 200 kg rice, 40 broilers"></textarea><span class="error" id="e-wn"></span></div>
-        </div>
-        <button type="button" class="btn wa-btn" data-action="send-ws">Send enquiry on WhatsApp</button>
-        <!--<p class="note">Opening WhatsApp does not send the message until you press send. A quotation is not an order.</p>-->
+      <!--<p class="note">
+        For restaurants, caterers, retailers and hotels. Tell us what you need and we will reply with a quotation. 
+        Quantity prices are agreed product by product.
+      </p>-->
+      <form id="wsForm" class="form" novalidate>
+          <div class="form-container">
+              <div class="textarea">
+                  <textarea id="wn" rows="4" placeholder="Products you wish to purchase, and quantities. E.g. 200kg rice, 40 broilers"></textarea>
+                  <span class="error" id="error-wn"></span>
+              </div>
+          </div>
+          <button type="button" class="btn form-btn wa-btn" data-action="send-ws">
+            Submit
+            <span class="icon send-icon" data-icon="send"></span>
+          </button>
+          <!--<p class="note">Opening WhatsApp does not send the message until you press send. A quotation is not an order.</p>-->
       </form>
-    </section>`;
-}
+  </section>`);
+
+  const fields = wsPage.querySelector(".form-container");
+  if (!fields) throw new Error("Wholesale form is missing a form container");
+
+  fields.prepend(
+    input({ id: "wb", placeholder: "What's your business name?", icon: "store", labelClass: "input-field" }),
+    input({ id: "wc", icon: "phone", placeholder: "How do we contact you?", labelClass: "input-field" }),
+    input({ id: "wp", type: "tel", placeholder: "What do we use to contact you?", icon: "phone", labelClass: "input-field" }),
+    input({ id: "wl", placeholder: "Where do we deliver to?", icon: "location", labelClass: "input-field" }),
+    input({ id: "wd", type: "date", placeholder: "When do you need your order?", icon: "calendar", labelClass: "input-field" })
+  );
+
+  return wsPage;
+};
 
 function delivery() {
   return `
@@ -639,86 +748,97 @@ function delivery() {
       <h1>Delivery and collection</h1>
       <p>Delivery areas and fees are set by the business and shown at checkout.</p>
       ${ config.zones.map((zone) =>
-        `<div class="ln">
+    `<div class="location">
           <span>${ zone.name }<br />
             <small>Minimum order ${ naira(zone.minOrder) }. ${ zone.window }.</small>
           </span>
           <b>${ naira(zone.fee) }</b>
         </div>`).join("") }
-      <!--<div class="p">
+      <!--<p class="note">
         Livestock and frozen goods may need special arrangements, which are explained on each product. Outside these areas, send a WhatsApp enquiry for a quotation.
-      </div>-->
+      </p>-->
     </section>`;
 }
 
-function productPage(id) {
-  const p = product(id);
-  if (!p) return `<section class="section wrapper empty"><h1>Product not found</h1><a class="btn" href="#/shop">Back to shop</a></section>`;
-
-  const related = products.filter((x) => x.category === p.category && x.id !== p.id).slice(0, 4);
-  const tiers = p.tiers ? `<ul class="tiers">${ p.tiers.map((t) => `<li>${ t.quantity }+ ${ p.unit }: ${ naira(t.price) } per ${ p.unit }</li>`).join("") }</ul>` : "";
-  const ask = waLink(`Hello HarvestHub, I have a question about: ${ p.name }`);
-
-  return `
-    <section class="section wrapper">
-      <div class="product-page">
-        <div class="product-page-img">${ media(p) }</div>
-        <div>
-          <h1>${ p.name }</h1>
-          <div class="price">${ naira(p.price) } <small>per ${ p.unit }</small></div>
-          ${ tiers }${ stock(p) }
-          <p>${ p.desc }</p>
-          <p>Minimum order: ${ p.min } ${ p.unit }</p>
-          <div class="quantity"><button data-action="pq" data-d="-1" aria-label="Decrease">−</button><span id="pq" data-min="${ p.min }">${ p.min }</span><button data-action="pq" data-d="1" aria-label="Increase">+</button></div>
-          <div class="row">
-            <button class="btn btn-main" data-action="add-product-page" data-id="${ p.id }" ${ p.status === "out" ? "disabled" : "" }>Add to cart</button>
-            <button class="btn" data-action="buy" data-id="${ p.id }" ${ p.status === "out" ? "disabled" : "" }>Buy now</button>
-            <a class="btn wa-btn" href="${ ask }" target="_blank" rel="noopener">Ask on WhatsApp</a>
-          </div>
-          ${ p.note ? `<div class="note">${ p.note }</div>` : "" }
-        </div>
-      </div>
-    </section>
-    ${ related.length ? `<section class="section wrapper"><h2>More in this section</h2><div class="grid">${ related.map(card).join("") }</div></section>` : "" }`;
-};
-
 function checkout() {
   const ls = lines();
-  if (!ls.length) return `<section class="section wrapper empty"><h1>Your cart is empty</h1><a class="btn" href="#/shop">Browse products</a></section>`;
+  if (!ls.length) return`
+  <section class="section wrapper empty">
+    <h1>Your cart is empty</h1>
+    <a class="btn" href="#/shop">Browse products</a>
+  </section>`;
 
-  const zones = config.zones.map((z) => `<option value="${ z.id }">${ z.name } (${ naira(z.fee) })</option>`).join("");
+  const zones = config.zones.map((zone) => `
+  <li>
+    <button class="zone-select-btn">
+    ${ zone.name } (${ naira(zone.fee) })
+    </button>
+  </li>`).join("");
   const sub = subtotal();
 
-  return `
+  const coPage = parseHTML(`
     <section class="section wrapper">
       <h1>Checkout</h1>
-      <div class="co">
+      <div class="checkout">
         <form id="coForm" novalidate>
-          <div class="two">
-            ${ field("name", "Full name", "text", "full") }
-            ${ field("phone", "Phone number", "tel") }
-            ${ field("email", "Email (optional)", "email") }
-            <div class="fld"><label for="ful">Fulfilment</label><select id="ful"><option>Delivery</option>${ config.collectionEnabled ? "<option>Collection</option>" : "" }</select></div>
-            <div class="fld"><label for="zone">Delivery area</label><select id="zone">${ zones }</select></div>
-            ${ field("city", "City or town") }
-            ${ field("state", "State") }
-            ${ field("address", "Delivery address", "text", "full") }
-            <div class="fld full"><label for="notes">Notes (optional)</label><textarea id="notes" rows="3"></textarea></div>
+          <div class="form-container">
+            <!--<div class="dropdown">
+              <button type="button" class="picker">
+                Delivery area
+                <span class="icon chevron-icon" data-icon="arrowDown"></span>
+              </button>
+              <ul id="zone" class="drop-box">${ zones }</ul>
+            </div>-->
+            <div class="textarea full-length">
+              <textarea id="notes" rows="3" placeholder="Any notes? (optional)"></textarea>
+            </div>
           </div>
-          <div class="note">Sending on WhatsApp or email submits an order request only. HarvestHub confirms stock, final price, payment and delivery with you. Online payment arrives with the backend stage.</div>
-          <div class="row">
-            <button type="button" class="btn btn--wa" data-action="send-wa">Send order on WhatsApp</button>
-            <button type="button" class="btn btn--forest" data-action="send-mail">Send order by email</button>
-          </div>
+          <menu class="checkout-actions">
+            <button type="button" class="btn btn-main" data-action="send-mail">
+              Submit order
+              <span class="icon email-icon" data-icon="email"></span>
+            </button>
+            <button type="button" class="btn wa-btn" data-action="send-wa">
+              Submit order
+              <span class="icon wa-icon" data-icon="whatsapp"></span>
+            </button>
+          </menu>
+          <!--<p class="note">
+            Sending on WhatsApp or email submits an order request only. HarvestHub confirms stock, final price, payment and delivery with you. Online payment arrives with the backend stage.
+          </p>-->
         </form>
-        <aside class="box">
+        <aside class="form">
           <h3>Order summary</h3>
-          ${ ls.map((l) => `<div class="ln"><span>${ l.p.name } (${ l.quantity } ${ l.p.unit })</span><span>${ naira(l.total) }</span></div>`).join("") }
-          <div class="ln"><span>Subtotal</span><span>${ naira(sub) }</span></div>
-          <div class="ln ln--t"><span>Delivery fee and total</span><span>shown in your message</span></div>
+          ${ ls.map((l) => `
+          <div class="ln">
+            <span>${ l.p.name } (${ l.qty } ${ l.p.unit })</span>
+            <span>${ naira(l.total) }</span>
+          </div>`).join("") }
+          <div class="location">
+            <span>Subtotal</span>
+            <span>${ naira(sub) }</span>
+          </div>
+          <div class="location location-t">
+            <span>Delivery fee and total</span>
+            <span>shown in your message</span>
+          </div>
         </aside>
       </div>
-    </section>`;
+    </section>`);
+
+  const coFields = coPage.querySelector(".form-container");
+  if (!coFields) throw new Error("Checkout page must have fields!");
+
+  coFields.prepend(
+    input({ id: "name", icon: "user", placeholder: "What's your full name", labelClass: "input-field full-length" }),
+    input({ id: "phone", icon: "phone", placeholder: "Your phone number", type: "tel", labelClass: "input-field" }),
+    input({ id: "email", icon: "mail", placeholder: "Your e-mail address (optional)", type: "email", labelClass: "input-field" })
+  );
+  coFields.querySelector(".textarea").before(
+    input({ id: "address", icon: "location", iconClass: "location-icon",placeholder: "Where do we deliver to?", labelClass: "input-field" })
+  );
+
+  return coPage;
 };
 
 function info(title) {
@@ -730,17 +850,93 @@ function info(title) {
   </section>`;
 };
 
+function productPage(id) {
+  const p = product(id);
+  if (!p) return `
+  <div class="empty-state">
+  <figure class="empty-img">
+    <img src="../../Assets/Illustrations/no-results.svg" alt="No Results Found"/>
+  </figure>
+    <h3 class="empty-heading">Product Not Found</h3>
+    <a href="#/shop" class="back-to-shop-btn">
+        Back to Shop
+        <span class="icon attachment-icon" data-icon="attachment"></span>
+    </a>
+  </div>`;
+
+  const related = products.filter((x) => x.category === p.category && x.id !== p.id).slice(0, 5);
+  const ask = waLink(`Hello HarvestHub, I have a question about: ${ p.name }`);
+
+  return `
+    <section class="section wrapper">
+      <div class="product-page">
+        <button class="add-to-wishlist-btn">
+          <span class="icon wishlist-icon" data-icon="heart"></span>
+        </button>
+      
+        <div class="product-page-img">${ media(p) }</div>
+        <div class="pdp-content">
+        <div class="pdp-heading">
+          <h1 class="pdp-name">${ p.name }</h1>
+          <p class="pdp-price">
+            ${ naira(p.price) } 
+            <small class="pdp-unit">per ${ p.unit }</small>
+          </p>
+        </div>
+          <div class="pdp-desc">
+            <h4 class="desc-heading">Description</h4>
+            <p class="desc">${ p.description }</p>
+        </div>
+          <menu class="pdp-actions">
+            <button class="btn btn-main" data-action="buy" data-id="${ p.id }">Buy now</button>
+            <button class="btn add-to-cart-btn" data-action="add-product-page" data-id="${ p.id }" >
+            Add to cart
+            <span class="icon cart-icon" data-icon="cartPlus"></span>
+            </button>
+            ${ counter(p) }
+            <!--<a class="btn wa-btn enquire-btn" href="${ ask }" target="_blank" rel="noopener" aria-label="Enquire about ${ p.name }">
+              <span class="icon wa-icon" data-icon="whatsapp"></span>
+            </a>-->
+          </menu>
+          <!--${ p.note ? `<p class="note">${ p.note }</p>` : "" }-->
+        </div>
+      </div>
+    </section>
+    ${ related.length ?
+      `<section class="others">
+      <div class="section-header">
+      <h2 class="primary-header-text">More Like This Product</h2>
+      <p class="secondary-header-text">
+        <span class="icon clover-icon" data-icon="clover"></span>
+        Explore similar items you might also like
+      </p>
+      </div>
+        <div class="product-grid">${ related.map(productCard).join("") }</div>
+      </section>` : "" }`;
+};
+
 /* --------- Rendering Functions ----------- */
 
 function renderApp() {
   const { page, id, params } = router();
-  const pages = { home, product: () => productPage(id), checkout, wholesale, delivery, about: () => info("About HarvestHub") };
 
-  page === "shop" ? shop(params) : app.innerHTML = (pages[page] || home)();
+  const pages = {
+    home, product: () => productPage(id),
+    checkout, wholesale, delivery, about: () => info("About HarvestHub")
+  };
+
+  const view = page === "shop"
+    ? shop(params)
+    : (pages[page] || home)();
+
+  if (typeof view === "string") { app.innerHTML = view }
+  else if (view instanceof Node) { app.replaceChildren(view) }
+  else { throw new TypeError("A page must return an HTML string or a DOM node.") }
 
   //$("nav").classList.remove("on");
   window.scrollTo(0, 0);
-};
+  initializeIcons(document);
+}
 
 function renderProducts(products) {
   return products.map((product) => {
@@ -786,12 +982,16 @@ function updateShop() {
   empty = matches.length === 0;
 
   if (empty) {
-    console.log("No Matches");
-    /*const noRes = parseHTML(`<div class="empty">Nothing matches. Try clearing a filter.</div>`);
-    results.append(noRes);*/
-  } else {
-    console.log(matches);
-  };
+    const noRes = parseHTML(`<div class="empty-state">
+      <figure class="empty-img">
+        <img src="../../Assets/Illustrations/no-results.svg" alt="No Results Found" />
+      </figure>
+      <p class="empty-desc">No Matching Products. Try clearing a filter</p>
+    </div>`);
+    results.append(noRes);
+    results.classList.add("empty")
+  } else { results.classList.remove("empty") };
+
   return matches;
 };
 
@@ -852,14 +1052,13 @@ function sendEnquiry() {
 
 function init() {
   query(".app-header").innerHTML = navbar(navdata);
+  query(".cart").innerHTML = appCart();
   $("wa").href = waLink("Hello HarvestHub, I would like to place an order.");
   $("footAddr").textContent = config.address;
   $("footCategorys").innerHTML = categories.slice(0, 6).map((c) => `<a href="#/shop?category=${ c.id }">${ c.name }</a>`).join("");
   $("footContact").innerHTML = `<a href="${ waLink("Hello HarvestHub") }" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:${ config.email }">${ config.email }</a><span>${ config.phone }</span>`;
-  //drawCart();
+  drawCart();
   renderApp();
-  initializeIcons(document);
 };
-
 
 init();

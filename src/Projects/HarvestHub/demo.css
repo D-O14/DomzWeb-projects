@@ -9,6 +9,7 @@
     --terra: hsl(17, 64%, 47%);
     --line: hsl(41, 32%, 80%);
     --radius: 8px;
+    --brdr-clr: hsl(41, 32%, 80%);
 }
 
 * {
@@ -41,39 +42,219 @@ img {
     aspect-ratio: 16/9;
 }
 
-button {
-    border: none;
+svg {
+    display: inline;
+    vertical-align: middle;
+    transform: translate(0);
+}
+
+.cart {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    display: flex;
+    position: fixed;
+    width: min(450px, 100%);
+    background: var(--oat);
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform .25s;
+    border-left: 1px solid var(--brdr-clr);
+}
+
+.cart-header {
+    display: flex;
+    padding: 1em 1.12em;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--brdr-clr);
+}
+
+.cart-header h2 {
+    gap: .5em;
+    margin: 0;
+    font-size: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.cart-header button {
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    font-weight: 600;
+    background: none;
+}
+
+.cart-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 18px;
+}
+
+.cart-footer {
+    overflow: hidden;
+    border-top: 1px solid var(--brdr-clr);
+}
+
+.cart.on {
+    transform: none;
+}
+
+.in-cart-count {
+    top: 20px;
+    left: 115px;
+    width: 14px;
+    height: 14px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--paper);
+    position: absolute;
+    text-align: center;
+    background: var(--terra);
+    border-radius: var(--radius);
+}
+
+.co-btn {
+    width: 100%;
+    height: 60px;
     font-size: 1rem;
     font-weight: 600;
     padding: .5em 1em;
-}
-
-.search-field {
-    gap: 1em;
-    width: 400px;
-    height: 40px;
-    display: flex;
-    overflow: hidden;
-    position: relative;
-    padding: .5em 1em;
-    align-items: center;
-    border-radius: .5rem;
-    padding-block: 0;
-    padding-inline: .05em;
-    background: hsl(from var(--paper) h calc(s - 50) calc(l - 30) / .25);
-}
-
-.search-field .plant-icon {
     color: var(--oat);
-    padding: .25em .75em;
-    background: var(--botanic);
+    background: var(--forest);
+    border: 1px solid transparent;
+
+    &:hover {
+        background: hsl(from var(--forest) h s calc(l - 4));
+    }
 }
 
-.searchbar {
-    flex-grow: 1;
+.close-icon svg {
+    width: 18px;
+    height: 18px;
+}
+
+.cart-item {
+    display: grid;
+    padding-block: .5em 1em;
+    position: relative;
+    grid-template-columns: auto 1fr;
+    border-bottom: 1px dashed var(--brdr-clr);
+}
+
+.item-body {
     width: 100%;
-    border: none;
-    outline: none;
+    display: flex;
+    padding: .5em;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-specs {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.item-name {
+    text-wrap: nowrap;
+    font-size: 1rem;
+    display: inline-flex;
+    flex-direction: column;
+    margin-bottom: 8px;
+}
+
+.item-price {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 10px;
+    letter-spacing: .05em;
+}
+
+.item-category {
+    top: 10px;
+    left: 105px;
+    font-size: 8px;
+    font-weight: 600;
+    padding: 4px 8px;
+    position: absolute;
+    border-radius: 5em;
+    width: fit-content;
+    color: var(--forest);
+    text-transform: uppercase;
+    border: 1px solid var(--forest);
+}
+
+.item-display {
+    display: grid;
+    width: 100px;
+    height: 100px;
+    font-size: 2rem;
+    place-items: center;
+    position: relative;
+    border-radius: .15em;
+    background: hsl(44, 43%, 85%);
+}
+
+.item-actions {
+    gap: 1em;
+    display: flex;
+    align-items: center;
+    padding-right: 1em;
+    justify-content: flex-start;
+}
+
+.item-unit {
+    font-size: 12px;
+    font-weight: 400;
+    color: hsl(100, 5%, 42%);
+}
+
+.q-counter {
+    flex: 1;
+    gap: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    border-radius: .5rem;
+    background: var(--terra);
+}
+
+.q-count-btn {
+    width: 100%;
+    color: var(--oat);
     background: none;
-    caret-color: var(--botanic);
+    padding: .4em .5em;
+    border-radius: 5rem;
+    background: var(--terra);
+    border: 1px solid transparent;
+
+    & svg {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.q-count {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--oat);
+    border-radius: .5rem;
+    padding: .25em .75em;
+}
+
+.remove-item-btn {
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--terra);
+
+    & svg {
+        width: 20px;
+        height: 20px;
+    }
 }

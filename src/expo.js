@@ -121,6 +121,38 @@ const newBtn = {
     },
 };
 
+function textArea({ ...textarea }) {
+    return `
+  <textarea ${ textarea.className ? `class="${ textarea.className }"` : "" } ${ textarea.id ? `id="${ textarea.id }"` : "" } 
+  ${ textarea.rows ? `rows="${ textarea.rows }"` : "" }${ textarea.columns ? `columns="${ textarea.columns }"` : "" } 
+  ${ textarea.placeholder ? `placeholder="${ textarea.placeholder }"` : "" }></textarea>
+  <!--<span class="char-count" id="charCount"></span>-->`
+};
+
+function input({ ...input }) {
+    const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ?? "" }">
+          ${ input.label ?? "" }
+          <span class="icon ${ input.iconClass ? input.iconClass : "" }" data-icon="${ input?.icon }"></span>
+          <input ${ input.value ? `value="${ input.value }"` : "" } type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
+          ${ input.name ? `name="${ input.name }"` : "" } class="${ input?.className }"  ${ input.required ? "required" : "" } >
+          ${ input?.required ? `<p class="error" id="error-${ input?.id }" aria-live="polite"></p>` : "" }
+      </label>`);
+
+    const inputElement = field.querySelector("input");
+
+    /*if (input.events) {
+        const events = input?.events;
+        inputElement.addEventListener("blur", (event) => {
+            if (events.blurred(event)) { events?.blurred(event) }
+        });
+        inputElement.addEventListener("focus", (event) => { events?.focused(event) });
+        inputElement.addEventListener("input", (event) => { events?.update(event) });
+        inputElement.addEventListener("keydown", (event) => { events?.keydown(event) });
+    };*/
+
+    return field;
+};
+
 //const button = newBtn.render(create("button"));
 //renderApp(Button());
 initializeIcons(document)
