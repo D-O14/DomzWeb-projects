@@ -69,8 +69,56 @@ const products = [
     },
 ];
 
+const actions = {
+    openCart: (element) => { element.nextElementSibling.classList.toggle("on") },
+    closeCart: (element) => { element.parentElement.parentElement.classList.remove("on") },
+};
+
+document.addEventListener("click", (e) => {
+    const element = e.target.closest("[data-action]");
+    if (element && actions[element.dataset.action]) { actions[element.dataset.action](element) };
+});
+
+const naira = (num) => "₦" + num.toLocaleString("en-NG");
+
 function create(element) { return document.createElement(element) };
 function query(selector) { return document.querySelector(selector) };
+
+
+function navbar() {
+  return `<nav class="header-nav">
+    <div class="row">
+      <a href="#/" class="logo">
+        <span class="icon plant-icon" data-icon="${ config.logo }"></span>
+        ${ config.brandName }
+      </a>
+      <ul class="navbar">
+      ${ config.links.map(navlink => {
+    return `
+        <li class="${ navlink.className ? navlink.className : "" }">
+          <a href="${ navlink.path }" class="nav-item">${ navlink.anchor }</a>
+        </li>`
+  }).join("") }
+      </ul>
+    </div>
+    <div class="row">
+      <label for="searchbar" class="search-field" id="searchField">
+        <span class="icon plant-icon" data-icon="${ config.logo }"></span>
+        <input type="search" name="searched_item" placeholder="Search the market..." class="searchbar">
+      </label>
+      <menu class="nav-menu">
+        <button class="open-cart-btn" data-action="openCart" aria-label="Open Cart">
+          <span class="icon cart-icon" data-icon="shoppingCart"></span>
+          <span class="cart-count" id="cartCount"></span>
+        </button>
+      </menu>
+    </div>
+    <div class="nav-toggle" id="nav-toggle" part="toggle">
+      <span class="icon bar-icon" data-icon="menubar"></span>
+      <span class="icon close-icon" data-icon="close"></span>
+    </div>
+  </nav>`
+};
 
 function parseHTML(markup) {
     const template = create("template");
@@ -89,7 +137,7 @@ function input({ ...input }) {
 
     const inputElement = field.querySelector("input");
 
-    /*if (input.events) {
+    if (input.events) {
         const events = input?.events;
         inputElement.addEventListener("blur", (event) => {
             if (events.blurred(event)) { events?.blurred(event) }
@@ -97,7 +145,7 @@ function input({ ...input }) {
         inputElement.addEventListener("focus", (event) => { events?.focused(event) });
         inputElement.addEventListener("input", (event) => { events?.update(event) });
         inputElement.addEventListener("keydown", (event) => { events?.keydown(event) });
-    };*/
+    };
 
     return field;
 };
@@ -148,24 +196,26 @@ function searchItems({ input, items, property }) {
         return typeof field && field.includes(query);
     });
     return searched;
-}; 
+};
 
-const naira = (num) => "₦" + num.toLocaleString("en-NG");
-
-function cartItem(product) { 
+function cartItem(product) {
     return `<article class="cart-item">
 <div class="item-header">
     <a class="item-display">
-        <span class="item-img" role="img" aria-label="${product.name}">${product.emoji}</span>
+        <span class="item-img" role="img" aria-label="${ product.name }">${ product.emoji }</span>
     </a>
     <span class="item-category">${ product.category }</span>
+    <label for="select">
+        <span class="item-select"></span>
+        <input type="checkbox" class="select" id="select">
+    </label>
 </div>
 <div class="item-body">
     <div class="item-specs">
         <h3 class="item-name">
         ${ product.name }
         <small class="item-unit">
-            per ${product.unit } (${ naira(product.price)})
+            per ${ product.unit } (${ naira(product.price) })
         </small>
         </h3>
         <span class="item-price">
@@ -190,32 +240,36 @@ function cartItem(product) {
 </article>`
 };
 
-function cart() { 
+function cart() {
+    const inCart = products.slice(2, 8);
     return `<aside class="cart on">
     <div class="cart-header">
         <h2>
             Your Cart
-            <small id="in-cartCount" class="in-cart-count">0</small>
+            <small id="in-cartCount" class="in-cart-count">${ inCart.length }</small>
         </h2>
-        <button data-action="close" aria-label="Close your cart">
+        <button data-action="closeCart" aria-label="Close your cart">
             <span class="icon close-icon" data-icon="close"></span>
         </button>
     </div>
     <div class="cart-content">
-    ${products.slice(2, 7).map(product => cartItem(product)).join("")}
+    ${ inCart.map(product => cartItem(product)).join("") }
     </div>
     <div class="cart-footer">
         <menu class="cart-actions">
-            <button class="co-btn">Checkout (${naira(85000)})</button>
+            <button class="co-btn">Checkout (${ naira(85000) })</button>
         </menu>
     </div>
 </aside>`
 };
 
+function toast({ ...notif }) {
+    const toast = parseHTML(``);
+    toast.textContent = notif.msg;
+    toast.classList.add("notify");
+    clearTimeout(timer);
+    timer = setTimeout(() => toast.classList.remove("notify"), 2000);
+};
+
 query("main").append(parseHTML(cart()));
-
-query(".cart-btn").addEventListener("click", () => { 
-    query(".cart").classList.toggle("on");
-});
-
 initializeIcons(document);

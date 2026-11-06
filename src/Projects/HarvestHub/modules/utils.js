@@ -1,5 +1,7 @@
 import { config } from "./config.js";
 
+function $(id) { return document.getElementById(id) };
+
 export const helpers = {
     filled: (v) => v.length > 0,
     v: (id) => $(id).value.trim(),

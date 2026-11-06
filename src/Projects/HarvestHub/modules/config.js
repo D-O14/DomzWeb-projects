@@ -110,10 +110,10 @@ export const config = {
     ],
 
     order: [
+        { id: "featured", label: "Featured", sortBy: (a, b) => Number(!!b.featured) - Number(!!a.featured) },
+        { id: "name", label: "Name: A-Z", sortBy: (a, b) => a.name.localeCompare(b.name) },
         { id: "high", label: "Price: High to Low", sortBy: (a, b) => b.price - a.price },
         { id: "low", label: "Price: Low to High", sortBy: (a, b) => a.price - b.price },
-        { id: "name", label: "Name: A-Z", sortBy: (a, b) => a.name.localeCompare(b.name) },
-        { id: "featured", label: "Featured", sortBy: (a, b) => Number(!!b.featured) - Number(!!a.featured) }
     ],
 
 };

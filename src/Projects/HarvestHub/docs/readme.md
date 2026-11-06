@@ -19,23 +19,29 @@ A diverse agricultural supermarket that provides livestock, poultry, frozen food
 - Product details are revealed in each product's display page (via button or img on product card)
 
 # To-do:
-- [] Introduce state
 - [] Improve toast component
-- [] Resolve shop rendering issue
 - [] Resolve subtotal update issues
 - [] Make category slider functional
-- [] Resolve category dropdown issue
+- [] Make navbar responsive on mobile
 - [] Enable active indication in navbar
-- [] Resolve sorting options height issue
-- [] Add Google Maps link to address link in footer
+- [] Add Google Maps link to address link in footer (optional)
 
-    Optional features:
+    # Completed:
+    - [✔️] ~~Introduce state~~
+    - [✔️] ~~Resolve toast issue~~
+    - [✔️] ~~Resolve shop rendering issue~~
+    - [✔️] ~~Resolve category dropdown issue~~
+    - [✔️] ~~Resolve sorting options height issue~~
+
+    # Optional features:
     - [] Add wishlist UI
     - [] Improve cart empty state
     - [] Improve order summary UI
     - [] Enable selection in cart UI
+    - [] Implement stripe payment gateway
     - [] Add cancel order to checkout page
     - [] Add image slider to product display page
+    - [] Update URL according to shop controls' value
     - [] Add navigation to next or previous product in pdp
     - [] Add confirmation dialog in removing item from cart
 

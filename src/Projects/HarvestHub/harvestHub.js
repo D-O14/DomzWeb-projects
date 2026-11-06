@@ -1,11 +1,11 @@
 import { config } from "./modules/config.js";
 import { helpers } from "./modules/utils.js";
-import {read, save} from "./modules/database.js"
-import { initializeIcons } from "./modules/icons.js";
+import { read, save } from "./modules/database.js"
+import { initializeIcons, removeIcon } from "./modules/icons.js";
 
 /* HarvestHub v1 (front-end stage, demo data) */
 
-/* ---------- Data ---------- */
+/* ---------- Actions ---------- */
 
 const actions = {
   openCart: () => panel(true),
@@ -30,38 +30,26 @@ const actions = {
   "send-ws": sendEnquiry,
 };
 
-
-// status: in | out | order (sourced or prepared after ordering)
-// tiers: quantity-based prices, set per product. image: path or URL (emoji shows if empty)
-
 /* ---------- State & Variables ---------- */
 
 let cart = read(config.cart_key, []);
 let selectedCategory = "all";
 let selectedSort = "featured";
 let timer;
-let isOpen;
 let empty;
 
-// Events
+/* ---------- Events ---------- */
 
 window.addEventListener("hashchange", renderApp);
 
 document.addEventListener("click", (e) => {
   const element = e.target.closest("[data-action]");
-  if (element && actions[element.dataset.action]) actions[element.dataset.action](element);
+  if (element && actions[element.dataset.action]) { actions[element.dataset.action](element) };
 });
 
-/*$("searchbar").addEventListener("submit", (e) => {
-  e.preventDefault();
-  location.hash = `#/shop?q=${ encodeURIComponent($("findInput").value.trim()) }`;
-});*/
-
-// Constants
+/* ---------- Constants ---------- */
 
 const app = $("app");
-
-// Functions to read and save from/in localstorage
 
 // Functions to get a reference to HTML elements, and perform DOM operations
 
@@ -86,11 +74,21 @@ function displayCount(count, items) {
   };
 };
 
-function addEvent(element, count) {
-  app.querySelector(element).addEventListener("input", () => {
+function addEvent(element, count, urlType) {
+  element.addEventListener("input", () => {
     const matches = updateShop();
     displayCount(count, matches);
+    updateHashParam(urlType, element.value);
   });
+};
+
+function dropOpen(element, dropdown) {
+  element.addEventListener("click", () => { dropdown.classList.toggle("open") });
+};
+
+function panel(on) {
+  $("cart").classList.toggle("on", on);
+  $("backdrop").classList.toggle("on", on);
 };
 
 const subtotal = () => lines().reduce((sum, l) => sum + l.total, 0);
@@ -150,12 +148,6 @@ function setQty(id, delta) {
 
 /* ---------- Order Messages ---------- */
 
-/*function feeFor(fulfilment, zoneId) {
-  if (fulfilment === "Collection") return 0;
-  const zone = config.zones.find((zone) => zone.id === zoneId);
-  return zone ? zone.fee : null;
-};*/
-
 function orderText(c, fee) {
   const rows = lines().map((l) => `- ${ l.p.name }: ${ l.quantity } ${ l.p.unit } @ ${ helpers.naira(l.price) } = ${ helpers.naira(l.total) }`);
   const sub = subtotal();
@@ -207,18 +199,18 @@ function navbar() {
   </nav>`
 };
 
-function footer() { 
+function footer() {
   return `
   <div class="wrapper footer-grid">
   <div>
-    <div class="mark mark-l">HarvestHub</div>
-    <p id="footAddr">${config.address}</p>
+    <div>HarvestHub</div>
+    <p id="footAddr">${ config.address }</p>
   </div>
   <div>
     <h4>Shop</h4>
     <div id="footCategorys">
-      ${config.categories.slice(0, 6).map((c) => {
-        return `<a href="#/shop?category=${ c.id }">
+      ${ config.categories.slice(0, 6).map((c) => {
+    return `<a href="#/shop?category=${ c.id }">
           ${ c.name }
         </a>`}).join("") }
     </div>
@@ -246,9 +238,9 @@ function footer() {
 function toast(msg) {
   const toast = $("toast");
   toast.textContent = msg;
-  toast.classList.add("on");
+  toast.classList.add("notify");
   clearTimeout(timer);
-  timer = setTimeout(() => toast.classList.remove("notify"), 2300);
+  timer = setTimeout(() => toast.classList.remove("notify"), 2000);
 };
 
 function input({ ...input }) {
@@ -272,7 +264,7 @@ function input({ ...input }) {
 };
 
 function searchControl(params) {
-  selectedCategory = params.get("category");
+  selectedCategory = params.get("category") || "all";
   const wrapper = parseHTML(`<div class="search-filter">
       <div class="filter">
           <button class="toggle-filter-btn" data-action="filter" aria-label="activate filter menu">
@@ -293,15 +285,6 @@ function searchControl(params) {
     //events: { update: updateShop },
   }));
 
-  wrapper.querySelector(".filter-box").addEventListener("click", event => {
-    const button = event.target.closest("[data-value]");
-    if (!button) return;
-    selectedCategory = button.dataset.value;
-    console.log(selectedCategory);
-    console.log(button.ariaPressed);
-    updateShop();
-  });
-
   return wrapper;
 };
 
@@ -315,7 +298,7 @@ function filterMenu(options, selectedId) {
       <li class="filter-option ${ isSelected ? "is-selected" : "" }">
           <button class="filter-btn" data-value="${ option.id }" 
           aria-pressed="${ isSelected }">${ option.name }</button>
-          <span class="icon check-icon" data-icon="${ isSelected ? "check" : "" }"></span>
+          <span class="icon check-icon" data-icon="${ isSelected ? "tick" : "" }"></span>
         </li>`}).join("") }
     </ul>
   </menu>`
@@ -332,11 +315,12 @@ function sortMenu(options, selectedSortId) {
         <ul class="sort-options" id="sortOpts">
         ${ options.map(option => {
     const isSelected = option.id === selectedSortId;
-    return `<li class="sort-option">
+    return `<li class="sort-option ${ isSelected ? "is-selected" : "" }">
               <button class="sort-btn" type="button" data-sort="${ option.id }"
               aria-pressed="${ isSelected }">
                 ${ option.label }
               </button>
+              <span class="icon check-icon" data-icon="${ isSelected ? "tick" : "" }"></span>
             </li>`}).join("") }
         </ul>
     </menu>`;
@@ -375,11 +359,6 @@ function productCard(product) {
     </article>`;
 };
 
-function panel(on) {
-  $("cart").classList.toggle("on", on);
-  $("backdrop").classList.toggle("on", on);
-};
-
 function cartItem(line) {
   return `<article class="cart-item">
 <div class="item-header">
@@ -397,7 +376,7 @@ function cartItem(line) {
         </small>
         </h3>
         <span class="item-price">
-            ${ helpers.naira(line.price) }
+            ${ helpers.naira(line.p.price) }
         </span>
     </div>
     <menu class="item-actions">
@@ -410,7 +389,7 @@ function cartItem(line) {
                 <span class="icon plus-icon" data-icon="plus"></span>
             </button>
         </div>
-        <button class="remove-item-btn" data-product-id="${line.p.id}" data-action="removeItem" aria-label="remove item from cart">
+        <button class="remove-item-btn" data-product-id="${ line.p.id }" data-action="removeItem" aria-label="remove item from cart">
             <span class="icon delete-icon" data-icon="delete"></span>
         </button>
     </menu>
@@ -435,25 +414,25 @@ function appCart() {
 
 function drawCart() {
   const ls = lines();
-  const count = ls.reduce((n, line) => n + line.qty, 0);
+  const count = ls.reduce((num, line) => num + line.qty, 0);
 
   $("cartCount").textContent = count;
   $("inCartCount").textContent = count;
 
   $("cartContent").innerHTML = ls.length
-    ? ls.map((line) => { return cartItem(line) }).join("") :
-    parseHTML(`<div class="empty-cart">
+    ? ls.map((line) => cartItem(line)).join("") :
+    `<div class="empty-cart">
         <figure class="empty-img">
           <img src="./assets/illustrations/empty-cart.svg" alt="Empty Cart">
         </figure>
         <p>Your cart is empty.</p>
       </div>
-    `);
+    `;
 
-  $("cartFooter").innerHTML = ls.length ? `
-  <menu class="cart-actions">
-    <a href="#/checkout" class="co-btn">Checkout (${ helpers.naira(subtotal()) })</a>
-</menu>`: ""
+  $("cartFooter").innerHTML = ls.length
+    ? `<menu class="cart-actions">
+        <a href="#/checkout" class="co-btn">Checkout (${ helpers.naira(subtotal()) })</a>
+    </menu>`: "";
 }
 
 function counter(product) {
@@ -495,7 +474,7 @@ function home() {
     </div>
   </section>
 
-  <!-- Categories Section -->
+  <!-- Categories Section 
 
   <section class="section wrapper">
     <div class="section-header">
@@ -517,7 +496,7 @@ function home() {
           <span class="icon chevron-icon" data-icon="arrowRight"></span>
       </button>
     </div>
-  </section>
+  </section>-->
 
   <!-- Featured Products Section -->
 
@@ -560,8 +539,17 @@ function home() {
   </section>`
 };
 
+function about() {
+  return `
+  <section class="section wrapper">
+    <h1>About HarvestHub</h1>
+    <p>Replace with the business's own text: who HarvestHub is, privacy, terms, and the returns, refunds and cancellation policy.</p>
+    <p>${ config.contact.phone }<br />${ config.contact.email }<br />${ config.address }</p>
+  </section>`;
+};
+
 function shop(params) {
-  //selectedCategory = params.get("category");
+  selectedCategory = params.get("category") || "all";
   selectedSort = params.get("sort") || "featured";
   app.innerHTML = `
     <section class="section wrapper">
@@ -572,7 +560,7 @@ function shop(params) {
       <div class="shop-controls">
         ${ sortMenu(config.order, selectedSort) }
         <label class="price-filter">
-          <span class="icon helpers.naira-icon">₦</span>
+          <span class="icon naira-icon">₦</span>
           <input id="priceFilter" class="price-filter-input" type="number" min="0" placeholder="Max price (₦)" aria-label="Maximum price" />
         </label>
       </div>
@@ -582,24 +570,41 @@ function shop(params) {
       </div>
     </section>`;
 
-  $("searchField").classList.add("hidden");
   const resCount = app.querySelector(".results-count");
   app.querySelector(".shop-controls").prepend(searchControl(params));
-  app.querySelector(".sort-options").addEventListener("click", (e) => {
-    const button = e.target.closest("[data-sort]");
+  app.querySelector(".filter-box").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-value]");
     if (!button) return;
-    selectedSort = button.dataset.sort;
+    selectedCategory = button.dataset.value;
+    app.querySelectorAll(".filter-box [data-value]").forEach(item => {
+      const icon = item.parentElement.querySelector(".check-icon");
+      const isSelected = item.dataset.value === selectedCategory;
+      item.setAttribute("aria-pressed", isSelected);
+      item.parentElement.classList.toggle("is-selected", isSelected);
+      if (icon.dataset.icon = isSelected) { icon.dataset.icon = "tick" }
+      else { removeIcon(icon) };
+    });
     updateShop();
   });
-  app.querySelector(".picker").addEventListener("click", () => {
-    const sortBox = query(".sort-box");
-    const sortOpts = query(".sort-options");
-    sortBox.classList.toggle("open");
-    sortOpts.style.height = sortOpts.scrollHeight + "px";
+  app.querySelector(".sort-options").addEventListener("click", event => {
+    const button = event.target.closest("[data-sort]");
+    if (!button) return;
+    selectedSort = button.dataset.sort;
+    app.querySelectorAll(".sort-options [data-sort]").forEach(item => {
+      const icon = item.parentElement.querySelector(".check-icon");
+      const isSelected = item.dataset.sort === selectedSort;
+      item.setAttribute("aria-pressed", isSelected);
+      item.parentElement.classList.toggle("is-selected", isSelected);
+      if (icon.dataset.icon = isSelected) { icon.dataset.icon = "tick" }
+      else { removeIcon(icon) };
+    });
+    $("selected").textContent = config.order.find(option => option.id === selectedSort)?.label || "Sort By:";
+    updateShop();
   });
-  app.querySelector(".toggle-filter-btn").addEventListener("click", () => { query(".filter-box").classList.toggle("open") });
-  addEvent(".price-filter-input", resCount);
-  addEvent(".searchbar", resCount);
+  dropOpen(query(".picker"), query(".sort-box"));
+  dropOpen(query(".toggle-filter-btn"), query(".filter-box"));
+  addEvent(app.querySelector(".price-filter-input"), resCount, "pf");
+  addEvent(app.querySelector(".searchbar"), resCount, "q")
   updateShop();
 };
 
@@ -712,7 +717,7 @@ function checkout() {
             <span>${ helpers.naira(l.total) }</span>
           </div>`).join("") }
           <div class="location">
-            <span>helpers.Subtotal</span>
+            <span>Subtotal</span>
             <span>${ helpers.naira(sub) }</span>
           </div>
           <div class="location location-t">
@@ -727,7 +732,7 @@ function checkout() {
   if (!coFields) throw new Error("Checkout page must have fields!");
 
   coFields.prepend(
-    input({ id: "name", icon: "user", placeholder: "What's your full name", labelClass: "input-field full-length" }),
+    input({ id: "name", icon: "user", placeholder: "What's your full name?", labelClass: "input-field full-length" }),
     input({ id: "phone", icon: "phone", placeholder: "Your phone number", type: "tel", labelClass: "input-field" }),
     input({ id: "email", icon: "mail", placeholder: "Your e-mail address (optional)", type: "email", labelClass: "input-field" })
   );
@@ -736,15 +741,6 @@ function checkout() {
   );
 
   return coPage;
-};
-
-function info(title) {
-  return `
-  <section class="section wrapper">
-    <h1>${ title }</h1>
-    <p>Replace with the business's own text: who HarvestHub is, privacy, terms, and the returns, refunds and cancellation policy.</p>
-    <p>${ config.contact.phone }<br />${ config.contact.email }<br />${ config.address }</p>
-  </section>`;
 };
 
 function productPage(id) {
@@ -812,28 +808,29 @@ function productPage(id) {
       </section>` : "" }`;
 };
 
-/* --------- Rendering Functions ----------- */
+/* --------- Render & Update Functions ----------- */
 
 function renderApp() {
   const { page, id, params } = router();
 
   const pages = {
     home, product: () => productPage(id),
-    checkout, wholesale, delivery, about: () => info("About HarvestHub")
+    checkout, wholesale, delivery, about
   };
 
-  const view = page === "shop"
-    ? shop(params)
-    : (pages[page] || home)();
-
-  if (typeof view === "string") { app.innerHTML = view }
-  else if (view instanceof Node) { app.replaceChildren(view) }
-  else { throw new TypeError("A page must return an HTML string or a DOM node.") }
+  if (page === "shop") { shop(params) }
+  else {
+    const view = (pages[page] || home)();
+    if (typeof view === "string") { app.innerHTML = view }
+    else if (view instanceof Node) { app.replaceChildren(view) }
+    else { throw new TypeError(`Invalid page output for "${ page }": expected an HTML string or DOM Node, received ${ view }.`) };
+  };
 
   //$("nav").classList.remove("on");
   window.scrollTo(0, 0);
   initializeIcons(document);
-}
+
+};
 
 function renderProducts(products) {
   return products.map((product) => {
@@ -841,15 +838,12 @@ function renderProducts(products) {
   }).join("");
 };
 
-/* ---------- Routing and Events ---------- */
-
-function router() {
-  const [path, query] = (location.hash.slice(1) || "/").split("?");
-  const parts = path.split("/").filter(Boolean);
-  return { page: parts[0] || "home", id: parts[1], params: new URLSearchParams(query || "") };
-};
-
 function updateShop() {
+  /*const params = router().params;
+  $("searchbar").value = params.get("q") || "";
+  $("priceFilter").value = params.get("pf") || "";
+  selectedCategory = params.get("category") || "all";
+  selectedSort = params.get("sort") || "featured";*/
   const category = selectedCategory === "all" ? "" : selectedCategory;
   const query = app.querySelector(".searchbar").value.trim().toLowerCase();
   const maxPrice = parseFloat($("priceFilter").value);
@@ -885,12 +879,40 @@ function updateShop() {
       </figure>
       <p class="empty-desc">No Matching Products. Try clearing a filter</p>
     </div>`);
-    results.append(noRes);
+    //results.replaceChildren(noRes);
     results.classList.add("empty")
   } else { results.classList.remove("empty") };
 
   return matches;
 };
+
+function updateHashParam(name, value) {
+  const hash = location.hash || "#/shop";
+  const queryIndex = hash.indexOf("?");
+
+  const route = queryIndex === -1 ? hash
+    : hash.slice(0, queryIndex);
+
+  const params = new URLSearchParams(queryIndex === -1 ? "" : hash.slice(queryIndex + 1));
+
+  if (value.trim() === "") { params.delete(name) }
+  else { params.set(name, value.trim()) }
+
+  const query = params.toString();
+  const newHash = `${ route }${ query ? `?${ query }` : "" }`;
+
+  history.replaceState(history.state, "", `${ location.pathname }${ location.search }${ newHash }`);
+};
+
+/* ---------- Routing ---------- */
+
+function router() {
+  const [path, query] = (location.hash.slice(1) || "/").split("?");
+  const parts = path.split("/").filter(Boolean);
+  return { page: parts[0] || "home", id: parts[1], params: new URLSearchParams(query || "") };
+};
+
+/* ---------- Validation ---------- */
 
 function check(rules) {
   let ok = true;
@@ -903,6 +925,8 @@ function check(rules) {
   });
   return ok;
 };
+
+/* ---------- Messages ---------- */
 
 function sendOrder(channel) {
   const val = (id) => $(id).value.trim();
@@ -952,11 +976,13 @@ function sendEnquiry() {
   toast("WhatsApp opened. Press send there to submit your enquiry.");
 };
 
+/* ---------- Initialization ---------- */
+
 function init() {
   query(".cart").innerHTML = appCart();
   query(".footer").innerHTML = footer();
   query(".app-header").innerHTML = navbar();
-  query(".wa-fab").href = helpers.waLink("Hello HarvestHub, I would like to place an order.");
+  query(".wa-btn").href = helpers.waLink("Hello HarvestHub, I would like to place an order.");
   drawCart();
   renderApp();
 };
