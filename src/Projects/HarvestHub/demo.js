@@ -69,9 +69,26 @@ const products = [
     },
 ];
 
+let timer;
+let inCart = products.slice(2, 8);
+
 const actions = {
     openCart: (element) => { element.nextElementSibling.classList.toggle("on") },
-    closeCart: (element) => { element.parentElement.parentElement.classList.remove("on") },
+    closeCart: (element) => { element.closest(".cart").classList.remove("on") },
+    selectItem: (element) => {
+        const checked = element.classList.contains("checked");
+        !checked ? element.classList.add("checked") :
+            element.classList.remove("checked");
+        element.closest(".cart-item").dataset.selected = !checked;
+    },
+    removeFromCart: (element) => {
+        const item = element.closest(".cart-item");
+        item.classList.add("deleted");
+        inCart = inCart.filter((product) => product.id !== item.dataset.productId);
+        item.addEventListener("transitionend", () => { item.remove() });
+    },
+    increase: (element) => { element.parentElement.querySelector(".q-count").textContent++ },
+    decrease: (element) => { element.parentElement.querySelector(".q-count").textContent-- },
 };
 
 document.addEventListener("click", (e) => {
@@ -79,14 +96,17 @@ document.addEventListener("click", (e) => {
     if (element && actions[element.dataset.action]) { actions[element.dataset.action](element) };
 });
 
-const naira = (num) => "₦" + num.toLocaleString("en-NG");
-
+function $(id) { return document.getElementById(id) };
+function naira(num) { return "₦" + num.toLocaleString("en-NG") };
 function create(element) { return document.createElement(element) };
 function query(selector) { return document.querySelector(selector) };
-
+function media(product) {
+    return product.image ? `<img src="${ product.img }" alt="${ product.name }" loading="lazy" />` :
+        `<span role="img" aria-label="${ product.name }">${ product.emoji }</span>`;
+};
 
 function navbar() {
-  return `<nav class="header-nav">
+    return `<nav class="header-nav">
     <div class="row">
       <a href="#/" class="logo">
         <span class="icon plant-icon" data-icon="${ config.logo }"></span>
@@ -94,11 +114,11 @@ function navbar() {
       </a>
       <ul class="navbar">
       ${ config.links.map(navlink => {
-    return `
+        return `
         <li class="${ navlink.className ? navlink.className : "" }">
           <a href="${ navlink.path }" class="nav-item">${ navlink.anchor }</a>
         </li>`
-  }).join("") }
+    }).join("") }
       </ul>
     </div>
     <div class="row">
@@ -126,28 +146,34 @@ function parseHTML(markup) {
     return template.content.firstElementChild;
 };
 
-function input({ ...input }) {
-    const field = parseHTML(`<label for="${ input.id }" class="${ input.labelClass ?? "" }">
-          ${ input.label ?? "" }
-          <span class="icon ${ input.iconClass ? input.iconClass : "" }" data-icon="${ input?.icon }"></span>
-          <input ${ input.value ? `value="${ input.value }"` : "" } type="${ input.type }" placeholder="${ input?.placeholder }" id="${ input?.id }" 
-          ${ input.name ? `name="${ input.name }"` : "" } class="${ input?.className }"  ${ input.required ? "required" : "" } >
-          ${ input?.required ? `<p class="error" id="error-${ input?.id }" aria-live="polite"></p>` : "" }
+function input(config = {}) {
+    const field = parseHTML(`<label for="${ config.id }" class="${ config.labelClass ?? "" }">
+          ${ config.label ?? "" }
+          <span class="icon ${config.icon}-icon" data-icon="${ config.icon ?? "caret" }"></span>
+          <input ${ config.value ? `value="${ config.value }"` : "" } type="${ config.type ?? "text" }" placeholder="${ config.placeholder ?? "input here" }" id="${ config.id }" 
+          ${ config.name ? `name="${ config.name }"` : "" } class="${ config.className }"  ${ config.required ? "required" : "" } 
+          ${ config.attributes ? config.attributes.map(attr => { return attr }).join(" ") : "" }>
+          ${ config.required ? `<span class="error" id="error-${ config.id }" aria-live="polite"></span>` : "" }
       </label>`);
 
-    const inputElement = field.querySelector("input");
-
-    if (input.events) {
-        const events = input?.events;
-        inputElement.addEventListener("blur", (event) => {
-            if (events.blurred(event)) { events?.blurred(event) }
-        });
-        inputElement.addEventListener("focus", (event) => { events?.focused(event) });
-        inputElement.addEventListener("input", (event) => { events?.update(event) });
-        inputElement.addEventListener("keydown", (event) => { events?.keydown(event) });
+    function attachEvents(element, events = {}) {
+        for (const [eventName, handler] of Object.entries(events)) {
+            if (typeof handler !== "function") continue;
+            element.addEventListener(eventName, handler);
+        };
     };
 
-    return field;
+    const inputElement = field.querySelector("input");
+    attachEvents(inputElement, config.events);
+
+    return {
+        element: field,
+        input: inputElement,
+
+        update(newProps = {}) { 
+
+        }
+    };
 };
 
 function searchFilter() {
@@ -199,15 +225,15 @@ function searchItems({ input, items, property }) {
 };
 
 function cartItem(product) {
-    return `<article class="cart-item">
+    return `<article class="cart-item" data-product-id="${ product.id }">
 <div class="item-header">
     <a class="item-display">
         <span class="item-img" role="img" aria-label="${ product.name }">${ product.emoji }</span>
     </a>
     <span class="item-category">${ product.category }</span>
     <label for="select">
-        <span class="item-select"></span>
-        <input type="checkbox" class="select" id="select">
+        <span class="item-select" data-action="selectItem" id="${ product.id }"></span>
+        <input type="checkbox" class="select">
     </label>
 </div>
 <div class="item-body">
@@ -224,15 +250,15 @@ function cartItem(product) {
     </div>
     <menu class="item-actions">
         <div class="q-counter">
-            <button class="q-count-btn" aria-label="decrease quantity">
+            <button class="q-count-btn" data-action="decrease" aria-label="decrease quantity">
                 <span class="icon minus-icon" data-icon="minus"></span>
             </button>
-            <span class="q-count">1</span>
-            <button class="q-count-btn" aria-label="increase quantity">
+            <span class="q-count">${ product.minQty }</span>
+            <button class="q-count-btn" data-action="increase" aria-label="increase quantity">
                 <span class="icon plus-icon" data-icon="plus"></span>
             </button>
         </div>
-        <button class="remove-item-btn" aria-label="remove item from cart">
+        <button class="remove-item-btn" data-action="removeFromCart" aria-label="remove item from cart">
             <span class="icon delete-icon" data-icon="delete"></span>
         </button>
     </menu>
@@ -241,19 +267,18 @@ function cartItem(product) {
 };
 
 function cart() {
-    const inCart = products.slice(2, 8);
     return `<aside class="cart on">
     <div class="cart-header">
         <h2>
             Your Cart
-            <small id="in-cartCount" class="in-cart-count">${ inCart.length }</small>
+            <span id="in-cartCount" class="in-cart-count">${ inCart.length }</span>
         </h2>
         <button data-action="closeCart" aria-label="Close your cart">
             <span class="icon close-icon" data-icon="close"></span>
         </button>
     </div>
     <div class="cart-content">
-    ${ inCart.map(product => cartItem(product)).join("") }
+    ${ inCart.map((product) => cartItem(product)).join("") }
     </div>
     <div class="cart-footer">
         <menu class="cart-actions">
@@ -264,12 +289,64 @@ function cart() {
 };
 
 function toast({ ...notif }) {
-    const toast = parseHTML(``);
-    toast.textContent = notif.msg;
-    toast.classList.add("notify");
-    clearTimeout(timer);
-    timer = setTimeout(() => toast.classList.remove("notify"), 2000);
+    const state = {
+        timerId: null,
+        duration: notif.duration ?? 2000,
+    };
+    const toast = parseHTML(`<div class="toast" id="toast" role="status" aria-live="polite">
+        <span class="icon toast-icon" data-icon="check"></span>
+        <p class="content">${ notif.content }</p>
+    </div>`);
+
+    return {
+        toast,
+        notify() {
+            toast.classList.add("notify");
+            clearTimeout(state.timerId);
+            state.timerId = setTimeout(() => { toast.classList.remove("notify") }, state.duration);
+          },
+
+        destroy() {
+            clearTimeout(state.timerId);
+            toast.classList.remove("notify");
+            toast.remove();
+          }
+    };
 };
 
-query("main").append(parseHTML(cart()));
+function renderApp(...components) {
+    const app = query("main");
+    const view = components;
+    if (typeof view === "string") { app.innerHTML = view }
+    else if (view instanceof Node) { app.replaceChildren(view) }
+    else { throw new TypeError(`Invalid Element: "${ view }". Expected an HTML string or DOM Node, received ${ view }.`) };
+};
+
+const notif = toast({ content: "Added to cart!", duration: 2000 });
+const inputField = input({
+    id: "searchbar",
+    type: "search",
+    className: "searchbar",
+    labelClass: "search-field",
+    placeholder: "Search your items...",
+    events: {
+        input: (event) => {
+            const searched = searchItems({
+                input: event.currentTarget,
+                items: [...products],
+                property: "name",
+            })
+            searched.length === 0 ? console.log("no results") : renderProducts(searched);
+        }
+    },
+});
+
+query("button").addEventListener("click", () => { notif.notify() });
+query("main").append(inputField.element);
 initializeIcons(document);
+
+/*I think it's okay if I exposed the element for a toast component, but the input is better left isolated, while
+the update function alone can be returned as an object. The component already had the ability to be assigned to
+a constant, so I can just do that, but I want to be able to preserve the ability of the component to simply
+render in innerHTML, or when appended. I also want it to be that the lifecycle functions can be used directly in
+the configuration of the element instead of just as an external API.*/

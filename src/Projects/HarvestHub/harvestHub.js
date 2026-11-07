@@ -91,7 +91,7 @@ function panel(on) {
   $("backdrop").classList.toggle("on", on);
 };
 
-const subtotal = () => lines().reduce((sum, l) => sum + l.total, 0);
+function subtotal() { return lines().reduce((sum, l) => sum + l.total, 0) };
 
 // Best matching quantity tier, or the base price.
 
@@ -119,7 +119,7 @@ function addToCart(id, quantity) {
   const entry = cart.find((cart) => cart.id === id);
   const next = (entry ? entry.quantity : 0) + quantity;
   if (next < p.minQty) { return toast(`Minimum order for ${ p.name } is ${ p.minQty } ${ p.unit }.`) };
-  entry ? entry.quantity = next : cart.push({ id, quantity: next })
+  entry ? entry.quantity = next : cart.push({ id, quantity: next });
   save(config.cart_key, cart);
   drawCart();
   toast("Added to cart!");

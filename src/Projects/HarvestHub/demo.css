@@ -17,6 +17,7 @@
     padding: 0;
     box-sizing: border-box;
     transition: all 300ms ease-in-out;
+    -webkit-tap-highlight-color: transparent;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
         'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -32,6 +33,11 @@ body {
 a {
     color: var(--forest);
     text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
 img {
@@ -272,8 +278,8 @@ svg {
     top: 10px;
     z-index: 1;
     right: 20px;
-    width: 1rem;
-    height: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
     display: grid;
     cursor: pointer;
     position: absolute;
@@ -283,9 +289,8 @@ svg {
     border: 1px solid var(--terra);
 }
 
-.select:checked .item-select {
+.checked {
     background: var(--terra);
-    border-color: var(--terra);
 }
 
 .item-select::after {
@@ -295,6 +300,56 @@ svg {
     color: var(--oat);
 }
 
-.select:checked .item-select::after {
+.checked::after {
     opacity: 1;
+}
+
+.deleted{
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.toast {
+    gap: .55em;
+    left: 50%;
+    z-index: 50;
+    bottom: 24px;
+    display: flex;
+    position: fixed;
+    color: var(--oat);
+    padding: 10px 18px;
+    align-items: center;
+    justify-content: start;
+    background: var(--forest);
+    transition: transform 200ms;
+    border-radius: var(--radius);
+    transform: translateY(100px);
+    border: 1px solid var(--botanic);
+}
+
+.toast-icon{
+    display: inline-flex;
+    align-items: center;
+    border-radius: 5rem;
+    justify-content: center;
+    /*background: var(--botanic);*/
+
+    & svg{
+        stroke-width: 3;
+        stroke: var(--botanic);
+    }
+}
+
+.notify {
+    transform: translateY(0); 
+}
+
+.draw{
+    animation: draw 2s ease-in-out;
+}
+
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
 }

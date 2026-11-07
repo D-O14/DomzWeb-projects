@@ -40,7 +40,7 @@ label{
 
 .custom-checkbox::after {
     content: "\2713";
-    font-size: .8rem;
+    font-size: .5rem;
     color: hsl(0, 0%, 100%);
     opacity: 0;
 }
