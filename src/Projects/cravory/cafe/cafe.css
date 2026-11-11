@@ -1,7 +1,4 @@
 @layer base, primitives, layout, components, utilities;
-/*@tailwind base;
-@tailwind components;
-@tailwind utilities;*/
 
 .lucide {
   @scope (main) {

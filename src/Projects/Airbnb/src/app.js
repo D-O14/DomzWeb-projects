@@ -1,11 +1,12 @@
+import { $ } from "@utils/DOM.js";
 import { SITE } from "./config/site.js";
 import { PRODUCTS, CATEGORIES } from "./data/products.js";
 import { PROPERTIES } from "./data/properties.js";
 import { esc, formatPrice } from "./lib/format.js";
 import { waButton, productMessage, propertyMessage, generalMessage } from "./lib/whatsapp.js";
 
-const app = document.getElementById("app");
-const LINKS = [["shop", "Shop"], ["stay", "Stay"], ["about", "About"], ["contact", "Contact"]];
+const app = $("app");
+const links = [["shop", "Shop"], ["stay", "Stay"], ["about", "About"], ["contact", "Contact"]];
 const price = (p) => (p.price == null ? "Price on enquiry" : formatPrice(p.price));
 const featuredProperty = () => PROPERTIES.find((p) => p.featured) || PROPERTIES[0];
 
@@ -126,7 +127,7 @@ const ROUTES = [[/^\/$/, home], [/^\/shop$/, shop], [/^\/shop\/([\w-]+)$/, produ
 
 const setMenu = (open) => {
   document.querySelector(".hdr").classList.toggle("open", open);
-  const b = document.getElementById("navBtn");
+  const b = $("navBtn");
   b.setAttribute("aria-expanded", String(open));
   b.textContent = open ? "Close" : "Menu";
 };
@@ -139,12 +140,12 @@ function route() {
   notFound();
 }
 
-document.getElementById("hdr").innerHTML = `<header class="hdr"><div class="bar"><a class="brand" href="#/">${esc(SITE.name)}</a>
+$("hdr").innerHTML = `<header class="hdr"><div class="bar"><a class="brand" href="#/">${esc(SITE.name)}</a>
   <button id="navBtn" class="btn" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
-  <nav id="nav" aria-label="Main">${LINKS.map(([h, t]) => `<a href="#/${h}">${t}</a>`).join("")}</nav></div></header>`;
-document.getElementById("ftr").innerHTML = `<div class="wrap"><strong>${esc(SITE.name)}</strong><p>${esc(SITE.tagline)}</p>
-  <nav aria-label="Footer">${LINKS.map(([h, t]) => `<a href="#/${h}">${t}</a>`).join("")}</nav>${waButton("Chat on WhatsApp", generalMessage(), "btn")}</div>`;
-document.getElementById("navBtn").addEventListener("click", () => setMenu(!document.querySelector(".hdr").classList.contains("open")));
+  <nav id="nav" aria-label="Main">${links.map(([h, t]) => `<a href="#/${h}">${t}</a>`).join("")}</nav></div></header>`;
+$("ftr").innerHTML = `<div class="wrap"><strong>${esc(SITE.name)}</strong><p>${esc(SITE.tagline)}</p>
+  <nav aria-label="Footer">${links.map(([h, t]) => `<a href="#/${h}">${t}</a>`).join("")}</nav>${waButton("Chat on WhatsApp", generalMessage(), "btn")}</div>`;
+$("navBtn").addEventListener("click", () => setMenu(!document.querySelector(".hdr").classList.contains("open")));
 document.addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
 addEventListener("hashchange", route);
 route();

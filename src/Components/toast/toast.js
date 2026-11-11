@@ -22,10 +22,10 @@ const statuses = {
     message: { className: "message", icon: icons.message }
 };
 
-//const activeToasts = [];
+const activeToasts = [];
 const button = document.querySelector(".show");
 
-class Toast extends HTMLElement {
+export default class Toast extends HTMLElement {
     constructor() {
         super();
         const shadow = this.attachShadow({ mode: "open" });
@@ -55,11 +55,11 @@ class Toast extends HTMLElement {
             this.notif.classList.remove("visible");
         }, 3000);
         this.renderToast({ ...variant, ...options });
-        //activeToasts.push(this.notif);
-        /*if (activeToasts.length > 4) {
+        activeToasts.push(this.notif);
+        if (activeToasts.length > 4) {
             const oldToast = activeToasts.shift();
             oldToast.remove();
-        };*/
+        };
     }
 
     dismissToast() {
@@ -71,7 +71,6 @@ class Toast extends HTMLElement {
 }
 
 customElements.define("toast-notif", Toast);
-export default Toast;
 
 const toastNotif = document.querySelector("toast-notif");
 if (button) {
@@ -82,3 +81,41 @@ if (button) {
         });
     });   
 }
+
+/*function Toast(config = {}) {
+    const state = { timerId: null, duration: config.duration ?? 2000 };
+    const lifecycles = {
+        notify(element) {
+            element.classList.add("notify");
+            clearTimeout(state.timerId);
+            state.timerId = setTimeout(() => { element.classList.remove("notify") }, config.duration);
+        },
+
+        destroy(element) {
+            element.className = "";
+            clearTimeout(state.timerId);
+            element.classList.remove("notify");
+            removeIcon(element.querySelector(".toast-icon"));
+            element.querySelector(".content").textContent = null;
+            element.remove();
+        },
+    };
+
+    const manager = query(".toast-manager");
+    const toast = parseHTML(
+        `<div class="toast ${ config.type }-toast" id="toast" role="status" aria-live="polite">
+        <span class="icon toast-icon" data-icon="${ config.icon }"></span>
+        <p class="content">${ config.content }</p>
+    </div>`);
+
+    manager.append(toast);
+    initializeIcons(manager);
+    lifecycles.notify(manager);
+
+    return toast;
+};
+
+function ToastManager() {
+    const toastManager = parseHTML(`<div class="toast-manager"></div>`);
+    return toastManager;
+};*/

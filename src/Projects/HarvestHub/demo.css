@@ -304,47 +304,50 @@ svg {
     opacity: 1;
 }
 
-.deleted{
+.deleted {
     opacity: 0;
     transform: translateX(100%);
 }
 
-.toast {
-    gap: .55em;
+.toast-manager {
     left: 50%;
     z-index: 50;
     bottom: 24px;
-    display: flex;
     position: fixed;
+    transition: transform 200ms;
+    transform: translateY(100px);
+}
+
+.toast {
+    gap: .55em;
+    display: flex;
     color: var(--oat);
     padding: 10px 18px;
     align-items: center;
     justify-content: start;
     background: var(--forest);
-    transition: transform 200ms;
     border-radius: var(--radius);
-    transform: translateY(100px);
     border: 1px solid var(--botanic);
 }
 
-.toast-icon{
+.toast-icon {
     display: inline-flex;
     align-items: center;
     border-radius: 5rem;
     justify-content: center;
     /*background: var(--botanic);*/
 
-    & svg{
+    & svg {
         stroke-width: 3;
         stroke: var(--botanic);
     }
 }
 
 .notify {
-    transform: translateY(0); 
+    transform: translateY(0);
 }
 
-.draw{
+.draw {
     animation: draw 2s ease-in-out;
 }
 

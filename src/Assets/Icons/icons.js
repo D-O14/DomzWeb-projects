@@ -355,7 +355,7 @@ class="lucide line-chart"><path d="M12 16v5" /><path d="M16 14.639V21" /><path d
     </svg>`,
     email: `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
-        class="icon email">
+        class="icon email" width="24" heigh="24">
         <path
             d="M2 5.5V3.9934C2 3.44476 2.45531 3 2.9918 3H21.0082C21.556 3 22 3.44495 22 3.9934V20.0066C22 20.5552 21.5447 21 21.0082 21H2.9918C2.44405 21 2 20.5551 2 20.0066V19H20V7.3L12 14.5L2 5.5ZM0 10H5V12H0V10ZM0 15H8V17H0V15Z">
         </path>
@@ -390,7 +390,7 @@ class="lucide line-chart"><path d="M12 16v5" /><path d="M16 14.639V21" /><path d
     list: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-logs-icon lucide-logs"><path d="M3 5h1"/><path d="M3 12h1"/><path d="M3 19h1"/><path d="M8 5h1"/><path d="M8 12h1"/><path d="M8 19h1"/><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/></svg>`,
 };
 
-export function initializeIcons(root) {
+export function initializeIcons(root = document) {
     const svgs = root.querySelectorAll("[data-icon]");
     svgs.forEach(svg => {
         svg.dataset.icon ? svg.innerHTML = icons[svg.dataset.icon] : svg.dataset.icon = "";
