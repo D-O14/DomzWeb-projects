@@ -317,7 +317,8 @@
   box-shadow: 1px 1px 2px hsl(101, 20%, 47%);
 }
 
-.filter-option, .sort-option {
+.filter-option,
+.sort-option {
   width: 100%;
   display: flex;
   list-style: none;
@@ -381,7 +382,7 @@
   box-shadow: 1px 1px 2px hsl(101, 20%, 47%);
 }
 
-.sort-options{
+.sort-options {
   top: 50px;
   z-index: 1;
   min-width: 300px;
@@ -1582,11 +1583,6 @@
 }
 
 @media screen and (max-width: 920px) {
-
-  .app-header {
-    display: none;
-  }
-
   li {
     width: 100%;
     padding: 2em 2em;
@@ -1703,6 +1699,10 @@
 
 @media screen and (max-width: 700px) {
   .hero-img {
+    display: none;
+  }
+
+  .app-header {
     display: none;
   }
 }

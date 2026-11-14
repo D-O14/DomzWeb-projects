@@ -3,12 +3,71 @@ import { config } from "./modules/config";
 import { Button } from "@components/button/button.js";
 import { Input } from "@components/form/input/input.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
-import { $, parseHTML, initializeActions } from "@utils/DOM.js";
+import { $, query, parseHTML, initializeActions } from "@utils/DOM.js";
 
-const actions = {};
+const actions = {
+    showMenu: () => { query(".site-header").classList.toggle("hamburger") },
+};
+
 const pages = {};
 
-function NavBar(config) { return parseHTML(``) };
+let cart = [];
+
+function Tab(links) {
+    const tab = parseHTML(`<span class="tab"></span>`);
+    for (const link of links) {
+        link.addEventListener("click", (e) => {
+            e.preventDefault();
+            links.forEach(link => { link.classList.remove("active") })
+            link.classList.add("active");
+            tab.style.width = `${ e.target.offsetWidth }px`;
+            tab.style.left = `${ e.target.offsetLeft }px`;
+        });
+    };
+
+    return tab;
+};
+
+function NavBar(config) {
+    const navbar = parseHTML(`
+        <nav class= "site-navbar">
+          <a href="#/" class="logo">
+            <span class="icon logo-icon" data-icon="${ config.logo }"></span>
+            <span class="brand-name">
+                ${ config.brandName }
+                <small>Bakery & Cafe</small>
+            </span>
+            <span class="icon coffee-icon" data-icon="coffee"></span>
+          </a>
+          <div class="navbar">
+            <ul class="nav-links">
+            ${ config.links.map(navlink => {
+        return `
+                <li>
+                <a href="${ navlink.path }" class="nav-item ${ navlink.className ? navlink.className : "" }">${ navlink.anchor }</a>
+                </li>`
+    }).join("") }
+            </ul>
+          </div>
+          <menu class="nav-menu">
+            <button class="user-btn" title="Become a user">
+                <span class="icon account-icon" data-icon="account"></span>
+            </button>
+            <button class="cart-btn" data-action="openCart" aria-label="Open Cart">
+              <span class="icon cart-icon" data-icon="shoppingCart"></span>
+              <span class="cart-count" id="cartCount">${ cart.length }</span>
+            </button>
+            <button class="nav-toggle" data-action="showMenu" aria-label="Toggle navbar menu">
+                <span class="icon menubar-icon" data-icon="menubar"></span>
+                <span class="icon close-icon" data-icon="close"></span>
+            </button>
+          </menu>
+      </nav>`);
+
+    const links = navbar.querySelectorAll("a");
+    navbar.querySelector(".nav-links").after(Tab(links));
+    return navbar;
+};
 
 function Footer(config) {
     return `
@@ -40,10 +99,10 @@ function Footer(config) {
     </div>
 
     <div>
-        <h4>Links</h4>
+        <h4>Quick Links</h4>
         <div>
             ${ config.links.map(link => {
-            return `
+        return `
                 <a href="${ link.path }">${ link.anchor }</a>
             `}).join("") }
         </div>
@@ -52,7 +111,7 @@ function Footer(config) {
     <div>
         <menu>
         ${ config.socials.map(social => {
-                return `
+            return `
             <a href="${ social.path }" title="${ social.name }" aria-label="Link to cravory's ${ social.name } account">
                 <span class="icon" data-icon="${ social.icon }"></span>
             </a>
@@ -68,7 +127,7 @@ function Footer(config) {
 
 function Slider(config) {
     return `
-    ${ config.categories.filter(category => category.featured).map((category) => `
+    ${ config.categories.map((category) => `
         <div class="category">
             <a href="#/products-page?category=${ category.id }" class="category-img" data-category="${ category.id }"> 
                 <img class="category-display-img" src="${ category.img }" alt="">
@@ -77,7 +136,36 @@ function Slider(config) {
         </div>`).join("") }`;
 };
 
-function ProductCard(config) { return parseHTML(``) };
+function Chips() { };
+
+function Carousel(config) { };
+
+function ProductCard(product) {
+    return `<article class= "product-card" data-product-id="${ product.id }" >
+            <div class="card-header">
+                <span class="product-category">${ product.category }</span>
+                <a class="product-img" href="#/product/${ product.id }">
+                    <figure class="product-display">
+                        <img src="${ product.img }">
+                    </figure>
+                </a>
+            </div>
+            <div class="card-content">
+                <div class="product-specs">
+                    <h3 class="product-name">
+                        <a href="#/product/${ product.id }">${ product.name }</a>
+                    </h3>
+                    <span class="product-price">$${ product.price }</span>
+                </div>
+                <menu class="card-actions">
+                    <button class="cart-btn" data-product-id="${ product.id }" data-action="addItem" aria-label="Add to Cart">
+                        <span class="icon cart-icon" data-icon="cartPlus"></span>
+                    </button>
+                </menu>
+            </div>
+        </article>`;
+};
+
 function TestimonialCard(config) { return parseHTML(``) };
 function TestimonialSlider(config) { return parseHTML(``) };
 
@@ -85,14 +173,17 @@ function homePage() {
     return `
     <section class="hero-section two-column" id="hero">
         <div class="hero-content">
+            <small class="hero-subtext">Baked fresh. Made with love</small>
             <h1 class="hero-header">Freshly Baked Delights, Every Day</h1>
             <p class="hero-text">
                 Discover the magic of freshly baked goodness. Handcrafted with love and the finest
                 ingredients. Delight in every bite, every day
+                <!--Cravory, your ultimate destination for artisanal delights delivered right to your doorstep. Explore our curated
+                selection of handcrafted pastries, breads, and cakes, crafted with care and delivered fresh to you.-->
             </p>
             <menu class="hero-actions">
-                <a href="#/page/products-page" class="btn main-hero-btn">Shop Now</a>
-                <a href="#/page/branches" class="btn secondary-hero-btn">Explore nearest store</a>
+                <a href="#/page/products-page" class="btn main-hero-btn">Order Now</a>
+                <a href="#/page/branches" class="btn secondary-hero-btn">Explore our menu</a>
             </menu>
         </div>
         <figure class="hero-img">
@@ -101,15 +192,19 @@ function homePage() {
     </section>
     
     <section class="categories-section" id="categories">
-        <h2 class="section-header">Explore Products of different variations</h2>
+        <h2>-Products and variations-</h2>
         <div class="categories">
             ${ Slider(config) }
         </div>
     </section>
+
+    <section class="specials-section">
+        <h2>-Our Most Loved Products-</h2>
+    </section>
     
     <section class="two-column form-section" id="form">
         <div class="section-content">
-            <h2>Daily Dough</h2>
+            <h2>-Get The Daily Dough-</h2>
             <p class="section-text">
                 Subscribe and experience the convenience of freshly baked goods delivered
                 right to your doorstep every day.
@@ -120,8 +215,20 @@ function homePage() {
             <img src="." alt="">
         </figure>
     </section>
+
+    <section class="products-section" id="products">
+        <h2>-Most Popular Products-</h2>
+        <div class="products-grid">
+            ${ config.products.filter(product => product.featured).map((product) => {
+                return ProductCard(product)
+            }).join("") }
+        </div>
+    </section>
     
-    <section class="about-section" id="about">
+    <section class="about-section two-column" id="about">
+        <figure class="about-img">
+            <img src="." alt="">
+        </figure>
         <div class="section-content">
             <h2>Baked Fresh For You, Straight From The Oven</h2>
             <p class="section-text">
@@ -131,9 +238,6 @@ function homePage() {
             </p>
             <a href="" class="btn">Read More</a>
         </div>
-        <figure class="section-img">
-            <img src="." alt="">
-        </figure>
     </section>`;
 };
 
@@ -144,7 +248,7 @@ function renderApp() {
     $("siteHeader").append(NavBar(config));
     $("siteFooter").innerHTML = Footer(config);
     initializeIcons();
-    initializeActions();
+    initializeActions(document, actions);
 };
 
 renderApp();

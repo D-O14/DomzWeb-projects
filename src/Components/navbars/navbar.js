@@ -1,7 +1,10 @@
 import "./navbar.css";
-import { query } from "@utils/utilities";
 import { initializeIcons } from "@assets/Icons/icons";
 import { createStyle, createTemplate } from "@utils/component";
+
+function query(root=document, selector) { 
+    return root.querySelector(selector);
+};
 
 const navTemplate = createTemplate(
     `<header part="header"> 
