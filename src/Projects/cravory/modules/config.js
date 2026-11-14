@@ -1,5 +1,6 @@
 export const config = {
     heroImg: ".",
+    aboutImg: ".",
     brandName: "Cravory", logo: "croissant",
     address: "8819 Ohio St. South Gate, CA 90280",
     contact: {
@@ -19,17 +20,23 @@ export const config = {
         { anchor: "Reservations", path: "#" },
         { anchor: "Partners", path: "#" },
     ],
+    features: [
+        { icon: "sprout", header: "100%", small: "Arabica Beans", content: "Premium quality in each flavor" },
+        { icon: "coffee", header: "Freshly Brewed", small: "Every Day", content: "Crafted with care" },
+        { icon: "heart", header: "Cozy Ambience", small: "& Great Vibes", content: "The perfect place to unwind" },
+        { icon: "people", header: "5k+", small: "Happy Customers", content: "And counting..." },
+    ],
     products: [
         { id: "matcha-latte", name: "Matcha Latte", price: 4.20, category: "Coffee", desc: "", img: "", stars: "" },
-        { id: "capuccino", name: "Capuccino", price: 3.80, category: "Coffee", desc: "", img: "", stars: "", featured: true },
-        { id: "iced-latte", name: "Iced Latte", price: 4.00, category: "Cold Drink", desc: "", img: "", stars: "", featured: true },
-        { id: "mocha-frappe", name: "Mocha Frappe", price: 4.80, category: "Coffee", desc: "", img: "", stars: "", featured: true },
-        { id: "choco-cake", name: "Chocolate Cake", price: 3.25, category: "Sweets", desc: "", img: "", stars: "", featured: true },
-        { id: "caramel-macchiato", name: "Caramel Macchiato", price: 4.50, category: "Cold Drink", desc: "", img: "", stars: "", featured: true },
-        { id: "strawberry-cake", name: "Strawberry-topped Cake", price: 3.45, category: "Sweets", desc: "", img: "", stars: "", featured: true },
+        { id: "capuccino", name: "Capuccino", price: 3.80, category: "Coffee", desc: "", img: "../../Assets/Images/coffee-glass.webp", stars: "", popular: true },
+        { id: "iced-latte", name: "Iced Latte", price: 4.00, category: "Cold Drink", desc: "", img: "../../Assets/Images/side-view-macchiato.jpg", stars: "", popular: true },
+        { id: "mocha-frappe", name: "Mocha Frappe", price: 4.80, category: "Coffee", desc: "", img: "../../Assets/Images/spiced-latte.jpg", stars: "", popular: true },
+        { id: "choco-cake", name: "Chocolate Cake", price: 3.25, category: "Sweets", desc: "", img: "../../Assets/Images/seasoned-cappucino.jpg", stars: "", popular: true },
+        { id: "caramel-macchiato", name: "Caramel Macchiato", price: 4.50, category: "Cold Drink", desc: "", img: "../../Assets/Images/chocolate-drink.jpg", stars: "", popular: true },
+        { id: "strawberry-cake", name: "Strawberry-topped Cake", price: 3.45, category: "Sweets", desc: "", img: "../../Assets/Images/cup-cappuccino.jpg", stars: "", popular: true },
     ],
     categories: [
-        { id: "specials", name: "Specials", img: "." },
+        { id: "specials", name: "Specials", img: "../../Assets/Images/3d-croissant.jpg" },
         { id: "p&s", name: "Pastries & Sweets", img: "." },
         { id: "cookies", name: "Cookies", img: "." },
         { id: "cakes", name: "Cakes", img: "." },

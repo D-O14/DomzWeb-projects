@@ -1,4 +1,4 @@
-@layer root, resets, base, components;
+@layer root, resets, base, components, utilities;
 
 @layer resets {
 
@@ -17,7 +17,11 @@
 
 @layer root {
     :root {
-        --: "";
+        --wine: hsl(1, 61%, 27%);
+        --camel: hsl(37, 42%, 54%);
+        --brown: hsl(25, 57%, 38%);
+        --coffee: hsl(22, 47%, 18%);
+        --apricot: hsl(43, 100%, 83%);
     }
 }
 
@@ -49,7 +53,7 @@
         height: 100%;
         display: block;
         object-fit: cover;
-        aspect-ratio: 16/9;
+        border-radius: inherit;
     }
 
     input {
@@ -77,6 +81,16 @@
         text-decoration: none;
     }
 
+    a,
+    button,
+    small,
+    span,
+    h1,
+    h2,
+    p {
+        font-family: inherit;
+    }
+
     svg {
         width: 20px;
         height: 20px;
@@ -89,9 +103,9 @@
 @layer components {
 
     .section-header {
-        font-weight: 400;
         line-height: 1.5;
-        text-transform: uppercase;
+        letter-spacing: .05em;
+        font-family: "Merriweather";
         font-size: clamp(1rem, 2rem, 1.25rem);
     }
 
@@ -171,10 +185,11 @@
 
         .logo {
             position: relative;
+            font-family: none;
 
             & .coffee-icon {
                 top: 10px;
-                right: 0px;
+                right: 10px;
                 position: absolute;
             }
         }
@@ -269,9 +284,17 @@
             align-items: start;
             flex-direction: column;
 
+            & .hero-subtext {
+                font-size: 16px;
+                font-style: oblique;
+                letter-spacing: .25em;
+                font-family: "Merriweather";
+            }
+
             & .hero-header {
                 line-height: 1.5;
                 letter-spacing: .025em;
+                font-family: "Merriweather";
                 font-size: clamp(1.8rem, 3vw, 2.2rem);
             }
 
@@ -287,6 +310,48 @@
             width: min(400px, 100vw);
             transform-origin: center;
             background: hsl(0, 0%, 90%);
+        }
+
+        .features {
+            gap: 2em;
+            display: grid;
+            grid-column: span 2;
+            align-items: center;
+            grid-template-columns: repeat(4, 1fr);
+
+            & .feature {
+                gap: .25em;
+                display: flex;
+                align-items: start;
+                justify-content: start;
+                flex-direction: column;
+                font-family: "Merriweather";
+                border-right: 1px solid hsl(0, 0%, 80%);
+
+                & .feature-header {
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+
+                & .feature-small {
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                }
+
+                & .feature-content {
+                    font-size: 12px;
+                    color: hsl(0, 0%, 50%);
+                }
+
+                & .feature-icon {
+                    margin-bottom: 5px;
+
+                    & svg {
+                        width: 2em;
+                        height: 2em;
+                    }
+                }
+            }
         }
     }
 
@@ -327,7 +392,7 @@
         }
     }
 
-    @scope(.specials-section, .products-section) {
+    @scope(.specials-section) {
         :scope {
             min-height: 60dvh;
             border-top: 1px solid hsl(0, 0%, 80%);
@@ -335,16 +400,93 @@
         }
     }
 
-    @scope(.products-section){
-        .products-grid{
+    @scope(.products-section) {
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            row-gap: 1.5em;
+            column-gap: 2em;
+            margin-top: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
-            & .products-card{
-                gap: 1em;
+            & .product-card {
                 display: flex;
-                align-items: center;
+                position: relative;
+                border-radius: .5rem;
                 flex-direction: column;
+                border: 1px solid hsl(0, 0%, 80%);
+                box-shadow: 2px 2px 3px hsl(159, 44%, 90%);
+
+                & .card-content {
+                    flex: 1;
+                    position: relative;
+                    padding-block: .75em;
+                    padding-inline: .5em;
+
+                    & .add-product-btn {
+                        right: 10px;
+                        bottom: 6px;
+                        position: absolute;
+                        border-radius: 5rem;
+                        padding: .35em .35em;
+                        background: hsl(159, 44%, 14%);
+
+                        & span {
+                            display: inline-flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+
+                        & svg {
+                            width: 16px;
+                            height: 16px;
+                            stroke: hsl(0, 0%, 100%);
+                        }
+                    }
+                }
+
+                & .product-category {
+                    top: -10px;
+                    left: -20px;
+                    z-index: 1;
+                    font-size: 12px;
+                    font-weight: 600;
+                    padding: .5em 1em;
+                    position: absolute;
+                    border-radius: 5rem;
+                    max-width: fit-content;
+                    color: hsl(0, 0%, 100%);
+                    text-transform: capitalize;
+                    background: hsl(159, 44%, 14%);
+                }
+
+                & .card-header {
+                    height: 70%;
+                }
+
+                & .product-display {
+                    width: 100%;
+                    height: 100%;
+                    overflow: hidden;
+                    border-radius: .5rem;
+
+                    &:hover img {
+                        transform: scale(1.1);
+                    }
+                }
+
+                & .product-specs {
+                    gap: .75em;
+                    height: 100%;
+                    display: flex;
+                    align-items: start;
+                    flex-direction: column;
+                    justify-content: space-between;
+
+                    & .product-name {
+                        font-weight: 400;
+                        font-size: .95rem;
+                    }
+                }
             }
         }
     }
@@ -379,9 +521,15 @@
             justify-content: start;
         }
     }
-
 }
 
+@layer utilities{
+    .spaced{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -404,7 +552,7 @@
     .two-column {
         display: grid;
         align-items: center;
-        grid-template-columns: 1.15fr 1fr;
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .nav-links {
@@ -430,6 +578,14 @@
         line-height: 1.25;
         font-size: clamp(2.2rem, 5vw, 2.5rem);
     }
+
+    .features{
+        margin-top: 20px;
+    }
+
+    .products-grid {
+        grid-template-rows: repeat(2, 300px);
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -445,6 +601,10 @@
 
     .site-navbar {
         height: 40px;
+    }
+
+    .logo {
+        font-family: "Merriweather";
     }
 
     .tab {
@@ -530,6 +690,29 @@
         }
     }
 
+    .features {
+        padding-top: 40px;
+        padding-inline: 20px;
+        grid-template-columns: repeat(2, 1fr);
+
+        & .feature {
+            border-right: none;
+
+            & .feature-header {
+                font-size: 16px;
+            }
+
+            .feature-small {
+                font-size: 14px;
+            }
+
+            & .feature-icon svg {
+                width: 1.8em;
+                height: 1.8em;
+            }
+        }
+    }
+
     .categories {
         gap: 1em;
         flex-direction: column;
@@ -553,6 +736,17 @@
         }
     }
 
+    .products-grid {
+        row-gap: 1em;
+        column-gap: .75em;
+        grid-template-columns: repeat(2, 150px);
+    }
+
+    .product-category {
+        font-size: 10px;
+        padding: .35em .5em;
+    }
+
     .site-footer {
         margin-top: 0;
         padding: 44px 20px;
@@ -568,7 +762,7 @@
         }
     }
 
-    .nav-toggle{
+    .nav-toggle {
         top: 5px;
     }
 

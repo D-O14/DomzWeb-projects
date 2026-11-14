@@ -4,7 +4,7 @@
 @layer base {
   :root {
     --forest: hsl(159, 44%, 14%);
-    --botanic: #6f9060;
+    --botanic: hsl(101, 20%, 47%);
     --oat: hsl(42, 49%, 91%);
     --paper: hsl(43, 100%, 99%);
     --ink: hsl(100, 5%, 12%);

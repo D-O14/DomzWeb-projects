@@ -125,9 +125,9 @@ function Footer(config) {
     </div>`
 };
 
-function Slider(config) {
+function Slider(items) {
     return `
-    ${ config.categories.map((category) => `
+    ${ items.map((category) => `
         <div class="category">
             <a href="#/products-page?category=${ category.id }" class="category-img" data-category="${ category.id }"> 
                 <img class="category-display-img" src="${ category.img }" alt="">
@@ -146,7 +146,8 @@ function ProductCard(product) {
                 <span class="product-category">${ product.category }</span>
                 <a class="product-img" href="#/product/${ product.id }">
                     <figure class="product-display">
-                        <img src="${ product.img }">
+                        <img src="${ product.img }" loading="lazy" decoding="async" 
+                        fetchpriority="high">
                     </figure>
                 </a>
             </div>
@@ -157,11 +158,9 @@ function ProductCard(product) {
                     </h3>
                     <span class="product-price">$${ product.price }</span>
                 </div>
-                <menu class="card-actions">
-                    <button class="cart-btn" data-product-id="${ product.id }" data-action="addItem" aria-label="Add to Cart">
-                        <span class="icon cart-icon" data-icon="cartPlus"></span>
-                    </button>
-                </menu>
+                <button class="add-product-btn" data-product-id="${ product.id }" data-action="addToCart" aria-label="Add ${ product.name } to Cart">
+                    <span class="icon plus-icon" data-icon="plus"></span>
+                </button>
             </div>
         </article>`;
 };
@@ -177,9 +176,7 @@ function homePage() {
             <h1 class="hero-header">Freshly Baked Delights, Every Day</h1>
             <p class="hero-text">
                 Discover the magic of freshly baked goodness. Handcrafted with love and the finest
-                ingredients. Delight in every bite, every day
-                <!--Cravory, your ultimate destination for artisanal delights delivered right to your doorstep. Explore our curated
-                selection of handcrafted pastries, breads, and cakes, crafted with care and delivered fresh to you.-->
+                ingredients. Delight in every bite, every day.
             </p>
             <menu class="hero-actions">
                 <a href="#/page/products-page" class="btn main-hero-btn">Order Now</a>
@@ -189,27 +186,41 @@ function homePage() {
         <figure class="hero-img">
             <img src="${ config.heroImg }" alt="">
         </figure>
+
+        <div class="features">
+            ${ config.features.map(feature => {
+        return `<article class="feature">
+                    <span class="icon feature-icon" data-icon="${ feature.icon }"></span>
+                    <h2 class="feature-header">${ feature.header }</h2>
+                    <small class="feature-small">${ feature.small }</small>
+                    <p class="feature-content">${ feature.content }</p>
+                </article>`
+    }).join("") }
+        </div>
     </section>
-    
+
     <section class="categories-section" id="categories">
-        <h2>-Products and variations-</h2>
+        <h2 class="section-header">-Products and variations-</h2>
         <div class="categories">
-            ${ Slider(config) }
+            ${ Slider(config.categories) }
         </div>
     </section>
 
     <section class="specials-section">
-        <h2>-Our Most Loved Products-</h2>
+        <h2 class="section-header">-Our Most Loved Products-</h2>
     </section>
     
     <section class="two-column form-section" id="form">
         <div class="section-content">
-            <h2>-Get The Daily Dough-</h2>
+            <h2 class="section-header">-Get The Daily Dough-</h2>
             <p class="section-text">
                 Subscribe and experience the convenience of freshly baked goods delivered
                 right to your doorstep every day.
             </p>
-            <a href="" class="btn">Learn More</a>
+            <a href="" class="btn">
+                Learn More
+                <span class="icon" data-icon="arrowRight"></span>
+            </a>
         </div>
         <figure class="section-img">
             <img src="." alt="">
@@ -217,26 +228,35 @@ function homePage() {
     </section>
 
     <section class="products-section" id="products">
-        <h2>-Most Popular Products-</h2>
+        <h2 class="section-header spaced">
+            -Most Popular Products-
+            <a href="#/menu" class="btn">
+                View Menu
+                <span class="icon" data-icon="chevronRight"></span>
+            </a>
+        </h2>
         <div class="products-grid">
-            ${ config.products.filter(product => product.featured).map((product) => {
-                return ProductCard(product)
-            }).join("") }
+            ${ config.products.filter(product => product.popular).map((product) => {
+        return ProductCard(product)
+    }).join("") }
         </div>
     </section>
     
     <section class="about-section two-column" id="about">
         <figure class="about-img">
-            <img src="." alt="">
+            <img src="${config.aboutImg}" alt="">
         </figure>
         <div class="section-content">
-            <h2>Baked Fresh For You, Straight From The Oven</h2>
+            <h2 class="section-header">Baked Fresh For You, Straight From The Oven</h2>
             <p class="section-text">
                 From our oven to your doorstep, each bite is a testament to our commitment to
                 quality and taste with every order. Experience the joy of indulging in bakery treats that are both
                 comforting and delicious, making every moment a celebration of flavor.
             </p>
-            <a href="" class="btn">Read More</a>
+            <a href="" class="btn">
+                Read More
+                <span class="icon" data-icon="arrowRight"></span>
+            </a>
         </div>
     </section>`;
 };
