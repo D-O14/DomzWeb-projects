@@ -1,6 +1,6 @@
 export const config = {
-    heroImg: ".",
-    aboutImg: ".",
+    heroImg: "../../Assets/Images/3d-bread.webp",
+    aboutImg: "../../Assets/Images/bakery-image.jpg",
     brandName: "Cravory", logo: "croissant",
     address: "8819 Ohio St. South Gate, CA 90280",
     contact: {
@@ -37,10 +37,10 @@ export const config = {
     ],
     categories: [
         { id: "specials", name: "Specials", img: "../../Assets/Images/3d-croissant.jpg" },
-        { id: "p&s", name: "Pastries & Sweets", img: "." },
-        { id: "cookies", name: "Cookies", img: "." },
-        { id: "cakes", name: "Cakes", img: "." },
-        { id: "breads", name: "Breads", img: "." },
+        { id: "p&s", name: "Pastries & Sweets", img: "../../Assets/Images/3d-doughnut.jpg" },
+        { id: "cookies", name: "Cookies", img: "../../Assets/Images/3d-choco-cookie.jpg" },
+        { id: "cakes", name: "Cakes", img: "../../Assets/Images/cupcake.webp" },
+        { id: "breads", name: "Breads", img: "../../Assets/Images/3d-bread-slices.jpg" },
     ],
     testimonials: [
         { name: "", img: "", review: "" },

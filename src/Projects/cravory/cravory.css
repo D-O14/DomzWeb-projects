@@ -32,14 +32,21 @@
 
     body {
         height: 100dvh;
+        color: var(--coffee);
+        background: hsl(from var(--apricot) h s l / .5);
     }
 
     section {
         padding: 52px 0;
         margin-inline: auto;
         padding-inline: 20px;
-        width: min(1000px, 95%);
+        width: min(1150px, 95%);
     }
+
+    /*section:nth-of-type(even){
+        background: var(--coffee);
+        color: hsl(from var(--apricot) h s calc(l + 15));
+    }*/
 
     menu {
         gap: 1em;
@@ -106,7 +113,7 @@
         line-height: 1.5;
         letter-spacing: .05em;
         font-family: "Merriweather";
-        font-size: clamp(1rem, 2rem, 1.25rem);
+        font-size: clamp(1.5rem, 2rem, 1.25rem);
     }
 
     .section-content {
@@ -125,9 +132,8 @@
     .about-img {
         border-radius: .5em;
         aspect-ratio: 1 / 1;
-        width: min(400px, 100vw);
+        width: min(280px, 100vw);
         transform-origin: center;
-        background: hsl(0, 0%, 90%);
     }
 
     .btn {
@@ -152,6 +158,49 @@
         }
     }
 
+    .main-btn {
+        background: var(--coffee);
+        color: hsl(from var(--apricot) h s calc(l + 15));
+    }
+
+    .secondary-btn {
+        background: none;
+        color: var(--coffee);
+        border: 1px solid var(--coffee);
+    }
+
+    .secondary-btn:hover {
+        scale: .95;
+        color: var(--apricot);
+        border-color: transparent;
+        background: var(--coffee);
+
+        & span svg {
+            transform: translateX(5px);
+        }
+    }
+
+    .view-btn {
+        gap: 1em;
+        font-size: 14px;
+        background: none;
+
+        & span {
+            padding: .25em;
+            border-radius: 5rem;
+            border: 1px solid var(--coffee);
+
+            &:hover {
+                scale: .95;
+                background: var(--coffee);
+
+                & svg {
+                    stroke: var(--apricot);
+                }
+            }
+        }
+    }
+
     .menubar-icon,
     .close-icon {
         top: 0;
@@ -168,22 +217,22 @@
     @scope(.site-header) {
         :scope {
             top: 0;
-            width: 100%;
             z-index: 1;
+            width: 100%;
             height: 70px;
-            padding: 1em 2em;
             position: fixed;
-            border-bottom: 1px solid hsl(0, 0%, 80%);
+            padding: 1em 2em;
         }
 
         .site-navbar {
             height: 25px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            justify-content: space-evenly;
         }
 
         .logo {
+            color: var(--coffee);
             position: relative;
             font-family: none;
 
@@ -222,11 +271,11 @@
         .tab {
             left: 20px;
             width: 50px;
-            height: 5px;
-            bottom: -2px;
+            height: 2px;
+            bottom: 2px;
             position: absolute;
             border-radius: 1rem;
-            background: hsl(0, 0%, 0%);
+            background: var(--wine);
         }
 
         .nav-links {
@@ -245,6 +294,7 @@
 
             & .active {
                 font-weight: 600;
+                color: var(--wine);
                 position: relative;
             }
         }
@@ -268,16 +318,13 @@
             position: absolute;
             border-radius: 8px;
             display: inline-flex;
+            color: var(--apricot);
             justify-content: center;
-            background: hsl(0, 0%, 80%);
+            background: var(--coffee);
         }
     }
 
     @scope(.hero-section) {
-        :scope {
-            margin-top: 40px;
-        }
-
         .hero-content {
             gap: 1em;
             display: flex;
@@ -289,6 +336,7 @@
                 font-style: oblique;
                 letter-spacing: .25em;
                 font-family: "Merriweather";
+                color: hsl(from var(--wine) h s calc(l + 20));
             }
 
             & .hero-header {
@@ -301,15 +349,31 @@
             & .hero-text {
                 max-width: 50ch;
                 line-height: 1.5;
+                color: hsl(from var(--coffee) h s l / .75);
+            }
+
+            & .hero-actions{
+                & .secondary-btn{
+                    color: var(--coffee);
+                    border-color: transparent;
+                    background: hsl(from var(--camel) h calc(s + 15) l);
+                }
+
+                & .btn:hover{
+                    transform: translateY(-5px);
+                }
             }
         }
 
         .hero-img {
-            border-radius: .5em;
-            aspect-ratio: 1 / 1;
-            width: min(400px, 100vw);
+            width: 380px;
+            aspect-ratio: 1/1;
             transform-origin: center;
-            background: hsl(0, 0%, 90%);
+            /*animation: float 6s ease-in-out infinite;*/
+
+            & img{
+                transform: rotate(-25deg) rotateY(180deg);
+            }
         }
 
         .features {
@@ -326,7 +390,7 @@
                 justify-content: start;
                 flex-direction: column;
                 font-family: "Merriweather";
-                border-right: 1px solid hsl(0, 0%, 80%);
+                border-right: 1px solid var(--coffee);
 
                 & .feature-header {
                     font-size: 20px;
@@ -340,7 +404,7 @@
 
                 & .feature-content {
                     font-size: 12px;
-                    color: hsl(0, 0%, 50%);
+                    color: var(--camel);
                 }
 
                 & .feature-icon {
@@ -365,7 +429,7 @@
         }
 
         .category {
-            gap: 1em;
+            gap: .5em;
             display: flex;
             align-items: center;
             flex-direction: column;
@@ -375,19 +439,24 @@
                 & .category-img {
                     transform: translateY(-5px);
                 }
+
+                & .category-display-img{
+                    transform: scale(.95);
+                }
             }
 
             & .category-img {
                 height: 150px;
                 width: 150px;
                 display: grid;
+                overflow: hidden;
                 place-items: center;
                 border-radius: 5em;
             }
 
             & .category-display-img {
-                width: 100px;
-                height: 100px;
+                width: 125px;
+                height: 125px;
             }
         }
     }
@@ -414,7 +483,7 @@
                 border-radius: .5rem;
                 flex-direction: column;
                 border: 1px solid hsl(0, 0%, 80%);
-                box-shadow: 2px 2px 3px hsl(159, 44%, 90%);
+                box-shadow: 1px 1px 2px var(--camel);
 
                 & .card-content {
                     flex: 1;
@@ -495,6 +564,12 @@
         :scope {
             padding: 60px;
             margin-top: 30px;
+            color: var(--apricot);
+            background: var(--coffee);
+
+            & svg{
+                stroke: var(--apricot);
+            }
         }
 
         .footer-grid {
@@ -523,11 +598,22 @@
     }
 }
 
-@layer utilities{
-    .spaced{
+@layer utilities {
+    .spaced {
         display: flex;
         align-items: center;
         justify-content: space-between;
+    }
+}
+
+@keyframes float {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-50px);
     }
 }
 
@@ -551,7 +637,7 @@
 @media screen and (min-width: 1110px) {
     .two-column {
         display: grid;
-        align-items: center;
+        align-items: end;
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -579,7 +665,7 @@
         font-size: clamp(2.2rem, 5vw, 2.5rem);
     }
 
-    .features{
+    .features {
         margin-top: 20px;
     }
 
@@ -601,6 +687,7 @@
 
     .site-navbar {
         height: 40px;
+        justify-content: space-between;
     }
 
     .logo {
@@ -673,6 +760,7 @@
     }
 
     .hero-section {
+        margin-top: 40px;
         padding-inline: 10px;
 
         & .hero-text {

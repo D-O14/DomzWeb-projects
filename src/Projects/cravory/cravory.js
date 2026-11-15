@@ -1,17 +1,17 @@
 import "./cravory.css";
 import { config } from "./modules/config";
 import { Button } from "@components/button/button.js";
-import { Input } from "@components/form/input/input.js";
+//import { Input } from "@components/form/input/input.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
 import { $, query, parseHTML, initializeActions } from "@utils/DOM.js";
+
+let cart = [];
 
 const actions = {
     showMenu: () => { query(".site-header").classList.toggle("hamburger") },
 };
 
 const pages = {};
-
-let cart = [];
 
 function Tab(links) {
     const tab = parseHTML(`<span class="tab"></span>`);
@@ -42,29 +42,21 @@ function NavBar(config) {
           <div class="navbar">
             <ul class="nav-links">
             ${ config.links.map(navlink => {
-        return `
-                <li>
+        return `<li>
                 <a href="${ navlink.path }" class="nav-item ${ navlink.className ? navlink.className : "" }">${ navlink.anchor }</a>
-                </li>`
+            </li>`
     }).join("") }
             </ul>
           </div>
-          <menu class="nav-menu">
-            <button class="user-btn" title="Become a user">
-                <span class="icon account-icon" data-icon="account"></span>
-            </button>
-            <button class="cart-btn" data-action="openCart" aria-label="Open Cart">
-              <span class="icon cart-icon" data-icon="shoppingCart"></span>
-              <span class="cart-count" id="cartCount">${ cart.length }</span>
-            </button>
-            <button class="nav-toggle" data-action="showMenu" aria-label="Toggle navbar menu">
-                <span class="icon menubar-icon" data-icon="menubar"></span>
-                <span class="icon close-icon" data-icon="close"></span>
-            </button>
-          </menu>
+          <menu class="nav-menu"></menu>
       </nav>`);
 
     const links = navbar.querySelectorAll("a");
+    navbar.querySelector(".nav-menu").append(
+        Button({ className: "user-btn", id: "", icon: "account", iconOnly: true, ariaLabel: "Become a user", attributes: ["title='Become a user'"] }),
+        Button({ className: "cart-btn", id: "", icon: "shoppingCart", iconOnly: true, ariaLabel: "Open your cart", children: `<span class="cart-count" id="cartCount">${cart.length}</span>` }),
+        Button({ className: "nav-toggle", id: "", icon: "menubar", children: `<span class="icon close-icon" data-icon="close"></span>`, action: "showMenu", iconOnly: true, ariaLabel: "Toggle navbar menu" }),
+    );
     navbar.querySelector(".nav-links").after(Tab(links));
     return navbar;
 };
@@ -146,8 +138,7 @@ function ProductCard(product) {
                 <span class="product-category">${ product.category }</span>
                 <a class="product-img" href="#/product/${ product.id }">
                     <figure class="product-display">
-                        <img src="${ product.img }" loading="lazy" decoding="async" 
-                        fetchpriority="high">
+                        <img src="" loading="lazy" decoding="async">
                     </figure>
                 </a>
             </div>
@@ -179,15 +170,15 @@ function homePage() {
                 ingredients. Delight in every bite, every day.
             </p>
             <menu class="hero-actions">
-                <a href="#/page/products-page" class="btn main-hero-btn">Order Now</a>
-                <a href="#/page/branches" class="btn secondary-hero-btn">Explore our menu</a>
+                <a href="#/page/products-page" class="btn main-btn">Order Now</a>
+                <a href="#/page/branches" class="btn secondary-btn">Explore our menu</a>
             </menu>
         </div>
         <figure class="hero-img">
             <img src="${ config.heroImg }" alt="">
         </figure>
 
-        <div class="features">
+        <!--<div class="features">
             ${ config.features.map(feature => {
         return `<article class="feature">
                     <span class="icon feature-icon" data-icon="${ feature.icon }"></span>
@@ -196,7 +187,7 @@ function homePage() {
                     <p class="feature-content">${ feature.content }</p>
                 </article>`
     }).join("") }
-        </div>
+        </div>-->
     </section>
 
     <section class="categories-section" id="categories">
@@ -217,22 +208,22 @@ function homePage() {
                 Subscribe and experience the convenience of freshly baked goods delivered
                 right to your doorstep every day.
             </p>
-            <a href="" class="btn">
+            <a href="" class="secondary-btn btn">
                 Learn More
                 <span class="icon" data-icon="arrowRight"></span>
             </a>
         </div>
         <figure class="section-img">
-            <img src="." alt="">
+            <img src="../../Assets/Images/3d-package.webp" alt="">
         </figure>
     </section>
 
     <section class="products-section" id="products">
         <h2 class="section-header spaced">
             -Most Popular Products-
-            <a href="#/menu" class="btn">
+            <a href="#/menu" class="btn view-btn">
                 View Menu
-                <span class="icon" data-icon="chevronRight"></span>
+                <span class="icon" data-icon="arrowRight"></span>
             </a>
         </h2>
         <div class="products-grid">
@@ -244,7 +235,7 @@ function homePage() {
     
     <section class="about-section two-column" id="about">
         <figure class="about-img">
-            <img src="${config.aboutImg}" alt="">
+            <img src="${config.aboutImg}" alt="" loading="lazy" decoding="async">
         </figure>
         <div class="section-content">
             <h2 class="section-header">Baked Fresh For You, Straight From The Oven</h2>
@@ -253,7 +244,7 @@ function homePage() {
                 quality and taste with every order. Experience the joy of indulging in bakery treats that are both
                 comforting and delicious, making every moment a celebration of flavor.
             </p>
-            <a href="" class="btn">
+            <a href="" class="secondary-btn btn">
                 Read More
                 <span class="icon" data-icon="arrowRight"></span>
             </a>
