@@ -1,6 +1,6 @@
 export const config = {
     heroImg: "../../Assets/Images/3d-bread.webp",
-    aboutImg: "../../Assets/Images/bakery-image.jpg",
+    aboutImg: "../../Assets/Images/cupcake.webp",
     brandName: "Cravory", logo: "croissant",
     address: "8819 Ohio St. South Gate, CA 90280",
     contact: {

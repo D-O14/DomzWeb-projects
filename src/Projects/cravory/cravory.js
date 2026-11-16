@@ -1,7 +1,7 @@
 import "./cravory.css";
 import { config } from "./modules/config";
 import { Button } from "@components/button/button.js";
-//import { Input } from "@components/form/input/input.js";
+import { Input } from "@components/form/input/input.js";
 import { initializeIcons } from "@assets/Icons/icons.js";
 import { $, query, parseHTML, initializeActions } from "@utils/DOM.js";
 
@@ -54,7 +54,7 @@ function NavBar(config) {
     const links = navbar.querySelectorAll("a");
     navbar.querySelector(".nav-menu").append(
         Button({ className: "user-btn", id: "", icon: "account", iconOnly: true, ariaLabel: "Become a user", attributes: ["title='Become a user'"] }),
-        Button({ className: "cart-btn", id: "", icon: "shoppingCart", iconOnly: true, ariaLabel: "Open your cart", children: `<span class="cart-count" id="cartCount">${cart.length}</span>` }),
+        Button({ className: "cart-btn", id: "", icon: "shoppingCart", iconOnly: true, ariaLabel: "Open your cart", children: `<span class="cart-count" id="cartCount">${ cart.length }</span>` }),
         Button({ className: "nav-toggle", id: "", icon: "menubar", children: `<span class="icon close-icon" data-icon="close"></span>`, action: "showMenu", iconOnly: true, ariaLabel: "Toggle navbar menu" }),
     );
     navbar.querySelector(".nav-links").after(Tab(links));
@@ -62,59 +62,70 @@ function NavBar(config) {
 };
 
 function Footer(config) {
-    return `
+    const footer = parseHTML(`
     <div class="footer-grid">
-    <div>
-        <h2>${ config.brandName }</h2>
-        <p class="footer-content">
-            Cravory, your ultimate destination for artisanal delights delivered right to your doorstep. Explore our curated
-            selection of handcrafted pastries, breads, and cakes, crafted with care and delivered fresh to you.
-        </p>
-    </div>
-
-    <div>
-        <h4>Get in Touch</h4>
-        <div class="contact">
-            <a href="#">
-                <span class="icon" data-icon="location"></span>
-                <span>${ config.address }</span>
-            </a>
-            <a href="#">
-                <span class="icon" data-icon="email"></span>
-                <span>${ config.contact.email }</span>
-            </a>
-            <a href="#">
-                <span class="icon" data-icon="phone"></span>
-                <span>${ config.contact.phoneNumber }</span>
-            </a>
-        </div>
-    </div>
-
-    <div>
-        <h4>Quick Links</h4>
         <div>
-            ${ config.links.map(link => {
-        return `
-                <a href="${ link.path }">${ link.anchor }</a>
-            `}).join("") }
+            <h2>${ config.brandName }</h2>
+            <p class="footer-content">
+                Cravory, your ultimate destination for artisanal delights delivered right to your doorstep. Explore our curated
+                selection of handcrafted pastries, breads, and cakes, crafted with care and delivered fresh to you.
+            </p>
         </div>
-    </div>
 
-    <div>
-        <menu>
-        ${ config.socials.map(social => {
+        <div>
+            <h4>Get in Touch</h4>
+            <div class="contact">
+                <a href="#">
+                    <span class="icon" data-icon="location"></span>
+                    <span>${ config.address }</span>
+                </a>
+                <a href="#">
+                    <span class="icon" data-icon="email"></span>
+                    <span>${ config.contact.email }</span>
+                </a>
+                <a href="#">
+                    <span class="icon" data-icon="phone"></span>
+                    <span>${ config.contact.phoneNumber }</span>
+                </a>
+            </div>
+        </div>
+
+        <div>
+            <h4>Quick Links</h4>
+            <div>
+                ${ config.links.map(link => {
             return `
-            <a href="${ social.path }" title="${ social.name }" aria-label="Link to cravory's ${ social.name } account">
-                <span class="icon" data-icon="${ social.icon }"></span>
-            </a>
-        `}).join("") }
-        </menu>
-        <p class="footer-contact-info">
-            Join our community and transform your 
-            space with the beauty of plants.
-        </p>
+                    <a href="${ link.path }">${ link.anchor }</a>
+                `}).join("") }
+            </div>
+        </div>
+
+        <div class="social-section">
+            <menu>
+            ${ config.socials.map(social => {
+                return `
+                <a href="${ social.path }" title="${ social.name }" aria-label="Link to cravory's ${ social.name } account">
+                    <span class="icon social-icon" data-icon="${ social.icon }"></span>
+                </a>
+            `}).join("") }
+            </menu>
+            <p class="footer-contact-info">
+                Join our newsletter to receive exclusive updates and news.
+            </p>
+            <div class="form-container"></div>
+        </div>
+
+    <div class="copyright">
+           <p>&copy;2026 Cravory. All Rights Reserved</p>
+           <small class="author">Made with motion</small>
     </div>
-    </div>`
+    </div>`);
+
+    footer.querySelector(".form-container").append(
+        Input({ id: "emailField", labelClass: "email-input", placeholder: "Your E-mail address", icon: "mail", className: "email-field" }),
+        Button({text: "Subscribe", className: "subscribe-btn"})
+    );
+    return footer;
 };
 
 function Slider(items) {
@@ -132,14 +143,21 @@ function Chips() { };
 
 function Carousel(config) { };
 
+function imgDisplay(config = {}) {
+    return `
+    <figure class="${ config.className }">
+        <img src="${ config.src ?? "." }" alt="${ config.alt ?? "" }" loading="${ config.loading ?? "lazy" }"
+        ${ config.fetchpriority ? `fetchpriority="${ config.fetchpriority }"` : "" } decoding="async" 
+        ${ config.dimensions ? `width="${ config.dimensions.width }" height="${ config.dimensions.height }"` : "width=100 height=100" }>
+    </figure>`;
+};
+
 function ProductCard(product) {
     return `<article class= "product-card" data-product-id="${ product.id }" >
             <div class="card-header">
                 <span class="product-category">${ product.category }</span>
                 <a class="product-img" href="#/product/${ product.id }">
-                    <figure class="product-display">
-                        <img src="" loading="lazy" decoding="async">
-                    </figure>
+                    ${ imgDisplay({ className: "product-display", src: product.img, alt: `picture of ${ product.name }` }) }
                 </a>
             </div>
             <div class="card-content">
@@ -174,20 +192,19 @@ function homePage() {
                 <a href="#/page/branches" class="btn secondary-btn">Explore our menu</a>
             </menu>
         </div>
-        <figure class="hero-img">
-            <img src="${ config.heroImg }" alt="">
-        </figure>
+        ${ imgDisplay({ src: config.heroImg, className: "hero-img", fetchpriority: "high", loading: "eager" }) }
 
-        <!--<div class="features">
-            ${ config.features.map(feature => {
+    </section>
+
+    <section class="features">
+        ${ config.features.map(feature => {
         return `<article class="feature">
-                    <span class="icon feature-icon" data-icon="${ feature.icon }"></span>
-                    <h2 class="feature-header">${ feature.header }</h2>
-                    <small class="feature-small">${ feature.small }</small>
-                    <p class="feature-content">${ feature.content }</p>
-                </article>`
+                <span class="icon feature-icon" data-icon="${ feature.icon }"></span>
+                <h2 class="feature-header">${ feature.header }</h2>
+                <small class="feature-small">${ feature.small }</small>
+                <p class="feature-content">${ feature.content }</p>
+            </article>`
     }).join("") }
-        </div>-->
     </section>
 
     <section class="categories-section" id="categories">
@@ -213,9 +230,7 @@ function homePage() {
                 <span class="icon" data-icon="arrowRight"></span>
             </a>
         </div>
-        <figure class="section-img">
-            <img src="../../Assets/Images/3d-package.webp" alt="">
-        </figure>
+        ${ imgDisplay({ className: "section-img", src: "../../Assets/Images/3d-package.webp" }) }
     </section>
 
     <section class="products-section" id="products">
@@ -234,9 +249,7 @@ function homePage() {
     </section>
     
     <section class="about-section two-column" id="about">
-        <figure class="about-img">
-            <img src="${config.aboutImg}" alt="" loading="lazy" decoding="async">
-        </figure>
+        ${ imgDisplay({ className: "about-img", src: config.aboutImg }) }
         <div class="section-content">
             <h2 class="section-header">Baked Fresh For You, Straight From The Oven</h2>
             <p class="section-text">
@@ -257,7 +270,7 @@ function router() { };
 function renderApp() {
     $("site").innerHTML = homePage();
     $("siteHeader").append(NavBar(config));
-    $("siteFooter").innerHTML = Footer(config);
+    $("siteFooter").append(Footer(config));
     initializeIcons();
     initializeActions(document, actions);
 };
