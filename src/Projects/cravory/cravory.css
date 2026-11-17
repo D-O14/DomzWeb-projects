@@ -18,9 +18,11 @@
 @layer root {
     :root {
         --wine: hsl(1, 61%, 27%);
+        --gothic: hsl(30, 11%, 4%);
         --camel: hsl(37, 42%, 54%);
         --brown: hsl(25, 57%, 38%);
         --coffee: hsl(22, 47%, 18%);
+        --cozy-cafe: hsl(40, 7%, 8%);
         --apricot: hsl(43, 100%, 83%);
     }
 }
@@ -34,13 +36,6 @@
         height: 100dvh;
         color: var(--coffee);
         background: hsl(from var(--apricot) h s l / .5);
-    }
-
-    section {
-        padding: 52px 0;
-        margin-inline: auto;
-        padding-inline: 20px;
-        width: min(1150px, 95%);
     }
 
     /*section:nth-of-type(even){
@@ -68,6 +63,12 @@
         width: 100%;
         padding: .5em 1em;
         border: 1px solid transparent;
+
+        &:-webkit-autofill {
+            border: none;
+            -webkit-text-fill-color: var(--apricot);
+            -webkit-box-shadow: 0 0 0 1000px var(--coffee) inset;
+        }
     }
 
     button {
@@ -108,6 +109,16 @@
 }
 
 @layer components {
+
+    .about-section,
+    .hero-section,
+    .section,
+    .wrapper {
+        padding: 52px 0;
+        margin-inline: auto;
+        padding-inline: 20px;
+        width: min(1150px, 95%);
+    }
 
     .section-header {
         line-height: 1.5;
@@ -377,45 +388,50 @@
 
     }
 
-    @scope(.features) {
-        :scope {
+    @scope(.features-section) {
+        :scope{
+            background: var(--coffee);
+        }
+
+        .features {
             gap: 2em;
             display: grid;
             grid-column: span 2;
             align-items: center;
             grid-template-columns: repeat(4, 1fr);
-        }
 
-        .feature {
-            gap: .25em;
-            display: flex;
-            align-items: start;
-            justify-content: start;
-            flex-direction: column;
-            font-family: "Merriweather";
-            border-right: 1px solid var(--coffee);
+            & .feature {
+                gap: .25em;
+                display: flex;
+                align-items: start;
+                justify-content: start;
+                flex-direction: column;
+                font-family: "Merriweather";
+                color: hsl(from var(--apricot) h calc(s - 15) l);
+                border-right: 1px solid var(--apricot);
 
-            & .feature-header {
-                font-size: 20px;
-                font-weight: 500;
-            }
+                & .feature-header {
+                    font-size: 20px;
+                    font-weight: 500;
+                }
 
-            & .feature-small {
-                font-size: 16px;
-                margin-bottom: 5px;
-            }
+                & .feature-small {
+                    font-size: 16px;
+                    margin-bottom: 5px;
+                }
 
-            & .feature-content {
-                font-size: 12px;
-                color: var(--camel);
-            }
+                & .feature-content {
+                    font-size: 12px;
+                    color: var(--camel);
+                }
 
-            & .feature-icon {
-                margin-bottom: 5px;
+                & .feature-icon {
+                    margin-bottom: 5px;
 
-                & svg {
-                    width: 2em;
-                    height: 2em;
+                    & svg {
+                        width: 2em;
+                        height: 2em;
+                    }
                 }
             }
         }
@@ -427,7 +443,7 @@
             display: flex;
             padding-block: 20px;
             align-items: center;
-            justify-content: center;
+            justify-content: start;
         }
 
         .category {
@@ -466,6 +482,12 @@
     @scope(.specials-section) {
         :scope {
             min-height: 60dvh;
+        }
+    }
+
+    @scope(.newsletter-section) {
+        :scope {
+            background: hsl(from var(--apricot) h s l / .5);
         }
     }
 
@@ -576,95 +598,11 @@
         :scope {
             padding: 60px;
             margin-top: 30px;
-            color: hsl(from var(--apricot) h s calc(l + 8));
             background: var(--coffee);
+            color: hsl(from var(--apricot) h s calc(l + 8));
 
             & svg {
                 stroke: var(--apricot);
-            }
-        }
-
-        .copyright{
-            height: 10px;
-            width: 100%;
-            display: flex;
-            align-items: start;
-            grid-column: span 8;
-            justify-content: space-between;
-            border-top: 1px solid var(--apricot);
-
-            & p,small{
-                margin-top: 10px;
-            }
-
-            & small{
-                font-size: 16px;
-                letter-spacing: .15em;
-                text-transform: uppercase;
-            }
-        }
-
-        .footer-grid {
-            gap: 2em;
-            display: grid;
-            place-items: center;
-            width: min(1500px, 95%);
-            grid-template-columns: repeat(4, 1fr);
-        }
-
-        .social-icon {
-            padding: .5em .5em;
-            border-radius: 5rem;
-            display: inline-flex;
-            align-items: center;
-            margin-bottom: 20px;
-            background: var(--apricot);
-
-            & svg{
-                width: 18px;
-                height: 18px;
-                fill: var(--coffee);
-                stroke: var(--coffee);
-            }
-        }
-
-        .form-container {
-            position: relative;
-            margin-top: 1em;
-
-            & .email-input {
-                height: 40px;
-                display: flex;
-                border-radius: 5em;
-                align-items: center;
-                justify-content: start;
-                background: hsl(from var(--apricot) h s calc(l + 10));
-
-                & span {
-                    padding: .5em .75em;
-
-                    & svg {
-                        opacity: .5;
-                        stroke: var(--coffee);
-                    }
-                }
-
-                & input {
-                    flex: 1;
-                    width: 100%;
-                    padding: 0;
-                    background: none;
-                }
-            }
-
-            & .subscribe-btn {
-                top: 0px;
-                right: 0;
-                height: 100%;
-                position: absolute;
-                color: var(--coffee);
-                background: var(--apricot);
-                border: 1px solid var(--coffee);
             }
         }
 
@@ -683,6 +621,120 @@
             padding-top: 10px;
             align-items: center;
             justify-content: start;
+        }
+
+        .copyright {
+            height: 10px;
+            width: 100%;
+            display: flex;
+            grid-column: span 8;
+            align-items: start;
+            justify-content: space-between;
+            border-top: 1px solid var(--apricot);
+
+            & p,
+            small {
+                margin-top: 10px;
+            }
+
+            & small {
+                font-size: 16px;
+                letter-spacing: .15em;
+                text-transform: uppercase;
+            }
+        }
+
+        .footer-grid {
+            gap: 2em;
+            display: grid;
+            place-items: center;
+            width: min(1500px, 100%);
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .footer-icon {
+            & svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .social-icon {
+            padding: .5em .5em;
+            border-radius: 5rem;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: var(--apricot);
+
+            & svg {
+                width: 18px;
+                height: 18px;
+                stroke: var(--coffee);
+            }
+        }
+
+        .instagram-icon,
+        .email-icon {
+            & svg {
+                fill: var(--coffee);
+            }
+        }
+
+        .email-form {
+            gap: 1em;
+            display: flex;
+            margin-top: 1em;
+            align-items: center;
+
+            & .email-input {
+                height: 40px;
+                display: flex;
+                width: 250px;
+                border-radius: .5em;
+                align-items: center;
+                justify-content: start;
+                background: transparent;
+                border: 1px solid var(--apricot);
+
+                & input {
+                    outline: none;
+                    color: var(--apricot);
+
+                    &::placeholder {
+                        color: var(--apricot);
+                    }
+                }
+
+                & span {
+                    padding: .5em .75em;
+
+                    & svg {
+                        opacity: .5;
+                        stroke: var(--apricot);
+                    }
+                }
+
+                & input {
+                    flex: 1;
+                    width: 100%;
+                    padding: 0;
+                    background: none;
+                }
+            }
+
+            & .subscribe-btn {
+                font-weight: 400;
+                color: var(--coffee);
+                border-radius: .5rem;
+                background: var(--apricot);
+                border: 1px solid var(--coffee);
+
+                &:hover {
+                    scale: .95;
+                    opacity: .75;
+                }
+            }
         }
     }
 }
@@ -934,7 +986,7 @@
             grid-template-columns: repeat(1, 1fr);
         }
 
-        & .copyright{
+        & .copyright {
             display: none;
         }
 

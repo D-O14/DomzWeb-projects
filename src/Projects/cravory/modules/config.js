@@ -9,9 +9,9 @@ export const config = {
         phoneNumber: "+234 486 686 3295"
     },
     socials: [
-        { name: "Twitter", path: "", icon: "" },
-        { name: "WhatsApp", path: "", icon: "whatsapp" },
-        { name: "Instagram", path: "", icon: "instagram" },
+        { name: "Twitter", path: "https://x.com", icon: "twitter" },
+        { name: "Facebook", path: "https://facebook.com", icon: "facebook" },
+        { name: "Instagram", path: "https://instagram.com", icon: "instagram" },
     ],
     links: [
         { anchor: "Home", path: "#", className: "active" },
@@ -41,6 +41,13 @@ export const config = {
         { id: "cookies", name: "Cookies", img: "../../Assets/Images/3d-choco-cookie.jpg" },
         { id: "cakes", name: "Cakes", img: "../../Assets/Images/cupcake.webp" },
         { id: "breads", name: "Breads", img: "../../Assets/Images/3d-bread-slices.jpg" },
+    ],
+    resources: [
+        { anchor: "Contact Us", path: "#" },
+        { anchor: "Privacy Policy", path: "#" },
+        { anchor: "Reservation Policy", path: "#" },
+        { anchor: "Terms & Conditions", path: "#" },
+        { anchor: "Licensing", path: "#" },
     ],
     testimonials: [
         { name: "", img: "", review: "" },

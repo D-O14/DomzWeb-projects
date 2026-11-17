@@ -9,6 +9,25 @@ let cart = [];
 
 const actions = {
     showMenu: () => { query(".site-header").classList.toggle("hamburger") },
+    sendEmail: () => {
+        const form = query(".email-form");
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+            formData.append("access_key", "2754f49b-1543-4f88-bbde-f4298c06e99d");
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+                const data = await response.json();
+                if (response.ok) { Toast({ content: "Success! Your message has been sent." }); form.reset() }
+                else { Toast({ content: `Error: ${ data.message }` }) };
+            } catch (error) {
+                Toast({ content: "Something went wrong. Please try again." });
+            };
+        });
+    },
 };
 
 const pages = {};
@@ -65,65 +84,62 @@ function Footer(config) {
     const footer = parseHTML(`
     <div class="footer-grid">
         <div>
-            <h2>${ config.brandName }</h2>
+            <h2>
+                <span class="footer-icon" data-icon="coffee"></span>
+                ${ config.brandName }
+            </h2>
             <p class="footer-content">
-                Cravory, your ultimate destination for artisanal delights delivered right to your doorstep. Explore our curated
+                Your ultimate destination for artisanal delights delivered right to your doorstep. Explore our curated
                 selection of handcrafted pastries, breads, and cakes, crafted with care and delivered fresh to you.
             </p>
         </div>
 
         <div>
-            <h4>Get in Touch</h4>
-            <div class="contact">
-                <a href="#">
-                    <span class="icon" data-icon="location"></span>
-                    <span>${ config.address }</span>
-                </a>
-                <a href="#">
-                    <span class="icon" data-icon="email"></span>
-                    <span>${ config.contact.email }</span>
-                </a>
-                <a href="#">
-                    <span class="icon" data-icon="phone"></span>
-                    <span>${ config.contact.phoneNumber }</span>
-                </a>
+            <h4>Pages</h4>
+            <div>
+                ${ config.links.map(link => {
+        return `
+                    <a href="${ link.path }">${ link.anchor }</a>
+                `}).join("") }
             </div>
         </div>
 
         <div>
-            <h4>Quick Links</h4>
+            <h4>Resources</h4>
             <div>
-                ${ config.links.map(link => {
+                ${ config.resources.map(link => {
             return `
                     <a href="${ link.path }">${ link.anchor }</a>
                 `}).join("") }
             </div>
         </div>
 
+
         <div class="social-section">
             <menu>
             ${ config.socials.map(social => {
                 return `
                 <a href="${ social.path }" title="${ social.name }" aria-label="Link to cravory's ${ social.name } account">
-                    <span class="icon social-icon" data-icon="${ social.icon }"></span>
+                    <span class="social-icon ${ social.icon }-icon" data-icon="${ social.icon }"></span>
                 </a>
             `}).join("") }
             </menu>
             <p class="footer-contact-info">
-                Join our newsletter to receive exclusive updates and news.
+                Subscribe to Cravory Bakery & Cafe's newsletter and discover the delightful
+                treats we have planned for you.
             </p>
-            <div class="form-container"></div>
+            <form class="email-form"></form>
         </div>
 
     <div class="copyright">
-           <p>&copy;2026 Cravory. All Rights Reserved</p>
-           <small class="author">Made with motion</small>
+        <p>&copy;2026 Cravory. All Rights Reserved</p>
+        <small class="author">Made with motion</small>
     </div>
     </div>`);
 
-    footer.querySelector(".form-container").append(
+    footer.querySelector(".email-form").append(
         Input({ id: "emailField", labelClass: "email-input", placeholder: "Your E-mail address", icon: "mail", className: "email-field" }),
-        Button({text: "Subscribe", className: "subscribe-btn"})
+        Button({ text: "Subscribe", className: "subscribe-btn" })
     );
     return footer;
 };
@@ -196,44 +212,49 @@ function homePage() {
 
     </section>
 
-    <section class="features">
+    <section class="features-section">
+        <div class="features wrapper">
         ${ config.features.map(feature => {
-        return `<article class="feature">
+            return `<article class="feature">
                 <span class="icon feature-icon" data-icon="${ feature.icon }"></span>
                 <h2 class="feature-header">${ feature.header }</h2>
                 <small class="feature-small">${ feature.small }</small>
                 <p class="feature-content">${ feature.content }</p>
             </article>`
-    }).join("") }
+        }).join("") }
+        </div>
     </section>
 
-    <section class="categories-section" id="categories">
+    <section class="section categories-section" id="categories">
         <h2 class="section-header">-Products and variations-</h2>
         <div class="categories">
             ${ Slider(config.categories) }
         </div>
     </section>
 
-    <section class="specials-section">
+    <section class="section specials-section">
         <h2 class="section-header">-Our Most Loved Products-</h2>
+        <div class="wrapper"></div>
     </section>
     
-    <section class="two-column form-section" id="form">
-        <div class="section-content">
-            <h2 class="section-header">-Get The Daily Dough-</h2>
-            <p class="section-text">
-                Subscribe and experience the convenience of freshly baked goods delivered
-                right to your doorstep every day.
-            </p>
-            <a href="" class="secondary-btn btn">
-                Learn More
-                <span class="icon" data-icon="arrowRight"></span>
-            </a>
+    <section class="newsletter-section">
+        <div class="wrapper two-column">
+            <div class="section-content">
+                <h2 class="section-header">-Get The Daily Dough-</h2>
+                <p class="section-text">
+                    Subscribe and experience the convenience of freshly baked goods delivered
+                    right to your doorstep every day.
+                </p>
+                <a href="" class="secondary-btn btn">
+                    Learn More
+                    <span class="icon" data-icon="arrowRight"></span>
+                </a>
+            </div>
+            ${ imgDisplay({ className: "section-img", src: "../../Assets/Images/3d-package.webp" }) }
         </div>
-        ${ imgDisplay({ className: "section-img", src: "../../Assets/Images/3d-package.webp" }) }
     </section>
 
-    <section class="products-section" id="products">
+    <section class="section products-section" id="products">
         <h2 class="section-header spaced">
             -Most Popular Products-
             <a href="#/menu" class="btn view-btn">
