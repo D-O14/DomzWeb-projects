@@ -9,8 +9,8 @@ let cart = [];
 
 const actions = {
     showMenu: () => { query(".site-header").classList.toggle("hamburger") },
-    sendEmail: () => {
-        const form = query(".email-form");
+    sendEmail: (element) => {
+        const form = element.closest(".email-form");
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const formData = new FormData(form);
@@ -53,8 +53,13 @@ function NavBar(config) {
           <a href="#/" class="logo">
             <span class="icon logo-icon" data-icon="${ config.logo }"></span>
             <span class="brand-name">
-                ${ config.brandName }
-                <small>Bakery & Cafe</small>
+                <!--${ config.brandName }-->
+                <span>
+                    <span class="covered">Cra</span>vory
+                </span>
+                <small>
+                    <span class="covered">Bak</span>ery & Cafe
+                </small>
             </span>
             <span class="icon coffee-icon" data-icon="coffee"></span>
           </a>
@@ -162,7 +167,7 @@ function Carousel(config) { };
 function imgDisplay(config = {}) {
     return `
     <figure class="${ config.className }">
-        <img src="${ config.src ?? "." }" alt="${ config.alt ?? "" }" loading="${ config.loading ?? "lazy" }"
+        <img src="${ config.src ? config.src : "../../Assets/Illustrations/image-placeholder.svg" }" alt="${ config.alt ?? "" }" loading="${ config.loading ?? "lazy" }"
         ${ config.fetchpriority ? `fetchpriority="${ config.fetchpriority }"` : "" } decoding="async" 
         ${ config.dimensions ? `width="${ config.dimensions.width }" height="${ config.dimensions.height }"` : "width=100 height=100" }>
     </figure>`;
@@ -183,9 +188,12 @@ function ProductCard(product) {
                     </h3>
                     <span class="product-price">$${ product.price }</span>
                 </div>
-                <button class="add-product-btn" data-product-id="${ product.id }" data-action="addToCart" aria-label="Add ${ product.name } to Cart">
-                    <span class="icon plus-icon" data-icon="plus"></span>
-                </button>
+                <menu class="card-actions"> 
+                    <div class="product-ratings">⭐</div>
+                    <button class="add-product-btn" data-product-id="${ product.id }" data-action="addToCart" aria-label="Add ${ product.name } to Cart">
+                        <span class="icon plus-icon" data-icon="plus"></span>
+                    </button>
+                </menu>
             </div>
         </article>`;
 };
@@ -194,8 +202,7 @@ function TestimonialCard(config) { return parseHTML(``) };
 function TestimonialSlider(config) { return parseHTML(``) };
 
 function homePage() {
-    return `
-    <section class="hero-section two-column" id="hero">
+    return `<section class="hero-section two-column" id="hero">
         <div class="hero-content">
             <small class="hero-subtext">Baked fresh. Made with love</small>
             <h1 class="hero-header">Freshly Baked Delights, Every Day</h1>
@@ -204,24 +211,29 @@ function homePage() {
                 ingredients. Delight in every bite, every day.
             </p>
             <menu class="hero-actions">
-                <a href="#/page/products-page" class="btn main-btn">Order Now</a>
-                <a href="#/page/branches" class="btn secondary-btn">Explore our menu</a>
+                <a href="#/page/products-page" class="btn main-btn">
+                    Order Now
+                    <span class="icon" data-icon="goArrow"></span>
+                </a>
+                <a href="#/page/branches" class="btn secondary-btn">
+                    Explore our menu
+                    <span class="icon" data-icon="foodMenu"></span>
+                </a>
             </menu>
         </div>
         ${ imgDisplay({ src: config.heroImg, className: "hero-img", fetchpriority: "high", loading: "eager" }) }
-
     </section>
 
     <section class="features-section">
         <div class="features wrapper">
         ${ config.features.map(feature => {
-            return `<article class="feature">
+        return `<article class="feature">
                 <span class="icon feature-icon" data-icon="${ feature.icon }"></span>
                 <h2 class="feature-header">${ feature.header }</h2>
                 <small class="feature-small">${ feature.small }</small>
                 <p class="feature-content">${ feature.content }</p>
             </article>`
-        }).join("") }
+    }).join("") }
         </div>
     </section>
 
@@ -232,9 +244,11 @@ function homePage() {
         </div>
     </section>
 
-    <section class="section specials-section">
-        <h2 class="section-header">-Our Most Loved Products-</h2>
-        <div class="wrapper"></div>
+    <section class="specials-section">
+        <div class="wrapper">
+            <h2 class="section-header">-Our Most Loved Products-</h2>
+            <div class="specials"></div>
+        </div>
     </section>
     
     <section class="newsletter-section">
@@ -250,11 +264,23 @@ function homePage() {
                     <span class="icon" data-icon="arrowRight"></span>
                 </a>
             </div>
-            ${ imgDisplay({ className: "section-img", src: "../../Assets/Images/3d-package.webp" }) }
+            <div class="column">
+                ${ imgDisplay({ className: "section-img", src: "../../Assets/Images/3d-package.webp" }) }
+                <form class="email-form">
+                    <label for="emailField" class="email-input">
+                        <span class="icon mail-icon" data-icon="mail"></span>
+                        <input type="text" placeholder="Your E-mail address" id="emailField" class="email-field">
+                    </label>
+                    <button type="button" class="subscribe-btn">
+                        <span class="text">Subscribe</span>
+                    </button>
+                </form>
+            </div>
         </div>
     </section>
 
-    <section class="section products-section" id="products">
+    <section class="products-section" id="products">
+    <div class="wrapper products">
         <h2 class="section-header spaced">
             -Most Popular Products-
             <a href="#/menu" class="btn view-btn">
@@ -267,6 +293,7 @@ function homePage() {
         return ProductCard(product)
     }).join("") }
         </div>
+    </div>
     </section>
     
     <section class="about-section two-column" id="about">

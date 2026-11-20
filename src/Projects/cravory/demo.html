@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cravory - demo</title>
+    <title>Cravory - demo</title>
 </head>
 <body>
-    
+    <article class="product-card">
+        <div class="card-header">
+            <span class="product-category">Cold drink</span>
+            <figure class="product-display">
+                <img src="https://res.cloudinary.com/rkevllcx/image/upload/f_auto,q_auto/coffee-glass" alt="" class="product-img">
+            </figure>
+        </div>
+        <div class="card-content">
+            <div class="product-specs">
+                <h4 class="product-name">
+                    <a href="">Iced Matcha</a>
+                </h4>
+                <span class="product-price">$10</span>
+            </div>
+            <div class="product-tags">
+                <span class="product-tag">Matcha</span>
+                <span class="product-tag">Ice Cubes</span>
+                <span class="product-tag">Honey</span>
+                <span class="product-tag">Milk</span>
+            </div>
+            <menu class="card-actions">
+                <div class="ratings">
+                    ⭐
+                </div>
+                <button class="card-btn" aria-label="Add product to cart">
+                    <span data-icon="plus"></span>
+                </button>
+            </menu>
+        </div>
+    </article>
 </body>
+<script type="module" src="./demo.js"></script>
 </html>

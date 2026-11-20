@@ -1,0 +1,17 @@
+# Refinements
+- [✔️] Add icons to hero actions buttons
+- [✔️] Add input field to newsletter section
+- [] Refine product card's styling and structure
+- [✔️] Add pseudo element to navbar
+- [] Work on navbar behavior during scrolling
+- [] Work on hamburger menu
+- [] Build testimonial card and slider
+- [] Add carousel component
+- [] Add cart component
+- [] Build Products display page
+- [] Add image optimization
+- [] Add toast component
+- [] Connect web3forms api
+- [] Validate input fields
+- [] Add scroll animations
+- [] Add product card functionality like adding to cart

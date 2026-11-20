@@ -38,10 +38,10 @@
         background: hsl(from var(--apricot) h s l / .5);
     }
 
-    /*section:nth-of-type(even){
+    section:nth-of-type(even) {
         background: var(--coffee);
         color: hsl(from var(--apricot) h s calc(l + 15));
-    }*/
+    }
 
     menu {
         gap: 1em;
@@ -142,7 +142,7 @@
     .section-img {
         border-radius: .5em;
         aspect-ratio: 1 / 1;
-        width: min(280px, 100vw);
+        width: min(250px, 100vw);
         transform-origin: center;
     }
 
@@ -194,18 +194,19 @@
         gap: 1em;
         font-size: 14px;
         background: none;
+        color: var(--apricot);
 
         & span {
             padding: .25em;
             border-radius: 5rem;
-            border: 1px solid var(--coffee);
+            border: 1px solid var(--apricot);
 
             &:hover {
                 scale: .95;
-                background: var(--coffee);
+                background: var(--apricot);
 
                 & svg {
-                    stroke: var(--apricot);
+                    stroke: var(--coffee);
                 }
             }
         }
@@ -224,6 +225,62 @@
         opacity: 0;
     }
 
+    .email-form {
+        gap: 1em;
+        display: flex;
+        margin-top: 1em;
+        align-items: center;
+
+        & .email-input {
+            height: 40px;
+            display: flex;
+            width: 250px;
+            border-radius: .5em;
+            align-items: center;
+            justify-content: start;
+            background: transparent;
+            border: 1px solid var(--apricot);
+
+            & input {
+                outline: none;
+                color: var(--apricot);
+
+                &::placeholder {
+                    color: var(--apricot);
+                }
+            }
+
+            & span {
+                padding: .5em .75em;
+
+                & svg {
+                    opacity: .5;
+                    stroke: var(--apricot);
+                }
+            }
+
+            & input {
+                flex: 1;
+                width: 100%;
+                padding: 0;
+                background: none;
+            }
+        }
+
+        & .subscribe-btn {
+            font-weight: 400;
+            color: var(--coffee);
+            border-radius: .5rem;
+            background: var(--apricot);
+            border: 1px solid var(--coffee);
+
+            &:hover {
+                scale: .95;
+                opacity: .75;
+            }
+        }
+    }
+
     @scope(.site-header) {
         :scope {
             top: 0;
@@ -232,13 +289,28 @@
             height: 70px;
             position: fixed;
             padding: 1em 2em;
+            /*backdrop-filter: blur(4px);
+            background: hsl(from var(--apricot) h s l / .25);
+            border: 1px solid hsl(from var(--camel) h s l / .15);*/
+
+            &:before {
+                top: -20px;
+                left: -100px;
+                content: "";
+                width: 200px;
+                height: 100px;
+                position: absolute;
+                background: var(--coffee);
+                border-bottom-left-radius: 5rem;
+                border-bottom-right-radius: 5rem;
+            }
         }
 
         .site-navbar {
             height: 25px;
             display: flex;
             align-items: center;
-            justify-content: space-evenly;
+            justify-content: space-between;
         }
 
         .logo {
@@ -260,6 +332,10 @@
             display: inline-flex;
             flex-direction: column;
             font-size: clamp(1.8rem, 1vw, 1.5rem);
+
+            & .covered {
+                color: var(--apricot);
+            }
 
             & small {
                 font-size: 12px;
@@ -364,9 +440,31 @@
 
             & .hero-actions {
                 & .secondary-btn {
+                    gap: .5em;
                     color: var(--coffee);
                     border-color: transparent;
                     background: hsl(from var(--camel) h calc(s + 15) l);
+
+                    &:hover .icon svg {
+                        transform: none;
+                    }
+                }
+
+                & .main-btn {
+                    gap: .5em;
+
+                    & .icon {
+                        border-radius: 5rem;
+                        background: var(--apricot);
+
+                        & svg {
+                            fill: var(--coffee);
+                        }
+                    }
+
+                    &:hover .icon {
+                        transform: translateX(4px) translateY(-2px);
+                    }
                 }
 
                 & .btn:hover {
@@ -389,7 +487,7 @@
     }
 
     @scope(.features-section) {
-        :scope{
+        :scope {
             background: var(--coffee);
         }
 
@@ -480,6 +578,10 @@
     }
 
     @scope(.specials-section) {
+        .section-header {
+            color: var(--apricot);
+        }
+
         :scope {
             min-height: 60dvh;
         }
@@ -489,14 +591,46 @@
         :scope {
             background: hsl(from var(--apricot) h s l / .5);
         }
+
+        .column {
+            & .email-form {
+                & .email-input {
+                    border: 1px solid var(--coffee);
+
+                    & input {
+                        color: var(--coffee);
+
+                        &::placeholder {
+                            color: var(--coffee);
+                        }
+                    }
+
+                    & svg {
+                        opacity: 1;
+                        stroke: var(--coffee);
+                    }
+
+                }
+
+                & .subscribe-btn {
+                    color: var(--apricot);
+                    border-color: transparent;
+                    background: var(--coffee);
+                }
+            }
+        }
     }
 
     @scope(.products-section) {
+        .section-header {
+            color: var(--apricot);
+        }
+
         .products-grid {
             display: grid;
             row-gap: 1.5em;
             column-gap: 2em;
-            margin-top: 50px;
+            margin-top: 20px;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 
             & .product-card {
@@ -505,7 +639,7 @@
                 border-radius: .5rem;
                 flex-direction: column;
                 border: 1px solid hsl(0, 0%, 80%);
-                box-shadow: 1px 1px 2px var(--camel);
+                /*box-shadow: 1px 1px 2px var(--camel);*/
 
                 & .card-content {
                     flex: 1;
@@ -513,26 +647,37 @@
                     padding-block: .75em;
                     padding-inline: .5em;
 
-                    & .add-product-btn {
-                        right: 10px;
+                    & .card-actions {
+                        width: 92%;
                         bottom: 6px;
+                        display: flex;
                         position: absolute;
-                        border-radius: 5rem;
-                        padding: .35em .35em;
-                        background: hsl(159, 44%, 14%);
+                        align-items: start;
+                        justify-content: space-between;
 
-                        & span {
-                            display: inline-flex;
-                            align-items: center;
-                            justify-content: center;
-                        }
 
-                        & svg {
-                            width: 16px;
-                            height: 16px;
-                            stroke: hsl(0, 0%, 100%);
+                        & .add-product-btn {
+                            border-radius: 5rem;
+                            padding: .35em .35em;
+                            background: hsl(159, 44%, 14%);
+
+                            & span {
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                            }
+
+                            & svg {
+                                width: 16px;
+                                height: 16px;
+                                stroke: hsl(0, 0%, 100%);
+                            }
                         }
                     }
+                }
+
+                & .card-header {
+                    height: 70%;
                 }
 
                 & .product-category {
@@ -548,10 +693,6 @@
                     color: hsl(0, 0%, 100%);
                     text-transform: capitalize;
                     background: hsl(159, 44%, 14%);
-                }
-
-                & .card-header {
-                    height: 70%;
                 }
 
                 & .product-display {
@@ -570,7 +711,6 @@
                     height: 100%;
                     display: flex;
                     align-items: start;
-                    flex-direction: column;
                     justify-content: space-between;
 
                     & .product-name {
@@ -680,62 +820,6 @@
                 fill: var(--coffee);
             }
         }
-
-        .email-form {
-            gap: 1em;
-            display: flex;
-            margin-top: 1em;
-            align-items: center;
-
-            & .email-input {
-                height: 40px;
-                display: flex;
-                width: 250px;
-                border-radius: .5em;
-                align-items: center;
-                justify-content: start;
-                background: transparent;
-                border: 1px solid var(--apricot);
-
-                & input {
-                    outline: none;
-                    color: var(--apricot);
-
-                    &::placeholder {
-                        color: var(--apricot);
-                    }
-                }
-
-                & span {
-                    padding: .5em .75em;
-
-                    & svg {
-                        opacity: .5;
-                        stroke: var(--apricot);
-                    }
-                }
-
-                & input {
-                    flex: 1;
-                    width: 100%;
-                    padding: 0;
-                    background: none;
-                }
-            }
-
-            & .subscribe-btn {
-                font-weight: 400;
-                color: var(--coffee);
-                border-radius: .5rem;
-                background: var(--apricot);
-                border: 1px solid var(--coffee);
-
-                &:hover {
-                    scale: .95;
-                    opacity: .75;
-                }
-            }
-        }
     }
 }
 
@@ -825,6 +909,14 @@
     .site-header {
         padding-inline: 1em;
         padding-right: 40px;
+
+        & .covered {
+            color: var(--coffee);
+        }
+
+        &::before {
+            display: none;
+        }
     }
 
     .site-navbar {
@@ -952,17 +1044,13 @@
         }
     }
 
-    .form-section {
-        padding: 50px 10px;
-    }
-
     .about-section {
         gap: 2em;
         display: flex;
         flex-direction: column;
 
         & .about-img {
-            width: 300px;
+            width: 100%;
         }
     }
 
@@ -983,6 +1071,7 @@
 
         & .footer-grid {
             place-items: start;
+            width: min(1200px, 95%);
             grid-template-columns: repeat(1, 1fr);
         }
 
